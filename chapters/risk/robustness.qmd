@@ -1,0 +1,19 @@
+---
+title: Robustness
+---
+
+## Learning Objectives {.unnumbered}
+
+- Address deep uncertainty in climate decision-making.
+- Use robust decision-making (RDM) methods to compare strategies across multiple futures.
+- Balance robustness vs. optimality in selecting climate actions.
+
+## Deep uncertainty and scenario exploration
+
+## Robust decision-making (RDM), info-gap theory
+
+## Stress testing policies under various climate, economic, and societal conditions
+
+## Trade-offs between robust vs. “best-estimate” solutions
+
+

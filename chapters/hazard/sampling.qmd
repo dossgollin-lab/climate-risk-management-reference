@@ -1,0 +1,17 @@
+---
+title: Synthetic Events and Optimal Sampling
+---
+
+## Learning Objectives {.unnumbered}
+
+- Apply sampling techniques to generate synthetic event sets (e.g., hurricanes, floods).
+- Use importance and stratified sampling to improve efficiency in hazard modeling.
+- Evaluate how sampling choices affect estimates of extreme risk.
+
+## Monte Carlo sampling and variance reduction
+
+## Importance sampling, stratified sampling
+
+## Synthetic event generation (hurricane tracks, extreme rainfall patterns)
+    
+## Balancing computational cost vs. accuracy in climate risk estimation

@@ -1,0 +1,13 @@
+# Surrogates and Emulators
+
+## Learning Objectives {.unnumbered}
+
+- Create faster, approximate models (surrogates) for complex climate simulations.
+- Implement Gaussian Process regressors, polynomial chaos expansions, or other metamodeling techniques.
+- Use surrogates for uncertainty quantification, sensitivity analysis, and optimization.
+
+## Surrogate modeling (response surfaces, metamodels)
+
+## Emulator-based sensitivity analysis
+
+## Surrogate optimization strategies

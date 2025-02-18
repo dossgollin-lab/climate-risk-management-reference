@@ -1,0 +1,72 @@
+project:
+  type: book
+  preview:
+    port: 4200
+
+book:
+  title: "Climate Risk Assessment and Management"
+  author: "James Doss-Gollin"
+  date: "12/17/2024"
+  chapters:
+    - index.qmd
+    - part: "Fundamentals"
+      chapters:
+        - chapters/fundamentals/probability-stats.qmd
+        - chapters/fundamentals/inference.qmd
+        - chapters/fundamentals/bayes.qmd
+        - chapters/fundamentals/time-series.qmd
+        - chapters/fundamentals/multidimensional.qmd
+        - chapters/fundamentals/spatial.qmd
+        - chapters/fundamentals/ml.qmd
+        - chapters/fundamentals/model-comparison.qmd
+        - chapters/fundamentals/sensitivity.qmd
+        - chapters/fundamentals/climate-science.qmd
+    - part: "Climate Hazard Assessment"
+      chapters:
+        - chapters/hazard/extremes.qmd
+        - chapters/hazard/downscaling-bias-correction.qmd
+        - chapters/hazard/assimilation.qmd
+        - chapters/hazard/sampling.qmd
+        - chapters/hazard/surrogate-models.qmd
+    - part: "Climate Risk Management"
+      chapters:
+        - chapters/risk/risk.qmd
+        - chapters/risk/expectations-cost-benefit.qmd
+        - chapters/risk/policy-search.qmd
+        - chapters/risk/robustness.qmd
+        - chapters/risk/cascading.qmd
+        - chapters/risk/adaptive.qmd
+        - chapters/risk/risk-transfer.qmd
+        - chapters/risk/equity-values.qmd
+        - chapters/risk/stakeholders.qmd
+    - references.qmd
+  appendices: 
+    - appendices/julia.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: spacelab #spacelab #simplex
+    code-overflow: wrap
+    anchor-sections: true
+    callout-appearance: simple
+    reference-location: section
+    citations-hover: true
+    code-annotations: hover
+    code-line-numbers: true
+    html-math-method: mathjax
+    date-format: "ddd., MMM. D"
+
+glossary:
+  path: _glossary.yml
+  popup: click
+  show: true
+
+# use Julia
+kernel: julia-1.11
+
+# execution options
+execute:
+  freeze: auto  
+  cache: true

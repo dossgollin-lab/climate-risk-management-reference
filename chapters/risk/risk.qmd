@@ -1,0 +1,17 @@
+---
+title: Foundations of Risk and Decision-Making Under Uncertainty
+---
+
+## Learning Objectives {.unnumbered}
+
+- Define and conceptualize risk within the climate context (hazard, exposure, vulnerability).
+- Understand basic risk terminology (risk = probability × consequence).
+- Identify how different stakeholders perceive and prioritize climate risks.
+
+## Risk definitions: expected loss, variance, downside risk
+
+## Hazard vs. vulnerability vs. exposure
+
+## Risk perception and communication
+
+## Intro to decision-making under uncertainty

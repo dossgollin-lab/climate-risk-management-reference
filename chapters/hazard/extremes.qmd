@@ -1,0 +1,16 @@
+---
+title: Extreme Value Theory
+---
+
+## Learning Objectives {.unnumbered}
+
+- Characterize the behavior of rare, high-impact climate events (e.g., floods, heatwaves).
+- Select and fit appropriate extreme value distributions (GEV, POT).
+- Calculate return periods and interpret their limitations under climate change.
+
+## Extreme Value Theory
+ (GEV distributions, block maxima, POT methods)
+
+## Return level, return period, tail dependence
+
+## Non-stationarity in extremes, trend detection in peak events

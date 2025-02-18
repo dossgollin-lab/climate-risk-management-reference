@@ -1,0 +1,15 @@
+---
+title: Data Assimilation
+---
+
+## Learning Objectives {.unnumbered}
+
+- Integrate observational data into climate or weather models to refine forecasts (data assimilation).
+- Understand ensemble-based and variational approaches (EnKF, 3D/4D-Var).
+- Assess the impact of data assimilation on predictive skill for climate hazards (e.g., storms).
+
+## Data assimilation concepts (analysis, forecast step)
+
+## Ensemble Kalman Filter (EnKF), variational methods
+
+## Updating model states with real-time observations

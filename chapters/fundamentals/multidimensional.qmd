@@ -1,0 +1,15 @@
+---
+title: Multidimensional Statistics and Copulas
+---
+
+## Learning Objectives {.unnumbered}
+
+- Understand correlation and dependence among multiple climate variables (e.g., temperature and humidity).
+- Apply techniques such as PCA or factor analysis to reduce dimensionality.
+- Recognize when joint modeling (instead of independent modeling) is essential in climate risk assessment.
+
+## Covariance matrices and correlation structures
+
+## Principal Component Analysis (PCA) and Dimension Reduction
+
+## Copulas

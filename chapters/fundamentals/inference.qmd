@@ -1,0 +1,18 @@
+---
+title: Inference and Optimization
+---
+
+## Learning Objectives {.unnumbered}
+
+- Distinguish between point estimation, interval estimation, and hypothesis testing.
+- Conduct maximum likelihood estimation (MLE) for parameter inference in simple climate models.
+- Compare frequentist inference to Bayesian inference at a conceptual level.
+- Evaluate model assumptions (e.g., independence, stationarity) in climate data.
+
+## Point estimators, bias, efficiency, and consistency
+
+## Interval estimation: confidence intervals vs. prediction intervals
+
+## Frequentist hypothesis testing (Z-tests, t-tests, etc.)
+
+## Likelihood function, MLE, and model diagnostics

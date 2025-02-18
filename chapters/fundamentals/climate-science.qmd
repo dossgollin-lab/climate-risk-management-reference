@@ -1,0 +1,17 @@
+---
+title: Fundamentals of Climate Science
+---
+
+## Learning Objectives {.unnumbered}
+
+- Grasp the key physical processes driving climate variability and change (radiative forcing, feedback loops).
+- Understand the structure and outputs of Global Climate Models (GCMs).
+- Recognize sources of uncertainty in climate projections (emission scenarios, model biases).
+
+## Earth’s energy balance, greenhouse effect
+
+## Atmosphere–ocean interactions, major climate feedback mechanisms
+
+## Basics of GCMs and Earth System Models
+
+## Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)

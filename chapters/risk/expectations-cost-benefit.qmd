@@ -1,0 +1,17 @@
+---
+title: Economic Analysis, Discounting, and Benefit-Cost Analysis
+---
+
+## Learning Objectives {.unnumbered}
+
+- Perform cost-benefit analysis for climate adaptation/mitigation projects.
+- Incorporate discount rates, externalities, and non-monetary benefits into assessments.
+- Evaluate economic trade-offs over different time horizons and scenarios.
+
+## Net present value (NPV), discounting approaches
+
+## Externalities, social cost of carbon
+
+## Integrating uncertainty in cost-benefit frameworks
+
+## Project appraisal for infrastructure and policy interventions

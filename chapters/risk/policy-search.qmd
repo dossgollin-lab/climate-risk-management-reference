@@ -1,0 +1,17 @@
+---
+title: Policy Search & Optimization
+---
+
+## Learning Objectives {.unnumbered}
+
+- Formulate policy design problems as optimization tasks.
+- Explore multi-objective policy search (e.g., cost, emissions, equity).
+- Evaluate strategies (carbon taxes, cap-and-trade) under uncertainty.
+
+## Policy instruments and objectives
+
+## Multi-objective optimization, Pareto front
+
+## Heuristic vs. deterministic search methods
+
+## Constraints (political feasibility, budget limits)

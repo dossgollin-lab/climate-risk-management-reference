@@ -1,0 +1,37 @@
+---
+title: Bayesian Statistics and Utility Theory
+---
+
+Learning Objectives:
+
+- Formulate Bayesian models for uncertain climate parameters.
+- Incorporate priors and interpret posterior distributions in the context of climate data.
+- Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions.
+- Understand the role of utility theory in decision-making under uncertainty.
+
+Key Topics
+
+- Bayes’ theorem, prior/posterior updating
+- Conjugate priors and posterior analysis
+- MCMC methods (Metropolis-Hastings, Gibbs sampling)
+- Hierarchical models and hyperparameters
+- Utility theory and decision-making under risk
+
+## Bayes' Theorem
+
+## Prior and Posterior Distributions
+
+## Markov Chain Monte Carlo
+
+## Hierarchical Methods
+
+## Bayesian Workflow and Philosophy
+
+## Recommended Resources
+
+- Although about a decade old, @gelman_bda3:2014 is the definitive reference for Bayesian statistics
+- @mcelreath_rethinking2:2020 takes a different pedagogical approach to @gelman_bda3:2014, covering similar concepts from a somewhat more applied perspective. Lectures are available on YouTube.
+- @jaynes_probability:2003 is a definitive textbook on Bayesian philosophy in the context of physical systems and science.
+- @gelman_workflow:2020 is a mini-textbook on Bayesian workflow
+- @gelman_subjectiveobjective:2017 and @gelman_workflow:2020 cleanly outline how to think about interpreting probability -- which is often misunderstood.
+

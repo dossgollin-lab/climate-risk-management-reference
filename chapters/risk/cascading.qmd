@@ -1,0 +1,17 @@
+---
+title: Cascading Risks and Resilience
+---
+
+## Learning Objectives {.unnumbered}
+
+- Recognize and analyze multi-hazard events (e.g., hurricane + storm surge + inland flooding).
+- Understand how cascading failures in interconnected systems (power grids, supply chains) amplify risk.
+- Integrate compound hazard assessments into broader risk management plans.
+
+## Compound extremes and correlated hazards
+
+## Infrastructure interdependencies
+
+## Systemic risk and feedback loops
+
+## Approaches to model or approximate cascading impacts

@@ -1,0 +1,22 @@
+# Overview
+
+## Motivation and Real-World Context
+
+- Examples of recent extreme events and their impacts.
+- The growing need for robust climate risk assessment.
+
+## Scales of Interest & Applications
+
+- From local (infrastructure planning) to regional (floodplain management) to global (international policy).
+- Different time horizons (immediate disaster response vs. long-term adaptation planning).
+
+## Key Concepts & Frameworks
+
+- Hazard, vulnerability, exposure, and risk.
+- The modeling-to-decision pipeline: data →→ models →→ insights →→ policy.
+
+## Roadmap
+
+- Brief overview of Fundamentals (Part 1).
+- “Task-Oriented” approach to Climate Hazards & Catastrophe Modeling (Part 2).
+- Risk Management & Policy (Part 3) and how it ties everything together.

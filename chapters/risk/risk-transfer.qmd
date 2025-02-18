@@ -1,0 +1,19 @@
+---
+title: Risk Transfer
+---
+
+## Learning Objectives {.unnumbered}
+
+- Explore financial instruments (insurance, reinsurance, catastrophe bonds) for spreading or transferring climate risk.
+- Understand parametric insurance triggers and how they differ from indemnity-based approaches.
+- Assess the role of public-private partnerships in risk transfer mechanisms.
+
+## Insurance/reinsurance fundamentals
+
+## Parametric vs. indemnity coverage
+
+## Catastrophe bonds, index-based schemes
+
+## Challenges in emerging markets and vulnerable regions
+
+

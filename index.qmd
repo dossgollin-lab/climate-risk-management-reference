@@ -1,0 +1,58 @@
+# Preface {.unnumbered}
+
+Welcome to the online textbook **Climate Risk Assessment and Management**, which aims to provide a comprehensive introduction to the field of climate risk management.
+Our goal is to address the needs of decision-makers while acknowledging the limitations of the data and models used to study climate phenomena.
+
+Information on the probabilities of extreme events plays a key role in many contexts, from designing infrastructure to shaping public policy.
+However, by definition, these events are rare, meaning few observations exist to objectively estimate their probabilities—this is the challenge of **sampling error**.
+While we can try to compensate for limited observations by using models to simulate various weather scenarios and their effects on extreme events, these models inevitably have **biases** that limit their reliability.
+Balancing sparse observations and imperfect models is a central theme in climate risk management. We strive to acknowledge and communicate uncertainty without letting it paralyze our decision-making.
+Although we rely on quantitative tools to characterize uncertainty and guide risk strategies, we interpret those quantitative results through a qualitative lens.
+In other words, we aim to build and deeply understand our models without taking them too literally.
+
+When translating theoretical concepts into real-world examples, one approach is to make significant idealizations that yield neat analytical solutions.
+Here, we opt instead for a **computational** perspective.
+All code examples use the [Julia language](appendices/julia.qmd), but the core ideas apply broadly--Python is widely used in climate data science and R is especially popular in statistics.
+
+## Structure
+
+This textbook began as online lecture notes for two courses at Rice University: **CEVE 543 (Data Science Methods for Climate Hazard Assessment)** and **CEVE 421 (Climate Risk Management)**.
+Although these courses informed one another, they focused on distinct techniques in climate risk assessment and management--an approach reflected in the structure of this book.
+By separating the textbook from the class, we hope to create an open-source community resource for **Climate Risk Management**.
+
+This text is designed to be used as a reference, rather than to be covered from start to finish in a single course.
+It is organized as follows:
+
+- **Part 1** provides a foundational toolkit in probability, inference, Bayesian methods, optimization, and essential climate science knowledge.  
+- **Part 2** explores the mechanics of modeling climate hazards and extremes, showing how to build and refine catastrophe models and handle complex climate data.  
+- **Part 3** moves into decision-making, policy, and equity concerns of climate risk, helping you connect technical insights to real-world management and policy solutions.
+
+## Pre-requisites
+
+A background in **statistics** and/or **machine learning** is helpful.
+We also assume some familiarity with **programming**, which you can develop (or refresh) through resources listed in the [Julia appendix](appendices/julia.qmd).
+
+## Contributing
+
+This textbook is a work in progress, and we welcome your contributions.
+Whether it’s fixing a typo or proposing a new module, every suggestion helps.
+The easiest way to contribute is to fork the repository and submit a pull request.
+If you’re not comfortable with that workflow, please open an issue [on GitHub]({{< book.github >}}).
+
+This textbook is and will always remain free, licensed under the [CC BY-SA 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
+
+## Related Projects
+
+- **@abernathey_datascience:2024** is an excellent resource covering introductory topics in Earth and climate data science using Python, with an emphasis on foundational computations. It serves as a great prerequisite for more advanced material in this book.
+
+## Cite
+
+Please cite this book as:
+
+```bibtex
+@book{doss-gollin_climate_2024,
+  author = {Doss-Gollin, James},
+  title = {Climate Risk Management},
+  year = {2025},
+}
+```
