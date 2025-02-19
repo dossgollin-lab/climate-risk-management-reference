@@ -9,3 +9,5 @@ title: Nonparametric Statistics
 ## Neighborhood methods
 
 ## Bootstrapping
+
+## Semi-parametric methods

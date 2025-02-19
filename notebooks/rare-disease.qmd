@@ -1,0 +1,49 @@
+# Rare Disease {.unnumbered}
+
+
+1. Everyone is tested for CEVE543acitis, a rare and deadly disease
+1. It is known that 1 in 1,000 people have CEVE543acitis
+1. The test is 99% accurate
+1. Your test comes back positive. What is the probability that you have CEVE543acitis?
+
+$$
+\Pr \left\{ \theta | y \right\} = \frac{\Pr \left\{ y | \theta \right\} \Pr \left\{ \theta \right\}}{\Pr \left\{ y \right\}}
+$$
+
+Define $y$ is getting a positive test result and $\theta$ is having the underlying condition.
+*Not that we do not observe $\theta$ directly!*
+Here $y=1$ and we want to know $\Pr\left\{\theta = 1 \mid y=1 \right\}$.
+
+Likelihood:
+
+::: {.center}
+|           | $\Pr\left\{y = 1 \ldots\right.$ | $\Pr\left\{y = 0 |\ldots \right.$ |
+|-----------|--------------------|--------------------|
+| $\left. ...\theta=1 \right\}$ | 0.99      | 0.01 |
+| $\left. ...\theta=0\right\}$ | 0.01    | 0.99      |
+:::
+
+A naive application of maximum likelihood: $\Pr\left\{y=1 \mid \theta=1 \right\} > \Pr\left\{y=1 \mid \theta=0 \right\}$ so best estimate is $\theta=1$
+
+## Solving
+
+We are studying $\Pr\left\{\theta = 1 | y = 1 \right\}$.
+
+1. Step 1: $\Pr\left\{ y = 1 \right\}$
+    1. $\Pr\left\{y=1\right\} = \Pr \left\{ y=1, \theta=0 \right\} + \Pr \left\{ y=1, \theta=1 \right\}$
+    1. $\Pr\left\{y=1\right\} = \Pr \left\{ \theta=0 \right\} \Pr \left\{ y = 1 | \theta=0 \right\} + \Pr \left\{ \theta=1 \right\} \Pr \left\{ y=1 | \theta=0 \right\}$
+    1. $\underbrace{\Pr\left\{y=1\right\}}_\text{test +} = \underbrace{0.999}_\text{don't have it} \times \overbrace{0.01}^\text{false +} + \underbrace{0.001}_\text{have it} \times \overbrace{0.99}^\text{true +}$
+1. Now plug in to Bayes' rule
+    1. $\Pr\left\{ \theta=1 | y=1 \right\} = \frac{\Pr\left\{y=1 | \theta=1 \right\} \Pr\left\{ \theta=1 \right\}}{\Pr\left\{y=1\right\}}$
+    1.  $\Pr\left\{\theta=1 | y=1 \right\} = \frac{0.99 \times 0.001}{\Pr\left\{y=1\right\}}$
+
+## Implementation
+
+```{julia}
+accuracy = 0.99
+pr_disease = 0.001 # p(θ = 1)
+pr_positive_test = accuracy * pr_disease + (1 - accuracy) * (1 - pr_disease) # p(y = 1)
+pr_disease_given_test = accuracy * pr_disease / pr_positive_test # p(θ = 1 | y = 1)
+display(round(pr_positive_test; digits=5))
+display(round(pr_disease_given_test; digits=5))
+```

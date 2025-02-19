@@ -1,0 +1,171 @@
+# Coin Flipping {.unnumbered}
+
+## Setup
+
+```{julia}
+#| include: false
+#| output: false
+
+using CairoMakie
+using Distributions
+using DynamicHMC
+using LaTeXStrings
+using Optim
+using Turing
+```
+
+## The Problem: Estimating a Probability
+
+We flip a coin a few times and want to estimate the probability of heads so that we can make well-calibrated bets on future coin tosses. This is a simple example of statistical inference - we have some data and want to learn something about the underlying process that generated it.
+
+```{julia}
+coin_flips = ["H", "H", "H", "T", "H", "H", "H", "H", "H"]
+heads = [flip == "H" for flip in coin_flips]
+N = length(coin_flips)
+n_heads = sum(heads)
+```
+
+## Maximum Likelihood Estimation
+
+The maximum likelihood estimate (MLE) is the value of $\theta$ that makes our observed data most likely.
+For a coin flip, this is equivalent to the proportion of heads in our data. While simple to calculate, the MLE can be misleading with small sample sizes.
+
+```{julia}
+flip_log_like(θ) = sum(logpdf.(Bernoulli(θ), heads))
+loss(θ) = -flip_log_like(θ)
+θ_mle = optimize(loss, 0, 1).minimizer
+
+fig1 = Figure()
+ax1 = Axis(fig1[1, 1];
+    xlabel=L"θ",
+    ylabel=L"p(y | θ)")
+θ_range = range(0.1, 1, length=100)
+lines!(ax1, θ_range, flip_log_like.(θ_range); label=L"p(y | θ)")
+vlines!(ax1, [θ_mle]; label="MLE", linewidth=3)
+axislegend(ax1)
+fig1
+```
+
+## Bayesian Analysis
+
+### Choosing a Prior
+
+To perform a Bayesian analysis, we need to specify our prior beliefs about $\theta$ before seeing any data. For a probability parameter like this, the Beta distribution is a natural choice because:
+1. It's defined on [0,1], just like probabilities
+2. It's flexible enough to encode different prior beliefs
+3. It's conjugate to the Binomial likelihood, giving us analytical solutions
+
+```{julia}
+prior_dist = Beta(5, 5)
+
+fig2 = Figure()
+ax2 = Axis(fig2[1, 1];
+    xlabel=L"θ",
+    ylabel=L"p(θ)")
+θ_range = range(0, 1, length=100)
+lines!(ax2, θ_range, pdf.(prior_dist, θ_range); linewidth=3)
+fig2
+```
+
+Cool property: if you have a Beta prior and a Binomial likelihood, the posterior is also Beta distributed.
+Look up Beta-Binomial conjugacy for more!
+We will leverage this property to check our answers.
+
+```{julia}
+#| output: false
+closed_form = Beta(prior_dist.α + n_heads, prior_dist.β + N - n_heads)
+```
+
+### Metropolis-Hastings Sampling
+
+For simple problems like this, we can sample from the posterior distribution using the Metropolis-Hastings algorithm. This demonstrates the core ideas of MCMC sampling, though it's not the most efficient approach.
+
+```{julia}
+log_posterior(θ) = logpdf(prior_dist, θ) + flip_log_like(θ)
+
+θ_samples = []
+θ_sample = 0.5 # initial guess
+proposal_dist(θ) = Uniform(0, 1) # propose new values based on the current value
+
+while length(θ_samples) < 10_000
+    proposal = rand(proposal_dist(θ_sample)) # propose a new value
+    p_accept = min(exp(log_posterior(proposal) - log_posterior(θ_sample)), 1)
+    if rand() < p_accept
+        θ_sample = proposal
+    end
+    push!(θ_samples, θ_sample)
+end
+
+fig3 = Figure()
+ax3 = Axis(fig3[1, 1];
+    xlabel=L"θ",
+    ylabel=L"p(θ | y)")
+hist!(ax3, θ_samples;
+    normalization=:pdf,
+    label="Samples")
+lines!(ax3, θ_range, pdf.(closed_form, θ_range);
+    label="Exact Posterior",
+    linewidth=3)
+axislegend(ax3; position=:lt)
+fig3
+```
+
+### Modern MCMC with Turing.jl
+
+Modern samplers use more sophisticated techniques to sample efficiently from complex posterior distributions. Here we use Turing.jl, which provides:
+1. Intuitive model specification
+2. Efficient gradient-based sampling
+3. Automatic convergence diagnostics
+
+```{julia}
+@model function coinflip(y)
+
+    # to define θ as a random variable, we use ~
+    # anything that's not an input (data) is treated as a parameter to be estimated!
+    θ ~ prior_dist
+
+    # the data generating process
+    return y .~ Bernoulli(θ)
+end
+
+coin_chain = let # variables defined in a let...end block are temporary
+    model = coinflip(heads)
+    sampler = externalsampler(DynamicHMC.NUTS())
+    nsamples = 10_000
+    sample(model, sampler, nsamples; drop_warmup=true)
+end
+summarystats(coin_chain)
+```
+
+## Comparing Methods
+
+Let's compare our different approaches to inference:
+- The MLE gives a point estimate but no uncertainty
+- The Metropolis-Hastings sampler shows the full posterior but is inefficient
+- The modern MCMC sampler agrees with our analytical solution while being more generalizable
+
+```{julia}
+fig4 = Figure()
+ax4 = Axis(fig4[1, 1];
+    xlabel=L"θ",
+    ylabel=L"p(θ | y)")
+
+# Draw histogram of samples
+hist!(ax4, coin_chain[:θ][:]; normalization=:pdf, label="Posterior Samples")
+
+# Add exact posterior, prior, and MLE
+θ_range = range(0, 1, length=100)
+lines!(ax4, θ_range, pdf.(closed_form, θ_range);
+    label="Exact Posterior",
+    linewidth=3)
+lines!(ax4, θ_range, pdf.(prior_dist, θ_range);
+    label="Prior",
+    linewidth=3)
+vlines!(ax4, [θ_mle];
+    label="MLE",
+    linewidth=3)
+
+# Add legend in top left
+axislegend(ax4; position=:lt)
+fig4
+```

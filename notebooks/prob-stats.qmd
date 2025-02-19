@@ -1,6 +1,4 @@
----
-title: Probability Distributions
----
+# Probability Distributions {.unnumbered}
 
 ```{julia}
 #| code-fold: true
@@ -554,3 +552,8 @@ What I *do* want you to understand is:
 
 
 
+## Further reading
+
+If you're wondering "what is probability?" you're not alone.
+For a digestible discussion, David Spiegelhalter's appearance on the [Learn Bayesian Statistics](https://learnbayesstats.com/episode/50-talking-risks-embracing-uncertainty-david-spiegelhalter){target=_blank} podcast is accessible, enlightening, and entertaining.
+For a more mathematical and philosophical exploration, @jaynes_probability:2003 is an authoritative textbook.

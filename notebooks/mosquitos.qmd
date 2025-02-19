@@ -1,7 +1,4 @@
----
-title: Statistics Without the Agonizing Details
-engine: julia
----
+# Statistics Without the Agonizing Details {.unnumbered}
 
 In this class we will use computation and simulation to build fundamental insight into statistical processes without dwelling on "agonizing" details.
 Here we implement the excellent example problem from John Rauser.
@@ -20,6 +17,7 @@ Here is the data for the beer drinkers:
 
 ```{julia}
 #| output: false
+#| code-fold: true
 beer = [
     27,
     20,
@@ -70,6 +68,8 @@ sum(beer) / length(beer) # the sample average
 We can do the same for water drinkers:
 
 ```{julia}
+#| code-fold: true
+#| output: false
 water = [21, 22, 15, 12, 21, 16, 19, 15, 22, 24, 19, 23, 13, 22, 20, 24, 18, 20]
 ```
 

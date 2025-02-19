@@ -23,12 +23,12 @@ book:
         - chapters/fundamentals/model-comparison.qmd
         - chapters/fundamentals/sensitivity.qmd
         - chapters/fundamentals/climate-science.qmd
-    - part: "Climate Hazard Assessment"
+    - part: "Hydroclimate Extremes and Catastrophes"
       chapters:
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
-        - chapters/hazard/assimilation.qmd
         - chapters/hazard/sampling.qmd
+        - chapters/hazard/assimilation.qmd
         - chapters/hazard/surrogate-models.qmd
     - part: "Climate Risk Management"
       chapters:
@@ -41,6 +41,13 @@ book:
         - chapters/risk/risk-transfer.qmd
         - chapters/risk/equity-values.qmd
         - chapters/risk/stakeholders.qmd
+    - part: "Notebooks"
+      chapters:
+        - notebooks/mosquitos.qmd
+        - notebooks/prob-stats.qmd
+        - notebooks/rare-disease.qmd
+        - notebooks/coin-flipping.qmd
+      folded: true
     - references.qmd
   appendices: 
     - appendices/julia.qmd

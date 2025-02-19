@@ -1,0 +1,8 @@
+# Overview {.unnumbered}
+
+Big idea is sampling variability and how to deal with it
+
+- Observations are noisy, backward-looking, incompletely measured, etc.
+- Model-based estimates can explore unseen conditions but necessarily layer in model biases
+
+The other technical challenge is that estimates of very rare events are necessarily hard to impossible to verify

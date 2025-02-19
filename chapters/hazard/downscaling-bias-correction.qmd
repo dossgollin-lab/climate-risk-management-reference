@@ -17,3 +17,7 @@ title: Downscaling and Bias Correction
 ## Bias Correction
 
 ## Uncorrectable Bias
+
+## Stochastic Weather Generators
+
+## Further Reading
