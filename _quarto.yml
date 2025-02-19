@@ -6,14 +6,16 @@ project:
 book:
   title: "Climate Risk Assessment and Management"
   author: "James Doss-Gollin"
-  date: "12/17/2024"
+  date: "2/19/2025"
   chapters:
     - index.qmd
     - part: "Fundamentals"
       chapters:
+        - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/inference.qmd
         - chapters/fundamentals/bayes.qmd
+        - chapters/fundamentals/nonparametric.qmd
         - chapters/fundamentals/time-series.qmd
         - chapters/fundamentals/multidimensional.qmd
         - chapters/fundamentals/spatial.qmd
@@ -47,7 +49,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: spacelab #spacelab #simplex
+    theme: sandstone
     code-overflow: wrap
     anchor-sections: true
     callout-appearance: simple

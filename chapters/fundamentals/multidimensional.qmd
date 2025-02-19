@@ -1,15 +1,26 @@
 ---
-title: Multidimensional Statistics and Copulas
+title: Multidimensional Statistics
 ---
 
 ## Learning Objectives {.unnumbered}
 
-- Understand correlation and dependence among multiple climate variables (e.g., temperature and humidity).
-- Apply techniques such as PCA or factor analysis to reduce dimensionality.
-- Recognize when joint modeling (instead of independent modeling) is essential in climate risk assessment.
+## Covariance and correlation
 
-## Covariance matrices and correlation structures
+## Structured variability
 
-## Principal Component Analysis (PCA) and Dimension Reduction
+- e.g., model grid
+
+## Dimension Reduction
+
+- PCA (aka EOF)
 
 ## Copulas
+
+## Deep Models
+
+Many generative AI models are fundamentally sampling from high-dimensional conditional distributions.
+Handling the high dimensionality of these distributions is a key challenge.
+
+- GAN
+- cGAN
+- Diffusion Models

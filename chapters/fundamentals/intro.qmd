@@ -1,0 +1,8 @@
+# Overview {.unnumbered}
+
+## How to use this Part
+
+- There are LOTS of fantastic stats resources, but they are often very narrowly tailored
+- NOT designed to be comprehensive. Provides an overview of fundamental concepts, then works through a couple of example methods and then points to resources for other methods.
+- Designed to be a reference and annotated bibliography
+- A course could work through these chapters in order, but it may make more sense to pick and choose

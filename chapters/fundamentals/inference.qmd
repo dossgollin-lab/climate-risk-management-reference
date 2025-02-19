@@ -4,15 +4,163 @@ title: Inference and Optimization
 
 ## Learning Objectives {.unnumbered}
 
-- Distinguish between point estimation, interval estimation, and hypothesis testing.
-- Conduct maximum likelihood estimation (MLE) for parameter inference in simple climate models.
-- Compare frequentist inference to Bayesian inference at a conceptual level.
-- Evaluate model assumptions (e.g., independence, stationarity) in climate data.
+## Optimization: calculus perspective
 
-## Point estimators, bias, efficiency, and consistency
+## Optimization: overview of methods
 
-## Interval estimation: confidence intervals vs. prediction intervals
+## Curse of dimensionality
 
-## Frequentist hypothesis testing (Z-tests, t-tests, etc.)
+## Maximum Likelihood Estimation (MLE)
 
-## Likelihood function, MLE, and model diagnostics
+We have some *parametric statistical model* with unknown parameters.
+We want to evaluate how consistent the data are with different values of the parameters, and to find the values of the parameters that are most consistent with the data.
+
+### Likelihood function for one observation
+
+The likelihood is the probability of the **data** given some **parameters**:
+$$
+p(y | \theta)
+$$
+
+Often, we want to study how the likelihood changes for different values of $\theta$, holding $y$ fixed.
+This is just $p(y | \theta)$ for a range of $\theta$.
+
+
+::: {.callout-note}
+You will sometimes see this referred to as $\mathcal{L}(\theta)$, which is a  confusing notation...
+:::
+
+### Likelihood function for multiple observations
+
+Independent and identically distributed (i.i.d.) assumption:
+$$
+\begin{align}
+p(y_1, y_2, \ldots, y_n) &= p(y_1) p(y_2) \times \ldots \times p(y_n)\\
+ &= \prod_{i=1}^n p(y_i)
+\end{align}
+$$
+
+
+Usually we have more than one data point.
+Say we measure $y = y_1, y_2, \ldots, y_n$:
+$$
+p(y | \theta) = \prod_{i=1}^n p(y_i | \theta)
+$$
+
+#### Log trick
+
+Recall: $\log(AB) = \log(A) + \log(B)$ or, more generally,
+$$
+\log \left( \prod_{i=1}^n f_i \right) = \sum_{i=1}^n \log(f_i)
+$$
+
+Thus, we can work with the "log likelihood":
+$$
+\log p(y | \theta) =  \log \left( \prod_{i=1}^n p(y_i | \theta) \right) = \sum_{i=1}^n \log \left( p(y_i | \theta) \right)
+$$
+
+Adding small numbers is also more numerically stable than multiplying them
+
+Can we find the parameters $\theta^*$ that maximize the likelihood $p(y | \theta)$?
+
+#### Log likelihood
+
+We can use the log likelihood $\log p(y | \theta)$ instead of the likelihood $p(y | \theta)$.
+
+The log likelihood is monotonic with the likelihood, so 
+$$
+\arg \max \log p(y | \theta) = \arg \max p(y | \theta)
+$$
+
+
+Solving things analytically takes time up-front, but can be much faster to run because you can avoid the optimization step.
+Consider the (potentially multivariate) Gaussian example with known covariance matrix $\Sigma$.
+We want to *maximize* the likelihood
+$$
+\sum_{i=1}^n p(y_i | \mu, \Sigma)
+$$
+
+
+To maximize, we set its derivative with respect to $\mu$, which we'll denote with $\nabla_\mu$, to zero:
+$$
+\sum_{i=1}^n \nabla_\mu \log p(y_i | \mu, \Sigma) = 0
+$$
+
+
+Substituting in the multivariate Gaussian likelihood we get:
+$$
+\begin{aligned}
+0 & =\sum_{i=1}^n \nabla_\mu \log \frac{1}{\sqrt{(2 \pi)^d|\Sigma|}} \exp \left(-\frac{1}{2}\left(x_i-\mu\right)^{\top} \Sigma^{-1}\left(x_i-\mu\right)\right) \\
+& =\sum_{i=1}^n \nabla_\mu\left(\log \left(\frac{1}{\sqrt{(2 \pi)^d|\Sigma|}}\right)\right)+\log \left(\exp \left(-\frac{1}{2}\left(x_i-\mu\right)^{\top} \Sigma^{-1}\left(x_i-\mu\right)\right)\right) \\
+& =\sum_{i=1}^n \nabla_\mu\left(-\frac{1}{2}\left(x_i-\mu\right)^{\top} \Sigma^{-1}\left(x_i-\mu\right)\right)\\
+&=\sum_{i=1}^n \Sigma^{-1}\left(x_i-\mu\right) \\
+0 &= \sum_{i=1}^n (x_i - \mu) \\
+\mu &= \frac{1}{n} \sum_{i=1}^n x_i
+\end{aligned}
+$$
+
+
+You are not expected to remember the above equations and I won't ask you to do this derivation in a time-constrained exam.
+You should understand the general procedure:
+
+1. write down log likelihood for all data points
+    1. write down likelihood for one data point
+    1. write down log likelihood for one data point
+    1. sum over all data points
+1. take $\frac{d}{d\theta}$ and set equal to zero to maximize
+1. solve for $\theta^*$.
+
+## Regression models (inference)
+
+Let's consider the generic regression probelem where we have paired observations $\left\{x_i, y_i\right\}_{i=1}^n$.
+In general, we can write this regression as
+$$
+y_i | \alpha, \beta, \epsilon \sim \mathcal{N}(\alpha + x_i \beta, \sigma^2)
+$$
+where $x_i$ and $\beta$ may be vectors.
+
+We can use the same approach to derive the maximum likelihood estimate for linear regression:
+
+1. Write the likelihood for one data point
+1. Write the log likelihood for one data point
+1. Write the log likelihood for all data points
+1. Take $\frac{d}{d\theta}$ and set equal to zero to maximize
+
+If you want a walkthrough, see [Ryan Adams's lecture notes](https://www.cs.princeton.edu/courses/archive/fall18/cos324/files/mle-regression.pdf) starting at about equation 11.
+
+If we work through the math, we can show that the log likelihood for the linear regression problem is
+$$
+\log p(y | X, \beta, \sigma) = \frac{N}{2} \log (2 \sigma^2 \pi)  - \frac{1}{2 \sigma^2} \left( X \beta - y \right)^T \left( X \beta - y \right)
+$$
+
+::: {.callout-note}
+## Linear algebra notation
+
+There is no intercept here!
+This is a common notation and assumes that the first column of $X$ is all ones.
+That is equivalent to writing down an intercept, but lets us use linear algebra notation and keep track of fewer variable names
+:::
+
+
+From this, we can show that terms drop out and
+$$
+\beta^\text{MLE} = \arg \min_\beta \left( X \beta - y \right)^T \left( X \beta - y \right)
+$$
+which is exactly the least squares problem (minimize squared error):
+$$
+\min_{\theta} \sum_{i=1}^n (y_i - y_i^\text{pred})^2
+$$
+
+::: {.callout-important}
+## Key point
+
+"Least squares can be interpreted as assuming Gaussian noise, and particular choices of likelihood can be interpreted directly as (usually exponentiated) loss functions" --[Adams](https://www.cs.princeton.edu/courses/archive/fall18/cos324/files/mle-regression.pdf)
+:::
+
+If we then want to estimate $\sigma$, we can estimate the standard deviation of the residuals.
+
+### GLMs
+
+## Old
+
+

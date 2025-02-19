@@ -10,8 +10,6 @@ title: Fundamentals of Climate Science
 
 ## Earth’s energy balance, greenhouse effect
 
-## Atmosphere–ocean interactions, major climate feedback mechanisms
+## Multi-scale variability
 
 ## Basics of GCMs and Earth System Models
-
-## Representative Concentration Pathways (RCPs) and Shared Socioeconomic Pathways (SSPs)

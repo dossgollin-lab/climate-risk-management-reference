@@ -1,5 +1,5 @@
 ---
-title: Economic Analysis, Discounting, and Benefit-Cost Analysis
+title: Expectations and Discounting
 ---
 
 ## Learning Objectives {.unnumbered}
@@ -8,9 +8,12 @@ title: Economic Analysis, Discounting, and Benefit-Cost Analysis
 - Incorporate discount rates, externalities, and non-monetary benefits into assessments.
 - Evaluate economic trade-offs over different time horizons and scenarios.
 
-## Net present value (NPV), discounting approaches
+See first:
 
-## Externalities, social cost of carbon
+- [Expectations](../fundamentals/probability-stats.qmd#expectations)
+- [Utility](../fundamentals/bayes.qmd#bayesian-utility-theory)
+
+## Net present value (NPV), discounting approaches
 
 ## Integrating uncertainty in cost-benefit frameworks
 

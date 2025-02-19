@@ -1,0 +1,11 @@
+---
+title: Nonparametric Statistics
+---
+
+## Learning Objectives {.unnumbered}
+
+## Density estimation
+
+## Neighborhood methods
+
+## Bootstrapping

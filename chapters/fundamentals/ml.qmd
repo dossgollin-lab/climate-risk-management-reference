@@ -10,8 +10,10 @@ title: Machine Learning
 
 ## Supervised vs. unsupervised learning
 
-## Common algorithms (random forests, neural networks, SVMs)
+## Common algorithms (random forests, SVMs)
 
 ## Regularization (Lasso, Ridge) and hyperparameter tuning
 
-## Interpretability and explainable ML (e.g., SHAP values)
+## Neural networks
+
+## Further reading

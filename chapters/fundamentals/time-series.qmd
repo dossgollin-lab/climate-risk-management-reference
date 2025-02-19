@@ -4,14 +4,20 @@ title: Time Series and Frequency Analysis
 
 ## Learning Objectives {.unnumbered}
 
-- Analyze temporal patterns (trends, seasonality) in climate variables like temperature or precipitation.
-- Fit and validate basic time-series models (ARIMA, SARIMA) for forecasting.
-- Recognize stationarity issues and handle non-stationary signals in climate data.
+## Autocorrelation functions
 
-## Autocorrelation functions (ACF, PACF), stationarity tests
-
-## AR, MA, ARIMA, SARIMA models
-
-## Seasonal decomposition (trend, seasonal, residual)
+## Frequency analysis
 
 ## Wavelets
+
+## Autoregressive models
+
+Sometimes used in practice, but most useful as a didactic tool.
+
+## Other time series models
+
+- ARIMA
+- Generalized Additive Models
+- State Space Models
+- LSTMs
+- and beyond

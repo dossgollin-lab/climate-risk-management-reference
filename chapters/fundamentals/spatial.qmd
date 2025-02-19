@@ -4,12 +4,21 @@ title: Spatial Statistics
 
 ## Learning Objectives {.unnumbered}
 
-- Model and interpret spatial dependence in climate fields (e.g., rainfall across a region).
+- Model and interpret spatial dependence in climate fields
 - Perform kriging and other geostatistical interpolations for mapping hazards.
 - Understand the fundamentals of spatial autocorrelation and variogram analysis.
 
-## Spatial autocorrelation, Moran’s I, variograms
+## Spatial autocorrelation and variograms
 
-## Kriging (ordinary, universal), spatial prediction
+## Interpolation methods
 
-## Handling large spatial datasets (e.g., reanalysis products)
+Really 
+
+## Kriging
+
+-  (ordinary, universal)
+
+## Gaussian processes in 1D
+
+## Gaussian processes in multiple dimensinos
+

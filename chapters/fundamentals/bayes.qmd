@@ -2,32 +2,62 @@
 title: Bayesian Statistics and Utility Theory
 ---
 
-Learning Objectives:
+## Learning Objectives {.unnumbered}
 
 - Formulate Bayesian models for uncertain climate parameters.
 - Incorporate priors and interpret posterior distributions in the context of climate data.
 - Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions.
 - Understand the role of utility theory in decision-making under uncertainty.
 
-Key Topics
+## Bayesian Utility Theory
 
-- Bayes’ theorem, prior/posterior updating
-- Conjugate priors and posterior analysis
-- MCMC methods (Metropolis-Hastings, Gibbs sampling)
-- Hierarchical models and hyperparameters
-- Utility theory and decision-making under risk
+We will often be interested in making decisions despite not having perfect information.
 
-## Bayes' Theorem
+### Types of uncertainty
 
-## Prior and Posterior Distributions
+- Aleatory uncertainty: inherent variability in the system (ie, randomness)
+- Epistemic uncertainty: uncertainty in our knowledge of the system, often useful to divide into
+    - Parametric uncertainty (what we will use here)
+    - Model structure uncertainty (treated qualitatively)
 
-## Markov Chain Monte Carlo
+### History
 
-## Hierarchical Methods
+- First conceived as a way to try to explain human behavior
+    - Turns out not to be a great model -- people do not always behave rationally
+
+### Utility
+
+- Some function that we want to maximize
+- Alternatively can be thought of as a cost function that we want to minimize
+- $U(a, \theta)$
+    - $a$ is the action we take
+    - $\theta$ is the state of the world
+
+### Expected Utility
+
+$$
+\mathbb{E} \left[ U(a, \theta) \right] = \int_{\theta \in \Theta} U(a, \theta) p(\theta) d\theta
+$$
+
+or in the discrete case
+
+$$
+\mathbb{E} \left[ U(a, \theta) \right] = \sum_{\theta \in \Theta} U(a, \theta) p(\theta)
+$$
+
+## Maximum A Posteriori (MAP) Estimation
+
+## Bayesian Inference
+
+## MCMC Methods
+
+## Expectations
+
+## Hierarchical Models
 
 ## Bayesian Workflow and Philosophy
 
-## Recommended Resources
+## Further Reading
 
 - Although about a decade old, @gelman_bda3:2014 is the definitive reference for Bayesian statistics
 - @mcelreath_rethinking2:2020 takes a different pedagogical approach to @gelman_bda3:2014, covering similar concepts from a somewhat more applied perspective. Lectures are available on YouTube.
