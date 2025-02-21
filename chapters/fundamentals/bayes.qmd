@@ -1,6 +1,11 @@
 ---
-title: Bayesian Statistics and Decision Making
+title: Bayesian Utility and Inference
 ---
+
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
 
 ## Learning Objectives {.unnumbered}
 
@@ -68,9 +73,11 @@ $$
 
 ## MCMC Methods
 
-## Expectations
-
 ## Hierarchical Models
+
+## Missing Data
+
+## Censored Data
 
 ## Bayesian Workflow and Philosophy
 

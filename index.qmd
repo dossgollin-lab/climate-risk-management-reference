@@ -1,5 +1,10 @@
 # Preface {.unnumbered}
 
+::: {.callout-note}
+## Under Construction
+This textbook is still under active construction. Please check back regularly for updates and new content.
+:::
+
 Welcome to the online textbook **Climate Risk Assessment and Management**, which aims to provide a comprehensive introduction to the field of climate risk management.
 
 Information on the probabilities of extreme events plays a key role in many contexts, from designing infrastructure to shaping public policy.

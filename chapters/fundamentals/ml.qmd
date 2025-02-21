@@ -2,6 +2,11 @@
 title: Machine Learning
 ---
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## Learning Objectives {.unnumbered}
 
 - Identify common machine learning techniques relevant to climate data (regression, classification, clustering).

@@ -9,7 +9,7 @@ book:
   date: "2/19/2025"
   chapters:
     - index.qmd
-    - part: "Fundamentals"
+    - part: "Part I: Fundamentals"
       chapters:
         - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
@@ -23,14 +23,15 @@ book:
         - chapters/fundamentals/model-comparison.qmd
         - chapters/fundamentals/sensitivity.qmd
         - chapters/fundamentals/climate-science.qmd
-    - part: "Hydroclimate Extremes and Catastrophes"
+    - part: "Part II: Hydroclimate Extremes and Catastrophes"
       chapters:
+        - chapters/hazard/intro.qmd
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
         - chapters/hazard/sampling.qmd
         - chapters/hazard/assimilation.qmd
         - chapters/hazard/surrogate-models.qmd
-    - part: "Climate Risk Management"
+    - part: "Part III: Climate Risk Management"
       chapters:
         - chapters/risk/intro.qmd
         - chapters/risk/risk.qmd
@@ -43,11 +44,12 @@ book:
         - chapters/risk/equity-values.qmd
         - chapters/risk/stakeholders.qmd
     - references.qmd
-    - part: "Notebooks"
-      chapters:
-        - notebooks/block-maxima.qmd
   appendices: 
     - appendices/julia.qmd
+  
+  search:
+    location: sidebar
+    type: textbox
 
 bibliography: references.bib
 
@@ -63,6 +65,10 @@ format:
     code-line-numbers: true
     html-math-method: mathjax
     date-format: "ddd., MMM. D"
+    notebook-links: true
+    page-footer: |
+      &copy; 2025 James Doss-Gollin. All rights reserved.
+  
 
 glossary:
   path: _glossary.yml

@@ -2,6 +2,11 @@
 title: Cascading Risks and Resilience
 ---
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## Learning Objectives {.unnumbered}
 
 - Recognize and analyze multi-hazard events (e.g., hurricane + storm surge + inland flooding).

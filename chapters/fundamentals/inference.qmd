@@ -2,6 +2,11 @@
 title: Inference and Optimization
 ---
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## Learning Objectives {.unnumbered}
 
 ## Optimization: calculus perspective

@@ -2,6 +2,11 @@
 title: Fundamentals of Climate Science
 ---
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## Learning Objectives {.unnumbered}
 
 - Grasp the key physical processes driving climate variability and change (radiative forcing, feedback loops).

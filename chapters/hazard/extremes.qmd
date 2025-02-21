@@ -2,6 +2,11 @@
 title: Extreme Value Theory
 ---
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## Learning Objectives {.unnumbered}
 
 - Characterize the behavior of rare, high-impact climate events (e.g., floods, heatwaves).
@@ -43,7 +48,7 @@ If $Y_i \sim \text{GPD}(\sigma, \xi)$, then the mean is given by
 $$
 \mathbb{E}[Y] = \frac{\sigma}{1 - \xi}, \quad \xi < 1.
 $$ {#eq-gpd-mean}
-If $\xi \geq 1$, then the mean is infinite.
+If $\xi \geq 1, then the mean is infinite.
 Assuming the GPD is valid for excesses of the threshold $u_0$, then the mean value of the threshold exceedances is
 $$
 \mathbb{E}[X - u_0 | X > u_0] = \frac{\sigma_{u_0}}{1 - \xi}, \quad \xi < 1,
@@ -61,8 +66,6 @@ Above a level $u_0$ at which the asymptotic approximation is valid, the estimate
 ### Parameter Estimation
 
 ## Non-stationarity
-
-### Trend detection
 
 ### Covariate methods
 

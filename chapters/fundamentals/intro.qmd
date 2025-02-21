@@ -1,5 +1,10 @@
 # Overview {.unnumbered}
 
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
 ## How to use this Part
 
 - There are LOTS of fantastic stats resources, but they are often very narrowly tailored
