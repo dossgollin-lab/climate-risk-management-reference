@@ -53,7 +53,7 @@ This textbook is and will always remain free, licensed under the [CC BY-SA 4.0 L
 Please cite this book as:
 
 ```bibtex
-@book{doss-gollin_climate_2024,
+@book{doss-gollin_crm_2025,
   author = {Doss-Gollin, James},
   title = {Climate Risk Management},
   year = {2025},

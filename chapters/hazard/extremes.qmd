@@ -8,9 +8,72 @@ title: Extreme Value Theory
 - Select and fit appropriate extreme value distributions (GEV, POT).
 - Calculate return periods and interpret their limitations under climate change.
 
-## Extreme Value Theory
- (GEV distributions, block maxima, POT methods)
+## Overview
+ 
+- Extreme value theory
+- Block maxima
+- Peak over threshold
+- Return level
+- return period
+- Sampling uncertainty
 
-## Return level, return period, tail dependence
+## Block maxima
 
-## Non-stationarity in extremes, trend detection in peak events
+
+## Peaks over thresholds
+
+
+Modeling only the maxima can be wasteful if other data on extremes is available (eg, more than one flood in a single year).
+Peak over threshold (POT) methods avoid the procedure of separating into blocks.
+
+In general, we are dealing with a sequence of independent and identically distributed (iid) measurements $x_1, x_2, \ldots, x_n$.
+Extreme events are defined as exceedances over a threshold $u$, ${x_i: x_i > u}$.
+If we call the threshold excesses $y$, as in $y_j = x_{(j)} - u$ for $j=1, \ldots, k$, then we can model the $y_j$ as independent ralizations of a random variable.
+As outlined in chapter 4 of @coles_extremes:2001, the Generalized Pareto Distribution (GPD) is a well-justified (and common) choice for modeling exceedances with theoretical links to the GEV distribution.
+
+### Declustering
+
+### Choosing a threshold
+
+Choosing too low a threshold can lead to bias, while too high a threshold can lead to large uncertainty in the estimates.
+In general, it's useful to adopt as low a threshold as possible (to improve estimation quality) subject to the limit model providing a good approximation.
+
+The first method is based on the mean of the Generalized Pareto Distribution.
+If $Y_i \sim \text{GPD}(\sigma, \xi)$, then the mean is given by
+$$
+\mathbb{E}[Y] = \frac{\sigma}{1 - \xi}, \quad \xi < 1.
+$$ {#eq-gpd-mean}
+If $\xi \geq 1$, then the mean is infinite.
+Assuming the GPD is valid for excesses of the threshold $u_0$, then the mean value of the threshold exceedances is
+$$
+\mathbb{E}[X - u_0 | X > u_0] = \frac{\sigma_{u_0}}{1 - \xi}, \quad \xi < 1,
+$$ {#eq-gpd-mean-excess}
+where $\sigma_{u_0}$ is the scale parameter of the GPD fitted to exceedances over $u_0$.
+If $u_0$ is a good choice, then the GPD should also be valid for thresholds $u > u_0$, subject to a change of scale parameter.
+This means that if we plot the "mean excess", $\mathbb{E}[X - u | X > u]$, for different values of $u$, called the "mean residual life plot", it should be approximately linear, with respect to $u$.
+In practice with limited data this is involves somewhat subjective interpretation.
+
+{{< embed ../../notebooks/block-maxima.qmd#fig-mean-residual-life >}}
+
+A second procedure is to estimate the GPD parameters for a range of thresholds.
+Above a level $u_0$ at which the asymptotic approximation is valid, the estimates of the shape parameter $\xi$ should be approximately constant.
+
+### Parameter Estimation
+
+## Non-stationarity
+
+### Trend detection
+
+### Covariate methods
+
+## Regionalization
+
+## Further reading
+
+A classic text is @coles_extremes:2001: an authoritative textbook on extreme value theory and applications, with both mathematical rigor and practical examples.
+Packages like the R `ismev` package and the Julia `Extremes.jl` package implement many of the techniques discussed and provide well-documented tutorials.
+
+Lots of current research on this topic focuses on the problems of sampling uncertainty in extreme value analysis.
+One of our papers, @lu_spatiotemporal:2025, discusses this challenge and proposes an approach for managing it using spatial information.
+
+Other current research aims to account for the fact that the measurements $x_i$ are not iid.

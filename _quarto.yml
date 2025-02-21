@@ -32,6 +32,7 @@ book:
         - chapters/hazard/surrogate-models.qmd
     - part: "Climate Risk Management"
       chapters:
+        - chapters/risk/intro.qmd
         - chapters/risk/risk.qmd
         - chapters/risk/expectations-cost-benefit.qmd
         - chapters/risk/policy-search.qmd
@@ -41,14 +42,10 @@ book:
         - chapters/risk/risk-transfer.qmd
         - chapters/risk/equity-values.qmd
         - chapters/risk/stakeholders.qmd
+    - references.qmd
     - part: "Notebooks"
       chapters:
-        - notebooks/mosquitos.qmd
-        - notebooks/prob-stats.qmd
-        - notebooks/rare-disease.qmd
-        - notebooks/coin-flipping.qmd
-      folded: true
-    - references.qmd
+        - notebooks/block-maxima.qmd
   appendices: 
     - appendices/julia.qmd
 
@@ -56,7 +53,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: sandstone
+    theme: flatly
     code-overflow: wrap
     anchor-sections: true
     callout-appearance: simple

@@ -8,8 +8,12 @@ title: Data Assimilation
 - Understand ensemble-based and variational approaches (EnKF, 3D/4D-Var).
 - Assess the impact of data assimilation on predictive skill for climate hazards (e.g., storms).
 
-## Data assimilation concepts (analysis, forecast step)
+## Overview
 
-## Ensemble Kalman Filter (EnKF), variational methods
+## Kalman Filter
 
-## Updating model states with real-time observations
+## Ensemble Kalman Filter
+
+## Variational methods
+
+## Further reading

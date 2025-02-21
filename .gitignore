@@ -11,3 +11,4 @@ slides/
 *.ipynb
 
 notebooks/.jupyter_cache/
+notebooks/*_files/*
