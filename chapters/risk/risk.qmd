@@ -1,5 +1,5 @@
 ---
-title: Foundations of Risk and Decision-Making Under Uncertainty
+title: From Hazard to Risk
 ---
 
 ## Learning Objectives {.unnumbered}
@@ -8,10 +8,12 @@ title: Foundations of Risk and Decision-Making Under Uncertainty
 - Understand basic risk terminology (risk = probability × consequence).
 - Identify how different stakeholders perceive and prioritize climate risks.
 
-## Risk definitions: expected loss, variance, downside risk
-
 ## Hazard vs. vulnerability vs. exposure
 
-## Risk perception and communication
+### Damage
 
-## Intro to decision-making under uncertainty
+### Example: Depth-Damage Functions
+
+### Example: Wind Fragility Functions
+
+## Risk metrics

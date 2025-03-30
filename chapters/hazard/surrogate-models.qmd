@@ -1,9 +1,13 @@
+---
+title: Surrogates and Emulators
+---
+
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-# Surrogates and Emulators
+
 
 ## Learning Objectives {.unnumbered}
 

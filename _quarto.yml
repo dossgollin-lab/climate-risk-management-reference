@@ -4,22 +4,35 @@ project:
     port: 4200
 
 book:
-  title: "Climate Risk Assessment and Management"
-  author: "James Doss-Gollin"
+  title: "Hydroclimate Risk Assessment and Management"
+  author: "{{< var author >}}"
   date: "2/19/2025"
+  page-footer:
+    left: |
+      <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} {{< var author >}}</span>
+      <span class="faux-block">All content licensed under<br>[{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</span>      
+    center: |
+      <span class="faux-block">{{< fa brands orcid >}} <strong>ORCID</strong> [{{< var orcid >}}](https://orcid.org/{{< var orcid >}})</span>
+
+    right: |
+      <span class="faux-block">Made with Julia and [Quarto](https://quarto.org/).</span>
+      <span class="faux-block">[View the source at {{< fa brands github >}} GitHub]({{< var github-url >}})</span>
+    
   chapters:
     - index.qmd
+    - author.qmd
+    - uncertainty.qmd
     - part: "Part I: Fundamentals"
       chapters:
         - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/inference.qmd
         - chapters/fundamentals/bayes.qmd
+        - chapters/fundamentals/ml.qmd
         - chapters/fundamentals/nonparametric.qmd
         - chapters/fundamentals/time-series.qmd
         - chapters/fundamentals/multidimensional.qmd
         - chapters/fundamentals/spatial.qmd
-        - chapters/fundamentals/ml.qmd
         - chapters/fundamentals/model-comparison.qmd
         - chapters/fundamentals/sensitivity.qmd
         - chapters/fundamentals/climate-science.qmd
@@ -29,7 +42,6 @@ book:
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
         - chapters/hazard/sampling.qmd
-        - chapters/hazard/assimilation.qmd
         - chapters/hazard/surrogate-models.qmd
     - part: "Part III: Climate Risk Management"
       chapters:
@@ -44,12 +56,19 @@ book:
         - chapters/risk/equity-values.qmd
         - chapters/risk/stakeholders.qmd
     - references.qmd
-  appendices: 
-    - appendices/julia.qmd
-  
+
+    - part: "Notebooks"
+      chapters: 
+        - "notebooks/mosquitos.ipynb"
+        - "notebooks/block-maxima.ipynb"
+        - "notebooks/sewells-point.ipynb"
+
   search:
     location: sidebar
     type: textbox
+
+  sidebar:
+    collapse-level: 1
 
 bibliography: references.bib
 
@@ -66,9 +85,6 @@ format:
     html-math-method: mathjax
     date-format: "ddd., MMM. D"
     notebook-links: true
-    page-footer: |
-      &copy; 2025 James Doss-Gollin. All rights reserved.
-  
 
 glossary:
   path: _glossary.yml
@@ -82,3 +98,5 @@ kernel: julia-1.11
 execute:
   freeze: auto  
   cache: true
+
+citation: true

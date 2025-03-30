@@ -15,10 +15,14 @@ This chapter is still under active construction. Please check back regularly for
 
 ## Supervised vs. unsupervised learning
 
-## Common algorithms (random forests, SVMs)
+## Hyperparameter Tuning
 
-## Regularization (Lasso, Ridge) and hyperparameter tuning
+## Regularization
 
 ## Neural networks
 
-## Further reading
+## Further reading {.unnumbered}
+
+- There are numerous books on modern deep learning approaches, but @bishop_deeplearning:2024 is an accessible and comprehensive introduction
+- @james_statlearn:2013 provides a clear overview of traditional statistical learning methods, mostly predating the recent deep learning boom, that provides a conceptual link between statistics and machine learning
+- @thuerey_pbdl:2024 covers modern techniques for physics-based deep learning, covering topics like neural operators, diffusion models, physics-informed neural networks, and related topics. These topics would nicely supplement the material in this book, but are not covered here except to note their potential relevance and applications.

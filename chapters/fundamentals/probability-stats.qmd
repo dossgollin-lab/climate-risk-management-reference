@@ -1,11 +1,14 @@
 ---
-title: Basics of Probability and Statistics
+title: Probability and Statistics
 ---
 
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
+
+This textbook assumes that you have taken not only an introductory course in probability and statistics, but also some more advanced courses on statistics, machine learning, or data analysis.
+For this reason, this chapter will briefly summarize some of the key concepts in probability theory that we will use throughout the book, but is by no means a comprehensive reference.
 
 ## Learning Objectives {.unnumbered}
 
@@ -24,7 +27,7 @@ In this textbook we will not get into measure theory.
 - Normalization: $\Pr(S) = 1$ where $S$ is the sample space
 - Additivity: $\Pr(A \cup B) = \Pr(A) + \Pr(B)$ for any two mutually exclusive events $A$ and $B$
 
-## CDFs, PDFs, and PMFs
+### CDFs, PDFs, and PMFs
 
 If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the *probability density function* (PDF) of $X$, then:
 $$
@@ -47,9 +50,9 @@ The probability that $y$ takes on the value $y^*$, written $p(y=y^*)$, is zero.
 - Discrete distributions (like the Poisson) have a *probability mass function* (PMF) instead of a PDF
 - For PMFs, $p(y=y^*)$ is the probability that $y$ takes on the value $y^*$, and is defined
 
-## Marginal, conditional, and joint distributions
+### Marginal, conditional, and joint distributions
 
-### Marginal probability
+#### Marginal probability
 
 Probability of event $A$: $\Pr(A)$
 
@@ -59,7 +62,7 @@ $$
 p(\theta) \quad \text{or} \quad p(y)
 $$
 
-### Joint probability
+#### Joint probability
 
 Probability of events $A$ and $B$: $\Pr(A  \& B)$
 
@@ -67,7 +70,7 @@ $$
 p(\theta, y)
 $$
 
-### Conditional probability
+#### Conditional probability
 
 Probability of event $A$ given event $B$: $\Pr(A | B)$
 
@@ -91,7 +94,7 @@ $$
 p(\theta | y) \propto p(\theta) p(y | \theta)
 $$
 
-### Regression example
+### Example: Regression as a Conditional Distribution
 
 Standard linear regression model, let's assume $x \in \mathbb{R}$ for simplicity (1 predictor):
 $$
@@ -124,13 +127,17 @@ $$
 where $p(x_i)$ is the probability density of $x_i$.
 
 
-## Descriptive statistics (mean, variance, quantiles)
+## Statistics
 
-## Common probability distributions 
+### Expectations
+
+### Descriptive statistics (mean, variance, quantiles)
 
 ### Central Limit Theorem
 
-### Mixture models
+### Common Probability Distributions
+
+#### Mixture models
 
 The Negative Binomial distribution (see last lecture) can be interpreted as a Gamma-Poisson *mixture*:
 
@@ -152,9 +159,19 @@ $$
 $$
 For all the steps see [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution#Gamma%E2%80%93Poisson_mixture){target=_blank}.
 
-## Hypothesis testing
+### Hypothesis Testing
 
-- How consistent is the data with a hypothesis?
+A common goal of statistical analysis is to quantify how consistent a set of observations is with a given hypothesis.
 
-### Example: Effect of Beer on Mosquito Bites
+#### Case Study: Statistics Without the Agonizing Pain
 
+See [the notebook](/notebooks/mosquitos.ipynb).)
+
+## Further Reading {.unnumbered}
+
+If most of this content is unfamiliar to you, it may be worth reviewing a more comprehensive introduction to probability and statistics before proceeding.
+While introductory statistics is often taught in an exhaustingly dry way, there are a few excellent resources
+
+- **@blitzstein_probability:2019** rovides a thorough introduction to key concepts and ideas in probability. The book accompanies a free online course, [Stat 110](https://projects.iq.harvard.edu/stat110/home), which is a great resource for learning probability and statistics. Practice problems and solutions, handouts, and lecture videos are all available online.
+- **@downey_thinkbayes:2021**  offers an introduction to Bayesian statistics using computational methods. It’s not focused on environmental variables or extremes but provides code and a clear explanation of core concepts.
+- **@gelman_regression:2021** is an examples-centric introduction to probability, statistics, and statistical modeling. Andrew Gelman is the professor who got me passionate about statistics, and this is an excellent resource.

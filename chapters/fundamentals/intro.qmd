@@ -7,7 +7,6 @@ This chapter is still under active construction. Please check back regularly for
 
 ## How to use this Part
 
-- There are LOTS of fantastic stats resources, but they are often very narrowly tailored
-- NOT designed to be comprehensive. Provides an overview of fundamental concepts, then works through a couple of example methods and then points to resources for other methods.
-- Designed to be a reference and annotated bibliography
-- A course could work through these chapters in order, but it may make more sense to pick and choose
+- There are LOTS of fantastic stats, optimization, and Earth science resources, but they are often very narrowly tailored
+- This section is NOT designed to be comprehensive. Provides an overview of fundamental concepts, then works through a couple of example methods and then points to resources for other methods.
+- A course could work through these chapters in order, but it may make more sense to pick and choose, or to refer to them in the context of other chapters.

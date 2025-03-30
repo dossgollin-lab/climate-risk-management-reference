@@ -1,5 +1,5 @@
 ---
-title: Inference and Optimization
+title: Optimization and MLE
 ---
 
 ::: {.callout-note}
@@ -7,22 +7,33 @@ title: Inference and Optimization
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
+The study of optimization forms a key component of many fields, including operations research and much of machine learning research.
+In this chapter, we briefly touch on key concepts in optimization as they relate to inference and decision-making.
+
 ## Learning Objectives {.unnumbered}
 
-## Optimization: calculus perspective
+## Optimization Overview
 
-## Optimization: overview of methods
+Optimization is the study of finding the best solution to a problem from a set of feasible solutions.
+Thus, optimization problems typically consist of
 
-## Curse of dimensionality
+1. An objective function, $f(x)$, which we want to minimize. (Minimizing is a convention, but of course we can also maximize. In this case, we would just minimize $-f(x)$.)
+1. A set of decision variables, $x$, which are the inputs we can control.
+1. A set of constraints which define the feasible region.
 
-## Maximum Likelihood Estimation (MLE)
+Optimization is an incredibly diverse field.
+Problems can have many constraints or none; can have discrete or continuous decision variables (or both); can be static or dynamic; deterministic or stochastic; linear or nonlinear; or much more.
 
-We have some *parametric statistical model* with unknown parameters.
-We want to evaluate how consistent the data are with different values of the parameters, and to find the values of the parameters that are most consistent with the data.
+## Maximum Likelihood Estimation
 
-### Likelihood function for one observation
+One common application of optimization is in statistics.
+Specifically, we often want to evaluate how consistent the data are with different values of the parameters, and to find the values of the parameters that are most consistent with the data.
 
-The likelihood is the probability of the **data** given some **parameters**:
+### General Case
+
+#### Likelihood
+
+The likelihood is the probability of the **observations** $y$ given some **parameters** $\theta$:
 $$
 p(y | \theta)
 $$
@@ -32,10 +43,14 @@ This is just $p(y | \theta)$ for a range of $\theta$.
 
 
 ::: {.callout-note}
-You will sometimes see this referred to as $\mathcal{L}(\theta)$, which is a  confusing notation...
+You will sometimes see this referred to as $\mathcal{L}(\theta)$.
+However, since this is a probability distribution, it doesn't really need its own notation.
 :::
 
-### Likelihood function for multiple observations
+#### Likelihood function for multiple observations
+
+Often, we have multiple observations $y_1, y_2, \ldots, y_n$.
+
 
 Independent and identically distributed (i.i.d.) assumption:
 $$
@@ -115,7 +130,7 @@ You should understand the general procedure:
 1. take $\frac{d}{d\theta}$ and set equal to zero to maximize
 1. solve for $\theta^*$.
 
-## Regression models (inference)
+### Example: Linear Regression
 
 Let's consider the generic regression probelem where we have paired observations $\left\{x_i, y_i\right\}_{i=1}^n$.
 In general, we can write this regression as
@@ -164,8 +179,22 @@ $$
 
 If we then want to estimate $\sigma$, we can estimate the standard deviation of the residuals.
 
-### GLMs
+## Simulation-Optimization
 
-## Old
+- Nonlinear systems that we can't solve analytically
+- Heuristics -- often not exact
 
+## Sequential Decision Problems
 
+### Dynamic Policy Search
+
+### Other approaches
+
+- **@sutton_reinforcement:2018** provides a comprehensive introduction to reinforcement learning, which is broadly the study of sequential decision-making under uncertainty.
+
+## Multiobjective Optimization
+
+## Further Reading {.unnumbered}
+
+- **@sutton_reinforcement:2018** provides a comprehensive introduction to reinforcement learning, which is broadly the study of sequential decision-making under uncertainty.
+- **@powell_textbook:2022** provides a comprehensive treatment of sequential decision-making under uncertainty, aiming at a unified framework

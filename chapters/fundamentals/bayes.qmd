@@ -1,5 +1,5 @@
 ---
-title: Bayesian Utility and Inference
+title: Bayesian Inference
 ---
 
 ::: {.callout-note}
@@ -9,45 +9,9 @@ This chapter is still under active construction. Please check back regularly for
 
 ## Learning Objectives {.unnumbered}
 
-- Articulate why parametric uncertainty is important for climate risk management
 - Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions.
 - Understand the role of utility theory in decision-making under uncertainty.
 
-## Bayesian Utility Theory
-
-We will often be interested in making decisions despite not having perfect information.
-
-### Types of uncertainty
-
-- Aleatory uncertainty: inherent variability in the system (ie, randomness)
-- Epistemic uncertainty: uncertainty in our knowledge of the system, often useful to divide into
-    - Parametric uncertainty (what we will use here)
-    - Model structure uncertainty (treated qualitatively)
-
-### History
-
-- First conceived as a way to try to explain human behavior
-    - Turns out not to be a great model -- people do not always behave rationally
-
-### Utility
-
-- Some function that we want to maximize
-- Alternatively can be thought of as a cost function that we want to minimize
-- $U(a, \theta)$
-    - $a$ is the action we take
-    - $\theta$ is the state of the world
-
-### Expected Utility
-
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \int_{\theta \in \Theta} U(a, \theta) p(\theta) d\theta
-$$
-
-or in the discrete case
-
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \sum_{\theta \in \Theta} U(a, \theta) p(\theta)
-$$
 
 ## Bayesian Inference
 
@@ -71,7 +35,9 @@ $$
 
 ## Maximum A Posteriori (MAP) Estimation
 
-## MCMC Methods
+## Exact Posterior Estimation
+
+## Posterior Approximation with MCMC
 
 ## Hierarchical Models
 

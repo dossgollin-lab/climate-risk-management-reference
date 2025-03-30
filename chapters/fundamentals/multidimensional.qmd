@@ -1,5 +1,5 @@
 ---
-title: Multidimensional Statistics
+title: High-Dimensional Statistics
 ---
 
 ::: {.callout-note}
