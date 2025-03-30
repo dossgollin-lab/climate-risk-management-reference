@@ -5,14 +5,14 @@ project:
 
 book:
   title: "Hydroclimate Risk Assessment and Management"
-  author: "{{< var author >}}"
+  author: "James Doss-Gollin"
   date: "2/19/2025"
   page-footer:
     left: |
-      <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} {{< var author >}}</span>
-      <span class="faux-block">All content licensed under<br>[{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</span>      
+      <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} [{{< var author >}}](https://orcid.org/{{< var orcid >}})</span>
+      <span class="faux-block">
     center: |
-      <span class="faux-block">{{< fa brands orcid >}} <strong>ORCID</strong> [{{< var orcid >}}](https://orcid.org/{{< var orcid >}})</span>
+      All content licensed under [{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</span>
 
     right: |
       <span class="faux-block">Made with Julia and [Quarto](https://quarto.org/).</span>
@@ -41,6 +41,8 @@ book:
         - chapters/hazard/intro.qmd
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
+        - chapters/hazard/perturbations.qmd
+        - chapters/hazard/generators.qmd
         - chapters/hazard/sampling.qmd
         - chapters/hazard/surrogate-models.qmd
     - part: "Part III: Climate Risk Management"
@@ -57,11 +59,11 @@ book:
         - chapters/risk/stakeholders.qmd
     - references.qmd
 
-    - part: "Notebooks"
+    - part: "Computational Notebooks"
       chapters: 
-        - "notebooks/mosquitos.ipynb"
-        - "notebooks/block-maxima.ipynb"
-        - "notebooks/sewells-point.ipynb"
+        - "notebooks/mosquitos.qmd"
+        - "notebooks/block-maxima.qmd"
+        - "notebooks/sewells-point.qmd"
 
   search:
     location: sidebar

@@ -1,17 +1,19 @@
+---
+title: Optimal Sampling
+---
+
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
----
-title: Synthetic Events and Optimal Sampling
----
-
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
 
 - Apply sampling techniques to generate synthetic event sets (e.g., hurricanes, floods).
 - Use importance and stratified sampling to improve efficiency in hazard modeling.
 - Evaluate how sampling choices affect estimates of extreme risk.
+:::
 
 ## Monte Carlo sampling and variance reduction
 

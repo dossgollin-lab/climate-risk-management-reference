@@ -7,7 +7,9 @@ title: Time Series and Frequency Analysis
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
+:::
 
 ## Autocorrelation functions
 

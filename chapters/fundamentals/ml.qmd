@@ -7,11 +7,13 @@ title: Machine Learning
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
 
 - Identify common machine learning techniques relevant to climate data (regression, classification, clustering).
 - Evaluate model performance (cross-validation, error metrics) and address overfitting.
 - Recognize opportunities and pitfalls of applying ML to complex climate problems.
+:::
 
 ## Supervised vs. unsupervised learning
 

@@ -2,11 +2,18 @@
 title: Robustness
 ---
 
-## Learning Objectives {.unnumbered}
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
 
 - Address deep uncertainty in climate decision-making.
 - Use robust decision-making (RDM) methods to compare strategies across multiple futures.
 - Balance robustness vs. optimality in selecting climate actions.
+:::
 
 ## Deep uncertainty and scenario exploration
 

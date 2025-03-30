@@ -7,7 +7,9 @@ title: High-Dimensional Statistics
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
+:::
 
 ## Covariance and correlation
 

@@ -2,11 +2,18 @@
 title: Expectations and Discounting
 ---
 
-## Learning Objectives {.unnumbered}
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
 
 - Perform cost-benefit analysis for climate adaptation/mitigation projects.
 - Incorporate discount rates, externalities, and non-monetary benefits into assessments.
 - Evaluate economic trade-offs over different time horizons and scenarios.
+:::
 
 See first:
 

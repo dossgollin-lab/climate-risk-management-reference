@@ -1,4 +1,4 @@
-# Homepage {.unnumbered}
+# Welcome {.unnumbered}
 
 ::: {.callout-note}
 ## Under Construction
@@ -22,8 +22,19 @@ This text is modular and organized as follows:
 ## Pre-requisites
 
 A background in **statistics** and/or **machine learning** is helpful.
-We also assume some familiarity with **programming**, which you can develop (or refresh) through resources listed in the [Julia appendix](appendices/julia.qmd).
-Although linear algebra and differential calculus are essential for understanding statistics, machine learning, Earth science, and optimization at a deep level, this book focuses on understanding the concepts and applications of these methods, and so a conceptual understanding of these topics is usually sufficient.
+Although linear algebra and differential calculus are essential for understanding statistics, machine learning, Earth science, and optimization at a deep level, this book focuses on understanding the concepts and applications of these methods, and so a conceptual understanding of these topics is usually qsufficient.
+
+## Computation
+
+This book is accompanied by a series of computational notebooks written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed.
+While the text itself does not include code snippets, these notebooks integrate text, code, and visualizations using the Quarto framework.
+You can download and run them locally to explore the material interactively.
+
+No prior experience with Julia or programming is required to read the text.
+However, working through the notebooks is highly recommended, as they provide a hands-on introduction to the methods and concepts covered.
+Julia was chosen for its general-purpose capabilities, mathematically intuitive syntax, and versatility across applications.
+Julia is open source, and its community is growing rapidly, making it an excellent choice for computational tasks in climate risk assessment and management.
+That said, the methods discussed are applicable in other programming languages, such as Python, R, and C++, and many relevant software ecosystems are stronger in those languages (e.g., PyTorch/TensorFlow for machine learning or Pangeo/xarray for working with gridded climate data).
 
 ## Related Projects
 
@@ -33,10 +44,11 @@ In particular, this draws from Upmanu Lall's Environmental Data Analysis course 
 There is also overlap with several other textbooks, including:
 
 - **@abernathey_datascience:2024** is an excellent resource covering introductory topics in Earth and climate data science using Python, with an emphasis on foundational computations. These core computational concepts serves as a recommended prerequisite for more advanced material in this book.
-- **@pyrcz_textbook:2024** is a textbook focused on applied machine learning, with a particular focus on geostatistics. There's less focus on extremes, hydroclimate, and decision-making, but it provides very clear and interpretable explanations of many machine learning methods, including some that are not directly covered in this book.
 - **@helsel_waterresources:2020** is a comprehensive introduction to water resources and hydrology, focusing on statistical methods for analyzing hydrologic data. Its methods are traditional, with less emphasis on machine learning or Bayesian methods and more attention to null hypothesis significance testing, but its case studies are well-worked and thoughtfully described.
 - **@loucks_planning:2017** provides a broad and rigorous overview of simulation, optimization, and multi-objective planning for water resource systems. While not focused on climate extremes, it forms a core reference for decision modeling and infrastructure management under uncertainty. This book extends Loucks by incorporating hydroclimate hazard modeling and deep uncertainty.
 - **@marchau_decisionmakingunderdeepuncertainty:2019** introduces robust and adaptive decision frameworks designed for uncertain or unknowable futures. It covers methods like Robust Decision Making, Dynamic Adaptive Planning, and Info-Gap Theory. While not specific to climate or water, it provides essential theory for Part 3 of this book, which applies these frameworks to hydroclimate risk and adaptation.
+- **@mignan_textbook:2024**  is a modern introduction to catastrophe risk modeling that covers a wide range of hazards, including hydroclimatic extremes, from a physics-based perspective. It provides a structured framework for quantifying hazard, exposure, and vulnerability, following industry-standard CAT modeling approaches. While broader in scope and more introductory in level, it complements this book’s focus by illustrating foundational principles of probabilistic risk modeling in practice.
+- **@pyrcz_textbook:2024** is a textbook focused on applied machine learning, with a particular focus on geostatistics. There's less focus on extremes, hydroclimate, and decision-making, but it provides very clear and interpretable explanations of many machine learning methods, including some that are not directly covered in this book.
 
 In addition, most of the chapters in the book summarize topics that are themselves the subject of numerous more focused texts, which are summarized in the references at the end of each chapter.
 
@@ -49,7 +61,7 @@ It is my hope that this permissive license will broaden access to knowledge and 
 Please cite this book as:
 
 ```bibtex
-@book{doss-gollin_texbtook:2025,
+@book{doss-gollin_textbook:2025,
   author = {Doss-Gollin, James},
   title = {Climate Risk Management},
   year = {2025},

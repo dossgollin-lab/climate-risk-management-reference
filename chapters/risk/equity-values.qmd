@@ -1,17 +1,24 @@
+---
+title: Values, Ethics, and Equity
+---
+
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
----
-title: Values, Ethics, and Equity
----
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
 
 - Integrate ethical and equity considerations into climate risk policies.
 - Examine how costs and benefits are distributed across different communities and generations.
 - Reflect on climate justice frameworks for decision-making.
+:::
 
 ## Climate justice, distributional equity
 

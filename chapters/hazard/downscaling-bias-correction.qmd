@@ -1,17 +1,19 @@
+---
+title: Downscaling and Bias Correction
+---
+
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
----
-title: Downscaling and Bias Correction
----
-
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
 
 - Differentiate between dynamical and statistical downscaling methods.
 - Correct systematic biases in climate model outputs for local or regional assessments.
 - Evaluate the quality and limitations of downscaled datasets in hazard modeling.
+:::
 
 ## Role of high-resolution data in local risk assessments
 

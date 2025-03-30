@@ -2,7 +2,14 @@
 title: Adaptive Planning and Flexibility
 ---
 
-## Learning Objectives {.unnumbered}
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
+:::
 
 - Plan for uncertainty with adaptive management and iterative risk strategies.
 - Develop adaptation pathways that evolve with new information (e.g., climate data, impacts).

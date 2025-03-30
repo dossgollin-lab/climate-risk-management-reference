@@ -8,7 +8,9 @@ notebook-links: true
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
+:::
 
 - Characterize the behavior of rare, high-impact climate events (e.g., floods, heatwaves).
 - Select and fit appropriate extreme value distributions (GEV, POT).
@@ -57,12 +59,12 @@ If $u_0$ is a good choice, then the GPD should also be valid for thresholds $u >
 This means that if we plot the "mean excess", $\mathbb{E}[X - u | X > u]$, for different values of $u$, called the "mean residual life plot", it should be approximately linear, with respect to $u$.
 In practice with limited data this is involves somewhat subjective interpretation.
 
-{{< embed ../../notebooks/block-maxima.ipynb#fig-mean-residual-life >}}
+{{< embed ../../notebooks/block-maxima.qmd#fig-mean-residual-life >}}
 
 A second procedure is to estimate the GPD parameters for a range of thresholds.
 Above a level $u_0$ at which the asymptotic approximation is valid, the estimates of the shape parameter $\xi$ should be approximately constant.
 
-{{< embed ../../notebooks/sewells-point.ipynb#fig-return-scatter >}}
+{{< embed ../../notebooks/sewells-point.qmd#fig-return-scatter >}}
 
 ### Parameter Estimation
 

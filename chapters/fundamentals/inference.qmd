@@ -7,17 +7,20 @@ title: Optimization and MLE
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
+::: {.callout-tip}
+## Learning Objectives
+:::
+
+
 The study of optimization forms a key component of many fields, including operations research and much of machine learning research.
 In this chapter, we briefly touch on key concepts in optimization as they relate to inference and decision-making.
-
-## Learning Objectives {.unnumbered}
 
 ## Optimization Overview
 
 Optimization is the study of finding the best solution to a problem from a set of feasible solutions.
 Thus, optimization problems typically consist of
 
-1. An objective function, $f(x)$, which we want to minimize. (Minimizing is a convention, but of course we can also maximize. In this case, we would just minimize $-f(x)$.)
+1. An objective function, $f(x)$, which we want to minimize or maximize.
 1. A set of decision variables, $x$, which are the inputs we can control.
 1. A set of constraints which define the feasible region.
 

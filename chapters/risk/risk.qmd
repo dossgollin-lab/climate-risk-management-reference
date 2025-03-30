@@ -2,18 +2,25 @@
 title: From Hazard to Risk
 ---
 
-## Learning Objectives {.unnumbered}
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
 
 - Define and conceptualize risk within the climate context (hazard, exposure, vulnerability).
 - Understand basic risk terminology (risk = probability × consequence).
 - Identify how different stakeholders perceive and prioritize climate risks.
+:::
 
-## Hazard vs. vulnerability vs. exposure
-
-### Damage
+## Damage
 
 ### Example: Depth-Damage Functions
 
 ### Example: Wind Fragility Functions
 
-## Risk metrics
+## Exposure
+
+## Risk

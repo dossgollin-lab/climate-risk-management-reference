@@ -7,13 +7,13 @@ title: Bayesian Inference
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
 
 - Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions.
 - Understand the role of utility theory in decision-making under uncertainty.
+:::
 
-
-## Bayesian Inference
 
 1. Parameters have **probability distributions**, not single point values 
 1. Start with some prior distribution for parameters

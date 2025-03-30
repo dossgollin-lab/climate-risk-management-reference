@@ -10,11 +10,15 @@ This chapter is still under active construction. Please check back regularly for
 This textbook assumes that you have taken not only an introductory course in probability and statistics, but also some more advanced courses on statistics, machine learning, or data analysis.
 For this reason, this chapter will briefly summarize some of the key concepts in probability theory that we will use throughout the book, but is by no means a comprehensive reference.
 
+::: {.callout-tip}
+## Learning Objectives
+
 ## Learning Objectives {.unnumbered}
 
 - Understand foundational probability concepts (random variables, distributions, moments).
 - Apply descriptive and inferential statistical methods to climate-related datasets.
 - Recognize when and why certain probability models are appropriate for climate variables.
+:::
 
 ## Probability
 

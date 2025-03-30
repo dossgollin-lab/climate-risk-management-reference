@@ -2,11 +2,18 @@
 title: Spatial Statistics
 ---
 
-## Learning Objectives {.unnumbered}
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
 
 - Model and interpret spatial dependence in climate fields
 - Perform kriging and other geostatistical interpolations for mapping hazards.
 - Understand the fundamentals of spatial autocorrelation and variogram analysis.
+:::
 
 ## Spatial autocorrelation and variograms
 

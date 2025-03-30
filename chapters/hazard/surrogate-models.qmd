@@ -7,9 +7,9 @@ title: Surrogates and Emulators
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
-
-
-## Learning Objectives {.unnumbered}
+::: {.callout-tip}
+## Learning Objectives
+:::
 
 - Create faster, approximate models (surrogates) for complex climate simulations.
 - Implement Gaussian Process regressors, polynomial chaos expansions, or other metamodeling techniques.

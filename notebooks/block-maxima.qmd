@@ -1,0 +1,233 @@
+# Block Maxima {.unnumbered}
+
+This tutorial walks through some basic choices for modeling block maxima using peak over threshold (POT) methods, using an example of extreme rainfall in England.
+
+::: {.callout-important}
+## Credit
+
+This tutorial is lightly modified from the `Extremes.jl` [tutorial](https://jojal5.github.io/Extremes.jl/dev/tutorial/ThresholdExceedance/) on threshold exceedances, which itself is based on an example from @coles_extremes:2001.
+:::
+
+```{julia}
+using CairoMakie
+using DataFrames
+using Dates
+using Extremes
+using StatsBase: mean
+using Statistics
+
+CairoMakie.activate!(; type="svg")
+```
+
+Load the dataset as demonstrated in the tutorial:
+
+```{julia}
+data = Extremes.dataset("rain")
+first(data, 5)
+```
+
+Replace the original plotting code with CairoMakie syntax.
+For example, to plot the daily rainfall data:
+
+```{julia}
+let
+    # Extracting data
+    dates = data.Date
+    rainfall = data.Rainfall
+
+    # Creating the plot
+    fig = Figure()
+    ax = Axis(
+        fig[1, 1]; title="Daily Rainfall in Southwest England", ylabel="Rainfall (mm)"
+    )
+    scatter!(ax, dates, rainfall; alpha=0.4)
+    fig
+end
+```
+
+To create a Mean Residual Life (MRL) plot:
+
+```{julia}
+Extremes.mrlplot(data[:, :Rainfall])
+```
+
+We can reproduce this using Makie
+
+```{julia}
+#| fig-cap: Mean Residual Life Plot for extreme rainfall data
+#| label: fig-mean-residual-life
+function mean_residual_life_plot(data, thresholds; n_bootstrap=1000, alpha=0.05)
+    # Compute mean residuals and confidence intervals
+    mean_residuals = [mean(data[data.>u] .- u) for u in thresholds]
+
+    # Bootstrapping for confidence intervals
+    ci_lower = Float64[]
+    ci_upper = Float64[]
+
+    for u in thresholds
+        excesses = data[data.>u] .- u
+        if length(excesses) < 2
+            push!(ci_lower, NaN)
+            push!(ci_upper, NaN)
+            continue
+        end
+        boot_means = [mean(rand(excesses, length(excesses))) for _ in 1:n_bootstrap]
+        push!(ci_lower, quantile(boot_means, alpha / 2))
+        push!(ci_upper, quantile(boot_means, 1 - alpha / 2))
+    end
+
+    # Create figure
+    fig = Figure()
+    ax = Axis(
+        fig[1, 1];
+        title="Mean Residual Life Plot",
+        xlabel="Threshold (mm)",
+        ylabel="Mean Excess (mm)",
+    )
+
+    # Plot mean residuals
+    lines!(ax, thresholds, mean_residuals; color=:blue, label="Mean Residuals")
+    scatter!(ax, thresholds, mean_residuals; color=:red)
+
+    # Plot confidence intervals as shaded region
+    band!(ax, thresholds, ci_lower, ci_upper; color=(:blue, 0.3))
+
+    axislegend(ax; position=:rt)
+    return fig, ax
+end
+fig, ax = let
+    thresholds = 0:2:100
+    mean_residual_life_plot(data.Rainfall, thresholds)
+end
+fig
+```
+
+As concluded by @coles_extremes:2001, chapter 4, a reasonable threshold is 30 mm.
+
+```{julia}
+#| output: false
+threshold = 30.0
+```
+
+We filter out exceedances
+
+```{julia}
+df = filter(row -> row.Rainfall > threshold, data)
+df[!, :Rainfall] = df[!, :Rainfall] .- threshold
+rename!(df, :Rainfall => :Exceedance)
+first(df, 5)
+```
+
+We fit the model
+
+```{julia}
+fm = gpfit(df, :Exceedance)
+```
+
+Which gives us parameters
+
+```{julia}
+params(fm)
+```
+
+and useful things like confidence intervals
+
+```{julia}
+cint(fm)
+```
+
+## Diagnostic plots
+
+Probability plot
+
+```{julia}
+function probability_plot(fitted_model)
+    # Extract data and parameters
+    data = fitted_model.model.data.value
+    n = length(data)
+    sorted_data = sort(data)
+    empirical_probs = (1:n) ./ (n + 1)
+
+    # Theoretical quantiles
+    theoretical_quantiles = [
+        mean(Extremes.quantile(fitted_model, p)) for p in empirical_probs
+    ]
+
+    # Create figure
+    fig = Figure()
+    ax = Axis(
+        fig[1, 1];
+        title="Probability Plot",
+        xlabel="Theoretical Quantiles",
+        ylabel="Empirical Quantiles",
+    )
+
+    # Plot empirical vs theoretical
+    scatter!(ax, theoretical_quantiles, sorted_data; color=:blue)
+    lines!(ax, theoretical_quantiles, theoretical_quantiles; color=:red, linestyle=:dash)
+    return fig, ax
+end
+
+let
+    fig, ax = probability_plot(fm)
+    fig
+end
+```
+
+Return level plot
+
+```{julia}
+function return_level_plot(fitted_model, threshold, nobs, nobsperblock)
+    rt_plot = [0.5, 1, 2, 5, 10, 20, 50, 100]  # Return periods in years
+
+    # Empirical return levels
+    exceedances = fitted_model.model.data.value  # Extract exceedances
+    sorted_exceedances = sort(exceedances)  # Sort exceedances for plotting
+    n = length(sorted_exceedances)
+    empirical_return_periods = [(nobs / nobsperblock + 1) / (n - i + 1) for i in 1:n]
+    empirical_return_levels = sorted_exceedances .+ threshold
+
+    # Fitted return levels
+    rt_calc =
+        exp.(
+            range(log(minimum(empirical_return_periods)), log(maximum(rt_plot)); length=100)
+        )
+    rl = [
+        mean(returnlevel(fitted_model, threshold, nobs, nobsperblock, rt).value) for
+        rt in rt_calc
+    ]  # Fitted return levels
+
+    fig = Figure()
+    ax = Axis(
+        fig[1, 1];
+        title="Return Level Plot",
+        xlabel="Return Period (years)",
+        ylabel="Return Level (mm/day)",
+        xscale=log10,
+        xticks=(rt_plot, string.(rt_plot)),
+    )
+
+    lines!(
+        ax, rt_calc, rl; color=:orange, linestyle=:dash, linewidth=2, label="Fitted Model"
+    )
+    scatter!(
+        ax,
+        empirical_return_periods,
+        empirical_return_levels;
+        markersize=10,
+        label="Observed",
+        alpha=0.6,
+        color=:purple,
+    )
+
+    axislegend(ax; position=:lt)  # Adjusted legend position
+    return fig, ax
+end
+
+fig, ax = let
+    nobs = length(data.Rainfall)
+    nobsperblock = 365
+    return_level_plot(fm, threshold, nobs, nobsperblock)
+end
+fig
+```
