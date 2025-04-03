@@ -20,8 +20,8 @@ book:
     
   chapters:
     - index.qmd
-    - author.qmd
-    - uncertainty.qmd
+    - chapters/author.qmd
+    - chapters/uncertainty.qmd
     - part: "Part I: Fundamentals"
       chapters:
         - chapters/fundamentals/intro.qmd
@@ -57,7 +57,7 @@ book:
         - chapters/risk/risk-transfer.qmd
         - chapters/risk/equity-values.qmd
         - chapters/risk/stakeholders.qmd
-    - references.qmd
+    - chapters/references.qmd
 
     - part: "Computational Notebooks"
       chapters: 
