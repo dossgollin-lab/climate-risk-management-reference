@@ -78,7 +78,7 @@ Above a level $u_0$ at which the asymptotic approximation is valid, the estimate
 
 ## Regionalization
 
-## Further reading
+## Further Reading {.unnumbered}
 
 A classic text is @coles_extremes:2001: an authoritative textbook on extreme value theory and applications, with both mathematical rigor and practical examples.
 Packages like the R `ismev` package and the Julia `Extremes.jl` package implement many of the techniques discussed and provide well-documented tutorials.

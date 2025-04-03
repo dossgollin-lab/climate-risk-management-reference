@@ -28,10 +28,6 @@ $$
 
 If we are drawing samples from a distribution, we can calculate up to a constant of proportionality and  -- since $p(y)$ doesn't depend on $\theta$ -- we can usually ignore it.
 
-$$
-\overbrace{p(\theta \mid y)}^\rm{posterior} \propto \underbrace{p(y \mid \theta)}_\rm{likelihood} \overbrace{p(\theta)}^\rm{prior}
-$$
-
 
 ## Maximum A Posteriori (MAP) Estimation
 
@@ -57,7 +53,7 @@ The posterior is a compromise between the prior and the likelihood.
     - Lots of other steps are also subjective (choice of likelihood model, which data to use, problem framing, etc)
     - False sense of objectivity is dangerous anyways!
 
-## Further Reading
+## Further Reading {.unnumbered}
 
 - Although about a decade old, @gelman_bda3:2014 is the definitive reference for Bayesian statistics
 - @mcelreath_rethinking2:2020 takes a different pedagogical approach to @gelman_bda3:2014, covering similar concepts from a somewhat more applied perspective. Lectures are available [on YouTube](https://www.youtube.com/@rmcelreath).

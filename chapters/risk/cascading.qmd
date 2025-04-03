@@ -15,10 +15,14 @@ This chapter is still under active construction. Please check back regularly for
 - Integrate compound hazard assessments into broader risk management plans.
 :::
 
-## Compound extremes and correlated hazards
+## Systems Thinking
+
+A cool tool: https://ncase.me/loopy/
 
 ## Infrastructure interdependencies
 
 ## Systemic risk and feedback loops
 
 ## Approaches to model or approximate cascading impacts
+
+## Further Reading {.unnumbered}

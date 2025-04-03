@@ -33,7 +33,7 @@ In this textbook we will not get into measure theory.
 
 ### CDFs, PDFs, and PMFs
 
-If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the *probability density function* (PDF) of $X$, then:
+If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the {{< acr pdf >}} of $X$, then:
 $$
 F_X ( x ) = \int_{-\infty}^x f_X(u) \, du,
 $$
@@ -146,20 +146,20 @@ where $p(x_i)$ is the probability density of $x_i$.
 The Negative Binomial distribution (see last lecture) can be interpreted as a Gamma-Poisson *mixture*:
 
 $$
-\begin{align}
+\begin{aligned}
 y &\sim \textrm{Poisson}(\lambda) \\
 \lambda &\sim \textrm{Gamma}\left(r, \frac{p}{1-p} \right)
-\end{align}
+\end{aligned}
 $$
 
 We can show mathematically that if $y ~ \textrm{Negative Binomial}(r, p)$, that is equivalent to the mixture model $y ~ \textrm{Poisson}(\lambda)$ and $\lambda ~ \textrm{Gamma}(r, p / (1 - p))$.
 $$
-\begin{align}
+\begin{aligned}
 & \int_0^{\infty} f_{\text {Poisson }(\lambda)}(y) \times f_{\operatorname{Gamma}\left(r, \frac{p}{1-p}\right)}(\lambda) \mathrm{d} \lambda \\
 & = \int_0^{\infty} \frac{\lambda^y}{y !} e^{-\lambda} \times \frac{1}{\Gamma(r)}\left(\frac{p}{1-p} \lambda\right)^{r-1} e^{-\frac{p}{1-p} \lambda}\left(\frac{p}{1-p} \mathrm{~d} \lambda\right) \\
 \ldots \\
 &= f_{\text {Negative Binomial }(r, p)}(y)
-\end{align}
+\end{aligned}
 $$
 For all the steps see [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution#Gamma%E2%80%93Poisson_mixture){target=_blank}.
 
@@ -169,7 +169,7 @@ A common goal of statistical analysis is to quantify how consistent a set of obs
 
 #### Case Study: Statistics Without the Agonizing Pain
 
-See [the notebook](/notebooks/mosquitos.ipynb).)
+See [the notebook](/notebooks/mosquitos.qmd).)
 
 ## Further Reading {.unnumbered}
 

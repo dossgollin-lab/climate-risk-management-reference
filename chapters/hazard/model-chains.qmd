@@ -1,0 +1,44 @@
+---
+title: Hazard Model Chains
+---
+
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+We often want to combine models.
+For example, to assess flood **hazard** from a tropical cyclone, we might
+
+1. Model the tropical cyclone track and intensity.
+2. Model the rainfall associated with the cyclone.
+3. Model the flood response of the watershed.
+
+While statistical models are well-suited to components (1) and (2), we might want to use physics-based models for tasks (2) and (3).
+Similarly, in water resources planning we might be interested in modeling drought risks for a watershed; while we might want to use a stochastic weather generator to generate synthetic multi-site time series of variables like precipitation, temperature, and potential evapotranspiration, we might want to use a hydrologic model to simulate the watershed response to these variables.
+While the field of hydrological, hydraulic, and hydrodynamic modeling is extensive, and the subject of numerous textbooks (and thus beyond our scope), here we will focus on
+
+
+::: {.callout-tip}
+## Learning Objectives
+
+1. Understand how to navigate trade-offs between model complexity, interpretability, and computational cost.
+1. Understand how to characterize and communicate within- and between-model uncertainty.
+1. Understand how to use surrogate models to approximate the output of a more complex model.
+:::
+
+## Physics-Based and ML-Based Models
+
+This is a false dichotomy.
+Physics-based models all have parameterizations, for example of sub-grid turbulence.
+Rather, models exist on a **spectrum** ranging from fully data-driven to fully physics-based.
+Moreover, ML techniques are increasingly being applied to speed and enhance solutions to PDEs, further blurring this distinction [@rackauckas_sciml:2020].
+
+## Uncertainty in Model Chains
+
+- @dittes_uncertainty:2018 quantifies the contribution of various drivers (scenario, GCM, downscaling, hydro modeling)
+- @lafferty_downscaling:2023 shows that model structure uncertainty in downscaling choice matters a lot for risk assessment
+
+## Calibration
+
+## Further Reading {.unnumbered}

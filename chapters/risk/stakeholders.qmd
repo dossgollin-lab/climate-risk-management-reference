@@ -22,3 +22,5 @@ This chapter is still under active construction. Please check back regularly for
 ## Risk communication strategies (visualization, framing)
 
 ## Conflict resolution and consensus-building
+
+## Further Reading {.unnumbered}

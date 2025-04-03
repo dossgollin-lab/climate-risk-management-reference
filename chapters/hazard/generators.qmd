@@ -1,5 +1,5 @@
 ---
-title: Hydroclimate Generators
+title: Stochastic Weather Generators
 ---
 
 ::: {.callout-note}
@@ -11,6 +11,15 @@ This chapter is still under active construction. Please check back regularly for
 ## Learning Objectives
 :::
 
-## Weather Generators
+- @steinschneider_generator:2019
+- @greene_nhmm:2011
 
-## Streamflow Generators
+## Example: Hidden Markov Models (HMMs)
+
+We can pull one of Andy's examples into a notebook
+
+## Generators for Downscaling
+
+Generators can be used as a form of downscaling, where some credibly simulated variables from a climate model are used as input to a stattistical generator.
+
+## Further Reading {.unnumbered}

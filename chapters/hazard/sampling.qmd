@@ -22,3 +22,5 @@ This chapter is still under active construction. Please check back regularly for
 ## Synthetic event generation (hurricane tracks, extreme rainfall patterns)
     
 ## Balancing computational cost vs. accuracy in climate risk estimation
+
+## Further Reading {.unnumbered}

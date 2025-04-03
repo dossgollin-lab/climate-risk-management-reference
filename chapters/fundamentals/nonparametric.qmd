@@ -53,3 +53,5 @@ The main challenge to the kde approach is varying data density: regions of high 
 ## Bootstrapping
 
 ## Semi-parametric methods
+
+## Further Reading {.unnumbered}

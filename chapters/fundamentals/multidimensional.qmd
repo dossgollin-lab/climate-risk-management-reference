@@ -45,3 +45,5 @@ Handling the high dimensionality of these distributions is a key challenge.
 - GAN
 - cGAN
 - Diffusion Models
+
+## Further Reading {.unnumbered}

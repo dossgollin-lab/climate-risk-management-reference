@@ -15,6 +15,14 @@ This chapter is still under active construction. Please check back regularly for
 - Identify how different stakeholders perceive and prioritize climate risks.
 :::
 
+The most important concept is:
+$$
+\mathbb{E}\left[ f(x) \right] \neq f \left( \mathbb{E}[x] \right)
+$$
+where $x$ is some random variable and $f$ is some function.
+In our context, this means that if we want to know the expected value of a risk-related variable, like damage, we should not just take the expected value of the hazard and then apply a damage function to that.
+Extending the concept further, the damage caused by a hazard that scores in the 99th percentile of a chosen intensity measure may not be the 99th percentile of the damage distribution (a commonly used, but wrong, assumption).
+
 ## Damage
 
 ### Example: Depth-Damage Functions
@@ -24,3 +32,12 @@ This chapter is still under active construction. Please check back regularly for
 ## Exposure
 
 ## Risk
+
+### Risk Metrics
+
+- Expected Annual Loss (EAL)
+- Probable Maximum Loss (PML)
+- Value at Risk (VaR)
+- Conditional Value at Risk (CVaR)
+
+## Further Reading {.unnumbered}

@@ -15,10 +15,8 @@ This chapter is still under active construction. Please check back regularly for
 - Evaluate strategies (carbon taxes, cap-and-trade) under uncertainty.
 :::
 
-## Policy instruments and objectives
-
-## Multi-objective optimization, Pareto front
-
-## Heuristic vs. deterministic search methods
+You'll want to refer heavily to the chapter on [optimization](../fundamentals/optimization.qmd)
 
 ## Constraints (political feasibility, budget limits)
+
+## Further Reading {.unnumbered}

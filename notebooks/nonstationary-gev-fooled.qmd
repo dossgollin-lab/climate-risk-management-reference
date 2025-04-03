@@ -1,0 +1,175 @@
+# Fooled by Randomness {.unnumbered}
+
+This notebook will cover sampling variability to illustrate the pitfalls of fitting a flexible model (e.g., a nonstationary GEV distribution) to a relatively short observational record.
+Building on the simulation experiments illustrated in @doss-gollin_robustadaptation:2019 we will look at the potential to accurately identify trends in the distribution for the "best case" where we know the true distribution and are just estimating parameters (of course, in the real world we don't know the true distribution).
+
+```{julia}
+using Base: @kwdef
+using CairoMakie
+using Distributions
+using DynamicHMC
+using LinearAlgebra: I
+using Random
+using Turing
+```
+
+## Formulation
+
+Consider the basic model
+$$
+y(t) \sim \mathrm{GEV} \left(\mu(t), \sigma(t), \xi)
+$$
+where $\mu(t)$ and $\sigma(t)$ are the location and scale parameters, respectively, and $\xi$ is the shape parameter.
+The shape parameter is assumed to be constant over time, while the location and scale parameters can vary with time.
+
+::: {.callout-note}
+## Alternative models
+
+Similar models can be appplied to peak over threshold approaches, or other models.
+This is a general problem in statistical analysis, especially of extreme values.
+:::
+
+In the "process-informed" [@schlef_idf:2023; @lu_spatiotemporal:2025] nonstationary GEV model, we relate the location and scale parameters to a set of covariates $X(t)$:
+$$
+\begin{aligned}
+\mu(t) &= \alpha_\mu + \beta_\mu X(t) \\
+\sigma(t) &= \exp \left[ \alpha_\sigma + \beta_\sigma X(t) \right]
+$$
+where $\alpha_\mu$, $\beta_\mu$, $\alpha_\sigma$, and $\beta_\sigma$ are the parameters to be estimated (note that other parameterizations are possible).
+We exponentiate the scale parameter to ensure that it is positive.
+The choice of covariates depends on the application and requires careful choice, as it is important to have a clear physical link between the covariates and the parameters to mitigate the risk of overfitting.
+
+## Forward Model
+
+Given fixed parameters, we use the "forward" model to generate synthetic data.
+
+```{julia}
+@kwdef struct NonStationaryGEVParams{T<:AbstractFloat}
+    α_μ::T
+    β_μ::Vector{T}
+    α_σ::T
+    β_σ::Vector{T}
+    ξ::T
+end
+
+function make_synthetic_data(params::NonStationaryGEVParams, X::Matrix{<:Real}, n::Int)
+    # Simulate GEV data
+    μ = params.α_μ .+ params.β_μ' * X' |> vec
+    σ = exp.(params.α_σ .+ params.β_σ' * X') |> vec
+    ξ = params.ξ
+    y = [rand.(GeneralizedExtremeValue.(μ, σ, ξ)) for _ in 1:n]
+    return y
+end
+```
+
+A common desire is to analyze data available in a reanalysis product from 1979--present.
+
+We will generate synthetic data using two covariates: time and ENSO.
+
+```{julia}
+years = 1979:2024 |> collect |> float
+enso = 2.5 * sin.(2π * years ./ 6.5) .+ 0.5 * randn(length(years))
+
+fig = Figure()
+ax = Axis(fig[1, 1])
+lines!(ax, years, enso)
+scatter!(ax, years, enso)
+ax.ylabel = "Simulated ENSO Index"
+fig
+```        
+
+based on this
+
+```{julia}
+#| output: false
+X = hcat(years .- first(years), enso)
+```
+
+We need to choose a set of parameters to generate synthetic data.
+
+```{julia}
+#| output: false
+true_param = NonStationaryGEVParams(
+    α_μ=2.5, # location in 1979 with ENSO=0
+    β_μ=[0.005, 0.025], # location change per [year, unit ENSO]
+    α_σ=log(1.5), # LOG OF scale in 1979 with ENSO=0
+    β_σ=[0.005, 0.01], # change in log σ per [year, unit ENSO]
+    ξ=0.1 # standard value
+)
+```
+
+This means that in 1979, the location parameter is 2.5 and the scale parameter is 1.
+Here's what our distribution looked like in 1979 and 2024
+
+```{julia}
+let
+    μ_1979 = true_param.α_μ
+    σ_1979 = exp.(true_param.α_σ)
+    dist_1979 = GeneralizedExtremeValue(μ_1979, σ_1979, true_param.ξ)
+
+    μ_2024 = true_param.α_μ + true_param.β_μ[1] * (2024 - 1979)
+    σ_2024 = exp.(true_param.α_σ + true_param.β_σ[1] * (2024 - 1979))
+    dist_2024 = GeneralizedExtremeValue(μ_2024, σ_2024, true_param.ξ)
+
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    plot!(ax, dist_1979, label="1979", color=:purple, linewidth=3)
+    plot!(ax, dist_2024, label="2024", color=:orange, linestyle=:dash, linewidth=3)
+    xlims!(ax, 0, 15)
+    ax.title = "Simulated GEV Distribution in 1979 and 2024"
+    ax.ylabel = "Density"
+    ax.xlabel = "Climate Hazard"
+    axislegend(ax, position=:rt)
+    fig
+end
+```
+
+Now we can use these *known* parameters and our *fixed* covariates to generate different random realizations.
+The only difference between these time series is random chance
+
+```{julia}
+Random.seed!(543)
+N = 100
+y = make_synthetic_data(true_param, X, N)
+
+fig = Figure()
+ax = Axis(fig[1, 1])
+
+for i in 1:N
+    if i == N
+        lines!(ax, years, y[i], color=:purple, linewidth=3)
+    else
+        lines!(ax, years, y[i], color=:gray, alpha=0.5)
+    end
+end
+ax.ylabel = "Simulated Climate Hazard"
+ax.xlabel = "Year"
+fig
+```
+
+It looks from the purple line that there's a negative trend, but this is just random chance!
+
+## Inverse Model
+
+Given the data, we use the "inverse" model to estimate the parameters.
+We make the flawed, but common, IID assumption which is that *conditional on covariates* the $y$ values are independent and identically distributed.
+
+As noted in the introduction, we are using the exact same mathematical model to simulate synthetic data and to fit the model to data, so this is a best-case scenario for model power.
+
+```{julia}
+@model NonStationaryGEV(y, X) = begin
+    p = size(X, 2) # number of covariates
+
+    # Refined Priors
+    α_μ ~ Normal(2.5, 1) # Informative prior based on domain knowledge
+    β_μ ~ MvNormal(zeros(p), 0.5 * I) # Tighter prior for regression coefficients
+    α_σ ~ Normal(log(1.5), 0.5) # Prior centered around log scale
+    β_σ ~ MvNormal(zeros(p), 0.5 * I) # Tighter prior for scale coefficients
+    ξ ~ Normal(0.1, 0.2) # Informative prior for shape parameter
+
+    # Vectorized Likelihood
+    μ = α_μ .+ β_μ' * X'
+    σ = exp.(α_σ .+ β_σ' * X')
+    y ~ arraydist(GeneralizedExtremeValue.(μ, σ, ξ))
+end
+```

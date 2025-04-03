@@ -1,5 +1,5 @@
 ---
-title: Optimization and MLE
+title: Optimization
 ---
 
 ::: {.callout-note}
@@ -12,22 +12,29 @@ This chapter is still under active construction. Please check back regularly for
 :::
 
 
-The study of optimization forms a key component of many fields, including operations research and much of machine learning research.
-In this chapter, we briefly touch on key concepts in optimization as they relate to inference and decision-making.
+Optimization is a field of study unto itself, and forms an essential backbone of statistics, machine learning, and operations research.
+Here, we briefly summarize key concepts and techniques in optimization, with a focus on their application to statistics and policy search.
 
-## Optimization Overview
+## Overview
 
 Optimization is the study of finding the best solution to a problem from a set of feasible solutions.
 Thus, optimization problems typically consist of
 
-1. An objective function, $f(x)$, which we want to minimize or maximize.
-1. A set of decision variables, $x$, which are the inputs we can control.
+1. A set of decision variables , $x$, which are the inputs we can control (or the "dials" we can turn).
+1. One (or more) objective function(s), $f(x)$, which we want to minimize or maximize.
 1. A set of constraints which define the feasible region.
 
 Optimization is an incredibly diverse field.
 Problems can have many constraints or none; can have discrete or continuous decision variables (or both); can be static or dynamic; deterministic or stochastic; linear or nonlinear; or much more.
+When you encounter an optimization problem in the wild, you should always make sure you understand the decision variables (which define what is being optimized), the objective function(s), which define what makes a solution "good", and the constraints, which define what solutions are being considered.
+When you build an optimization model, you should always make sure to communicate these three components clearly.
 
-## Maximum Likelihood Estimation
+Because optimization is a widely studied field, exact solutions to some classes of problems are known, and nearly exact solutions to many others are known.
+However, these exact solutions often require formulating the problem in a very specific way.
+Thus, there is generally a trade-off between designing an optimization problem that is (relatively) easy to solve vs. one that represents the relevant system dynamics and uncertainties (relatively) accurately.
+Consequently, converting a decision problem into an optimization problem is somewhat of an art form, rather than an exact science; this is largely the field of operations research.
+
+## Motivation: Inference
 
 One common application of optimization is in statistics.
 Specifically, we often want to evaluate how consistent the data are with different values of the parameters, and to find the values of the parameters that are most consistent with the data.
@@ -57,10 +64,10 @@ Often, we have multiple observations $y_1, y_2, \ldots, y_n$.
 
 Independent and identically distributed (i.i.d.) assumption:
 $$
-\begin{align}
+\begin{aligned}
 p(y_1, y_2, \ldots, y_n) &= p(y_1) p(y_2) \times \ldots \times p(y_n)\\
  &= \prod_{i=1}^n p(y_i)
-\end{align}
+\end{aligned}
 $$
 
 
@@ -182,20 +189,30 @@ $$
 
 If we then want to estimate $\sigma$, we can estimate the standard deviation of the residuals.
 
-## Simulation-Optimization
+## Motivation: Policy Search
 
-- Nonlinear systems that we can't solve analytically
-- Heuristics -- often not exact
+## Gradient-Based Optimization
+
+This is useful for thinking about neural networks, but also for many other optimization problems.
+The key idea is that we can use the gradient of the objective function to find the direction in which to move to improve our solution.
+This is often called **gradient descent**.
+The basic idea is to take a step in the direction of the gradient, which is the direction of steepest ascent.
+In the simplest case,
+$$
+\Delta x = -\alpha \nabla f(x)
+$$
+where $\alpha$ is the step size or learning rate.
+This is a hyperparameter that we can tune.
+
+The primary limitation of gradient descent is that it can get stuck in local minima.
+This is especially true for non-convex problems, where there may be many local minima.
+A vast range of techniques, a treatment of which merits a textbook on its own, have been developed to address this issue, including for example the Adam optimizer [@kingma_adam:2017].
+
+## Stochastic Optimization
 
 ## Sequential Decision Problems
 
-### Dynamic Policy Search
-
-### Other approaches
-
-- **@sutton_reinforcement:2018** provides a comprehensive introduction to reinforcement learning, which is broadly the study of sequential decision-making under uncertainty.
-
-## Multiobjective Optimization
+## High-Dimensional Optimization
 
 ## Further Reading {.unnumbered}
 

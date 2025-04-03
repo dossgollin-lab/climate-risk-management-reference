@@ -9,22 +9,45 @@ This chapter is still under active construction. Please check back regularly for
 
 ::: {.callout-tip}
 ## Learning Objectives
-
-- Differentiate between dynamical and statistical downscaling methods.
-- Correct systematic biases in climate model outputs for local or regional assessments.
-- Evaluate the quality and limitations of downscaled datasets in hazard modeling.
 :::
 
-## Role of high-resolution data in local risk assessments
+## Motivation
 
-## Dynamical downscaling
+## Supervised Methods
 
-## Statistical Downscaling
+Especially common in the context of weather forecasting, where we have pairs of (observed, forecasted) data.
 
-## Bias Correction
+### Example: Linear Regression
 
-## Uncorrectable Bias
+This is a very simple model
 
-## Stochastic Weather Generators
+### Example: Model Output Statistics
 
-## Further Reading
+### Example: Generative ML
+
+This is a very sophisticated model.
+Generative ML models are beyond the scope of this textbook (conditional GANs, diffusion models).
+Goal: conditional on inputs, sample the distribution of outputs -- seems simple, right?
+
+## Distribution-Based Methods
+
+When we're working with climate models, there are no pairs of (observed, forecasted) data.
+We might have a climate model that simulated the historical period, which means that we used observed boundary conditions (such as CO2 forcing, volcanoes, aerosols, etc.) but let the model generate different random variability.
+This means that, while the model can generate simulations from a distribution of "days in late April in the 1990s, conditional on the particular model", there is no reason to expect that "April 15, 1995" in a model time series will be similar to "April 15, 1995" in an observed time series, except to the extent that the latter is a sample from the (approximated) distribution of the former.
+
+This means that we cannot use supervised methods, because we don't have pairs of (observed, forecasted) data.
+Instead, we need to use methods that compare the distributions of the two datasets.
+
+### Example: Quantile-Quantile Mapping
+
+### Example: CDF Matching
+
+## Dynamical Downscaling
+
+### Dynamic Downscaling with Physics-Based Models
+
+### Dynamical Downscaling with AI Weather Models
+
+## Further Reading {.unnumbered}
+
+- [Weather generators](./generators.qmd) can be used for downscaling

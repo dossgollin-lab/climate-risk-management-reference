@@ -26,7 +26,7 @@ book:
       chapters:
         - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
-        - chapters/fundamentals/inference.qmd
+        - chapters/fundamentals/optimization.qmd
         - chapters/fundamentals/bayes.qmd
         - chapters/fundamentals/ml.qmd
         - chapters/fundamentals/nonparametric.qmd
@@ -44,7 +44,7 @@ book:
         - chapters/hazard/perturbations.qmd
         - chapters/hazard/generators.qmd
         - chapters/hazard/sampling.qmd
-        - chapters/hazard/surrogate-models.qmd
+        - chapters/hazard/model-chains.qmd
     - part: "Part III: Climate Risk Management"
       chapters:
         - chapters/risk/intro.qmd
@@ -61,9 +61,14 @@ book:
 
     - part: "Computational Notebooks"
       chapters: 
-        - "notebooks/mosquitos.qmd"
         - "notebooks/block-maxima.qmd"
+        - "notebooks/lake-problem.qmd"
+        - "notebooks/mosquitos.qmd"
+        - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
+
+  appendices: 
+    - "chapters/appendices/julia.qmd"
 
   search:
     location: sidebar
@@ -85,7 +90,7 @@ format:
     code-annotations: hover
     code-line-numbers: true
     html-math-method: mathjax
-    date-format: "ddd., MMM. D"
+    date-format: iso
     notebook-links: true
 
 glossary:
@@ -93,12 +98,10 @@ glossary:
   popup: click
   show: true
 
-# use Julia
-kernel: julia-1.11
-
 # execution options
 execute:
   freeze: auto  
   cache: true
+  jupyter: julia-1.11
 
 citation: true
