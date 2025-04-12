@@ -10,18 +10,111 @@ This chapter is still under active construction. Please check back regularly for
 ::: {.callout-tip}
 ## Learning Objectives
 
-- Identify common machine learning techniques relevant to climate data (regression, classification, clustering).
-- Evaluate model performance (cross-validation, error metrics) and address overfitting.
-- Recognize opportunities and pitfalls of applying ML to complex climate problems.
+By the end of this chapter, students should be able to:
+
+- Apply fundamental supervised learning concepts (regression and classification) to frame typical hydroclimate hazard assessment problems, and understand the crucial steps of data preparation and model evaluation.
+- Critically evaluate the application of machine learning in hydroclimate hazard assessment literature (papers, reports, models, datasets), identifying key assumptions, limitations, and potential biases.
+- Understand the basic principles and potential of more advanced machine learning techniques (deep learning for sequence data, probabilistic models for scenario generation) in the context of hydroclimate hazards, while also recognizing their inherent complexities and interpretability challenges.
 :::
 
-## Supervised vs. unsupervised learning
+## Machine Learning Fundamentals
 
-## Hyperparameter Tuning
+- Briefly introduce machine learning as a tool in hydroclimate hazard assessment.
+- Highlight the need for critical engagement with ML-driven products.
+- State the chapter's focus on fundamental concepts and critical evaluation.
+- Mention computational notebooks for practical examples.
 
-## Regularization
+### Supervised Learning
 
-## Neural networks
+- Learning from labeled data (inputs and desired outputs).
+
+#### Regression
+
+- Predicting continuous hazard variables (e.g., flood depth, streamflow).
+
+#### Classification
+
+- Predicting categorical hazard outcomes (e.g., landslide occurrence, drought severity class).
+
+## Machine Learning Practice
+
+### Input Data and Preprocessing
+
+- The quality and preparation of input data is crucial for model performance.
+- Known issues with common hydroclimate datasets (e.g., biases, resolution limitations).
+- Handling common data issues: Missing values, outliers, scaling.
+
+### Feature Engineering
+
+- Creating informative predictors from raw data.
+
+### Feature Selection
+
+- Choosing the most relevant variables for the model.
+
+### Loss Functions
+
+- Explain the concept of a loss function as a measure of model error during training.
+- Discuss common loss functions for regression (e.g., MSE, MAE) and their sensitivity to different error types.
+- Introduce loss functions for classification (e.g., binary cross-entropy).
+- Briefly mention the importance of selecting a loss function aligned with the hazard prediction goal.
+
+#### Common Regression Metrics
+
+- RMSE, MAE, $R^2$, and their interpretation in a hazard context.
+
+#### Common Classification Metrics
+
+- Accuracy, Precision, Recall, F1-score, Confusion Matrix, and their relevance to hazard prediction accuracy and reliability.
+
+### Training and Evaluating Models for Generalization
+
+- The primary goal of model training and evaluation is to achieve robust predictive performance on unseen data, avoiding overfitting or underfitting (the bias-variance tradeoff).
+- **Training, Validation, and Testing Sets:**
+    - The standard evaluation framework to assess generalization.
+    - The validation set's role in hyperparameter tuning and model selection.
+    - Robustly assessing out-of-sample performance using the test set.
+- **Cross-Validation:** A technique for more reliable estimation of generalization performance.
+- **Regularization:** Techniques (e.g., L1, L2) to prevent overfitting by penalizing model complexity.
+
+## Modern ML
+
+- This section introduces more advanced machine learning techniques that have shown promise in complex data analysis.
+
+### Deep Learning Background
+
+- Briefly introduce the core idea of deep learning: hierarchical feature learning through multi-layered neural networks.
+
+### Modeling Temporal Dependencies: Recurrent Neural Networks (RNNs) and LSTMs
+
+- Introduce the concept of processing sequential data, crucial for time-series hazard prediction.
+- Explain the basic idea and utility of LSTMs for capturing long-range dependencies in temporal data (e.g., streamflow forecasting).
+- Briefly discuss their complexity and data requirements.
+
+### Probabilistic Models
+
+- Introduce the concept of models that can generate synthetic hazard data and quantify uncertainty.
+- Briefly discuss GANs and diffusion models and their potential for creating realistic hazard scenarios and exploring uncertainty.
+- Acknowledge the challenges in evaluating and interpreting these models.
+
+### Image (Spatial) Models
+
+- Briefly introduce Convolutional Neural Networks (CNNs) for analyzing spatial patterns in hazard-related data (e.g., satellite imagery for flood extent mapping).
+
+### Spatiotemporal Models
+
+- Briefly mention models that combine spatial and temporal analysis (e.g., using combinations of CNNs and RNNs for dynamic hazard prediction).
+
+### Scientific Machine Learning
+
+The field of scientific machine learning (SciML) typically refers to using ML to solve systems of differential equations [@rackauckas_sciml:2020]
+
+## Conclusion {.unnumbered}
+
+- Summarize the fundamental ML concepts and their application to hazard assessment.
+- Re-emphasize the importance of critical thinking when engaging with ML-driven hazard products.
+- Point to the computational notebooks for practical examples and deeper exploration.
+- Briefly preview the application of these concepts in subsequent chapters.
 
 ## Further reading {.unnumbered}
 

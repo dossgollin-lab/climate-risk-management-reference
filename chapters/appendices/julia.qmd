@@ -2,8 +2,46 @@
 title: "Julia"
 ---
 
+The computational examples in this textbook use the Julia programming language.
+
 ## Why Julia?
 
-## How to Learn Julia?
+Julia has many advantages for our purposes.
+Like languages such as Python, R, and Matlab, it has a clean, expressive syntax
 
-## Intermediate Julia
+- Readable to computers and humans
+- Closely parallels math notation
+- Designed for numerical and scientific computing
+
+Additionally, like languages such as C, Fortran, and Rust, it is fast!
+This solves the "two language problem" in which a popular package might be written in Python (e.g., `numpy`) or R (e.g., `tidyverse`), but modifying or developing the underlying methods requires writing code in a low-level language.
+If you prototype a method in R or Python, you might need to enlist the help of a software engineer to implement it in C or Fortran so that you can scale it to realistic problems.
+If you write in Julia, a software engineer will likely still be able to help you improve performance, but you will be better able to understand, update, and maintain the code yourself.
+
+The methods discussed are applicable in other programming languages, such as Python, R, and C++.
+And while Julia is great, many relevant software ecosystems are stronger in other languages.
+For example, while Julia has great libraries for deep learning, industry and research tend to rely on the PyTorch/TensorFlow/JAX ecosystem and their Python interfaces.
+Similarly, while tooling for reading large climate data files in Julia is improving, the Python-based Pangeo/xarray community excels for working with gridded climate data.
+So while Julia is great for teaching, for general-purpose work, and for learning [computational thinking](https://computationalthinking.mit.edu/), you will likely need to learn other languages as well.
+
+## Julia Resources
+
+There are lots of great resources on programming and Julia.
+Here is a curated list of some particularly helpful tools.
+
+### Getting Started
+
+* MIT's [Introduction to Computational Thinking](https://computationalthinking.mit.edu): a great Julia-based course at MIT covering applied mathematics and computational thinking
+* [Julia for Nervous Begineers](https://juliaacademy.com/p/julia-programming-for-nervous-beginners): a free course on JuliaAcademy for people who are hesitant but curious about learning to write code in Julia. 
+* [FastTrack to Julia cheatsheet](https://juliadocs.github.io/Julia-Cheat-Sheet/)
+* [Comprehensive Julia Tutorials](https://www.youtube.com/playlist?list=PLCXbkShHt01seTlnlVg6O7f6jKGTguFi7): YouTube playlist covering a variety of Julia topics, starting with an introduciton to the language.
+* [Matlab-Python-Julia Cheatsheet](https://cheatsheets.quantecon.org/): if you are experienced in one of these languages, this cheatsheet can help you learn the basics of Julia.
+
+### Plotting with Makie
+
+* [Makie Tutorials](https://docs.makie.org/stable/tutorials/)
+* [MakieCon 2023 YouTube Channel](https://youtube.com/playlist?list=PLP8iPy9hna6TXEn99mhG5KaTgjsrCkDzQ&feature=shared)
+
+## Running the Notebooks
+
+This course comes with a series of computational notebooks written in Julia.

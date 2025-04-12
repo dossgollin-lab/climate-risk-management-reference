@@ -32,9 +32,7 @@ You can download and run them locally to explore the material interactively.
 
 No prior experience with Julia or programming is required to read the text.
 However, working through the notebooks is highly recommended, as they provide a hands-on introduction to the methods and concepts covered.
-Julia was chosen for its general-purpose capabilities, mathematically intuitive syntax, and versatility across applications.
-Julia is open source, and its community is growing rapidly, making it an excellent choice for computational tasks in climate risk assessment and management.
-That said, the methods discussed are applicable in other programming languages, such as Python, R, and C++, and many relevant software ecosystems are stronger in those languages (e.g., PyTorch/TensorFlow for machine learning or Pangeo/xarray for working with gridded climate data).
+For more on Julia, see [the appendix](chapters/appendices/julia.qmd).
 
 ## Related Projects
 

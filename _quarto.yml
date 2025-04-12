@@ -55,8 +55,7 @@ book:
         - chapters/risk/cascading.qmd
         - chapters/risk/adaptive.qmd
         - chapters/risk/risk-transfer.qmd
-        - chapters/risk/equity-values.qmd
-        - chapters/risk/stakeholders.qmd
+        - chapters/risk/equity-people.qmd
     - chapters/references.qmd
 
     - part: "Computational Notebooks"
