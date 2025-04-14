@@ -1,61 +1,6 @@
-# Motivation {.unnumbered}
+# Preface {.unnumbered}
 
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
-
-## Bayesian Utility Theory
-
-We will often be interested in making decisions despite not having perfect information.
-In the simplest, most ideal world, Bayesian Decision Theory provides a coherent framework for making optimal decisions:
-$$
-\mathbb{E}[U(a)] = \int U(a, s) p(s) ds,
-$$
-where $U(a, s)$ is the utility of action $a$ given "state of the world" $s$, and $p(s)$ is the probability density function of the state.
-The "best" action is the one that maximizes expected utility.
-This clean starting point provides a jumping-off point for framing the challenges of this book.
-Although much of this book is focused on the reasons why this idealized framework is not sufficient, this simplifed framework is useful for framing a key goal, which is that we are interested not in forecasting the future through a crystal ball, but rather in estimating the probability distribution of future states of the world.
-Specifically, we are interested in the {{< glossary "joint probability distribution" >}} of relevant variables, which may include both physical (e.g., climate hazard) and socioeconomic (e.g., vulnerability) variables.
-
-### Types of uncertainty
-
-- Aleatory uncertainty: inherent variability in the system (ie, randomness)
-- Epistemic uncertainty: uncertainty in our knowledge of the system, often useful to divide into
-    - Parametric uncertainty (what we will use here)
-    - Model structure uncertainty (treated qualitatively)
-
-### History
-
-- First conceived as a way to try to explain human behavior
-    - Turns out not to be a great model -- people do not always behave rationally
-
-### Utility
-
-- Some function that we want to maximize
-- Alternatively can be thought of as a cost function that we want to minimize
-- $U(a, \theta)$
-    - $a$ is the action we take
-    - $\theta$ is the state of the world
-
-### Expected Utility
-
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \int_{\theta \in \Theta} U(a, \theta) p(\theta) d\theta
-$$
-
-or in the discrete case
-
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \sum_{\theta \in \Theta} U(a, \theta) p(\theta)
-$$
-
-## Case Study: How High to Elevate a Levee?
-
-::: {.callout-note}
-## Computational Blocks
-
-This is a computational example, but the code isn't included in this chapter.
-Rather, all code used to create the figures in this chapter is in the _Notebooks_.
-This will be the case for all the computational examples in this reproducible textbook unless explicitly noted (in which case, a reference to the figure will be provided).
 :::

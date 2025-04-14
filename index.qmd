@@ -36,8 +36,9 @@ For more on Julia, see [the appendix](chapters/appendices/julia.qmd).
 
 ## Related Projects
 
-This textbook draws from classes I have taught at Rice University, courses I have taken, and courses taught by my close colleagues.
-In particular, this draws from Upmanu Lall's Environmental Data Analysis course at Columbia and Vivek Srikrishnan's Environmental Systems Analysis and Climate Risk Analysis classes at Cornell.
+This textbook draws from classes I have taught at Rice University, courses I have taken, and other synthesis efforts undertaken by colleagues.
+In particular, this textbook draws inspiration and content from Upmanu Lall's Environmental Data Analysis course at Columbia, Vivek Srikrishnan's [Environmental Systems Analysis](https://viveks.me/environmental-systems-analysis/) and [Climate Risk Analysis](https://viveks.me/climate-risk-analysis/) classes at Cornell, R. Balaji's Advanced Data Analysis Techniques
+(Statistical Learning Techniques for Engineering and Science) [course](https://civil.colorado.edu/~balajir/CVEN6833/) at CU Boulder and Alberto Montanari's [collection of open course notes and lectures](https://www.albertomontanari.it/lectures).
 
 There is also overlap with several other textbooks, including:
 

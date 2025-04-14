@@ -20,7 +20,6 @@ book:
     
   chapters:
     - index.qmd
-    - chapters/author.qmd
     - chapters/uncertainty.qmd
     - part: "Part I: Fundamentals"
       chapters:
@@ -66,15 +65,19 @@ book:
         - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
 
+    - pages/author.qmd
+    - pages/contribute.qmd
+
   appendices: 
     - "chapters/appendices/julia.qmd"
-
+  
   search:
     location: sidebar
     type: textbox
 
   sidebar:
     collapse-level: 1
+
 
 bibliography: references.bib
 
