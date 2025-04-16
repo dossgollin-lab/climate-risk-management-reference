@@ -20,31 +20,32 @@ book:
     
   chapters:
     - index.qmd
-    - chapters/uncertainty.qmd
-    - part: "Part I: Fundamentals"
+    - pages/author.qmd
+    - pages/contribute.qmd
+    - chapters/preface.qmd
+    - part: "Part I: Mathematical Toolkit"
       chapters:
         - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/optimization.qmd
-        - chapters/fundamentals/bayes.qmd
+        - chapters/fundamentals/monte-carlo.qmd
         - chapters/fundamentals/ml.qmd
         - chapters/fundamentals/nonparametric.qmd
         - chapters/fundamentals/time-series.qmd
         - chapters/fundamentals/multidimensional.qmd
         - chapters/fundamentals/spatial.qmd
         - chapters/fundamentals/model-comparison.qmd
-        - chapters/fundamentals/sensitivity.qmd
-        - chapters/fundamentals/climate-science.qmd
     - part: "Part II: Hydroclimate Extremes and Catastrophes"
       chapters:
         - chapters/hazard/intro.qmd
+        - chapters/hazard/climate-science.qmd
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
         - chapters/hazard/perturbations.qmd
         - chapters/hazard/generators.qmd
         - chapters/hazard/sampling.qmd
         - chapters/hazard/model-chains.qmd
-    - part: "Part III: Climate Risk Management"
+    - part: "Part III: Risk Analysis and Management"
       chapters:
         - chapters/risk/intro.qmd
         - chapters/risk/risk.qmd
@@ -65,8 +66,6 @@ book:
         - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
 
-    - pages/author.qmd
-    - pages/contribute.qmd
 
   appendices: 
     - "chapters/appendices/julia.qmd"

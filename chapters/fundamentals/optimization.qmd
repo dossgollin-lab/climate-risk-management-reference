@@ -1,16 +1,20 @@
 ---
 title: Optimization
+status: draft
 ---
 
 ::: {.callout-note}
-## Under Construction
+## Status: Draft
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
 
 ::: {.callout-tip}
 ## Learning Objectives
-:::
 
+- Understand the components of an optimization problem: decision variables, objective functions, and constraints.
+- Learn how optimization is applied in statistics and policy search.
+- Explore the trade-offs between problem complexity and solution accuracy.
+:::
 
 Optimization is a field of study unto itself, and forms an essential backbone of statistics, machine learning, and operations research.
 Here, we briefly summarize key concepts and techniques in optimization, with a focus on their application to statistics and policy search.
@@ -191,7 +195,9 @@ If we then want to estimate $\sigma$, we can estimate the standard deviation of 
 
 ## Motivation: Policy Search
 
-## Gradient-Based Optimization
+## Optimization Toolkit
+
+### Gradient-Based Optimization
 
 This is useful for thinking about neural networks, but also for many other optimization problems.
 The key idea is that we can use the gradient of the objective function to find the direction in which to move to improve our solution.
@@ -208,11 +214,11 @@ The primary limitation of gradient descent is that it can get stuck in local min
 This is especially true for non-convex problems, where there may be many local minima.
 A vast range of techniques, a treatment of which merits a textbook on its own, have been developed to address this issue, including for example the Adam optimizer [@kingma_adam:2017].
 
-## Stochastic Optimization
+### Stochastic Optimization
 
-## Sequential Decision Problems
+### Sequential Decision Problems
 
-## High-Dimensional Optimization
+### High-Dimensional Optimization
 
 ## Further Reading {.unnumbered}
 

@@ -36,6 +36,7 @@ What is the true dimensionality of this data?
 - Takes data matrix $A$ and finds $k$ orthogonal linear combinations of the columns of $A$ that maximize variance (the first $k$ components display the maximum possible variance)
 - 
 
+## Copulas
 
 ## Deep Models
 

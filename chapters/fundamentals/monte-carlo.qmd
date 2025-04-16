@@ -1,0 +1,35 @@
+---
+title: Monte Carlo Methods
+---
+
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
+
+- Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions.
+- Understand the role of utility theory in decision-making under uncertainty.
+:::
+
+Monte Carlo is a powerful class of methods used to estimate the properties of a distribution by generating random samples from that distribution.
+Specifically, Monte Carlo methods are used to estimate the expected value of a function of random variables.
+
+## Motivation: Bayesian Inference
+
+## Motivation: Sensitivity Analysis
+
+## Applications
+
+### Markov Chain Monte Carlo
+
+### MCMC with `Turing.jl`
+
+## Further Reading {.unnumbered}
+
+- Although about a decade old, @gelman_bda3:2014 is the definitive reference for Bayesian statistics
+- @mcelreath_rethinking2:2020 takes a different pedagogical approach to @gelman_bda3:2014, covering similar concepts from a somewhat more applied perspective. Lectures are available [on YouTube](https://www.youtube.com/@rmcelreath).
+- @gelman_workflow:2020 is a mini-textbook on Bayesian workflow
+- @gelman_subjectiveobjective:2017 and @gelman_workflow:2020 cleanly outline how to think about interpreting probability -- which is often misunderstood.
