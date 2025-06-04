@@ -18,21 +18,12 @@ This text is modular and organized as follows:
 - **Part 1** introduces key topics in probability, inference, Bayesian methods, optimization, machine learning, and Earth science. Rather than providing a comprehensive treatment, this part focuses on essential concepts and links to further references. It is best used as a reference to support the rest of the book, rather than as a standalone introduction to these topics.
 - **Part 2** focuses on hazard **assessment**, namely modeling climate hazards and extremes. Material is organized around thematic applications and predictive tasks. The foundational idea is integrating information from noisy and/or biased sources to estimate the joint probability distribution of relevant hydroclimatic variables. Since all approaches are necessarily imperfect, clearly understanding and communicating the  assumptions underlying these estimates becomes essential.
 - **Part 3** risk management, which involves both mapping hazard to risk and designing interventions to manage these risks. Key ideas include the sequential nature of decisions, the pursuit of unclear and/or contested objectives, and the need to account for the sensitivity of estimated probability distributions (of hazard and of other relevant physical, social, and economic variables) to underlying models and assumptions.
+- This book is accompanied by a series of computational notebooks written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed. These notebooks are designed 
 
 ## Pre-requisites
 
 A background in **statistics** and/or **machine learning** is helpful.
 Although linear algebra and differential calculus are essential for understanding statistics, machine learning, Earth science, and optimization at a deep level, this book focuses on understanding the concepts and applications of these methods, and so a conceptual understanding of these topics is usually qsufficient.
-
-## Computation
-
-This book is accompanied by a series of computational notebooks written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed.
-While the text itself does not include code snippets, these notebooks integrate text, code, and visualizations using the Quarto framework.
-You can download and run them locally to explore the material interactively.
-
-No prior experience with Julia or programming is required to read the text.
-However, working through the notebooks is highly recommended, as they provide a hands-on introduction to the methods and concepts covered.
-For more on Julia, see [the appendix](chapters/appendices/julia.qmd).
 
 ## Related Projects
 
