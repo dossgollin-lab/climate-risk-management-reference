@@ -1,0 +1,165 @@
+---
+title: Deep Uncertainty and Model Structure
+---
+
+::: {.callout-note}
+## Under Construction
+This chapter is still under active construction. Please check back regularly for updates and new content.
+:::
+
+::: {.callout-tip}
+## Learning Objectives
+
+- Distinguish between aleatory and epistemic uncertainty in climate risk assessment
+- Understand the challenges posed by structural uncertainty and model disagreement
+- Apply Bayesian Model Averaging (BMA) and stacking approaches to combine multiple models
+- Recognize when deep uncertainty invalidates traditional decision frameworks
+- Identify sources of deep uncertainty in exposure and impact modeling
+:::
+
+## Introduction: From Parameter to Structural Uncertainty
+
+When we move from hazard assessment (Part II) to risk analysis, we encounter increasingly severe forms of uncertainty. While climate hazard models have known physical constraints and observational data for validation, the mapping from hazards to societal impacts involves:
+
+- Socioeconomic projections with high uncertainty
+- Complex system interactions and cascading effects
+- Human behavioral responses that are difficult to predict
+- Infrastructure and institutional changes over time
+
+This chapter addresses how to handle situations where our uncertainty about model structure itself dominates other sources of uncertainty.
+
+## Types of Uncertainty
+
+### Aleatory vs Epistemic Uncertainty
+
+- **Aleatory uncertainty**: Irreducible randomness inherent in natural processes
+- **Epistemic uncertainty**: Reducible uncertainty due to incomplete knowledge
+
+### Parametric vs Structural Uncertainty
+
+- **Parametric uncertainty**: Uncertainty in model parameters given fixed model structure
+- **Structural uncertainty**: Uncertainty about which model structure is "correct"
+
+## Model Disagreement and Ensemble Methods
+
+### Climate Model Ensembles
+
+While climate models agree on basic warming trends, they disagree substantially on:
+- Regional precipitation changes
+- Extreme event frequency and intensity
+- Timing and magnitude of tipping points
+
+### Multi-Model Approaches
+
+#### Simple Model Averaging
+
+#### Bayesian Model Averaging (BMA)
+
+Bayesian Model Averaging provides a principled approach to combining predictions from multiple models:
+
+$$
+p(y | \mathbf{x}, \mathcal{D}) = \sum_{k=1}^K p(y | \mathbf{x}, M_k, \mathcal{D}) p(M_k | \mathcal{D})
+$$
+
+where $M_k$ represents model $k$, and $p(M_k | \mathcal{D})$ is the posterior model probability.
+
+**Advantages:**
+- Principled uncertainty quantification
+- Automatic weighting based on model performance
+- Coherent probabilistic framework
+
+**Challenges:**
+- Requires proper scoring rules for model comparison
+- Sensitive to model set selection
+- May struggle with model dependence
+
+#### Model Stacking
+
+Stacking optimizes model weights to minimize predictive error:
+
+$$
+\hat{w} = \arg\min_w \sum_{i=1}^n \left( y_i - \sum_{k=1}^K w_k \hat{y}_{i,k} \right)^2
+$$
+
+subject to $\sum_k w_k = 1$ and $w_k \geq 0$.
+
+**Advantages:**
+- Focused on predictive performance
+- Less sensitive to model specification
+- Computationally efficient
+
+**Challenges:**
+- No natural uncertainty quantification
+- Weights may not reflect model reliability
+
+## Sources of Deep Uncertainty in Climate Risk
+
+### Exposure Projections
+
+- Population growth and urbanization patterns
+- Economic development trajectories  
+- Land use and infrastructure changes
+- Adaptation and protection investments
+
+### Vulnerability Models
+
+- Social and economic vulnerability evolution
+- Infrastructure aging and upgrades
+- Institutional capacity changes
+- Cultural and behavioral adaptations
+
+### Impact Functions
+
+- Dose-response relationships for climate hazards
+- Threshold effects and system tipping points
+- Cascading failure mechanisms
+- Recovery and adaptation dynamics
+
+## When Models Fundamentally Disagree
+
+### Scenario Discovery
+
+Identifying conditions under which models yield conflicting predictions.
+
+### Model Structural Deficiencies
+
+Sometimes model disagreement reflects fundamental limitations:
+- Missing processes or feedbacks
+- Inappropriate spatial/temporal scales
+- Inadequate representation of extremes
+- Oversimplified human dimensions
+
+### Deep Uncertainty Diagnostics
+
+How to recognize when uncertainty is "deep":
+- Model predictions span decision-relevant thresholds
+- Different models imply different optimal decisions
+- No clear basis for discriminating among models
+- Disagreement persists despite additional data
+
+## Implications for Decision Making
+
+Deep uncertainty fundamentally challenges traditional decision frameworks:
+
+- **Expected utility theory**: Requires well-defined probabilities
+- **Cost-benefit analysis**: Sensitive to probability assignments
+- **Optimization approaches**: May yield misleading "optimal" solutions
+
+This motivates the robust decision-making approaches covered in the next chapter.
+
+## Case Studies
+
+### Sea Level Rise Projections
+
+Different physical models (ice sheet dynamics, thermal expansion, glacial isostatic adjustment) yield vastly different local sea level projections.
+
+### Hurricane Intensification Under Climate Change
+
+Models disagree on both the sign and magnitude of tropical cyclone frequency and intensity changes.
+
+### Ecosystem Service Valuation
+
+Economic models show orders-of-magnitude differences in ecosystem service values under climate change.
+
+## Further Reading {.unnumbered}
+

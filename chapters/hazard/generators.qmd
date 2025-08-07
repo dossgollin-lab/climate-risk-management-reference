@@ -11,8 +11,6 @@ This chapter is still under active construction. Please check back regularly for
 ## Learning Objectives
 :::
 
-- @steinschneider_generator:2019
-- @greene_nhmm:2011
 
 ## Example: Hidden Markov Models (HMMs)
 

@@ -1,51 +1,84 @@
 # Preface {.unnumbered}
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## What is Climate Risk?
 
-## Bayesian Utility Theory
+Climate risk is...
 
-We will often be interested in making decisions despite not having perfect information.
-In the simplest, most ideal world, Bayesian Decision Theory provides a coherent framework for making optimal decisions:
+- A quantitative book that will teach you how to analyze local and regional climate risks
+- I know it when I see it
+- Floods, extreme rainfall, sea-level rise, drought, 
+- financial world calls it "physical risk"
+
+What this book is NOT about
+
+- reputational risks
+
+## How Do We Manage Climate Risks?
+
+The goal of assessing climate risks is to manage them, as is the focus of Part III.
+We manage climate risks by
+
+- **building infrastructure**, such as seawalls, stormwater pipes, oyster beds, green roofs, dams
+- **designing policy**, such as water pricing, land-use regulations, building codes
+- **responding** to climate disasters through disaster response and recovery. While emergency management is beyond the scope of the book, disaster prevention (through infrastructure, policy, etc) and preparation (planning evacuation routes, assessing resource needs, etc) are problems that the tools of this class can inform.
+
+A key insight from considering these applications is that climate risks are not natural phenomena, but occur at the intersection of natural and human systems.
+A second insight is that decisions about how to manage climate risks do not depend only on climate hazard, but also on human systems and values.
+
+## The Simple Story
+
+In principle, managing climate risks should be straightforward. If we had clear objectives and well-characterized uncertainty, there are established mathematical formalisms for decision-making under uncertainty. Bayesian Decision Theory provides an elegant framework: find the action $a$ that maximizes expected utility
 $$
 \mathbb{E}[U(a)] = \int U(a, s) p(s) ds,
 $$
-where $U(a, s)$ is the utility of action $a$ given "state of the world" $s$, and $p(s)$ is the probability density function of the state.
-The "best" action is the one that maximizes expected utility.
-This clean starting point provides a jumping-off point for framing the challenges of this book.
-Although much of this book is focused on the reasons why this idealized framework is not sufficient, this simplifed framework is useful for framing a key goal, which is that we are interested not in forecasting the future through a crystal ball, but rather in estimating the probability distribution of future states of the world.
-Specifically, we are interested in the {{< glossary "joint probability distribution" >}} of relevant variables, which may include both physical (e.g., climate hazard) and socioeconomic (e.g., vulnerability) variables.
+where $U(a, s)$ is the utility of action $a$ given "state of the world" $s$, and $p(s)$ is the {{< glossary "joint probability distribution" >}} over all states of the world.
 
-### Types of uncertainty
+With this framework and modern advances in operations research and optimization, we could frame climate risk management as a large-scale optimization problem.
+Computational tools could search vast solution spaces—spanning infrastructure investments, policy interventions, risk transfer mechanisms, and adaptive management strategies—to identify optimal pathways forward.
 
-- Aleatory uncertainty: inherent variability in the system (ie, randomness)
-- Epistemic uncertainty: uncertainty in our knowledge of the system, often useful to divide into
-    - Parametric uncertainty (what we will use here)
-    - Model structure uncertainty (treated qualitatively)
+## Why This Isn't Enough
 
-### History
+In practice, climate risk management defies this idealized approach for several fundamental reasons:
 
-- First conceived as a way to try to explain human behavior
-    - Turns out not to be a great model -- people do not always behave rationally
+1. **Deep uncertainty**: Unlike textbook optimization problems, we rarely have well-defined probability distributions over future states. Climate risks involve poorly characterized, multiple, and interacting uncertainties spanning physical processes (climate projections), socioeconomic factors (development patterns, institutional capacity, human behavior), and their complex dependencies. The probability distributions we need span climate hazards, exposure patterns, vulnerability functions, and policy effectiveness—all evolving in ways that resist precise characterization.
 
-### Utility
+2. **Vast, complex decision spaces**: The solution space includes not just individual projects but entire systems: infrastructure networks, policy portfolios, risk transfer arrangements, and adaptive management sequences. These decisions interact across scales, sectors, and time horizons in ways that resist comprehensive optimization.
 
-- Some function that we want to maximize
-- Alternatively can be thought of as a cost function that we want to minimize
-- $U(a, \theta)$
-    - $a$ is the action we take
-    - $\theta$ is the state of the world
+3. **Contested objectives**: Different stakeholders hold different values about what we should optimize for—economic efficiency, equity, robustness, or flexibility. These objectives often conflict, and their relative importance is itself contested and evolving.
 
-### Expected Utility
+## Example: The Dutch Delta Works
 
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \int_{\theta \in \Theta} U(a, \theta) p(\theta) d\theta
-$$
+(MORE BACKGROUND)
 
-or in the discrete case
+The Netherlands' approach to flood risk management illustrates both the power and limitations of optimization-based thinking.
+The Dutch have made extraordinary progress through rigorous engineering analysis and cost-benefit optimization  (REFS).
+Yet questions about high-level strategy remain deeply contested and political (REFS / video).
 
-$$
-\mathbb{E} \left[ U(a, \theta) \right] = \sum_{\theta \in \Theta} U(a, \theta) p(\theta)
-$$
+
+## The Role of Conceptual Understanding
+
+This brings us to a crucial insight: **we cannot simply frame climate risk management as a big optimization problem**. The field has witnessed an explosion of computational tools—climate models with ever-finer resolution, machine learning algorithms for processing vast datasets, and sophisticated visualization platforms for rendering complex projections. While these advances represent genuine progress, their proliferation has created new challenges for practitioners seeking to manage real-world climate risks.
+
+The abundance of available tools does not automatically translate to better decisions. Indeed, the sophistication of modern computational approaches can obscure fundamental questions about problem framing, uncertainty characterization, and appropriate methods selection. Without solid conceptual foundations, practitioners may find themselves applying powerful tools inappropriately or mistaking methodological novelty for substantive insight.
+
+Effective climate risk management requires conceptual understanding to:
+
+- **Frame problems appropriately**: Identifying which uncertainties matter most for specific decisions and contexts
+- **Focus analytical effort**: Allocating computational resources where they add genuine value rather than pursuing sophistication for its own sake
+- **Evaluate methods critically**: Assessing whether new approaches offer meaningful improvements over established alternatives
+- **Balance quantification with judgment**: Extracting maximum value from quantitative analysis while acknowledging irreducible limitations
+- **Facilitate communication**: Translating technical findings into actionable insights for diverse stakeholders
+- **Design robust strategies**: Developing approaches that perform well across multiple scenarios rather than optimizing for particular forecasts
+- **Enable institutional learning**: Building systems that can adapt as conditions and knowledge evolve
+
+The goal is not to dismiss computational advances, but to deploy them more strategically. This requires understanding both the capabilities and constraints of different approaches, and recognizing when conceptual clarity matters more than computational complexity.
+
+## The Structure of This Book
+
+This book develops both the technical tools and conceptual frameworks needed for climate risk management:
+
+- **Part I** provides the statistical, optimization, and machine learning foundations that enable rigorous analysis of climate risks and decision alternatives
+- **Part II** focuses on characterizing climate hazards and their uncertainties, emphasizing the integration of multiple imperfect information sources
+- **Part III** addresses the transition from hazard to risk and the design of management strategies under deep uncertainty
+
+Throughout, we emphasize that technical sophistication must be coupled with conceptual clarity about the nature of climate risks and the limits of optimization approaches. The goal is not to abandon quantitative analysis, but to use it more wisely—focusing computational power where it adds most value while acknowledging the irreducible uncertainties that require adaptive, robust approaches to climate risk management.

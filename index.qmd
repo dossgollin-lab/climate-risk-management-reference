@@ -2,10 +2,11 @@
 
 ::: {.callout-note}
 ## Under Construction
-This textbook is under active development. Please check back regularly for updates and new content.
-:::
 
-Welcome to the online textbook **Hydroclimate Risk Assessment and Management**.
+This collection of lecture notes (the word "textbook" implies a level of completeness and polish that we are not particularly near) is under active development.
+Currently (Fall 2025), content is being added for use in my fall course at Rice University.
+Please check back frequently for updates, and feel free to [open an issue on GitHub]({{< book.github >}}) if you have questions or suggestions!
+:::
 
 Understanding the probabilities of extreme events is crucial in many contexts, from designing infrastructure to pricing insurance and shaping public policy.
 This book provides a comprehensive introduction to hydroclimate risk management, focusing on the statistical and computational methods used to assess and manage risks associated with extreme weather events and climate change.
@@ -18,29 +19,20 @@ This text is modular and organized as follows:
 - **Part 1** introduces key topics in probability, inference, Bayesian methods, optimization, machine learning, and Earth science. Rather than providing a comprehensive treatment, this part focuses on essential concepts and links to further references. It is best used as a reference to support the rest of the book, rather than as a standalone introduction to these topics.
 - **Part 2** focuses on hazard **assessment**, namely modeling climate hazards and extremes. Material is organized around thematic applications and predictive tasks. The foundational idea is integrating information from noisy and/or biased sources to estimate the joint probability distribution of relevant hydroclimatic variables. Since all approaches are necessarily imperfect, clearly understanding and communicating the  assumptions underlying these estimates becomes essential.
 - **Part 3** risk management, which involves both mapping hazard to risk and designing interventions to manage these risks. Key ideas include the sequential nature of decisions, the pursuit of unclear and/or contested objectives, and the need to account for the sensitivity of estimated probability distributions (of hazard and of other relevant physical, social, and economic variables) to underlying models and assumptions.
-- This book is accompanied by a series of computational notebooks written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed. These notebooks are designed 
+- This book is accompanied by a series of **computational notebooks** written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed in the text. WHile notebooks are referenced in the text, they are designed as standalone and self-contained resources.
 
 ## Pre-requisites
 
-A background in **statistics** and/or **machine learning** is helpful.
-Although linear algebra and differential calculus are essential for understanding statistics, machine learning, Earth science, and optimization at a deep level, this book focuses on understanding the concepts and applications of these methods, and so a conceptual understanding of these topics is usually qsufficient.
+Basic probability and multivariate calculus, along with linear algebra, are sufficient mathematical foundations for this textbook.
+Some exposure to Earth science, hydrology, water resources, or related topics is strongly encouraged for context, though not strictly necessary for understanding methods.
+This book builds on a wide range of topics and methods in statistics, machine learning, optimization, and Earth science, and expertise in any of these areas may deepen your understanding, but is not necessary.
+No programming is required to read the book, but going through computational examples and applying methods to your own problems, which can substantially strengthen your understanding, does require programming.
+The examples in this book use the Julia programming language; see the [Resources lis](/chapters/resources.qmd) for more.
 
 ## Related Projects
 
 This textbook draws from classes I have taught at Rice University, courses I have taken, and other synthesis efforts undertaken by colleagues.
-In particular, this textbook draws inspiration and content from Upmanu Lall's Environmental Data Analysis course at Columbia, Vivek Srikrishnan's [Environmental Systems Analysis](https://viveks.me/environmental-systems-analysis/) and [Climate Risk Analysis](https://viveks.me/climate-risk-analysis/) classes at Cornell, R. Balaji's Advanced Data Analysis Techniques
-(Statistical Learning Techniques for Engineering and Science) [course](https://civil.colorado.edu/~balajir/CVEN6833/) at CU Boulder and Alberto Montanari's [collection of open course notes and lectures](https://www.albertomontanari.it/lectures).
-
-There is also overlap with several other textbooks, including:
-
-- **@abernathey_datascience:2024** is an excellent resource covering introductory topics in Earth and climate data science using Python, with an emphasis on foundational computations. These core computational concepts serves as a recommended prerequisite for more advanced material in this book.
-- **@helsel_waterresources:2020** is a comprehensive introduction to water resources and hydrology, focusing on statistical methods for analyzing hydrologic data. Its methods are traditional, with less emphasis on machine learning or Bayesian methods and more attention to null hypothesis significance testing, but its case studies are well-worked and thoughtfully described.
-- **@loucks_planning:2017** provides a broad and rigorous overview of simulation, optimization, and multi-objective planning for water resource systems. While not focused on climate extremes, it forms a core reference for decision modeling and infrastructure management under uncertainty. This book extends Loucks by incorporating hydroclimate hazard modeling and deep uncertainty.
-- **@marchau_decisionmakingunderdeepuncertainty:2019** introduces robust and adaptive decision frameworks designed for uncertain or unknowable futures. It covers methods like Robust Decision Making, Dynamic Adaptive Planning, and Info-Gap Theory. While not specific to climate or water, it provides essential theory for Part 3 of this book, which applies these frameworks to hydroclimate risk and adaptation.
-- **@mignan_textbook:2024**  is a modern introduction to catastrophe risk modeling that covers a wide range of hazards, including hydroclimatic extremes, from a physics-based perspective. It provides a structured framework for quantifying hazard, exposure, and vulnerability, following industry-standard CAT modeling approaches. While broader in scope and more introductory in level, it complements this book’s focus by illustrating foundational principles of probabilistic risk modeling in practice.
-- **@pyrcz_textbook:2024** is a textbook focused on applied machine learning, with a particular focus on geostatistics. There's less focus on extremes, hydroclimate, and decision-making, but it provides very clear and interpretable explanations of many machine learning methods, including some that are not directly covered in this book.
-
-In addition, most of the chapters in the book summarize topics that are themselves the subject of numerous more focused texts, which are summarized in the references at the end of each chapter.
+A list of some materials and books that overlap with or complement this book are provided in the [Resources list](/chapters/resources.qmd), along with some guides to getting started with software tools used.
 
 ## License and Citation
 

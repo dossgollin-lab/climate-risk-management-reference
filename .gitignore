@@ -3,6 +3,7 @@ _book/
 _freeze/
 
 /.quarto/
+.claude/
 
 resources/
 slides/

@@ -42,6 +42,11 @@ Here is a curated list of some particularly helpful tools.
 * [Makie Tutorials](https://docs.makie.org/stable/tutorials/)
 * [MakieCon 2023 YouTube Channel](https://youtube.com/playlist?list=PLP8iPy9hna6TXEn99mhG5KaTgjsrCkDzQ&feature=shared)
 
+### Climate Risk Analysis in Julia
+
+- The documentation for the [Turing (Julia)](https://turing.ml/dev/tutorials/), [PyMC (Python)](https://www.pymc.io/projects/docs/en/v3/nb_examples/index.html), and (especially) [stan (multi-language)](https://mc-stan.org/users/documentation/) probabilistic programming languages offer outstanding tutorials on statistical modeling, and you can learn a lot by going through their examples and references.
+- Extremes.jl
+
 ## Running the Notebooks
 
 This course comes with a series of computational notebooks written in Julia.

@@ -1,10 +1,9 @@
-# Authors {.unnumbered}
+# Authors & Contributors {.unnumbered}
 
-## About the Author
 
 ::: {.columns}
 ::: {.column width=45%}
-![James Doss-Gollin](../_assets/img/james.png)
+![James Doss-Gollin](../_assets/img/jdossgollin.jpeg)
 :::
 ::: {.column width=10%}
 :::
@@ -12,8 +11,11 @@
 I am an assistant professor of civil and environmental engineering at Rice University.
 My research focuses broadly on understanding and managing the risks of hydroclimate extremes, particularly urban flooding.
 I teach CEVE 543 ("Statistical-Physical Methods for Hydroclimate Extremes and Catastrophes") and CEVE 421/521 ("Climate Risk Management").
-See [dossgollin-lab.github.io](https://dossgollin-lab.github.io) for more information.
+
+See [dossgollin-lab.github.io](https://dossgollin-lab.github.io) for more information about my research.
 :::
 :::
 
 ## Contributors
+
+*None yet. Please consider contributing!*

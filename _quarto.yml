@@ -4,7 +4,7 @@ project:
     port: 4200
 
 book:
-  title: "Hydroclimate Risk Assessment and Management"
+  title: "Climate Risk Assessment and Management"
   author: "James Doss-Gollin"
   date: "2/19/2025"
   page-footer:
@@ -21,21 +21,17 @@ book:
   chapters:
     - index.qmd
     - pages/author.qmd
-    - pages/contribute.qmd
     - chapters/preface.qmd
-    - part: "Part I: Mathematical Toolkit"
+    - part: "Part I: Building Blocks"
       chapters:
         - chapters/fundamentals/intro.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/optimization.qmd
         - chapters/fundamentals/monte-carlo.qmd
-        - chapters/fundamentals/ml.qmd
-        - chapters/fundamentals/nonparametric.qmd
-        - chapters/fundamentals/time-series.qmd
-        - chapters/fundamentals/multidimensional.qmd
-        - chapters/fundamentals/spatial.qmd
+        - chapters/fundamentals/ml-nonparametric.qmd
+        - chapters/fundamentals/spatiotemporal.qmd
         - chapters/fundamentals/model-comparison.qmd
-    - part: "Part II: Hydroclimate Extremes and Catastrophes"
+    - part: "Part II: Climate Hazards, Extremes, and Catastrophes"
       chapters:
         - chapters/hazard/intro.qmd
         - chapters/hazard/climate-science.qmd
@@ -48,14 +44,13 @@ book:
     - part: "Part III: Risk Analysis and Management"
       chapters:
         - chapters/risk/intro.qmd
-        - chapters/risk/risk.qmd
         - chapters/risk/expectations-cost-benefit.qmd
         - chapters/risk/policy-search.qmd
-        - chapters/risk/robustness.qmd
-        - chapters/risk/cascading.qmd
-        - chapters/risk/adaptive.qmd
         - chapters/risk/risk-transfer.qmd
-        - chapters/risk/equity-people.qmd
+        - chapters/risk/deep-uncertainty.qmd
+        - chapters/risk/robustness.qmd
+        - chapters/risk/adaptive.qmd
+        - chapters/risk/social-science.qmd
     - chapters/references.qmd
 
     - part: "Computational Notebooks"
@@ -65,10 +60,13 @@ book:
         - "notebooks/mosquitos.qmd"
         - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
+    - chapters/resources.qmd
 
 
   appendices: 
     - "chapters/appendices/julia.qmd"
+    - "chapters/appendices/software.qmd"
+    - "chapters/appendices/llm.qmd"
   
   search:
     location: sidebar

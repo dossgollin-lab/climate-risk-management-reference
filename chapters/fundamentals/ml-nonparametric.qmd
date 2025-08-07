@@ -1,5 +1,5 @@
 ---
-title: Machine Learning
+title: Machine Learning and Nonparametric Methods
 ---
 
 ::: {.callout-note}
@@ -13,6 +13,7 @@ This chapter is still under active construction. Please check back regularly for
 By the end of this chapter, students should be able to:
 
 - Apply fundamental supervised learning concepts (regression and classification) to frame typical hydroclimate hazard assessment problems, and understand the crucial steps of data preparation and model evaluation.
+- Understand nonparametric and semiparametric methods for flexible modeling of climate data distributions.
 - Critically evaluate the application of machine learning in hydroclimate hazard assessment literature (papers, reports, models, datasets), identifying key assumptions, limitations, and potential biases.
 - Understand the basic principles and potential of more advanced machine learning techniques (deep learning for sequence data, probabilistic models for scenario generation) in the context of hydroclimate hazards, while also recognizing their inherent complexities and interpretability challenges.
 :::
@@ -35,6 +36,47 @@ By the end of this chapter, students should be able to:
 #### Classification
 
 - Predicting categorical hazard outcomes (e.g., landslide occurrence, drought severity class).
+
+## Nonparametric Methods
+
+From Bayes' rule,
+$$
+f(y | \vec{x}) = \frac{f(y, \vec{x})}{f(\vec{x})}
+$$
+if we can build reliable multivariate probability distributions, we can build a general framework for conditional distributions.
+
+### Density Estimation
+
+::: {.callout-note}
+## Credit
+
+Pulling some bits from https://vita.had.co.nz/papers/density-estimation.pdf, be sure to cite correctly.
+:::
+
+Density estimation builds an estimate of some underlying probability density function using an observed data sample. Density estimation can either be parametric, where the data is from a known family, or nonparametric, which attempts to flexibly estimate an unknown distribution.
+
+A simple approach is a histogram (refer to grad class notes).
+The histogram requires two parameters: bin width and starting position of the first bin.
+
+::: {.callout-note}
+REFER TO Ricardo Gutierrez-Osuna notes
+:::
+
+Another approach is kernel density estimation (KDE), which uses a kernel function
+$$
+\hat{f}_{\text{KDE}} (x) = \frac{1}{n} \sum_{i=1}^n K(\frac{x - x_i}{h})
+$$
+where $K$ is the kernel function, $h$ is the bandwidth, and $x_i$ are the data points.
+
+The main challenge to the kde approach is varying data density: regions of high data density could have small bandwidths, but regions with sparse data need large bandwidths.
+
+### Nonparametric Regression
+
+### Neighborhood Methods
+
+### Bootstrapping
+
+### Semi-parametric Methods
 
 ## Machine Learning Practice
 
@@ -77,7 +119,7 @@ By the end of this chapter, students should be able to:
 - **Cross-Validation:** A technique for more reliable estimation of generalization performance.
 - **Regularization:** Techniques (e.g., L1, L2) to prevent overfitting by penalizing model complexity.
 
-## Modern ML
+## Deep Learning and Advanced Methods
 
 - This section introduces more advanced machine learning techniques that have shown promise in complex data analysis.
 

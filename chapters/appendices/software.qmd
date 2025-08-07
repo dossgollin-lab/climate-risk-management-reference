@@ -1,0 +1,25 @@
+---
+title: "Other Software Tools"
+---
+
+## Quarto + Jupyter
+
+This textbook is written using the Quarto language.
+Quarto allows us to combine code, math, and code output in a single document.
+Jupyter notebooks fulfill a similar functionality, although they are implemented very differently.
+Both use Markdown syntax with LaTeX math notation.
+
+- [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/)
+- [LaTeX Cheatsheet](https://ctan.math.washington.edu/tex-archive/info/undergradmath/undergradmath.pdf)
+- [Mathpix Snip](https://mathpix.com/snip) allows you to convert images of equations to LaTeX code (there is a free tier)
+- [Detexify](https://detexify.kirelabs.org/classify.html) lets you draw a symbol and suggests the LaTeX code for the corresponding symbol 
+
+## Git and GitHub
+
+Git and GitHub are widely used to share, save, collaborate on, and disseminate code, including this book.
+There are lots of great resources for learning Git and GitHub, including:
+
+- [Git Basics](https://www.theodinproject.com/lessons/foundations-git-basics) from The Odin Project.
+- [Learn Git Branching](https://learngitbranching.js.org/): An interactive, visual tutorial to how git works.
+- [Version Control](https://missing.csail.mit.edu/2020/version-control/) from MIT's "CS: Your Missing Semester" course.
+- [Git and GitHub for Poets](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV): YouTube playlist covering the basics of git and GitHub.

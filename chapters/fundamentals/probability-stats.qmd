@@ -33,7 +33,7 @@ In this textbook we will not get into measure theory.
 
 ### CDFs, PDFs, and PMFs
 
-If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the {{< acr pdf >}} of $X$, then:
+If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the {{< glossary pdf >}} of $X$, then:
 $$
 F_X ( x ) = \int_{-\infty}^x f_X(u) \, du,
 $$

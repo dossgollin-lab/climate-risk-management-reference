@@ -1,0 +1,18 @@
+---
+title: Large Language Models ("AI")
+---
+
+Coding is an integral part of real-world climate-risk analysis, and large language models (LLMs; often referred to as "AI" models) are rapidly changing how some kinds of coding happen.
+Beyond web-based chatbots, you may have useed tools like [GitHub Copilot](https://github.com/features/copilot){target=_blank} (free for students and educators) or Claude Code (see free [Deeplearning.AI Course](https://www.deeplearning.ai/short-courses/claude-code-a-highly-agentic-coding-assistant/)).
+LLMs use powerful new technologies that can support learning and replace tedious tasks, but they can also threaten your intellectual growth and skill development [@kosmyna_yourbrainonchatgpt:2025; @bastani_gpt4:2025].
+
+It is clear that there are some tasks that should be delegated to these models and some tasks that must remain human-driven.
+However, there are tremendous differences of opinion about how most tasks in the middle can or should be allocated.
+As you wrestle with these questions for yourself, you should explore resources like:
+
+- [AI Snake Oil](https://www.aisnakeoil.com/){target=_blank}
+  is a blog that seeks to dispel hype, remove misconceptions, and clarify the limits of AI.
+  The authors are in the Princeton University Department of Computer Science.
+- [AI software assistants make the hardest kinds of bugs to spot](https://pluralistic.net/2025/08/04/bad-vibe-coding/#maximally-codelike-bugs) from Pluralistic is a thoughtful and deep blog post about the perils of (mis)using LLMs for coding.
+- [One Useful Thing](https://www.oneusefulthing.org/) is a newsletter about AI focused on implications for work and education. The authors' [prompt library](https://www.moreusefulthings.com/prompts) is also a good resource for working with LLMs.
+- [Ed Zitron's Where's Your Ed At](https://www.wheresyoured.at/) is a newsletter that takes a critical perspective on the business models and hype narratives around AI.

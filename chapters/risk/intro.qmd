@@ -1,8 +1,95 @@
-# Overview {.unnumbered}
-
-We want to manage risks
+---
+title: From Hazard to Risk
+---
 
 ::: {.callout-note}
 ## Under Construction
 This chapter is still under active construction. Please check back regularly for updates and new content.
 :::
+
+::: {.callout-tip}
+## Learning Objectives
+
+- Define and conceptualize risk within the climate context (hazard, exposure, vulnerability)
+- Understand basic risk terminology (risk = probability × consequence)
+- Identify how different stakeholders perceive and prioritize climate risks
+- Recognize and analyze multi-hazard events (e.g., hurricane + storm surge + inland flooding)
+- Understand how cascading failures in interconnected systems (power grids, supply chains) amplify risk
+- Apply systems thinking approaches to complex risk interactions
+:::
+
+The most important concept is:
+$$
+\mathbb{E}\left[ f(x) \right] \neq f \left( \mathbb{E}[x] \right)
+$$
+where $x$ is some random variable and $f$ is some function.
+In our context, this means that if we want to know the expected value of a risk-related variable, like damage, we should not just take the expected value of the hazard and then apply a damage function to that.
+Extending the concept further, the damage caused by a hazard that scores in the 99th percentile of a chosen intensity measure may not be the 99th percentile of the damage distribution (a commonly used, but wrong, assumption).
+
+## From Hazard to Impact
+
+### Exposure
+
+What and who is in harm's way? Exposure represents the people, property, ecosystems, and economic activities that could be affected by climate hazards.
+
+### Vulnerability
+
+The degree to which systems are susceptible to harm from climate hazards. Vulnerability depends on:
+- Physical characteristics (building design, infrastructure quality)
+- Social factors (income, education, social networks)
+- Economic factors (insurance, savings, livelihood diversity)
+- Institutional factors (governance, emergency response capacity)
+
+### Damage Functions
+
+#### Depth-Damage Functions
+
+#### Wind Fragility Functions
+
+## Risk Metrics
+
+- Expected Annual Loss (EAL)
+- Probable Maximum Loss (PML)
+- Value at Risk (VaR)
+- Conditional Value at Risk (CVaR)
+
+## Cascading Risks and System Interactions
+
+### Systems Thinking
+
+A cool tool: https://ncase.me/loopy/
+
+Climate risks rarely occur in isolation. Understanding and managing cascading risks requires systems thinking approaches that account for:
+
+- **Interconnected infrastructure**: How failures cascade through power grids, transportation networks, communication systems
+- **Supply chain vulnerabilities**: How disruptions propagate through economic networks
+- **Social and institutional impacts**: How climate shocks affect governance, social cohesion, migration patterns
+
+### Infrastructure Interdependencies
+
+Modern infrastructure systems are highly interdependent:
+- Power systems depend on water for cooling and transportation for fuel delivery
+- Water systems depend on power for pumping and treatment
+- Communication systems depend on power and transportation for maintenance
+- Transportation depends on fuel supply chains and traffic management systems
+
+### Multi-Hazard Events
+
+Many climate disasters involve multiple hazards occurring simultaneously or in sequence:
+- **Hurricanes**: High winds + storm surge + inland flooding + power outages
+- **Droughts**: Water scarcity + agricultural losses + wildfire risk + energy shortages
+- **Heat waves**: Direct health impacts + power system stress + agricultural losses + air quality degradation
+
+### Systemic Risk and Feedback Loops
+
+Climate risks can create feedback loops that amplify impacts:
+- **Positive feedbacks**: Initial damage creates conditions for additional damage
+- **Negative feedbacks**: System responses that reduce further damage
+- **Threshold effects**: Non-linear responses when systems reach critical limits
+
+### Approaches to Model or Approximate Cascading Impacts
+
+- **Network analysis**: Modeling infrastructure as interconnected networks
+- **Agent-based modeling**: Simulating individual actors and their interactions
+- **System dynamics**: Modeling feedback loops and system behavior over time
+- **Scenario analysis**: Exploring how cascading effects unfold under different conditions
