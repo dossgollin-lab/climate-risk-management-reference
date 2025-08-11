@@ -1,4 +1,11 @@
-# Dynamic Policy Search: The Lake Problem {.unnumbered}
+# Dynamic Policy Search: The Lake Problem 📝 {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Apply dynamic policy search to optimal lake management
+- Understand how threshold models create path dependence
+- Compare different policy structures and their performance
+- Analyze tradeoffs between economic benefits and environmental protection
 
 We're building on the lake problem as described in @quinn_dps:2017.
 

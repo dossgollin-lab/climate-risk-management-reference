@@ -1,14 +1,15 @@
 ---
-title: Model Validation and Comparison
+title: Model Validation and Comparison 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
-:::
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+- [Machine Learning and Nonparametric Methods](/chapters/fundamentals/ml-nonparametric.qmd)
+
+## Learning Objectives {.unnumbered}
+
+*Learning objectives to be added as chapter develops.*
 
 ## Further Reading {.unnumbered}

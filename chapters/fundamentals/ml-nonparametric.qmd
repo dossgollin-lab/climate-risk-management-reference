@@ -1,14 +1,14 @@
 ---
-title: Machine Learning and Nonparametric Methods
+title: Machine Learning and Nonparametric Methods 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+- [Optimization](/chapters/fundamentals/optimization.qmd)
+
+## Learning Objectives {.unnumbered}
 
 By the end of this chapter, students should be able to:
 
@@ -16,7 +16,6 @@ By the end of this chapter, students should be able to:
 - Understand nonparametric and semiparametric methods for flexible modeling of climate data distributions.
 - Critically evaluate the application of machine learning in hydroclimate hazard assessment literature (papers, reports, models, datasets), identifying key assumptions, limitations, and potential biases.
 - Understand the basic principles and potential of more advanced machine learning techniques (deep learning for sequence data, probabilistic models for scenario generation) in the context of hydroclimate hazards, while also recognizing their inherent complexities and interpretability challenges.
-:::
 
 ## Machine Learning Fundamentals
 
@@ -36,6 +35,8 @@ By the end of this chapter, students should be able to:
 #### Classification
 
 - Predicting categorical hazard outcomes (e.g., landslide occurrence, drought severity class).
+
+### Unsupervised Learning
 
 ## Nonparametric Methods
 

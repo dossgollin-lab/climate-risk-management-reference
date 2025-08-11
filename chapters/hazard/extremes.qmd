@@ -1,16 +1,15 @@
 ---
-title: Extreme Value Theory
+title: Extreme Value Theory 📝
 notebook-links: true
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
-:::
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+- [Fundamentals of Climate Science](/chapters/hazard/climate-science.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Characterize the behavior of rare, high-impact climate events (e.g., floods, heatwaves).
 - Select and fit appropriate extreme value distributions (GEV, POT).

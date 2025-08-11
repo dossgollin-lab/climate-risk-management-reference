@@ -1,4 +1,11 @@
-# Statistics Without the Agonizing Details {.unnumbered}
+# Statistics Without the Agonizing Details 🎯 {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Compare simulation-based and parametric statistical tests
+- Understand the logic of permutation testing
+- Apply computational methods to hypothesis testing
+- Interpret p-values through simulation
 
 In this class we will use computation and simulation to build fundamental insight into statistical processes without dwelling on “agonizing” details. Here we implement the excellent example problem from John Rauser. First, watch the video:
 

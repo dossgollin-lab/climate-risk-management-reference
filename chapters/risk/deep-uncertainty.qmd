@@ -1,21 +1,20 @@
 ---
-title: Deep Uncertainty and Model Structure
+title: Deep Uncertainty and Model Structure 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+- [Model Validation and Comparison](/chapters/fundamentals/model-comparison.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Distinguish between aleatory and epistemic uncertainty in climate risk assessment
 - Understand the challenges posed by structural uncertainty and model disagreement
 - Apply Bayesian Model Averaging (BMA) and stacking approaches to combine multiple models
 - Recognize when deep uncertainty invalidates traditional decision frameworks
 - Identify sources of deep uncertainty in exposure and impact modeling
-:::
 
 ## Introduction: From Parameter to Structural Uncertainty
 

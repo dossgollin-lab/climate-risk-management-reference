@@ -1,14 +1,14 @@
 ---
-title: Spatiotemporal and High-Dimensional Methods
+title: Spatiotemporal and High-Dimensional Methods 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+- [Machine Learning and Nonparametric Methods](/chapters/fundamentals/ml-nonparametric.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Model and interpret spatial dependence in climate fields
 - Perform kriging and other geostatistical interpolations for mapping hazards
@@ -16,7 +16,6 @@ This chapter is still under active construction. Please check back regularly for
 - Apply time series analysis methods to detect trends and patterns in climate data
 - Use dimension reduction techniques for high-dimensional climate datasets
 - Integrate spatial and temporal methods for spatiotemporal climate analysis
-:::
 
 ## Spatial Statistics
 

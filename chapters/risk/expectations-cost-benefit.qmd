@@ -1,11 +1,6 @@
 ---
-title: Expectations and Discounting
+title: Expectations and Discounting 🚧
 ---
-
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
 
 ::: {.callout-tip}
 ## Learning Objectives

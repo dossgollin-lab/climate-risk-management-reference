@@ -1,14 +1,14 @@
 ---
-title: Optimal Sampling
+title: Optimal Sampling 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd)
+- [Optimization](/chapters/fundamentals/optimization.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Apply sampling techniques to generate synthetic event sets (e.g., hurricanes, floods).
 - Use importance and stratified sampling to improve efficiency in hazard modeling.

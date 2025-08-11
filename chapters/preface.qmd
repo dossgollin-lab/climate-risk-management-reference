@@ -1,77 +1,79 @@
-# Preface {.unnumbered}
+# Preface ✏️ {.unnumbered}
 
 ## What is Climate Risk?
 
-Climate risk is...
+Climate risks arise at the intersection of climate hazards, exposed systems, and vulnerability.
+They manifest when extreme or changing climate conditions—floods, droughts, extreme temperatures, sea-level rise, or shifting precipitation patterns—impact human and natural systems that are exposed and vulnerable to these conditions.
+The financial sector terms these "physical risks" to distinguish them from transition risks related to policy and market changes.
 
-- A quantitative book that will teach you how to analyze local and regional climate risks
-- I know it when I see it
-- Floods, extreme rainfall, sea-level rise, drought, 
-- financial world calls it "physical risk"
+Climate risks span scales from the hyperlocal (a single building's flood exposure) to the global (climate impacts on agricultural productivity).
+They encompass immediate acute risks from individual extreme events and longer-term chronic risks from gradual climate changes.
+Crucially, climate risks are not solely natural phenomena but emerge from the complex interactions between climate hazards and the human systems—infrastructure, institutions, communities, and economies—that experience their impacts.
 
-What this book is NOT about
+### Terminology
 
-- reputational risks
+The term "climate risk" is sometimes used differently from how we use it.
+For example, the financial sector often distinguishes between "physical risks" (related to climate hazards) and "transition risks" (related to policy and market changes);
+we would be focused here on the physical risks associated with climate hazards.
 
-## How Do We Manage Climate Risks?
+### How Do We Manage Climate Risks?
 
 The goal of assessing climate risks is to manage them, as is the focus of Part III.
 We manage climate risks by
 
 - **building infrastructure**, such as seawalls, stormwater pipes, oyster beds, green roofs, dams
 - **designing policy**, such as water pricing, land-use regulations, building codes
-- **responding** to climate disasters through disaster response and recovery. While emergency management is beyond the scope of the book, disaster prevention (through infrastructure, policy, etc) and preparation (planning evacuation routes, assessing resource needs, etc) are problems that the tools of this class can inform.
+- **responding** to climate disasters through disaster response and recovery.
+While emergency management is beyond the scope of the book, disaster prevention (through infrastructure, policy, etc) and preparation (planning evacuation routes, assessing resource needs, etc) are problems that the tools of this class can inform.
 
 A key insight from considering these applications is that climate risks are not natural phenomena, but occur at the intersection of natural and human systems.
 A second insight is that decisions about how to manage climate risks do not depend only on climate hazard, but also on human systems and values.
 
 ## The Simple Story
 
-In principle, managing climate risks should be straightforward. If we had clear objectives and well-characterized uncertainty, there are established mathematical formalisms for decision-making under uncertainty. Bayesian Decision Theory provides an elegant framework: find the action $a$ that maximizes expected utility
+In principle, managing climate risks should be straightforward.
+If we had clear objectives and well-characterized uncertainty, there are **established mathematical formalisms for decision-making under uncertainty**.
+Notably, Bayesian Decision Theory provides an elegant framework: find the action $a$ that maximizes expected utility
 $$
 \mathbb{E}[U(a)] = \int U(a, s) p(s) ds,
 $$
-where $U(a, s)$ is the utility of action $a$ given "state of the world" $s$, and $p(s)$ is the {{< glossary "joint probability distribution" >}} over all states of the world.
+where $U(a, s)$ is the utility of action $a$ given {{< glossary "state of the world" >}} $s$, and $p(s)$ is the {{< glossary "joint probability distribution" >}} over states of the world.
+The {{< glossary "expectation" >}} $\mathbb{E}[U(a)]$ represents the average utility we would expect from action $a$ across all possible future states, weighted by their probabilities (see [Chapter on Probability and Statistics](/chapters/fundamentals/probability-stats.qmd) for mathematical foundations).
 
 With this framework and modern advances in operations research and optimization, we could frame climate risk management as a large-scale optimization problem.
-Computational tools could search vast solution spaces—spanning infrastructure investments, policy interventions, risk transfer mechanisms, and adaptive management strategies—to identify optimal pathways forward.
+This might still be a challenging problem, requiring sophisticated optimization methods, large-ensemble Monte Carlo simulation, high-performance computing, and more, but fundamentally **there would be a right answer** that we could identify, at least seek to approximate.
 
 ## Why This Isn't Enough
 
 In practice, climate risk management defies this idealized approach for several fundamental reasons:
 
-1. **Deep uncertainty**: Unlike textbook optimization problems, we rarely have well-defined probability distributions over future states. Climate risks involve poorly characterized, multiple, and interacting uncertainties spanning physical processes (climate projections), socioeconomic factors (development patterns, institutional capacity, human behavior), and their complex dependencies. The probability distributions we need span climate hazards, exposure patterns, vulnerability functions, and policy effectiveness—all evolving in ways that resist precise characterization.
-
-2. **Vast, complex decision spaces**: The solution space includes not just individual projects but entire systems: infrastructure networks, policy portfolios, risk transfer arrangements, and adaptive management sequences. These decisions interact across scales, sectors, and time horizons in ways that resist comprehensive optimization.
-
-3. **Contested objectives**: Different stakeholders hold different values about what we should optimize for—economic efficiency, equity, robustness, or flexibility. These objectives often conflict, and their relative importance is itself contested and evolving.
-
-## Example: The Dutch Delta Works
-
-(MORE BACKGROUND)
-
-The Netherlands' approach to flood risk management illustrates both the power and limitations of optimization-based thinking.
-The Dutch have made extraordinary progress through rigorous engineering analysis and cost-benefit optimization  (REFS).
-Yet questions about high-level strategy remain deeply contested and political (REFS / video).
+1. **Deep uncertainty**: Unlike textbook optimization problems, we rarely have well-defined probability distributions over future states.
+Climate risks involve poorly characterized, multiple, and interacting uncertainties spanning physical processes (climate projections), socioeconomic factors (development patterns, institutional capacity, human behavior), and their complex dependencies.
+The probability distributions we need span climate hazards, exposure patterns, vulnerability functions, and policy effectiveness—all evolving in ways that resist precise characterization.
+2. **Large and poorly defined decision spaces**: The solution space includes not just individual projects but entire systems: infrastructure networks, policy portfolios, risk transfer arrangements, and adaptive management sequences.
+These decisions interact across scales, sectors, and time horizons in ways that resist comprehensive optimization.
+3. **Contested objectives**: Different stakeholders hold different values about what we should optimize for—economic efficiency, equity, robustness, or flexibility.
+These objectives often conflict, and their relative importance is itself contested and evolving.
 
 
-## The Role of Conceptual Understanding
+This brings us to a crucial insight: **we cannot simply frame climate risk management as a big optimization problem**.
+The field has witnessed an explosion of computational tools—climate models with ever-finer resolution, machine learning algorithms for processing vast datasets, and sophisticated visualization platforms for rendering complex projections.
+While these advances represent genuine progress, their proliferation has created new challenges for practitioners seeking to manage real-world climate risks.
 
-This brings us to a crucial insight: **we cannot simply frame climate risk management as a big optimization problem**. The field has witnessed an explosion of computational tools—climate models with ever-finer resolution, machine learning algorithms for processing vast datasets, and sophisticated visualization platforms for rendering complex projections. While these advances represent genuine progress, their proliferation has created new challenges for practitioners seeking to manage real-world climate risks.
+The abundance of available tools does not automatically translate to better decisions.
+Indeed, the sophistication of modern computational approaches can obscure fundamental questions about problem framing, uncertainty characterization, and appropriate methods selection.
+Without solid conceptual foundations, practitioners may find themselves applying powerful tools inappropriately or mistaking methodological novelty for substantive insight.
 
-The abundance of available tools does not automatically translate to better decisions. Indeed, the sophistication of modern computational approaches can obscure fundamental questions about problem framing, uncertainty characterization, and appropriate methods selection. Without solid conceptual foundations, practitioners may find themselves applying powerful tools inappropriately or mistaking methodological novelty for substantive insight.
+## The Stakes of Getting It Wrong
 
-Effective climate risk management requires conceptual understanding to:
+The consequences of inadequate climate risk management are severe and diverse.
+**Infrastructure failures** occur when designs based on historical extremes prove insufficient for future conditions—leading to flooded neighborhoods when storm drains are undersized, or to costly over-design when extreme projections are treated as certainties.
+**Policy mistakes** compound these problems: development policies that ignore flood risks concentrate vulnerable populations in harm's way, while overly conservative regulations can stifle economic development without commensurate risk reduction benefits.
 
-- **Frame problems appropriately**: Identifying which uncertainties matter most for specific decisions and contexts
-- **Focus analytical effort**: Allocating computational resources where they add genuine value rather than pursuing sophistication for its own sake
-- **Evaluate methods critically**: Assessing whether new approaches offer meaningful improvements over established alternatives
-- **Balance quantification with judgment**: Extracting maximum value from quantitative analysis while acknowledging irreducible limitations
-- **Facilitate communication**: Translating technical findings into actionable insights for diverse stakeholders
-- **Design robust strategies**: Developing approaches that perform well across multiple scenarios rather than optimizing for particular forecasts
-- **Enable institutional learning**: Building systems that can adapt as conditions and knowledge evolve
-
-The goal is not to dismiss computational advances, but to deploy them more strategically. This requires understanding both the capabilities and constraints of different approaches, and recognizing when conceptual clarity matters more than computational complexity.
+**Financial miscalculations** affect both public and private sectors.
+Insurance companies that underestimate climate risks face catastrophic losses, while those that overestimate risks price themselves out of markets.
+Infrastructure investors struggle to balance climate resilience against cost constraints, often erring toward solutions that prove either inadequate or prohibitively expensive.
+These failures cascade across scales: a poorly designed local drainage system contributes to regional flood management challenges, while flawed national climate risk assessments misguide infrastructure investment priorities across entire countries.
 
 ## The Structure of This Book
 
@@ -81,4 +83,18 @@ This book develops both the technical tools and conceptual frameworks needed for
 - **Part II** focuses on characterizing climate hazards and their uncertainties, emphasizing the integration of multiple imperfect information sources
 - **Part III** addresses the transition from hazard to risk and the design of management strategies under deep uncertainty
 
-Throughout, we emphasize that technical sophistication must be coupled with conceptual clarity about the nature of climate risks and the limits of optimization approaches. The goal is not to abandon quantitative analysis, but to use it more wisely—focusing computational power where it adds most value while acknowledging the irreducible uncertainties that require adaptive, robust approaches to climate risk management.
+Throughout, we emphasize that technical sophistication must be coupled with conceptual clarity about the nature of climate risks and the limits of optimization approaches.
+The goal is not to abandon quantitative analysis, but to use it more wisely—focusing computational power where it adds most value while acknowledging the irreducible uncertainties that require adaptive, robust approaches to climate risk management.
+
+This book aims to teach readers how to **apply** tools from applied mathematics, statistics, and machine learning to answer questions such as
+
+- What is the probability distribution of some relevant hazards or variables, such as (rainfall, wind, flood, temperature, streamflows) at a specific location?
+- How do these probability distributions change in the next 50 years?
+- How uncertain are these estimates and what specific mechanisms drive these uncertainties?
+- What is the distribution of annual losses of a portfolio of assets exposed to one or many climate risks?
+- What are trade-offs between up-front costs and future damages for decisions like how high to elevate a house?
+- What are robust strategies for sequentially hardening infrastructure against climate risks?
+- What are trade-offs between flood and drought protection for managing a reservoir?
+
+While Part I does provide building blocks, they are intended to be self-contained references rather than a comprehensive overview to applied math, statistics, computer science, machine learning, and operations research.
+Instead, it aims to give you "just enough" context to think carefully about how to apply tools from these fields to climate risk management challenges.

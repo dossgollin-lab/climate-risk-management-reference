@@ -1,11 +1,6 @@
 ---
-title: Hazard Model Chains
+title: Hazard Model Chains 🚧
 ---
-
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
 
 We often want to combine models.
 For example, to assess flood **hazard** from a tropical cyclone, we might

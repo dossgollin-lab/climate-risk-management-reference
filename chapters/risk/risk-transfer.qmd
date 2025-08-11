@@ -1,14 +1,14 @@
 ---
-title: Risk Transfer
+title: Risk Transfer 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Exposure and Vulnerability](/chapters/risk/exposure-vulnerability.qmd)
+- [Expectations and Discounting](/chapters/risk/expectations-cost-benefit.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Explore financial instruments (insurance, reinsurance, catastrophe bonds) for spreading or transferring climate risk.
 - Understand parametric insurance triggers and how they differ from indemnity-based approaches.

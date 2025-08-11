@@ -1,11 +1,6 @@
 ---
-title: Perturbation and Transposition
+title: Modifying Past Events 🚧
 ---
-
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
 
 ::: {.callout-tip}
 ## Learning Objectives

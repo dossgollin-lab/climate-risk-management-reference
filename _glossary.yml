@@ -1,11 +1,9 @@
 # Glossary definitions for the Climate Risk Management textbook
 
-terms:
-  joint probability distribution:
-    def: "A probability distribution that describes the simultaneous behavior of two or more random variables, specifying the probability of occurrence of each possible combination of their values."
-    
-  # Acronyms
-  pdf:
-    def: "Probability Density Function"
-    full: "Probability Density Function"
-    short: "PDF"
+joint probability distribution: "A probability distribution that describes the simultaneous behavior of two or more random variables, specifying the probability of occurrence of each possible combination of their values."
+
+state of the world: "A realization of one or more uncertainties relevant to current or possible future conditions"
+
+expectation: "Average"
+
+pdf: "Probability Density Function"

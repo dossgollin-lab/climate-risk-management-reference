@@ -79,6 +79,25 @@ Each should be included as a submodule.
 - Mathematical notation follows standard conventions in the field
 - All content is licensed under CC BY-SA 4.0
 
+## Writing Style
+
+- Use one sentence per line in markdown files for better version control and editing
+- This applies to all `.qmd` files including chapters, index, and preface
+
+## Chapter Status System
+
+Each chapter and page uses a 4-level emoji-based status tracking system:
+
+- 🚧 **Planning** - Initial brainstorming and outlining stage. Structure identified but content not yet written.
+- 📝 **Draft** - Substantial content written but may have gaps, need reorganization, or require additional examples.
+- ✏️ **Revision** - Complete draft exists but needs editing for clarity, accuracy, and consistency.
+- 🎯 **Ready** - Content complete, polished, and has undergone final review. Ready for use.
+
+### Implementation:
+- Status emoji appears at the end of chapter titles: `# Chapter Title 📝`
+- Each chapter includes a status callout near the top explaining the current status and the 4-part scale
+- Status should be updated as chapters progress through development stages
+
 ## Execution Environment
 
 - Julia 1.11+ required

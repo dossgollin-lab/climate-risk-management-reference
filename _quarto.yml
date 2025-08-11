@@ -6,7 +6,6 @@ project:
 book:
   title: "Climate Risk Assessment and Management"
   author: "James Doss-Gollin"
-  date: "2/19/2025"
   page-footer:
     left: |
       <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} [{{< var author >}}](https://orcid.org/{{< var orcid >}})</span>
@@ -20,20 +19,20 @@ book:
     
   chapters:
     - index.qmd
-    - pages/author.qmd
     - chapters/preface.qmd
-    - part: "Part I: Building Blocks"
+    - chapters/resources.qmd
+    - part: "Part I: Foundations"
       chapters:
-        - chapters/fundamentals/intro.qmd
+        - chapters/fundamentals/index.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/optimization.qmd
         - chapters/fundamentals/monte-carlo.qmd
         - chapters/fundamentals/ml-nonparametric.qmd
         - chapters/fundamentals/spatiotemporal.qmd
         - chapters/fundamentals/model-comparison.qmd
-    - part: "Part II: Climate Hazards, Extremes, and Catastrophes"
+    - part: "Part II: Hazard Assessment"
       chapters:
-        - chapters/hazard/intro.qmd
+        - chapters/hazard/index.qmd
         - chapters/hazard/climate-science.qmd
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
@@ -41,9 +40,10 @@ book:
         - chapters/hazard/generators.qmd
         - chapters/hazard/sampling.qmd
         - chapters/hazard/model-chains.qmd
-    - part: "Part III: Risk Analysis and Management"
+    - part: "Part III: Risk Management"
       chapters:
-        - chapters/risk/intro.qmd
+        - chapters/risk/index.qmd
+        - chapters/risk/exposure-vulnerability.qmd
         - chapters/risk/expectations-cost-benefit.qmd
         - chapters/risk/policy-search.qmd
         - chapters/risk/risk-transfer.qmd
@@ -51,17 +51,17 @@ book:
         - chapters/risk/robustness.qmd
         - chapters/risk/adaptive.qmd
         - chapters/risk/social-science.qmd
-    - chapters/references.qmd
 
-    - part: "Computational Notebooks"
+    - part: "Computational Case Studies"
       chapters: 
+        - "notebooks/index.qmd"
         - "notebooks/block-maxima.qmd"
         - "notebooks/lake-problem.qmd"
         - "notebooks/mosquitos.qmd"
         - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
-    - chapters/resources.qmd
 
+    - chapters/references.qmd
 
   appendices: 
     - "chapters/appendices/julia.qmd"
@@ -74,9 +74,23 @@ book:
 
   sidebar:
     collapse-level: 1
+    footer: |
+      Chapter titles indicate their **status:**
+      🚧 Planning, 📝 Draft, ✏️ Revision, 🎯 Ready.
 
 
 bibliography: references.bib
+
+# Book-level citation metadata
+citation:
+  type: book
+  title: "Climate Risk Assessment and Management"
+  author: "James Doss-Gollin"
+  url: "https://jamesdossgollin.me/teaching/climate-risk-management-book/"
+  issued: "2025"
+  publisher: "Self-published"
+  license: "CC BY-SA 4.0"
+google-scholar: true
 
 format:
   html:
@@ -94,13 +108,11 @@ format:
 
 glossary:
   path: _glossary.yml
-  popup: click
+  popup: hover
   show: true
 
 # execution options
 execute:
-  freeze: auto  
+  freeze: true
   cache: true
   jupyter: julia-1.11
-
-citation: true

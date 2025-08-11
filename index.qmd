@@ -1,58 +1,87 @@
-# Welcome {.unnumbered}
+---
+# No individual chapter citation metadata - using book-level citations
+---
 
-::: {.callout-note}
-## Under Construction
+# Welcome 🎯 {.unnumbered}
 
-This collection of lecture notes (the word "textbook" implies a level of completeness and polish that we are not particularly near) is under active development.
-Currently (Fall 2025), content is being added for use in my fall course at Rice University.
-Please check back frequently for updates, and feel free to [open an issue on GitHub]({{< book.github >}}) if you have questions or suggestions!
-:::
 
-Understanding the probabilities of extreme events is crucial in many contexts, from designing infrastructure to pricing insurance and shaping public policy.
-This book provides a comprehensive introduction to hydroclimate risk management, focusing on the statistical and computational methods used to assess and manage risks associated with extreme weather events and climate change.
-It is designed to be accessible and relevant to engineers, catastrophe modelers, and applied scientists, offering a solid foundation in the principles and practices of hydroclimate risk management.
+Welcome to {{< meta book.title >}}, an online textbook **under construction** by [James Doss-Gollin](https://jdossgollin.github.io).
+The book is motivated by questions like
 
-## Structure
+- What is the probability distribution of wind speeds that a building structure might experience, and what drives changes to this distribution in a future climate?
+- How can insurers estimate the distribution of tropical cyclone losses across a regional portfolio?
+- When, and how high, should a house be elevated to proactively manage future flood risk?
+- What are robust, efficient, and equitable strategies for reducing flood risk in an urban area?
 
-This text is modular and organized as follows:
+These questions span scales and sectors, yet they share fundamental challenges: characterizing extreme events, quantifying uncertainty, assessing risks, and making robust decisions when probability distributions are unknown or contested.
+Moreover, there is not a single correct answer to these questions, or a single method that will incontrovertibly answer them.
 
-- **Part 1** introduces key topics in probability, inference, Bayesian methods, optimization, machine learning, and Earth science. Rather than providing a comprehensive treatment, this part focuses on essential concepts and links to further references. It is best used as a reference to support the rest of the book, rather than as a standalone introduction to these topics.
-- **Part 2** focuses on hazard **assessment**, namely modeling climate hazards and extremes. Material is organized around thematic applications and predictive tasks. The foundational idea is integrating information from noisy and/or biased sources to estimate the joint probability distribution of relevant hydroclimatic variables. Since all approaches are necessarily imperfect, clearly understanding and communicating the  assumptions underlying these estimates becomes essential.
-- **Part 3** risk management, which involves both mapping hazard to risk and designing interventions to manage these risks. Key ideas include the sequential nature of decisions, the pursuit of unclear and/or contested objectives, and the need to account for the sensitivity of estimated probability distributions (of hazard and of other relevant physical, social, and economic variables) to underlying models and assumptions.
-- This book is accompanied by a series of **computational notebooks** written in [Julia](https://julialang.org/), which illustrate and complement the methods and concepts discussed in the text. WHile notebooks are referenced in the text, they are designed as standalone and self-contained resources.
+In contrast with texts that aim to provide a single authoritative approach to a subset of questions, often using methods that, if they are not outdated correctly, soon will be, this book aims to provide a comprehensive and conceptual introduction to hydroclimate risk management.
+Climate risk assessment and management is an interdisciplinary topic, integrating Earth science, applied math, statistics, machine learning, social sciences, and beyond, this text provides a foundational overview of the most important ideas, with detailed case studies illustrating the application of specific methods to real-world problems.
+The objective is to offer a unified framework for practitioners working at scales from local infrastructure design to regional risk assessment.
 
-## Pre-requisites
+## How to Use This Book
+
+The book is designed to be useful for practitioners, students, and teachers.
+Teachers may use individual chapters in their courses.
+Students may use it as a class text or reference.
+Practitioners may focus on specific chapters relevant to their work.
+Each chapter includes learning objectives and can be read independently, though some chapters build on concepts introduced in others.
+
+### Structure 
+
+This book is organized in three parts
+
+- [The **Preface**](/chapters/preface.qmd) introduces the book's motivation and frames key challenges
+- [**Part 1**](/chapters/fundamentals/index.qmd) introduces key topics in probability, inference, Bayesian methods, optimization, machine learning, and Earth science.
+Rather than providing a comprehensive treatment, this part focuses on essential concepts and links to further resources.
+- [**Part 2**](/chapters/hazard/index.qmd) focuses on hazard **assessment**, namely modeling climate hazards and extremes.
+Material is organized around thematic applications and predictive tasks.
+The foundational idea is integrating information from noisy and/or biased sources to estimate the joint probability distribution of relevant hydroclimatic variables.
+- [**Part 3**](/chapters/risk/index.qmd) risk management, which involves both mapping hazard to risk and designing interventions to manage these risks.
+Key ideas include the sequential nature of decisions, the pursuit of unclear and/or contested objectives, and the need to account for the sensitivity of estimated probability distributions (of hazard and of other relevant physical, social, and economic variables) to underlying models and assumptions.
+- [**Computational notebooks**](/notebooks/index.qmd) written in [Julia](https://julialang.org/) illustrate and complement the methods and concepts discussed in the text.
+While notebooks are referenced in the text, they are designed as standalone and self-contained resources.
+
+### Pre-requisites
 
 Basic probability and multivariate calculus, along with linear algebra, are sufficient mathematical foundations for this textbook.
 Some exposure to Earth science, hydrology, water resources, or related topics is strongly encouraged for context, though not strictly necessary for understanding methods.
 This book builds on a wide range of topics and methods in statistics, machine learning, optimization, and Earth science, and expertise in any of these areas may deepen your understanding, but is not necessary.
 No programming is required to read the book, but going through computational examples and applying methods to your own problems, which can substantially strengthen your understanding, does require programming.
-The examples in this book use the Julia programming language; see the [Resources lis](/chapters/resources.qmd) for more.
 
-## Related Projects
+### What Makes This Book Unique
 
-This textbook draws from classes I have taught at Rice University, courses I have taken, and other synthesis efforts undertaken by colleagues.
-A list of some materials and books that overlap with or complement this book are provided in the [Resources list](/chapters/resources.qmd), along with some guides to getting started with software tools used.
+This book bridges statistical hydrology, catastrophe modeling, and climate science with a methods-focused approach that emphasizes problem framing over prescriptive techniques.
+Computational case studies demonstrate applications from local flood risk to regional portfolio assessment.
 
-## License and Citation
+For a comprehensive comparison with related textbooks and resources, see the [Resources list](/chapters/resources.qmd).
+
+## About This Project
+
+### License and Citation
 
 This textbook is licensed under the [CC BY-SA 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
 It is free to use, share, and adapt, provided that you give appropriate credit, provide a link to the license, and indicate if changes were made.
-It is my hope that this permissive license will broaden access to knowledge and foster a culture of open science.
 
-Please cite this book as:
+### Contributing
+
+This textbook is a work in progress, and we welcome your contributions.
+Whether it's fixing a typo or proposing a new module, every suggestion helps.
+The easiest way to contribute is to fork the repository and submit a pull request.
+If you're not comfortable with that workflow, please open an issue [on GitHub]({{< var github-url >}}/issues).
+
+### Citing
+
+Please cite this resource as
 
 ```bibtex
 @book{doss-gollin_textbook:2025,
   author = {Doss-Gollin, James},
   title = {Climate Risk Management},
   year = {2025},
+  url = {https://jdossgollin.github.io/climate-risk-book},
 }
 ```
 
-## Contributing
-
-This textbook is a work in progress, and we welcome your contributions.
-Whether it’s fixing a typo or proposing a new module, every suggestion helps.
-The easiest way to contribute is to fork the repository and submit a pull request.
-If you’re not comfortable with that workflow, please open an issue [on GitHub]({{< book.github >}}).
+In the future, we will move to stable releases with numbered versions.

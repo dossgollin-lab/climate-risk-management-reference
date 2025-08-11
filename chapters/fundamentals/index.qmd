@@ -1,9 +1,4 @@
-# Overview {.unnumbered}
-
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+# Overview 🚧 {.unnumbered}
 
 ## How to use this Part
 

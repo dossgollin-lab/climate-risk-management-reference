@@ -1,14 +1,14 @@
 ---
-title: Robustness
+title: Robustness 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Deep Uncertainty and Model Structure](/chapters/risk/deep-uncertainty.qmd)
+- [Optimization](/chapters/fundamentals/optimization.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Address deep uncertainty in climate decision-making.
 - Use robust decision-making (RDM) methods to compare strategies across multiple futures.

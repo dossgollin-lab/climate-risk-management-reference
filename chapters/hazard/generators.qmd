@@ -1,15 +1,8 @@
 ---
-title: Stochastic Weather Generators
+title: Stochastic Weather Generators 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
-
-::: {.callout-tip}
-## Learning Objectives
-:::
+## Learning Objectives {.unnumbered}
 
 
 ## Example: Hidden Markov Models (HMMs)

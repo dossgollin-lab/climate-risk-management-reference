@@ -1,15 +1,16 @@
 ---
-title: Downscaling and Bias Correction
+title: Downscaling and Bias Correction 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
-:::
+This chapter builds on concepts from:
+- [Fundamentals of Climate Science](/chapters/hazard/climate-science.qmd)
+- [Spatiotemporal and High-Dimensional Methods](/chapters/fundamentals/spatiotemporal.qmd)
+
+## Learning Objectives {.unnumbered}
+
+*Learning objectives to be added as chapter develops.*
 
 ## Motivation
 

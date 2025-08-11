@@ -1,14 +1,14 @@
 ---
-title: Policy Search & Optimization
+title: Policy Search & Optimization 🚧
 ---
 
-::: {.callout-note}
-## Under Construction
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Optimization](/chapters/fundamentals/optimization.qmd)
+- [Expectations and Discounting](/chapters/risk/expectations-cost-benefit.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Formulate policy design problems as optimization tasks.
 - Explore multi-objective policy search (e.g., cost, emissions, equity).

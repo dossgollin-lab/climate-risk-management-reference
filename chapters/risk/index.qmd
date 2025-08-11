@@ -1,0 +1,22 @@
+---
+title: Overview 🚧
+---
+
+::: {.callout-tip}
+## Learning Objectives
+
+- Define and conceptualize risk within the climate context (hazard, exposure, vulnerability)
+- Understand basic risk terminology (risk = probability × consequence)
+- Identify how different stakeholders perceive and prioritize climate risks
+- Recognize and analyze multi-hazard events (e.g., hurricane + storm surge + inland flooding)
+- Understand how cascading failures in interconnected systems (power grids, supply chains) amplify risk
+- Apply systems thinking approaches to complex risk interactions
+:::
+
+The most important concept is:
+$$
+\mathbb{E}\left[ f(x) \right] \neq f \left( \mathbb{E}[x] \right)
+$$
+where $x$ is some random variable and $f$ is some function.
+In our context, this means that if we want to know the expected value of a risk-related variable, like damage, we should not just take the expected value of the hazard and then apply a damage function to that.
+Extending the concept further, the damage caused by a hazard that scores in the 99th percentile of a chosen intensity measure may not be the 99th percentile of the damage distribution (a commonly used, but wrong, assumption).

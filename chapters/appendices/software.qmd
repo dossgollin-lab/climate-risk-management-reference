@@ -1,6 +1,12 @@
 ---
-title: "Other Software Tools"
+title: "Other Software Tools 📝"
 ---
+
+::: {.callout-note}
+## Appendix Status: 📝 Draft
+
+This appendix's status is: 📝 Draft. We use a 4-part scale (🚧 Planning, 📝 Draft, ✏️ Revision, 🎯 Ready) to track completion status.
+:::
 
 ## Quarto + Jupyter
 

@@ -1,20 +1,17 @@
 ---
-title: Optimization
-status: draft
+title: Optimization 📝
 ---
 
-::: {.callout-note}
-## Status: Draft
-This chapter is still under active construction. Please check back regularly for updates and new content.
-:::
+## See First {.unnumbered}
 
-::: {.callout-tip}
-## Learning Objectives
+This chapter builds on concepts from:
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
+
+## Learning Objectives {.unnumbered}
 
 - Understand the components of an optimization problem: decision variables, objective functions, and constraints.
 - Learn how optimization is applied in statistics and policy search.
 - Explore the trade-offs between problem complexity and solution accuracy.
-:::
 
 Optimization is a field of study unto itself, and forms an essential backbone of statistics, machine learning, and operations research.
 Here, we briefly summarize key concepts and techniques in optimization, with a focus on their application to statistics and policy search.

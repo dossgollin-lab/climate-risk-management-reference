@@ -1,4 +1,11 @@
-# Water Levels at Sewell's Point, VA  {.unnumbered}
+# Water Levels at Sewell's Point, VA 🎯 {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Apply Bayesian inference to extreme value distributions
+- Understand the impact of prior specification on posterior inference
+- Visualize uncertainty in return period estimates
+- Analyze water level data from tidal gauge observations
 
 ## Read the data
 
@@ -13,15 +20,15 @@ using LaTeXStrings
 using Turing
 using Unitful
 
-CairoMakie.activate!(; type="svg")
+CairoMakie.activate!(; type = "svg")
 
 function read_tides(year::Int)
-    fname = "./data/8638610/tidesandcurrents-8638610-$(year)-NAVD-GMT-metric.csv"
-    date_format = "yyyy-mm-dd HH:MM"
-    df = CSV.read(fname, DataFrame; dateformat=date_format)
-    df[!, " Water Level"] .*= u"m"
-    rename!(df, " Water Level" => "water_level", "Date Time" => "datetime")
-    return df[!, ["datetime", "water_level"]]
+	fname = "./data/8638610/tidesandcurrents-8638610-$(year)-NAVD-GMT-metric.csv"
+	date_format = "yyyy-mm-dd HH:MM"
+	df = CSV.read(fname, DataFrame; dateformat = date_format)
+	df[!, " Water Level"] .*= u"m"
+	rename!(df, " Water Level" => "water_level", "Date Time" => "datetime")
+	return df[!, ["datetime", "water_level"]]
 end
 
 hourly = vcat([read_tides(year) for year in 1928:2021]...)
@@ -34,8 +41,8 @@ Convert to annual maximums
 ```{julia}
 hourly[!, :year] = year.(hourly.datetime)
 annmax = combine(
-    groupby(hourly, :year),
-    :water_level => maximum => :lsl
+	groupby(hourly, :year),
+	:water_level => maximum => :lsl,
 )
 
 annmax.lsl_ft = ustrip.(u"ft", annmax.lsl)
@@ -43,34 +50,34 @@ first(annmax, 5)
 ```
 
 ```{julia}
-fig = Figure(; size=(800, 400))
+fig = Figure(; size = (800, 400))
 
 ax1 = Axis(
-    fig[1, 1];
-    xlabel="Year",
-    ylabel="Ann. Max. Water Level [ft]",
+	fig[1, 1];
+	xlabel = "Year",
+	ylabel = "Ann. Max. Water Level [ft]",
 )
 scatter!(ax1, annmax.year, annmax.lsl_ft)
 
 ax2 = Axis(
-    fig[1, 2];
-    ylabel="",
-    yticklabelsvisible=false,
+	fig[1, 2];
+	ylabel = "",
+	yticklabelsvisible = false,
 )
 
 hist!(
-    ax2,
-    annmax.lsl_ft;
-    direction=:x,
-    bins=range(2, 8, 20),
-    normalization=:pdf
+	ax2,
+	annmax.lsl_ft;
+	direction = :x,
+	bins = range(2, 8, 20),
+	normalization = :pdf,
 )
 
 linkyaxes!(ax1, ax2)
 ylims!(ax1, 2, 8)
 xlims!(ax2, 0, 0.8)
 
-Label(fig[0, :], "Sewell's Point, VA"; fontsize=20)
+Label(fig[0, :], "Sewell's Point, VA"; fontsize = 20)
 
 fig
 ```
@@ -79,26 +86,26 @@ Define a LogNormal distribution with very diffuse (flat) priors
 
 ```{julia}
 @model function lognormal_flatpriors(y)
-    μ ~ Normal(0, 10)
-    σ ~ truncated(Normal(0, 10), 0, Inf)
-    return y .~ LogNormal(μ, σ)
+	μ ~ Normal(0, 10)
+	σ ~ truncated(Normal(0, 10), 0, Inf)
+	return y .~ LogNormal(μ, σ)
 end;
 
 ln_flat_chn = let
-    model = lognormal_flatpriors(annmax.lsl_ft)
-    sampler = externalsampler(DynamicHMC.NUTS())
-    nsamples = 20_000
-    sample(model, sampler, nsamples; drop_warmup=true)
+	model = lognormal_flatpriors(annmax.lsl_ft)
+	sampler = externalsampler(DynamicHMC.NUTS())
+	nsamples = 20_000
+	sample(model, sampler, nsamples; drop_warmup = true)
 end
 summarystats(ln_flat_chn)
 ```
 
 ```{julia}
 post1_scatter = let
-    fig = Figure(size=(800, 600))
-    ax = Axis(fig[1, 1], title="Diffuse Priors", xlabel=L"\mu", ylabel=L"\sigma")
-    scatter!(ax, ln_flat_chn[:μ][:], ln_flat_chn[:σ][:], color=:blue, markersize=2, label=false)
-    fig
+	fig = Figure(size = (800, 600))
+	ax = Axis(fig[1, 1], title = "Diffuse Priors", xlabel = L"\mu", ylabel = L"\sigma")
+	scatter!(ax, ln_flat_chn[:μ][:], ln_flat_chn[:σ][:], color = :blue, markersize = 2, label = false)
+	fig
 end
 ```
 
@@ -107,42 +114,42 @@ Each draw from the posterior represents a plausible value of $\mu$ and $\sigma$.
 ```{julia}
 #| fig-cap: "Return Period with Uncertainty"
 #| label: fig-return-scatter
-rts = exp.(range(log(1.01), log(250); length=500))
+rts = exp.(range(log(1.01), log(250); length = 500))
 aeps = 1 .- 1 ./ rts
 
 xticks = [2, 5, 10, 25, 50, 100, 250, 500]
 yticks = 2:9
 
 plt_rt_base = let
-    fig = Figure(size=(800, 600))
-    ax = Axis(fig[1, 1], title="Return Period with Uncertainty", xlabel="Return Period [years]", ylabel="Return Level [ft]", xscale=log10, yscale=log10)
-    ax.xticks = (xticks, string.(xticks))
-    ax.yticks = (yticks, string.(yticks))
-    fig
+	fig = Figure(size = (800, 600))
+	ax = Axis(fig[1, 1], title = "Return Period with Uncertainty", xlabel = "Return Period [years]", ylabel = "Return Level [ft]", xscale = log10, yscale = log10)
+	ax.xticks = (xticks, string.(xticks))
+	ax.yticks = (yticks, string.(yticks))
+	fig
 end
 
 function weibull_plot_pos(y)
-    N = length(y)
-    ys = sort(y; rev=false)
-    nxp = xp = [r / (N + 1) for r in 1:N]
-    xp = 1 .- nxp
-    return xp, ys
+	N = length(y)
+	ys = sort(y; rev = false)
+	nxp = xp = [r / (N + 1) for r in 1:N]
+	xp = 1 .- nxp
+	return xp, ys
 end
 
 plt_rt = let
-    xp, ys = weibull_plot_pos(annmax.lsl_ft)
+	xp, ys = weibull_plot_pos(annmax.lsl_ft)
 
-    fig = plt_rt_base
-    ax = fig[1, 1]
-    scatter!(ax, 1 ./ xp, ys, label="Observations", color=:gray, alpha=1)
-    for idx in 1:500
-        μ = ln_flat_chn[:μ][idx]
-        σ = ln_flat_chn[:σ][idx]
-        rt = quantile.(LogNormal(μ, σ), aeps)
-        label = idx == 1 ? "Posterior" : false
-        lines!(ax, rts, rt, color=:black, alpha=0.05, label=label, linewidth=0.5)
-    end
-    fig
+	fig = plt_rt_base
+	ax = fig[1, 1]
+	scatter!(ax, 1 ./ xp, ys, label = "Observations", color = :gray, alpha = 1)
+	for idx in 1:500
+		μ = ln_flat_chn[:μ][idx]
+		σ = ln_flat_chn[:σ][idx]
+		rt = quantile.(LogNormal(μ, σ), aeps)
+		label = idx == 1 ? "Posterior" : false
+		lines!(ax, rts, rt, color = :black, alpha = 0.05, label = label, linewidth = 0.5)
+	end
+	fig
 end
 ```
 
@@ -150,17 +157,17 @@ Visualize the samples as a *chain*
 
 ```{julia}
 let
-    μ_trace = ln_flat_chn[:μ]
-    σ_trace = ln_flat_chn[:σ]
+	μ_trace = ln_flat_chn[:μ]
+	σ_trace = ln_flat_chn[:σ]
 
-    fig = Figure(size=(800, 600))
+	fig = Figure(size = (800, 600))
 
-    ax1 = Axis(fig[1, 1], title="Trace Plot for μ", xlabel="Iteration", ylabel=L"\mu")
-    lines!(ax1, μ_trace[:], color=:blue, linewidth=0.25)
+	ax1 = Axis(fig[1, 1], title = "Trace Plot for μ", xlabel = "Iteration", ylabel = L"\mu")
+	lines!(ax1, μ_trace[:], color = :blue, linewidth = 0.25)
 
-    ax2 = Axis(fig[2, 1], title="Trace Plot for σ", xlabel="Iteration", ylabel=L"\sigma")
-    lines!(ax2, σ_trace[:], color=:red, linewidth=0.25)
+	ax2 = Axis(fig[2, 1], title = "Trace Plot for σ", xlabel = "Iteration", ylabel = L"\sigma")
+	lines!(ax2, σ_trace[:], color = :red, linewidth = 0.25)
 
-    fig
+	fig
 end
 ```

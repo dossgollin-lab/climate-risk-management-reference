@@ -1,6 +1,9 @@
-# Resources {.unnumbered}
+# Further Reading 🎯 {.unnumbered}
 
-## Lecture Notes
+Climate risk assessment and management are complex and interdisciplinary topics, and we are by no means comprehensive here.
+This page provides some helpful resources for your continued and supplementary study.
+
+## Inspiration
 
 This textbook draws inspiration and content from several courses and lecture notes, and I am grateful to the instructors who have shared their materials with me.
 
@@ -25,21 +28,21 @@ This book assumes familiarity with these topics, but these resources may be help
 There are lots of related books on catastrophe modeling, water resources research, geostats, statistical hydrology and related topics.
 Here is an incomplete list of some core references.
 
+- **@naghettini_stathydro:2017** is a textbook on statistical hydrology that covers many of the same topics as this course. The statistical hydrology literature often obfuscates key ideas with complex notation and terminology, but this book is a helpful introduction to the field.
 - **@helsel_waterresources:2020** is a comprehensive introduction to water resources and hydrology, focusing on statistical methods for analyzing hydrologic data. Its methods are traditional, with less emphasis on machine learning or Bayesian methods and more attention to null hypothesis significance testing, but its case studies are well-worked and thoughtfully described.
 - **@abernathey_datascience:2024** is an excellent resource covering introductory topics in Earth and climate data science using Python, with an emphasis on foundational computations. These core computational concepts serves as a recommended prerequisite for more advanced material in this book.
-- **@mignan_textbook:2024**  is a modern introduction to catastrophe risk modeling that covers a wide range of hazards, including hydroclimatic extremes, from a physics-based perspective. It provides a structured framework for quantifying hazard, exposure, and vulnerability, following industry-standard CAT modeling approaches. While broader in scope and more introductory in level, it complements this book’s focus by illustrating foundational principles of probabilistic risk modeling in practice.
 - **@pyrcz_textbook:2024** is a textbook focused on applied machine learning, with a particular focus on geostatistics. There's less focus on extremes, hydroclimate, and decision-making, but it provides very clear and interpretable explanations of many machine learning methods, including some that are not directly covered in this book.
-- **@naghettini_stathydro:2017** is a textbook on statistical hydrology that covers many of the same topics as this course. The statistical hydrology literature often obfuscates key ideas with complex notation and terminology, but this book is a helpful introduction to the field.
+- **@mignan_textbook:2024**  is a modern introduction to catastrophe risk modeling that covers a wide range of hazards, including hydroclimatic extremes, from a physics-based perspective. It provides a structured framework for quantifying hazard, exposure, and vulnerability, following industry-standard CAT modeling approaches. While broader in scope and more introductory in level, it complements this book’s focus by illustrating foundational principles of probabilistic risk modeling in practice.
 
 ## More Stats + ML
 
 This book covers a broad set of topics in statistics, machine learning, and optimization.
 Most chapters could be a textbook of their own, and in fact many exist.
 
-- **@gelman_bda3:2014** and **@mcelreath_rethinking2:2020** are the classic textbooks on Bayesian inference and provide a wealth of insight and detail. The Gelman textbook is a bit more dense while the McElreath book has a more conversational tone, but both cover similar topics.
 - **@friedman_elements:2001** is a classic introduction to machine learning, which complements the Bayesian perspective nicely.
+- **@jaynes_probability:2003** is a classic text on probability theory that you should read if you're interested in questions like "what is probability?"
+- **@gelman_bda3:2014** and **@mcelreath_rethinking2:2020** are the classic textbooks on Bayesian inference and provide a wealth of insight and detail. The Gelman textbook is a bit more dense while the McElreath book has a more conversational tone, but both cover similar topics.
 - **@cressie_spatiotemporal:2011** provides a detailed exploration of hierarchical space-time models. There have been some computational advances since then that are worth keeping in mind before you apply these models directly, but it's a clearly written and overview.
 - **@thuerey_pbdl:2024** is a new textbook on physics-based deep learning, which is a rapidly growing area of research. It provides a comprehensive overview of the field, including theoretical foundations and practical applications. It covers topics, including neural operators and diffusion models, that are not covered in this course, but which are increasingly used in the climate risk space.
-- **@jaynes_probability:2003** is a classic text on probability theory that you should read if you're interested in questions like "what is probability?"
 - **@bishop_deeplearning:2024** is a comprehensive, modern, and accessible start-to-finish textbook covering machine learning from basic probability through diffusion models.
 

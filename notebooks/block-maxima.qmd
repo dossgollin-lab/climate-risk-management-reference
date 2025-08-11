@@ -1,4 +1,10 @@
-# Block Maxima {.unnumbered}
+---
+tags: 
+    - Extreme Value Theory
+    - Rainfall
+---
+
+# Block Maxima 📝 {.unnumbered}
 
 This tutorial walks through some basic choices for modeling block maxima using peak over threshold (POT) methods, using an example of extreme rainfall in England.
 
@@ -38,7 +44,7 @@ let
     # Creating the plot
     fig = Figure()
     ax = Axis(
-        fig[1, 1]; title="Daily Rainfall in Southwest England", ylabel="Rainfall (mm)"
+        fig[1, 1]; title="Daily Rainfall in Southwest England", ylabel="Rainfall (mm)",
     )
     scatter!(ax, dates, rainfall; alpha=0.4)
     fig
@@ -208,7 +214,7 @@ function return_level_plot(fitted_model, threshold, nobs, nobsperblock)
     )
 
     lines!(
-        ax, rt_calc, rl; color=:orange, linestyle=:dash, linewidth=2, label="Fitted Model"
+        ax, rt_calc, rl; color=:orange, linestyle=:dash, linewidth=2, label="Fitted Model",
     )
     scatter!(
         ax,
