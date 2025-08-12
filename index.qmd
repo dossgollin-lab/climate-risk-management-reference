@@ -1,11 +1,29 @@
 ---
-# No individual chapter citation metadata - using book-level citations
+title-block-style: none
 ---
 
 # Welcome 🎯 {.unnumbered}
 
-
 Welcome to {{< meta book.title >}}, an online textbook **under construction** by [James Doss-Gollin](https://jdossgollin.github.io).
+
+::: {.callout-important}
+## Under Construction
+
+This textbook is a work in progress.
+Currently it's largely a brain dump, but I am building it out incrementally for use in my own classes.
+As I add and organize content, I will update the chapter status codes: 🚧 Planning, 📝 Draft, ✏️ Revision, and 🎯 Ready.
+[Contributions are welcome](chapters/about/contributing.qmd)!
+:::
+
+## Motivation and Scope
+
+### History
+
+This project emerged from two courses taught at Rice University by [James Doss-Gollin](https://dossgollin-lab.github.io), [CEVE 543](https://ceve543.github.io) focused on climate hazard and extremes and [CEVE 421/521](https://ceve-421-521.github.io) focused on risk management.
+It is also partly inspired by @applegate_raes:2015 and motivated by identified needs across academia, government, and industry.
+
+### Scope 
+
 The book is motivated by questions like
 
 - What is the probability distribution of wind speeds that a building structure might experience, and what drives changes to this distribution in a future climate?
@@ -20,7 +38,7 @@ In contrast with texts that aim to provide a single authoritative approach to a 
 Climate risk assessment and management is an interdisciplinary topic, integrating Earth science, applied math, statistics, machine learning, social sciences, and beyond, this text provides a foundational overview of the most important ideas, with detailed case studies illustrating the application of specific methods to real-world problems.
 The objective is to offer a unified framework for practitioners working at scales from local infrastructure design to regional risk assessment.
 
-## How to Use This Book
+## How to Use This Resource
 
 The book is designed to be useful for practitioners, students, and teachers.
 Teachers may use individual chapters in their courses.
@@ -43,45 +61,9 @@ Key ideas include the sequential nature of decisions, the pursuit of unclear and
 - [**Computational notebooks**](/notebooks/index.qmd) written in [Julia](https://julialang.org/) illustrate and complement the methods and concepts discussed in the text.
 While notebooks are referenced in the text, they are designed as standalone and self-contained resources.
 
-### Pre-requisites
+### Prerequisites
 
 Basic probability and multivariate calculus, along with linear algebra, are sufficient mathematical foundations for this textbook.
 Some exposure to Earth science, hydrology, water resources, or related topics is strongly encouraged for context, though not strictly necessary for understanding methods.
 This book builds on a wide range of topics and methods in statistics, machine learning, optimization, and Earth science, and expertise in any of these areas may deepen your understanding, but is not necessary.
 No programming is required to read the book, but going through computational examples and applying methods to your own problems, which can substantially strengthen your understanding, does require programming.
-
-### What Makes This Book Unique
-
-This book bridges statistical hydrology, catastrophe modeling, and climate science with a methods-focused approach that emphasizes problem framing over prescriptive techniques.
-Computational case studies demonstrate applications from local flood risk to regional portfolio assessment.
-
-For a comprehensive comparison with related textbooks and resources, see the [Resources list](/chapters/resources.qmd).
-
-## About This Project
-
-### License and Citation
-
-This textbook is licensed under the [CC BY-SA 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
-It is free to use, share, and adapt, provided that you give appropriate credit, provide a link to the license, and indicate if changes were made.
-
-### Contributing
-
-This textbook is a work in progress, and we welcome your contributions.
-Whether it's fixing a typo or proposing a new module, every suggestion helps.
-The easiest way to contribute is to fork the repository and submit a pull request.
-If you're not comfortable with that workflow, please open an issue [on GitHub]({{< var github-url >}}/issues).
-
-### Citing
-
-Please cite this resource as
-
-```bibtex
-@book{doss-gollin_textbook:2025,
-  author = {Doss-Gollin, James},
-  title = {Climate Risk Management},
-  year = {2025},
-  url = {https://jdossgollin.github.io/climate-risk-book},
-}
-```
-
-In the future, we will move to stable releases with numbered versions.

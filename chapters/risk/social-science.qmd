@@ -80,6 +80,82 @@ Climate change raises fundamental questions about obligations to future generati
 - **Irreversibility**: How should irreversible changes affect our decisions?
 - **Uncertainty**: How do we make decisions on behalf of people whose preferences we cannot know?
 
+### Environmental Justice Frameworks
+
+Environmental justice provides a critical lens for understanding climate risks and policy impacts.
+As defined by Bullard (1999):
+
+> Environmental racism refers to any environmental policy, practice or directive that differentially affects or disadvantages (whether intended or unintended) individuals, groups or communities based on race or colour.
+
+This definition importantly focuses on **effects rather than intent**, recognizing that policies can create disparate impacts regardless of intention.
+
+#### Five Dimensions of Justice
+
+Following Wutich et al. (2023), environmental justice encompasses multiple dimensions:
+
+1. **Distributive Justice**: Fair and equitable access to resources and outcomes across social groups
+   - Example: No disparities in flood protection measures between low-income and high-income neighborhoods
+
+2. **Interpersonal Justice**: Fair and equitable treatment of individuals regardless of identity
+   - Example: Equal consideration for post-flood assistance regardless of income level
+
+3. **Procedural Justice**: Fair and equitable rules, norms, and decision-making processes
+   - Example: Equal opportunities for community participation in flood risk management decisions
+
+4. **Recognition Justice**: Fair and equitable representation of different worldviews and values
+   - Example: Including Indigenous knowledge in flood risk management strategies
+
+5. **Transformative (Restorative) Justice**: Collaborative addressing of root causes of systemic oppression
+   - Example: Targeted investments to address historical inequities in flood risk exposure
+
+#### Quantitative Frameworks for Equity Assessment
+
+Different moral frameworks provide different approaches to quantifying equity (Jafino et al., 2022):
+
+**Utilitarian**: Maximize aggregate welfare
+- Maximize: $\sum_{i=1}^n u(x_i)$
+
+**Strict Egalitarian**: Minimize inequality of outcomes
+- Minimize: $\max(u(x_i)) - \min(u(x_i))$
+
+**Rawlsian Difference Principle**: Benefit the least advantaged
+- Maximize: $\min(u(x_i))$
+
+**Prioritarian**: Weight welfare of worse-off individuals more heavily
+- Maximize: $\frac{1}{1-\gamma} \sum_{i=1}^n u(\frac{u(x_i)}{u(\bar{x})})^{1-\gamma}$
+where $\gamma$ is the inequality aversion factor
+
+**Sufficientarian**: Ensure all individuals meet minimum welfare thresholds
+- Maximize: $\{i \in n : u(x_i) \geq u(s)\}$
+where $u(s)$ is the minimum sufficient welfare level
+
+Note that quantifying welfare functions is notoriously challenging, involving fundamental questions about value comparison and measurement.
+
+### Practical Considerations for Equity Assessment
+
+#### Equity in What?
+Environmental justice analysis should examine both burdens and benefits:
+- **Risk**: Distribution of potential consequences across groups
+- **Funding**: Allocation of resources for risk management and recovery
+- **Recovery**: Different groups' ability to recover from climate impacts
+- **Benefits**: Distribution of positive outcomes like reduced risk or improved quality of life
+
+#### Equity at What Scale?
+The choice of spatial aggregation significantly impacts equity assessments:
+- **Individual level**: Household or building-level outcomes
+- **Neighborhood level**: Community-defined boundaries important for environmental justice
+- **Small areas**: Administrative boundaries like census tracts
+- **Large areas**: Cities or regions
+
+Different scales can reveal or obscure disparities, so the choice should reflect where inequities are produced and experienced.
+
+#### Equity with Respect to What?
+Equity can be assessed across multiple dimensions:
+- **Demographics**: Income, race, ethnicity, age, or composite vulnerability indices
+- **Environmental burden**: Exposure to pollution, access to environmental amenities
+- **Procedural factors**: Historical discrimination, differential policy treatment
+- **Causal factors**: Root causes that produce inequities rather than just describing disparities
+
 ### Distributional Analysis
 
 Tools for analyzing how climate risks and policies affect different groups:
@@ -157,6 +233,20 @@ Tools for analyzing how climate risks and policies affect different groups:
 - **Scale mismatches**: Local participation in regional/global problems
 - **Tokenism**: Superficial consultation without real influence
 - **Participation fatigue**: Over-consultation without visible results
+
+#### Addressing Power Dynamics
+
+Following Fletcher et al. (2022), effective participatory processes must explicitly address power imbalances:
+
+**Beyond inclusion to equitable participation**: Simply including marginalized communities is insufficient; the quality and equity of participation matters more than just presence.
+
+**Power shapes knowledge prioritization**: Power imbalances determine whose knowledge is considered legitimate and valuable, and who ultimately benefits from participatory processes.
+
+**Explicit power analysis is essential**: Successful participatory processes must identify existing power dynamics and create mechanisms for participants to share power more equitably.
+
+**Skilled facilitation matters**: Professional facilitation and collaboration with boundary organizations can help address power imbalances and create more equitable participation.
+
+**Sustained engagement required**: Building trust and shifting power dynamics requires long-term commitment rather than one-off consultation events.
 
 ## Communicating Climate Risk and Uncertainty
 

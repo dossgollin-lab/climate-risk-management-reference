@@ -1,5 +1,5 @@
 ---
-title: Deep Uncertainty and Model Structure 🚧
+title: Deep Uncertainty and Model Structure ✏️
 ---
 
 ## See First {.unnumbered}
@@ -26,6 +26,38 @@ When we move from hazard assessment (Part II) to risk analysis, we encounter inc
 - Infrastructure and institutional changes over time
 
 This chapter addresses how to handle situations where our uncertainty about model structure itself dominates other sources of uncertainty.
+
+## The Spectrum of Uncertainty
+
+Understanding uncertainty requires recognizing that not all uncertainties are alike.
+We can conceptualize a spectrum from relatively certain knowledge to situations of deep uncertainty:
+
+**Deterministic representations**: Decision variables without any uncertainty
+- Example: Cost-benefit analysis with a single time series of future water demand
+- Example: A single deterministic depth-damage function
+
+**"Objective" probabilities**: Uncertainties represented using well-established probabilistic models with widely agreed-upon parameters
+- Example: Distribution of storm surge (with very long records)
+- Example: Probabilistic depth-damage curve calibrated on many similar structures
+
+**"Subjective" probabilities**: Uncertainties represented using probabilistic models informed by expert judgment
+- Note: Not fundamentally different from "objective" probabilities—assumptions are always required
+- Example: Future price of carbon
+- Example: Probability distribution for future sea-level rise
+
+**Deep uncertainty**: Situations where probabilities cannot be reliably quantified, and even the range of possible outcomes may be unknown
+- Example: Long-term impact of artificial intelligence on society and the economy
+- Example: Many samples of future sea-level rise
+- No one disputes that climate change research involves deep uncertainties—the question is what to do about it
+
+### What Tools Do Different Approaches Enable?
+
+Traditional decision-making tools like cost-benefit analysis and optimization require probabilities to quantify the likelihood of different outcomes and evaluate expected values of different strategies.
+Risk-based and risk-averse approaches can still be used (e.g., examining 95th percentile of damages, weighting bad outcomes more heavily).
+
+For deep uncertainty, alternative approaches include:
+- **Exploratory modeling**: No assumptions of likelihood made
+- **Robustness approaches**: Aggregate metrics across scenarios, though this is implicitly similar to assuming a probability distribution
 
 ## Types of Uncertainty
 
@@ -91,6 +123,81 @@ subject to $\sum_k w_k = 1$ and $w_k \geq 0$.
 - No natural uncertainty quantification
 - Weights may not reflect model reliability
 
+## Scenario Analysis
+
+Let's tighten our notation just a little bit.
+
+- State of the world: encapsulates all inputs to our model.
+- Decisions: can be very simple (how high do we elevate a house right now?) or very complex (spatial and/or temporal optimization problems)
+- Outcomes: can be a single number (scalar) or a vector if there are multiple outcomes we care about.
+
+### Cost-benefit analysis
+
+- Do this for a single state of the world
+- Emphasis on discounted cash flow to define "outcomes"
+
+### Uncertainty
+
+Uncertainty commonly divided into two broad classes:
+
+- Aleatory uncertainty, or uncertainties resulting from randomness;
+- Epistemic uncertainty, or uncertainties resulting from lack of knowledge.
+
+We can also categorize uncertainty based on the source of the uncertainty:
+
+- Parameter uncertainty
+- Model structure uncertainty
+- External / boundary condition / scenario uncertainty
+
+Uncertainty is represented in models in many different ways.
+For example:
+
+- Deterministic: hold some things fixed (we always do this!)
+- Probabilistic with expectations (lab)
+- Probabilistic with sampling
+
+These are all assumptions, and these assumptions can be varied.
+
+### Scenario analysis
+
+Scenario analysis is a broad class of methods that are used in many fields.
+They fall into two very broad categories:
+
+1. Stress-testing: pick a few scenarios and make sure the system performs acceptably
+    1. Financial stress testing
+    1. Design storms for flooding
+1. Traditional scenario analysis: explore several scenarios and see how the system performs
+    1. Optimizing energy systems
+    1. Climate science (where RCP scenarios are a key input)
+    1. Often a focus on scenarios that are difficult to put probabilities on
+
+::: {.callout-important}
+## Key point
+
+Scenario analysis is a way to explore the consequences of different assumptions.
+However, decisions that perform well on some scenarios may not perform well on others.
+Scenario analysis does not attempt to quantify the likelihood of different scenarios.
+Recall that estimating expectations requires a probability distribution.
+:::
+
+### Examples
+
+Let's return to our house elevation problem.
+What are some things we could consider?
+
+- Sea-level rise: could consider a few different scenarios of sea-level rise
+- Discount rate
+
+### Experiment design
+
+1. Number of scenarios
+    1. A few = interpretable
+    1. Many = more systematic analysis. Interactions between different sources of uncertainty are important.
+1. What is a scenario?
+    1. Parameter values
+    1. Model structure
+1. How to generate / sample scenarios
+
 ## Sources of Deep Uncertainty in Climate Risk
 
 ### Exposure Projections
@@ -135,6 +242,49 @@ How to recognize when uncertainty is "deep":
 - Different models imply different optimal decisions
 - No clear basis for discriminating among models
 - Disagreement persists despite additional data
+
+## Philosophical Approaches to Deep Uncertainty
+
+### The Lempert-Schneider Debate
+
+A fundamental tension in climate policy involves whether and how to assign probabilities to deeply uncertain scenarios.
+This debate is well illustrated by contrasting views from Robert Lempert and Stephen Schneider regarding IPCC scenarios.
+
+#### The Case Against Probabilities (Lempert's Position)
+
+**Traditional prediction-based approaches are inadequate**: The conventional framework for climate policy relies on predicting the future and identifying optimal policies.
+However, such predictions are inherently unreliable for complex, long-term issues like climate change.
+
+**Optimal policies based on point estimates are brittle**: Policies optimized for specific future scenarios fail when different futures unfold.
+Moreover, they fail to generate consensus among stakeholders with divergent expectations about the future.
+
+**Robust strategies are preferable to optimal ones**: Rather than seeking optimal policies, we should identify robust strategies that perform reasonably well across a wide range of plausible futures.
+Robust strategies are less sensitive to uncertainty and more likely to garner stakeholder support.
+
+**Exploratory modeling enables robust decision-making**: Computer simulations can create large ensembles of plausible scenarios based on different assumptions.
+Analysts can systematically explore strategy performance across scenarios, identifying those that work well under various conditions.
+
+#### The Case for Probabilities (Schneider's Position)
+
+**Risk requires both probability and consequence**: The concept of risk inherently combines the probability of events with their consequences.
+Without probabilities, decision-makers are left with only consequences, potentially leading to misplaced priorities.
+
+**IPCC's failure to assign probabilities creates confusion**: Presenting scenarios without indicating relative likelihood allows cherry-picking of results to support preferred narratives.
+Low-probability, high-consequence outcomes may receive undue emphasis, distorting public debate.
+
+**Expert judgment provides valuable information**: While subjective and uncertain, probabilistic assessments can provide valuable guidance when done transparently.
+These should be attempted for each step of the climate modeling chain—emissions scenarios, carbon cycle modeling, climate sensitivity, and impacts.
+
+**Probability assumptions matter enormously**: Different assumptions about scenario likelihoods can lead to vastly different risk assessments.
+For example, the probability of exceeding "dangerous" warming thresholds can range from 25% to nearly 40% depending on probability assignments.
+
+#### Synthesis
+
+Both perspectives offer important insights:
+- Lempert highlights the dangers of false precision in probability estimates
+- Schneider emphasizes the need for risk-based thinking in policy contexts
+
+In practice, many successful approaches combine elements of both perspectives, using scenario analysis to explore robustness while acknowledging that some scenarios are more plausible than others.
 
 ## Implications for Decision Making
 

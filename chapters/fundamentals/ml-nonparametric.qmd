@@ -1,5 +1,5 @@
 ---
-title: Machine Learning and Nonparametric Methods 🚧
+title: Machine Learning and Nonparametric Methods ✏️
 ---
 
 ## See First {.unnumbered}
@@ -19,24 +19,185 @@ By the end of this chapter, students should be able to:
 
 ## Machine Learning Fundamentals
 
-- Briefly introduce machine learning as a tool in hydroclimate hazard assessment.
-- Highlight the need for critical engagement with ML-driven products.
-- State the chapter's focus on fundamental concepts and critical evaluation.
-- Mention computational notebooks for practical examples.
+Machine learning has become an essential tool in hydroclimate hazard assessment, offering powerful methods for pattern recognition, prediction, and data analysis.
+However, critical engagement with ML-driven products is essential - understanding assumptions, limitations, and appropriate applications.
+
+This chapter focuses on fundamental concepts and critical evaluation, with computational notebooks providing practical examples.
+
+### Motivating Example
+
+Consider the fundamental machine learning problem: we want to make predictions about the value of $y$ given some $x$, where the true relationship is unknown.
+
+Suppose the true function is:
+$$
+f(x) = 2x + x \sin(2 \pi x)
+$$
+
+But we only observe noisy data and don't know the true functional form. How do we approximate $f$ from the data?
+
+This illustrates the core challenge of machine learning: learning relationships from limited, noisy observations to make predictions on new data.
+
+### Function Approximation Approaches
+
+#### Parametric Methods
+
+Parametric methods model the function $f$ using parameters $\theta$. Finding $\hat{f}$ becomes equivalent to choosing appropriate $\theta$.
+
+**Linear Regression Example:**
+$$
+y | X \sim \mathcal{N}(X^T \beta, \sigma^2 I)
+$$
+
+This is equivalent to:
+$$
+y_i | X_i \sim \mathcal{N} \left(\sum_{j=1}^J X_{ij} \beta_j, \sigma^2 \right)
+$$
+
+**Point Estimation vs. Bayesian Inference:**
+
+We can obtain point estimates rather than full posterior distributions:
+- **Maximum Likelihood Estimate (MLE)**: $\arg \max_\theta p(y | \theta)$
+- **Maximum a Posteriori Estimate (MAP)**: $\arg \max_\theta p(\theta | y)$
+
+Point estimates are appropriate when:
+1. We need just a plausible value of the parameters
+2. We don't need to carefully quantify parametric uncertainty
+3. Computational efficiency is prioritized
+
+#### Nonparametric Methods
+
+$K$ nearest neighbors (KNN) exemplifies nonparametric methods: find the $K$ training examples closest to a given input and return the average output.
+
+**Important Note**: "Nonparametric" doesn't mean no parameters—$K$ is still a parameter that must be chosen!
+
+**Advantages**: Flexible, makes few assumptions about functional form
+**Disadvantages**: Can be sensitive to local data density, curse of dimensionality
+
+### Loss Functions
+
+We need to define what constitutes a "best" approximation through loss functions that measure differences between predicted and actual values.
+
+**Common Loss Functions:**
+
+1. **Mean Squared Error (MSE)**: $L(y, \hat{y}) = (y - \hat{y})^2$
+   - Emphasizes larger errors but sensitive to outliers
+
+2. **Mean Absolute Error (MAE)**: $L(y, \hat{y}) = |y - \hat{y}|$
+   - Less sensitive to outliers, non-differentiable at zero
+
+3. **Huber Loss**: Combines MSE and MAE with threshold parameter $\delta$:
+   $$
+   L_\delta(y, \hat{y}) = \begin{cases} 
+   \frac{1}{2}(y - \hat{y})^2 & \text{for } |y - \hat{y}| \leq \delta \\
+   \delta \left( |y - \hat{y}| - \frac{1}{2}\delta \right) & \text{otherwise}
+   \end{cases}
+   $$
+
+4. **Quantile Loss**: Tailored to specific quantiles $\tau$, useful for asymmetric errors:
+   $$
+   L_\tau(y, \hat{y}) = \begin{cases}
+   \tau(y - \hat{y}) & \text{if } (y - \hat{y}) > 0 \\
+   (\tau - 1)(y - \hat{y}) & \text{otherwise}
+   \end{cases}
+   $$
+
+### Bias-Variance Tradeoff
+
+Every model error can be decomposed as:
+$$
+\text{MSE} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}
+$$
+
+**Bias**: How much on average are predicted values different from actual values?
+$$
+\text{Bias}(\hat{f}(x)) = E[\hat{f}(x) - f(x)]
+$$
+
+**Variance**: How much does prediction vary between different model realizations?
+$$
+\text{Variance}(\hat{f}(x)) = E[\hat{f}(x)^2] - E[\hat{f}(x)]^2
+$$
+
+**Irreducible Error**: Noise inherent in real-world data that cannot be removed.
+
+**Key Insight**: Bayesian methods address this tradeoff through priors that add bias but often reduce variance.
+
+### Regularization
+
+**Ridge Regression** includes an L2 penalty to discourage overly complex models:
+$$
+L(\beta) = \| Y - X^T \beta \|_2^2 + \lambda \| \beta \|_2^2
+$$
+
+**Lasso Regression** uses an L1 penalty that can set coefficients to exactly zero:
+$$
+L(\beta) = \| Y - X^T \beta \|_2^2 + \lambda \| \beta \|_1
+$$
+
+where $\lambda$ controls the regularization strength.
 
 ### Supervised Learning
 
-- Learning from labeled data (inputs and desired outputs).
+Supervised learning involves learning from labeled data (inputs and desired outputs).
+Given paired data $\{(X_i, y_i) \mid i = 1, 2, \ldots, n\}$ where $X_i$ are predictors and $y_i$ are targets, the goal is to approximate a function $f$ that provides good predictions on new data.
 
 #### Regression
 
-- Predicting continuous hazard variables (e.g., flood depth, streamflow).
+Predicting continuous hazard variables (e.g., flood depth, streamflow, precipitation amounts).
+The challenge is modeling relationships between predictors and continuous outcomes while handling uncertainty and avoiding overfitting.
 
 #### Classification
 
-- Predicting categorical hazard outcomes (e.g., landslide occurrence, drought severity class).
+Predicting categorical hazard outcomes (e.g., landslide occurrence, drought severity class, flood/no-flood).
+Often involves probability estimation rather than just binary decisions, which is crucial for risk assessment applications.
 
 ### Unsupervised Learning
+
+Learning patterns from data without explicit target variables.
+Common applications include dimensionality reduction, clustering similar climate patterns, and exploratory data analysis.
+
+### Model Evaluation and Validation
+
+#### Hyperparameters
+
+Many ML models have nested parameters called "hyperparameters":
+
+- **Parameters**: Learned during model fitting (e.g., where to partition regions in trees)
+- **Hyperparameters**: Must be chosen before training (e.g., number of trees in a forest)
+
+Hyperparameters are not optimized during model training and require separate tuning strategies.
+
+#### Cross-Validation
+
+**Key idea**: Evaluate models on data not used for fitting (*out of sample*).
+
+**K-fold Cross-Validation Process**:
+1. Split data into $K$ folds
+2. For each fold $k = 1, \ldots, K$:
+   - Fit model on all folds except the $k$-th
+   - Evaluate model on the $k$-th fold
+3. Average performance across all folds
+
+Cross-validation reduces variance in performance estimates, but cross-validated estimates can still be biased due to hyperparameter overfitting.
+
+#### Train-Test Split
+
+For unbiased performance assessment:
+1. **Split data** into training (70-80%) and test (20-30%) sets
+   - For spatially/temporally structured data, use structured splits
+2. **Fit model** on training set (including cross-validation for hyperparameter tuning)
+3. **Final evaluation** on test set as last step
+
+This provides an honest estimate of model performance on truly unseen data.
+
+#### Grid Search
+
+Simple hyperparameter optimization approach:
+1. Predefine a set of $S$ hyperparameter combinations
+2. For each combination, fit the model using cross-validation
+3. Choose the best-performing model
+
+More sophisticated approaches include random search and Bayesian optimization.
 
 ## Nonparametric Methods
 
@@ -76,6 +237,89 @@ The main challenge to the kde approach is varying data density: regions of high 
 ### Neighborhood Methods
 
 ### Bootstrapping
+
+### Semi-parametric Methods
+
+## Generalized Linear Models (GLMs)
+
+Linear regression assumes normally distributed errors and a linear relationship between predictors and the response. Generalized Linear Models extend this framework to other distributions and link functions, making them particularly useful for climate applications.
+
+### Why Linear Models?
+
+The linear relationship $y = ax + b$ is often a strong assumption, not always physically justifiable, though frequently useful.
+A helpful way to think about linear models is as Taylor series representations of functions - they provide local approximations to more complex relationships.
+
+### The GLM Framework
+
+GLMs consist of three components:
+1. **Random component**: The probability distribution of the response variable
+2. **Systematic component**: Linear combination of predictors $\alpha + \beta x_i$
+3. **Link function**: Connects the systematic component to the expected response
+
+### Binomial Regression: Forest Fire Example
+
+Consider modeling forest fire occurrence based on average summertime temperature.
+We have binary outcomes (fire occurred or not) and want to model the probability of occurrence.
+
+For each data point, we use a Bernoulli distribution:
+$$
+y_i \sim \mathrm{Bernoulli}(p_i)
+$$
+
+The challenge: we need $p_i \in (0, 1)$ but linear predictors $\alpha + \beta x_i \in (-\infty, \infty)$.
+
+#### Logit Link Function
+
+The canonical link function is the **logit**:
+$$
+\begin{align}
+\textrm{logit}(p_i) &= \alpha + \beta x_i \\
+\log \frac{p_i}{1 - p_i} &= \alpha + \beta x_i \\
+p_i &= \frac{\exp(\alpha + \beta x_i)}{1 + \exp(\alpha + \beta x_i)}
+\end{align}
+$$
+
+This maps the linear space $(-\infty, \infty)$ onto the probability space $(0, 1)$.
+
+#### Alternative Link Functions
+
+Other link functions exist, such as the **probit link** (inverse of standard normal CDF), popular in economics.
+The choice can affect tail behavior and interpretation.
+
+### Poisson Regression: Wildlife Sightings Example
+
+For count data (e.g., number of wildlife sightings, flood events), Poisson regression is appropriate:
+$$
+y_i \sim \mathrm{Poisson}(\lambda_i)
+$$
+
+The canonical link function is logarithmic:
+$$
+\log(\lambda_i) = \alpha + \beta x_i
+$$
+
+This ensures $\lambda_i > 0$ (required for Poisson) while allowing linear relationships on the log scale.
+
+### Implementation in Julia
+
+GLMs can be implemented using Bayesian frameworks like Turing.jl:
+
+```julia
+@model function logistic_regression(y::AbstractVector, x::AbstractVector)
+    α ~ Normal(0, 1)
+    β ~ Normal(0, 1)
+    for i in eachindex(y)
+        p = logistic(α + β * x[i])
+        y[i] ~ Bernoulli(p)
+    end
+end
+```
+
+### Other GLM Families
+
+- **Negative Binomial regression**: For overdispersed count data
+- **Robust regression**: Using t-distributions for heavy-tailed errors
+- **Gamma regression**: For positive continuous data with non-constant variance
 
 ### Semi-parametric Methods
 
@@ -119,6 +363,167 @@ The main challenge to the kde approach is varying data density: regions of high 
     - Robustly assessing out-of-sample performance using the test set.
 - **Cross-Validation:** A technique for more reliable estimation of generalization performance.
 - **Regularization:** Techniques (e.g., L1, L2) to prevent overfitting by penalizing model complexity.
+
+## Tree-Based Methods and Ensemble Learning
+
+### Decision Trees
+
+Decision trees partition the predictor space into distinct regions and make constant predictions within each region.
+They are intuitive, interpretable, and handle both regression and classification tasks.
+
+#### Tree Construction
+
+The algorithm uses recursive binary splitting:
+1. Select a predictor $X_j$ and cutpoint $s$ that minimizes the loss function
+2. Split the space into $\{X | X_j < s\}$ and $\{X | X_j \geq s\}$
+3. Repeat for each resulting region
+
+For regression, the loss function is typically residual sum of squares (RSS):
+$$
+\sum_{j=1}^J \sum_{i \in R_j} \left(y_i - \hat{y}_j \right)^2
+$$
+
+For classification, common loss functions include cross-entropy:
+$$
+D = - \sum_{k=1}^K p_{mk} \log \hat{p}_{mk}
+$$
+where $\hat{p}_{mk}$ is the proportion of observations in region $m$ that are in class $k$.
+
+#### Bias-Variance Tradeoff in Trees
+
+- **Deep trees**: Low bias, high variance (overfitting risk)
+- **Shallow trees**: High bias, low variance (underfitting risk)
+
+#### Pruning
+
+To control overfitting, use cost complexity pruning:
+$$
+\text{Loss} = \sum_{m=1}^{|T|} \sum_{i: X_i \in R_m} \left(y_i - \hat{y}_{R_m} \right)^2 + \alpha |T|
+$$
+
+where $|T|$ is the number of terminal nodes and $\alpha$ is the complexity parameter.
+
+### Ensemble Methods
+
+The key insight: **combine many "weak" learners into a "strong" learner**.
+Ensemble methods work better when the weak learners are less correlated.
+
+#### Bagging (Bootstrap Aggregating)
+
+**Problem**: Decision trees have high variance.
+
+**Solution**: Average predictions from multiple trees trained on bootstrap samples:
+$$
+\hat{f}_\text{bag} = \frac{1}{B} \sum_{b=1}^B \hat{f}^{*b}(x)
+$$
+
+#### Random Forests
+
+**Problem**: Bagged trees are highly correlated if there's one dominant predictor.
+
+**Solution**: At each split, consider only a random subset of $m$ predictors (typically $m \approx \sqrt{p}$).
+
+**Algorithm**:
+1. For each bootstrap sample, grow a tree
+2. At each split, randomly select $m$ predictors from $p$ total
+3. Choose the best split among these $m$ predictors
+4. Average predictions across all trees
+
+#### Boosting
+
+**Idea**: Sequentially fit trees to residuals from previous iterations.
+
+**Algorithm**:
+1. Initialize $\hat{f}(x) = 0$ and residuals $r_i = y_i$
+2. For $b = 1, 2, \ldots, B$:
+   - Fit tree $\hat{f}^b$ to $(X, r)$ with $d$ splits
+   - Update: $\hat{f}(x) \leftarrow \hat{f}(x) + \lambda \hat{f}^b(x)$
+   - Update residuals
+3. Output: $\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)$
+
+Key parameters: number of trees $B$, shrinkage rate $\lambda$, tree depth $d$.
+
+### Implementation in Julia
+
+Using the DecisionTree.jl package:
+
+```julia
+# Random Forest Regressor
+m = Int(ceil(sqrt(size(features, 2))))  # number of features per split
+model = RandomForestRegressor(n_subfeatures=m, n_trees=250)
+fit!(model, features, labels)
+predictions = DecisionTree.predict(model, features)
+```
+
+## Principal Component Analysis (PCA)
+
+### Motivation for Dimensionality Reduction
+
+High-dimensional data presents several challenges:
+1. Difficult to visualize and interpret
+2. Computational challenges (curse of dimensionality)
+3. Redundant or correlated dimensions
+4. Need to identify meaningful patterns
+
+Climate data is particularly high-dimensional: indexed by location and time, often with strong spatial correlation.
+
+### PCA Theory
+
+Given $n$ observations and $p$ features $X_1, X_2, \ldots, X_p$:
+
+- Find a low-dimensional representation that captures maximum variation
+- The first **principal component** is the linear combination that maximizes variance:
+  $$Z_1 = \phi_{11}X_1 + \phi_{21}X_2 + \ldots + \phi_{p1}X_p$$
+  with constraint $\sum_{j=1}^p \phi_{j1}^2 = 1$
+
+- The **loading vector** $\phi_1 = (\phi_{11}, \phi_{21}, \ldots, \phi_{p1})^T$ defines the direction of maximum variation
+
+### PCA as Optimization
+
+Consider representing data $X$ with a linear model:
+$$
+f(Z) = \mu + \phi_q Z
+$$
+
+Minimize reconstruction error:
+$$
+\min \sum_{i=1}^n \| X_i - \phi_q Z \|_2^2
+$$
+
+The solution involves the singular value decomposition (SVD) of the empirical covariance matrix.
+
+### Climate Data Applications
+
+For space-time climate data, PCA provides:
+- **Spatial patterns** (EOFs - Empirical Orthogonal Functions)
+- **Time series** (principal component loadings)
+- **Data compression** and **noise reduction**
+
+### Preprocessing Considerations
+
+#### Centering
+Variables should have mean zero. For climate data, work with **anomalies**:
+$$
+x(t) = \overline{x}(t) + x'(t)
+$$
+where $\overline{x}(t)$ is climatology and $x'(t)$ is the anomaly.
+
+#### Standardization
+Optional: standardize variables to unit variance when variables have different scales or units.
+
+#### Weighting
+For spatial data, consider area weighting: $\sqrt{\cos(\phi)}$ where $\phi$ is latitude.
+
+### Implementation
+
+Julia packages for PCA:
+- **EmpiricalOrthogonalFunctions.jl**: Specialized for climate data
+- **MultivariateStats.jl**: General-purpose PCA implementation
+
+### Choosing Number of Components
+
+Use a **scree plot** to identify natural breaks in explained variance.
+Consider practical trade-offs between dimension reduction and information retention.
 
 ## Deep Learning and Advanced Methods
 

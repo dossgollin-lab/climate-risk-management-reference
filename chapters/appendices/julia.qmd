@@ -1,5 +1,5 @@
 ---
-title: "Julia 📝"
+title: "Julia ✏️"
 ---
 
 The computational examples in this textbook use the Julia programming language.
@@ -46,6 +46,105 @@ Here is a curated list of some particularly helpful tools.
 
 - The documentation for the [Turing (Julia)](https://turing.ml/dev/tutorials/), [PyMC (Python)](https://www.pymc.io/projects/docs/en/v3/nb_examples/index.html), and (especially) [stan (multi-language)](https://mc-stan.org/users/documentation/) probabilistic programming languages offer outstanding tutorials on statistical modeling, and you can learn a lot by going through their examples and references.
 - Extremes.jl
+
+## Computational Efficiency Tips
+
+### Caching MCMC Chains
+
+Most Bayesian models in this textbook are computationally inexpensive to run.
+However, for complex models or when sharing results with collaborators, you may want to save posterior samples to disk rather than regenerating them each time.
+
+Here's a complete workflow for caching MCMC chains using HDF5 storage:
+
+```julia
+using Distributions
+using DynamicHMC
+using HDF5
+using MCMCChains
+using MCMCChainsStorage
+using Random
+using Turing
+
+"""Write a MCMC Chain to disk"""
+function write_chain(chain::MCMCChains.Chains, fname::AbstractString)
+    mkpath(dirname(fname))
+    HDF5.h5open(fname, "w") do f
+        write(f, chain)
+    end
+end
+
+"""Read a MCMCChain from disk"""
+function read_chain(fname::AbstractString)
+    HDF5.h5open(fname, "r") do f
+        read(f, MCMCChains.Chains)
+    end
+end
+
+"""User-facing interface"""
+function get_posterior(
+    model::DynamicPPL.Model, # the model to sample
+    fname::String; # where to save it
+    n_samples::Int=2_000, # number of samples per chain
+    n_chains::Int=1, # how many chains to run?
+    overwrite::Bool=false,
+    kwargs...,
+)
+    # unless we're overwriting, try to load from file
+    if !overwrite
+        try
+            samples = read_chain(fname)
+            return samples
+        catch
+        end
+    end
+
+    # if we're here, we didn't want to or weren't able to
+    # read the chain in from file. Generate the samples and
+    # write them to disk.
+    chn = let
+        rng = Random.MersenneTwister(1041)
+        sampler = externalsampler(DynamicHMC.NUTS())
+        n_per_chain = n_samples
+        nchains = n_chains
+        sample(rng, model, sampler, MCMCThreads(), n_per_chain, nchains; kwargs...)
+    end
+    write_chain(chn, fname)
+    return chn
+end
+```
+
+**Example Usage:**
+
+```julia
+@model function BayesGEV(x)
+    μ ~ Normal(0, 10)
+    σ ~ InverseGamma(2, 3)
+    ξ ~ Normal(0, 0.5)
+    return x ~ Normal(μ, σ)
+end
+
+x = rand(GeneralizedExtremeValue(6, 1, 0.2), 100)
+model = BayesGEV(x)
+
+# First run: generates and saves samples
+@time posterior = get_posterior(model, "bayes_gev.h5"; n_samples=10_000, n_chains=4)
+
+# Second run: loads saved samples from disk (much faster)
+@time posterior = get_posterior(model, "bayes_gev.h5"; n_samples=10_000, n_chains=4)
+```
+
+::: {.callout-tip}
+## Don't commit `.h5` files
+
+You generally shouldn't share `.h5` files in your repository since they can be large and your version history tracks changes.
+Add `*.h5` to your `.gitignore` file to keep them out of version control.
+:::
+
+::: {.callout-tip}
+## Alternative Approach
+
+[`Arviz.jl`](https://arviz-devs.github.io/ArviZ.jl/stable/) offers a more sophisticated solution for posterior analysis and storage, but requires learning its own conventions.
+:::
 
 ## Running the Notebooks
 

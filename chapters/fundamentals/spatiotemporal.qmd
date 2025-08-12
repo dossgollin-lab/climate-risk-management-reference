@@ -1,5 +1,5 @@
 ---
-title: Spatiotemporal and High-Dimensional Methods 🚧
+title: Spatiotemporal and High-Dimensional Methods ✏️
 ---
 
 ## See First {.unnumbered}
@@ -105,10 +105,145 @@ What is the true dimensionality of this data?
 - You will lose _some_ information in $A$ that is not in $X$
 - balancing act betwen clarity of represenation (ease of understanding) vs loss of relevant information
 
-#### PCA
+#### Principal Component Analysis (PCA)
 
-- Widely used, well-studied
-- Takes data matrix $A$ and finds $k$ orthogonal linear combinations of the columns of $A$ that maximize variance (the first $k$ components display the maximum possible variance)
+**Overview and Motivation:**
+
+High-dimensional data presents several challenges:
+- Difficult to visualize and interpret
+- Contains redundant or irrelevant dimensions
+- Computational challenges in high dimensions ("curse of dimensionality")
+- Need to identify meaningful patterns in complex datasets
+
+PCA addresses these challenges by finding low-dimensional representations that preserve as much variation as possible in the original data.
+
+**Mathematical Foundation:**
+
+For $n$ observations and $p$ features $X_1, X_2, \ldots, X_p$, PCA finds a low-dimensional representation that captures maximum variance.
+
+The first **principal component** is the **linear combination** of features that maximizes variance:
+$$Z_1  = \phi_{11}X_1 + \phi_{21}X_2 + \ldots + \phi_{p1}X_p$$
+
+with normalization constraint: $\sum_{j=1}^p \phi_{j1}^2 = 1$
+
+The **loading vector** $\phi_1 = (\phi_{11}, \phi_{21}, \ldots, \phi_{p1})^T$ defines a direction in feature space along which the data vary the most.
+
+**PCA as an Optimization Problem:**
+
+We can formulate PCA as finding the best linear approximation to the data:
+$$f(Z) = \mu + \phi_q Z$$
+
+where:
+- $\mu$ is a location vector (typically zero for centered data)
+- $\phi_q$ is a $p \times q$ matrix with $q$ **orthogonal** unit vectors as columns
+- $Z$ is a $q$-dimensional vector of **coefficients** or **scores**
+
+The optimization problem becomes:
+$$\min \sum_{i=1}^n \| X_i - \phi_q Z_i \|_2^2$$
+
+**Connection to Singular Value Decomposition (SVD):**
+
+The solution can be written as a singular value decomposition of the empirical covariance matrix.
+This assumes that variance is an appropriate measure of variability in the data.
+
+**Important caveat:** This assumption may be poor when:
+- Variables have very different scales
+- Outliers are present
+- Non-Gaussian distributions where variance doesn't capture the relevant structure
+
+**Uniqueness and Interpretation:**
+
+Each principal component loading vector is unique up to a sign flip.
+The choice of sign is arbitrary and doesn't affect the interpretation.
+
+**Climate Science Applications:**
+
+In climate science, we commonly work with space-time data where PCA components can be interpreted as:
+
+1. **Spatial patterns** ($Z$): The "EOFs" (Empirical Orthogonal Functions) or principal components represent dominant spatial patterns of variability
+2. **Time series** ($\phi$): The loadings represent time evolution of each spatial pattern
+3. **Data reconstruction**: Can reconstruct the full field at time $t$ from the EOFs and their time series
+
+**Preprocessing Considerations:**
+
+**Centering:**
+- Variables should have mean zero for standard PCA
+- Variance is the average squared deviation from the mean
+- Centered and non-centered data will have different covariance matrices
+
+**Standardization:**
+- Optional: standardize variables to unit variance
+- Important when variables have different units or scales
+- Equivalent to weighting variables by inverse of their variances
+
+**Climate Anomalies:**
+In climate science, it's common to decompose time series into climatology and anomalies:
+$$x(t) = \overline{x}(t) + x'(t)$$
+where $\overline{x}(t)$ is the **climatology** and $x'(t)$ is the **anomaly**.
+
+Common approaches for defining climatology:
+1. **Time-mean** over a reference period
+2. **Seasonal climatology** computed separately for each month or season (DJF, MAM, JJA, SON)
+3. **Harmonic climatology** with seasonal cycle removed using sinusoidal terms
+
+**Spatial Data Considerations:**
+
+**Weighting:**
+- **Area weighting**: Use $\sqrt{\cos(\phi)}$ where $\phi$ is latitude to weight by grid cell area
+- **Variance weighting**: Weight by inverse variance (equivalent to standardization)
+- **Physical considerations**: Weight variables based on measurement uncertainty or physical importance
+
+**Model Selection:**
+
+**How Many Components to Retain?**
+- **Scree plot**: Look for "elbow" where eigenvalues level off
+- **Cumulative variance**: Retain components explaining desired percentage (e.g., 90%)
+- **Cross-validation**: Choose number based on out-of-sample performance
+- **Physical interpretation**: Retain components with clear physical meaning
+
+**Computational Implementation:**
+
+**Julia Packages:**
+- [`EmpiricalOrthogonalFunctions.jl`](https://kmarkert.github.io/EmpiricalOrthogonalFunctions.jl/dev/): Climate-focused PCA/EOF analysis, based on Python's EOFS library
+- [`MultivariateStats.jl`](https://juliastats.org/MultivariateStats.jl/dev/pca/): General-purpose multivariate statistics including PCA
+
+**Practical Workflow:**
+```julia
+using EmpiricalOrthogonalFunctions
+
+# Assume data matrix with time × space structure
+solver = EmpiricalOrthogonalFunctions.Eof(data)
+
+# Get EOFs (spatial patterns)
+eofs = solver.eofs()
+
+# Get principal components (time series)  
+pcs = solver.pcs()
+
+# Get explained variance
+variance = solver.varianceFraction()
+```
+
+**Extensions and Advanced Methods:**
+
+**Probabilistic PCA**: Provides probabilistic framework with uncertainty quantification
+**Robust PCA**: Less sensitive to outliers and non-Gaussian distributions  
+**Sparse PCA**: Produces interpretable loadings with many zero entries
+**Canonical Correlation Analysis**: Analyzes relationships between two sets of variables
+
+**Climate Applications:**
+
+**Mode Analysis**: Identify dominant climate variability patterns (ENSO, NAO, etc.)
+**Model Evaluation**: Compare spatial patterns between observations and climate models
+**Dimension Reduction**: Reduce high-dimensional climate model output for analysis
+**Data Compression**: Efficiently store and transmit large climate datasets
+
+**Further Reading:**
+
+- [SVD Mathematical Overview](https://youtube.com/watch?v=nbBvuuNVfco&feature=shared) by Steven Brunton provides conceptual SVD overview
+- [MIT Computational Thinking PCA Lecture](https://computationalthinking.mit.edu/Fall23/data_science/pca/)
+- Chapter 10.2 of @james_statlearn:2013 for statistical learning perspective
+- [NCAR EOF Tutorial](https://climatedataguide.ucar.edu/climate-tools/empirical-orthogonal-function-eof-analysis-and-rotated-eof-analysis) for climate applications
 
 ### Copulas
 

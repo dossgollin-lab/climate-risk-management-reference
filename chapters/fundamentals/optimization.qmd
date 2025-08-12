@@ -1,5 +1,5 @@
 ---
-title: Optimization 📝
+title: Optimization ✏️
 ---
 
 ## See First {.unnumbered}
@@ -189,6 +189,19 @@ $$
 :::
 
 If we then want to estimate $\sigma$, we can estimate the standard deviation of the residuals.
+
+::: {.callout-tip}
+## Computational Examples
+
+For detailed computational examples of likelihood functions, MLE estimation, and numerical optimization, see the companion file: [Maximum Likelihood Estimation: Computational Examples](/chapters/fundamentals/optimization-examples.qmd).
+
+Examples include:
+- Plotting likelihood functions for single and multiple data points
+- Poisson likelihood for count data (tropical cyclone example)  
+- Multivariate likelihood surfaces
+- Numerical optimization with `Optim.jl`
+- Linear regression MLE equivalence to least squares
+:::
 
 ## Motivation: Policy Search
 

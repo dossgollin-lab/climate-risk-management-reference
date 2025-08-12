@@ -66,10 +66,23 @@ This book uses a single Julia project with a single environment.
 - Follow existing patterns in computational notebooks for consistency
 - Leverage domain-specific packages like `Extremes.jl` for specialized analysis
 
-### Notebooks
+### Code Organization Strategy
 
-Each notebook is designed to be a standalone git repository with its own Julia repository for easily maintenance.
-Each should be included as a submodule.
+**Computational Notebooks** (`notebooks/`):
+
+- Standalone case studies and tutorials
+- Each notebook is a complete analysis or application
+- Should be added to `_quarto.yml` in the "Computational Case Studies" section
+- Designed as separate git repositories/submodules for easy maintenance
+
+**Chapter Support Files**:
+
+- For smaller code snippets that generate figures or simple examples
+- Create companion files like `chapters/risk/adaptive-notebook.qmd` to support `chapters/risk/adaptive.qmd`
+- These contain the computational work but aren't full case studies
+- Keep code separate from main chapter text for cleaner organization
+
+**General Principle**: Pull computational content out of main textbook chapters. Use full notebooks for substantial case studies, companion files for supporting computations.
 
 ## Content Guidelines
 
@@ -93,7 +106,8 @@ Each chapter and page uses a 4-level emoji-based status tracking system:
 - ✏️ **Revision** - Complete draft exists but needs editing for clarity, accuracy, and consistency.
 - 🎯 **Ready** - Content complete, polished, and has undergone final review. Ready for use.
 
-### Implementation:
+### Implementation
+
 - Status emoji appears at the end of chapter titles: `# Chapter Title 📝`
 - Each chapter includes a status callout near the top explaining the current status and the 4-part scale
 - Status should be updated as chapters progress through development stages

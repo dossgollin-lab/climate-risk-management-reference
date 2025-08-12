@@ -16,7 +16,92 @@ This chapter builds on concepts from:
 
 ## Adaptive management frameworks
 
+### Real options and flexibility
+
+The financial theory of real options defines "the right, but not obligation" to take a particular action in the future.
+For example, purchasing the right to buy stocks at a fixed price gives flexibility to exercise the option only if favorable conditions emerge.
+
+This concept has motivated applications in engineering and policy design.
+Creating flexibility in decision making can be very valuable, though generating naturally flexible designs isn't always straightforward.
+
+A classic example in infrastructure: when building a parking garage, should we:
+- Build to a few floors immediately?
+- Build to many floors immediately?
+- Build a few floors but with extra-strong foundations so we can add levels later if demand increases?
+
+The third option provides valuable flexibility—it creates the option to expand without the full upfront cost.
+In climate adaptation, similar principles apply:
+- Design infrastructure that can be upgraded rather than replaced
+- Implement monitoring systems that can trigger additional interventions
+- Create institutional frameworks that can accommodate evolving policies
+
+### Policy parameterization
+
+In climate adaptation contexts, there are many ways to parameterize adaptive policies.
+Common approaches include:
+
+**Threshold-based rules**: Define triggers (e.g., sea level rise exceeding X cm, temperature increases beyond Y°C) that activate specific interventions.
+
+**Buffer-based approaches**: Maintain safety margins that shrink over time, triggering adaptation when margins become inadequate.
+
+**Pathway-based strategies**: Pre-define sequences of interventions, with decision points based on observed conditions and new information.
+
+More complex adaptive policies can use machine learning approaches, though these require careful consideration of interpretability and stakeholder acceptance.
+
 ## Dynamic decision-making under uncertainty
+
+Dynamic planning problems identify policies to select actions in response _to new information over time_.
+Policy design involves choosing the sequence, timing, and/or threshold of actions to achieve a desired outcome.
+This typically involves a combination of optimal control and adaptive design.
+
+Unlike static decision problems where all decisions are made upfront, sequential decisions allow us to wait and incorporate new information.
+For example, rather than deciding today how high to elevate a house, we could wait to see how fast local sea-levels are rising, then make a decision later **with more information**.
+
+### Sequential decision framework
+
+In sequential decision problems, the decision maker does not need to make all decisions at once.
+Instead, at each time step, the decision maker makes a decision based on the **state** of the system (which may not be fully observable).
+In climate risk management, the state might include current exposure levels, recent climate observations, and evolving socio-economic conditions.
+
+Mathematically, the state evolves over time according to a dynamics model:
+$$
+\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1}),
+$$
+where
+
+- $\mathbf{x}_t$ is the state at time $t$
+- $a_t$ is the decision at time $t$ (e.g., whether to implement an adaptation measure)
+- $e_{t+1}$ is external forcing (e.g., climate change, socio-economic development)  
+- $f_t$ describes how the system evolves in response to actions and external factors
+
+### Policy and value
+
+The decision maker's strategy for choosing actions is called a **policy**.
+The policy is a function that maps states to actions, and can be either deterministic or stochastic.
+
+A central idea is to maximize the expected sum of future rewards (or minimize expected costs).
+Actions that give low rewards now might lead to high rewards in the future.
+For example, spending money on early adaptation might reduce future climate damages.
+
+The **value** of a state is the expected sum of future rewards that can be obtained from that state, assuming the decision maker follows a particular policy.
+
+### Solution approaches
+
+**Open loop control** solves for all actions at once, producing a predetermined schedule of interventions.
+The advantage is simplicity of execution.
+The disadvantage is inflexibility—it doesn't adapt to new information.
+
+**Dynamic programming** uses the recursive Bellman equation to find optimal policies:
+$$
+Q_t(\mathbf{x}_t) = \min_{a_t} \left\{ R_t + \gamma Q_{t+1} (\mathbf{x}_{t+1}) \right\}
+$$
+where $\gamma$ is the discount factor and $Q_t$ is the value function.
+
+This approach can provide exact solutions but requires discretizing the problem and suffers from the "curse of dimensionality" as the number of states and actions grows.
+
+**Policy search** assumes a specific functional form for the policy with parameters to optimize.
+Common approaches include linear decision rules, decision trees, and neural networks.
+This approach is flexible and works well with simulation-optimization frameworks, but can be computationally expensive.
 
 ## "Tipping points" and trigger-based adaptation
 

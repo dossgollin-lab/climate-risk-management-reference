@@ -13,7 +13,6 @@ This chapter builds on concepts from:
 - Apply sampling techniques to generate synthetic event sets (e.g., hurricanes, floods).
 - Use importance and stratified sampling to improve efficiency in hazard modeling.
 - Evaluate how sampling choices affect estimates of extreme risk.
-:::
 
 ## Monte Carlo sampling and variance reduction
 

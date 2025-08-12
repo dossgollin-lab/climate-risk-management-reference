@@ -1,5 +1,5 @@
 ---
-title: Downscaling and Bias Correction 🚧
+title: Downscaling and Bias Correction ✏️
 ---
 
 ## See First {.unnumbered}
@@ -10,45 +10,342 @@ This chapter builds on concepts from:
 
 ## Learning Objectives {.unnumbered}
 
-*Learning objectives to be added as chapter develops.*
+After reading this chapter, you should be able to:
+
+- Distinguish between supervised and distributional downscaling approaches
+- Understand the motivation for downscaling climate model outputs
+- Apply bias correction and quantile-quantile mapping techniques
+- Recognize the stationarity assumption and its implications
+- Evaluate different downscaling methods for specific applications
+- Understand modern machine learning approaches to climate downscaling
 
 ## Motivation
 
+Climate models operate at coarse spatial and temporal resolutions, but many applications require high-resolution climate information:
+
+- **Stormwater management**: Long-term design requires hourly precipitation at city scales
+- **Water resources management**: Subseasonal to multi-year planning needs basin-specific information
+- **Fire propagation**: Hourly to weekly meteorological conditions at landscape scales
+- **Agriculture**: Daily temperature and precipitation at field scales
+
+### Objectives of Downscaling
+
+Downscaling aims to achieve three primary objectives [@lanzante_pitfalls:2018]:
+
+1. **Enhanced spatial detail**: Increase resolution from ~100-200 km to ~1-10 km
+2. **Mitigation of systematic ESM biases**: Correct known model biases
+3. **Generation of variables not explicitly rendered by GCMs**: Derive additional variables
+
+### Challenges with Earth System Models
+
+Earth System Models (ESMs) face inherent limitations for local applications:
+
+1. **Scale mismatch**: ESMs are tuned for energy balance and large-scale circulation, not local extremes
+2. **Spatial averaging**: Grid cells represent averages over large areas
+3. **Temporal averaging**: Time steps may miss sub-daily variability
+4. **Process representation**: Local-scale processes may be parameterized or missing
+
+Two specific challenges illustrate these limitations:
+
+- **"Dreary" problem**: Models produce too many days with light precipitation
+- **"Drizzling" problem**: Models fail to capture intense precipitation events
+
+These systematic biases require correction for practical applications.
+
 ## Supervised Methods
 
-Especially common in the context of weather forecasting, where we have pairs of (observed, forecasted) data.
+Supervised downscaling is especially common in weather forecasting, where we have pairs of (observed, forecasted) data.
+
+### Framework
+
+Supervised downscaling treats the problem as a statistical learning task:
+
+- **Input**: Pairs $(X_i, y_i)$ where:
+  - $X_i$: Predictors (e.g., gridded model output)
+  - $y_i$: Predictand (e.g., station observations)
+- **Goal**: Learn function $f$ such that $f(X_i) \approx y_i$
+- **Key requirement**: $X_i$ and $y_i$ observed at the same time
+
+Quality is measured through loss functions (e.g., mean squared error, likelihood).
+
+### Applications
+
+Supervised methods work well when:
+- Historical model-observation pairs exist
+- Relationship between predictors and predictand is stable
+- Focus is on weather forecasting or hindcasting
+
+**Examples**:
+- Mapping satellite to radar precipitation data
+- Post-processing numerical weather predictions
+- Downscaling reanalysis to station observations
 
 ### Example: Linear Regression
 
-This is a very simple model
+Simplest approach relates large-scale predictors to local observations:
 
-### Example: Model Output Statistics
+$$y = \beta_0 + \sum_{j=1}^p \beta_j X_j + \epsilon$$
+
+where $X_j$ might include:
+- Temperature at multiple pressure levels
+- Geopotential height gradients
+- Humidity measures
+- Previous day's local weather
+
+**Advantages**: Simple, interpretable, computationally fast
+**Limitations**: Assumes linear relationships, may miss complex interactions
+
+### Example: Model Output Statistics (MOS)
+
+Operational approach used by weather services:
+
+1. **Preprocessing**: Standardize model outputs and observations
+2. **Predictor selection**: Choose relevant large-scale variables
+3. **Model fitting**: Often multiple linear regression with categorical predictors
+4. **Post-processing**: Apply adjustments for known biases
+
+**Key insight**: MOS exploits systematic model biases to improve forecasts.
 
 ### Example: Generative ML
 
-This is a very sophisticated model.
-Generative ML models are beyond the scope of this textbook (conditional GANs, diffusion models).
-Goal: conditional on inputs, sample the distribution of outputs -- seems simple, right?
+Modern approach using deep learning:
+
+- **Generative Adversarial Networks (GANs)**: Learn to generate realistic high-resolution fields
+- **Diffusion models**: Model the data generation process through noise injection and removal
+- **Conditional models**: Generate outputs conditional on large-scale inputs
+
+**Goal**: Sample from $p(y|X)$ rather than just predict $\mathbb{E}[y|X]$
+
+**Advantages**: Can capture complex nonlinear relationships and full probability distributions
+**Limitations**: Computationally intensive, requires large training datasets, difficult to interpret
 
 ## Distribution-Based Methods
 
-When we're working with climate models, there are no pairs of (observed, forecasted) data.
-We might have a climate model that simulated the historical period, which means that we used observed boundary conditions (such as CO2 forcing, volcanoes, aerosols, etc.) but let the model generate different random variability.
-This means that, while the model can generate simulations from a distribution of "days in late April in the 1990s, conditional on the particular model", there is no reason to expect that "April 15, 1995" in a model time series will be similar to "April 15, 1995" in an observed time series, except to the extent that the latter is a sample from the (approximated) distribution of the former.
+### The Climate Model Challenge
 
-This means that we cannot use supervised methods, because we don't have pairs of (observed, forecasted) data.
-Instead, we need to use methods that compare the distributions of the two datasets.
+Climate models present a unique challenge different from weather forecasting.
+ESMs simulate from the distribution of weather given climate boundary conditions:
+
+- Run 100 ESM ensemble members over historical conditions
+- Study December 1, 1980 across all ensemble members
+- Some realizations will be rainy, others dry; some cool, others warm
+- **Statistically meaningful but not deterministic forecasts**
+
+### No Paired Data Problem
+
+Unlike weather forecasting, climate models don't provide paired observations:
+- We have samples ${X_1, \ldots, X_N}$ from climate model
+- We have samples ${y_1, \ldots, y_K}$ from observations
+- No correspondence between $X_i$ and $y_j$ at specific times
+
+**Key insight**: April 15, 1995 in model ≠ April 15, 1995 in observations
+
+Both are samples from "distribution of late April weather in 1990s conditions"
+
+### Distributional Approach
+
+Since we cannot use supervised methods, we compare distributions:
+
+$$p_{\text{model}}(X) \neq p_{\text{obs}}(y)$$
+
+Goal: Transform model outputs to match observational distribution characteristics.
+
+### Example: Bias Correction
+
+Simplest distributional method corrects the mean:
+
+$$\begin{aligned}
+\text{bias} &= \mathbb{E}[X] - \mathbb{E}[y] \\
+\hat{y} &= X - \text{bias}
+\end{aligned}$$
+
+**Question**: Is this distributional or supervised? 
+**Answer**: Distributional - uses distributional moments, not paired data.
 
 ### Example: Quantile-Quantile Mapping
 
+More sophisticated approach matching full distributions:
+
+1. **Calculate quantiles**: For probabilities $p \in [0,1]$:
+   - Model quantile: $q_m(p) = F_m^{-1}(p)$
+   - Observed quantile: $q_o(p) = F_o^{-1}(p)$
+
+2. **Create mapping function**: $h(x) = F_o^{-1}(F_m(x))$
+
+3. **Apply correction**: $\hat{y} = h(X)$
+
+**Interpretation**: Transform model value to its quantile, then map to corresponding observed quantile.
+
+**Advantages**: 
+- Corrects entire distribution, not just mean
+- Preserves temporal correlations
+- Handles non-Gaussian distributions
+
+**Limitations**:
+- Assumes stationarity of correction
+- Cannot add variability not present in model
+- May create artifacts at distribution tails
+
 ### Example: CDF Matching
+
+Alternative approach directly matches cumulative distribution functions:
+
+1. **Estimate CDFs**: $\hat{F}_m(x)$ and $\hat{F}_o(x)$
+2. **Define mapping**: Minimize $\int |\hat{F}_m(h(x)) - \hat{F}_o(x)| dx$
+3. **Apply transformation**: Use optimal $h(\cdot)$ to correct future data
+
+This is closely related to quantile mapping but may use different estimation techniques.
+
+## Advanced Machine Learning Approaches
+
+### CorrectorGAN
+
+Recent work applies Generative Adversarial Networks to bias correction [@price_correctorgan:2022]:
+
+**Architecture**:
+- **Generator**: Takes coarse model output, produces high-resolution corrected field
+- **Discriminator**: Learns to distinguish real observations from generated corrections
+
+**Advantages**:
+- Learns complex spatial patterns
+- Can generate multiple plausible realizations
+- Captures spatial correlations better than pointwise methods
+
+**Training process**:
+1. Generator learns mapping from model to observations
+2. Discriminator learns to identify "realistic" weather patterns
+3. Adversarial training improves both networks
+
+### Other Modern Approaches
+
+**Super-resolution methods**: Increase spatial resolution while correcting biases
+**Conditional diffusion models**: Generate high-resolution weather conditioned on large-scale patterns
+**Physics-informed neural networks**: Incorporate physical constraints into ML models
 
 ## Dynamical Downscaling
 
-### Dynamic Downscaling with Physics-Based Models
+### Physics-Based Dynamical Downscaling
 
-### Dynamical Downscaling with AI Weather Models
+**Approach**: Run high-resolution regional climate model (RCM) nested within global model:
+
+1. **Global model** provides boundary conditions
+2. **Regional model** simulates detailed physics at ~10-50 km resolution
+3. **Output** includes all meteorological variables at high resolution
+
+**Advantages**:
+- Physically consistent
+- Captures local topographic effects
+- Generates all meteorological variables simultaneously
+
+**Limitations**:
+- Computationally expensive
+- May inherit global model biases
+- Still requires bias correction for many applications
+
+### AI-Based Dynamical Downscaling
+
+Emerging approach using machine learning weather models:
+
+- **Training**: Learn atmospheric dynamics from high-resolution observations/reanalysis
+- **Application**: Use ML model to generate high-resolution fields from coarse inputs
+- **Examples**: FourCastNet, GraphCast, DLWP
+
+**Potential advantages**:
+- Much faster than physics-based models
+- Can be trained on observational targets
+- May avoid some systematic model biases
+
+**Current limitations**:
+- Limited to variables in training data
+- May not conserve physical quantities
+- Shorter stable integration times
+
+## The Stationarity Assumption
+
+### Critical Assumption
+
+All downscaling methods assume **stationarity**: the relationship between large-scale and local climate does not change over time.
+
+**For supervised methods**: $p(y|X)$ or $y = f(X)$ constant over time
+**For distributional methods**: Distributional corrections constant over time
+
+### Why Stationarity Matters
+
+Downscaling is trained on historical relationships but applied to future conditions:
+- Climate change may alter precipitation-temperature relationships
+- Atmospheric circulation patterns may shift
+- Extreme event characteristics may change
+
+**This assumption is never perfect** but is necessary for practical applications.
+
+### Implications for Practice
+
+1. **Method selection**: Choose approaches robust to modest non-stationarity
+2. **Validation**: Test performance across different time periods
+3. **Uncertainty**: Acknowledge stationarity as source of uncertainty
+4. **Updating**: Regularly retrain models as new observations become available
+
+## Common Datasets for Downscaling
+
+### Observational Data
+
+- **Gauge data**: Point measurements with high temporal resolution
+- **Gridded observational products**: Interpolated from station networks
+- **Radar/satellite products**: Remote sensing observations processed to grids
+
+### Model Data
+
+- **Reanalysis products**: Gridded reconstructions combining observations and models
+  - Example: ERA5 (0.25° resolution, hourly, 1940-present)
+- **ESM outputs**: Climate model simulations
+  - Historical runs (observed forcing)
+  - Future projections (scenario forcing)
+  - CMIP archives provide standardized multi-model ensembles
+
+### Key Characteristics
+
+**ESMs simulate weather distributions conditional on boundary conditions**:
+- Not deterministic forecasts
+- Multiple ensemble members show range of possible weather
+- Focus on statistics, not individual events
+
+## Practical Considerations
+
+### Method Selection
+
+Choose downscaling approach based on:
+
+1. **Data availability**: Supervised requires paired data; distributional does not
+2. **Application needs**: Point vs. spatial; single vs. multiple variables
+3. **Computational resources**: Statistical vs. dynamical methods
+4. **Physical consistency**: Importance of conserving physical relationships
+
+### Evaluation Strategies
+
+**Statistical metrics**:
+- Bias in mean, variance, quantiles
+- Correlation with observations
+- Skill at extreme events
+
+**Physical consistency**:
+- Energy and water balance
+- Spatial and temporal correlations
+- Frequency of extremes
+
+**Decision-relevant metrics**:
+- Performance for specific applications
+- Economic value for decision-making
+
+### Common Pitfalls
+
+1. **Over-reliance on stationarity**: Assume relationships never change
+2. **Ignoring physical constraints**: Focus only on statistical fit
+3. **Inadequate validation**: Test only on training period
+4. **Single-model dependence**: Rely on one downscaling approach
 
 ## Further Reading {.unnumbered}
 
+- @lanzante_pitfalls:2018 for comprehensive review of downscaling challenges
 - [Weather generators](./generators.qmd) can be used for downscaling
+- [Extreme value statistics](./extreme-value-stats.qmd) for downscaling extremes
+- [Spatiotemporal methods](/chapters/fundamentals/spatiotemporal.qmd) for advanced statistical techniques

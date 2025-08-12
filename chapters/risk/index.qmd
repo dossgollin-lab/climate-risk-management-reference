@@ -1,6 +1,4 @@
----
-title: Overview 🚧
----
+# Overview ✏️ {.unnumbered}
 
 ::: {.callout-tip}
 ## Learning Objectives
@@ -13,6 +11,28 @@ title: Overview 🚧
 - Apply systems thinking approaches to complex risk interactions
 :::
 
+## Example Management Decisions
+
+Climate risk management involves making decisions across multiple scales and contexts. Consider these examples:
+
+### Update land use / zoning regulations?
+
+![Boomtown development [{{< fa camera-retro >}}: @satija_boomtown:2016](../../_assets/img/boomtown.png)
+
+### How to size stormwater infrastructure?
+
+![Buffalo drainage infrastructure [{{< fa camera-retro >}}: Doss-Gollin](../../_assets/img/doss-gollin-buffalo-drainage.jpeg)
+
+### How high to elevate a house for proactive flood protection?
+
+![House elevation [{{< fa camera-retro >}}: Allison Lee / Houston Public Media](https://www.houstonpublicmedia.org/articles/news/2017/10/06/240934/many-houstonians-seek-home-elevation-after-repetitive-flooding/)](../../_assets/img/lee-meyerland-elevation.jpg)
+
+### Require weatherization of privately owned electricity infrastructure?
+
+![Infrastructure weatherization [{{< fa camera-retro >}}: Jonathan Cutrer / Flickr](../../_assets/img/cutrer-uri.jpg)
+
+## Key Mathematical Concept
+
 The most important concept is:
 $$
 \mathbb{E}\left[ f(x) \right] \neq f \left( \mathbb{E}[x] \right)
@@ -20,3 +40,114 @@ $$
 where $x$ is some random variable and $f$ is some function.
 In our context, this means that if we want to know the expected value of a risk-related variable, like damage, we should not just take the expected value of the hazard and then apply a damage function to that.
 Extending the concept further, the damage caused by a hazard that scores in the 99th percentile of a chosen intensity measure may not be the 99th percentile of the damage distribution (a commonly used, but wrong, assumption).
+
+## Climate Risks to Complex Systems
+
+### Interconnected and interdependent infrastructure systems
+
+Many of the same principles we've discussed apply to complex systems, though analyzing these systems presents unique challenges. 
+Climate risks to complex systems are particularly challenging because of cascading failures and interdependencies.
+
+### Case Study: 2021 Texas Freeze
+
+The 2021 Texas freeze provides an excellent example of how climate hazards interact with complex infrastructure systems to create cascading failures.
+
+#### What happened?
+
+Moving forward, we'll focus largely on decision frameworks for analyzing climate risks.
+We'll generally use *simple systems* for interpretability!
+However, many of the same principles apply to *complex systems*.
+
+The 2021 Texas freeze demonstrates cascading failures in interconnected and interdependent infrastructure systems.
+
+#### Were these temperatures unprecedented?
+
+1. Use observations only
+1. Look globally and regionally
+1. Past temperatures were lower / comparable
+
+How else can we explore hazard?
+
+The question of whether the 2021 temperatures were unprecedented requires careful analysis.
+Using observations alone and looking both globally and regionally, past temperatures were actually lower or comparable to what was observed.
+
+#### Demand for heating
+
+For each grid cell and each hour, we can calculate the difference between observed temperature and "comfortable" temperature, then take the average weighted by population to get **inferred demand for heating**.
+
+The key question becomes: What is the **return period** of temperatures observed during the 2021 Texas freeze as a function of the defined **duration** of the event?
+
+#### Some pitfalls
+
+1. The past (1950-2022) may not be a good guide to the future
+1. Temperature is not the only factor that influences demand for heating
+
+#### Electricity supply
+
+Key points from the 2021 Texas freeze:
+
+1. Gas production dropped ~50% 
+1. Outages: 30GW of electricity
+1. Inadequate winterization of electricity and gas systems
+1. Financial repercussions
+1. Primary culprit for outages was problems in electricity production from natural gas
+
+#### All major fuel sources underperformed
+
+The crisis was not limited to a single energy source - all major fuel sources experienced significant underperformance during the extreme cold event.
+
+#### Cascading risks
+
+The natural gas supply chain failures occurred in multiple areas:
+
+1. Oil & gas wells
+2. Gathering lines
+3. Equipment malfunction at power plants
+4. Outage cut power to compressor stations that moved gas
+
+Plus other long-term issues like limited storage in TX.
+
+#### Analysis challenges
+
+If we wanted to model the natural gas ➡️ electricity supply chain, we would need to know (at minimum!): 
+
+1. Locations of all wells, separators, gathering lines, compressors, power stations
+1. Weatherization / vulnerability to cold of all
+1. This is very hard!
+
+Climate risk to complex systems is hard!
+Hence, attempts at standardized design rules / standards.
+
+### Policy recommendations
+
+Based on analysis of the 2021 Texas freeze:
+
+1. Regulation and price incentives
+1. Plan for winter peaks, not summer ones!
+1. Weatherization
+1. Demand response
+1. Regional transmission
+
+Grid resilience in an electrified, renewable-powered world is possible but non-trivial to ensure.
+
+### Summary: 2021 Texas Cold Snap
+
+#### What happened:
+1. Cold temperatures: demand for heating 📈
+1. Cold temperatures: supply of electricity 📉
+    1. Complex supply chain!
+1. Joint effects: cascading failures
+
+#### How to analyze:
+1. Observations/reanalysis: not very many extremes
+1. ESMs: bigger sample size, but biased
+    - Many pitfalls to bias correction
+1. Fragility of individual components ➡️ interdependence ➡️ system performance
+
+### Climate risks to electricity systems
+
+Climate risks to electricity systems involve:
+
+1. Outages from severe weather
+1. At long time scales, technological and demographic drivers of demand dominate
+1. At shorter time scales, interannual variability critically important

@@ -1,0 +1,14 @@
+# Citing 🎯 {.unnumbered}
+
+Please cite this resource as
+
+```bibtex
+@book{doss-gollin_textbook:2025,
+  author = {Doss-Gollin, James},
+  title = {Climate Risk Management},
+  year = {2025},
+  url = {https://jdossgollin.github.io/climate-risk-book},
+}
+```
+
+In the future, we will move to stable releases with numbered versions.

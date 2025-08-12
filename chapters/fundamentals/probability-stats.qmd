@@ -1,5 +1,5 @@
 ---
-title: Probability and Statistics 📝
+title: Probability and Statistics ✏️
 ---
 
 ## Learning Objectives {.unnumbered}
@@ -46,47 +46,60 @@ The probability that $y$ takes on the value $y^*$, written $p(y=y^*)$, is zero.
 
 ### Marginal, conditional, and joint distributions
 
+Understanding relationships between multiple random variables is essential for climate risk modeling, where we often need to consider how different variables interact.
+
 #### Marginal probability
 
 Probability of event $A$: $\Pr(A)$
 
-
-We will write the marginal probability density function as
+We write the marginal probability density function as:
 $$
 p(\theta) \quad \text{or} \quad p(y)
 $$
 
-#### Joint probability
+#### Joint probability  
 
-Probability of events $A$ and $B$: $\Pr(A  \& B)$
+Probability of events $A$ and $B$ both occurring: $\Pr(A \cap B)$
 
+The joint probability density function is written as:
 $$
 p(\theta, y)
 $$
 
 #### Conditional probability
 
-Probability of event $A$ given event $B$: $\Pr(A | B)$
+Probability of event $A$ given that event $B$ has occurred: $\Pr(A | B)$
 
+The conditional probability density function is:
 $$
 p(\theta | y) \quad \text{or} \quad p(y | \theta)
 $$
 
+#### Example: Two-Dice Wager
+
+A gambler presents you with an even-money wager. You will roll two dice, and if the highest number showing is one, two, three or four, then you win. If the highest number on either die is five or six, then she wins. Should you take the bet?
+
+This problem illustrates how joint and conditional probabilities help us evaluate complex scenarios involving multiple random events.
 
 ### Bayes' theorem
 
+Bayes' theorem provides the fundamental relationship between joint, marginal, and conditional probabilities:
 
 $$
 p(\theta, y) = p(\theta) p(y | \theta)
 $$
-and thus
+
+and thus:
 $$
 p(\theta | y) = \frac{p(\theta, y)}{p(y)} = \frac{p(\theta) p(y | \theta)}{p(y)}
 $$
-generally:
+
+In many applications, we work with the proportional form:
 $$
 p(\theta | y) \propto p(\theta) p(y | \theta)
 $$
+
+This theorem is fundamental to Bayesian inference and updating beliefs based on new evidence.
 
 ### Example: Regression as a Conditional Distribution
 
@@ -127,9 +140,139 @@ where $p(x_i)$ is the probability density of $x_i$.
 
 ### Descriptive statistics (mean, variance, quantiles)
 
+#### Mean
+
+The mean of a sample is the sample average:
+$$
+\bar{y} = \frac{1}{N} \sum_{i=1}^N y_i
+$$
+
+The mean of a distribution is the expected value:
+$$
+\mathbb{E}(u) = \int u p(u) \, du
+$$
+
+#### Variance
+
+Variance measures how points differ from the mean. 
+
+Sample variance:
+$$
+S^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n - 1}
+$$
+
+For a distribution:
+$$
+\mathbb{V}(u) = \int (u - \mathbb{E}(u))^2 p(u) \, du
+$$
+or, for a vector
+$$
+\mathbb{V}(u) = \int (u - \mathbb{E}(u)) (u - \mathbb{E}(u))^T p(u) \, du
+$$
+
 ### Central Limit Theorem
 
+The *central limit theorem* says that the sum of many independent random variables is approximately normally distributed.
+
+```{julia}
+#| code-fold: true
+#| label: fig-sample-means
+#| fig-cap: "Illustration of the central limit theorem"
+using CairoMakie
+using Distributions
+using LaTeXStrings
+
+dist = Gamma(2, 1)
+N = 10_000 # number of samples
+J = 300 # draws per sample
+ȳ = [
+    mean(rand(dist, J)) for i in 1:N
+]
+fig = hist(
+    ȳ;
+    bins=30,
+    axis=(
+        xlabel=L"$\bar{y}$",
+    ),
+    normalization=:probability,
+    label="$N sample means"
+)
+vlines!(
+    [mean(dist)],
+    color=:red,
+    linestyle=:dash,
+    label="True mean",
+    linewidth=2,
+)
+axislegend()
+fig
+```
+
 ### Common Probability Distributions
+
+#### Normal Distribution
+
+The Normal (Gaussian) distribution has probability density function:
+
+$$
+p(y | \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}} \exp
+\left(
+-\frac{1}{2}\left(
+\frac{y-\mu}{\sigma}
+\right)^{\!2}
+\,
+\right)
+$$
+
+- Mean $\mu$
+- Variance $\sigma^2$ 
+- Symmetric
+- Often written as shorthand: $y \sim \mathcal{N}(\mu, \sigma^2)$
+
+#### Bernoulli Distribution
+
+Models a coin flip with probability $p$ of success.
+
+```{julia}
+p = 0.5 # probability of heads
+rand(Bernoulli(p), 5)
+```
+
+#### Binomial Distribution
+
+Models the number of successes in $n$ consecutive trials with probability $p$.
+
+```{julia}
+p = 0.5
+N = 5
+rand(Binomial(N, p), 5)
+```
+
+#### Multinomial Distribution
+
+Extends the Binomial to multiple categories. Note that `p` is a *vector*.
+
+```{julia}
+p = [0.5, 0.3, 0.2]
+N = 5
+dist = Multinomial(N, p)
+rand(dist, 5)
+```
+
+#### Poisson Distribution
+
+Used to model count data. It is the limit of a Binomial distribution with $p=\lambda/N$, as $N \rightarrow \infty$.
+A Poisson distribution has mean and variance equal to $\lambda$.
+
+```{julia}
+dist = Poisson(2.5)
+rand(dist, 10)
+```
+
+#### Negative Binomial Distribution
+
+The Negative Binomial distribution relaxes the Poisson's assumption that $\text{mean} = \text{variance}$.
+This distribution models the number of successes before a specified number of failures occurs.
 
 #### Mixture models
 

@@ -1,0 +1,6 @@
+# Contributing 🎯 {.unnumbered}
+
+This textbook is a work in progress, and we welcome your contributions.
+Whether it's fixing a typo or proposing a new module, every suggestion helps.
+The easiest way to contribute is to fork the repository and submit a pull request.
+If you're not comfortable with that workflow, please open an issue [on GitHub]({{< var github-url >}}/issues).

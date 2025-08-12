@@ -1,17 +1,229 @@
 ---
-title: Fundamentals of Climate Science 🚧
+title: Fundamentals of Climate Science ✏️
 ---
 
 ## Learning Objectives {.unnumbered}
 
-- Grasp the key physical processes driving climate variability and change (radiative forcing, feedback loops).
-- Understand the structure and outputs of Global Climate Models (GCMs).
-- Recognize sources of uncertainty in climate projections (emission scenarios, model biases).
+After reading this chapter, you should be able to:
 
-## Earth’s energy balance, greenhouse effect
+- Identify key statistical characteristics of climate hazards (fat tails, non-stationarity, multi-scale variability)
+- Understand why traditional statistical approaches often fail for climate extremes
+- Recognize the decision-theoretic foundation for climate risk assessment
+- Grasp the key physical processes driving climate variability and change
+- Understand sources of uncertainty in climate projections and their implications for risk assessment
 
-## Multi-scale variability
+
+## Climate and the Water Cycle
+
+Climate refers to "the slowly varying aspects of the atmosphere–hydrosphere–land surface system." 
+The water cycle plays a key role in our climate system, connecting atmospheric processes with terrestrial and oceanic systems.
+
+![The water cycle plays a key role in our climate system. [{{< fa camera-retro >}}: USGS Water Cycle](https://labs.waterdata.usgs.gov/visualizations/water-cycle/index.html#/)](/_assets/img/USGS_WaterCycle_English_ONLINE_20230302.png)
+
+## Statistical Characteristics of Climate Hazards
+
+Climate hazards exhibit several key statistical properties that are crucial for risk assessment and management.
+Understanding these characteristics helps explain why traditional statistical approaches often fail for climate extremes.
+
+### Decision-Theoretic Foundation
+
+For any climate risk decision, we need to evaluate:
+$$
+\mathbb{E}(R(a)) = \int_{\mathcal{S}} R(a, {\bf{s}}) p({\bf{s}}) d{\bf{s}}
+$$
+
+where $a$ is a decision, $R(a, {\bf{s}})$ is the reward/utility function, and ${\bf{s}}$ represents the state of the climate system.
+
+**Crucial insight**: 
+$$
+\mathbb{E}(R(a)) \neq R(a, \mathbb{E}({\bf{s}}))
+$$
+
+This means we cannot simply use "average" climate conditions to assess risk.
+The full probability distribution $p({\bf{s}})$ matters, especially the tails.
+
+### Key Statistical Properties
+
+Climate hazards are characterized by:
+
+- **Fat tails**: Extreme events are more probable than normal distributions predict
+- **Quasi-periodic oscillations**: Multi-year patterns like ENSO, AMO, PDO
+- **Non-stationarity**: Statistical properties change over time due to climate change
+- **Multi-scale variability**: Processes operate across temporal and spatial scales
+- **Spatial coherence**: Extreme events often affect large regions simultaneously
+- **Deep uncertainty**: Structural uncertainty about future climate evolution
+
+### Examples of Climate Hazard Characteristics
+
+#### Extreme Events: Recent Examples
+
+**Floods in Paraguay, 2015**: Demonstrates the compound nature of climate hazards, where prolonged precipitation combined with river basin characteristics led to widespread inundation.
+
+**Texas Cold Snap, 2021**: Illustrates how rare events outside the historical range of variability can have catastrophic impacts on unprepared infrastructure systems.
+
+#### Fat Tails and Extreme Value Behavior
+
+Many climate variables exhibit "fat tail" behavior, meaning extreme values occur more frequently than predicted by normal distributions.
+This has profound implications for:
+- Infrastructure design based on return periods
+- Insurance and risk transfer mechanisms
+- Emergency preparedness planning
+
+#### Non-Stationarity and Climate Change
+
+Traditional statistical analysis assumes "stationarity" - that statistical properties remain constant over time.
+Climate change violates this assumption through:
+- Changing mean values (e.g., rising temperatures)
+- Changing variability (e.g., intensifying precipitation extremes)
+- Shifting seasonal patterns
+- Evolving spatial patterns of extremes
+
+#### Multi-Scale Temporal Variability
+
+Climate hazards vary across multiple time scales:
+- **Interannual**: El Niño-Southern Oscillation (2-7 years)
+- **Decadal**: Atlantic Multidecadal Oscillation (60-80 years)
+- **Centennial**: Long-term climate trends and solar cycles
+- **Millennial**: Ice age cycles and geological forcing
+
+This multi-scale nature means that short observational records may not capture the full range of possible climate states.
+
+### Implications for Climate Risk Assessment
+
+#### Requirements for "Good" Climate Estimates
+
+To support decision-making, climate hazard characterizations should be:
+- **Physically realistic**: Consistent with known climate processes
+- **High resolution**: Adequate spatial and temporal detail for impact assessment
+- **Uncertainty-aware**: Large ensemble sizes to quantify uncertainty
+- **Scenario-inclusive**: Multiple plausible futures for deep uncertainties
+
+#### Why Extremes Matter
+
+Climate risk assessment focuses on extremes because:
+- Most climate impacts are driven by extreme events, not average conditions
+- Infrastructure and ecosystems are often designed for historical extremes
+- Climate change may disproportionately affect extreme events
+- Extreme events drive most climate-related economic losses
+
+### Discussion Questions for Climate Science
+
+When studying climate science for risk assessment, consider these questions:
+
+- What are the challenges of using climate models to predict future climate?
+- What are the challenges of using climate models to predict future impacts?
+- How can observations help us understand future climate when the climate system is changing?
+- What is the difference between **climate risks** and **climate change risks**?
+- How should we plan for climate change impacts that are highly uncertain?
+
+These questions highlight the intersection between physical climate science and decision-making under uncertainty.
+
+## What Drives Climate Hazard Uncertainty?
+
+Understanding the sources of uncertainty in climate hazard assessment is crucial for effective risk management.
+
+### Motivating Applications
+
+#### Stormwater Infrastructure Design
+
+Consider sizing a stormwater pipe:
+1. Use rainfall-runoff model: $Q = CiA$ (rational method)
+   - $i$ is rainfall intensity, $A$ is drainage area, $C$ is runoff coefficient
+2. Select design rainfall based on return period $T$: $p(i > i^*) = 1/T$
+3. Size culvert to handle design flow $Q^* = Ci^*A$
+4. **Requires knowing** $p(i)$ - the probability distribution of rainfall intensity
+
+#### Floodplain Mapping
+
+For riverine flood risk assessment:
+1. Analyze historical streamflow data at gauge locations
+2. Estimate the 99th percentile (100-year return level) of annual maximum flows
+3. Use hydraulic models to map flood extent and depths
+4. **Requires understanding** the probability distribution of extreme flows
+
+#### Reservoir Design and Operations
+
+For water supply reliability:
+1. Consider $N$ years of inflows, releases, and evaporation
+2. Count failure events (reservoir emptying)
+3. Repeat with different flow scenarios
+4. **If sampling from** $p(\text{inflow})$, estimate system reliability using Monte Carlo methods
+
+#### Index Insurance Pricing
+
+For weather-based insurance products:
+1. Define insurance index $I$ (e.g., total seasonal rainfall)
+2. Set threshold $I^*$ for payouts of amount $X$
+3. Payout probability: $p^* = p(I > I^*)$
+4. Risk premium: $R = X \left( \mathbb{E}[p^*] + \lambda \mathbb{V}^{1/2}[p^*] \right)$
+5. **Requires estimating** probability distributions and their uncertainty
+
+### Case Study: Storm Surge Risk Assessment
+
+#### Problem Statement
+Design a storm surge barrier for Galveston Bay. What is the probability distribution of storm surge at your location?
+
+This requires understanding multiple components:
+
+#### Historical Data Analysis
+- **Advantages**: Measures actual hazards at locations of interest
+- **Limitations**: 
+  - Sampling uncertainty from short records
+  - Doesn't account for changing future conditions
+  - Limited spatial coverage
+
+#### Tropical Cyclone Characteristics
+To generate synthetic storm records, we need to model:
+- Storm tracks and intensities
+- Wind and precipitation fields
+- Storm surge physics using models (ADCIRC, GeoClaw, SFINCS)
+
+#### Sea Level Rise Scenarios
+Future storm surge risk depends on:
+1. Greenhouse gas emissions scenarios
+2. Climate system sensitivity to CO₂
+3. Ice sheet response to warming
+4. Local land subsidence rates
+
+#### Model Limitations and Uncertainties
+
+Recent research highlights persistent model biases:
+> "Models are incorrectly simulating the equatorial Pacific response to greenhouse gas warming. This implies that projections of regional tropical cyclone activity may be incorrect as well" [@sobel_biases:2023]
+
+### Sources of Uncertainty
+
+#### Historical Data
+- **Strengths**: Direct measurement of hazards
+- **Weaknesses**: Sampling uncertainty, limited to past conditions
+
+#### Model Simulations  
+- **Strengths**: Can explore future scenarios, larger sample sizes
+- **Weaknesses**: Model structure uncertainty, potential biases
+
+#### Deep Uncertainty
+Many aspects of future climate involve "deep uncertainty":
+- Unknown probability distributions
+- Uncertain model structure
+- Ambiguous scenario definitions
+
+### Key Concepts and Terminology
+
+- **Return Period**: Average time between exceedances of a threshold
+- **Return Level**: Magnitude of event associated with a given return period  
+- **Monte Carlo**: Statistical sampling method for uncertainty quantification
+- **Synthetic Record**: Model-generated data extending historical observations
+- **Climate Sensitivity**: Global temperature response to CO₂ doubling
+
+## Earth's Energy Balance and Greenhouse Effect
+
+*[This section to be developed with fundamental climate physics]*
+
+## Multi-Scale Variability
+
+*[This section to be developed with climate system dynamics]*
 
 ## Basics of GCMs and Earth System Models
+
+*[This section to be developed with climate model fundamentals]*
 
 ## Further Reading {.unnumbered}
