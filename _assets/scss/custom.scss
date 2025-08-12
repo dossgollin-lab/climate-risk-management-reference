@@ -1,0 +1,13 @@
+/*-- scss:defaults --*/
+
+// Sidebar font size
+$sidebar-font-size: 0.85rem;
+
+/*-- scss:rules --*/
+
+// Sidebar styling
+.sidebar-section-header,
+.sidebar-item-text,
+.quarto-sidebar-footer {
+  font-size: $sidebar-font-size;
+}

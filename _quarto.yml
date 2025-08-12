@@ -6,6 +6,7 @@ project:
 book:
   title: "Climate Risk Assessment and Management"
   author: "James Doss-Gollin"
+  
   page-footer:
     left: |
       <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} [{{< var author >}}](https://orcid.org/{{< var orcid >}})</span>
@@ -19,9 +20,17 @@ book:
     
   chapters:
     - index.qmd
+
+    - part: "**About this book**"
+      chapters:
+        - "chapters/about/license.qmd"
+        - "chapters/about/contributing.qmd"
+        - "chapters/about/citing.qmd"
+        - chapters/about/resources.qmd
+
     - chapters/preface.qmd
-    - chapters/resources.qmd
-    - part: "Part I: Foundations"
+    
+    - part: "**I: Foundations**"
       chapters:
         - chapters/fundamentals/index.qmd
         - chapters/fundamentals/probability-stats.qmd
@@ -30,7 +39,7 @@ book:
         - chapters/fundamentals/ml-nonparametric.qmd
         - chapters/fundamentals/spatiotemporal.qmd
         - chapters/fundamentals/model-comparison.qmd
-    - part: "Part II: Hazard Assessment"
+    - part: "**II: Hazard Assessment**"
       chapters:
         - chapters/hazard/index.qmd
         - chapters/hazard/climate-science.qmd
@@ -40,7 +49,7 @@ book:
         - chapters/hazard/generators.qmd
         - chapters/hazard/sampling.qmd
         - chapters/hazard/model-chains.qmd
-    - part: "Part III: Risk Management"
+    - part: "**III: Risk Management**"
       chapters:
         - chapters/risk/index.qmd
         - chapters/risk/exposure-vulnerability.qmd
@@ -52,7 +61,7 @@ book:
         - chapters/risk/adaptive.qmd
         - chapters/risk/social-science.qmd
 
-    - part: "Computational Case Studies"
+    - part: "**Computational Case Studies**"
       chapters: 
         - "notebooks/index.qmd"
         - "notebooks/block-maxima.qmd"
@@ -73,10 +82,11 @@ book:
     type: textbox
 
   sidebar:
-    collapse-level: 1
+    collapse-level: 0
     footer: |
-      Chapter titles indicate their **status:**
-      🚧 Planning, 📝 Draft, ✏️ Revision, 🎯 Ready.
+      This project is **under construction.**
+      Each page is either:
+      🚧 Planning, 📝 Draft, ✏️ Revision, or 🎯 Ready.
 
 
 bibliography: references.bib
@@ -94,7 +104,10 @@ google-scholar: true
 
 format:
   html:
-    theme: flatly
+    theme: 
+      - zephyr # spacelab pulse default zephyr flatly
+      - _assets/scss/custom.scss
+    fontsize: 0.95em
     code-overflow: wrap
     anchor-sections: true
     callout-appearance: simple
