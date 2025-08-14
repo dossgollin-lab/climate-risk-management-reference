@@ -1,4 +1,5 @@
 # License 🎯 {.unnumbered}
 
-This textbook is licensed under the [CC BY-SA 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
-It is free to use, share, and adapt, provided that you give appropriate credit, provide a link to the license, and indicate if changes were made.
+This textbook is licensed under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).
+It is free to use, share, and adapt for non-commercial purposes, provided that you give appropriate credit, provide a link to the license, and indicate if changes were made.
+If you would like to use this content for commercial purposes, please contact me.

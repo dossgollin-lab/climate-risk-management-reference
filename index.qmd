@@ -11,7 +11,7 @@ Welcome to {{< meta book.title >}}, an online textbook **under construction** by
 
 This textbook is a work in progress.
 Currently it's largely a brain dump, but I am building it out incrementally for use in my own classes.
-As I add and organize content, I will update the chapter status codes: 🚧 Planning, 📝 Draft, ✏️ Revision, and 🎯 Ready.
+As I add and organize content, I will update the chapter status codes: 🚧 (*planning*), 📝 (*draft*), ✏️ (*revision*), and 🎯 (*ready*).
 [Contributions are welcome](chapters/about/contributing.qmd)!
 :::
 
@@ -19,24 +19,20 @@ As I add and organize content, I will update the chapter status codes: 🚧 Plan
 
 ### History
 
-This project emerged from two courses taught at Rice University by [James Doss-Gollin](https://dossgollin-lab.github.io), [CEVE 543](https://ceve543.github.io) focused on climate hazard and extremes and [CEVE 421/521](https://ceve-421-521.github.io) focused on risk management.
-It is also partly inspired by @applegate_raes:2015 and motivated by identified needs across academia, government, and industry.
+This project emerged from two courses taught at Rice University by [James Doss-Gollin](https://dossgollin-lab.github.io): [CEVE 543](https://ceve543.github.io) focused on climate hazard and extremes and [CEVE 421/521](https://ceve-421-521.github.io) focused on risk management.
 
-### Scope 
+### Aim 
 
 The book is motivated by questions like
 
-- What is the probability distribution of wind speeds that a building structure might experience, and what drives changes to this distribution in a future climate?
-- How can insurers estimate the distribution of tropical cyclone losses across a regional portfolio?
+- What is the probability distribution of wind speeds that a building structure might experience?
+- What will the probability distribution of extreme rainfall be in 2050, and what drives uncertainty in this estimate?
+- What is the probability distribution of tropical cyclone losses across a regional portfolio?
 - When, and how high, should a house be elevated to proactively manage future flood risk?
 - What are robust, efficient, and equitable strategies for reducing flood risk in an urban area?
 
 These questions span scales and sectors, yet they share fundamental challenges: characterizing extreme events, quantifying uncertainty, assessing risks, and making robust decisions when probability distributions are unknown or contested.
 Moreover, there is not a single correct answer to these questions, or a single method that will incontrovertibly answer them.
-
-In contrast with texts that aim to provide a single authoritative approach to a subset of questions, often using methods that, if they are not outdated correctly, soon will be, this book aims to provide a comprehensive and conceptual introduction to hydroclimate risk management.
-Climate risk assessment and management is an interdisciplinary topic, integrating Earth science, applied math, statistics, machine learning, social sciences, and beyond, this text provides a foundational overview of the most important ideas, with detailed case studies illustrating the application of specific methods to real-world problems.
-The objective is to offer a unified framework for practitioners working at scales from local infrastructure design to regional risk assessment.
 
 ## How to Use This Resource
 
@@ -47,8 +43,6 @@ Practitioners may focus on specific chapters relevant to their work.
 Each chapter includes learning objectives and can be read independently, though some chapters build on concepts introduced in others.
 
 ### Structure 
-
-This book is organized in three parts
 
 - [The **Preface**](/chapters/preface.qmd) introduces the book's motivation and frames key challenges
 - [**Part 1**](/chapters/fundamentals/index.qmd) introduces key topics in probability, inference, Bayesian methods, optimization, machine learning, and Earth science.

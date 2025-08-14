@@ -1,5 +1,5 @@
 ---
-title: Spatiotemporal and High-Dimensional Methods ✏️
+title: Spatiotemporal Processes ✏️
 ---
 
 ## See First {.unnumbered}

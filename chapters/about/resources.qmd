@@ -1,7 +1,7 @@
 # Further Reading 🎯 {.unnumbered}
 
 Climate risk assessment and management are complex and interdisciplinary topics, and we are by no means comprehensive here.
-This page provides some helpful resources for your continued and supplementary study.
+This page provides some helpful resources (textbooks, detailed online tutorials, and class websites) for your continued and supplementary study.
 
 ## Inspiration
 
@@ -12,8 +12,7 @@ This textbook draws inspiration and content from several courses and lecture not
 - R. Balaji's Advanced Data Analysis Techniques
 (Statistical Learning Techniques for Engineering and Science) [course](https://civil.colorado.edu/~balajir/CVEN6833/) at CU Boulder
 - Alberto Montanari's [collection of open course notes and lectures](https://www.albertomontanari.it/lectures)
-
-The book also builds on and is inspired by @applegate_raes:2015.
+- **@applegate_raes:2015** motivates this project and demonstrates problem-based learning.
 
 ## Stats + ML basics
 
@@ -45,4 +44,4 @@ Most chapters could be a textbook of their own, and in fact many exist.
 - **@cressie_spatiotemporal:2011** provides a detailed exploration of hierarchical space-time models. There have been some computational advances since then that are worth keeping in mind before you apply these models directly, but it's a clearly written and overview.
 - **@thuerey_pbdl:2024** is a new textbook on physics-based deep learning, which is a rapidly growing area of research. It provides a comprehensive overview of the field, including theoretical foundations and practical applications. It covers topics, including neural operators and diffusion models, that are not covered in this course, but which are increasingly used in the climate risk space.
 - **@bishop_deeplearning:2024** is a comprehensive, modern, and accessible start-to-finish textbook covering machine learning from basic probability through diffusion models.
-
+- Michael Betancourt's [writing page](https://betanalpha.github.io/writing/) has detailed and mathematically rigorous explanations of many topics in Bayesian data analysis and probabilistic modeling.

@@ -12,11 +12,11 @@ book:
       <span class="faux-block">{{< fa brands creative-commons >}} {{< var years >}} [{{< var author >}}](https://orcid.org/{{< var orcid >}})</span>
       <span class="faux-block">
     center: |
-      All content licensed under [{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} Creative Commons CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)</span>
+      All content licensed under [{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} Creative Commons CC BY-NC 4.0](/chapters/about/license.qmd)</span>
 
     right: |
       <span class="faux-block">Made with Julia and [Quarto](https://quarto.org/).</span>
-      <span class="faux-block">[View the source at {{< fa brands github >}} GitHub]({{< var github-url >}})</span>
+      <span class="faux-block">[View the source on {{< fa brands github >}} GitHub]({{< var github-url >}})</span>
     
   chapters:
     - index.qmd
@@ -32,7 +32,7 @@ book:
     
     - part: "**I: Foundations**"
       chapters:
-        - chapters/fundamentals/index.qmd
+        - chapters/fundamentals/climate-science.qmd
         - chapters/fundamentals/probability-stats.qmd
         - chapters/fundamentals/optimization.qmd
         - chapters/fundamentals/monte-carlo.qmd
@@ -41,8 +41,6 @@ book:
         - chapters/fundamentals/model-comparison.qmd
     - part: "**II: Hazard Assessment**"
       chapters:
-        - chapters/hazard/index.qmd
-        - chapters/hazard/climate-science.qmd
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
         - chapters/hazard/perturbations.qmd
@@ -51,7 +49,6 @@ book:
         - chapters/hazard/model-chains.qmd
     - part: "**III: Risk Management**"
       chapters:
-        - chapters/risk/index.qmd
         - chapters/risk/exposure-vulnerability.qmd
         - chapters/risk/expectations-cost-benefit.qmd
         - chapters/risk/policy-search.qmd

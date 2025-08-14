@@ -1,5 +1,5 @@
 ---
-title: Machine Learning and Nonparametric Methods ✏️
+title: Machine Learning ✏️
 ---
 
 ## See First {.unnumbered}

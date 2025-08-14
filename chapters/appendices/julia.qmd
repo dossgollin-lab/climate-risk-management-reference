@@ -6,24 +6,17 @@ The computational examples in this textbook use the Julia programming language.
 
 ## Why Julia?
 
-Julia has many advantages for our purposes.
-Like languages such as Python, R, and Matlab, it has a clean, expressive syntax
+Julia offers a unique combination of features that make it particularly well-suited for scientific and numerical computing. As outlined in the ["Why Julia? - A Manifesto"](https://github.com/Datseris/whyjulia-manifesto), the language is designed to be **fast**, **dynamic**, and **easy to use**, addressing many of the common challenges faced by researchers and developers.
 
-- Readable to computers and humans
-- Closely parallels math notation
-- Designed for numerical and scientific computing
+### Key Advantages:
 
-Additionally, like languages such as C, Fortran, and Rust, it is fast!
-This solves the "two language problem" in which a popular package might be written in Python (e.g., `numpy`) or R (e.g., `tidyverse`), but modifying or developing the underlying methods requires writing code in a low-level language.
-If you prototype a method in R or Python, you might need to enlist the help of a software engineer to implement it in C or Fortran so that you can scale it to realistic problems.
-If you write in Julia, a software engineer will likely still be able to help you improve performance, but you will be better able to understand, update, and maintain the code yourself.
+* **High-Level Syntax:** Like Python, R, and Matlab, Julia has a clean and expressive syntax that is readable to both humans and computers, and it closely parallels mathematical notation.
+* **Performance:** Unlike those languages, however, Julia is fast. It compiles to efficient machine code, achieving speeds comparable to low-level languages like C and Fortran. This solves the "two-language problem," where a researcher might prototype a method in a high-level language but then need to rewrite it in a low-level one for performance.
+* **Extensibility and Composability:** Julia's multiple dispatch paradigm allows for exceptional code re-use and seamless integration between different packages, making it easy to extend existing libraries.
+* **Strong Ecosystem:** Despite being a newer language, Julia has a rapidly growing ecosystem of high-quality libraries for various scientific domains, from deep learning to climate data analysis.
+* **Accessibility and Reproducibility:** Julia is straightforward to install and manage. Its built-in package manager simplifies the process of sharing and reproducing research environments, which is crucial for collaborative and verifiable science.
 
-The methods discussed are applicable in other programming languages, such as Python, R, and C++.
-And while Julia is great, many relevant software ecosystems are stronger in other languages.
-For example, while Julia has great libraries for deep learning, industry and research tend to rely on the PyTorch/TensorFlow/JAX ecosystem and their Python interfaces.
-Similarly, while tooling for reading large climate data files in Julia is improving, the Python-based Pangeo/xarray community excels for working with gridded climate data.
-So while Julia is great for teaching, for general-purpose work, and for learning [computational thinking](https://computationalthinking.mit.edu/), you will likely need to learn other languages as well.
-
+The methods discussed are applicable in other programming languages, such as Python, R, and C++. And while Julia is great, many relevant software ecosystems are stronger in other languages. For example, while Julia has great libraries for deep learning, industry and research tend to rely on the PyTorch/TensorFlow/JAX ecosystem and their Python interfaces. Similarly, while tooling for reading large climate data files in Julia is improving, the Python-based Pangeo ecosystem remains more mature. Therefore, while Julia is a powerful tool for computational thinking and research, a well-rounded programmer will likely benefit from learning other languages as well.
 ## Julia Resources
 
 There are lots of great resources on programming and Julia.
