@@ -1,0 +1,152 @@
+# Overview ✏️ {.unnumbered}
+
+This part of the book focuses on **hazard assessment** - the process of characterizing climate hazards and their probability distributions.
+Understanding climate hazards is fundamental to risk assessment and management across many applications.
+
+## Why Climate Hazards Matter
+
+For virtually every climate risk decision, we need to evaluate the expected outcome:
+
+$$\mathbb{E}(R(a)) = \int_{\mathcal{S}} R(a, \mathbf{s}) p(\mathbf{s}) d\mathbf{s}$$
+
+where $a$ is a decision, $R(a, \mathbf{s})$ is the reward/utility function, and $\mathbf{s}$ represents the state of the climate system.
+
+**The key insight**: We cannot simply use "average" conditions. 
+The full probability distribution $p(\mathbf{s})$ matters, especially the tails representing extreme events.
+
+## Motivating Applications
+
+### Engineering Design: Stormwater Infrastructure
+
+**Challenge**: Size a stormwater pipe for adequate drainage
+
+**Process**:
+1. Use rainfall-runoff model: $Q = CiA$ (rational method)
+2. Design rainfall based on return period $T$: $p(i > i^*) = 1/T$  
+3. Size culvert to handle $Q^* = Ci^*A$
+
+**Requirement**: Must know precipitation probability distribution $p(i)$
+
+### Floodplain Mapping
+
+**Challenge**: Delineate areas at risk of riverine flooding
+
+**Process**:
+1. Analyze historical streamflow data at gauge
+2. Extract 100-year return level (99th percentile) of annual maximum flows
+3. Use hydraulic model to map flood extent
+
+**Requirement**: Must characterize extreme streamflow distributions
+
+### Reservoir Operations
+
+**Challenge**: Design reservoir for reliable water supply
+
+**Process**:
+1. Consider $N$ years of inflows, releases, and evaporation
+2. Count reservoir failures (empty states)
+3. Repeat with different inflow sequences (Monte Carlo)
+4. Estimate reliability if sampling from true $p(\text{inflow})$
+
+**Requirement**: Must understand inflow variability and extremes
+
+### Index Insurance Pricing
+
+**Challenge**: Price weather-based insurance products
+
+**Process**:
+1. Define trigger: payout $X$ if index $I > I^*$
+2. Calculate payout probability: $p^* = p(I > I^*)$
+3. Set premium: $R = X[\mathbb{E}[p^*] + \lambda \mathbb{V}^{1/2}[p^*]]$
+
+**Requirement**: Must quantify trigger probability and uncertainty
+
+## Case Study: Storm Surge Risk Assessment
+
+Storm surge provides an excellent example of the complexity involved in hazard assessment.
+
+### Physical Drivers
+
+**Tropical cyclone characteristics**:
+- Track and intensity
+- Size and forward speed  
+- Landfall location and timing
+
+**Environmental conditions**:
+- Sea level (mean and variability)
+- Coastal bathymetry and topography
+- Antecedent conditions
+
+### Modeling Chain
+
+1. **Tropical cyclone simulation**: Generate synthetic storm tracks and intensities
+2. **Meteorological modeling**: Create wind and pressure fields
+3. **Storm surge modeling**: Use hydrodynamic models (ADCIRC, GeoClaw, SFINCS)
+4. **Sea level projections**: Account for climate change effects
+
+### Sources of Uncertainty
+
+**Historical data limitations**:
+- Short observational records
+- Sampling uncertainty for rare events
+- Non-stationarity due to climate change
+
+**Model uncertainties**:
+- Tropical cyclone behavior in changing climate
+- Ice sheet dynamics and sea level rise
+- Regional climate patterns
+
+**Recent research** [@sobel_biases:2023] highlights that models may incorrectly simulate tropical responses to greenhouse gas warming, affecting regional projections.
+
+## The Central Challenge
+
+**Fundamental tension** in hazard assessment:
+
+### Historical Data
+**Strengths**:
+- Measures what we care about directly
+- Represents actual physical processes
+- Includes complex interactions
+
+**Limitations**:
+- Sampling uncertainty for rare events
+- Backward-looking (doesn't capture future conditions)
+- Limited spatial and temporal coverage
+
+### Model Simulations  
+**Strengths**:
+- Can explore future climate conditions
+- Generate large ensembles for rare event estimation
+- Incorporate physical understanding
+
+**Limitations**:
+- Model biases and structural uncertainty  
+- Simplified representation of complex processes
+- Uncertain future forcing scenarios
+
+## Key Technical Challenges
+
+### Sampling Variability
+- Observations are noisy, backward-looking, and incompletely measured
+- Model estimates can explore unseen conditions but layer in systematic biases
+- Rare events are necessarily hard to validate
+
+### Non-Stationarity
+- Climate change violates traditional stationarity assumptions
+- Relationships between large-scale and local climate may evolve
+- Historical records may not represent future conditions
+
+### Multi-Scale Interactions
+- Climate hazards emerge from processes across spatial and temporal scales
+- Local extremes depend on global patterns and regional processes
+- Compound and cascading hazards increase complexity
+
+## Structure of This Part
+
+This part addresses these challenges through several key topics:
+
+- **[Climate Science Fundamentals](climate-science.qmd)**: Physical basis of climate hazards and their characteristics
+- **[Extreme Value Theory](extremes.qmd)**: Statistical methods for characterizing rare events  
+- **[Downscaling and Bias Correction](downscaling-bias-correction.qmd)**: Connecting global models to local impacts
+
+The overarching goal is integrating information from noisy and/or biased sources to estimate the joint probability distribution of relevant hydroclimatic variables for decision-making under uncertainty.

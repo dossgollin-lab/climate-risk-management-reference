@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix B — Other Software Tools ✏️ – Climate Risk Assessment and Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/appendices/llm.html" rel="next">
+<link href="../../chapters/appendices/julia.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta name="citation_title" content="Climate Risk Assessment and Management">
+<meta name="citation_author" content="James Doss-Gollin">
+<meta name="citation_publication_date" content="2024-12-31">
+<meta name="citation_cover_date" content="2024-12-31">
+<meta name="citation_year" content="2024">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=An Introduction to Earth and Environmental Data Science;,citation_abstract=History: This book grew out of a course developed at Columbia University called Research Computing in Earth Science. It was written mostly by Ryan Abernathey, with significant contributions from Ke...;,citation_author=Ryan Abernathey;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://earth-env-data-science.github.io/intro.html;">
+<meta name="citation_reference" content="citation_title=Differential effects of climate change on average and peak demand for heating and cooling across the contiguous USA;,citation_abstract=While most electricity systems are designed to handle peak demand during summer months, long-term energy pathways consistent with deep decarbonization generally electrify building heating, thus increasing electricity demand during winter. A key question is how climate variability and change will affect peak heating and cooling demand in an electrified future. We conduct a spatially explicit analysis of trends in temperature-based proxies of electricity demand over the past 70 years. Average annual demand for heating (cooling) decreases (increases) over most of the contiguous US. However, while climate change drives robust increases in peak cooling demand, trends in peak heating demand are generally smaller and less robust. Because the distribution of temperature exhibits a long left tail, severe cold snaps dominate the extremes of thermal demand. As building heating electrifies, system operators must account for these events to ensure reliability.;,citation_author=Yash Amonkar;,citation_author=James Doss-Gollin;,citation_author=David J. Farnham;,citation_author=Vijay Modi;,citation_author=Upmanu Lall;,citation_publication_date=2023-11-01;,citation_cover_date=2023-11-01;,citation_year=2023;,citation_fulltext_html_url=https://www.nature.com/articles/s43247-023-01048-1;,citation_issue=1, 1;,citation_doi=10.1038/s43247-023-01048-1;,citation_issn=2662-4435;,citation_volume=4;,citation_journal_title=Communications Earth &amp;amp;amp; Environment;,citation_journal_abbrev=Commun Earth Environ;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Risk Analysis in the Earth Sciences;,citation_abstract=A free e-textbook that teaches the Earth science and statistical concepts needed to assess climate-related risks, using the R programming environment.;,citation_author=Patrick Applegate;,citation_author=Klaus Keller;,citation_publication_date=2015-10-26;,citation_cover_date=2015-10-26;,citation_year=2015;,citation_fulltext_html_url=https://leanpub.next/raes;">
+<meta name="citation_reference" content="citation_title=Climate risk assessment needs urgent improvement;,citation_abstract=Existing constraints in current climate risk assessments make them inappropriate to effectively assess the true exposure of society and businesses to climate-related risk. Using the key constraints to guide a conceptual framework, we identify four cross-cutting and inter-related critical paths for improvement.;,citation_author=Alberto Arribas;,citation_author=Ross Fairgrieve;,citation_author=Trevor Dhu;,citation_author=Juliet Bell;,citation_author=Rosalind Cornforth;,citation_author=Geoff Gooley;,citation_author=Chris J. Hilson;,citation_author=Amy Luers;,citation_author=Theodore G. Shepherd;,citation_author=Roger Street;,citation_author=Nick Wood;,citation_publication_date=2022-08-25;,citation_cover_date=2022-08-25;,citation_year=2022;,citation_fulltext_html_url=https://www.nature.com/articles/s41467-022-31979-w;,citation_issue=1, 1;,citation_doi=10.1038/s41467-022-31979-w;,citation_issn=2041-1723;,citation_volume=13;,citation_journal_title=Nature Communications;,citation_journal_abbrev=Nat Commun;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Determining benefits and costs for future generations;,citation_abstract=In economic project analysis, the rate at which future benefits and costs are discounted relative to current values often determines whether a project passes the benefit-cost test. This is especially true of projects with long time horizons, such as those to reduce greenhouse gas (GHG) emissions. Whether the benefits of climate policies, which can last for centuries, outweigh the costs, many of which are borne today, is especially sensitive to the rate at which future benefits are discounted. This is also true of other policies, e.g., affecting nuclear waste disposal or the construction of long-lived infrastructure. The United States and others should consider adopting a different approach to estimating costs and benefits in light of uncertainty. The United States and others should consider adopting a different approach to estimating costs and benefits in light of uncertainty.;,citation_author=K. Arrow;,citation_author=M. Cropper;,citation_author=C. Gollier;,citation_author=B. Groom;,citation_author=G. Heal;,citation_author=R. Newell;,citation_author=W. Nordhaus;,citation_author=R. Pindyck;,citation_author=W. Pizer;,citation_author=P. Portney;,citation_author=T. Sterner;,citation_author=R. S. J. Tol;,citation_author=M. Weitzman;,citation_publication_date=2013-07-26;,citation_cover_date=2013-07-26;,citation_year=2013;,citation_fulltext_html_url=https://science.sciencemag.org/content/341/6144/349;,citation_issue=6144;,citation_doi=10.1126/science.1235665;,citation_issn=0036-8075, 1095-9203;,citation_volume=341;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
+<meta name="citation_reference" content="citation_title=Social choice and individual values;,citation_author=Kenneth J. Arrow;,citation_publication_date=1951;,citation_cover_date=1951;,citation_year=1951;">
+<meta name="citation_reference" content="citation_title=Exploratory modeling for policy analysis;,citation_abstract=Exploratory modeling is using computational experiments to assist in reasoning about systems where there is significant uncertainty. While frequently confused with the use of models to consolidate knowledge into a package that is used to predict system behavior, exploratory modeling is a very different kind of use, requiring a different methodology for model development. This paper distinguishes these two broad classes of model use describes some of the approaches used in exploratory modeling, and suggests some technological innovations needed to facilitate it.;,citation_author=Steve Bankes;,citation_publication_date=1993-06-01;,citation_cover_date=1993-06-01;,citation_year=1993;,citation_fulltext_html_url=https://pubsonline.informs.org/doi/abs/10.1287/opre.41.3.435;,citation_issue=3;,citation_doi=10/c7rgcr;,citation_issn=0030-364X;,citation_volume=41;,citation_journal_title=Operations Research;,citation_journal_abbrev=Operations Research;">
+<meta name="citation_reference" content="citation_title=Generative AI without guardrails can harm learning: Evidence from high school mathematics;,citation_abstract=Generative AI is poised to revolutionize how humans work, and has already demonstrated promise in significantly improving human productivity. A key question is how generative AI affects learning—namely, how humans acquire new skills as they perform tasks. Learning is critical to long-term productivity, especially since generative AI is fallible and users must check its outputs. We study this question via a field experiment where we provide nearly a thousand high school math students with access to generative AI tutors. To understand the differential impact of tool design on learning, we deploy two generative AI tutors: one that mimics a standard ChatGPT interface (“GPT Base”) and one with prompts designed to safeguard learning (“GPT Tutor”). Consistent with prior work, our results show that having GPT-4 access while solving problems significantly improves performance (48% improvement in grades for GPT Base and 127% for GPT Tutor). However, we additionally find that when access is subsequently taken away, students actually perform worse than those who never had access (17% reduction in grades for GPT Base)—i.e., unfettered access to GPT-4 can harm educational outcomes. These negative learning effects are largely mitigated by the safeguards in GPT Tutor. Without guardrails, students attempt to use GPT-4 as a “crutch” during practice problem sessions, and subsequently perform worse on their own. Thus, decision-makers must be cautious about design choices underlying generative AI deployments to preserve skill learning and long-term productivity.;,citation_author=Hamsa Bastani;,citation_author=Osbert Bastani;,citation_author=Alp Sungu;,citation_author=Haosen Ge;,citation_author=Özge Kabakcı;,citation_author=Rei Mariman;,citation_publication_date=2025-07;,citation_cover_date=2025-07;,citation_year=2025;,citation_fulltext_html_url=https://www.pnas.org/doi/10.1073/pnas.2422633122;,citation_issue=26;,citation_doi=10.1073/pnas.2422633122;,citation_volume=122;,citation_journal_title=Proceedings of the National Academy of Sciences;,citation_publisher=Proceedings of the National Academy of Sciences;">
+<meta name="citation_reference" content="citation_title=Deep Learning: Foundations and Concepts;,citation_author=Christopher M. Bishop;,citation_author=Hugh Bishop;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://link.springer.com/10.1007/978-3-031-45468-4;,citation_doi=10.1007/978-3-031-45468-4;,citation_isbn=978-3-031-45467-7 978-3-031-45468-4;">
+<meta name="citation_reference" content="citation_title=Introduction to Probability, Second Edition;,citation_abstract=Developed from celebrated Harvard statistics lectures, Introduction to Probability provides essential language and tools for understanding statistics, randomness, and uncertainty. The book explores a wide variety of applications and examples, ranging from coincidences and paradoxes to Google PageRank and Markov chain Monte Carlo (MCMC). Additional application areas explored include genetics, medicine, computer science, and information theory. The authors present the material in an accessible style and motivate concepts using real-world examples. Throughout, they use stories to uncover connections between the fundamental distributions in statistics and conditioning to reduce complicated problems to manageable pieces.The book includes many intuitive explanations, diagrams, and practice problems. Each chapter ends with a section showing how to perform relevant simulations and calculations in R, a free statistical software environment. The second edition adds many new examples, exercises, and explanations, to deepen understanding of the ideas, clarify subtle concepts, and respond to feedback from many students and readers. New supplementary online resources have been developed, including animations and interactive visualizations, and the book has been updated to dovetail with these resources. Supplementary material is available on Joseph Blitzstein’s website www. stat110.net. The supplements include:Solutions to selected exercisesAdditional practice problemsHandouts including review material and sample exams Animations and interactive visualizations created in connection with the edX online version of Stat 110.Links to lecture videos available on ITunes U and YouTube There is also a complete instructor’s solutions manual available to instructors who require the book for a course.;,citation_author=Joseph K. Blitzstein;,citation_author=Jessica Hwang;,citation_publication_date=2019-02-08;,citation_cover_date=2019-02-08;,citation_year=2019;,citation_fulltext_html_url=http://probabilitybook.net;,citation_isbn=978-1-138-36991-7;">
+<meta name="citation_reference" content="citation_title=A water risk index for portfolio exposure to climatic extremes: Conceptualization and an application to the mining industry;,citation_abstract=Corporations, industries and non-governmental organizations have become increasingly concerned with growing water risks in many parts of the world. Most of the focus has been on water scarcity and competition for the resource between agriculture, urban users, ecology and industry. However, water risks are multi-dimensional. Water-related hazards include flooding due to extreme rainfall, persistent drought and pollution, either due to industrial operations themselves, or to the failure of infrastructure. Most companies have risk management plans at each operational location to address these risks to a certain design level. The residual risk may or may not be managed, and is typically not quantified at a portfolio scale, i.e. across many sites. Given that climate is the driver of many of these extreme events, and there is evidence of quasi-periodic climate regimes at inter-annual and decadal timescales, it is possible that a portfolio is subject to persistent, multi-year exceedances of the design level. In other words, for a multi-national corporation, it is possible that there is correlation in the climate-induced portfolio water risk across its operational sites as multiple sites may experience a hazard beyond the design level in a given year. Therefore, from an investor’s perspective, a need exists for a water risk index that allows for an exploration of the possible space and/or time clustering in exposure across many sites contained in a portfolio. This paper represents a first attempt to develop an index for financial exposure of a geographically diversified, global portfolio to the time-varying risk of climatic extremes using long daily global rainfall datasets derived from climate re-analysis models. Focusing on extreme daily rainfall amounts and using examples from major mining companies, we illustrate how the index can be developed. We discuss how companies can use it to explore their corporate exposure, and what they may need to disclose to investors and regulators to promote transparency as to risk exposure and mitigation efforts. For the examples of mining companies provided, we note that the actual exposure is substantially higher than would be expected in the absence of space and time correlation of risk as is usually tacitly assumed. We also find evidence for the increasing exposure to climate-induced risk, and for decadal variability in exposure. The relative vulnerability of different portfolios to multiple extreme events in a given year is also demonstrated.;,citation_author=Luc Bonnafous;,citation_author=Upmanu Lall;,citation_author=Jason Siegel;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://www.hydrol-earth-syst-sci.net/21/2075/2017/;,citation_issue=4;,citation_doi=10/f96k67;,citation_volume=21;,citation_journal_title=Hydrology and Earth System Sciences;">
+<meta name="citation_reference" content="citation_title=Dismantling Environmental Racism in the USA;,citation_abstract=A growing body of evidence reveals that people of colour and low‐income persons have borne greater environmental and health risks than the society at large in their neighbourhoods, workplaces and playgrounds. Over the past decade or so, grassroots activists have attempted to change the way government implements environmental, health and civil rights laws. A new movement has emerged in opposition to environmental racism and environmental injustice. Over the past two decades or so, grassroots activists have had some success in changing the way the federal government treats communities of colour and their inhabitants. Grassroots groups have also organised, educated and empowered themselves to improve the way health and environmental policies are administered. Environmentalism is now equated with social justice and civil rights.;,citation_author=Robert D. Bullard;,citation_publication_date=1999-02-01;,citation_cover_date=1999-02-01;,citation_year=1999;,citation_fulltext_html_url=https://doi.org/10.1080/13549839908725577;,citation_issue=1;,citation_doi=10.1080/13549839908725577;,citation_issn=1354-9839;,citation_volume=4;,citation_journal_title=Local Environment;,citation_publisher=Routledge;">
+<meta name="citation_reference" content="citation_title=Cascading risks: Understanding the 2021 winter blackout in Texas;,citation_abstract=The Texas freeze of February 2021 left more than 4.5 million customers (more than 10 million people) without electricity at its peak, some for several days. The freeze had cascading effects on other services reliant upon electricity including drinking water treatment and medical services. Economic losses from lost output and damage are estimated to be $130 billion in Texas alone. In the wake of the freeze, there has been major fallout among regulators and utilities as actors sought to apportion blame and utilities and generators began to settle up accounts. This piece offers a retrospective on what caused the blackouts and the knock-on effects on other services, the subsequent financial and political effects of the freeze, and the implications for Texas and the country going forward. Texas failed to sufficiently winterize its electricity and gas systems after 2011. Feedback between failures in the two systems made the situation worse. Overall, the state faced outages of 30 GW of electricity as demand reached unprecedented highs. The gap between production and demand forced the non-profit grid manager, the Electric Reliability Council of Texas (ERCOT), to cut off supply to millions of customers or face a systems collapse that by some accounts was minutes away. The 2021 freeze suggests a need to rethink the state’s regulatory approach to energy to avoid future such outcomes. Weatherization, demand response, and expanded interstate interconnections are potential solutions Texas should consider to avoid generation losses, reduce demand, and tap neighboring states’ capacity.;,citation_author=Joshua W. Busby;,citation_author=Kyri Baker;,citation_author=Morgan D. Bazilian;,citation_author=Alex Q. Gilbert;,citation_author=Emily Grubert;,citation_author=Varun Rai;,citation_author=Joshua D. Rhodes;,citation_author=Sarang Shidore;,citation_author=Caitlin A. Smith;,citation_author=Michael E. Webber;,citation_publication_date=2021-07-01;,citation_cover_date=2021-07-01;,citation_year=2021;,citation_fulltext_html_url=outage;,citation_doi=10.1016/j.erss.2021.102106;,citation_issn=2214-6296;,citation_volume=77;,citation_journal_title=Energy Research &amp;amp;amp; Social Science;,citation_journal_abbrev=Energy Research &amp;amp; Social Science;,citation_publisher=Elsevier;">
+<meta name="citation_reference" content="citation_title=An introduction to statistical modeling of extreme values;,citation_author=Stuart Coles;,citation_publication_date=2001;,citation_cover_date=2001;,citation_year=2001;,citation_isbn=1-85233-459-2;,citation_series_title=Springer series in statistics;">
+<meta name="citation_reference" content="citation_title=Climate services: The business of physical risk;,citation_abstract=A growing number of investors, insurers, financial services providers, and nonprofits rely on information about localized physical climate risks, like floods, hurricanes, and wildfires. The outcomes of these risk projections have significant consequences in the economy, including allocating investment capital, impacting housing prices and demographic shifts, and prioritizing adaptation infrastructure projects. The climate risk information available to individual citizens and municipalities, however, is limited and expensive to access. Further, many providers of climate services use black box models that make overseeing the scientific rigor of their methodologies impossible— a concern given scientific critiques that many may be obfuscating the uncertainty in their projections. Municipalities that want to challenge insurance and bond rating determinations must rally significant resources for modeling and data, a scattershot policing method at best. And when companies have access to sophisticated modeling about future impacts— some of them potentially devastating for entire communities—the decision to share that information has been largely left up to the corporation.This Article argues that actionable and transparent information about our climate-changed future is a public good that the private sector cannot be depended upon to provide equitably or reliably. Further, all private climate services rely on upstream climate data and models that were collected and produced by an enormous network of public institutions. There are important lessons to be learned from the recent success of special interests in pressing for the privatization of weather data and services—a trend that has knock-on effects for weather forecasts globally. This Article urges state and federal governments to invest in their own climate services capacity at a scale not currently contemplated. Risk assessments lacking a scientific basis can lead to maladaptation across the economy. While it is a potentially limited matter of consumer protection or tort liability when a consultancy over-promises its analytical capabilities, it is a much larger problem if regulators themselves misunderstand the limits of uncertainty when designing risk oversight.;,citation_author=Madison Condon;,citation_publication_date=2023-03-22;,citation_cover_date=2023-03-22;,citation_year=2023;,citation_fulltext_html_url=https://papers.ssrn.com/abstract=4396826;">
+<meta name="citation_reference" content="citation_title=Market myopia’s climate bubble;,citation_abstract=A growing number of financial institutions, ranging from BlackRock to the Bank of England, have warned that markets may not be accurately incorporating climate change-related risks into asset prices. This Article seeks to explain how this mispricing can exist at the level of individual assets drawing from scholarship on corporate governance and the mechanisms of market (in)efficiency. Market actors: 1. Lack the fine-grained asset-level data they need in order to assess risk exposure; 2. Continue to rely on outdated means of assessing risk; 3. Have misaligned incentives resulting in climate-specific agency costs; 4. Have myopic biases exacerbated by climate change misinformation; and 5. Are impeded by captured regulators distorting the market. Further, trends in institutional share ownership reinforce apathy regarding assessment of firm-specific fundamentals, especially over long-term horizons. This underpricing of corporate climate risk contributes to the negative effects of climate change itself, as the mispricing of risk in the present leads to a misallocation of investment capital, hindering future adaptation and subsidizing future fossil combustion. These risks could accumulate to the macroeconomic scale, generating a systemic risk to the financial system. While a broad array of government interventions are necessary to mitigate climate related financial risks, this Article focuses on proposals for corporate governance and securities regulation—and their limits. Signals from the Biden Administration suggest that mandatory climate risk disclosure regulation from the Securities and Exchange Commission is forthcoming. This Article argues that climate risk disclosure is necessary, though alone not sufficient, to address the widespread disregard of corporate climate exposure.;,citation_author=Madison Condon;,citation_publication_date=2021-02-09;,citation_cover_date=2021-02-09;,citation_year=2021;,citation_fulltext_html_url=https://papers.ssrn.com/abstract=3782675;,citation_issue=2022;,citation_doi=10.2139/ssrn.3782675;,citation_volume=63;,citation_journal_title=Utah Law Review;">
+<meta name="citation_reference" content="citation_title=Statistics for spatio-temporal data;,citation_author=Noel A. C. Cressie;,citation_author=Christopher K. Wikle;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_isbn=978-0-471-69274-4;">
+<meta name="citation_reference" content="citation_title=Understanding Convolutions on Graphs;,citation_abstract=Understanding the building blocks and design choices of graph neural networks.;,citation_author=Ameya Daigavane;,citation_author=Balaraman Ravindran;,citation_author=Gaurav Aggarwal;,citation_publication_date=2021-09-02;,citation_cover_date=2021-09-02;,citation_year=2021;,citation_fulltext_html_url=https://distill.pub/2021/understanding-gnns;,citation_issue=9;,citation_doi=10.23915/distill.00032;,citation_issn=2476-0757;,citation_volume=6;,citation_journal_title=Distill;,citation_journal_abbrev=Distill;">
+<meta name="citation_reference" content="citation_title=Theory of value; an axiomatic analysis of economic equilibrium;,citation_author=Gerard Debreu;,citation_publication_date=1959;,citation_cover_date=1959;,citation_year=1959;">
+<meta name="citation_reference" content="citation_title=Contribution of Antarctica to past and future sea-level rise;,citation_abstract=Climate and ice-sheet modelling that includes ice fracture dynamics reveals that Antarctica could contribute more than a metre of sea-level rise by 2100 and more than 13 metres by 2500, if greenhouse gas emissions continue unabated.;,citation_author=Robert M. DeConto;,citation_author=David Pollard;,citation_publication_date=2016-03;,citation_cover_date=2016-03;,citation_year=2016;,citation_fulltext_html_url=http://www.nature.com/articles/nature17145;,citation_issue=7596;,citation_doi=10.1038/nature17145;,citation_issn=1476-4687;,citation_volume=531;,citation_journal_title=Nature;,citation_journal_abbrev=Nature;">
+<meta name="citation_reference" content="citation_title=Evaluating the effect of flood damage-reducing measures: A case study of the unembanked area of Rotterdam, the Netherlands;,citation_abstract=Empirical evidence of increasing flood damages and the prospect of climatic change has initiated discussions in the flood management community on how to effectively manage flood risks. In the Netherlands, the framework of multi-layer safety (MLS) has been introduced to support this risk-based approach. The MLS framework consists of three layers: (i) prevention, (ii) spatial planning and (iii) evacuation. This paper presents a methodology to evaluate measures in the second layer, such as wet proofing, dry proofing or elevating buildings. The methodology uses detailed land-use data for the area around the city of Rotterdam (up to building level) that has recently become available. The vulnerability of these detailed land-use classes to flooding is assessed using the stage–damage curves from different international models. The methodology is demonstrated using a case study in the unembanked area of Rotterdam in the Netherlands, as measures from the second layer may be particularly effective there. The results show that the flood risk in the region is considerable: EUR 36 million p.a. A large part (almost 60&nbsp;%) of this risk results from industrial land use, emphasising the need to give this category more attention in flood risk assessments. It was found that building level measures could substantially reduce flood risks in the region because of the relatively low inundation levels of buildings. Risk to residential buildings would be reduced by 40&nbsp;% if all buildings would be wet-proofed, by 89&nbsp;% if all buildings would be dry-proofed and elevating buildings over 100&nbsp;cm would render the risk almost zero. While climate change could double the risk in 2100, such building level measures could easily nullify this effect. Despite the high potential of such measures, actual implementation is still limited. This is partly caused by the lack of knowledge regarding these measures by most Dutch companies and the legal impossibility for municipalities to enforce most of these measures as they would go beyond the building codes established at the national level.;,citation_author=Hans Moel;,citation_author=Mathijs Vliet;,citation_author=Jeroen C. J. H. Aerts;,citation_publication_date=2014-06-01;,citation_cover_date=2014-06-01;,citation_year=2014;,citation_fulltext_html_url=https://doi.org/10.1007/s10113-013-0420-z;,citation_issue=3;,citation_doi=10.1007/s10113-013-0420-z;,citation_issn=1436-378X;,citation_volume=14;,citation_journal_title=Regional Environmental Change;,citation_journal_abbrev=Reg Environ Change;">
+<meta name="citation_reference" content="citation_title=Real Options by Spreadsheet: Parking Garage Case Example;,citation_author=Richard Neufville;,citation_author=Stefan Scholtes;,citation_author=Tao Wang;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_fulltext_html_url=https://ascelibrary.org/doi/abs/10.1061/(ASCE)1076-0342(2006)12:2(107);,citation_issue=2;,citation_doi=10.1061/(asce)1076-0342(2006)12:2(107);,citation_volume=12;,citation_journal_title=Journal of Infrastructure Systems;,citation_journal_abbrev=Journal of Infrastructure Systems;">
+<meta name="citation_reference" content="citation_title=Managing uncertainty in flood protection planning with climate projections;,citation_author=Beatrice Dittes;,citation_author=Olga Špačková;,citation_author=Lukas Schoppa;,citation_author=Daniel Straub;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://www.hydrol-earth-syst-sci.net/22/2511/2018/;,citation_issue=4;,citation_doi=10.5194/hess-22-2511-2018;,citation_volume=22;,citation_journal_title=Hydrology and Earth System Sciences;">
+<meta name="citation_reference" content="citation_title=Improving the representation of climate risks in long-term electricity systems planning: A critical review;,citation_abstract=Purpose of Review Electricity systems face substantial climate risks which are escalating due to electrification, renewable energy intermittency, population changes, and the intensifying impacts of climate change such as extreme temperatures and weather-induced infrastructure damage. This critical review investigates climate risks to the electricity sector and scrutinizes the methodologies used to represent climate risk in long-term electricity system planning studies. Recent Findings Climate risks to electricity systems are driven by extreme weather, average weather, technology, and other social and technological factors. All are expected to evolve in the future. Future climate risks to electricity systems depend on interactions between each, and thus assessing future climate risks to electricity systems requires exploring a wide range of possible futures. Summary Many studies rely on weather data and socio-economic scenarios that are inadequate to fully characterize climate risks to present and future electricity systems. We advocate for more holistic assessments that incorporate comprehensive weather data, acknowledge dynamic multi-sector interactions, and employ adaptive and robust methodologies.;,citation_author=James Doss-Gollin;,citation_author=Yash Amonkar;,citation_author=Katlyn Schmeltzer;,citation_author=Daniel Cohan;,citation_publication_date=2023-08-16;,citation_cover_date=2023-08-16;,citation_year=2023;,citation_fulltext_html_url=https://doi.org/10.1007/s40518-023-00224-3;,citation_doi=10.1007/s40518-023-00224-3;,citation_issn=2196-3010;,citation_journal_title=Current Sustainable/Renewable Energy Reports;,citation_journal_abbrev=Curr Sustainable Renewable Energy Rep;">
+<meta name="citation_reference" content="citation_title=Robust adaptation to multiscale climate variability;,citation_abstract=The assessment and implementation of structural or financial instruments for climate risk mitigation requires projections of future climate risk over the operational life of each proposed instrument. A point often neglected in the climate adaptation literature is that the physical sources of predictability differ between projects with long and short planning periods: while historical and paleo climate records emphasize modes of variability, anthropogenic climate change is expected to alter their occurrence at longer time scales. In this paper we present a set of stylized experiments to assess the uncertainties and biases involved in estimating future climate risk over a finite future period, given a limited observational record. These experiments consider both quasi-periodic and secular change for the underlying risk, as well as statistical models for estimating this risk from an N-year historical record. The uncertainty of IPCC-like future scenarios is considered through an equivalent sample size N. The relative importance of estimating the short- or long-term risk extremes depends on the investment life M. Shorter design lives are preferred for situations where inter-annual to decadal variability can be successfully identified and predicted, suggesting the importance of sequential investment strategies for adaptation.;,citation_author=James Doss-Gollin;,citation_author=David J. Farnham;,citation_author=Scott Steinschneider;,citation_author=Upmanu Lall;,citation_publication_date=2019-06-07;,citation_cover_date=2019-06-07;,citation_year=2019;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019EF001154;,citation_issue=7;,citation_doi=10.1029/2019ef001154;,citation_issn=2328-4277;,citation_volume=7;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=A subjective Bayesian framework for synthesizing deep uncertainties in climate risk management;,citation_abstract=Projections of nonstationary climate risks can vary considerably from one source to another, posing considerable communication and decision-analytical challenges. One such challenge is how to present trade-offs under deep uncertainty in a salient and interpretable manner. Some common approaches include analyzing a small subset of projections or treating all considered projections as equally likely. These approaches can underestimate risks, hide deep uncertainties, and are mostly silent on which assumptions drive decision-relevant outcomes. Here we introduce and demonstrate a transparent Bayesian framework for synthesizing deep uncertainties to inform climate risk management. The first step of this workflow is to generate an ensemble of simulations representing possible futures and analyze them through standard exploratory modeling techniques. Next, a small set of probability distributions representing subjective beliefs about the likelihood of possible futures is used to weight the scenarios. Finally, these weights are used to compute and characterize trade-offs, conduct robustness checks, and reveal implicit assumptions. We demonstrate the framework through a didactic case study analyzing how high to elevate a house to manage coastal flood risks.;,citation_author=James Doss-Gollin;,citation_author=Klaus Keller;,citation_publication_date=2023-01;,citation_cover_date=2023-01;,citation_year=2023;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1029/2022EF003044;,citation_issue=1;,citation_doi=10.1029/2022EF003044;,citation_issn=2328-4277;,citation_volume=11;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=How unprecedented was the February 2021 Texas cold snap?;,citation_abstract=Winter storm Uri brought severe cold to the southern United States in February 2021, causing a cascading failure of interdependent systems in Texas where infrastructure was not adequately prepared for such cold. In particular, the failure of interconnected energy systems restricted electricity supply just as demand for heating spiked, leaving millions of Texans without heat or electricity, many for several days. This motivates the question: did historical storms suggest that such temperatures were known to occur, and if so with what frequency? We compute a temperature-based proxy for heating demand and use this metric to answer the question “what would the aggregate demand for heating have been had historic cold snaps occurred with today’s population?”. We find that local temperatures and the inferred demand for heating per capita across the region served by the Texas Interconnection were more severe during a storm in December 1989 than during February 2021, and that cold snaps in 1951 and 1983 were nearly as severe. Given anticipated population growth, future storms may lead to even greater infrastructure failures if adaptive investments are not made. Further, electricity system managers should prepare for trends in electrification of heating to drive peak annual loads on the Texas Interconnection during severe winter storms.;,citation_author=James Doss-Gollin;,citation_author=David J. Farnham;,citation_author=Upmanu Lall;,citation_author=Vijay Modi;,citation_publication_date=2021-06-08;,citation_cover_date=2021-06-08;,citation_year=2021;,citation_fulltext_html_url=e;,citation_doi=10.1088/1748-9326/ac0278;,citation_issn=1748-9326;,citation_journal_title=Environmental Research Letters;,citation_journal_abbrev=Environ. Res. Lett.;">
+<meta name="citation_reference" content="citation_title=Think Bayes;,citation_abstract=If you know how to program, you’re ready to tackle Bayesian statistics. With this book, you’ll learn how to solve statistical problems with Python code instead of mathematical formulas, using discrete probability distributions rather than continuous mathematics. Once you get the math out of the way, the Bayesian fundamentals will become clearer and you’ll begin to apply these techniques to real-world problems.Bayesian statistical methods are becoming more common and more important, but there aren’t many resources available to help beginners. Based on undergraduate classes taught by author Allen B. Downey, this book’s computational approach helps you get a solid start.Use your programming skills to learn and understand Bayesian statisticsWork with problems involving estimation, prediction, decision analysis, evidence, and Bayesian hypothesis testingGet started with simple examples, using coins, dice, and a bowl of cookiesLearn computational methods for solving real-world problems;,citation_author=Allen B. Downey;,citation_publication_date=2021-05-18;,citation_cover_date=2021-05-18;,citation_year=2021;,citation_fulltext_html_url=https://allendowney.github.io/ThinkBayes2/;,citation_isbn=978-1-4920-8941-4;">
+<meta name="citation_reference" content="citation_title=Risk, ambiguity, and the Savage axioms;,citation_abstract=Abstract. I. Are there uncertainties that are not risks? 643. — II. Uncertainties that are not risks, 647. — III. Why are some uncertainties not risks? — 656.;,citation_author=Daniel Ellsberg;,citation_publication_date=1961-11-01;,citation_cover_date=1961-11-01;,citation_year=1961;,citation_fulltext_html_url=http://academic.oup.com/qje/article/75/4/643/1913802;,citation_issue=4;,citation_doi=10.2307/1884324;,citation_issn=0033-5533;,citation_volume=75;,citation_journal_title=The Quarterly Journal of Economics;,citation_journal_abbrev=Q J Econ;,citation_publisher=Oxford Academic;">
+<meta name="citation_reference" content="citation_title=Regional extreme precipitation events: Robust inference from credibly simulated GCM variables;,citation_abstract=eneral circulation models (GCMs) have been demonstrated to produce estimates of precipitation, including the frequency of extreme precipitation, with substantial bias and uncertainty relative to their representation of other fields. Thus, while theory predicts changes in the hydrologic cycle under anthropogenic warming, there is generally low confidence in future projections of extreme precipitation frequency for specific river basins. In this paper, we explore whether a GCM simulates large-scale atmospheric circulation indices that are associated with regional extreme precipitation (REP) days more accurately than it simulates REP days themselves, and thus whether conditional simulation of the precipitation events based on the circulation indices may improve the simulation of REP events. We show that a coupled Geophysical Fluid Dynamics Laboratory GCM simulates too many springtime REP days in the Ohio River Basin in historical (1950–2005) simulations. The GCM, however, does credibly simulate the distributional and persistence properties of several indices (which represent the large-scale atmospheric pressure features, local atmospheric moisture content, and local vertical velocity) that are shown to modulate the likelihood of REP occurrence in the reanalysis/observational record. We show that simulation of REP events based on the GCM-based atmospheric indices greatly reduces the bias of GCM REP frequency relative to the observed record. The simulation is conducted via a Bayesian regression model by imposing the empirical relationship between observed REP occurrence and the reanalysis-based atmospheric indices. Application of this model to future (2006–2100) representative concentration pathway 8.5 scenario suggests an increasing trend in springtime REP incidence in the study region. The proposed approach of simulating precipitation events of interest, particularly those poorly represented in GCMs, with a statistical model based on climate indices that are reasonably simulated by GCMs could be applied to subseasonal to seasonal forecasts as well as future projections.;,citation_author=David J Farnham;,citation_author=James Doss-Gollin;,citation_author=Upmanu Lall;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://doi.org/10.1002/2017wr021318;,citation_issue=6;,citation_doi=10.1002/2017wr021318;,citation_volume=54;,citation_journal_title=Water Resources Research;">
+<meta name="citation_reference" content="citation_title=Learning about climate change uncertainty enables flexible water infrastructure planning;,citation_abstract=Water resources planning requires infrastructure development consider regional climatic uncertainties. Here the authors introduce a new dynamic planning framework that captures opportunities to learn about climate change over time. By applying it to reservoir planning in Kenya, they show the value of flexible approaches in responding to learning.;,citation_author=Sarah Fletcher;,citation_author=Megan Lickley;,citation_author=Kenneth Strzepek;,citation_publication_date=2019-04-16;,citation_cover_date=2019-04-16;,citation_year=2019;,citation_fulltext_html_url=http://www.nature.com/articles/s41467-019-09677-x;,citation_issue=1;,citation_doi=10.1038/s41467-019-09677-x;,citation_issn=2041-1723;,citation_volume=10;,citation_journal_title=Nature Communications;">
+<meta name="citation_reference" content="citation_title=Equity in Water Resources Planning: A Path Forward for Decision Support Modelers;,citation_author=Sarah Fletcher;,citation_author=Antonia Hadjimichael;,citation_author=Julianne Quinn;,citation_author=Khalid Osman;,citation_author=Matteo Giuliani;,citation_author=David Gold;,citation_author=Anjuli Jain Figueroa;,citation_author=Bethany Gordon;,citation_publication_date=2022-07;,citation_cover_date=2022-07;,citation_year=2022;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29WR.1943-5452.0001573;,citation_issue=7;,citation_doi=10.1061/(ASCE)WR.1943-5452.0001573;,citation_issn=0733-9496, 1943-5452;,citation_volume=148;,citation_journal_title=Journal of Water Resources Planning and Management;,citation_journal_abbrev=J. Water Resour. Plann. Manage.;">
+<meta name="citation_reference" content="citation_title=Bold New Jersey Shore Flood Rules Could Be Blueprint for Entire U.S. Coast;,citation_abstract=Coastal flood zones where development is restricted will be based on future climate change projections, not past floods;,citation_author=Thomas Frank;,citation_publication_date=2022-08-22;,citation_cover_date=2022-08-22;,citation_year=2022;,citation_fulltext_html_url=https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/;,citation_journal_title=Scientific American;">
+<meta name="citation_reference" content="citation_title=The Elements of Statistical Learning;,citation_author=Jerome Friedman;,citation_author=Trevor Hastie;,citation_author=Robert Tibshirani;,citation_publication_date=2001;,citation_cover_date=2001;,citation_year=2001;,citation_volume=1;">
+<meta name="citation_reference" content="citation_title=Using direct policy search to identify robust strategies in adapting to uncertain sea-level rise and storm surge;,citation_abstract=Sea-level rise poses considerable risks to coastal communities, ecosystems, and infrastructure. Decision makers are faced with uncertain sea-level projections when designing a strategy for coastal adaptation. The traditional methods are often silent on tradeoffs as well as the effects of tail-area events and of potential future learning. Here we reformulate a simple sea-level rise adaptation model to address these concerns. We show that Direct Policy Search yields improved solution quality, with respect to Pareto-dominance in the objectives, over the traditional approach under uncertain sea-level rise projections and storm surge. Additionally, the new formulation produces high quality solutions with less computational demands than an intertemporal optimization approach. Our results illustrate the utility of multi-objective adaptive formulations for the example of coastal adaptation and point to wider-ranging application in climate change adaptation decision problems.;,citation_author=Gregory G. Garner;,citation_author=Klaus Keller;,citation_publication_date=2018-09-01;,citation_cover_date=2018-09-01;,citation_year=2018;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S1364815217307727;,citation_doi=10.1016/j.envsoft.2018.05.006;,citation_issn=1364-8152;,citation_volume=107;,citation_journal_title=Environmental Modelling &amp;amp;amp; Software;,citation_journal_abbrev=Environmental Modelling &amp;amp; Software;">
+<meta name="citation_reference" content="citation_title=Bayesian Data Analysis;,citation_author=Andrew Gelman;,citation_author=John B Carlin;,citation_author=Hal S Stern;,citation_author=Donald B Rubin;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;">
+<meta name="citation_reference" content="citation_title=Philosophy and the practice of Bayesian statistics;,citation_abstract=A substantial school in the philosophy of science identifies Bayesian inference with inductive inference and even rationality as such, and seems to be strengthened by the rise and practical success of Bayesian statistics. We argue that the most successful forms of Bayesian statistics do not actually support that particular philosophy but rather accord much better with sophisticated forms of hypothetico-deductivism. We examine the actual role played by prior distributions in Bayesian models, and the crucial aspects of model checking and model revision, which fall outside the scope of Bayesian confirmation theory. We draw on the literature on the consistency of Bayesian updating and also on our experience of applied work in social science. Clarity about these matters should benefit not just philosophy of science, but also statistical practice. At best, the inductivist view has encouraged researchers to fit and compare models without checking them; at worst, theorists have actively discouraged practitioners from performing model checking because it does not fit into their framework.;,citation_author=Andrew Gelman;,citation_author=Cosma Rohilla Shalizi;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1111/j.2044-8317.2011.02037.x;,citation_issue=1;,citation_doi=10/f4k2h4;,citation_issn=2044-8317;,citation_volume=66;,citation_journal_title=British Journal of Mathematical and Statistical Psychology;">
+<meta name="citation_reference" content="citation_title=Regression and other stories;,citation_abstract=&amp;amp;amp;quot;Many textbooks on regression focus on theory and the simplest examples. Real statistical problems, however, are complex and subtle. This is not a book about the theory of regression. It is a book about how to use regression to solve real problems of comparison, estimation, prediction, and causal inference. It focuses on practical issues such as sample size and missing data and a wide range of goals and techniques. It jumps right in to methods and computer code you can use fresh out of the box&amp;quot;–Back cover;,citation_author=Andrew Gelman;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_isbn=978-1-107-67651-0;,citation_series_title=Analytical methods for social research;">
+<meta name="citation_reference" content="citation_title=Beyond subjective and objective in statistics;,citation_abstract=Decisions in statistical data analysis are often justified, criticized or avoided by using concepts of objectivity and subjectivity. We argue that the words “objective” and “subjective” in statistics discourse are used in a mostly unhelpful way, and we propose to replace each of them with broader collections of attributes, with objectivity replaced by transparency, consensus, impartiality and correspondence to observable reality, and subjectivity replaced by awareness of multiple perspectives and context dependence. Together with stability, these make up a collection of virtues that we think is helpful in discussions of statistical foundations and practice. The advantage of these reformulations is that the replacement terms do not oppose each other and that they give more specific guidance about what statistical science strives to achieve. Instead of debating over whether a given statistical method is subjective or objective (or normatively debating the relative merits of subjectivity and objectivity in statistical practice), we can recognize desirable attributes such as transparency and acknowledgement of multiple perspectives as complementary goals. We demonstrate the implications of our proposal with recent applied examples from pharmacology, election polling and socio-economic stratification. The aim of the paper is to push users and developers of statistical methods towards more effective use of diverse sources of information and more open acknowledgement of assumptions and goals.;,citation_author=Andrew Gelman;,citation_author=Christian Hennig;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssa.12276;,citation_issue=4;,citation_doi=10.1111/rssa.12276;,citation_issn=1467-985X;,citation_volume=180;,citation_journal_title=Journal of the Royal Statistical Society: Series A (Statistics in Society);">
+<meta name="citation_reference" content="citation_title=Bayesian workflow;,citation_abstract=The Bayesian approach to data analysis provides a powerful way to handle uncertainty in all observations, model parameters, and model structure using probability theory. Probabilistic programming languages make it easier to specify and fit Bayesian models, but this still leaves us with many options regarding constructing, evaluating, and using these models, along with many remaining challenges in computation. Using Bayesian inference to solve real-world problems requires not only statistical skills, subject matter knowledge, and programming, but also awareness of the decisions made in the process of data analysis. All of these aspects can be understood as part of a tangled workflow of applied Bayesian statistics. Beyond inference, the workflow also includes iterative model building, model checking, validation and troubleshooting of computational problems, model understanding, and model comparison. We review all these aspects of workflow in the context of several examples, keeping in mind that in practice we will be fitting many models for any given problem, even if only a subset of them will ultimately be relevant for our conclusions.;,citation_author=Andrew Gelman;,citation_author=Aki Vehtari;,citation_author=Daniel Simpson;,citation_author=Charles C. Margossian;,citation_author=Bob Carpenter;,citation_author=Yuling Yao;,citation_author=Lauren Kennedy;,citation_author=Jonah Gabry;,citation_author=Paul-Christian Bürkner;,citation_author=Martin Modrák;,citation_publication_date=2020-11-03;,citation_cover_date=2020-11-03;,citation_year=2020;,citation_fulltext_html_url=http://arxiv.org/abs/2011.01808;,citation_doi=10.48550/arXiv.2011.01808;">
+<meta name="citation_reference" content="citation_title=Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review;,citation_abstract=AbstractHighway bridges are one of the most vulnerable constituents of transportation networks when exposed to one or more natural hazards, such as earthquakes, hurricanes, tsunamis, and riverine floods. To facilitate and enhance prehazard and posthazard ...;,citation_author=Ioannis Gidaris;,citation_author=Jamie E. Padgett;,citation_author=Andre R. Barbosa;,citation_author=Suren Chen;,citation_author=Daniel Cox;,citation_author=Bret Webb;,citation_author=Amy Cerato;,citation_publication_date=2017-03-01;,citation_cover_date=2017-03-01;,citation_year=2017;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29ST.1943-541X.0001672;,citation_issue=3;,citation_doi=10.1061/(ASCE)ST.1943-541X.0001672;,citation_issn=1943-541X;,citation_volume=143;,citation_journal_title=Journal of Structural Engineering;,citation_publisher=American Society of Civil Engineers;">
+<meta name="citation_reference" content="citation_title=Beyond wickedness: Managing complex systems and climate change;,citation_author=Jonathan M. Gilligan;,citation_author=Michael P. Vandenbergh;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://wp0.vanderbilt.edu/lawreview/2020/12/beyond-wickedness-managing-complex-systems-and-climate-change/;,citation_volume=73;,citation_journal_title=Vanderbilt Law Review;,citation_journal_abbrev=Vand. L. Rev.;">
+<meta name="citation_reference" content="citation_title=Downscaling projections of Indian monsoon rainfall using a non‐homogeneous hidden Markov model;,citation_author=Arthur M Greene;,citation_author=Andrew W Robertson;,citation_author=Padhraic Smyth;,citation_author=Scott Triglia;,citation_publication_date=2011-01;,citation_cover_date=2011-01;,citation_year=2011;,citation_issue=655;,citation_doi=10.1002/qj.788;,citation_volume=137;,citation_journal_title=Quart J Royal Meteoro Soc;,citation_publisher=Wiley Online Library;">
+<meta name="citation_reference" content="citation_title=Emissions – the ’business as usual’ story is misleading;,citation_abstract=Stop using the worst-case scenario for climate warming as the most likely outcome — more-realistic baselines make for better policy.;,citation_author=Zeke Hausfather;,citation_author=Glen P. Peters;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/d41586-020-00177-3;,citation_issue=7792, 7792;,citation_doi=10.1038/d41586-020-00177-3;,citation_volume=577;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
+<meta name="citation_reference" content="citation_title=Climate adaptation as a control problem: Review and perspectives on dynamic water resources planning under uncertainty;,citation_abstract=Climate change introduces substantial uncertainty to water resources planning, and raises the key question: when, or under what conditions, should adaptation occur? A number of recent studies aim to identify policies mapping future observations to actions—in other words, framing climate adaptation as an optimal control problem. This paper uses the control paradigm to review and classify recent dynamic planning studies according to their approaches to uncertainty characterization, policy structure, and solution methods. We propose a set of research gaps and opportunities in this area centered on the challenge of characterizing uncertainty, which prevents the unambiguous application of control methods to this problem. These include: exogenous uncertainty in forcing, model structure, and parameters propagated through a chain of climate and hydrologic models; endogenous uncertainty in human-environmental system dynamics across multiple scales; and sampling uncertainty due to the finite length of historical observations and future projections. Recognizing these challenges, several opportunities exist to improve the use of control methods for climate adaptation, namely: how problem context and understanding of climate processes might assist with uncertainty quantification and experimental design; out-of-sample validation and robustness of optimized adaptation policies; and monitoring and data assimilation, including trend detection, Bayesian inference, and indicator variable selection. We conclude with a summary of recommendations for dynamic water resources planning under climate change through the lens of optimal control.;,citation_author=Jonathan D. Herman;,citation_author=Julianne D. Quinn;,citation_author=Scott Steinschneider;,citation_author=Matteo Giuliani;,citation_author=Sarah Fletcher;,citation_publication_date=2020-01-07;,citation_cover_date=2020-01-07;,citation_year=2020;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019WR025502;,citation_doi=10.1029/2019wr025502;,citation_issn=1944-7973;,citation_journal_title=Water Resources Research;">
+<meta name="citation_reference" content="citation_title=How should robustness be defined for water systems planning under change?;,citation_abstract=Water systems planners have long recognized the need for robust solutions capable of withstanding deviations from the conditions for which they were designed. Robustness analyses have shifted from expected utility to exploratory bottom-up approaches which identify vulnerable scenarios prior to assigning likelihoods. Examples include Robust Decision Making (RDM), Decision Scaling, Info-Gap, and Many-Objective Robust Decision Making (MORDM). We propose a taxonomy of robustness frameworks to compare and contrast these approaches based on their methods of (1) alternative generation, (2) sampling of states of the world, (3) quantification of robustness measures, and (4) sensitivity analysis to identify important uncertainties. Building from the proposed taxonomy, we use a regional urban water supply case study in the Research Triangle region of North Carolina to illustrate the decision-relevant consequences that emerge from each of these choices. Results indicate that the methodological choices in the taxonomy lead to the selection of substantially different planning alternatives, underscoring the importance of an informed definition of robustness. Moreover, the results show that some commonly employed methodological choices and definitions of robustness can have undesired consequences when ranking decision alternatives. For the demonstrated test case, recommendations for overcoming these issues include: (1) decision alternatives should be searched rather than prespecified, (2) dominant uncertainties should be discovered through sensitivity analysis rather than assumed, and (3) a carefully elicited multivariate satisficing measure of robustness allows stakeholders to achieve their problem-specific performance requirements. This work emphasizes the importance of an informed problem formulation for systems facing challenging performance tradeoffs and provides a common vocabulary to link the robustness frameworks widely used in the field of water systems planning.;,citation_author=Jonathan D. Herman;,citation_author=Patrick M. Reed;,citation_author=Harrison B. Zeff;,citation_author=Gregory W. Characklis;,citation_publication_date=2015-10-01;,citation_cover_date=2015-10-01;,citation_year=2015;,citation_fulltext_html_url=http://ascelibrary.org/doi/abs/10.1061/(ASCE)WR.1943-5452.0000509;,citation_issue=10;,citation_doi=10.1061/(asce)wr.1943-5452.0000509;,citation_volume=141;,citation_journal_title=Journal of Water Resources Planning and Management;,citation_journal_abbrev=Journal of Water Resources Planning and Management;">
+<meta name="citation_reference" content="citation_title=Evaluating the distributional fairness of alternative adaptation policies: A case study in Vietnam’s upper Mekong Delta;,citation_abstract=To support equitable adaptation planning, quantitative assessments should consider the fairness of the distribution of outcomes to different people. What constitutes a fair distribution, however, is a normative question. In this study, we explore the use of different moral principles drawn from theories of distributive justice to evaluate fairness. We use adaptation planning in Vietnam Mekong Delta as a case study. We evaluate the preference ranking of six alternative policies for seven moral principles across an ensemble of scenarios. Under the baseline scenario, each principle yields distinctive preference rankings, though most principles identify the same policy as the most preferred one. Across the ensemble of scenarios, the commonly used utilitarian principle yields the most stable ranking, while rankings from other principles are more sensitive to uncertainty. The sufficientarian and the envy-free principles yield the most distinctive ranking of policies, with a median ranking correlation of only 0.07 across all scenarios. Finally, we identify scenarios under which using these two principles results in reversed policy preference rankings. Our study highlights the importance of considering multiple moral principles in evaluating the fairness of adaptation policies, as this would reduce the possibility of maladaptation.;,citation_author=Bramka Arga Jafino;,citation_author=Jan H. Kwakkel;,citation_author=Frans Klijn;,citation_publication_date=2022-08-02;,citation_cover_date=2022-08-02;,citation_year=2022;,citation_fulltext_html_url=https://doi.org/10.1007/s10584-022-03395-y;,citation_issue=3;,citation_doi=10.1007/s10584-022-03395-y;,citation_issn=1573-1480;,citation_volume=173;,citation_journal_title=Climatic Change;,citation_journal_abbrev=Climatic Change;">
+<meta name="citation_reference" content="citation_title=An Introduction to Statistical Learning;,citation_author=Gareth James;,citation_author=Daniela Witten;,citation_author=Trevor Hastie;,citation_author=Robert Tibshirani;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_isbn=978-1-4614-7137-0;,citation_volume=103;,citation_series_title=Springer Texts in Statistics;">
+<meta name="citation_reference" content="citation_title=Probability theory: The logic of science;,citation_author=Edwin T. Jaynes;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_isbn=978052159271;">
+<meta name="citation_reference" content="citation_title=Global exposure to river and coastal flooding: Long term trends and changes;,citation_author=Brenden Jongman;,citation_author=Philip J Ward;,citation_author=Jeroen C J H Aerts;,citation_publication_date=2012-10;,citation_cover_date=2012-10;,citation_year=2012;,citation_fulltext_html_url=http://linkinghub.elsevier.com/retrieve/pii/S0959378012000830;,citation_issue=4;,citation_doi=10.1016/j.gloenvcha.2012.07.004;,citation_volume=22;,citation_journal_title=Global Environmental Change;">
+<meta name="citation_reference" content="citation_title=Many objective robust decision making for complex environmental systems undergoing change;,citation_abstract=This paper introduces many objective robust decision making (MORDM). MORDM combines concepts and methods from many objective evolutionary optimization and robust decision making (RDM), along with extensive use of interactive visual analytics, to facilitate the management of complex environmental systems. Many objective evolutionary search is used to generate alternatives for complex planning problems, enabling the discovery of the key tradeoffs among planning objectives. RDM then determines the robustness of planning alternatives to deeply uncertain future conditions and facilitates decision makers’ selection of promising candidate solutions. MORDM tests each solution under the ensemble of future extreme states of the world (SOW). Interactive visual analytics are used to explore whether solutions of interest are robust to a wide range of plausible future conditions (i.e., assessment of their Pareto satisficing behavior in alternative SOW). Scenario discovery methods that use statistical data mining algorithms are then used to identify what assumptions and system conditions strongly influence the cost-effectiveness, efficiency, and reliability of the robust alternatives. The framework is demonstrated using a case study that examines a single city’s water supply in the Lower Rio Grande Valley (LRGV) in Texas, USA. Results suggest that including robustness as a decision criterion can dramatically change the formulation of complex environmental management problems as well as the negotiated selection of candidate alternatives to implement. MORDM also allows decision makers to characterize the most important vulnerabilities for their systems, which should be the focus of ex post monitoring and identification of triggers for adaptive management.;,citation_author=Joseph R. Kasprzyk;,citation_author=Shanthi Nataraj;,citation_author=Patrick M. Reed;,citation_author=Robert J. Lempert;,citation_publication_date=2013-04-01;,citation_cover_date=2013-04-01;,citation_year=2013;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S1364815212003131;,citation_doi=10.1016/j.envsoft.2012.12.007;,citation_issn=1364-8152;,citation_volume=42;,citation_journal_title=Environmental Modelling &amp;amp;amp; Software;,citation_journal_abbrev=Environmental Modelling &amp;amp; Software;">
+<meta name="citation_reference" content="citation_title=Climate risk management;,citation_author=Klaus Keller;,citation_author=Casey Helgeson;,citation_author=Vivek Srikrishnan;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_issue=1;,citation_doi=10.1146/annurev-earth-080320-055847;,citation_issn=0084-6597;,citation_volume=49;,citation_journal_title=Annual Review of Earth and Planetary Sciences;,citation_publisher=Annual Reviews;">
+<meta name="citation_reference" content="citation_title=Adam: A Method for Stochastic Optimization;,citation_abstract=We introduce Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions, based on adaptive estimates of lower-order moments. The method is straightforward to implement, is computationally efficient, has little memory requirements, is invariant to diagonal rescaling of the gradients, and is well suited for problems that are large in terms of data and/or parameters. The method is also appropriate for non-stationary objectives and problems with very noisy and/or sparse gradients. The hyper-parameters have intuitive interpretations and typically require little tuning. Some connections to related algorithms, on which Adam was inspired, are discussed. We also analyze the theoretical convergence properties of the algorithm and provide a regret bound on the convergence rate that is comparable to the best known results under the online convex optimization framework. Empirical results demonstrate that Adam works well in practice and compares favorably to other stochastic optimization methods. Finally, we discuss AdaMax, a variant of Adam based on the infinity norm.;,citation_author=Diederik P. Kingma;,citation_author=Jimmy Ba;,citation_publication_date=2017-01-30;,citation_cover_date=2017-01-30;,citation_year=2017;,citation_fulltext_html_url=http://arxiv.org/abs/1412.6980;,citation_doi=10.48550/arXiv.1412.6980;">
+<meta name="citation_reference" content="citation_title=Evolving understanding of Antarctic ice-sheet physics and ambiguity in probabilistic sea-level projections;,citation_abstract=Mechanisms such as ice-shelf hydrofracturing and ice-cliff collapse may rapidly increase discharge from marine-based ice sheets. Here, we link a probabilistic framework for sea-level projections to a small ensemble of Antarctic ice-sheet (AIS) simulations incorporating these physical processes to explore their influence on global-mean sea-level (GMSL) and relative sea-level (RSL). We compare the new projections to past results using expert assessment and structured expert elicitation about AIS changes. Under high greenhouse gas emissions (Representative Concentration Pathway [RCP] 8.5), median projected 21st century GMSL rise increases from 79 to 146 cm. Without protective measures, revised median RSL projections would by 2100 submerge land currently home to 153 million people, an increase of 44 million. The use of a physical model, rather than simple parameterizations assuming constant acceleration of ice loss, increases forcing sensitivity: overlap between the central 90% of simulations for 2100 for RCP 8.5 (93–243 cm) and RCP 2.6 (26–98 cm) is minimal. By 2300, the gap between median GMSL estimates for RCP 8.5 and RCP 2.6 reaches $&amp;amp;amp;gt;$10 m, with median RSL projections for RCP 8.5 jeopardizing land now occupied by 950 million people (versus 167 million for RCP 2.6). The minimal correlation between the contribution of AIS to GMSL by 2050 and that in 2100 and beyond implies current sea-level observations cannot exclude future extreme outcomes. The sensitivity of post-2050 projections to deeply uncertain physics highlights the need for robust decision and adaptive management frameworks.;,citation_author=Robert E. Kopp;,citation_author=Robert M. DeConto;,citation_author=Daniel A. Bader;,citation_author=Carling C. Hay;,citation_author=Radley M. Horton;,citation_author=Scott Kulp;,citation_author=Michael Oppenheimer;,citation_author=David Pollard;,citation_author=Benjamin H. Strauss;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://doi.org/10.1002/2017ef000663;,citation_issue=12;,citation_doi=10.1002/2017ef000663;,citation_issn=2328-4277;,citation_volume=5;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=Probabilistic 21st and 22nd century sea-level projections at a global network of tide-gauge sites;,citation_abstract=Sea-level rise due to both climate change and non-climatic factors threatens coastal settlements, infrastructure, and ecosystems. Projections of mean global sea-level (GSL) rise provide insufficient information to plan adaptive responses; local decisions require local projections that accommodate different risk tolerances and time frames and that can be linked to storm surge projections. Here we present a global set of local sea-level (LSL) projections to inform decisions on timescales ranging from the coming decades through the 22nd century. We provide complete probability distributions, informed by a combination of expert community assessment, expert elicitation, and process modeling. Between the years 2000 and 2100, we project a very likely (90% probability) GSL rise of 0.5–1.2 m under representative concentration pathway (RCP) 8.5, 0.4–0.9 m under RCP 4.5, and 0.3–0.8 m under RCP 2.6. Site-to-site differences in LSL projections are due to varying non-climatic background uplift or subsidence, oceanographic effects, and spatially variable responses of the geoid and the lithosphere to shrinking land ice. The Antarctic ice sheet (AIS) constitutes a growing share of variance in GSL and LSL projections. In the global average and at many locations, it is the dominant source of variance in late 21st century projections, though at some sites oceanographic processes contribute the largest share throughout the century. LSL rise dramatically reshapes flood risk, greatly increasing the expected number of “1-in-10” and “1-in-100” year events.;,citation_author=Robert E. Kopp;,citation_author=Radley M. Horton;,citation_author=Christopher M. Little;,citation_author=Jerry X. Mitrovica;,citation_author=Michael Oppenheimer;,citation_author=D. J. Rasmussen;,citation_author=Benjamin H. Strauss;,citation_author=Claudia Tebaldi;,citation_publication_date=2014;,citation_cover_date=2014;,citation_year=2014;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2014EF000239;,citation_issue=8;,citation_doi=10.1002/2014ef000239;,citation_issn=2328-4277;,citation_volume=2;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task;,citation_abstract=This study explores the neural and behavioral consequences of LLM-assisted essay writing. Participants were divided into three groups: LLM, Search Engine, and Brain-only (no tools). Each completed three sessions under the same condition. In a fourth session, LLM users were reassigned to Brain-only group (LLM-to-Brain), and Brain-only users were reassigned to LLM condition (Brain-to-LLM). A total of 54 participants took part in Sessions 1-3, with 18 completing session 4. We used electroencephalography (EEG) to assess cognitive load during essay writing, and analyzed essays using NLP, as well as scoring essays with the help from human teachers and an AI judge. Across groups, NERs, n-gram patterns, and topic ontology showed within-group homogeneity. EEG revealed significant differences in brain connectivity: Brain-only participants exhibited the strongest, most distributed networks; Search Engine users showed moderate engagement; and LLM users displayed the weakest connectivity. Cognitive activity scaled down in relation to external tool use. In session 4, LLM-to-Brain participants showed reduced alpha and beta connectivity, indicating under-engagement. Brain-to-LLM users exhibited higher memory recall and activation of occipito-parietal and prefrontal areas, similar to Search Engine users. Self-reported ownership of essays was the lowest in the LLM group and the highest in the Brain-only group. LLM users also struggled to accurately quote their own work. While LLMs offer immediate convenience, our findings highlight potential cognitive costs. Over four months, LLM users consistently underperformed at neural, linguistic, and behavioral levels. These results raise concerns about the long-term educational implications of LLM reliance and underscore the need for deeper inquiry into AI’s role in learning.;,citation_author=Nataliya Kosmyna;,citation_author=Eugene Hauptmann;,citation_author=Ye Tong Yuan;,citation_author=Jessica Situ;,citation_author=Xian-Hao Liao;,citation_author=Ashly Vivian Beresnitzky;,citation_author=Iris Braunstein;,citation_author=Pattie Maes;,citation_publication_date=2025-06-10;,citation_cover_date=2025-06-10;,citation_year=2025;,citation_fulltext_html_url=http://arxiv.org/abs/2506.08872;,citation_doi=10.48550/arXiv.2506.08872;">
+<meta name="citation_reference" content="citation_title=Downscaling and bias-correction contribute considerable uncertainty to local climate projections in CMIP6;,citation_abstract=Efforts to diagnose the risks of a changing climate often rely on downscaled and bias-corrected climate information, making it important to understand the uncertainties and potential biases of this approach. Here, we perform a variance decomposition to partition uncertainty in global climate projections and quantify the relative importance of downscaling and bias-correction. We analyze simple climate metrics such as annual temperature and precipitation averages, as well as several indices of climate extremes. We find that downscaling and bias-correction often contribute substantial uncertainty to local decision-relevant climate outcomes, though our results are strongly heterogeneous across space, time, and climate metrics. Our results can provide guidance to impact modelers and decision-makers regarding the uncertainties associated with downscaling and bias-correction when performing local-scale analyses, as neglecting to account for these uncertainties may risk overconfidence relative to the full range of possible climate futures.;,citation_author=David C. Lafferty;,citation_author=Ryan L. Sriver;,citation_publication_date=2023-09-30;,citation_cover_date=2023-09-30;,citation_year=2023;,citation_fulltext_html_url=https://www.nature.com/articles/s41612-023-00486-0;,citation_issue=1, 1;,citation_doi=10.1038/s41612-023-00486-0;,citation_issn=2397-3722;,citation_volume=6;,citation_journal_title=npj Climate and Atmospheric Science;,citation_journal_abbrev=npj Clim Atmos Sci;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Chapter 3: Water;,citation_author=Upmanu Lall;,citation_author=Thomas Johnson;,citation_author=Peter Colohan;,citation_author=Amir Aghakouchak;,citation_author=Sankar Arumugam;,citation_author=Casey Brown;,citation_author=Gregory J. Mccabe;,citation_author=Roger S. Pulwarty;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://nca2018.globalchange.gov/chapter/3/;,citation_doi=10.7930/NCA4.2018.CH3;,citation_inbook_title=Impacts, Risks, and Adaptation in the United States: The Fourth National Climate Assessment, Volume II;">
+<meta name="citation_reference" content="citation_title=Robust abatement pathways to tolerable climate futures require immediate global action;,citation_abstract=Uncertainties are often cited as a reason for mitigation inaction. Here, millions of scenarios are evaluated to assess the relative importance of human–earth system uncertainties and policy variables. The growth rate of global abatement is found to be the primary driver of long-term warming.;,citation_author=J. R. Lamontagne;,citation_author=P. M. Reed;,citation_author=G. Marangoni;,citation_author=K. Keller;,citation_author=G. G. Garner;,citation_publication_date=2019-04;,citation_cover_date=2019-04;,citation_year=2019;,citation_fulltext_html_url=http://www.nature.com/articles/s41558-019-0426-8;,citation_issue=4;,citation_doi=10.1038/s41558-019-0426-8;,citation_issn=1758-6798;,citation_volume=9;,citation_journal_title=Nature Climate Change;,citation_journal_abbrev=Nat. Clim. Chang.;">
+<meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
+<meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
+<meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
+<meta name="citation_reference" content="citation_title=Bayesian Spatiotemporal Nonstationary Model Quantifies Robust Increases in Daily Extreme Rainfall Across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like NOAA Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in the statistical modeling of extreme precipitation has faced practical challenges that have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Ben Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-02-04;,citation_cover_date=2025-02-04;,citation_year=2025;,citation_fulltext_html_url=http://arxiv.org/abs/2502.02000;,citation_doi=10.48550/arXiv.2502.02000;">
+<meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
+<meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
+<meta name="citation_reference" content="citation_title=Robustness metrics: How are they calculated, when should they be used and why do they give different results?;,citation_abstract=Robustness is being used increasingly for decision analysis in relation to deep uncertainty and many metrics have been proposed for its quantification. Recent studies have shown that the application of different robustness metrics can result in different rankings of decision alternatives, but there has been little discussion of what potential causes for this might be. To shed some light on this issue, we present a unifying framework for the calculation of robustness metrics, which assists with understanding how robustness metrics work, when they should be used, and why they sometimes disagree. The framework categorizes the suitability of metrics to a decision-maker based on (1) the decision-context (i.e., the suitability of using absolute performance or regret), (2) the decision-maker’s preferred level of risk aversion, and (3) the decision-maker’s preference toward maximizing performance, minimizing variance, or some higher-order moment. This article also introduces a conceptual framework describing when relative robustness values of decision alternatives obtained using different metrics are likely to agree and disagree. This is used as a measure of how ?stable? the ranking of decision alternatives is when determined using different robustness metrics. The framework is tested on three case studies, including water supply augmentation in Adelaide, Australia, the operation of a multipurpose regulated lake in Italy, and flood protection for a hypothetical river based on a reach of the river Rhine in the Netherlands. The proposed conceptual framework is confirmed by the case study results, providing insight into the reasons for disagreements between rankings obtained using different robustness metrics.;,citation_author=C. McPhail;,citation_author=H. R. Maier;,citation_author=J. H. Kwakkel;,citation_author=M. Giuliani;,citation_author=A. Castelletti;,citation_author=S. Westra;,citation_publication_date=2019-04-02;,citation_cover_date=2019-04-02;,citation_year=2019;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000649%4010.1002/%28ISSN%292328-4277.RESDEC1;,citation_doi=10.1002/2017ef000649;,citation_issn=2328-4277;,citation_journal_title=Earth’s Future;,citation_journal_abbrev=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=Understanding heavy tails of flood peak distributions;,citation_abstract=Statistical distributions of flood peak discharge often show heavy tail behavior, that is, extreme floods are more likely to occur than would be predicted by commonly used distributions that have exponential asymptotic behavior. This heavy tail behavior may surprise flood managers and citizens, as human intuition tends to expect light tail behavior, and the heaviness of the tails is very difficult to predict, which may lead to unnecessarily high flood damage. Despite its high importance, the literature on the heavy tail behavior of flood distributions is rather fragmented. In this review, we provide a coherent overview of the processes causing heavy flood tails and the implications for science and practice. Specifically, we propose nine hypotheses on the mechanisms causing heavy tails in flood peak distributions related to processes in the atmosphere, the catchment, and the river system. We then discuss to which extent the current knowledge supports or contradicts these hypotheses. We also discuss the statistical conditions for the emergence of heavy tail behavior based on derived distribution theory and relate them to the hypotheses and flood generation mechanisms. We review the degree to which the heaviness of the tails can be predicted from process knowledge and data. Finally, we recommend further research toward testing the hypotheses and improving the prediction of heavy tails.;,citation_author=Bruno Merz;,citation_author=Stefano Basso;,citation_author=Svenja Fischer;,citation_author=David Lun;,citation_author=Günter Blöschl;,citation_author=Ralf Merz;,citation_author=Björn Guse;,citation_author=Alberto Viglione;,citation_author=Sergiy Vorogushyn;,citation_author=Elena Macdonald;,citation_author=Luzie Wietzke;,citation_author=Andreas Schumann;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1029/2021WR030506;,citation_issue=6;,citation_doi=10.1029/2021WR030506;,citation_issn=1944-7973;,citation_volume=58;,citation_journal_title=Water Resources Research;">
+<meta name="citation_reference" content="citation_title=Introduction to Catastrophe Risk Modelling: A Physics-based Approach;,citation_abstract=Focusing on the physics of the&nbsp;catastrophe process and addressed directly to advanced students, this innovative textbook quantifies dozens of perils, both natural and man-made, and covers the latest developments in catastrophe modelling. Combining basic statistics, applied physics, natural and environmental sciences, civil engineering, and psychology, the text remains at an introductory level, focusing on fundamental concepts for a comprehensive understanding of catastrophe phenomenology and risk quantification. A broad spectrum of perils are covered, including geophysical, hydrological, meteorological, climatological, biological, extraterrestrial, technological and socio-economic, as well as events caused by domino effects and global warming. Following industry standards, the text provides the necessary tools to develop a CAT model from hazard to loss assessment. Online resources include a&nbsp;CAT risk model starter-kit and a CAT risk modelling ’sandbox’ with Python Jupyter tutorial.&nbsp;Every process, described by equations, (pseudo)codes and illustrations, is fully reproducible, allowing students to solidify knowledge through practice.;,citation_author=Arnaud Mignan;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://www.cambridge.org/core/product/A3A5B5FB990921422BFEBB07734BF869;,citation_doi=10.1017/9781009437370;,citation_isbn=978-1-009-43738-7;">
+<meta name="citation_reference" content="citation_title=Fundamentals of Statistical Hydrology;,citation_editor=Mauro Naghettini;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=http://link.springer.com/10.1007/978-3-319-43561-9;,citation_doi=10.1007/978-3-319-43561-9;,citation_isbn=978-3-319-43560-2 978-3-319-43561-9;">
+<meta name="citation_reference" content="citation_title=Statistics with Julia: Fundamentals for Data Science, Machine Learning and Artificial Intelligence;,citation_abstract=This monograph uses the Julia language to guide the reader through an exploration of the fundamental concepts of probability and statistics, all with a view of mastering machine learning, data science, and artificial intelligence. The text does not require any prior statistical knowledge and only assumes a basic understanding of programming and mathematical notation. It is accessible to practitioners and researchers in data science, machine learning, bio-statistics, finance, or engineering who may wish to solidify their knowledge of probability and statistics. The book progresses through ten independent chapters starting with an introduction of Julia, and moving through basic probability, distributions, statistical inference, regression analysis, machine learning methods, and the use of Monte Carlo simulation for dynamic stochastic models. Ultimately this text introduces the Julia programming language as a computational tool, uniquely addressing end-users rather than developers. It makes heavy use of over 200 code examples to illustrate dozens of key statistical concepts. The Julia code, written in a simple format with parameters that can be easily modified, is also available for download from the book’s associated GitHub repository online.See what co-creators of the Julia language are saying about the book:Professor Alan Edelman, MIT: With “Statistics with Julia”, Yoni and Hayden have written an easy to read, well organized, modern introduction to statistics. The code may be looked at, and understood on the static pages of a book, or even better, when running live on a computer. Everything you need is here in one nicely written self-contained reference. Dr. Viral Shah, CEO of Julia Computing: Yoni and Hayden provide a modern way to learn statistics with the Julia programming language. This book has been perfected through iteration over several semesters in the classroom. It prepares the reader with two complementary skills - statistical reasoning with hands on experience and working with large datasets through training in Julia.;,citation_author=Yoni Nazarathy;,citation_author=Hayden Klok;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.springer.com/gp/book/9783030709006;,citation_doi=10.1007/978-3-030-70901-3;,citation_isbn=978-3-030-70900-6;,citation_series_title=Springer Series in the Data Sciences;">
+<meta name="citation_reference" content="citation_title=Deep uncertainties in sea-level rise and storm surge projections: Implications for coastal flood risk management;,citation_abstract=Sea levels are rising in many areas around the world, posing risks to coastal communities and infrastructures. Strategies for managing these flood risks present decision challenges that require a combination of geophysical, economic, and infrastructure models. Previous studies have broken important new ground on the considerable tensions between the costs of upgrading infrastructure and the damages that could result from extreme flood events. However, many risk-based adaptation strategies remain silent on certain potentially important uncertainties, as well as the tradeoffs between competing objectives. Here, we implement and improve on a classic decision-analytical model (Van Dantzig 1956) to: (i) capture tradeoffs across conflicting stakeholder objectives, (ii) demonstrate the consequences of structural uncertainties in the sea-level rise and storm surge models, and (iii) identify the parametric uncertainties that most strongly influence each objective using global sensitivity analysis. We find that the flood adaptation model produces potentially myopic solutions when formulated using traditional mean-centric decision theory. Moving from a single-objective problem formulation to one with multiobjective tradeoffs dramatically expands the decision space, and highlights the need for compromise solutions to address stakeholder preferences. We find deep structural uncertainties that have large effects on the model outcome, with the storm surge parameters accounting for the greatest impacts. Global sensitivity analysis effectively identifies important parameter interactions that local methods overlook, and that could have critical implications for flood adaptation strategies.;,citation_author=Perry C. Oddo;,citation_author=Ben S. Lee;,citation_author=Gregory G. Garner;,citation_author=Vivek Srikrishnan;,citation_author=Patrick M. Reed;,citation_author=Chris E. Forest;,citation_author=Klaus Keller;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1111/risa.12888;,citation_issue=0;,citation_doi=10/ghkp82;,citation_issn=1539-6924;,citation_volume=0;,citation_journal_title=Risk Analysis;">
+<meta name="citation_reference" content="citation_title=Verification, validation, and confirmation of numerical models in the Earth sciences;,citation_abstract=Verification and validation of numerical models of natural systems is impossible. This is because natural systems are never closed and because model results are always nonunique. Models can be confirmed by the demonstration of agreement between ...;,citation_author=Naomi Oreskes;,citation_author=Kristin Shrader-Frechette;,citation_author=Kenneth Belitz;,citation_publication_date=1994-02-04;,citation_cover_date=1994-02-04;,citation_year=1994;,citation_fulltext_html_url=http://www.science.org/doi/abs/10.1126/science.263.5147.641;,citation_doi=10.1126/science.263.5147.641;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
+<meta name="citation_reference" content="citation_title=The geography of future water challenges;,citation_author=PBL Netherlands Environmental Assessment Agency;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://www.pbl.nl/en/publications/the-geography-of-future-water-challenges;,citation_technical_report_institution=PBL Netherlands Environmental Assessment Agency;">
+<meta name="citation_reference" content="citation_title=Sequential Decision Analytics and Modeling: Modeling with Python;,citation_abstract=Publishers of Foundations and Trends, making research accessible;,citation_author=Warren B. Powell;,citation_publication_date=2022-11-21;,citation_cover_date=2022-11-21;,citation_year=2022;,citation_fulltext_html_url=https://nowpublishers.com/Article/BookDetails/9781638280828;,citation_issn=978-1-63828-082-8, 978-1-63828-083-5;,citation_publisher=Now Publishers, Inc.;">
+<meta name="citation_reference" content="citation_title=Applied Machine Learning in Python: A Hands-on Guide with Code;,citation_author=Michael J. Pyrcz;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://geostatsguy.github.io/MachineLearningDemos_Book;">
+<meta name="citation_reference" content="citation_title=Direct policy search for robust multi-objective management of deeply uncertain socio-ecological tipping points;,citation_abstract=Managing socio-ecological systems is a challenge wrought by competing societal objectives, deep uncertainties, and potentially irreversible tipping points. A classic, didactic example is the shallow lake problem in which a hypothetical town situated on a lake must develop pollution control strategies to maximize its economic benefits while minimizing the probability of the lake crossing a critical phosphorus (P) threshold, above which it irreversibly transitions into a eutrophic state. Here, we explore the use of direct policy search (DPS) to design robust pollution control rules for the town that account for deeply uncertain system characteristics and conflicting objectives. The closed loop control formulation of DPS improves the quality and robustness of key management tradeoffs, while dramatically reducing the computational complexity of solving the multi-objective pollution control problem relative to open loop control strategies. These insights suggest DPS is a promising tool for managing socio-ecological systems with deeply uncertain tipping points.;,citation_author=Julianne D. Quinn;,citation_author=Patrick M. Reed;,citation_author=Klaus Keller;,citation_publication_date=2017-06-01;,citation_cover_date=2017-06-01;,citation_year=2017;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S1364815216302250;,citation_doi=10.1016/j.envsoft.2017.02.017;,citation_issn=1364-8152;,citation_volume=92;,citation_journal_title=Environmental Modelling &amp;amp;amp; Software;,citation_journal_abbrev=Environmental Modelling &amp;amp; Software;">
+<meta name="citation_reference" content="citation_title=Universal Differential Equations for Scientific Machine Learning;,citation_abstract=In the context of science, the well-known adage &amp;amp;amp;quot;a picture is worth a thousand words&amp;quot; might well be &quot;a model is worth a thousand datasets.&quot; In this manuscript we introduce the SciML software ecosystem as a tool for mixing the information of physical laws and scientific models with data-driven machine learning approaches. We describe a mathematical object, which we denote universal differential equations (UDEs), as the unifying framework connecting the ecosystem. We show how a wide variety of applications, from automatically discovering biological mechanisms to solving high-dimensional Hamilton-Jacobi-Bellman equations, can be phrased and efficiently handled through the UDE formalism and its tooling. We demonstrate the generality of the software tooling to handle stochasticity, delays, and implicit constraints. This funnels the wide variety of SciML applications into a core set of training mechanisms which are highly optimized, stabilized for stiff equations, and compatible with distributed parallelism and GPU accelerators.;,citation_author=Christopher Rackauckas;,citation_author=Yingbo Ma;,citation_author=Julius Martensen;,citation_author=Collin Warner;,citation_author=Kirill Zubov;,citation_author=Rohit Supekar;,citation_author=Dominic Skinner;,citation_author=Ali Ramadhan;,citation_author=Alan Edelman;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://arxiv.org/abs/2001.04385;,citation_doi=10.48550/ARXIV.2001.04385;">
+<meta name="citation_reference" content="citation_title=Evolutionary multiobjective optimization in water resources: The past, present, and future;,citation_abstract=This study contributes a rigorous diagnostic assessment of state-of-the-art multiobjective evolutionary algorithms (MOEAs) and highlights key advances that the water resources field can exploit to better discover the critical tradeoffs constraining our systems. This study provides the most comprehensive diagnostic assessment of MOEAs for water resources to date, exploiting more than 100,000 MOEA runs and trillions of design evaluations. The diagnostic assessment measures the effectiveness, efficiency, reliability, and controllability of ten benchmark MOEAs for a representative suite of water resources applications addressing rainfall–runoff calibration, long-term groundwater monitoring (LTM), and risk-based water supply portfolio planning. The suite of problems encompasses a range of challenging problem properties including (1) many-objective formulations with four or more objectives, (2) multi-modality (or false optima), (3) nonlinearity, (4) discreteness, (5) severe constraints, (6) stochastic objectives, and (7) non-separability (also called epistasis). The applications are representative of the dominant problem classes that have shaped the history of MOEAs in water resources and that will be dominant foci in the future. Recommendations are given for the new algorithms that should serve as the benchmarks for innovations in the water resources literature. The future of MOEAs in water resources needs to emphasize self-adaptive search, new technologies for visualizing tradeoffs, and the next generation of computing technologies.;,citation_author=P. M. Reed;,citation_author=D. Hadka;,citation_author=J. D. Herman;,citation_author=J. R. Kasprzyk;,citation_author=J. B. Kollat;,citation_publication_date=2013-01-01;,citation_cover_date=2013-01-01;,citation_year=2013;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S0309170812000073;,citation_doi=10.1016/j.advwatres.2012.01.005;,citation_issn=0309-1708;,citation_volume=51;,citation_journal_title=Advances in Water Resources;,citation_journal_abbrev=Advances in Water Resources;,citation_series_title=35th Year Anniversary Issue;">
+<meta name="citation_reference" content="citation_title=Multisector Dynamics: Advancing the Science of Complex Adaptive Human-Earth Systems;,citation_abstract=The field of MultiSector Dynamics (MSD) explores the dynamics and co-evolutionary pathways of human and Earth systems with a focus on critical goods, services, and amenities delivered to people through interdependent sectors. This commentary lays out core definitions and concepts, identifies MSD science questions in the context of the current state of knowledge, and describes ongoing activities to expand capacities for open science, leverage revolutions in data and computing, and grow and diversify the MSD workforce. Central to our vision is the ambition of advancing the next generation of complex adaptive human-Earth systems science to better address interconnected risks, increase resilience, and improve sustainability. This will require convergent research and the integration of ideas and methods from multiple disciplines. Understanding the tradeoffs, synergies, and complexities that exist in coupled human-Earth systems is particularly important in the context of energy transitions and increased future shocks.;,citation_author=Patrick M. Reed;,citation_author=Antonia Hadjimichael;,citation_author=Richard H. Moss;,citation_author=Christa Brelsford;,citation_author=Casey D. Burleyson;,citation_author=Stuart Cohen;,citation_author=Ana Dyreson;,citation_author=David F. Gold;,citation_author=Rohini S. Gupta;,citation_author=Klaus Keller;,citation_author=Megan Konar;,citation_author=Erwan Monier;,citation_author=Jennifer Morris;,citation_author=Vivek Srikrishnan;,citation_author=Nathalie Voisin;,citation_author=Jim Yoon;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1029/2021EF002621;,citation_issue=3;,citation_doi=10.1029/2021EF002621;,citation_issn=2328-4277;,citation_volume=10;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=Techniques for assessing water infrastructure for nonstationary extreme events: A review;,citation_author=J D Salas;,citation_author=J Obeysekera;,citation_author=R M Vogel;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://www.tandfonline.com/doi/full/10.1080/02626667.2018.1426858;,citation_issue=3;,citation_doi=10.1080/02626667.2018.1426858;,citation_volume=63;,citation_journal_title=Hydrological Sciences Journal;">
+<meta name="citation_reference" content="citation_title=A Gentle Introduction to Graph Neural Networks;,citation_abstract=What components are needed for building learning algorithms that leverage the structure and properties of graphs?;,citation_author=Benjamin Sanchez-Lengeling;,citation_author=Emily Reif;,citation_author=Adam Pearce;,citation_author=Alexander B. Wiltschko;,citation_publication_date=2021-09-02;,citation_cover_date=2021-09-02;,citation_year=2021;,citation_fulltext_html_url=https://distill.pub/2021/gnn-intro;,citation_issue=9;,citation_doi=10.23915/distill.00033;,citation_issn=2476-0757;,citation_volume=6;,citation_journal_title=Distill;,citation_journal_abbrev=Distill;">
+<meta name="citation_reference" content="citation_title=Boomtown, flood town;,citation_abstract=Climate change will bring more frequent and fierce rainstorms to cities like Houston. But unchecked development remains a priority in the famously un-zoned city, creating short-term economic gains for some while increasing flood risks for everyone.;,citation_author=Nina Satija;,citation_author=Kiah Collier;,citation_author=Al Shaw;,citation_publication_date=2016-12-07;,citation_cover_date=2016-12-07;,citation_year=2016;,citation_fulltext_html_url=https://projects.propublica.org/houston-cypress/;,citation_journal_title=ProPublica: Hell and High Water;">
+<meta name="citation_reference" content="citation_title=Foundations of statistics.;,citation_author=L. J. Savage;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;">
+<meta name="citation_reference" content="citation_title=Incorporating non-stationarity from climate change into rainfall frequency and intensity-duration-frequency (IDF) curves;,citation_abstract=Intensity-duration-frequency (IDF) curves – sometimes also called precipitation frequency estimates – are used to design urban drainage systems for stormwater control and, when combined with hydrologic modeling, to design flood control infrastructure and other structures. However, common approaches to estimating IDF curves need to be revised to account for non-stationarity from global climate change. This review synthesizes the current knowledge and on-going research regarding IDF curves under non-stationarity. In particular, this review briefly summarizes known and projected changes in extreme precipitation at the global scale, describes approaches for IDF curve estimation under non-stationarity (focusing on the covariate-based approach and including a brief overview of the specific challenges facing snow-dominated regions), addresses the topic of regionalization under non-stationarity (which has been overlooked in previous reviews), explores the challenges of design values and uncertainty in the context of non-stationarity, provides details on these topics in the context of the United States, and finishes by enumerating needed avenues of future research.;,citation_author=Katherine E. Schlef;,citation_author=Kenneth E. Kunkel;,citation_author=Casey Brown;,citation_author=Yonas Demissie;,citation_author=Dennis P. Lettenmaier;,citation_author=Anna Wagner;,citation_author=Mark S. Wigmosta;,citation_author=Thomas R. Karl;,citation_author=David R. Easterling;,citation_author=Kimberly J. Wang;,citation_author=Baptiste François;,citation_author=Eugene Yan;,citation_publication_date=2023-01-01;,citation_cover_date=2023-01-01;,citation_year=2023;,citation_fulltext_html_url=https://www.sciencedirect.com/science/article/pii/S0022169422013270;,citation_doi=10.1016/j.jhydrol.2022.128757;,citation_issn=0022-1694;,citation_volume=616;,citation_journal_title=Journal of Hydrology;,citation_journal_abbrev=Journal of Hydrology;">
+<meta name="citation_reference" content="citation_title=Can we estimate the likelihood of climatic changes at 2100?;,citation_abstract=Schneider points out some of the consequences of the deliberate choice not to discuss the possibilities of CO2 emissions and how that can–and has–led to confusion on the part of the media and policy makers over the likelihood of potential dangerous anthropogenic climate change in the next century.;,citation_author=Stephen H. Schneider;,citation_publication_date=2002-03;,citation_cover_date=2002-03;,citation_year=2002;,citation_fulltext_html_url=https://www.proquest.com/docview/198493931/abstract/7F4C45C74324C3EPQ/1;,citation_issue=4;,citation_doi=http://dx.doi.org/10.1023/A:1014276210717;,citation_issn=01650009;,citation_volume=52;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Optimizing Scale for Decentralized Wastewater Treatment: A Tool to Address Failing Wastewater Infrastructure in the United States;,citation_abstract=Wastewater systems (sewered or on-site septic tanks) are failing across the U.S. Economically disadvantaged populations, communities of color, tribal lands, and rural/peri-urban areas are especially vulnerable. Efficient deployment of public and private capital to assure appropriate service levels and affordability is a critical need. We present a modeling framework to identify economically optimal wastewater network layout and component sizes. Six system configurations are considered, which include gravity versus pressurized collection system flow and treatment of septic effluent versus raw wastewater. A case study for Uniontown, Alabama─a community that has been in national news for the failure of their wastewater infrastructure─is presented. We find that a decentralized network that separates and stores solids on-site, prior to conveyance to a cluster-scale treatment site, has a fraction of the capital and operating cost of a centralized system that is currently proposed. Broader implications are discussed.;,citation_author=Sara E. Schwetschenau;,citation_author=Yunus Kovankaya;,citation_author=Mark A. Elliott;,citation_author=Maura Allaire;,citation_author=Kevin D. White;,citation_author=Upmanu Lall;,citation_publication_date=2023-01-13;,citation_cover_date=2023-01-13;,citation_year=2023;,citation_fulltext_html_url=https://doi.org/10.1021/acsestengg.2c00188;,citation_issue=1;,citation_doi=10.1021/acsestengg.2c00188;,citation_volume=3;,citation_journal_title=ACS ES&amp;amp;amp;T Engineering;,citation_journal_abbrev=ACS EST Eng.;,citation_publisher=American Chemical Society;">
+<meta name="citation_reference" content="citation_title=Operationalizing equity for integrated water resources management;,citation_abstract=Advancing social equity has been implicitly and explicitly central to water resources policy for decades. Yet, equity remains largely outside of standard water resources planning and management practices. Inclusion of equity within water resources infrastructure is inhibited by barriers including an incomplete conceptual understanding of equity, a perceived lack of quantitative and qualitative equity metrics, unclear connections between equity and standard project planning frameworks, and the absence of concrete examples. To facilitate greater practical inclusion of social equity in water resources practices, we describe equity relative to dimensions of distribution, procedure, and recognition and identify metrics associated with each. We then map these dimensions of equity onto different stages of a water resources project life cycle. We discuss how inequities are often perpetuated by current approaches and highlight case studies that promote one or more of the facets of equity. Rather than providing a prescriptive solution to “achieve” equity within water resources practices, we emphasize the need for contextualized approaches that include pragmatic steps toward more equitable practices and outcomes.;,citation_author=Cydney K. Seigerman;,citation_author=S. Kyle McKay;,citation_author=Raul Basilio;,citation_author=Shelly A. Biesel;,citation_author=Jon Hallemeier;,citation_author=Andressa V. Mansur;,citation_author=Candice Piercy;,citation_author=Sebastian Rowan;,citation_author=Bruno Ubiali;,citation_author=Elissa Yeates;,citation_author=Donald R. Nelson;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/1752-1688.13086;,citation_issue=2;,citation_doi=10.1111/1752-1688.13086;,citation_issn=1752-1688;,citation_volume=59;,citation_journal_title=JAWRA Journal of the American Water Resources Association;">
+<meta name="citation_reference" content="citation_title=Weather and climate extreme events in a changing climate;,citation_author=S. I. Seneviratne;,citation_author=X. Zhang;,citation_author=M. Adnan;,citation_author=W. Badi;,citation_author=C. Dereczynski;,citation_author=A. Di Luca;,citation_author=S. Ghosh;,citation_author=I. Iskandar;,citation_author=J. Kossin;,citation_author=S. Lewis;,citation_author=F. Otto;,citation_author=I. Pinto;,citation_author=M. Satoh;,citation_author=S. M. Vicente-Serrano;,citation_author=M. Wehner;,citation_author=B. Zhou;,citation_editor=V. Masson-Delmotte;,citation_editor=P. Zhai;,citation_editor=A. Pirani;,citation_editor=S. L. Connors;,citation_editor=C. Péan;,citation_editor=S. Berger;,citation_editor=N. Caud;,citation_editor=Y. Chen;,citation_editor=L. Goldfarb;,citation_editor=M. I. Gomis;,citation_editor=M. Huang;,citation_editor=K. Leitzell;,citation_editor=E. Lonnoy;,citation_editor=J. B. R. Matthews;,citation_editor=T. K. Maycock;,citation_editor=T. Waterfield;,citation_editor=O. Yelekçi;,citation_editor=R. Yu;,citation_editor=B. Zhou;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_Chapter11.pdf;,citation_doi=10.1017/9781009157896.013;,citation_inbook_title=Climate change 2021: The physical science basis. Contribution of working group I to the sixth assessment report of the intergovernmental panel on climate change;">
+<meta name="citation_reference" content="citation_title=Multiobjective optimization and Pareto front visualization techniques applied to normal conducting rf accelerating structures;,citation_abstract=There has been a renewed interest in applying multiobjective (MO) optimization methods to a number of problems in the physical sciences, including to rf structure design. The results of these optimizations generate large datasets, which makes visualizing the data and selecting individual solutions difficult. Using the generated results, Pareto fronts can be found giving the trade-off between different objectives, allowing one to utilize this key information in design decisions. Although various visualization techniques exist, it can be difficult to know which technique is appropriate and how to apply them successfully to the problem at hand. First, we present the setup and execution of MO optimizations of one standing wave and one traveling wave accelerating cavity, including constraint handling and an algorithm comparison. In order to understand the generated Pareto frontiers, we discuss several visualization techniques, applying them to the problem, and give the benefits and drawbacks of each. We found that the best techniques involve clustering the resulting data first to narrow down the possible choices and then using multidimensional visualization methods such as parallel coordinate plots and decision maps to view the clustered results and select individual solutions. Finally, we give some examples of the application of these methods and the cavities selected based on arbitrary design requirements.;,citation_author=S. Smith;,citation_author=M. Southerby;,citation_author=S. Setiniyaz;,citation_author=R. Apsimon;,citation_author=G. Burt;,citation_publication_date=2022-06-14;,citation_cover_date=2022-06-14;,citation_year=2022;,citation_fulltext_html_url=https://link.aps.org/doi/10.1103/PhysRevAccelBeams.25.062002;,citation_issue=6;,citation_doi=10.1103/PhysRevAccelBeams.25.062002;,citation_volume=25;,citation_journal_title=Physical Review Accelerators and Beams;,citation_journal_abbrev=Phys. Rev. Accel. Beams;,citation_publisher=American Physical Society;">
+<meta name="citation_reference" content="citation_title=An unexpected item is blocking cities’ climate change prep: Obsolete rainfall records;,citation_abstract=Cities are experiencing heavier storms and flooding as the climate gets hotter. But due to outdated rainfall records, many are still building infrastructure for the climate of the past.;,citation_author=Lauren Sommer;,citation_publication_date=2022-02-09;,citation_cover_date=2022-02-09;,citation_year=2022;,citation_fulltext_html_url=https://www.npr.org/2022/02/09/1078261183/an-unexpected-item-is-blocking-cities-climate-change-prep-obsolete-rainfall-reco;,citation_journal_title=NPR: Climate;">
+<meta name="citation_reference" content="citation_title=Expanded decision-scaling framework to select robust long-term water-system plans under hydroclimatic uncertainties;,citation_author=Scott Steinschneider;,citation_author=Rachel McCrary;,citation_author=Sungwook Wi;,citation_author=Kevin Mulligan;,citation_author=Linda O Mearns;,citation_author=Casey M Brown;,citation_publication_date=2015-11;,citation_cover_date=2015-11;,citation_year=2015;,citation_fulltext_html_url=http://ascelibrary.org/doi/10.1061/%28ASCE%29WR.1943-5452.0000536;,citation_issue=11;,citation_doi=10.1061/(asce)wr.1943-5452.0000536;,citation_volume=141;,citation_journal_title=Journal of Water Resources Planning and Management;">
+<meta name="citation_reference" content="citation_title=Reinforcement learning: An Introduction;,citation_author=Richard S Sutton;,citation_author=Andrew G Barto;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_isbn=0-262-03924-9;">
+<meta name="citation_reference" content="citation_title=Global and regional sea level rise scenarios for the United States;,citation_author=W. V. Sweet;,citation_author=B. D. Hamlington;,citation_author=R. E. Kopp;,citation_author=C. P. Weaver;,citation_author=P. L. Barnard;,citation_author=D. Bekaert;,citation_author=W. Brooks;,citation_author=M. Craghan;,citation_author=G. Dusek;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://oceanservice.noaa.gov/hazards/sealevelrise/sealevelrise-tech-report-sections.html;,citation_technical_report_institution=National Oceanic and Atmospheric Administration, National Ocean Service;,citation_technical_report_number=NOS 01;">
+<meta name="citation_reference" content="citation_title=Exposure of real estate properties to the 2018 Hurricane Florence flooding;,citation_abstract=Quantifying the potential exposure of property to damages associated with storm surges, extreme weather and hurricanes is fundamental to developing frameworks that can be used to conceive and implement mitigation plans as well as support urban development that accounts for such events. In this study, we aim at quantifying the total value and area of properties exposed to the flooding associated with Hurricane Florence that occurred in September 2018. To this aim, we implement an approach for the identification of affected areas by generating a map of the maximum flood extent obtained from a combination of the flood extent produced by the Federal Emergency Management Agency’s (FEMA’s) water marks with those obtained from spaceborne radar remote-sensing data. The use of radar in the creation of the flood extent allows for those properties commonly missed by FEMA’s interpolation methods, especially from pluvial or non-fluvial sources, and can be used in more accurately estimating the exposure and market value of properties to event-specific flooding. Lastly, we study and quantify how the urban development over the past decades in the regions flooded by Hurricane Florence might have impacted the exposure of properties to present-day storms and floods. This approach is conceptually similar to what experts are addressing as the “expanding bull’s eye effect”, in which “targets” of geophysical hazards, such as people and their built environments, enlarge as populations grow and spread. Our results indicate that the total value of property exposed to flooding during Hurricane Florence was USD&amp;amp;amp;thinsp;52 billion (in 2018 USD), with this value increasing from USD&amp;thinsp;∼10 billion at the beginning of the past century to the final amount based on the expansion of the number of properties exposed. We also found that, despite the decrease in the number of properties built during the decade before Florence, much of the new construction was in proximity to permanent water bodies, hence increasing exposure to flooding. Ultimately, the results of this paper provide a new tool for shedding light on the relationships between urban development in coastal areas and the flooding of those areas, which is estimated to increase in view of projected increasing sea level rise, storm surges and the strength of storms.;,citation_author=Marco Tedesco;,citation_author=Steven McAlpine;,citation_author=Jeremy R. Porter;,citation_publication_date=2020-04-01;,citation_cover_date=2020-04-01;,citation_year=2020;,citation_fulltext_html_url=https://www.nat-hazards-earth-syst-sci.net/20/907/2020/;,citation_issue=3;,citation_doi=10.5194/nhess-20-907-2020;,citation_issn=1561-8633;,citation_volume=20;,citation_journal_title=Natural Hazards and Earth System Sciences;,citation_publisher=Copernicus GmbH;">
+<meta name="citation_reference" content="citation_title=Systemic Financial Risk Arising From Residential Flood Losses;,citation_abstract=Direct damage from flooding at residential properties has typically been categorized as insured, with liabilities accruing to insurers, or uninsured, with costs accruing to property owners. However, residential flooding can also expose lenders and local governments to financial risk, though the distribution of this risk is not well understood. Flood losses are not limited to direct damages, but also include indirect effects such as decreases in property values, which can be substantial, though are rarely well quantified. The combination of direct damage and property value decrease influences rates of mortgage default and property abandonment in the wake of a flood, creating financial risk. In this research, property-level data on sales, mortgages, and insurance claims are used in combination with machine learning techniques and geostatistical methods to provide estimates of flood losses that are then utilized to evaluate the risk of default and abandonment in eastern North Carolina following Hurricane Florence (2018). Within the study area, Hurricane Florence generated \366M in observed insured damages and an estimated \1.77B in combined uninsured damages and property value decreases. Property owners, lenders, and local governments were exposed to an additional $562M in potential losses due to increased rates of default and abandonment. Areas with lower pre-flood property values were exposed to greater risk than areas with higher valued properties. Results suggest more highly resolved estimates of a flooding event’s systemic financial risk may be useful in developing improved flood resilience strategies.;,citation_author=Hope Thomson;,citation_author=Harrison B. Zeff;,citation_author=Rachel Kleiman;,citation_author=Antonia Sebastian;,citation_author=Gregory W. Characklis;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1029/2022EF003206;,citation_issue=4;,citation_doi=10.1029/2022EF003206;,citation_issn=2328-4277;,citation_volume=11;,citation_journal_title=Earth’s Future;">
+<meta name="citation_reference" content="citation_title=Physics-based deep learning;,citation_author=N. Thuerey;,citation_author=B. Holzschuh;,citation_author=P. Holl;,citation_author=G. Kohl;,citation_author=M. Lino;,citation_author=Q. Liu;,citation_author=P. Schnell;,citation_author=F. Trost;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://physicsbaseddeeplearning.org;">
+<meta name="citation_reference" content="citation_title=Impacts of future weather and climate extremes on United States infrastructure: Assessing and prioritizing adaptation actions;,citation_author=Mari R. Tye;,citation_author=Jason P. Giovannettone;,citation_publication_date=2021-10-13;,citation_cover_date=2021-10-13;,citation_year=2021;,citation_fulltext_html_url=https://ascelibrary.org/doi/book/10.1061/9780784415863;,citation_doi=10.1061/9780784415863;,citation_isbn=978-0-7844-1586-3 978-0-7844-8372-5;">
+<meta name="citation_reference" content="citation_title=Evaluation of flood risk reduction strategies through combinations of interventions;,citation_abstract=Large, complex coastal regions often require a combination of interventions to lower the risk of flooding to an acceptable level. In practice, a limited number of strategies are considered and interdependencies between interventions are often simplified. This paper presents the Multiple Lines of Defence Optimization System (MODOS)-model. This quick, probabilistic model simulates and evaluates the impact of many flood risk reduction strategies while accounting for interdependencies amongst measures. The simulation includes hydraulic calculations, damage calculations, and the effects of measures for various return periods. The application and potential of this model is shown with a conceptual and simplified case study, based on the Houston-Galveston Bay area. The analyses demonstrate how the MODOS-model identifies trade-offs within the system and shows how flood risk, cost, and impact respond to flood management decisions. This improved understanding of the impact of design and planning choices can benefit the discussions in finding the optimal flood risk reduction strategy for coastal regions.;,citation_author=Erik C. Berchum;,citation_author=William Mobley;,citation_author=Sebastiaan N. Jonkman;,citation_author=Jos S. Timmermans;,citation_author=Jan H. Kwakkel;,citation_author=Samuel D. Brody;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/jfr3.12506;,citation_issue=S2;,citation_doi=10.1111/jfr3.12506;,citation_issn=1753-318X;,citation_volume=12;,citation_journal_title=Journal of Flood Risk Management;">
+<meta name="citation_reference" content="citation_title=Economic Decision Problems for Flood Prevention;,citation_author=D. Dantzig;,citation_publication_date=1956;,citation_cover_date=1956;,citation_year=1956;,citation_fulltext_html_url=https://doi.org/10.2307/1911632;,citation_issue=3;,citation_doi=10.2307/1911632;,citation_issn=0012-9682;,citation_volume=24;,citation_journal_title=Econometrica;">
+<meta name="citation_reference" content="citation_title=Deep Uncertainty;,citation_author=Warren E. Walker;,citation_author=Robert J. Lempert;,citation_author=Jan H. Kwakkel;,citation_editor=Saul I. Gass;,citation_editor=Michael C. Fu;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_fulltext_html_url=https://doi.org/10.1007/978-1-4419-1153-7_1140;,citation_doi=10.1007/978-1-4419-1153-7_1140;,citation_isbn=978-1-4419-1153-7;,citation_inbook_title=Encyclopedia of Operations Research and Management Science;">
+<meta name="citation_reference" content="citation_title=A review of the Stern review on the economics of climate change;,citation_author=Martin L. Weitzman;,citation_publication_date=2007-09;,citation_cover_date=2007-09;,citation_year=2007;,citation_fulltext_html_url=https://www.aeaweb.org/articles?id=10.1257/jel.45.3.703;,citation_issue=3;,citation_doi=10.1257/jel.45.3.703;,citation_issn=0022-0515;,citation_volume=45;,citation_journal_title=Journal of Economic Literature;">
+<meta name="citation_reference" content="citation_title=New insights into US flood vulnerability revealed from flood insurance big data;,citation_abstract=Improvements in modelling power and input data have vastly improved the precision of physical flood models, but translation into economic outputs requires depth–damage functions that are inadequately verified. In particular, flood damage is widely assumed to increase monotonically with water depth. Here, we assess flood vulnerability in the US using $&amp;amp;amp;gt;$2 million claims from the National Flood Insurance Program (NFIP). NFIP claims data are messy, but the size of the dataset provides powerful empirical tests of damage patterns and modelling approaches. We show that current depth–damage functions consist of disparate relationships that match poorly with observations. Observed flood losses are not monotonic functions of depth, but instead better follow a beta function, with bimodal distributions for different water depths. Uncertainty in flood losses has been called the main bottleneck in flood risk studies, an obstacle that may be remedied using large-scale empirical flood damage data.;,citation_author=Oliver E. J. Wing;,citation_author=Nicholas Pinter;,citation_author=Paul D. Bates;,citation_author=Carolyn Kousky;,citation_publication_date=2020-03-19;,citation_cover_date=2020-03-19;,citation_year=2020;,citation_fulltext_html_url=https://www.nature.com/articles/s41467-020-15264-2;,citation_issue=1, 1;,citation_doi=10.1038/s41467-020-15264-2;,citation_issn=2041-1723;,citation_volume=11;,citation_journal_title=Nature Communications;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=MAD water: Integrating modular, adaptive, and decentralized approaches for water security in the climate change era;,citation_abstract=Centralized water infrastructure has, over the last century, brought safe and reliable drinking water to much of the world. But climate change, combined with aging and underfunded infrastructure, is increasingly testing the limits of—and reversing gains made by—this approach. To address these growing strains and gaps, we must assess and advance alternatives to centralized water provision and sanitation. The water literature is rife with examples of systems that are neither centralized nor networked, yet meet water needs of local communities in important ways, including: informal and hybrid water systems, decentralized water provision, community-based water management, small drinking water systems, point-of-use treatment, small-scale water vendors, and packaged water. Our work builds on these literatures by proposing a convergence approach that can integrate and explore the benefits and challenges of modular, adaptive, and decentralized (“MAD”) water provision and sanitation, often foregrounding important advances in engineering technology. We further provide frameworks to evaluate justice, economic feasibility, governance, human health, and environmental sustainability as key parameters of MAD water system performance.;,citation_author=Amber Wutich;,citation_author=Patrick Thomson;,citation_author=Wendy Jepson;,citation_author=Justin Stoler;,citation_author=Alicia D. Cooperman;,citation_author=James Doss-Gollin;,citation_author=Anish Jantrania;,citation_author=Alex Mayer;,citation_author=Jami Nelson-Nuñez;,citation_author=W. Shane Walker;,citation_author=Paul Westerhoff;,citation_publication_date=2023-07-12;,citation_cover_date=2023-07-12;,citation_year=2023;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1002/wat2.1680;,citation_issue=n/a;,citation_doi=10.1002/wat2.1680;,citation_issn=2049-1948;,citation_volume=n/a;,citation_journal_title=WIREs Water;">
+<meta name="citation_reference" content="citation_title=Neglecting uncertainties biases house-elevation decisions to manage riverine flood risks;,citation_abstract=Homeowners around the world elevate houses to manage flood risks. Deciding how high to elevate a house poses a nontrivial decision problem. The U.S. Federal Emergency Management Agency (FEMA) recommends elevating existing houses to the Base Flood Elevation (the elevation of the 100-year flood) plus a freeboard. This recommendation neglects many uncertainties. Here we analyze a case-study of riverine flood risk management using a multi-objective robust decision-making framework in the face of deep uncertainties. While the quantitative results are location-specific, the approach and overall insights are generalizable. We find strong interactions between the economic, engineering, and Earth science uncertainties, illustrating the need for expanding on previous integrated analyses to further understand the nature and strength of these connections. Considering deep uncertainties surrounding flood hazards, the discount rate, the house lifetime, and the fragility can increase the economically optimal house elevation to values well above FEMA’s recommendation.;,citation_author=Mahkameh Zarekarizi;,citation_author=Vivek Srikrishnan;,citation_author=Klaus Keller;,citation_publication_date=2020-10-26;,citation_cover_date=2020-10-26;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/s41467-020-19188-9;,citation_issue=1, 1;,citation_doi=10.1038/s41467-020-19188-9;,citation_issn=2041-1723;,citation_volume=11;,citation_journal_title=Nature Communications;,citation_publisher=Nature Publishing Group;">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/appendices/julia.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../chapters/appendices/software.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Other Software Tools ✏️</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Climate Risk Assessment and Management</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome 🎯</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>About this book</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/about/license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License 🎯</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contributing 🎯</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citing 🎯</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Further Reading 🎯</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface ✏️</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>I: Foundations</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Climate Science ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Statistics ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Optimization ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/spatiotemporal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatiotemporal Processes ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison ✏️</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>II: Hazard Assessment</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/perturbations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Modifying Past Events 🚧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling 🚧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/hazard/model-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hazard Model Chains 🚧</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>III: Risk Management</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Robustness ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Computational Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview 🎯</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/block-maxima.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Block Maxima 📝</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/lake-problem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Dynamic Policy Search: The Lake Problem</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Statistics Without the Agonizing Details</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/nonstationary-gev-fooled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fooled by Randomness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/sewells-point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Water Levels at Sewell’s Point, VA</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References 🎯</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Julia ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/appendices/software.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Other Software Tools ✏️</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/appendices/llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Large Language Models (“AI”) ✏️</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>This project is <strong>under construction.</strong> Each page is either: 🚧 Planning, 📝 Draft, ✏️ Revision, or 🎯 Ready.</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#quarto-jupyter" id="toc-quarto-jupyter" class="nav-link active" data-scroll-target="#quarto-jupyter"><span class="header-section-number">B.1</span> Quarto + Jupyter</a></li>
+  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github"><span class="header-section-number">B.2</span> Git and GitHub</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/appendices/julia.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../chapters/appendices/software.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Other Software Tools ✏️</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Appendix B — Other Software Tools ✏️</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="quarto-jupyter" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="quarto-jupyter"><span class="header-section-number">B.1</span> Quarto + Jupyter</h2>
+<p>This textbook is written using the Quarto language. Quarto allows us to combine code, math, and code output in a single document. Jupyter notebooks fulfill a similar functionality, although they are implemented very differently. Both use Markdown syntax with LaTeX math notation.</p>
+<ul>
+<li><a href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheatsheet</a></li>
+<li><a href="https://ctan.math.washington.edu/tex-archive/info/undergradmath/undergradmath.pdf">LaTeX Cheatsheet</a></li>
+<li><a href="https://mathpix.com/snip">Mathpix Snip</a> allows you to convert images of equations to LaTeX code (there is a free tier)</li>
+<li><a href="https://detexify.kirelabs.org/classify.html">Detexify</a> lets you draw a symbol and suggests the LaTeX code for the corresponding symbol</li>
+</ul>
+</section>
+<section id="git-and-github" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="git-and-github"><span class="header-section-number">B.2</span> Git and GitHub</h2>
+<p>Git and GitHub are widely used to share, save, collaborate on, and disseminate code, including this book. There are lots of great resources for learning Git and GitHub, including:</p>
+<ul>
+<li><a href="https://www.theodinproject.com/lessons/foundations-git-basics">Git Basics</a> from The Odin Project.</li>
+<li><a href="https://learngitbranching.js.org/">Learn Git Branching</a>: An interactive, visual tutorial to how git works.</li>
+<li><a href="https://missing.csail.mit.edu/2020/version-control/">Version Control</a> from MIT’s “CS: Your Missing Semester” course.</li>
+<li><a href="https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV">Git and GitHub for Poets</a>: YouTube playlist covering the basics of git and GitHub.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/appendices/julia.html" class="pagination-link" aria-label="Julia ✏️">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Julia ✏️</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapters/appendices/llm.html" class="pagination-link" aria-label="Large Language Models (&quot;AI&quot;) ✏️">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Large Language Models (“AI”) ✏️</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2024–2025 <a href="https://orcid.org/0000-0002-3428-2224">James Doss-Gollin</a></span> <span class="faux-block"></span></p>
+</div>   
+    <div class="nav-footer-center">
+<p>All content licensed under <a href="../../chapters/about/license.html"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY-NC 4.0</a></p>
+</div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with Julia and <a href="https://quarto.org/">Quarto</a>.</span> <span class="faux-block"><a href="https://github.com/dossgollin-lab/climate-risk-management-reference">View the source on <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

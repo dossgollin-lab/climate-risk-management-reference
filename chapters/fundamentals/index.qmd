@@ -1,0 +1,72 @@
+# Overview ✏️ {.unnumbered}
+
+
+## Introduction to Climate Hazards
+
+Understanding climate hazards requires grappling with their unique characteristics that distinguish them from typical engineering and statistical problems.
+
+### Motivating Examples
+
+#### Paraguay Floods, 2015
+
+The Paraguay River reached extreme flood levels in 2015, inundating large portions of Asunción and displacing thousands of residents.
+This event illustrated how hydrologic extremes can have cascading impacts on urban infrastructure and vulnerable populations.
+
+#### Texas Cold Snap, 2021
+
+An unprecedented winter storm brought sub-zero temperatures to Texas in February 2021, causing widespread power outages and infrastructure failures.
+The event highlighted vulnerabilities in systems designed for typical climatic conditions but unprepared for extreme deviations.
+
+### Decision-Making Under Climate Uncertainty
+
+**Bayesian Decision Theory** provides a framework for climate risk management.
+The expected reward (or loss) for taking decision $a$ is:
+
+$$
+\mathbb{E}(R(a)) = \int_{\mathcal{S}} R(a, \mathbf{s}) p(\mathbf{s}) d\mathbf{s}
+$$
+
+**Crucial insight**: Jensen's inequality tells us that:
+$$
+\mathbb{E}(R(a)) \neq R(a, \mathbb{E}(\mathbf{s}))
+$$
+
+This means we cannot simply use average climate conditions to assess risks - the full distribution of possible outcomes matters.
+
+### What Makes Climate Data Unique?
+
+Climate hazards exhibit several characteristics that complicate traditional statistical analysis:
+
+#### Fat Tails
+Extreme events occur more frequently than normal distributions would suggest.
+The tails of climate distributions often follow power-law or heavy-tailed behavior.
+
+#### Quasi-periodic Oscillations
+Climate systems exhibit variability on multiple timescales, from seasonal cycles to multi-decadal oscillations like the Atlantic Multidecadal Oscillation (AMO) and Pacific Decadal Oscillation (PDO).
+
+#### Nonstationarity
+Climate statistics are changing over time due to anthropogenic forcing, making historical records insufficient for future risk assessment.
+The assumption that "the past is prologue" breaks down.
+
+#### Multi-scale Temporal Variations
+Climate hazards vary simultaneously on daily, seasonal, interannual, and multidecadal timescales.
+This temporal complexity requires sophisticated modeling approaches.
+
+#### Spatial Structure
+Climate extremes exhibit complex spatial dependencies and teleconnections.
+Events in one region can influence conditions thousands of kilometers away through atmospheric and oceanic circulation patterns.
+
+#### Emphasis on Extremes
+For risk assessment, we care most about rare, high-impact events that occur in the tails of distributions.
+Traditional statistical methods focused on central tendencies are insufficient.
+
+### Deep Uncertainty
+
+Many aspects of climate risk involve "deep uncertainty" - situations where we don't know the probability distributions, the set of possible outcomes, or even which models are appropriate.
+This requires robust decision-making approaches that perform well across multiple plausible futures.
+
+## How to use this Part
+
+- There are LOTS of fantastic stats, optimization, and Earth science resources, but they are often very narrowly tailored
+- This section is NOT designed to be comprehensive. Provides an overview of fundamental concepts, then works through a couple of example methods and then points to resources for other methods.
+- A course could work through these chapters in order, but it may make more sense to pick and choose, or to refer to them in the context of other chapters.
