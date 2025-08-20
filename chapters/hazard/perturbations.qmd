@@ -1,9 +1,0 @@
----
-title: Modifying Past Events 🚧
----
-
-::: {.callout-tip}
-## Learning Objectives
-:::
-
-## Further Reading {.unnumbered}

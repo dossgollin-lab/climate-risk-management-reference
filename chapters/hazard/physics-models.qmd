@@ -1,5 +1,5 @@
 ---
-title: Hazard Model Chains 🚧
+title: Physics-Based Models and Calibration 🚧
 ---
 
 We often want to combine models.
@@ -15,25 +15,25 @@ While the field of hydrological, hydraulic, and hydrodynamic modeling is extensi
 
 
 ::: {.callout-tip}
-## Learning Objectives
+## Learning objectives
 
 1. Understand how to navigate trade-offs between model complexity, interpretability, and computational cost.
 1. Understand how to characterize and communicate within- and between-model uncertainty.
 1. Understand how to use surrogate models to approximate the output of a more complex model.
 :::
 
-## Physics-Based and ML-Based Models
+## Physics-based and ML-based models
 
 This is a false dichotomy.
 Physics-based models all have parameterizations, for example of sub-grid turbulence.
 Rather, models exist on a **spectrum** ranging from fully data-driven to fully physics-based.
 Moreover, ML techniques are increasingly being applied to speed and enhance solutions to PDEs, further blurring this distinction [@rackauckas_sciml:2020].
 
-## Uncertainty in Model Chains
+## Uncertainty in model chains
 
 - @dittes_uncertainty:2018 quantifies the contribution of various drivers (scenario, GCM, downscaling, hydro modeling)
 - @lafferty_downscaling:2023 shows that model structure uncertainty in downscaling choice matters a lot for risk assessment
 
 ## Calibration
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

@@ -3,13 +3,13 @@ title: Extreme Value Theory ✏️
 notebook-links: true
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
-- [Fundamentals of Climate Science](/chapters/hazard/climate-science.qmd)
+- [Fundamentals of Climate Science](/chapters/fundamentals/climate-science.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
@@ -353,7 +353,7 @@ This assumption is violated by:
 A stationary process is a stochastic process whose unconditional joint probability distribution does not change when shifted in time.
 A stochastic process is a model for a *sequence* of random variables (e.g., random walk, MCMC).
 
-As famously stated by @milly_stationarity:2008: "Stationarity is dead."
+As famously stated by @milly_stationary:2008: "Stationarity is dead."
 
 ### Climate Change Impacts on Extremes
 
@@ -368,7 +368,7 @@ As famously stated by @milly_stationarity:2008: "Stationarity is dead."
 - Changes in storm structure and intensity
 - Shifts in jet stream patterns affecting extreme weather
 
-The following content draws from @seneviratne_wg1ch11:2021 executive summary:
+The following content draws from @seneviratne_IPCC:2021 executive summary:
 
 **Climate Change Impacts on Precipitation:**
 - The frequency and intensity of heavy precipitation events have likely increased at the global scale over a majority of land regions with good observational coverage
@@ -763,12 +763,10 @@ $$
 - `scipy.stats`: Basic extreme value distributions
 - `pyextremes`: Specialized extreme value analysis
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 
 **Essential texts**:
 - @coles_extremes:2001: Canonical extreme value textbook with mathematical rigor and practical examples
-- @reiss_statistical:2007: Mathematical foundations
-- @finkenst\u00e4dt_statistics:2003: Environmental applications
 
 **Current research directions**:
 - Sampling uncertainty: @lu_spatiotemporal:2025 discusses spatial approaches

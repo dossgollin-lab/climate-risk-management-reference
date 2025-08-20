@@ -37,16 +37,16 @@ book:
         - chapters/fundamentals/optimization.qmd
         - chapters/fundamentals/monte-carlo.qmd
         - chapters/fundamentals/ml-nonparametric.qmd
-        - chapters/fundamentals/spatiotemporal.qmd
+        - chapters/fundamentals/correlation-dimensionality.qmd
         - chapters/fundamentals/model-comparison.qmd
     - part: "**II: Hazard Assessment**"
       chapters:
         - chapters/hazard/extremes.qmd
         - chapters/hazard/downscaling-bias-correction.qmd
-        - chapters/hazard/perturbations.qmd
         - chapters/hazard/generators.qmd
+        - chapters/hazard/physics-models.qmd
         - chapters/hazard/sampling.qmd
-        - chapters/hazard/model-chains.qmd
+        - chapters/hazard/sensitivity-analysis.qmd
     - part: "**III: Risk Management**"
       chapters:
         - chapters/risk/exposure-vulnerability.qmd

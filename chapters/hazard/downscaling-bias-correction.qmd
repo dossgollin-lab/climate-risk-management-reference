@@ -2,13 +2,13 @@
 title: Downscaling and Bias Correction ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
-- [Fundamentals of Climate Science](/chapters/hazard/climate-science.qmd)
-- [Spatiotemporal and High-Dimensional Methods](/chapters/fundamentals/spatiotemporal.qmd)
+- [Fundamentals of Climate Science](/chapters/fundamentals/climate-science.qmd)
+- [Correlation and Dimensionality](/chapters/fundamentals/correlation-dimensionality.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
@@ -343,9 +343,9 @@ Choose downscaling approach based on:
 3. **Inadequate validation**: Test only on training period
 4. **Single-model dependence**: Rely on one downscaling approach
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 
 - @lanzante_pitfalls:2018 for comprehensive review of downscaling challenges
 - [Weather generators](./generators.qmd) can be used for downscaling
-- [Extreme value statistics](./extreme-value-stats.qmd) for downscaling extremes
-- [Spatiotemporal methods](/chapters/fundamentals/spatiotemporal.qmd) for advanced statistical techniques
+- [Extreme value statistics](./extremes.qmd) for downscaling extremes
+- [Correlation and Dimensionality](/chapters/fundamentals/correlation-dimensionality.qmd) for advanced statistical techniques

@@ -1,0 +1,178 @@
+---
+title: Global Sensitivity Analysis 🚧
+---
+
+## See first {.unnumbered}
+
+This chapter builds on concepts from:
+- [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd)
+- [Physics-Based Models and Calibration](/chapters/hazard/physics-models.qmd)
+
+## Learning objectives {.unnumbered}
+
+- Understand the role of sensitivity analysis in climate risk modeling
+- Apply variance-based sensitivity methods (Sobol indices) to identify key model parameters
+- Use Morris screening methods for initial parameter importance ranking
+- Interpret sensitivity analysis results for model simplification and uncertainty reduction
+- Apply sensitivity analysis to complex model chains and multi-model ensembles
+
+## Introduction
+
+Global sensitivity analysis (GSA) is essential for understanding which parameters, inputs, or model components contribute most to uncertainty in climate risk assessments.
+Unlike local sensitivity analysis that examines parameter effects around a single point, GSA explores the entire parameter space to provide robust insights into model behavior.
+
+### Why Sensitivity Analysis Matters
+
+In climate risk modeling, we often work with:
+
+- **High-dimensional parameter spaces**: Climate models may have dozens to hundreds of parameters
+- **Complex model chains**: From global climate models to local impact models
+- **Computational constraints**: Limited budget for model evaluations
+- **Decision-making needs**: Must identify which uncertainties matter most for risk management
+
+**Key questions GSA helps answer:**
+
+1. Which parameters contribute most to output uncertainty?
+2. Which parameters can be fixed without significantly affecting results?
+3. How do parameter interactions affect model behavior?
+4. Where should we focus calibration and uncertainty reduction efforts?
+
+## Variance-Based Sensitivity Analysis
+
+### Sobol Indices
+
+The most widely used approach for GSA decomposes output variance based on input contributions:
+
+$$
+V(Y) = \sum_{i} V_i + \sum_{i<j} V_{ij} + \sum_{i<j<k} V_{ijk} + \ldots + V_{1,2,\ldots,k}
+$$
+
+where $V_i$ represents the variance contribution from parameter $i$ alone, $V_{ij}$ from the interaction between parameters $i$ and $j$, etc.
+
+**First-order Sobol index:**
+$$
+S_i = \frac{V_i}{V(Y)} = \frac{V[\mathbb{E}[Y|X_i]]}{V(Y)}
+$$
+
+**Total-effect index:**
+$$
+S_T^i = \frac{V_i + \sum_{j \neq i} V_{ij} + \sum_{j \neq i, k \neq i, j \neq k} V_{ijk} + \ldots}{V(Y)}
+$$
+
+### Computational Methods
+
+**Saltelli sampling scheme** efficiently estimates Sobol indices using structured sampling matrices.
+
+**Sample size requirements**: For $k$ parameters, need $(k+2) \times N$ model evaluations where $N$ is the base sample size.
+
+## Morris Elementary Effects
+
+For computationally expensive models, Morris method provides screening at lower cost:
+
+$$
+EE_i^{(j)} = \frac{f(x_1, \ldots, x_i + \Delta, \ldots, x_k) - f(x_1, \ldots, x_i, \ldots, x_k)}{\Delta}
+$$
+
+**Morris measures:**
+- $\mu^*_i$: Mean of absolute elementary effects (overall importance)
+- $\sigma_i$: Standard deviation of elementary effects (interactions/non-linearity)
+
+## Applications in Climate Risk
+
+### Case Study 1: Hydrologic Model Calibration
+
+**Problem**: Identify most important parameters in distributed watershed model
+
+**Approach**:
+1. Define parameter ranges based on physical constraints
+2. Apply Morris screening to eliminate unimportant parameters  
+3. Use Sobol analysis on reduced parameter set
+4. Focus calibration on high-sensitivity parameters
+
+**Results**: Typically find 5-10 parameters explain 80%+ of output variance
+
+### Case Study 2: Storm Surge Model Chain
+
+**Model chain components**:
+1. Tropical cyclone track generator
+2. Wind field model  
+3. Storm surge model
+4. Sea level rise projections
+
+**GSA insights**:
+- Storm intensity parameters dominate surge height uncertainty
+- Track parameters most important for timing
+- Sea level rise becomes dominant for multi-decadal planning
+
+### Case Study 3: Drought Risk Assessment
+
+**Integrated modeling system**:
+- Climate model projections
+- Hydrologic model
+- Water system operations model
+- Economic impact model
+
+**Key findings**:
+- Climate model uncertainty dominates at seasonal scales
+- Hydrologic parameters important for extreme events
+- Operations parameters critical for economic impacts
+
+## Advanced Methods
+
+### Multi-model Sensitivity Analysis
+
+When working with ensemble of models:
+
+$$
+V(Y) = V[\mathbb{E}[Y|M]] + \mathbb{E}[V[Y|M]]
+$$
+
+Decomposes uncertainty into:
+- **Between-model variance**: Structural uncertainty
+- **Within-model variance**: Parameter uncertainty
+
+### Time-Varying Sensitivity
+
+For dynamic systems, sensitivity indices may change over time:
+- Use rolling window analysis
+- Apply functional data analysis methods
+- Consider time-integrated sensitivity measures
+
+## Implementation Guidelines
+
+### Sampling Strategy
+
+1. **Parameter space definition**: Use physical bounds and expert knowledge
+2. **Correlation handling**: Account for parameter dependencies using copulas
+3. **Hierarchical sampling**: For multi-scale problems, use nested sampling designs
+
+### Computational Efficiency
+
+1. **Surrogate modeling**: Build emulators for expensive models
+2. **Adaptive sampling**: Focus sampling in high-sensitivity regions
+3. **Multi-fidelity methods**: Combine high and low-fidelity model evaluations
+
+### Interpretation and Communication
+
+1. **Threshold values**: $S_i > 0.1$ often considered "important"
+2. **Interaction effects**: $S_T^i - S_i$ indicates interaction strength
+3. **Visualization**: Use radar plots, heatmaps for multi-output problems
+
+## Software and Tools
+
+### R Packages
+- `sensitivity`: Comprehensive GSA methods
+- `SALib` (Python): Popular sensitivity analysis library
+
+### Specialized Tools
+- SAFE Toolbox (MATLAB/Python): Advanced methods
+- OpenTURNS: Uncertainty quantification platform
+
+## Further reading {.unnumbered}
+
+**Key References:**
+- @saltelli_global:2008: Comprehensive introduction to GSA
+- @herman_salib:2017: Practical implementation guide
+- @razavi_sensitivity:2020: Review of GSA in environmental modeling
+
+**Climate Applications:**

@@ -18,11 +18,11 @@ Random.seed!(123)
 CairoMakie.activate!(; type = "svg")
 ```
 
-## Case Study: Flood Risk Assessment with Parameter Uncertainty
+## Case study: flood risk assessment with parameter uncertainty
 
 This example demonstrates how parameter uncertainty propagates through a flood risk assessment, following the methodology from climate risk decision-making.
 
-### Problem Setup
+### Problem setup
 
 **Scenario**: A client wants to understand flood damage risk for their property. We need to quantify the probability distribution of annual flood damages.
 
@@ -64,7 +64,7 @@ hist!(ax2, observed_heights, normalization = :pdf, bins = 15)
 fig
 ```
 
-### Maximum Likelihood Estimation
+### Maximum likelihood estimation
 
 ```{julia}
 # Fit log-normal distribution using MLE
@@ -86,7 +86,7 @@ axislegend()
 fig
 ```
 
-### Return Period Analysis
+### Return period analysis
 
 ```{julia}
 # Calculate return periods and levels
@@ -116,7 +116,7 @@ axislegend()
 fig
 ```
 
-## Depth-Damage Function
+## Depth-damage function
 
 Now we need to model how flood height translates to economic damages.
 
@@ -148,9 +148,9 @@ vlines!(fig.axis, [0], color = :gray, linestyle = :dash)
 fig
 ```
 
-## Monte Carlo Risk Assessment
+## Monte Carlo risk assessment
 
-### Basic Monte Carlo Analysis
+### Basic Monte Carlo analysis
 
 ```{julia}
 function monte_carlo_damage(flood_dist, building_elev, x0, k; n_samples = 50_000)
@@ -184,7 +184,7 @@ println("Probability of any damage: $(round(metrics.prob_any_damage, digits=4))"
 println("Probability of near-total loss: $(round(metrics.prob_total_loss, digits=4))")
 ```
 
-### Visualizing Damage Distribution
+### Visualizing damage distribution
 
 ```{julia}
 # Plot damage distribution (excluding zeros)
@@ -202,11 +202,11 @@ text!(fig.axis, 0.15, maximum(fig.axis.finallimits.val[2]) * 0.8,
 fig
 ```
 
-## Parameter Uncertainty Analysis
+## Parameter uncertainty analysis
 
 Now let's explore how uncertainty in model parameters affects our damage estimates.
 
-### Flood Distribution Parameter Uncertainty
+### Flood distribution parameter uncertainty
 
 ```{julia}
 # Alternative flood distributions (representing parameter uncertainty)
@@ -235,7 +235,7 @@ for (i, dmg) in enumerate(damage_scenarios)
 end
 ```
 
-### Damage Function Parameter Uncertainty
+### Damage function parameter uncertainty
 
 ```{julia}
 # Alternative damage function parameters
@@ -264,7 +264,7 @@ for (i, dmg) in enumerate(damage_func_scenarios)
 end
 ```
 
-### Combined Parameter Uncertainty
+### Combined parameter uncertainty
 
 ```{julia}
 # Combine both sources of uncertainty
@@ -289,7 +289,7 @@ println("Range: $(round(maximum(mean_damages) - minimum(mean_damages), digits=4)
 println("Relative uncertainty: $(round((maximum(mean_damages) - minimum(mean_damages))/mean(mean_damages)*100, digits=1))%")
 ```
 
-### Sensitivity Visualization
+### Sensitivity visualization
 
 ```{julia}
 # Create box plot showing damage uncertainty across scenarios
@@ -327,7 +327,7 @@ Legend(fig[1, 2],
 fig
 ```
 
-## Key Insights from Monte Carlo Analysis
+## Key insights from Monte Carlo analysis
 
 ```{julia}
 # Summary of key findings
@@ -355,7 +355,7 @@ println("   - Conservative decision-making should account for parameter uncertai
 println("   - Additional data collection could reduce key uncertainties")
 ```
 
-## Advanced Applications
+## Advanced applications
 
 This basic framework can be extended to more complex problems:
 

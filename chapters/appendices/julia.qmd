@@ -26,7 +26,7 @@ You can read more about Julia's design philosophy:
 - [Why We Created Julia](https://julialang.org/blog/2012/02/why-we-created-julia/) from the founders
 - [Why Julia Manifesto](https://github.com/Datseris/whyjulia-manifesto) is more comprehensive
 
-## Learning Resources
+## Learning resources
 
 This textbook aims to never reinvent the wheel.
 There are lots of exceptional resources for learning Julia, or for learning computational concepts with Juila.
@@ -39,7 +39,7 @@ Here are some favorites:
 - [Comprehensive Julia Tutorials](https://www.youtube.com/playlist?list=PLCXbkShHt01seTlnlVg6O7f6jKGTguFi7): YouTube playlist covering Julia topics
 - [Matlab-Python-Julia Cheatsheet](https://cheatsheets.quantecon.org/): helpful if you're experienced in one of these languages
 
-### Specialized Topics
+### Specialized topics
 
 Here are some additional resources for specific Julia tools and packages developed in this class
 

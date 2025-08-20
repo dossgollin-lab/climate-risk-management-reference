@@ -196,11 +196,11 @@ axislegend()
 fig
 ```
 
-## Case Study: Storm Surge Distribution
+## Case study: Storm Surge Distribution
 
 This example demonstrates Bayesian inference for continuous parameters using real climate data.
 
-### Data Preparation  
+### Data preparation  
 
 ```{julia}
 # Create synthetic storm surge data (representing annual maxima)
@@ -272,7 +272,7 @@ posterior_chain = sample(model, NUTS(), 2_000)
 summarystats(posterior_chain)
 ```
 
-### Return Period Analysis with Uncertainty
+### Return period analysis with Uncertainty
 
 ```{julia}
 # Calculate return levels with uncertainty

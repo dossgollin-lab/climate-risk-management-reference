@@ -2,13 +2,13 @@
 title: Deep Uncertainty and Model Structure ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 - [Model Validation and Comparison](/chapters/fundamentals/model-comparison.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Distinguish between aleatory and epistemic uncertainty in climate risk assessment
 - Understand the challenges posed by structural uncertainty and model disagreement
@@ -310,5 +310,5 @@ Models disagree on both the sign and magnitude of tropical cyclone frequency and
 
 Economic models show orders-of-magnitude differences in ecosystem service values under climate change.
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 

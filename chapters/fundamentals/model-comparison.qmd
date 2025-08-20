@@ -2,14 +2,14 @@
 title: Model Validation and Comparison ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 - [Optimization](/chapters/fundamentals/optimization.qmd) (maximum likelihood estimation)
 - [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd) (Bayesian inference)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
@@ -29,7 +29,7 @@ We need methods to:
 
 These challenges are particularly acute in climate science because Earth systems are high-dimensional, multi-scale, and nonlinear.
 
-## Graphical Diagnostic Methods
+## Graphical diagnostic methods
 
 ### The Power of Visualization
 
@@ -73,7 +73,7 @@ The goal is not to find a "perfect" model (which doesn't exist), but rather a mo
 
 **Remember**: You cannot look at a single criterion and decide whether a model is "good" or not.
 
-## Information Criteria
+## Information criteria
 
 ### The Fundamental Problem
 
@@ -163,7 +163,7 @@ Note that:
 - Still assumes existence of a true model (hence the many problems with NHST)
 - **This is widely used in practice, often without justification**
 
-## Model Selection Philosophy
+## Model selection philosophy
 
 ### No Magic Numbers
 
@@ -182,7 +182,7 @@ Rather than pretending model selection is purely objective:
 3. **Use domain knowledge** to inform choices
 4. **Test sensitivity** to key assumptions
 
-## Model Combination and Ensemble Methods
+## Model combination and ensemble methods
 
 ### Bayesian Model Averaging
 
@@ -201,7 +201,7 @@ This approach:
 Alternative ensemble approach that optimizes predictive performance by finding optimal weights for combining models without assuming any single model is "true."
 
 ::: {.callout-tip}
-## Computational Examples
+## Computational examples
 
 For detailed computational examples of model validation and comparison, see the companion file: [Model Validation Examples: Diagnostic Plots and Information Criteria](/chapters/fundamentals/model-comparison-examples.qmd).
 
@@ -213,8 +213,8 @@ Examples include:
 - Model validation for Houston precipitation data and HOUSTON HOBBY AP station
 :::
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 
 For more accessible discussion, see Chapter 7 of @mcelreath_rethinking2:2020.
 For more technical treatment, see @piironen_comparison:2017.
-For practical guidance on extreme value model selection, see @coles_introduction:2001.
+For practical guidance on extreme value model selection, see @coles_extremes:2001.

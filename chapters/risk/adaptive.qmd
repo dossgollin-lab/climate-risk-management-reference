@@ -2,13 +2,13 @@
 title: Adaptive Planning and Flexibility 🚧
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Deep Uncertainty](/chapters/risk/deep-uncertainty.qmd)
 - [Robustness](/chapters/risk/robustness.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Plan for uncertainty with adaptive management and iterative risk strategies.
 - Develop adaptation pathways that evolve with new information (e.g., climate data, impacts).
@@ -105,4 +105,4 @@ This approach is flexible and works well with simulation-optimization frameworks
 
 ## "Tipping points" and trigger-based adaptation
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

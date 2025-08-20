@@ -2,12 +2,12 @@
 title: Monte Carlo Methods ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Apply Monte Carlo methods to approximate integrals and expectations
 - Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions
@@ -34,11 +34,11 @@ where $x_1, x_2, \ldots, x_N$ are samples drawn from $p(x)$.
 
 This is particularly powerful when $p(x)$ is a complex posterior distribution that we can only sample from, not evaluate directly.
 
-## Motivation: Bayesian Inference
+## Motivation: Bayesian inference
 
 Bayesian inference provides a principled framework for updating our beliefs about parameters given observed data. The key insight is that parameters have probability distributions, not single point values.
 
-### Bayes' Theorem
+### Bayes' theorem
 
 For continuous parameters, Bayes' theorem states:
 $$
@@ -56,7 +56,7 @@ $$
 p(\theta | y) \propto p(y | \theta) p(\theta)
 $$
 
-### The Challenge
+### The challenge
 
 For most real-world problems, the posterior distribution $p(\theta | y)$ cannot be computed analytically. This is where Monte Carlo methods become essential - we use them to draw samples from complex posterior distributions.
 
@@ -70,7 +70,7 @@ MCMC methods generate samples from posterior distributions by:
 
 Modern MCMC algorithms like the No-U-Turn Sampler (NUTS) use gradient information to efficiently explore high-dimensional parameter spaces.
 
-## Motivation: Parameter Uncertainty
+## Motivation: parameter uncertainty
 
 A fundamental challenge in climate risk assessment is that model parameters are uncertain.
 Consider a simple flood risk assessment problem:
@@ -84,7 +84,7 @@ $$
 p(d) = \int_h d(h) p(h) \, dh
 $$
 
-### The Challenge
+### The challenge
 
 This integral is often impossible to solve analytically, especially when:
 1. We use realistic (non-analytical) damage functions
@@ -102,7 +102,7 @@ This approach generalizes to complex, multi-parameter problems where analytical 
 
 ## Monte Carlo Theory
 
-### Fundamental Theorem
+### Fundamental theorem
 
 If $\theta^s \sim p(\theta)$, then by the Law of Large Numbers:
 $$
@@ -111,7 +111,7 @@ $$
 
 This convergence is **guaranteed** as $S \to \infty$, making Monte Carlo a robust approach for complex problems.
 
-### Advantages Over Deterministic Integration
+### Advantages over deterministic integration
 
 **Deterministic approach**:
 - Sample $\theta$ at regular grid points
@@ -123,7 +123,7 @@ This convergence is **guaranteed** as $S \to \infty$, making Monte Carlo a robus
 - Automatically focuses computational effort where probability is high
 - **Benefits**: Scales well to high dimensions, handles complex domains
 
-## Motivation: Resilience
+## Motivation: resilience
 
 Monte Carlo methods are essential for resilience analysis because they can handle:
 - Multiple uncertain hazards occurring simultaneously
@@ -131,18 +131,18 @@ Monte Carlo methods are essential for resilience analysis because they can handl
 - Non-linear damage functions and thresholds
 - Rare but high-impact events
 
-## Motivation: Sensitivity Analysis
+## Motivation: sensitivity analysis
 
 Monte Carlo methods excel at sensitivity analysis - understanding how uncertain inputs affect outputs.
 
-### Parameter Sensitivity
+### Parameter sensitivity
 
 By systematically varying parameters and observing changes in Monte Carlo outputs, we can:
 1. **Identify critical parameters**: Which uncertainties matter most?
 2. **Quantify sensitivity**: How much does output uncertainty change with input uncertainty?
 3. **Guide data collection**: Where would additional measurements be most valuable?
 
-### Global Sensitivity Analysis
+### Global sensitivity analysis
 
 Unlike local sensitivity (derivatives at a point), Monte Carlo enables **global sensitivity analysis** across the entire parameter space, capturing:
 - Non-linear relationships
@@ -162,7 +162,7 @@ Where $\theta$ is a vector of parameters, $a$ is some action or decision, and $L
 We previously called $\theta$ a "state of the world" and $L$ a "reward function".
 :::
 
-## Practical Problem: Flood Risk Assessment
+## Practical problem: flood risk assessment
 
 You have been commissioned by a client to assess their exposure to flooding.
 Specifically, they want to know the probability distribution of annual flood damages at their property if they do not elevate or floodproof their building.
@@ -173,7 +173,7 @@ Specifically, they want to know the probability distribution of annual flood dam
 
 With this information, they can compute metrics like the expected annual damage, the 99th percentile annual damage, and the probability of any flood occurring that will help them make a decision.
 
-## Functions of Random Variables: The Challenge
+## Functions of random variables: the challenge
 
 Plugging in a bounded logistic model for $d(h)$ and our lognormal model for $h$:
 $$
@@ -185,7 +185,7 @@ p(d) &= \int_h d(h) p(h) \, dh \\
 \end{align}
 $$
 
-### Limitations: Analytic Approach
+### Limitations: analytic approach
 
 We might be able to solve this analytically (Wolfram Alpha can't...).
 But:
@@ -206,9 +206,9 @@ A sampling strategy:
 2. for each value: compute $\mathbb{I}(h^s > 0) \text{logistic}(h^s)$ and take the average
 3. this converges to the correct expectation!
 
-## Parameter Uncertainty Propagation
+## Parameter uncertainty propagation
 
-### The Core Problem
+### The core problem
 
 We have been working with a single probability distribution for flood depths, which we computed by maximum likelihood.
 
@@ -217,7 +217,7 @@ What happens if we consider the lognormal distribution with slightly different, 
 
 What about the depth-damage parameters $x_0$ and $k$?
 
-### Parameter Uncertainty Impact
+### Parameter uncertainty impact
 
 - Uncertainties in our model parameters propagate to uncertainties in the things we care about.
 - As we collect more data, fewer combinations of parameters are consistent with observations
@@ -300,7 +300,7 @@ The posterior is a compromise between the prior and the likelihood.
 - False sense of objectivity is dangerous anyways!
 
 ::: {.callout-tip}
-## Computational Examples
+## Computational examples
 
 For detailed computational examples, see the companion files:
 

@@ -3,7 +3,7 @@ title: "Working with People: Values, Participation, and Communication 🚧"
 ---
 
 ::: {.callout-tip}
-## Learning Objectives
+## Learning objectives
 
 - Understand and communicate how decision analyses are necessarily influenced by subjective value judgements
 - Explain common ethical frameworks for decision analysis
@@ -324,4 +324,4 @@ Following Fletcher et al. (2022), effective participatory processes must explici
 - Decision support tools accessible to non-experts
 - Translation and interpretation capabilities
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

@@ -2,7 +2,7 @@
 title: Stochastic Weather Generators 🚧
 ---
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 
 ## Example: Hidden Markov Models (HMMs)
@@ -13,4 +13,4 @@ We can pull one of Andy's examples into a notebook
 
 Generators can be used as a form of downscaling, where some credibly simulated variables from a climate model are used as input to a stattistical generator.
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

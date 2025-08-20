@@ -2,7 +2,7 @@
 title: Probability and Statistics ✏️
 ---
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
@@ -304,7 +304,7 @@ A common goal of statistical analysis is to quantify how consistent a set of obs
 
 See [the notebook](/notebooks/mosquitos.qmd).)
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 
 If most of this content is unfamiliar to you, it may be worth reviewing a more comprehensive introduction to probability and statistics before proceeding.
 While introductory statistics is often taught in an exhaustingly dry way, there are a few excellent resources

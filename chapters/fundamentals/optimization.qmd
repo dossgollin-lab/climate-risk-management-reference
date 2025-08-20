@@ -2,12 +2,12 @@
 title: Optimization ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Understand the components of an optimization problem: decision variables, objective functions, and constraints.
 - Learn how optimization is applied in statistics and policy search.
@@ -191,7 +191,7 @@ $$
 If we then want to estimate $\sigma$, we can estimate the standard deviation of the residuals.
 
 ::: {.callout-tip}
-## Computational Examples
+## Computational examples
 
 For detailed computational examples of likelihood functions, MLE estimation, and numerical optimization, see the companion file: [Maximum Likelihood Estimation: Computational Examples](/chapters/fundamentals/optimization-examples.qmd).
 
@@ -230,7 +230,7 @@ A vast range of techniques, a treatment of which merits a textbook on its own, h
 
 ### High-Dimensional Optimization
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}
 
 - **@sutton_reinforcement:2018** provides a comprehensive introduction to reinforcement learning, which is broadly the study of sequential decision-making under uncertainty.
 - **@powell_textbook:2022** provides a comprehensive treatment of sequential decision-making under uncertainty, aiming at a unified framework

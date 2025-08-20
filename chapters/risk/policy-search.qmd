@@ -2,13 +2,13 @@
 title: Policy Search & Optimization ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Optimization](/chapters/fundamentals/optimization.qmd)
 - [Expectations and Discounting](/chapters/risk/expectations-cost-benefit.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Formulate policy design problems as optimization tasks.
 - Explore multi-objective policy search (e.g., cost, emissions, equity).
@@ -293,7 +293,7 @@ This creates challenges for assessing solution quality and algorithm convergence
 - **Multiple objectives**: More objectives exponentially increase difficulty
 - **Archive management**: Maintain external archive of best solutions found
 
-### The Challenge of Many Objectives
+### The challenge of Many Objectives
 
 **Diminishing Returns from Additional Objectives:**
 
@@ -343,4 +343,4 @@ Quality over quantity applies strongly in multi-objective optimization.
 
 *Content to be developed*
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

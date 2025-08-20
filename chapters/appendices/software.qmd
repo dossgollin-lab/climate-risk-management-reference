@@ -4,11 +4,11 @@ title: "Software Setup ✏️"
 
 If you want to run the computational notebooks in this book, or apply a similar workflow, then these instructions are for you.
 
-## Quick Start
+## Quick start
 
 This section provides step-by-step instructions to get your development environment set up and running.
 
-### Installation Steps
+### Installation steps
 
 1. **Install [Visual Studio Code](https://code.visualstudio.com/download)** - your code editor
    - There are other good IDEs out there, and you can absolutely use one.
@@ -40,7 +40,7 @@ After installation, you should be able to:
 - Open a terminal and type `julia` to start the Julia REPL
 - Create a new Quarto document (`.qmd` file) in VS Code with syntax highlighting
 
-## Dig Deeper
+## Dig deeper
 
 ### Julia 
 
@@ -67,7 +67,7 @@ You can learn more at:
 - Official [Tutorial: Computations](https://quarto.org/docs/get-started/computations/vscode.html) - integrating code
 - Comprehensive [Quarto documentation](https://quarto.org/docs/guide/)
 
-#### Writing with Markdown and Math
+#### Writing with Markdown and math
 
 Quarto uses Markdown syntax with LaTeX math notation.
 Essential references:

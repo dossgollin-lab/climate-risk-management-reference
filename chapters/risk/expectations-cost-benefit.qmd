@@ -2,7 +2,7 @@
 title: Cost-Benefit Analysis and Net Present Value ✏️
 ---
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
@@ -116,7 +116,7 @@ $$
 \mathbb{E}_\mathbf{s} \left[ u(a, \mathbf{s}) \right] = \int p(\mathbf{s}) u(a, \mathbf{s}) d\mathbf{s}
 $$
 which requires a probability distribution over states of the world.
-So applying this theory requires a "subjective" [@savage:1954] or "personal" probability distribution over states of the world and a utility function.
+So applying this theory requires a "subjective" [@savage_foundations:1954] or "personal" probability distribution over states of the world and a utility function.
 
 ## Critiques and limitations
 
@@ -134,7 +134,7 @@ So applying this theory requires a "subjective" [@savage:1954] or "personal" pro
 - We often deal with "deep" uncertainties for which it's hard to come up with a probability distribution
   - We will revisit this much later in the semester
 - Is Bayesian decision theory a good model of how people actually make decisions?
-  - This framework was largely formalized by @savage:1954, who postulated that people often behave as though maximizing expected utility
+  - This framework was largely formalized by @savage_foundations:1954, who postulated that people often behave as though maximizing expected utility
   - @ellsberg_ambiguity:1961 and others: this is not how people really make decisions!
   - Our goal is to **support** decision-making, not **predict** how people will actually make decisions. So the fact that this is not how people actually make decisions is not a problem for us.
   - That said: when our predictions of "what is rational" diverge from what people actually do, we should be curious about why instead of assuming they are stupid!
@@ -153,4 +153,4 @@ Ultimately, cost-benefit analysis is a great decision-support tool, but it is no
 When applied well, it's an iterative process through which we repeatedly refine our understanding of the decision problem.
 When applied poorly, it's a black-box process that spits out a number that is used to justify a decision that was already made.
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

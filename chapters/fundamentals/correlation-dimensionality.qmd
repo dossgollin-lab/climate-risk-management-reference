@@ -1,14 +1,14 @@
 ---
-title: Spatiotemporal Processes ✏️
+title: Correlation and Dimensionality ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 - [Machine Learning and Nonparametric Methods](/chapters/fundamentals/ml-nonparametric.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Model and interpret spatial dependence in climate fields
 - Perform kriging and other geostatistical interpolations for mapping hazards
@@ -282,4 +282,4 @@ Almost all the high-dimensional data we deal with in climate science are spatial
 
 ### Model Evaluation and Intercomparison
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

@@ -2,13 +2,13 @@
 title: Machine Learning ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
 - [Optimization](/chapters/fundamentals/optimization.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 By the end of this chapter, students should be able to:
 
@@ -17,7 +17,7 @@ By the end of this chapter, students should be able to:
 - Critically evaluate the application of machine learning in hydroclimate hazard assessment literature (papers, reports, models, datasets), identifying key assumptions, limitations, and potential biases.
 - Understand the basic principles and potential of more advanced machine learning techniques (deep learning for sequence data, probabilistic models for scenario generation) in the context of hydroclimate hazards, while also recognizing their inherent complexities and interpretability challenges.
 
-## Machine Learning Fundamentals
+## Machine learning fundamentals
 
 Machine learning has become an essential tool in hydroclimate hazard assessment, offering powerful methods for pattern recognition, prediction, and data analysis.
 However, critical engagement with ML-driven products is essential - understanding assumptions, limitations, and appropriate applications.
@@ -199,7 +199,7 @@ Simple hyperparameter optimization approach:
 
 More sophisticated approaches include random search and Bayesian optimization.
 
-## Nonparametric Methods
+## Nonparametric methods
 
 From Bayes' rule,
 $$
@@ -240,7 +240,7 @@ The main challenge to the kde approach is varying data density: regions of high 
 
 ### Semi-parametric Methods
 
-## Generalized Linear Models (GLMs)
+## Generalized linear models (GLMs)
 
 Linear regression assumes normally distributed errors and a linear relationship between predictors and the response. Generalized Linear Models extend this framework to other distributions and link functions, making them particularly useful for climate applications.
 
@@ -323,7 +323,7 @@ end
 
 ### Semi-parametric Methods
 
-## Machine Learning Practice
+## Machine learning practice
 
 ### Input Data and Preprocessing
 
@@ -364,7 +364,7 @@ end
 - **Cross-Validation:** A technique for more reliable estimation of generalization performance.
 - **Regularization:** Techniques (e.g., L1, L2) to prevent overfitting by penalizing model complexity.
 
-## Tree-Based Methods and Ensemble Learning
+## Tree-based methods and ensemble learning
 
 ### Decision Trees
 
@@ -455,7 +455,7 @@ fit!(model, features, labels)
 predictions = DecisionTree.predict(model, features)
 ```
 
-## Principal Component Analysis (PCA)
+## Principal component analysis (PCA)
 
 ### Motivation for Dimensionality Reduction
 
@@ -525,7 +525,7 @@ Julia packages for PCA:
 Use a **scree plot** to identify natural breaks in explained variance.
 Consider practical trade-offs between dimension reduction and information retention.
 
-## Deep Learning and Advanced Methods
+## Deep learning and advanced methods
 
 - This section introduces more advanced machine learning techniques that have shown promise in complex data analysis.
 

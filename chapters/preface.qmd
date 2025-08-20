@@ -1,6 +1,6 @@
 # Preface ✏️ {.unnumbered}
 
-## What is Climate Risk?
+## What is climate risk?
 
 Climate risks arise at the intersection of climate hazards, exposed systems, and vulnerability.
 They manifest when extreme or changing climate conditions—floods, droughts, extreme temperatures, sea-level rise, or shifting precipitation patterns—impact human and natural systems that are exposed and vulnerable to these conditions.
@@ -10,13 +10,10 @@ Climate risks span scales from the hyperlocal (a single building's flood exposur
 They encompass immediate acute risks from individual extreme events and longer-term chronic risks from gradual climate changes.
 Crucially, climate risks are not solely natural phenomena but emerge from the complex interactions between climate hazards and the human systems—infrastructure, institutions, communities, and economies—that experience their impacts.
 
-### Terminology
+Climate risk is often defined as the product of hazard (probability that something will happen) and consequences (exposure and vulnerability).
+However, it's often helpful to start with the decisions we care about.
 
-The term "climate risk" is sometimes used differently from how we use it.
-For example, the financial sector often distinguishes between "physical risks" (related to climate hazards) and "transition risks" (related to policy and market changes);
-we would be focused here on the physical risks associated with climate hazards.
-
-### How Do We Manage Climate Risks?
+### Risk management
 
 The goal of assessing climate risks is to manage them, as is the focus of Part III.
 We manage climate risks by
@@ -29,7 +26,25 @@ While emergency management is beyond the scope of the book, disaster prevention 
 A key insight from considering these applications is that climate risks are not natural phenomena, but occur at the intersection of natural and human systems.
 A second insight is that decisions about how to manage climate risks do not depend only on climate hazard, but also on human systems and values.
 
-## The Simple Story
+### Exposure and vulnerability
+
+Hazards do not create consequences by themselves.
+Hazards affect things that we care about, whether natural ecosystems, human homes, infrastructure systems, or something else.
+Quantitatively these are often described as exposure and vulnerability.
+However, this is not always a helpful framing because everything is exposed, to at least some degree, to climate hazards.
+
+### Climate hazard
+
+Climate hazards have several key characteristics:
+
+- **Location-specific impacts**: Specific weather patterns cause different things in different places—tropical cyclones cause extreme winds on the Gulf Coast, while persistent intense rainfall causes flooding in major rivers
+- **Require Earth science and data**: Understanding hazards requires both physical process knowledge and empirical data
+- **Variable focus on extremes**: Some applications care about extremes, but others (e.g., water management) care about shifts in the whole distribution
+- **Multi-scale variability**: Characterized by variability across multiple spatial and temporal scales
+
+## What are good strategies?
+
+### The simple story
 
 In principle, managing climate risks should be straightforward.
 If we had clear objectives and well-characterized uncertainty, there are **established mathematical formalisms for decision-making under uncertainty**.
@@ -43,7 +58,7 @@ The {{< glossary "expectation" >}} $\mathbb{E}[U(a)]$ represents the average uti
 With this framework and modern advances in operations research and optimization, we could frame climate risk management as a large-scale optimization problem.
 This might still be a challenging problem, requiring sophisticated optimization methods, large-ensemble Monte Carlo simulation, high-performance computing, and more, but fundamentally **there would be a right answer** that we could identify, at least seek to approximate.
 
-## Why This Isn't Enough
+### Why this isn't enough
 
 In practice, climate risk management defies this idealized approach for several fundamental reasons:
 
@@ -64,7 +79,7 @@ The abundance of available tools does not automatically translate to better deci
 Indeed, the sophistication of modern computational approaches can obscure fundamental questions about problem framing, uncertainty characterization, and appropriate methods selection.
 Without solid conceptual foundations, practitioners may find themselves applying powerful tools inappropriately or mistaking methodological novelty for substantive insight.
 
-## The Stakes of Getting It Wrong
+### The stakes of getting it wrong
 
 The consequences of inadequate climate risk management are severe and diverse.
 **Infrastructure failures** occur when designs based on historical extremes prove insufficient for future conditions—leading to flooded neighborhoods when storm drains are undersized, or to costly over-design when extreme projections are treated as certainties.
@@ -75,7 +90,7 @@ Insurance companies that underestimate climate risks face catastrophic losses, w
 Infrastructure investors struggle to balance climate resilience against cost constraints, often erring toward solutions that prove either inadequate or prohibitively expensive.
 These failures cascade across scales: a poorly designed local drainage system contributes to regional flood management challenges, while flawed national climate risk assessments misguide infrastructure investment priorities across entire countries.
 
-## The Structure of This Book
+## This book
 
 This book develops both the technical tools and conceptual frameworks needed for climate risk management:
 
@@ -98,3 +113,19 @@ This book aims to teach readers how to **apply** tools from applied mathematics,
 
 While Part I does provide building blocks, they are intended to be self-contained references rather than a comprehensive overview to applied math, statistics, computer science, machine learning, and operations research.
 Instead, it aims to give you "just enough" context to think carefully about how to apply tools from these fields to climate risk management challenges.
+
+## What this book is not
+
+This book focuses on the technical foundations of climate risk assessment and quantitative decision-making under uncertainty.
+While we address design requirements, social dimensions, and stakeholder considerations throughout—recognizing that technical tools can significantly inform these challenges—there are important aspects of climate risk management that require specialized expertise beyond our scope.
+
+This book will **not** primarily teach you how to:
+
+- **Manage reputational and transition risks**: While we focus on physical climate risks and their quantitative assessment, organizations also face complex risks from changing policies, markets, and stakeholder expectations that require specialized risk management expertise
+- **Design and implement adaptive organizations**: While we cover adaptive management strategies and robust decision-making frameworks, the organizational design and management expertise needed to implement these approaches in practice requires additional specialized knowledge
+- **Facilitate stakeholder processes**: While the quantitative tools we teach can strongly support consensus building by clarifying trade-offs and uncertainties, the facilitation, negotiation, and collaborative governance skills needed to lead stakeholder processes require specialized training
+- **Develop communication strategies**: While we emphasize how to interpret and present quantitative risk assessments, developing effective communication strategies for diverse audiences—policymakers, communities, investors—requires specialized expertise in science communication and public engagement
+- **Navigate implementation challenges**: While we address policy design and infrastructure planning from an analytical perspective, the practical challenges of construction management, regulatory processes, and community engagement require domain-specific expertise
+
+This is an interdisciplinary text that draws insights from multiple fields and acknowledges the social, political, and institutional contexts that shape climate risk management.
+However, our primary focus remains on the quantitative and analytical foundations that can inform—but not replace—the broader expertise needed for effective practice.

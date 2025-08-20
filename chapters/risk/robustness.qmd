@@ -2,13 +2,13 @@
 title: Robustness ✏️
 ---
 
-## See First {.unnumbered}
+## See first {.unnumbered}
 
 This chapter builds on concepts from:
 - [Deep Uncertainty and Model Structure](/chapters/risk/deep-uncertainty.qmd)
 - [Optimization](/chapters/fundamentals/optimization.qmd)
 
-## Learning Objectives {.unnumbered}
+## Learning objectives {.unnumbered}
 
 - Address deep uncertainty in climate decision-making.
 - Use robust decision-making (RDM) methods to compare strategies across multiple futures.
@@ -23,7 +23,7 @@ This chapter builds on concepts from:
 ::: {.column width="44%"}
 ### The problem
 
-@abraham_demandforecasts:2020 show that water utilities systematically over-estimate future demand.
+Studies show that water utilities systematically over-estimate future demand.
 Using a single, certain, forecast of future water demand might motivate over-building infrastructure.
 :::
 ::::
@@ -41,7 +41,7 @@ We want to make choices / design infrastructure that are **robust** to errors in
 
 ## Definition
 
-> The insensitivity of system design to errors, random or otherwise, in the estimates of those parameters affecting design choice [@matalas:1977]
+> The insensitivity of system design to errors, random or otherwise, in the estimates of those parameters affecting design choice [@matalas_planning:1977]
 
 Mathematical definitions differ dramatically, however [@herman_robustness:2015]!
 Today we will discuss some overlapping perspectives and ideas about robustness.
@@ -88,7 +88,7 @@ Is this a good way to quantify our conceptual ideas about robustness?
 
 ### Combinations of uncertainties
 
-In practice, we often have a combination of parametric uncertainties and "model structure" uncertainties [@doss-gollin_subjective:2022].
+In practice, we often have a combination of parametric uncertainties and "model structure" uncertainties [@doss-gollin_subjective:2023].
 And **not all SOWs are equally likely**!
 
 ![](../_assets/img/lsl-evolution.png)
@@ -104,7 +104,7 @@ Climate scenario uncertainties are "deep" (more next week!), but it would be a m
 
 :::: {.columns}
 ::: {.column width="55%"}
-![@doss-gollin_subjective:2022](../_assets/img/lsl-priors-weights.png)
+![@doss-gollin_subjective:2023](../_assets/img/lsl-priors-weights.png)
 :::
 ::: {.column width="45%"}
 ### Alternative perspective
@@ -119,4 +119,4 @@ Climate scenario uncertainties are "deep" (more next week!), but it would be a m
 
 ## Trade-offs between robust vs. "best-estimate" solutions
 
-## Further Reading {.unnumbered}
+## Further reading {.unnumbered}

@@ -11,12 +11,26 @@ This document contains style guidelines for writing Markdown in this project.
 
 ## Headings
 
-Use proper heading hierarchy:
+Use proper heading hierarchy and sentence case capitalization:
 
 ```markdown
-## Main Section
+## Main section
 ### Subsection
 #### Sub-subsection
+```
+
+**Capitalization rule**: Use sentence case - capitalize only the first word and proper nouns:
+
+```markdown
+<!-- Good -->
+## Climate risk assessment
+### What is extreme value theory?
+#### Bayesian inference methods
+
+<!-- Bad -->
+## Climate Risk Assessment
+### What Is Extreme Value Theory?
+#### Bayesian Inference Methods
 ```
 
 Don't use bold text instead of headings:
@@ -26,7 +40,7 @@ Don't use bold text instead of headings:
 **Learning Resources:**
 
 <!-- Good -->
-### Learning Resources
+### Learning resources
 ```
 
 ## Lists

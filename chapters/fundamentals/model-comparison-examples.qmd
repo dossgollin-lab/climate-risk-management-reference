@@ -17,7 +17,7 @@ Random.seed!(123)
 CairoMakie.activate!(; type="svg")
 ```
 
-## Case Study: Extreme Value Model Selection
+## Case study: Extreme Value Model Selection
 
 This example demonstrates model validation and comparison using precipitation data, showing how different extreme value models perform and how to assess their adequacy.
 
@@ -252,7 +252,7 @@ axislegend()
 fig
 ```
 
-## Information Criteria Comparison
+## Information criteria Comparison
 
 ### Calculate Log-Likelihoods
 
