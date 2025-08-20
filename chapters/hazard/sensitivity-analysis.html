@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Fooled by Randomness ✏️ – Climate Risk Assessment and Management</title>
+<title>13&nbsp; Global Sensitivity Analysis 🚧 – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -78,27 +43,27 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../notebooks/sewells-point.html" rel="next">
-<link href="../notebooks/mosquitos.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/risk/exposure-vulnerability.html" rel="next">
+<link href="../../chapters/hazard/sampling.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -209,6 +174,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
 <meta name="citation_reference" content="citation_title=Climate adaptation as a control problem: Review and perspectives on dynamic water resources planning under uncertainty;,citation_abstract=Climate change introduces substantial uncertainty to water resources planning, and raises the key question: when, or under what conditions, should adaptation occur? A number of recent studies aim to identify policies mapping future observations to actions—in other words, framing climate adaptation as an optimal control problem. This paper uses the control paradigm to review and classify recent dynamic planning studies according to their approaches to uncertainty characterization, policy structure, and solution methods. We propose a set of research gaps and opportunities in this area centered on the challenge of characterizing uncertainty, which prevents the unambiguous application of control methods to this problem. These include: exogenous uncertainty in forcing, model structure, and parameters propagated through a chain of climate and hydrologic models; endogenous uncertainty in human-environmental system dynamics across multiple scales; and sampling uncertainty due to the finite length of historical observations and future projections. Recognizing these challenges, several opportunities exist to improve the use of control methods for climate adaptation, namely: how problem context and understanding of climate processes might assist with uncertainty quantification and experimental design; out-of-sample validation and robustness of optimized adaptation policies; and monitoring and data assimilation, including trend detection, Bayesian inference, and indicator variable selection. We conclude with a summary of recommendations for dynamic water resources planning under climate change through the lens of optimal control.;,citation_author=Jonathan D. Herman;,citation_author=Julianne D. Quinn;,citation_author=Scott Steinschneider;,citation_author=Matteo Giuliani;,citation_author=Sarah Fletcher;,citation_publication_date=2020-01-07;,citation_cover_date=2020-01-07;,citation_year=2020;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019WR025502;,citation_doi=10.1029/2019wr025502;,citation_issn=1944-7973;,citation_journal_title=Water Resources Research;">
 <meta name="citation_reference" content="citation_title=How should robustness be defined for water systems planning under change?;,citation_abstract=Water systems planners have long recognized the need for robust solutions capable of withstanding deviations from the conditions for which they were designed. Robustness analyses have shifted from expected utility to exploratory bottom-up approaches which identify vulnerable scenarios prior to assigning likelihoods. Examples include Robust Decision Making (RDM), Decision Scaling, Info-Gap, and Many-Objective Robust Decision Making (MORDM). We propose a taxonomy of robustness frameworks to compare and contrast these approaches based on their methods of (1) alternative generation, (2) sampling of states of the world, (3) quantification of robustness measures, and (4) sensitivity analysis to identify important uncertainties. Building from the proposed taxonomy, we use a regional urban water supply case study in the Research Triangle region of North Carolina to illustrate the decision-relevant consequences that emerge from each of these choices. Results indicate that the methodological choices in the taxonomy lead to the selection of substantially different planning alternatives, underscoring the importance of an informed definition of robustness. Moreover, the results show that some commonly employed methodological choices and definitions of robustness can have undesired consequences when ranking decision alternatives. For the demonstrated test case, recommendations for overcoming these issues include: (1) decision alternatives should be searched rather than prespecified, (2) dominant uncertainties should be discovered through sensitivity analysis rather than assumed, and (3) a carefully elicited multivariate satisficing measure of robustness allows stakeholders to achieve their problem-specific performance requirements. This work emphasizes the importance of an informed problem formulation for systems facing challenging performance tradeoffs and provides a common vocabulary to link the robustness frameworks widely used in the field of water systems planning.;,citation_author=Jonathan D. Herman;,citation_author=Patrick M. Reed;,citation_author=Harrison B. Zeff;,citation_author=Gregory W. Characklis;,citation_publication_date=2015-10-01;,citation_cover_date=2015-10-01;,citation_year=2015;,citation_fulltext_html_url=http://ascelibrary.org/doi/abs/10.1061/(ASCE)WR.1943-5452.0000509;,citation_issue=10;,citation_doi=10.1061/(asce)wr.1943-5452.0000509;,citation_volume=141;,citation_journal_title=Journal of Water Resources Planning and Management;,citation_journal_abbrev=Journal of Water Resources Planning and Management;">
+<meta name="citation_reference" content="citation_title=SALib: An open-source Python library for Sensitivity Analysis;,citation_abstract=Herman et al, (2017), SALib: An open-source Python library for Sensitivity Analysis, Journal of Open Source Software, 2(9), 97, doi:10.21105/joss.00097;,citation_author=Jon Herman;,citation_author=Will Usher;,citation_publication_date=2017-01-10;,citation_cover_date=2017-01-10;,citation_year=2017;,citation_fulltext_html_url=https://joss.theoj.org/papers/10.21105/joss.00097;,citation_issue=9;,citation_doi=10.21105/joss.00097;,citation_issn=2475-9066;,citation_volume=2;,citation_journal_title=Journal of Open Source Software;">
 <meta name="citation_reference" content="citation_title=Evaluating the distributional fairness of alternative adaptation policies: A case study in Vietnam’s upper Mekong Delta;,citation_abstract=To support equitable adaptation planning, quantitative assessments should consider the fairness of the distribution of outcomes to different people. What constitutes a fair distribution, however, is a normative question. In this study, we explore the use of different moral principles drawn from theories of distributive justice to evaluate fairness. We use adaptation planning in Vietnam Mekong Delta as a case study. We evaluate the preference ranking of six alternative policies for seven moral principles across an ensemble of scenarios. Under the baseline scenario, each principle yields distinctive preference rankings, though most principles identify the same policy as the most preferred one. Across the ensemble of scenarios, the commonly used utilitarian principle yields the most stable ranking, while rankings from other principles are more sensitive to uncertainty. The sufficientarian and the envy-free principles yield the most distinctive ranking of policies, with a median ranking correlation of only 0.07 across all scenarios. Finally, we identify scenarios under which using these two principles results in reversed policy preference rankings. Our study highlights the importance of considering multiple moral principles in evaluating the fairness of adaptation policies, as this would reduce the possibility of maladaptation.;,citation_author=Bramka Arga Jafino;,citation_author=Jan H. Kwakkel;,citation_author=Frans Klijn;,citation_publication_date=2022-08-02;,citation_cover_date=2022-08-02;,citation_year=2022;,citation_fulltext_html_url=https://doi.org/10.1007/s10584-022-03395-y;,citation_issue=3;,citation_doi=10.1007/s10584-022-03395-y;,citation_issn=1573-1480;,citation_volume=173;,citation_journal_title=Climatic Change;,citation_journal_abbrev=Climatic Change;">
 <meta name="citation_reference" content="citation_title=An Introduction to Statistical Learning;,citation_author=Gareth James;,citation_author=Daniela Witten;,citation_author=Trevor Hastie;,citation_author=Robert Tibshirani;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_isbn=978-1-4614-7137-0;,citation_volume=103;,citation_series_title=Springer Texts in Statistics;">
 <meta name="citation_reference" content="citation_title=Probability theory: The logic of science;,citation_author=Edwin T. Jaynes;,citation_publication_date=2003;,citation_cover_date=2003;,citation_year=2003;,citation_isbn=978052159271;">
@@ -222,28 +188,35 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Downscaling and bias-correction contribute considerable uncertainty to local climate projections in CMIP6;,citation_abstract=Efforts to diagnose the risks of a changing climate often rely on downscaled and bias-corrected climate information, making it important to understand the uncertainties and potential biases of this approach. Here, we perform a variance decomposition to partition uncertainty in global climate projections and quantify the relative importance of downscaling and bias-correction. We analyze simple climate metrics such as annual temperature and precipitation averages, as well as several indices of climate extremes. We find that downscaling and bias-correction often contribute substantial uncertainty to local decision-relevant climate outcomes, though our results are strongly heterogeneous across space, time, and climate metrics. Our results can provide guidance to impact modelers and decision-makers regarding the uncertainties associated with downscaling and bias-correction when performing local-scale analyses, as neglecting to account for these uncertainties may risk overconfidence relative to the full range of possible climate futures.;,citation_author=David C. Lafferty;,citation_author=Ryan L. Sriver;,citation_publication_date=2023-09-30;,citation_cover_date=2023-09-30;,citation_year=2023;,citation_fulltext_html_url=https://www.nature.com/articles/s41612-023-00486-0;,citation_issue=1, 1;,citation_doi=10.1038/s41612-023-00486-0;,citation_issn=2397-3722;,citation_volume=6;,citation_journal_title=npj Climate and Atmospheric Science;,citation_journal_abbrev=npj Clim Atmos Sci;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Chapter 3: Water;,citation_author=Upmanu Lall;,citation_author=Thomas Johnson;,citation_author=Peter Colohan;,citation_author=Amir Aghakouchak;,citation_author=Sankar Arumugam;,citation_author=Casey Brown;,citation_author=Gregory J. Mccabe;,citation_author=Roger S. Pulwarty;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://nca2018.globalchange.gov/chapter/3/;,citation_doi=10.7930/NCA4.2018.CH3;,citation_inbook_title=Impacts, Risks, and Adaptation in the United States: The Fourth National Climate Assessment, Volume II;">
 <meta name="citation_reference" content="citation_title=Robust abatement pathways to tolerable climate futures require immediate global action;,citation_abstract=Uncertainties are often cited as a reason for mitigation inaction. Here, millions of scenarios are evaluated to assess the relative importance of human–earth system uncertainties and policy variables. The growth rate of global abatement is found to be the primary driver of long-term warming.;,citation_author=J. R. Lamontagne;,citation_author=P. M. Reed;,citation_author=G. Marangoni;,citation_author=K. Keller;,citation_author=G. G. Garner;,citation_publication_date=2019-04;,citation_cover_date=2019-04;,citation_year=2019;,citation_fulltext_html_url=http://www.nature.com/articles/s41558-019-0426-8;,citation_issue=4;,citation_doi=10.1038/s41558-019-0426-8;,citation_issn=1758-6798;,citation_volume=9;,citation_journal_title=Nature Climate Change;,citation_journal_abbrev=Nat. Clim. Chang.;">
+<meta name="citation_reference" content="citation_title=Some Pitfalls in Statistical Downscaling of Future Climate;,citation_author=John R Lanzante;,citation_author=Keith W Dixon;,citation_author=Mary Jo Nath;,citation_author=Carolyn E Whitlock;,citation_author=Dennis Adams-Smith;,citation_publication_date=2018-04;,citation_cover_date=2018-04;,citation_year=2018;,citation_fulltext_html_url=http://journals.ametsoc.org/doi/10.1175/BAMS-D-17-0046.1;,citation_issue=4;,citation_doi=10.1175/bams-d-17-0046.1;,citation_volume=99;,citation_journal_title=Bulletin of the American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
 <meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
 <meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
 <meta name="citation_reference" content="citation_title=Bayesian Spatiotemporal Nonstationary Model Quantifies Robust Increases in Daily Extreme Rainfall Across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like NOAA Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in the statistical modeling of extreme precipitation has faced practical challenges that have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Ben Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-02-04;,citation_cover_date=2025-02-04;,citation_year=2025;,citation_fulltext_html_url=http://arxiv.org/abs/2502.02000;,citation_doi=10.48550/arXiv.2502.02000;">
 <meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
+<meta name="citation_reference" content="citation_title=6. Water-Resource Systems Planning.;,citation_author=Nicholas C Matalas;,citation_author=Myron B Fiering;,citation_publication_date=1977;,citation_cover_date=1977;,citation_year=1977;,citation_fulltext_html_url=https://www.nap.edu/read/185/chapter/11;,citation_inbook_title=Climate, Climatic Change, and Water Supply;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
 <meta name="citation_reference" content="citation_title=Robustness metrics: How are they calculated, when should they be used and why do they give different results?;,citation_abstract=Robustness is being used increasingly for decision analysis in relation to deep uncertainty and many metrics have been proposed for its quantification. Recent studies have shown that the application of different robustness metrics can result in different rankings of decision alternatives, but there has been little discussion of what potential causes for this might be. To shed some light on this issue, we present a unifying framework for the calculation of robustness metrics, which assists with understanding how robustness metrics work, when they should be used, and why they sometimes disagree. The framework categorizes the suitability of metrics to a decision-maker based on (1) the decision-context (i.e., the suitability of using absolute performance or regret), (2) the decision-maker’s preferred level of risk aversion, and (3) the decision-maker’s preference toward maximizing performance, minimizing variance, or some higher-order moment. This article also introduces a conceptual framework describing when relative robustness values of decision alternatives obtained using different metrics are likely to agree and disagree. This is used as a measure of how ?stable? the ranking of decision alternatives is when determined using different robustness metrics. The framework is tested on three case studies, including water supply augmentation in Adelaide, Australia, the operation of a multipurpose regulated lake in Italy, and flood protection for a hypothetical river based on a reach of the river Rhine in the Netherlands. The proposed conceptual framework is confirmed by the case study results, providing insight into the reasons for disagreements between rankings obtained using different robustness metrics.;,citation_author=C. McPhail;,citation_author=H. R. Maier;,citation_author=J. H. Kwakkel;,citation_author=M. Giuliani;,citation_author=A. Castelletti;,citation_author=S. Westra;,citation_publication_date=2019-04-02;,citation_cover_date=2019-04-02;,citation_year=2019;,citation_fulltext_html_url=http://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017EF000649%4010.1002/%28ISSN%292328-4277.RESDEC1;,citation_doi=10.1002/2017ef000649;,citation_issn=2328-4277;,citation_journal_title=Earth’s Future;,citation_journal_abbrev=Earth’s Future;">
 <meta name="citation_reference" content="citation_title=Understanding heavy tails of flood peak distributions;,citation_abstract=Statistical distributions of flood peak discharge often show heavy tail behavior, that is, extreme floods are more likely to occur than would be predicted by commonly used distributions that have exponential asymptotic behavior. This heavy tail behavior may surprise flood managers and citizens, as human intuition tends to expect light tail behavior, and the heaviness of the tails is very difficult to predict, which may lead to unnecessarily high flood damage. Despite its high importance, the literature on the heavy tail behavior of flood distributions is rather fragmented. In this review, we provide a coherent overview of the processes causing heavy flood tails and the implications for science and practice. Specifically, we propose nine hypotheses on the mechanisms causing heavy tails in flood peak distributions related to processes in the atmosphere, the catchment, and the river system. We then discuss to which extent the current knowledge supports or contradicts these hypotheses. We also discuss the statistical conditions for the emergence of heavy tail behavior based on derived distribution theory and relate them to the hypotheses and flood generation mechanisms. We review the degree to which the heaviness of the tails can be predicted from process knowledge and data. Finally, we recommend further research toward testing the hypotheses and improving the prediction of heavy tails.;,citation_author=Bruno Merz;,citation_author=Stefano Basso;,citation_author=Svenja Fischer;,citation_author=David Lun;,citation_author=Günter Blöschl;,citation_author=Ralf Merz;,citation_author=Björn Guse;,citation_author=Alberto Viglione;,citation_author=Sergiy Vorogushyn;,citation_author=Elena Macdonald;,citation_author=Luzie Wietzke;,citation_author=Andreas Schumann;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1029/2021WR030506;,citation_issue=6;,citation_doi=10.1029/2021WR030506;,citation_issn=1944-7973;,citation_volume=58;,citation_journal_title=Water Resources Research;">
 <meta name="citation_reference" content="citation_title=Introduction to Catastrophe Risk Modelling: A Physics-based Approach;,citation_abstract=Focusing on the physics of the&nbsp;catastrophe process and addressed directly to advanced students, this innovative textbook quantifies dozens of perils, both natural and man-made, and covers the latest developments in catastrophe modelling. Combining basic statistics, applied physics, natural and environmental sciences, civil engineering, and psychology, the text remains at an introductory level, focusing on fundamental concepts for a comprehensive understanding of catastrophe phenomenology and risk quantification. A broad spectrum of perils are covered, including geophysical, hydrological, meteorological, climatological, biological, extraterrestrial, technological and socio-economic, as well as events caused by domino effects and global warming. Following industry standards, the text provides the necessary tools to develop a CAT model from hazard to loss assessment. Online resources include a&nbsp;CAT risk model starter-kit and a CAT risk modelling ’sandbox’ with Python Jupyter tutorial.&nbsp;Every process, described by equations, (pseudo)codes and illustrations, is fully reproducible, allowing students to solidify knowledge through practice.;,citation_author=Arnaud Mignan;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://www.cambridge.org/core/product/A3A5B5FB990921422BFEBB07734BF869;,citation_doi=10.1017/9781009437370;,citation_isbn=978-1-009-43738-7;">
+<meta name="citation_reference" content="citation_title=Stationarity is dead: Whither water management?;,citation_abstract=Climate change undermines a basic assumption that historically has facilitated management of water supplies, demands, and risks.;,citation_author=P C D Milly;,citation_author=Julio Betancourt;,citation_author=M Falkenmark;,citation_author=R M Hirsch;,citation_author=Z W Kundzewicz;,citation_author=D P Lettenmaier;,citation_author=R J Stouffer;,citation_publication_date=2008-02;,citation_cover_date=2008-02;,citation_year=2008;,citation_fulltext_html_url=http://www.sciencemag.org/cgi/doi/10.1126/science.1151915;,citation_issue=5863;,citation_doi=10.1126/science.1151915;,citation_volume=319;,citation_journal_title=Science;">
 <meta name="citation_reference" content="citation_title=Fundamentals of Statistical Hydrology;,citation_editor=Mauro Naghettini;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=http://link.springer.com/10.1007/978-3-319-43561-9;,citation_doi=10.1007/978-3-319-43561-9;,citation_isbn=978-3-319-43560-2 978-3-319-43561-9;">
 <meta name="citation_reference" content="citation_title=Statistics with Julia: Fundamentals for Data Science, Machine Learning and Artificial Intelligence;,citation_abstract=This monograph uses the Julia language to guide the reader through an exploration of the fundamental concepts of probability and statistics, all with a view of mastering machine learning, data science, and artificial intelligence. The text does not require any prior statistical knowledge and only assumes a basic understanding of programming and mathematical notation. It is accessible to practitioners and researchers in data science, machine learning, bio-statistics, finance, or engineering who may wish to solidify their knowledge of probability and statistics. The book progresses through ten independent chapters starting with an introduction of Julia, and moving through basic probability, distributions, statistical inference, regression analysis, machine learning methods, and the use of Monte Carlo simulation for dynamic stochastic models. Ultimately this text introduces the Julia programming language as a computational tool, uniquely addressing end-users rather than developers. It makes heavy use of over 200 code examples to illustrate dozens of key statistical concepts. The Julia code, written in a simple format with parameters that can be easily modified, is also available for download from the book’s associated GitHub repository online.See what co-creators of the Julia language are saying about the book:Professor Alan Edelman, MIT: With “Statistics with Julia”, Yoni and Hayden have written an easy to read, well organized, modern introduction to statistics. The code may be looked at, and understood on the static pages of a book, or even better, when running live on a computer. Everything you need is here in one nicely written self-contained reference. Dr. Viral Shah, CEO of Julia Computing: Yoni and Hayden provide a modern way to learn statistics with the Julia programming language. This book has been perfected through iteration over several semesters in the classroom. It prepares the reader with two complementary skills - statistical reasoning with hands on experience and working with large datasets through training in Julia.;,citation_author=Yoni Nazarathy;,citation_author=Hayden Klok;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.springer.com/gp/book/9783030709006;,citation_doi=10.1007/978-3-030-70901-3;,citation_isbn=978-3-030-70900-6;,citation_series_title=Springer Series in the Data Sciences;">
 <meta name="citation_reference" content="citation_title=Deep uncertainties in sea-level rise and storm surge projections: Implications for coastal flood risk management;,citation_abstract=Sea levels are rising in many areas around the world, posing risks to coastal communities and infrastructures. Strategies for managing these flood risks present decision challenges that require a combination of geophysical, economic, and infrastructure models. Previous studies have broken important new ground on the considerable tensions between the costs of upgrading infrastructure and the damages that could result from extreme flood events. However, many risk-based adaptation strategies remain silent on certain potentially important uncertainties, as well as the tradeoffs between competing objectives. Here, we implement and improve on a classic decision-analytical model (Van Dantzig 1956) to: (i) capture tradeoffs across conflicting stakeholder objectives, (ii) demonstrate the consequences of structural uncertainties in the sea-level rise and storm surge models, and (iii) identify the parametric uncertainties that most strongly influence each objective using global sensitivity analysis. We find that the flood adaptation model produces potentially myopic solutions when formulated using traditional mean-centric decision theory. Moving from a single-objective problem formulation to one with multiobjective tradeoffs dramatically expands the decision space, and highlights the need for compromise solutions to address stakeholder preferences. We find deep structural uncertainties that have large effects on the model outcome, with the storm surge parameters accounting for the greatest impacts. Global sensitivity analysis effectively identifies important parameter interactions that local methods overlook, and that could have critical implications for flood adaptation strategies.;,citation_author=Perry C. Oddo;,citation_author=Ben S. Lee;,citation_author=Gregory G. Garner;,citation_author=Vivek Srikrishnan;,citation_author=Patrick M. Reed;,citation_author=Chris E. Forest;,citation_author=Klaus Keller;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1111/risa.12888;,citation_issue=0;,citation_doi=10/ghkp82;,citation_issn=1539-6924;,citation_volume=0;,citation_journal_title=Risk Analysis;">
 <meta name="citation_reference" content="citation_title=Verification, validation, and confirmation of numerical models in the Earth sciences;,citation_abstract=Verification and validation of numerical models of natural systems is impossible. This is because natural systems are never closed and because model results are always nonunique. Models can be confirmed by the demonstration of agreement between ...;,citation_author=Naomi Oreskes;,citation_author=Kristin Shrader-Frechette;,citation_author=Kenneth Belitz;,citation_publication_date=1994-02-04;,citation_cover_date=1994-02-04;,citation_year=1994;,citation_fulltext_html_url=http://www.science.org/doi/abs/10.1126/science.263.5147.641;,citation_doi=10.1126/science.263.5147.641;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
 <meta name="citation_reference" content="citation_title=The geography of future water challenges;,citation_author=PBL Netherlands Environmental Assessment Agency;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://www.pbl.nl/en/publications/the-geography-of-future-water-challenges;,citation_technical_report_institution=PBL Netherlands Environmental Assessment Agency;">
+<meta name="citation_reference" content="citation_title=Comparison of Bayesian predictive methods for model selection;,citation_abstract=The goal of this paper is to compare several widely used Bayesian model selection methods in practical model selection problems, highlight their differences and give recommendations about the preferred approaches. We focus on the variable subset selection for regression and classification and perform several numerical experiments using both simulated and real world data. The results show that the optimization of a utility estimate such as the cross-validation (CV) score is liable to finding overfitted models due to relatively high variance in the utility estimates when the data is scarce. This can also lead to substantial selection induced bias and optimism in the performance evaluation for the selected model. From a predictive viewpoint, best results are obtained by accounting for model uncertainty by forming the full encompassing model, such as the Bayesian model averaging solution over the candidate models. If the encompassing model is too complex, it can be robustly simplified by the projection method, in which the information of the full model is projected onto the submodels. This approach is substantially less prone to overfitting than selection based on CV-score. Overall, the projection method appears to outperform also the maximum a posteriori model and the selection of the most probable variables. The study also demonstrates that the model selection can greatly benefit from using cross-validation outside the searching process both for guiding the model size selection and assessing the predictive performance of the finally selected model. Published in: Statistics and Computing, 2017, Volume 27, Issue 3, 711-735;,citation_author=Juho Piironen;,citation_author=Aki Vehtari;,citation_publication_date=2017-05;,citation_cover_date=2017-05;,citation_year=2017;,citation_fulltext_html_url=http://link.springer.com/10.1007/s11222-016-9649-y;,citation_issue=3;,citation_doi=10.1007/s11222-016-9649-y;,citation_volume=27;,citation_journal_title=Statistics and Computing;">
 <meta name="citation_reference" content="citation_title=Sequential Decision Analytics and Modeling: Modeling with Python;,citation_abstract=Publishers of Foundations and Trends, making research accessible;,citation_author=Warren B. Powell;,citation_publication_date=2022-11-21;,citation_cover_date=2022-11-21;,citation_year=2022;,citation_fulltext_html_url=https://nowpublishers.com/Article/BookDetails/9781638280828;,citation_issn=978-1-63828-082-8, 978-1-63828-083-5;,citation_publisher=Now Publishers, Inc.;">
+<meta name="citation_reference" content="citation_title=Increasing the accuracy and resolution of precipitation forecasts using deep generative models;,citation_abstract=Accurately forecasting extreme rainfall is notoriously difficult, but is also ever more crucial for society as climate change increases the frequency of such extremes. Global numerical weather prediction models often fail to capture extremes, and are produced at too low a resolution to be actionable, while regional, high-resolution models are hugely expensive both in computation and labour. In this paper we explore the use of deep generative models to simultaneously correct and downscale (super-resolve) global ensemble forecasts over the Continental US. Specifically, using fine-grained radar observations as our ground truth, we train a conditional Generative Adversarial Network – coined CorrectorGAN – via a custom training procedure and augmented loss function, to produce ensembles of high-resolution, bias-corrected forecasts based on coarse, global precipitation forecasts in addition to other relevant meteorological fields. Our model outperforms an interpolation baseline, as well as super-resolution-only and CNN-based univariate methods, and approaches the performance of an operational regional high-resolution model across an array of established probabilistic metrics. Crucially, CorrectorGAN, once trained, produces predictions in seconds on a single machine. These results raise exciting questions about the necessity of regional models, and whether data-driven downscaling and correction methods can be transferred to data-poor regions that so far have had no access to high-resolution forecasts.;,citation_author=Ilan Price;,citation_author=Stephan Rasp;,citation_publication_date=2022-03-23;,citation_cover_date=2022-03-23;,citation_year=2022;,citation_fulltext_html_url=http://arxiv.org/abs/2203.12297;,citation_doi=10.48550/arXiv.2203.12297;">
 <meta name="citation_reference" content="citation_title=Applied Machine Learning in Python: A Hands-on Guide with Code;,citation_author=Michael J. Pyrcz;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://geostatsguy.github.io/MachineLearningDemos_Book;">
 <meta name="citation_reference" content="citation_title=Direct policy search for robust multi-objective management of deeply uncertain socio-ecological tipping points;,citation_abstract=Managing socio-ecological systems is a challenge wrought by competing societal objectives, deep uncertainties, and potentially irreversible tipping points. A classic, didactic example is the shallow lake problem in which a hypothetical town situated on a lake must develop pollution control strategies to maximize its economic benefits while minimizing the probability of the lake crossing a critical phosphorus (P) threshold, above which it irreversibly transitions into a eutrophic state. Here, we explore the use of direct policy search (DPS) to design robust pollution control rules for the town that account for deeply uncertain system characteristics and conflicting objectives. The closed loop control formulation of DPS improves the quality and robustness of key management tradeoffs, while dramatically reducing the computational complexity of solving the multi-objective pollution control problem relative to open loop control strategies. These insights suggest DPS is a promising tool for managing socio-ecological systems with deeply uncertain tipping points.;,citation_author=Julianne D. Quinn;,citation_author=Patrick M. Reed;,citation_author=Klaus Keller;,citation_publication_date=2017-06-01;,citation_cover_date=2017-06-01;,citation_year=2017;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S1364815216302250;,citation_doi=10.1016/j.envsoft.2017.02.017;,citation_issn=1364-8152;,citation_volume=92;,citation_journal_title=Environmental Modelling &amp;amp;amp; Software;,citation_journal_abbrev=Environmental Modelling &amp;amp; Software;">
 <meta name="citation_reference" content="citation_title=Universal Differential Equations for Scientific Machine Learning;,citation_abstract=In the context of science, the well-known adage &amp;amp;amp;quot;a picture is worth a thousand words&amp;quot; might well be &quot;a model is worth a thousand datasets.&quot; In this manuscript we introduce the SciML software ecosystem as a tool for mixing the information of physical laws and scientific models with data-driven machine learning approaches. We describe a mathematical object, which we denote universal differential equations (UDEs), as the unifying framework connecting the ecosystem. We show how a wide variety of applications, from automatically discovering biological mechanisms to solving high-dimensional Hamilton-Jacobi-Bellman equations, can be phrased and efficiently handled through the UDE formalism and its tooling. We demonstrate the generality of the software tooling to handle stochasticity, delays, and implicit constraints. This funnels the wide variety of SciML applications into a core set of training mechanisms which are highly optimized, stabilized for stiff equations, and compatible with distributed parallelism and GPU accelerators.;,citation_author=Christopher Rackauckas;,citation_author=Yingbo Ma;,citation_author=Julius Martensen;,citation_author=Collin Warner;,citation_author=Kirill Zubov;,citation_author=Rohit Supekar;,citation_author=Dominic Skinner;,citation_author=Ali Ramadhan;,citation_author=Alan Edelman;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://arxiv.org/abs/2001.04385;,citation_doi=10.48550/ARXIV.2001.04385;">
+<meta name="citation_reference" content="citation_title=The future of sensitivity analysis: An essential discipline for systems modeling and policy support;,citation_abstract=Sensitivity analysis (SA) is en route to becoming an integral part of mathematical modeling. The tremendous potential benefits of SA are, however, yet to be fully realized, both for advancing mechanistic and data-driven modeling of human and natural systems, and in support of decision making. In this perspective paper, a multidisciplinary group of researchers and practitioners revisit the current status of SA, and outline research challenges in regard to both theoretical frameworks and their applications to solve real-world problems. Six areas are discussed that warrant further attention, including (1) structuring and standardizing SA as a discipline, (2) realizing the untapped potential of SA for systems modeling, (3) addressing the computational burden of SA, (4) progressing SA in the context of machine learning, (5) clarifying the relationship and role of SA to uncertainty quantification, and (6) evolving the use of SA in support of decision making. An outlook for the future of SA is provided that underlines how SA must underpin a wide variety of activities to better serve science and society.;,citation_author=Saman Razavi;,citation_author=Anthony Jakeman;,citation_author=Andrea Saltelli;,citation_author=Clémentine Prieur;,citation_author=Bertrand Iooss;,citation_author=Emanuele Borgonovo;,citation_author=Elmar Plischke;,citation_author=Samuele Lo Piano;,citation_author=Takuya Iwanaga;,citation_author=William Becker;,citation_author=Stefano Tarantola;,citation_author=Joseph H. A. Guillaume;,citation_author=John Jakeman;,citation_author=Hoshin Gupta;,citation_author=Nicola Melillo;,citation_author=Giovanni Rabitti;,citation_author=Vincent Chabridon;,citation_author=Qingyun Duan;,citation_author=Xifu Sun;,citation_author=Stefán Smith;,citation_author=Razi Sheikholeslami;,citation_author=Nasim Hosseini;,citation_author=Masoud Asadzadeh;,citation_author=Arnald Puy;,citation_author=Sergei Kucherenko;,citation_author=Holger R. Maier;,citation_publication_date=2020-12-15;,citation_cover_date=2020-12-15;,citation_year=2020;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S1364815220310112;,citation_doi=10.1016/j.envsoft.2020.104954;,citation_issn=1364-8152;,citation_journal_title=Environmental Modelling &amp;amp;amp; Software;,citation_journal_abbrev=Environmental Modelling &amp;amp; Software;">
 <meta name="citation_reference" content="citation_title=Evolutionary multiobjective optimization in water resources: The past, present, and future;,citation_abstract=This study contributes a rigorous diagnostic assessment of state-of-the-art multiobjective evolutionary algorithms (MOEAs) and highlights key advances that the water resources field can exploit to better discover the critical tradeoffs constraining our systems. This study provides the most comprehensive diagnostic assessment of MOEAs for water resources to date, exploiting more than 100,000 MOEA runs and trillions of design evaluations. The diagnostic assessment measures the effectiveness, efficiency, reliability, and controllability of ten benchmark MOEAs for a representative suite of water resources applications addressing rainfall–runoff calibration, long-term groundwater monitoring (LTM), and risk-based water supply portfolio planning. The suite of problems encompasses a range of challenging problem properties including (1) many-objective formulations with four or more objectives, (2) multi-modality (or false optima), (3) nonlinearity, (4) discreteness, (5) severe constraints, (6) stochastic objectives, and (7) non-separability (also called epistasis). The applications are representative of the dominant problem classes that have shaped the history of MOEAs in water resources and that will be dominant foci in the future. Recommendations are given for the new algorithms that should serve as the benchmarks for innovations in the water resources literature. The future of MOEAs in water resources needs to emphasize self-adaptive search, new technologies for visualizing tradeoffs, and the next generation of computing technologies.;,citation_author=P. M. Reed;,citation_author=D. Hadka;,citation_author=J. D. Herman;,citation_author=J. R. Kasprzyk;,citation_author=J. B. Kollat;,citation_publication_date=2013-01-01;,citation_cover_date=2013-01-01;,citation_year=2013;,citation_fulltext_html_url=http://www.sciencedirect.com/science/article/pii/S0309170812000073;,citation_doi=10.1016/j.advwatres.2012.01.005;,citation_issn=0309-1708;,citation_volume=51;,citation_journal_title=Advances in Water Resources;,citation_journal_abbrev=Advances in Water Resources;,citation_series_title=35th Year Anniversary Issue;">
 <meta name="citation_reference" content="citation_title=Multisector Dynamics: Advancing the Science of Complex Adaptive Human-Earth Systems;,citation_abstract=The field of MultiSector Dynamics (MSD) explores the dynamics and co-evolutionary pathways of human and Earth systems with a focus on critical goods, services, and amenities delivered to people through interdependent sectors. This commentary lays out core definitions and concepts, identifies MSD science questions in the context of the current state of knowledge, and describes ongoing activities to expand capacities for open science, leverage revolutions in data and computing, and grow and diversify the MSD workforce. Central to our vision is the ambition of advancing the next generation of complex adaptive human-Earth systems science to better address interconnected risks, increase resilience, and improve sustainability. This will require convergent research and the integration of ideas and methods from multiple disciplines. Understanding the tradeoffs, synergies, and complexities that exist in coupled human-Earth systems is particularly important in the context of energy transitions and increased future shocks.;,citation_author=Patrick M. Reed;,citation_author=Antonia Hadjimichael;,citation_author=Richard H. Moss;,citation_author=Christa Brelsford;,citation_author=Casey D. Burleyson;,citation_author=Stuart Cohen;,citation_author=Ana Dyreson;,citation_author=David F. Gold;,citation_author=Rohini S. Gupta;,citation_author=Klaus Keller;,citation_author=Megan Konar;,citation_author=Erwan Monier;,citation_author=Jennifer Morris;,citation_author=Vivek Srikrishnan;,citation_author=Nathalie Voisin;,citation_author=Jim Yoon;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1029/2021EF002621;,citation_issue=3;,citation_doi=10.1029/2021EF002621;,citation_issn=2328-4277;,citation_volume=10;,citation_journal_title=Earth’s Future;">
 <meta name="citation_reference" content="citation_title=Techniques for assessing water infrastructure for nonstationary extreme events: A review;,citation_author=J D Salas;,citation_author=J Obeysekera;,citation_author=R M Vogel;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_fulltext_html_url=https://www.tandfonline.com/doi/full/10.1080/02626667.2018.1426858;,citation_issue=3;,citation_doi=10.1080/02626667.2018.1426858;,citation_volume=63;,citation_journal_title=Hydrological Sciences Journal;">
+<meta name="citation_reference" content="citation_title=Global sensitivity analysis: The primer;,citation_author=Andrea Saltelli;,citation_author=Marco Ratto;,citation_author=Terry Andres;,citation_author=Francesca Campolongo;,citation_author=Jessica Cariboni;,citation_author=Debora Gatelli;,citation_author=Michaela Saisana;,citation_author=Stefano Tarantola;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1;,citation_isbn=978-0-470-72518-4;">
 <meta name="citation_reference" content="citation_title=A Gentle Introduction to Graph Neural Networks;,citation_abstract=What components are needed for building learning algorithms that leverage the structure and properties of graphs?;,citation_author=Benjamin Sanchez-Lengeling;,citation_author=Emily Reif;,citation_author=Adam Pearce;,citation_author=Alexander B. Wiltschko;,citation_publication_date=2021-09-02;,citation_cover_date=2021-09-02;,citation_year=2021;,citation_fulltext_html_url=https://distill.pub/2021/gnn-intro;,citation_issue=9;,citation_doi=10.23915/distill.00033;,citation_issn=2476-0757;,citation_volume=6;,citation_journal_title=Distill;,citation_journal_abbrev=Distill;">
 <meta name="citation_reference" content="citation_title=Boomtown, flood town;,citation_abstract=Climate change will bring more frequent and fierce rainstorms to cities like Houston. But unchecked development remains a priority in the famously un-zoned city, creating short-term economic gains for some while increasing flood risks for everyone.;,citation_author=Nina Satija;,citation_author=Kiah Collier;,citation_author=Al Shaw;,citation_publication_date=2016-12-07;,citation_cover_date=2016-12-07;,citation_year=2016;,citation_fulltext_html_url=https://projects.propublica.org/houston-cypress/;,citation_journal_title=ProPublica: Hell and High Water;">
 <meta name="citation_reference" content="citation_title=Foundations of statistics.;,citation_author=L. J. Savage;,citation_publication_date=1954;,citation_cover_date=1954;,citation_year=1954;">
@@ -253,6 +226,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Operationalizing equity for integrated water resources management;,citation_abstract=Advancing social equity has been implicitly and explicitly central to water resources policy for decades. Yet, equity remains largely outside of standard water resources planning and management practices. Inclusion of equity within water resources infrastructure is inhibited by barriers including an incomplete conceptual understanding of equity, a perceived lack of quantitative and qualitative equity metrics, unclear connections between equity and standard project planning frameworks, and the absence of concrete examples. To facilitate greater practical inclusion of social equity in water resources practices, we describe equity relative to dimensions of distribution, procedure, and recognition and identify metrics associated with each. We then map these dimensions of equity onto different stages of a water resources project life cycle. We discuss how inequities are often perpetuated by current approaches and highlight case studies that promote one or more of the facets of equity. Rather than providing a prescriptive solution to “achieve” equity within water resources practices, we emphasize the need for contextualized approaches that include pragmatic steps toward more equitable practices and outcomes.;,citation_author=Cydney K. Seigerman;,citation_author=S. Kyle McKay;,citation_author=Raul Basilio;,citation_author=Shelly A. Biesel;,citation_author=Jon Hallemeier;,citation_author=Andressa V. Mansur;,citation_author=Candice Piercy;,citation_author=Sebastian Rowan;,citation_author=Bruno Ubiali;,citation_author=Elissa Yeates;,citation_author=Donald R. Nelson;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/1752-1688.13086;,citation_issue=2;,citation_doi=10.1111/1752-1688.13086;,citation_issn=1752-1688;,citation_volume=59;,citation_journal_title=JAWRA Journal of the American Water Resources Association;">
 <meta name="citation_reference" content="citation_title=Weather and climate extreme events in a changing climate;,citation_author=S. I. Seneviratne;,citation_author=X. Zhang;,citation_author=M. Adnan;,citation_author=W. Badi;,citation_author=C. Dereczynski;,citation_author=A. Di Luca;,citation_author=S. Ghosh;,citation_author=I. Iskandar;,citation_author=J. Kossin;,citation_author=S. Lewis;,citation_author=F. Otto;,citation_author=I. Pinto;,citation_author=M. Satoh;,citation_author=S. M. Vicente-Serrano;,citation_author=M. Wehner;,citation_author=B. Zhou;,citation_editor=V. Masson-Delmotte;,citation_editor=P. Zhai;,citation_editor=A. Pirani;,citation_editor=S. L. Connors;,citation_editor=C. Péan;,citation_editor=S. Berger;,citation_editor=N. Caud;,citation_editor=Y. Chen;,citation_editor=L. Goldfarb;,citation_editor=M. I. Gomis;,citation_editor=M. Huang;,citation_editor=K. Leitzell;,citation_editor=E. Lonnoy;,citation_editor=J. B. R. Matthews;,citation_editor=T. K. Maycock;,citation_editor=T. Waterfield;,citation_editor=O. Yelekçi;,citation_editor=R. Yu;,citation_editor=B. Zhou;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_Chapter11.pdf;,citation_doi=10.1017/9781009157896.013;,citation_inbook_title=Climate change 2021: The physical science basis. Contribution of working group I to the sixth assessment report of the intergovernmental panel on climate change;">
 <meta name="citation_reference" content="citation_title=Multiobjective optimization and Pareto front visualization techniques applied to normal conducting rf accelerating structures;,citation_abstract=There has been a renewed interest in applying multiobjective (MO) optimization methods to a number of problems in the physical sciences, including to rf structure design. The results of these optimizations generate large datasets, which makes visualizing the data and selecting individual solutions difficult. Using the generated results, Pareto fronts can be found giving the trade-off between different objectives, allowing one to utilize this key information in design decisions. Although various visualization techniques exist, it can be difficult to know which technique is appropriate and how to apply them successfully to the problem at hand. First, we present the setup and execution of MO optimizations of one standing wave and one traveling wave accelerating cavity, including constraint handling and an algorithm comparison. In order to understand the generated Pareto frontiers, we discuss several visualization techniques, applying them to the problem, and give the benefits and drawbacks of each. We found that the best techniques involve clustering the resulting data first to narrow down the possible choices and then using multidimensional visualization methods such as parallel coordinate plots and decision maps to view the clustered results and select individual solutions. Finally, we give some examples of the application of these methods and the cavities selected based on arbitrary design requirements.;,citation_author=S. Smith;,citation_author=M. Southerby;,citation_author=S. Setiniyaz;,citation_author=R. Apsimon;,citation_author=G. Burt;,citation_publication_date=2022-06-14;,citation_cover_date=2022-06-14;,citation_year=2022;,citation_fulltext_html_url=https://link.aps.org/doi/10.1103/PhysRevAccelBeams.25.062002;,citation_issue=6;,citation_doi=10.1103/PhysRevAccelBeams.25.062002;,citation_volume=25;,citation_journal_title=Physical Review Accelerators and Beams;,citation_journal_abbrev=Phys. Rev. Accel. Beams;,citation_publisher=American Physical Society;">
+<meta name="citation_reference" content="citation_title=Near-term tropical cyclone risk and coupled Earth system model biases;,citation_abstract=Most current climate models predict that the equatorial Pacific will evolve under greenhouse gas–induced warming to a more El Niño-like state over the next several decades, with a reduced zonal sea surface temperature gradient and weakened atmospheric Walker circulation. Yet, observations over the last 50 y show the opposite trend, toward a more La Niña-like state. Recent research provides evidence that the discrepancy cannot be dismissed as due to internal variability but rather that the models are incorrectly simulating the equatorial Pacific response to greenhouse gas warming. This implies that projections of regional tropical cyclone activity may be incorrect as well, perhaps even in the direction of change, in ways that can be understood by analogy to historical El Niño and La Niña events: North Pacific tropical cyclone projections will be too active, North Atlantic ones not active enough, for example. Other perils, including severe convective storms and droughts, will also be projected erroneously. While it can be argued that these errors are transient, such that the models’ responses to greenhouse gases may be correct in equilibrium, the transient response is relevant for climate adaptation in the next several decades. Given the urgency of understanding regional patterns of climate risk in the near term, it would be desirable to develop projections that represent a broader range of possible future tropical Pacific warming scenarios—including some in which recent historical trends continue—even if such projections cannot currently be produced using existing coupled earth system models.;,citation_author=Adam H. Sobel;,citation_author=Chia-Ying Lee;,citation_author=Steven G. Bowen;,citation_author=Suzana J. Camargo;,citation_author=Mark A. Cane;,citation_author=Amy Clement;,citation_author=Boniface Fosu;,citation_author=Megan Hart;,citation_author=Kevin A. Reed;,citation_author=Richard Seager;,citation_author=Michael K. Tippett;,citation_publication_date=2023-08-15;,citation_cover_date=2023-08-15;,citation_year=2023;,citation_fulltext_html_url=https://www.pnas.org/doi/10.1073/pnas.2209631120;,citation_issue=33;,citation_doi=10.1073/pnas.2209631120;,citation_volume=120;,citation_journal_title=Proceedings of the National Academy of Sciences;,citation_publisher=Proceedings of the National Academy of Sciences;">
 <meta name="citation_reference" content="citation_title=An unexpected item is blocking cities’ climate change prep: Obsolete rainfall records;,citation_abstract=Cities are experiencing heavier storms and flooding as the climate gets hotter. But due to outdated rainfall records, many are still building infrastructure for the climate of the past.;,citation_author=Lauren Sommer;,citation_publication_date=2022-02-09;,citation_cover_date=2022-02-09;,citation_year=2022;,citation_fulltext_html_url=https://www.npr.org/2022/02/09/1078261183/an-unexpected-item-is-blocking-cities-climate-change-prep-obsolete-rainfall-reco;,citation_journal_title=NPR: Climate;">
 <meta name="citation_reference" content="citation_title=Expanded decision-scaling framework to select robust long-term water-system plans under hydroclimatic uncertainties;,citation_author=Scott Steinschneider;,citation_author=Rachel McCrary;,citation_author=Sungwook Wi;,citation_author=Kevin Mulligan;,citation_author=Linda O Mearns;,citation_author=Casey M Brown;,citation_publication_date=2015-11;,citation_cover_date=2015-11;,citation_year=2015;,citation_fulltext_html_url=http://ascelibrary.org/doi/10.1061/%28ASCE%29WR.1943-5452.0000536;,citation_issue=11;,citation_doi=10.1061/(asce)wr.1943-5452.0000536;,citation_volume=141;,citation_journal_title=Journal of Water Resources Planning and Management;">
 <meta name="citation_reference" content="citation_title=Reinforcement learning: An Introduction;,citation_author=Richard S Sutton;,citation_author=Andrew G Barto;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_isbn=0-262-03924-9;">
@@ -279,7 +253,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/nonstationary-gev-fooled.html">Fooled by Randomness ✏️</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/hazard/extremes.html"><strong>II: Hazard Assessment</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/hazard/sensitivity-analysis.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -294,7 +268,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Climate Risk Assessment and Management</a> 
+      <a href="../../">Climate Risk Assessment and Management</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -306,8 +280,8 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome</span></span></a>
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome 🎯</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -321,25 +295,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/about/license.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/about/license.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">License</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contributing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Citing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Further Reading</span></a>
   </div>
 </li>
@@ -347,7 +321,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/preface.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface ✏️</span></a>
   </div>
 </li>
@@ -362,44 +336,44 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals of Climate Science ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Climate Science ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability and Statistics ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Statistics ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Optimization ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Monte Carlo Methods ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/spatiotemporal.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatiotemporal Processes ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Validation and Comparison ✏️</span></span></a>
+  <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison ✏️</span></span></a>
   </div>
 </li>
       </ul>
@@ -415,38 +389,38 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Extreme Value Theory ✏️</span></span></a>
+  <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction ✏️</span></span></a>
+  <a href="../../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/perturbations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modifying Past Events 🚧</span></span></a>
+  <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+  <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-Based Models and Calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optimal Sampling 🚧</span></span></a>
+  <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/hazard/model-chains.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hazard Model Chains 🚧</span></span></a>
+  <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -462,50 +436,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability</span></span></a>
+  <a href="../../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value ✏️</span></span></a>
+  <a href="../../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization ✏️</span></span></a>
+  <a href="../../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
+  <a href="../../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure ✏️</span></span></a>
+  <a href="../../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Robustness ✏️</span></span></a>
+  <a href="../../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Robustness ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
+  <a href="../../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
+  <a href="../../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -521,45 +495,39 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notebooks/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/block-maxima.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notebooks/block-maxima.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Block Maxima ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/lake-problem.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notebooks/lake-problem.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dynamic Policy Search: The Lake Problem 🚧</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/nonstationary-gev-fooled.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Fooled by Randomness ✏️</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/sewells-point.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Water Levels at Sewell’s Point, VA</span></a>
+  <a href="../../notebooks/sewells-point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Water Levels at Sewell’s Point, VA ✏️</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References 🎯</span></a>
   </div>
 </li>
@@ -574,19 +542,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Setup ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Julia Learning Resources ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendices/llm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/appendices/llm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Large Language Models (“AI”) ✏️</span></span></a>
   </div>
 </li>
@@ -604,19 +572,50 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#formulation" id="toc-formulation" class="nav-link" data-scroll-target="#formulation">Formulation</a></li>
-  <li><a href="#forward-model" id="toc-forward-model" class="nav-link" data-scroll-target="#forward-model">Forward Model</a></li>
-  <li><a href="#inverse-model" id="toc-inverse-model" class="nav-link" data-scroll-target="#inverse-model">Inverse Model</a></li>
+  <li><a href="#see-first" id="toc-see-first" class="nav-link active" data-scroll-target="#see-first">See first</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#why-sensitivity-analysis-matters" id="toc-why-sensitivity-analysis-matters" class="nav-link" data-scroll-target="#why-sensitivity-analysis-matters"><span class="header-section-number">13.1.1</span> Why Sensitivity Analysis Matters</a></li>
+  </ul></li>
+  <li><a href="#variance-based-sensitivity-analysis" id="toc-variance-based-sensitivity-analysis" class="nav-link" data-scroll-target="#variance-based-sensitivity-analysis"><span class="header-section-number">13.2</span> Variance-Based Sensitivity Analysis</a>
+  <ul class="collapse">
+  <li><a href="#sobol-indices" id="toc-sobol-indices" class="nav-link" data-scroll-target="#sobol-indices"><span class="header-section-number">13.2.1</span> Sobol Indices</a></li>
+  <li><a href="#computational-methods" id="toc-computational-methods" class="nav-link" data-scroll-target="#computational-methods"><span class="header-section-number">13.2.2</span> Computational Methods</a></li>
+  </ul></li>
+  <li><a href="#morris-elementary-effects" id="toc-morris-elementary-effects" class="nav-link" data-scroll-target="#morris-elementary-effects"><span class="header-section-number">13.3</span> Morris Elementary Effects</a></li>
+  <li><a href="#applications-in-climate-risk" id="toc-applications-in-climate-risk" class="nav-link" data-scroll-target="#applications-in-climate-risk"><span class="header-section-number">13.4</span> Applications in Climate Risk</a>
+  <ul class="collapse">
+  <li><a href="#case-study-1-hydrologic-model-calibration" id="toc-case-study-1-hydrologic-model-calibration" class="nav-link" data-scroll-target="#case-study-1-hydrologic-model-calibration"><span class="header-section-number">13.4.1</span> Case Study 1: Hydrologic Model Calibration</a></li>
+  <li><a href="#case-study-2-storm-surge-model-chain" id="toc-case-study-2-storm-surge-model-chain" class="nav-link" data-scroll-target="#case-study-2-storm-surge-model-chain"><span class="header-section-number">13.4.2</span> Case Study 2: Storm Surge Model Chain</a></li>
+  <li><a href="#case-study-3-drought-risk-assessment" id="toc-case-study-3-drought-risk-assessment" class="nav-link" data-scroll-target="#case-study-3-drought-risk-assessment"><span class="header-section-number">13.4.3</span> Case Study 3: Drought Risk Assessment</a></li>
+  </ul></li>
+  <li><a href="#advanced-methods" id="toc-advanced-methods" class="nav-link" data-scroll-target="#advanced-methods"><span class="header-section-number">13.5</span> Advanced Methods</a>
+  <ul class="collapse">
+  <li><a href="#multi-model-sensitivity-analysis" id="toc-multi-model-sensitivity-analysis" class="nav-link" data-scroll-target="#multi-model-sensitivity-analysis"><span class="header-section-number">13.5.1</span> Multi-model Sensitivity Analysis</a></li>
+  <li><a href="#time-varying-sensitivity" id="toc-time-varying-sensitivity" class="nav-link" data-scroll-target="#time-varying-sensitivity"><span class="header-section-number">13.5.2</span> Time-Varying Sensitivity</a></li>
+  </ul></li>
+  <li><a href="#implementation-guidelines" id="toc-implementation-guidelines" class="nav-link" data-scroll-target="#implementation-guidelines"><span class="header-section-number">13.6</span> Implementation Guidelines</a>
+  <ul class="collapse">
+  <li><a href="#sampling-strategy" id="toc-sampling-strategy" class="nav-link" data-scroll-target="#sampling-strategy"><span class="header-section-number">13.6.1</span> Sampling Strategy</a></li>
+  <li><a href="#computational-efficiency" id="toc-computational-efficiency" class="nav-link" data-scroll-target="#computational-efficiency"><span class="header-section-number">13.6.2</span> Computational Efficiency</a></li>
+  <li><a href="#interpretation-and-communication" id="toc-interpretation-and-communication" class="nav-link" data-scroll-target="#interpretation-and-communication"><span class="header-section-number">13.6.3</span> Interpretation and Communication</a></li>
+  </ul></li>
+  <li><a href="#software-and-tools" id="toc-software-and-tools" class="nav-link" data-scroll-target="#software-and-tools"><span class="header-section-number">13.7</span> Software and Tools</a>
+  <ul class="collapse">
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages"><span class="header-section-number">13.7.1</span> R Packages</a></li>
+  <li><a href="#specialized-tools" id="toc-specialized-tools" class="nav-link" data-scroll-target="#specialized-tools"><span class="header-section-number">13.7.2</span> Specialized Tools</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/nonstationary-gev-fooled.html">Fooled by Randomness ✏️</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/hazard/extremes.html"><strong>II: Hazard Assessment</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/hazard/sensitivity-analysis.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Fooled by Randomness ✏️</h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></h1>
 </div>
 
 
@@ -633,225 +632,166 @@ window.Quarto = {
 </header>
 
 
+<section id="see-first" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="see-first">See first</h2>
+<p>This chapter builds on concepts from: - <a href="../../chapters/fundamentals/monte-carlo.html">Monte Carlo Methods</a> - <a href="../../chapters/hazard/physics-models.html">Physics-Based Models and Calibration</a></p>
+</section>
 <section id="learning-objectives" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
-<li>Understand sampling variability in extreme value analysis</li>
-<li>Recognize when apparent trends may be artifacts of finite samples</li>
-<li>Apply Bayesian methods to nonstationary GEV models</li>
-<li>Interpret uncertainty in trend estimation with limited data</li>
+<li>Understand the role of sensitivity analysis in climate risk modeling</li>
+<li>Apply variance-based sensitivity methods (Sobol indices) to identify key model parameters</li>
+<li>Use Morris screening methods for initial parameter importance ranking</li>
+<li>Interpret sensitivity analysis results for model simplification and uncertainty reduction</li>
+<li>Apply sensitivity analysis to complex model chains and multi-model ensembles</li>
 </ul>
-<p>This notebook will cover sampling variability to illustrate the pitfalls of fitting a flexible model (e.g., a nonstationary GEV distribution) to a relatively short observational record. Building on the simulation experiments illustrated in <span class="citation" data-cites="doss-gollin_robustadaptation:2019">Doss-Gollin et al. (<a href="../chapters/references.html#ref-doss-gollin_robustadaptation:2019" role="doc-biblioref">2019</a>)</span> we will look at the potential to accurately identify trends in the distribution for the “best case” where we know the true distribution and are just estimating parameters (of course, in the real world we don’t know the true distribution).</p>
-<div id="a36f2b64" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">Base</span>: @kwdef</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">using</span> <span class="bu">DynamicHMC</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span>: I</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="im">using</span> <span class="bu">Random</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="im">using</span> <span class="bu">Turing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-<section id="formulation" class="level2">
-<h2 class="anchored" data-anchor-id="formulation">Formulation</h2>
-<p>Consider the basic model <span class="math display">\[
-y(t) \sim \mathrm{GEV} \left(\mu(t), \sigma(t), \xi)
-\]</span> where <span class="math inline">\(\mu(t)\)</span> and <span class="math inline">\(\sigma(t)\)</span> are the location and scale parameters, respectively, and <span class="math inline">\(\xi\)</span> is the shape parameter. The shape parameter is assumed to be constant over time, while the location and scale parameters can vary with time.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Alternative models
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Similar models can be appplied to peak over threshold approaches, or other models. This is a general problem in statistical analysis, especially of extreme values.</p>
-</div>
-</div>
-<p>In the “process-informed” <span class="citation" data-cites="schlef_idf:2023 lu_spatiotemporal:2025">(<a href="../chapters/references.html#ref-schlef_idf:2023" role="doc-biblioref">Schlef et al. 2023</a>; <a href="../chapters/references.html#ref-lu_spatiotemporal:2025" role="doc-biblioref">Lu, Lee, and Doss-Gollin 2025</a>)</span> nonstationary GEV model, we relate the location and scale parameters to a set of covariates <span class="math inline">\(X(t)\)</span>: <span class="math display">\[
-\begin{aligned}
-\mu(t) &amp;= \alpha_\mu + \beta_\mu X(t) \\
-\sigma(t) &amp;= \exp \left[ \alpha_\sigma + \beta_\sigma X(t) \right]
-\]</span> where <span class="math inline">\(\alpha_\mu\)</span>, <span class="math inline">\(\beta_\mu\)</span>, <span class="math inline">\(\alpha_\sigma\)</span>, and <span class="math inline">\(\beta_\sigma\)</span> are the parameters to be estimated (note that other parameterizations are possible). We exponentiate the scale parameter to ensure that it is positive. The choice of covariates depends on the application and requires careful choice, as it is important to have a clear physical link between the covariates and the parameters to mitigate the risk of overfitting.</p>
+<section id="introduction" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<p>Global sensitivity analysis (GSA) is essential for understanding which parameters, inputs, or model components contribute most to uncertainty in climate risk assessments. Unlike local sensitivity analysis that examines parameter effects around a single point, GSA explores the entire parameter space to provide robust insights into model behavior.</p>
+<section id="why-sensitivity-analysis-matters" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="why-sensitivity-analysis-matters"><span class="header-section-number">13.1.1</span> Why Sensitivity Analysis Matters</h3>
+<p>In climate risk modeling, we often work with:</p>
+<ul>
+<li><strong>High-dimensional parameter spaces</strong>: Climate models may have dozens to hundreds of parameters</li>
+<li><strong>Complex model chains</strong>: From global climate models to local impact models</li>
+<li><strong>Computational constraints</strong>: Limited budget for model evaluations</li>
+<li><strong>Decision-making needs</strong>: Must identify which uncertainties matter most for risk management</li>
+</ul>
+<p><strong>Key questions GSA helps answer:</strong></p>
+<ol type="1">
+<li>Which parameters contribute most to output uncertainty?</li>
+<li>Which parameters can be fixed without significantly affecting results?</li>
+<li>How do parameter interactions affect model behavior?</li>
+<li>Where should we focus calibration and uncertainty reduction efforts?</li>
+</ol>
 </section>
-<section id="forward-model" class="level2">
-<h2 class="anchored" data-anchor-id="forward-model">Forward Model</h2>
-<p>Given fixed parameters, we use the “forward” model to generate synthetic data.</p>
-<div id="15e980bb" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">@kwdef</span> <span class="kw">struct</span> NonStationaryGEVParams{T <span class="op">&lt;:</span><span class="dt"> AbstractFloat</span>}</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    α_μ<span class="op">::</span><span class="dt">T</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>    β_μ<span class="op">::</span><span class="dt">Vector{T}</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    α_σ<span class="op">::</span><span class="dt">T</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>    β_σ<span class="op">::</span><span class="dt">Vector{T}</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>    ξ<span class="op">::</span><span class="dt">T</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">end</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">function</span> <span class="fu">make_synthetic_data</span>(params<span class="op">::</span><span class="dt">NonStationaryGEVParams</span>, X<span class="op">::</span><span class="dt">Matrix{&lt;:Real}</span>, n<span class="op">::</span><span class="dt">Int</span>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="co"># Simulate GEV data</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>    μ <span class="op">=</span> params.α_μ <span class="op">.+</span> params.β_μ<span class="ch">' * X'</span> <span class="op">|&gt;</span> vec</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    σ <span class="op">=</span> <span class="fu">exp</span>.(params.α_σ <span class="op">.+</span> params.β_σ<span class="ch">' * X'</span>) <span class="op">|&gt;</span> vec</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    ξ <span class="op">=</span> params.ξ</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    y <span class="op">=</span> [<span class="fu">rand</span>.(<span class="fu">GeneralizedExtremeValue</span>.(μ, σ, ξ)) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n]</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="cf">return</span> y</span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>make_synthetic_data (generic function with 1 method)</code></pre>
-</div>
-</div>
-<p>A common desire is to analyze data available in a reanalysis product from 1979–present.</p>
-<p>We will generate synthetic data using two covariates: time and ENSO.</p>
-<div id="7d26d21b" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>years <span class="op">=</span> <span class="fl">1979</span><span class="op">:</span><span class="fl">2024</span> <span class="op">|&gt;</span> collect <span class="op">|&gt;</span> float</span>
-<span id="cb4-2"><a href="#cb4-2"></a>enso <span class="op">=</span> <span class="fl">2.5</span> <span class="op">*</span> <span class="fu">sin</span>.(<span class="fl">2</span>π <span class="op">*</span> years <span class="op">./</span> <span class="fl">6.5</span>) <span class="op">.+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="fu">randn</span>(<span class="fu">length</span>(years))</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb4-5"><a href="#cb4-5"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">lines!</span>(ax, years, enso)</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="fu">scatter!</span>(ax, years, enso)</span>
-<span id="cb4-8"><a href="#cb4-8"></a>ax.ylabel <span class="op">=</span> <span class="st">"Simulated ENSO Index"</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-yellow-fg ansi-bold">┌ </span><span class="ansi-yellow-fg ansi-bold">Warning: </span>Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.
-
-<span class="ansi-yellow-fg ansi-bold">└ </span><span class="ansi-bright-black-fg">@ Makie ~/.julia/packages/Makie/Q6F2P/src/scenes.jl:238</span>
-</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-<figure class="figure">
-<p><img src="nonstationary-gev-fooled_files/figure-html/cell-4-output-2.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>based on this</p>
-<div id="9b1a6fa5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>X <span class="op">=</span> <span class="fu">hcat</span>(years <span class="op">.-</span> <span class="fu">first</span>(years), enso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We need to choose a set of parameters to generate synthetic data.</p>
-<div id="412fa33f" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>true_param <span class="op">=</span> <span class="fu">NonStationaryGEVParams</span>(</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    α_μ <span class="op">=</span> <span class="fl">2.5</span>, <span class="co"># location in 1979 with ENSO=0</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    β_μ <span class="op">=</span> [<span class="fl">0.005</span>, <span class="fl">0.025</span>], <span class="co"># location change per [year, unit ENSO]</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>    α_σ <span class="op">=</span> <span class="fu">log</span>(<span class="fl">1.5</span>), <span class="co"># LOG OF scale in 1979 with ENSO=0</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>    β_σ <span class="op">=</span> [<span class="fl">0.005</span>, <span class="fl">0.01</span>], <span class="co"># change in log σ per [year, unit ENSO]</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>    ξ <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># standard value</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This means that in 1979, the location parameter is 2.5 and the scale parameter is 1. Here’s what our distribution looked like in 1979 and 2024</p>
-<div id="5d4b9b43" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">let</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>    μ_1979 <span class="op">=</span> true_param.α_μ</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    σ_1979 <span class="op">=</span> <span class="fu">exp</span>.(true_param.α_σ)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    dist_1979 <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ_1979, σ_1979, true_param.ξ)</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a>    μ_2024 <span class="op">=</span> true_param.α_μ <span class="op">+</span> true_param.β_μ[<span class="fl">1</span>] <span class="op">*</span> (<span class="fl">2024</span> <span class="op">-</span> <span class="fl">1979</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    σ_2024 <span class="op">=</span> <span class="fu">exp</span>.(true_param.α_σ <span class="op">+</span> true_param.β_σ[<span class="fl">1</span>] <span class="op">*</span> (<span class="fl">2024</span> <span class="op">-</span> <span class="fl">1979</span>))</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    dist_2024 <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ_2024, σ_2024, true_param.ξ)</span>
-<span id="cb7-9"><a href="#cb7-9"></a></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
-<span id="cb7-12"><a href="#cb7-12"></a>    <span class="fu">plot!</span>(ax, dist_1979, label <span class="op">=</span> <span class="st">"1979"</span>, color <span class="op">=</span> <span class="op">:</span>purple, linewidth <span class="op">=</span> <span class="fl">3</span>)</span>
-<span id="cb7-13"><a href="#cb7-13"></a>    <span class="fu">plot!</span>(ax, dist_2024, label <span class="op">=</span> <span class="st">"2024"</span>, color <span class="op">=</span> <span class="op">:</span>orange, linestyle <span class="op">=</span> <span class="op">:</span>dash, linewidth <span class="op">=</span> <span class="fl">3</span>)</span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="fu">xlims!</span>(ax, <span class="fl">0</span>, <span class="fl">15</span>)</span>
-<span id="cb7-15"><a href="#cb7-15"></a>    ax.title <span class="op">=</span> <span class="st">"Simulated GEV Distribution in 1979 and 2024"</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>    ax.ylabel <span class="op">=</span> <span class="st">"Density"</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a>    ax.xlabel <span class="op">=</span> <span class="st">"Climate Hazard"</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a>    <span class="fu">axislegend</span>(ax, position <span class="op">=</span> <span class="op">:</span>rt)</span>
-<span id="cb7-19"><a href="#cb7-19"></a>    fig</span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-yellow-fg ansi-bold">┌ </span><span class="ansi-yellow-fg ansi-bold">Warning: </span>Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.
-
-<span class="ansi-yellow-fg ansi-bold">└ </span><span class="ansi-bright-black-fg">@ Makie ~/.julia/packages/Makie/Q6F2P/src/scenes.jl:238</span>
-</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-<figure class="figure">
-<p><img src="nonstationary-gev-fooled_files/figure-html/cell-7-output-2.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now we can use these <em>known</em> parameters and our <em>fixed</em> covariates to generate different random realizations. The only difference between these time series is random chance</p>
-<div id="00ab1e03" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">543</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a>N <span class="op">=</span> <span class="fl">100</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>y <span class="op">=</span> <span class="fu">make_synthetic_data</span>(true_param, X, N)</span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a>fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb8-6"><a href="#cb8-6"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>])</span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
-<span id="cb8-9"><a href="#cb8-9"></a>    <span class="cf">if</span> i <span class="op">==</span> N</span>
-<span id="cb8-10"><a href="#cb8-10"></a>        <span class="fu">lines!</span>(ax, years, y[i], color <span class="op">=</span> <span class="op">:</span>purple, linewidth <span class="op">=</span> <span class="fl">3</span>)</span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">else</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>        <span class="fu">lines!</span>(ax, years, y[i], color <span class="op">=</span> <span class="op">:</span>gray, alpha <span class="op">=</span> <span class="fl">0.5</span>)</span>
-<span id="cb8-13"><a href="#cb8-13"></a>    <span class="cf">end</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="cf">end</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>ax.ylabel <span class="op">=</span> <span class="st">"Simulated Climate Hazard"</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>ax.xlabel <span class="op">=</span> <span class="st">"Year"</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-yellow-fg ansi-bold">┌ </span><span class="ansi-yellow-fg ansi-bold">Warning: </span>Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.
-
-<span class="ansi-yellow-fg ansi-bold">└ </span><span class="ansi-bright-black-fg">@ Makie ~/.julia/packages/Makie/Q6F2P/src/scenes.jl:238</span>
-</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<div>
-<figure class="figure">
-<p><img src="nonstationary-gev-fooled_files/figure-html/cell-8-output-2.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>It looks from the purple line that there’s a negative trend, but this is just random chance!</p>
 </section>
-<section id="inverse-model" class="level2">
-<h2 class="anchored" data-anchor-id="inverse-model">Inverse Model</h2>
-<p>Given the data, we use the “inverse” model to estimate the parameters. We make the flawed, but common, IID assumption which is that <em>conditional on covariates</em> the <span class="math inline">\(y\)</span> values are independent and identically distributed.</p>
-<p>As noted in the introduction, we are using the exact same mathematical model to simulate synthetic data and to fit the model to data, so this is a best-case scenario for model power.</p>
-<div id="7cd870ab" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="pp">@model</span> <span class="fu">NonStationaryGEV</span>(y, X) <span class="op">=</span> <span class="cf">begin</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>    p <span class="op">=</span> <span class="fu">size</span>(X, <span class="fl">2</span>) <span class="co"># number of covariates</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="co"># Refined Priors</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>    α_μ <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">2.5</span>, <span class="fl">1</span>) <span class="co"># Informative prior based on domain knowledge</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>    β_μ <span class="op">~</span> <span class="fu">MvNormal</span>(<span class="fu">zeros</span>(p), <span class="fl">0.5</span> <span class="op">*</span> I) <span class="co"># Tighter prior for regression coefficients</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>    α_σ <span class="op">~</span> <span class="fu">Normal</span>(<span class="fu">log</span>(<span class="fl">1.5</span>), <span class="fl">0.5</span>) <span class="co"># Prior centered around log scale</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>    β_σ <span class="op">~</span> <span class="fu">MvNormal</span>(<span class="fu">zeros</span>(p), <span class="fl">0.5</span> <span class="op">*</span> I) <span class="co"># Tighter prior for scale coefficients</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>    ξ <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>) <span class="co"># Informative prior for shape parameter</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a></span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="co"># Vectorized Likelihood</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>    μ <span class="op">=</span> α_μ <span class="op">.+</span> β_μ<span class="ch">' * X'</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>    σ <span class="op">=</span> <span class="fu">exp</span>.(α_σ <span class="op">.+</span> β_σ<span class="ch">' * X'</span>)</span>
-<span id="cb9-14"><a href="#cb9-14"></a>    y <span class="op">~</span> <span class="fu">arraydist</span>(<span class="fu">GeneralizedExtremeValue</span>.(μ, σ, ξ))</span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>NonStationaryGEV (generic function with 2 methods)</code></pre>
-</div>
-</div>
+<section id="variance-based-sensitivity-analysis" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="variance-based-sensitivity-analysis"><span class="header-section-number">13.2</span> Variance-Based Sensitivity Analysis</h2>
+<section id="sobol-indices" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="sobol-indices"><span class="header-section-number">13.2.1</span> Sobol Indices</h3>
+<p>The most widely used approach for GSA decomposes output variance based on input contributions:</p>
+<p><span class="math display">\[
+V(Y) = \sum_{i} V_i + \sum_{i&lt;j} V_{ij} + \sum_{i&lt;j&lt;k} V_{ijk} + \ldots + V_{1,2,\ldots,k}
+\]</span></p>
+<p>where <span class="math inline">\(V_i\)</span> represents the variance contribution from parameter <span class="math inline">\(i\)</span> alone, <span class="math inline">\(V_{ij}\)</span> from the interaction between parameters <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, etc.</p>
+<p><strong>First-order Sobol index:</strong> <span class="math display">\[
+S_i = \frac{V_i}{V(Y)} = \frac{V[\mathbb{E}[Y|X_i]]}{V(Y)}
+\]</span></p>
+<p><strong>Total-effect index:</strong> <span class="math display">\[
+S_T^i = \frac{V_i + \sum_{j \neq i} V_{ij} + \sum_{j \neq i, k \neq i, j \neq k} V_{ijk} + \ldots}{V(Y)}
+\]</span></p>
+</section>
+<section id="computational-methods" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="computational-methods"><span class="header-section-number">13.2.2</span> Computational Methods</h3>
+<p><strong>Saltelli sampling scheme</strong> efficiently estimates Sobol indices using structured sampling matrices.</p>
+<p><strong>Sample size requirements</strong>: For <span class="math inline">\(k\)</span> parameters, need <span class="math inline">\((k+2) \times N\)</span> model evaluations where <span class="math inline">\(N\)</span> is the base sample size.</p>
+</section>
+</section>
+<section id="morris-elementary-effects" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="morris-elementary-effects"><span class="header-section-number">13.3</span> Morris Elementary Effects</h2>
+<p>For computationally expensive models, Morris method provides screening at lower cost:</p>
+<p><span class="math display">\[
+EE_i^{(j)} = \frac{f(x_1, \ldots, x_i + \Delta, \ldots, x_k) - f(x_1, \ldots, x_i, \ldots, x_k)}{\Delta}
+\]</span></p>
+<p><strong>Morris measures:</strong> - <span class="math inline">\(\mu^*_i\)</span>: Mean of absolute elementary effects (overall importance) - <span class="math inline">\(\sigma_i\)</span>: Standard deviation of elementary effects (interactions/non-linearity)</p>
+</section>
+<section id="applications-in-climate-risk" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="applications-in-climate-risk"><span class="header-section-number">13.4</span> Applications in Climate Risk</h2>
+<section id="case-study-1-hydrologic-model-calibration" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="case-study-1-hydrologic-model-calibration"><span class="header-section-number">13.4.1</span> Case Study 1: Hydrologic Model Calibration</h3>
+<p><strong>Problem</strong>: Identify most important parameters in distributed watershed model</p>
+<p><strong>Approach</strong>: 1. Define parameter ranges based on physical constraints 2. Apply Morris screening to eliminate unimportant parameters<br>
+3. Use Sobol analysis on reduced parameter set 4. Focus calibration on high-sensitivity parameters</p>
+<p><strong>Results</strong>: Typically find 5-10 parameters explain 80%+ of output variance</p>
+</section>
+<section id="case-study-2-storm-surge-model-chain" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="case-study-2-storm-surge-model-chain"><span class="header-section-number">13.4.2</span> Case Study 2: Storm Surge Model Chain</h3>
+<p><strong>Model chain components</strong>: 1. Tropical cyclone track generator 2. Wind field model<br>
+3. Storm surge model 4. Sea level rise projections</p>
+<p><strong>GSA insights</strong>: - Storm intensity parameters dominate surge height uncertainty - Track parameters most important for timing - Sea level rise becomes dominant for multi-decadal planning</p>
+</section>
+<section id="case-study-3-drought-risk-assessment" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="case-study-3-drought-risk-assessment"><span class="header-section-number">13.4.3</span> Case Study 3: Drought Risk Assessment</h3>
+<p><strong>Integrated modeling system</strong>: - Climate model projections - Hydrologic model - Water system operations model - Economic impact model</p>
+<p><strong>Key findings</strong>: - Climate model uncertainty dominates at seasonal scales - Hydrologic parameters important for extreme events - Operations parameters critical for economic impacts</p>
+</section>
+</section>
+<section id="advanced-methods" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="advanced-methods"><span class="header-section-number">13.5</span> Advanced Methods</h2>
+<section id="multi-model-sensitivity-analysis" class="level3" data-number="13.5.1">
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="multi-model-sensitivity-analysis"><span class="header-section-number">13.5.1</span> Multi-model Sensitivity Analysis</h3>
+<p>When working with ensemble of models:</p>
+<p><span class="math display">\[
+V(Y) = V[\mathbb{E}[Y|M]] + \mathbb{E}[V[Y|M]]
+\]</span></p>
+<p>Decomposes uncertainty into: - <strong>Between-model variance</strong>: Structural uncertainty - <strong>Within-model variance</strong>: Parameter uncertainty</p>
+</section>
+<section id="time-varying-sensitivity" class="level3" data-number="13.5.2">
+<h3 data-number="13.5.2" class="anchored" data-anchor-id="time-varying-sensitivity"><span class="header-section-number">13.5.2</span> Time-Varying Sensitivity</h3>
+<p>For dynamic systems, sensitivity indices may change over time: - Use rolling window analysis - Apply functional data analysis methods - Consider time-integrated sensitivity measures</p>
+</section>
+</section>
+<section id="implementation-guidelines" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="implementation-guidelines"><span class="header-section-number">13.6</span> Implementation Guidelines</h2>
+<section id="sampling-strategy" class="level3" data-number="13.6.1">
+<h3 data-number="13.6.1" class="anchored" data-anchor-id="sampling-strategy"><span class="header-section-number">13.6.1</span> Sampling Strategy</h3>
+<ol type="1">
+<li><strong>Parameter space definition</strong>: Use physical bounds and expert knowledge</li>
+<li><strong>Correlation handling</strong>: Account for parameter dependencies using copulas</li>
+<li><strong>Hierarchical sampling</strong>: For multi-scale problems, use nested sampling designs</li>
+</ol>
+</section>
+<section id="computational-efficiency" class="level3" data-number="13.6.2">
+<h3 data-number="13.6.2" class="anchored" data-anchor-id="computational-efficiency"><span class="header-section-number">13.6.2</span> Computational Efficiency</h3>
+<ol type="1">
+<li><strong>Surrogate modeling</strong>: Build emulators for expensive models</li>
+<li><strong>Adaptive sampling</strong>: Focus sampling in high-sensitivity regions</li>
+<li><strong>Multi-fidelity methods</strong>: Combine high and low-fidelity model evaluations</li>
+</ol>
+</section>
+<section id="interpretation-and-communication" class="level3" data-number="13.6.3">
+<h3 data-number="13.6.3" class="anchored" data-anchor-id="interpretation-and-communication"><span class="header-section-number">13.6.3</span> Interpretation and Communication</h3>
+<ol type="1">
+<li><strong>Threshold values</strong>: <span class="math inline">\(S_i &gt; 0.1\)</span> often considered “important”</li>
+<li><strong>Interaction effects</strong>: <span class="math inline">\(S_T^i - S_i\)</span> indicates interaction strength</li>
+<li><strong>Visualization</strong>: Use radar plots, heatmaps for multi-output problems</li>
+</ol>
+</section>
+</section>
+<section id="software-and-tools" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="software-and-tools"><span class="header-section-number">13.7</span> Software and Tools</h2>
+<section id="r-packages" class="level3" data-number="13.7.1">
+<h3 data-number="13.7.1" class="anchored" data-anchor-id="r-packages"><span class="header-section-number">13.7.1</span> R Packages</h3>
+<ul>
+<li><code>sensitivity</code>: Comprehensive GSA methods</li>
+<li><code>SALib</code> (Python): Popular sensitivity analysis library</li>
+</ul>
+</section>
+<section id="specialized-tools" class="level3" data-number="13.7.2">
+<h3 data-number="13.7.2" class="anchored" data-anchor-id="specialized-tools"><span class="header-section-number">13.7.2</span> Specialized Tools</h3>
+<ul>
+<li>SAFE Toolbox (MATLAB/Python): Advanced methods</li>
+<li>OpenTURNS: Uncertainty quantification platform</li>
+</ul>
+</section>
+</section>
+<section id="further-reading" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><strong>Key References:</strong> - <span class="citation" data-cites="saltelli_global:2008">Saltelli et al. (<a href="../references.html#ref-saltelli_global:2008" role="doc-biblioref">2008</a>)</span>: Comprehensive introduction to GSA - <span class="citation" data-cites="herman_salib:2017">Herman and Usher (<a href="../references.html#ref-herman_salib:2017" role="doc-biblioref">2017</a>)</span>: Practical implementation guide - <span class="citation" data-cites="razavi_sensitivity:2020">Razavi et al. (<a href="../references.html#ref-razavi_sensitivity:2020" role="doc-biblioref">2020</a>)</span>: Review of GSA in environmental modeling</p>
+<p><strong>Climate Applications:</strong></p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-doss-gollin_robustadaptation:2019" class="csl-entry" role="listitem">
-Doss-Gollin, James, David J. Farnham, Scott Steinschneider, and Upmanu Lall. 2019. <span>“Robust Adaptation to Multiscale Climate Variability.”</span> <em>Earth’s Future</em> 7 (7): 734–47. <a href="https://doi.org/10.1029/2019ef001154">https://doi.org/10.1029/2019ef001154</a>.
+<div id="ref-herman_salib:2017" class="csl-entry" role="listitem">
+Herman, Jon, and Will Usher. 2017. <span>“<span>SALib</span>: <span>An</span> Open-Source <span>Python</span> Library for <span>Sensitivity Analysis</span>.”</span> <em>Journal of Open Source Software</em> 2 (9): 97. <a href="https://doi.org/10.21105/joss.00097">https://doi.org/10.21105/joss.00097</a>.
 </div>
-<div id="ref-lu_spatiotemporal:2025" class="csl-entry" role="listitem">
-Lu, Yuchen, Ben Seiyon Lee, and James Doss-Gollin. 2025. <span>“Bayesian <span>Spatiotemporal Nonstationary Model Quantifies Robust Increases</span> in <span>Daily Extreme Rainfall Across</span> the <span>Western Gulf Coast</span>.”</span> February 4, 2025. <a href="https://doi.org/10.48550/arXiv.2502.02000">https://doi.org/10.48550/arXiv.2502.02000</a>.
+<div id="ref-razavi_sensitivity:2020" class="csl-entry" role="listitem">
+Razavi, Saman, Anthony Jakeman, Andrea Saltelli, Clémentine Prieur, Bertrand Iooss, Emanuele Borgonovo, Elmar Plischke, et al. 2020. <span>“The Future of Sensitivity Analysis: An Essential Discipline for Systems Modeling and Policy Support.”</span> <em>Environmental Modelling &amp; Software</em>, December, 104954. <a href="https://doi.org/10.1016/j.envsoft.2020.104954">https://doi.org/10.1016/j.envsoft.2020.104954</a>.
 </div>
-<div id="ref-schlef_idf:2023" class="csl-entry" role="listitem">
-Schlef, Katherine E., Kenneth E. Kunkel, Casey Brown, Yonas Demissie, Dennis P. Lettenmaier, Anna Wagner, Mark S. Wigmosta, et al. 2023. <span>“Incorporating Non-Stationarity from Climate Change into Rainfall Frequency and Intensity-Duration-Frequency (<span>IDF</span>) Curves.”</span> <em>Journal of Hydrology</em> 616 (January): 128757. <a href="https://doi.org/10.1016/j.jhydrol.2022.128757">https://doi.org/10.1016/j.jhydrol.2022.128757</a>.
+<div id="ref-saltelli_global:2008" class="csl-entry" role="listitem">
+Saltelli, Andrea, Marco Ratto, Terry Andres, Francesca Campolongo, Jessica Cariboni, Debora Gatelli, Michaela Saisana, and Stefano Tarantola. 2008. <em>Global Sensitivity Analysis: The Primer</em>. John Wiley &amp; Sons, Ltd. <a href="http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1">http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1</a>.
 </div>
 </div>
 </section>
@@ -1297,13 +1237,13 @@ Schlef, Katherine E., Kenneth E. Kunkel, Casey Brown, Yonas Demissie, Dennis P. 
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../notebooks/mosquitos.html" class="pagination-link" aria-label="Statistics Without the Agonizing Details ✏️">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistics Without the Agonizing Details ✏️</span>
+      <a href="../../chapters/hazard/sampling.html" class="pagination-link" aria-label="Optimal Sampling Methods 🚧">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../notebooks/sewells-point.html" class="pagination-link" aria-label="Water Levels at Sewell's Point, VA">
-        <span class="nav-page-text">Water Levels at Sewell’s Point, VA</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/risk/exposure-vulnerability.html" class="pagination-link" aria-label="Exposure and Vulnerability ✏️">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability ✏️</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1314,7 +1254,7 @@ Schlef, Katherine E., Kenneth E. Kunkel, Casey Brown, Yonas Demissie, Dennis P. 
 <p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2024–2025 <a href="https://orcid.org/0000-0002-3428-2224">James Doss-Gollin</a></span> <span class="faux-block"></span></p>
 </div>   
     <div class="nav-footer-center">
-<p>All content licensed under <a href="../chapters/about/license.html"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY-NC 4.0</a></p>
+<p>All content licensed under <a href="../../chapters/about/license.html"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY-NC 4.0</a></p>
 </div>
     <div class="nav-footer-right">
 <p><span class="faux-block">Made with Julia and <a href="https://quarto.org/">Quarto</a>.</span> <span class="faux-block"><a href="https://github.com/dossgollin-lab/climate-risk-management-reference">View the source on <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>

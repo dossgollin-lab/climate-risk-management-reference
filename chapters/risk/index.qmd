@@ -1,7 +1,7 @@
 # Overview ✏️ {.unnumbered}
 
 ::: {.callout-tip}
-## Learning Objectives
+## Learning objectives
 
 - Define and conceptualize risk within the climate context (hazard, exposure, vulnerability)
 - Understand basic risk terminology (risk = probability × consequence)
@@ -41,14 +41,14 @@ where $x$ is some random variable and $f$ is some function.
 In our context, this means that if we want to know the expected value of a risk-related variable, like damage, we should not just take the expected value of the hazard and then apply a damage function to that.
 Extending the concept further, the damage caused by a hazard that scores in the 99th percentile of a chosen intensity measure may not be the 99th percentile of the damage distribution (a commonly used, but wrong, assumption).
 
-## Climate Risks to Complex Systems
+## Climate risks to complex systems
 
 ### Interconnected and interdependent infrastructure systems
 
 Many of the same principles we've discussed apply to complex systems, though analyzing these systems presents unique challenges. 
 Climate risks to complex systems are particularly challenging because of cascading failures and interdependencies.
 
-### Case Study: 2021 Texas Freeze
+### Case study: 2021 Texas Freeze
 
 The 2021 Texas freeze provides an excellent example of how climate hazards interact with complex infrastructure systems to create cascading failures.
 

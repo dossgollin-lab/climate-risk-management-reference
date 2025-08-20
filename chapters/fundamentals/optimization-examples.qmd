@@ -12,9 +12,9 @@ using Optim
 CairoMakie.activate!(; type="svg")
 ```
 
-## Likelihood Examples
+## Likelihood examples
 
-### Single Data Point Example
+### Single data point example
 
 We can plot the likelihood function $p(y | \theta)$ for different values of $\theta$.
 Consider $y \sim \mathcal{N}(\mu, \sigma)$ with $\theta = \{\mu, \sigma\}$.
@@ -47,7 +47,7 @@ fig
 
 Notice the likelihood function is maximized at $\mu = y$.
 
-### Multiple Data Points
+### Multiple data points
 
 For multiple i.i.d. observations, the likelihood becomes:
 $$p(y | \theta) = \prod_{i=1}^n p(y_i | \theta)$$
@@ -77,7 +77,7 @@ axislegend()
 fig
 ```
 
-## Poisson Example
+## Poisson example
 
 Consider modeling the annual number of tropical cyclones making landfall in the continental United States as Poisson($\lambda$).
 
@@ -102,7 +102,7 @@ fig = lines(
 )
 ```
 
-## Multivariate Likelihood Surface
+## Multivariate likelihood surface
 
 For multiple parameters, we can visualize the likelihood as a surface or contour plot.
 
@@ -133,7 +133,7 @@ fig = heatmap(
 
 The small high-likelihood region shows parameter combinations most consistent with the data.
 
-## Numerical Optimization
+## Numerical optimization
 
 We can use `Optim.jl` to find maximum likelihood estimates numerically.
 
@@ -158,7 +158,7 @@ println("σ̂ = $(round(θ_MLE[2], digits=3))")
 dist_MLE = Normal(θ_MLE[1], θ_MLE[2])
 ```
 
-## Linear Regression Example
+## Linear regression example
 
 Maximum likelihood estimation for linear regression is equivalent to least squares under Gaussian noise assumptions.
 
@@ -178,7 +178,7 @@ fig = scatter(
 )
 ```
 
-### Likelihood Functions
+### Likelihood functions
 
 ```{julia}
 # Likelihood for single point

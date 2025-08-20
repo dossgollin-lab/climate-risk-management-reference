@@ -1,7 +1,7 @@
 # Overview ✏️ {.unnumbered}
 
 
-## Introduction to Climate Hazards
+## Introduction to climate hazards
 
 Understanding climate hazards requires grappling with their unique characteristics that distinguish them from typical engineering and statistical problems.
 
