@@ -1,8 +1,3 @@
----
-title: "Overview"
-status: "draft"
----
-
 # Overview ✏️ {.unnumbered}
 
 This part of the book focuses on **hazard assessment** - the process of characterizing climate hazards and their probability distributions.
