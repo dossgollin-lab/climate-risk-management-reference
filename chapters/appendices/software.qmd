@@ -1,26 +1,103 @@
 ---
-title: "Other Software Tools ✏️"
+title: "Software Setup ✏️"
 ---
 
+If you want to run the computational notebooks in this book, or apply a similar workflow, then these instructions are for you.
 
-## Quarto + Jupyter
+## Quick Start
 
-This textbook is written using the Quarto language.
-Quarto allows us to combine code, math, and code output in a single document.
-Jupyter notebooks fulfill a similar functionality, although they are implemented very differently.
-Both use Markdown syntax with LaTeX math notation.
+This section provides step-by-step instructions to get your development environment set up and running.
 
-- [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/)
-- [LaTeX Cheatsheet](https://ctan.math.washington.edu/tex-archive/info/undergradmath/undergradmath.pdf)
-- [Mathpix Snip](https://mathpix.com/snip) allows you to convert images of equations to LaTeX code (there is a free tier)
-- [Detexify](https://detexify.kirelabs.org/classify.html) lets you draw a symbol and suggests the LaTeX code for the corresponding symbol 
+### Installation Steps
 
-## Git and GitHub
+1. **Install [Visual Studio Code](https://code.visualstudio.com/download)** - your code editor
+   - There are other good IDEs out there, and you can absolutely use one.
+   - VS Code is a good and well-supported starting point
 
-Git and GitHub are widely used to share, save, collaborate on, and disseminate code, including this book.
-There are lots of great resources for learning Git and GitHub, including:
+2. **Install [Quarto](https://quarto.org/docs/get-started/)** - for creating documents with code
+   - For step 1, choose your operating system
+   - For step 2, choose VS Code as your tool
 
-- [Git Basics](https://www.theodinproject.com/lessons/foundations-git-basics) from The Odin Project.
-- [Learn Git Branching](https://learngitbranching.js.org/): An interactive, visual tutorial to how git works.
-- [Version Control](https://missing.csail.mit.edu/2020/version-control/) from MIT's "CS: Your Missing Semester" course.
-- [Git and GitHub for Poets](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV): YouTube playlist covering the basics of git and GitHub.
+3. **Install Julia using [JuliaUp](https://github.com/JuliaLang/juliaup)** - the programming language
+   - Follow the directions on the GitHub page based on your operating system
+   - Don't worry about the Continuous Integration (CI) section or anything below it
+   - Install Julia 1.11 using `juliaup add 1.11`
+   - Set this to be your default version using `juliaup default 1.11`
+   - You should get a message that says something like `Configured the default Julia version to be '1.11'`
+
+4. **In VS Code: Install extensions** from the Extensions marketplace
+   - Install the **Julia** extension (provides syntax highlighting, code completion, and integrated REPL)
+   - Install the **Quarto** extension (provides syntax highlighting and preview capabilities for `.qmd` files)
+
+5. **Install [GitHub Desktop](https://desktop.github.com/download/)** - for version control
+   - This is optional if you prefer to use git through the command line or another app, but GitHub Desktop is a good default recommendation
+
+### Verification
+
+After installation, you should be able to:
+
+- Open VS Code and see the Julia and Quarto extensions listed
+- Open a terminal and type `julia` to start the Julia REPL
+- Create a new Quarto document (`.qmd` file) in VS Code with syntax highlighting
+
+## Dig Deeper
+
+### Julia 
+
+[Julia](./julia.qmd) is a fast, modern programming language designed for scientific computing.
+Its syntax closely mirrors mathematical notation, making it intuitive for researchers while delivering performance comparable to C and Fortran.
+
+JuliaUp is the official Julia version manager.
+It simplifies installation, allows you to maintain multiple Julia versions simultaneously, and keeps your installation current with the latest releases.
+This is especially useful as the Julia ecosystem evolves rapidly.
+
+See the [Julia page](./julia.qmd) for more.
+
+### Quarto
+
+Quarto is a scientific publishing system that enables you to combine code, results, and narrative text in reproducible documents.
+Think of it as the next generation of R Markdown, but with multi-language support (Julia, Python, R, and more).
+
+This textbook is written in Quarto.
+Unlike traditional notebooks, Quarto documents are plain text files that render to multiple output formats (HTML, PDF, Word, presentations) while maintaining computational reproducibility.
+
+You can learn more at:
+
+- Official [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/vscode.html) - basic document creation
+- Official [Tutorial: Computations](https://quarto.org/docs/get-started/computations/vscode.html) - integrating code
+- Comprehensive [Quarto documentation](https://quarto.org/docs/guide/)
+
+#### Writing with Markdown and Math
+
+Quarto uses Markdown syntax with LaTeX math notation.
+Essential references:
+
+- [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/) - basic text formatting
+- [LaTeX Cheatsheet](https://ctan.math.washington.edu/tex-archive/info/undergradmath/undergradmath.pdf) - mathematical notation
+- [Mathpix Snip](https://mathpix.com/snip) - convert equation images to LaTeX code (free tier available)
+- [Detexify](https://detexify.kirelabs.org/classify.html) - draw symbols to find LaTeX commands
+
+### Visual Studio Code 
+
+Visual Studio Code is a free, open-source code editor developed by Microsoft.
+Its strength lies in its extensibility—thousands of extensions add language support, debugging capabilities, and productivity tools.
+
+For our workflow, the Julia extension transforms VS Code into a full Julia development environment with syntax highlighting, intelligent code completion, integrated debugging, and a built-in REPL.
+The Quarto extension provides similar capabilities for computational documents, including live preview and cell execution.
+
+You can learn more at [the official tutorial](https://code.visualstudio.com/docs/introvideos/basics).
+
+### Git and GitHub
+
+Git is a distributed version control system that tracks changes in your code over time.
+GitHub is a cloud-based platform that hosts Git repositories and adds collaboration features like issue tracking, pull requests, and project management.
+
+Version control is essential for reproducible research—it allows you to track changes, collaborate with others, recover from mistakes, and share your work publicly.
+This textbook itself is maintained on GitHub.
+
+You can learn more at:
+
+- [Git Basics](https://www.theodinproject.com/lessons/foundations-git-basics) - fundamental concepts from The Odin Project
+- [Learn Git Branching](https://learngitbranching.js.org/) - interactive, visual tutorial for understanding Git workflows
+- [Version Control](https://missing.csail.mit.edu/2020/version-control/) - comprehensive guide from MIT's "Missing Semester"
+- [Git and GitHub for Poets](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV) - beginner-friendly video series

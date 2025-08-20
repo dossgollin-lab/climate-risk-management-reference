@@ -13,6 +13,11 @@ slides/
 *.quarto_ipynb
 *.db
 *.ipynb
+*.html
+site_libs/*
+.jupyter_cache
+*.svg
+*/*-listing.json
 
 notebooks/.jupyter_cache/
 notebooks/*_files/*

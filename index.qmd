@@ -1,5 +1,7 @@
 ---
 title-block-style: none
+title: "Welcome"
+status: "draft"
 ---
 
 # Welcome 🎯 {.unnumbered}

@@ -1,10 +1,4 @@
----
-tags: 
-    - Extreme Value Theory
-    - Rainfall
----
-
-# Block Maxima 📝 {.unnumbered}
+# Block Maxima ✏️ {.unnumbered}
 
 This tutorial walks through some basic choices for modeling block maxima using peak over threshold (POT) methods, using an example of extreme rainfall in England.
 

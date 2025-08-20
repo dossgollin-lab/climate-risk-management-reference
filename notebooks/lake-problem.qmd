@@ -1,9 +1,8 @@
 ---
-title: "Dynamic Policy Search: The Lake Problem"
 description: "Apply dynamic policy search to optimal lake management under uncertainty"
 ---
 
-# Dynamic Policy Search: The Lake Problem 📝 {.unnumbered}
+# Dynamic Policy Search: The Lake Problem 🚧 {.unnumbered}
 
 ## Learning Objectives {.unnumbered}
 

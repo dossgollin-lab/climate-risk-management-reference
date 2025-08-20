@@ -64,14 +64,13 @@ book:
         - "notebooks/block-maxima.qmd"
         - "notebooks/lake-problem.qmd"
         - "notebooks/mosquitos.qmd"
-        - "notebooks/nonstationary-gev-fooled.qmd"
         - "notebooks/sewells-point.qmd"
 
     - chapters/references.qmd
 
   appendices: 
-    - "chapters/appendices/julia.qmd"
     - "chapters/appendices/software.qmd"
+    - "chapters/appendices/julia.qmd"
     - "chapters/appendices/llm.qmd"
   
   search:
@@ -83,7 +82,7 @@ book:
     footer: |
       This project is **under construction.**
       Each page is either:
-      🚧 Planning, 📝 Draft, ✏️ Revision, or 🎯 Ready.
+      🚧 Planning, ✏️ Draft, or complete.
 
 
 bibliography: references.bib

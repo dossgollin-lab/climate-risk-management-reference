@@ -1,5 +1,6 @@
 ---
 title: "Working with People: Values, Participation, and Communication 🚧"
+status: "planning"
 ---
 
 ::: {.callout-tip}

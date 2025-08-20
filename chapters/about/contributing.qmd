@@ -1,4 +1,4 @@
-# Contributing 🎯 {.unnumbered}
+# Contributing {.unnumbered}
 
 This textbook is a work in progress, and we welcome your contributions.
 Whether it's fixing a typo or proposing a new module, every suggestion helps.

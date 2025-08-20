@@ -4,13 +4,12 @@ listing:
   type: table
   fields: 
     - title
-    - tags
   field-display-names:
     tags: "Tags"
     
 ---
 
-# Overview 🎯 {.unnumbered}
+# Overview {.unnumbered}
 
 This collection of computational notebooks demonstrates the methods and concepts discussed in the main text through practical applications.
 Each notebook is designed to be standalone and self-contained, using the Julia programming language for all computations.

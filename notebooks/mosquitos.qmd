@@ -1,9 +1,4 @@
----
-title: "Statistics Without the Agonizing Details"
-description: "Simulation-based statistical testing using computational methods"
----
-
-# Statistics Without the Agonizing Details 🎯 {.unnumbered}
+# Statistics Without the Agonizing Details ✏️ {.unnumbered}
 
 ## Learning Objectives {.unnumbered}
 
@@ -28,7 +23,7 @@ First, we will create the data. Here is the data for the beer drinkers:
 #| output: false
 #| code-fold: true
 beer = [
-    27, 20, 21, 26, 27, 31, 24, 21, 20, 19, 23, 24, 28, 19, 24, 29, 18, 20, 17, 31, 20, 25, 28, 21, 27,
+	27, 20, 21, 26, 27, 31, 24, 21, 20, 19, 23, 24, 28, 19, 24, 29, 18, 20, 17, 31, 20, 25, 28, 21, 27,
 ]
 ```
 
@@ -83,13 +78,13 @@ We can code up the simulation approach in Julia.
 using Random: shuffle
 
 function get_shuffled_difference(y1, y2)
-    y_all = vcat(y1, y2)
-    y_shuffled = shuffle(y_all)
-    N1 = length(y1)
-    ynew1 = y_shuffled[1:N1]
-    ynew2 = y_shuffled[(N1+1):end]
-    difference = mean(ynew1) - mean(ynew2)
-    return difference
+	y_all = vcat(y1, y2)
+	y_shuffled = shuffle(y_all)
+	N1 = length(y1)
+	ynew1 = y_shuffled[1:N1]
+	ynew2 = y_shuffled[(N1+1):end]
+	difference = mean(ynew1) - mean(ynew2)
+	return difference
 end
 
 get_shuffled_difference(beer, water)
@@ -109,12 +104,12 @@ using CairoMakie
 
 #| label: fig-plot-diffs
 function plot_diffs(diffs, obs)
-    fig = Figure()
-    ax = Axis(fig[1, 1], xlabel="Difference", ylabel="Proportion of samples")
-    hist!(ax, diffs, bins=range(-6, 6, step=0.5), normalization=:pdf, label="If Skeptic is Right")
-    vlines!(ax, [obs], label="Observed", linewidth=2, color=:red)
-    axislegend(ax, position=:lt)
-    return fig, ax
+	fig = Figure()
+	ax = Axis(fig[1, 1], xlabel = "Difference", ylabel = "Proportion of samples")
+	hist!(ax, diffs, bins = range(-6, 6, step = 0.5), normalization = :pdf, label = "If Skeptic is Right")
+	vlines!(ax, [obs], label = "Observed", linewidth = 2, color = :red)
+	axislegend(ax, position = :lt)
+	return fig, ax
 end
 
 fig, ax = plot_diffs(simulated_diffs, observed_diff)
