@@ -1,6 +1,5 @@
 ---
 title: Optimal Sampling 🚧
-status: "planning"
 ---
 
 ## See First {.unnumbered}

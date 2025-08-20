@@ -1,6 +1,5 @@
 ---
 title: "Parameter Uncertainty and Risk Assessment: Computational Examples ✏️"
-status: "draft"
 ---
 
 This companion file provides computational examples for parameter uncertainty and Monte Carlo methods covered in the [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd) chapter.
@@ -16,7 +15,7 @@ using LaTeXStrings
 using Optim
 using Random
 Random.seed!(123)
-CairoMakie.activate!(; type="svg")
+CairoMakie.activate!(; type = "svg")
 ```
 
 ## Case Study: Flood Risk Assessment with Parameter Uncertainty
@@ -52,15 +51,15 @@ true_σ = 0.25
 observed_heights = rand(LogNormal(true_μ, true_σ), n_years)
 
 # Plot time series and histogram
-fig = Figure(size=(800, 400))
+fig = Figure(size = (800, 400))
 
-ax1 = Axis(fig[1, 1], xlabel="Year", ylabel="Annual Max Water Level (ft)",
-    title="Observed Flood Heights")
-scatter!(ax1, 1:n_years, observed_heights, markersize=8)
+ax1 = Axis(fig[1, 1], xlabel = "Year", ylabel = "Annual Max Water Level (ft)",
+	title = "Observed Flood Heights")
+scatter!(ax1, 1:n_years, observed_heights, markersize = 8)
 
-ax2 = Axis(fig[1, 2], xlabel="Height (ft)", ylabel="Density",
-    title="Histogram of Observations")
-hist!(ax2, observed_heights, normalization=:pdf, bins=15)
+ax2 = Axis(fig[1, 2], xlabel = "Height (ft)", ylabel = "Density",
+	title = "Histogram of Observations")
+hist!(ax2, observed_heights, normalization = :pdf, bins = 15)
 
 fig
 ```
@@ -76,13 +75,13 @@ println("μ̂ = $(round(fitted_dist.μ, digits=3))")
 println("σ̂ = $(round(fitted_dist.σ, digits=3))")
 
 # Plot data with fitted distribution
-heights_range = range(1.5, 8, length=200)
-fig = hist(observed_heights, normalization=:pdf, bins=15,
-    label="Observed Data",
-    axis=(xlabel="Height (ft)", ylabel="Density",
-        title="Flood Height Distribution"))
+heights_range = range(1.5, 8, length = 200)
+fig = hist(observed_heights, normalization = :pdf, bins = 15,
+	label = "Observed Data",
+	axis = (xlabel = "Height (ft)", ylabel = "Density",
+		title = "Flood Height Distribution"))
 lines!(heights_range, pdf.(fitted_dist, heights_range),
-    linewidth=3, label="MLE Fit")
+	linewidth = 3, label = "MLE Fit")
 axislegend()
 fig
 ```
@@ -99,20 +98,20 @@ return_levels = quantile.(fitted_dist, annual_exceedance_probs)
 
 # Plot return period curve with Weibull plotting positions
 function weibull_plot_pos(y)
-    N = length(y)
-    ys = sort(y, rev=false)
-    exceedance_probs = [r / (N + 1) for r in 1:N]
-    return exceedance_probs, ys
+	N = length(y)
+	ys = sort(y, rev = false)
+	exceedance_probs = [r / (N + 1) for r in 1:N]
+	return exceedance_probs, ys
 end
 
 emp_probs, emp_heights = weibull_plot_pos(observed_heights)
 
-fig = scatter(1 ./ emp_probs, emp_heights, label="Observations",
-    markersize=6, alpha=0.7,
-    axis=(xlabel="Return Period (years)", ylabel="Return Level (ft)",
-        title="Return Period Analysis", xscale=log10, yscale=log10))
+fig = scatter(1 ./ emp_probs, emp_heights, label = "Observations",
+	markersize = 6, alpha = 0.7,
+	axis = (xlabel = "Return Period (years)", ylabel = "Return Level (ft)",
+		title = "Return Period Analysis", xscale = log10, yscale = log10))
 
-lines!(return_periods, return_levels, linewidth=3, label="MLE Fit")
+lines!(return_periods, return_levels, linewidth = 3, label = "MLE Fit")
 axislegend()
 fig
 ```
@@ -124,12 +123,12 @@ Now we need to model how flood height translates to economic damages.
 ```{julia}
 # Bounded logistic damage function
 function bounded_logistic(h, building_elevation, x0, k)
-    depth_at_building = h - building_elevation
-    if depth_at_building <= 0
-        return 0.0
-    else
-        return 1 / (1 + exp(-k * (depth_at_building - x0)))
-    end
+	depth_at_building = h - building_elevation
+	if depth_at_building <= 0
+		return 0.0
+	else
+		return 1 / (1 + exp(-k * (depth_at_building - x0)))
+	end
 end
 
 # Parameters for damage function
@@ -138,14 +137,14 @@ x0 = 4.0  # inflection point (depth in ft)
 k = 0.75  # steepness parameter
 
 # Plot damage function
-depths = range(-2, 8, length=200)
+depths = range(-2, 8, length = 200)
 damages = [bounded_logistic(d + building_elevation, building_elevation, x0, k) for d in depths]
 
-fig = lines(depths, damages, linewidth=3,
-    axis=(xlabel="Depth at Building (ft)", ylabel="Damage Fraction",
-        title="Depth-Damage Function"))
-hlines!(fig.axis, [0], color=:gray, linestyle=:dash)
-vlines!(fig.axis, [0], color=:gray, linestyle=:dash)
+fig = lines(depths, damages, linewidth = 3,
+	axis = (xlabel = "Depth at Building (ft)", ylabel = "Damage Fraction",
+		title = "Depth-Damage Function"))
+hlines!(fig.axis, [0], color = :gray, linestyle = :dash)
+vlines!(fig.axis, [0], color = :gray, linestyle = :dash)
 fig
 ```
 
@@ -154,14 +153,14 @@ fig
 ### Basic Monte Carlo Analysis
 
 ```{julia}
-function monte_carlo_damage(flood_dist, building_elev, x0, k; n_samples=50_000)
-    # Sample flood heights at gauge
-    heights_at_gauge = rand(flood_dist, n_samples)
+function monte_carlo_damage(flood_dist, building_elev, x0, k; n_samples = 50_000)
+	# Sample flood heights at gauge
+	heights_at_gauge = rand(flood_dist, n_samples)
 
-    # Calculate damages for each height
-    damages = [bounded_logistic(h, building_elev, x0, k) for h in heights_at_gauge]
+	# Calculate damages for each height
+	damages = [bounded_logistic(h, building_elev, x0, k) for h in heights_at_gauge]
 
-    return damages
+	return damages
 end
 
 # Run Monte Carlo simulation
@@ -169,12 +168,12 @@ damages = monte_carlo_damage(fitted_dist, building_elevation, x0, k)
 
 # Calculate key metrics
 function damage_metrics(dmg_samples)
-    return (
-        mean_damage=mean(dmg_samples),
-        q99_damage=quantile(dmg_samples, 0.99),
-        prob_any_damage=mean(dmg_samples .> 0),
-        prob_total_loss=mean(dmg_samples .> 0.95),
-    )
+	return (
+		mean_damage = mean(dmg_samples),
+		q99_damage = quantile(dmg_samples, 0.99),
+		prob_any_damage = mean(dmg_samples .> 0),
+		prob_total_loss = mean(dmg_samples .> 0.95),
+	)
 end
 
 metrics = damage_metrics(damages)
@@ -192,14 +191,14 @@ println("Probability of near-total loss: $(round(metrics.prob_total_loss, digits
 non_zero_damages = filter(d -> d > 0, damages)
 zero_fraction = 1 - length(non_zero_damages) / length(damages)
 
-fig = hist(non_zero_damages, normalization=:pdf, bins=50,
-    axis=(xlabel="Damage Fraction", ylabel="Probability Density",
-        title="Damage Distribution (Non-zero damages only)"))
+fig = hist(non_zero_damages, normalization = :pdf, bins = 50,
+	axis = (xlabel = "Damage Fraction", ylabel = "Probability Density",
+		title = "Damage Distribution (Non-zero damages only)"))
 
 # Add annotation about zero damages
 text!(fig.axis, 0.15, maximum(fig.axis.finallimits.val[2]) * 0.8,
-    text="$(round(zero_fraction*100, digits=1))% of samples\nhave zero damage",
-    align=(:left, :top))
+	text = "$(round(zero_fraction*100, digits=1))% of samples\nhave zero damage",
+	align = (:left, :top))
 fig
 ```
 
@@ -212,9 +211,9 @@ Now let's explore how uncertainty in model parameters affects our damage estimat
 ```{julia}
 # Alternative flood distributions (representing parameter uncertainty)
 alt_distributions = [
-    LogNormal(1.35, 0.28),  # Slightly different μ, σ
-    LogNormal(1.45, 0.22),  # Different parameters
-    LogNormal(1.38, 0.30),   # Another variation
+	LogNormal(1.35, 0.28),  # Slightly different μ, σ
+	LogNormal(1.45, 0.22),  # Different parameters
+	LogNormal(1.38, 0.30),   # Another variation
 ]
 
 # Calculate damages for each distribution
@@ -223,16 +222,16 @@ labels = ["Original MLE", "Alt 1", "Alt 2", "Alt 3"]
 
 push!(damage_scenarios, damages)  # Original
 for dist in alt_distributions
-    push!(damage_scenarios, monte_carlo_damage(dist, building_elevation, x0, k))
+	push!(damage_scenarios, monte_carlo_damage(dist, building_elevation, x0, k))
 end
 
 # Compare metrics across scenarios
 println("Parameter Sensitivity Analysis - Flood Distribution:")
 for (i, dmg) in enumerate(damage_scenarios)
-    metrics = damage_metrics(dmg)
-    println("$(labels[i]): Mean=$(round(metrics.mean_damage, digits=4)), " *
-            "Q99=$(round(metrics.q99_damage, digits=4)), " *
-            "P(damage)=$(round(metrics.prob_any_damage, digits=4))")
+	metrics = damage_metrics(dmg)
+	println("$(labels[i]): Mean=$(round(metrics.mean_damage, digits=4)), " *
+			"Q99=$(round(metrics.q99_damage, digits=4)), " *
+			"P(damage)=$(round(metrics.prob_any_damage, digits=4))")
 end
 ```
 
@@ -241,10 +240,10 @@ end
 ```{julia}
 # Alternative damage function parameters
 damage_params = [
-    (x0=4.0, k=0.75),   # Original
-    (x0=3.5, k=0.65),   # Earlier onset, gentler slope  
-    (x0=4.5, k=0.85),   # Later onset, steeper slope
-    (x0=3.8, k=0.90),    # Combined variation
+	(x0 = 4.0, k = 0.75),   # Original
+	(x0 = 3.5, k = 0.65),   # Earlier onset, gentler slope  
+	(x0 = 4.5, k = 0.85),   # Later onset, steeper slope
+	(x0 = 3.8, k = 0.90),    # Combined variation
 ]
 
 # Calculate damages for each parameter set
@@ -252,16 +251,16 @@ damage_func_scenarios = []
 func_labels = ["Original", "Early/Gentle", "Late/Steep", "Mixed"]
 
 for params in damage_params
-    dmg = monte_carlo_damage(fitted_dist, building_elevation, params.x0, params.k)
-    push!(damage_func_scenarios, dmg)
+	dmg = monte_carlo_damage(fitted_dist, building_elevation, params.x0, params.k)
+	push!(damage_func_scenarios, dmg)
 end
 
 println("\nParameter Sensitivity Analysis - Damage Function:")
 for (i, dmg) in enumerate(damage_func_scenarios)
-    metrics = damage_metrics(dmg)
-    println("$(func_labels[i]): Mean=$(round(metrics.mean_damage, digits=4)), " *
-            "Q99=$(round(metrics.q99_damage, digits=4)), " *
-            "P(damage)=$(round(metrics.prob_any_damage, digits=4))")
+	metrics = damage_metrics(dmg)
+	println("$(func_labels[i]): Mean=$(round(metrics.mean_damage, digits=4)), " *
+			"Q99=$(round(metrics.q99_damage, digits=4)), " *
+			"P(damage)=$(round(metrics.prob_any_damage, digits=4))")
 end
 ```
 
@@ -273,11 +272,11 @@ combined_scenarios = []
 combined_labels = []
 
 for (i, flood_dist) in enumerate([fitted_dist; alt_distributions])
-    for (j, dam_params) in enumerate(damage_params)
-        dmg = monte_carlo_damage(flood_dist, building_elevation, dam_params.x0, dam_params.k)
-        push!(combined_scenarios, dmg)
-        push!(combined_labels, "Flood$(i)_Dam$(j)")
-    end
+	for (j, dam_params) in enumerate(damage_params)
+		dmg = monte_carlo_damage(flood_dist, building_elevation, dam_params.x0, dam_params.k)
+		push!(combined_scenarios, dmg)
+		push!(combined_labels, "Flood$(i)_Dam$(j)")
+	end
 end
 
 # Extract just mean damages for comparison
@@ -294,36 +293,36 @@ println("Relative uncertainty: $(round((maximum(mean_damages) - minimum(mean_dam
 
 ```{julia}
 # Create box plot showing damage uncertainty across scenarios
-fig = Figure(size=(800, 600))
-ax = Axis(fig[1, 1], xlabel="Scenario", ylabel="Mean Annual Damage",
-    title="Parameter Uncertainty in Damage Estimates")
+fig = Figure(size = (800, 600))
+ax = Axis(fig[1, 1], xlabel = "Scenario", ylabel = "Mean Annual Damage",
+	title = "Parameter Uncertainty in Damage Estimates")
 
 # Group results for visualization
-flood_scenarios = repeat(1:4, inner=4)
-damage_scenarios = repeat(1:4, outer=4)
+flood_scenarios = repeat(1:4, inner = 4)
+damage_scenarios = repeat(1:4, outer = 4)
 
 colors = [:red, :blue, :green, :orange]
 markers = [:circle, :diamond, :utriangle, :rect]
 
 for i in 1:length(combined_scenarios)
-    flood_idx = flood_scenarios[i]
-    damage_idx = damage_scenarios[i]
-    mean_dmg = mean_damages[i]
+	flood_idx = flood_scenarios[i]
+	damage_idx = damage_scenarios[i]
+	mean_dmg = mean_damages[i]
 
-    scatter!(ax, [i], [mean_dmg],
-        color=colors[flood_idx],
-        marker=markers[damage_idx],
-        markersize=8)
+	scatter!(ax, [i], [mean_dmg],
+		color = colors[flood_idx],
+		marker = markers[damage_idx],
+		markersize = 8)
 end
 
 # Add legend
-elem_colors = [MarkerElement(color=c, marker=:circle) for c in colors]
-elem_shapes = [MarkerElement(color=:black, marker=m) for m in markers]
+elem_colors = [MarkerElement(color = c, marker = :circle) for c in colors]
+elem_shapes = [MarkerElement(color = :black, marker = m) for m in markers]
 
 Legend(fig[1, 2],
-    [elem_colors; elem_shapes],
-    [["Flood Dist $i" for i in 1:4]; ["Damage Func $i" for i in 1:4]],
-    ["Flood Distribution"; "Damage Function"])
+	[elem_colors; elem_shapes],
+	[["Flood Dist $i" for i in 1:4]; ["Damage Func $i" for i in 1:4]],
+	["Flood Distribution"; "Damage Function"])
 
 fig
 ```

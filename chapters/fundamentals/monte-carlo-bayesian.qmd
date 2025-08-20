@@ -1,6 +1,5 @@
 ---
 title: "Bayesian Inference and MCMC: Computational Examples ✏️"
-status: "draft"
 ---
 
 This companion file provides computational examples for Bayesian inference concepts covered in the [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd) chapter.
@@ -19,7 +18,7 @@ using Optim
 using Turing
 using Random
 Random.seed!(123)
-CairoMakie.activate!(; type = "svg")
+CairoMakie.activate!(; type="svg")
 ```
 
 ## Bayes' Theorem Fundamentals
@@ -80,8 +79,8 @@ loss(θ) = -flip_log_like(θ)
 likelihood = [exp(flip_log_like(θ)) for θ in θ_range]
 
 fig = lines(θ_range, likelihood;
-	axis = (xlabel = "θ", ylabel = "Likelihood", title = "Likelihood Function"))
-vlines!([θ_mle], color = :red, linewidth = 2, label = "MLE")
+    axis=(xlabel="θ", ylabel="Likelihood", title="Likelihood Function"))
+vlines!([θ_mle], color=:red, linewidth=2, label="MLE")
 axislegend()
 fig
 ```
@@ -98,17 +97,17 @@ posterior_dist = Beta(prior_dist.α + n_heads, prior_dist.β + N - n_heads)
 # Plot prior, likelihood, and posterior
 θ_fine = 0:0.01:1
 fig = lines(θ_fine, pdf.(prior_dist, θ_fine),
-	label = "Prior", linewidth = 2,
-	axis = (xlabel = "θ", ylabel = "Density", title = "Bayesian Coin Flip Analysis"))
+    label="Prior", linewidth=2,
+    axis=(xlabel="θ", ylabel="Density", title="Bayesian Coin Flip Analysis"))
 
 likelihood_normalized = [exp(flip_log_like(θ)) for θ in θ_fine]
 likelihood_normalized = likelihood_normalized ./ maximum(likelihood_normalized) .* maximum(pdf.(prior_dist, θ_fine))
-lines!(θ_fine, likelihood_normalized, label = "Likelihood (scaled)", linewidth = 2)
+lines!(θ_fine, likelihood_normalized, label="Likelihood (scaled)", linewidth=2)
 
 lines!(θ_fine, pdf.(posterior_dist, θ_fine),
-	label = "Posterior", linewidth = 2)
+    label="Posterior", linewidth=2)
 
-vlines!([θ_mle], color = :red, linewidth = 2, linestyle = :dash, label = "MLE")
+vlines!([θ_mle], color=:red, linewidth=2, linestyle=:dash, label="MLE")
 axislegend()
 fig
 ```
@@ -122,40 +121,40 @@ fig
 log_posterior(θ) = logpdf(prior_dist, θ) + flip_log_like(θ)
 
 # Simple Metropolis-Hastings sampler
-function simple_mcmc(n_samples; initial_θ = 0.5)
-	samples = Float64[]
-	current_θ = initial_θ
+function simple_mcmc(n_samples; initial_θ=0.5)
+    samples = Float64[]
+    current_θ = initial_θ
 
-	for i in 1:n_samples
-		# Propose new value from uniform distribution
-		proposal = rand(Uniform(0, 1))
+    for i in 1:n_samples
+        # Propose new value from uniform distribution
+        proposal = rand(Uniform(0, 1))
 
-		# Calculate acceptance probability
-		log_α = log_posterior(proposal) - log_posterior(current_θ)
-		α = min(1, exp(log_α))
+        # Calculate acceptance probability
+        log_α = log_posterior(proposal) - log_posterior(current_θ)
+        α = min(1, exp(log_α))
 
-		# Accept or reject
-		if rand() < α
-			current_θ = proposal
-		end
+        # Accept or reject
+        if rand() < α
+            current_θ = proposal
+        end
 
-		push!(samples, current_θ)
-	end
+        push!(samples, current_θ)
+    end
 
-	return samples
+    return samples
 end
 
 # Run sampler
 mcmc_samples = simple_mcmc(10_000)
 
 # Compare with analytical solution
-fig = hist(mcmc_samples, bins = 50, normalization = :pdf,
-	label = "MCMC Samples",
-	axis = (xlabel = "θ", ylabel = "Density", title = "MCMC vs Analytical Posterior"))
+fig = hist(mcmc_samples, bins=50, normalization=:pdf,
+    label="MCMC Samples",
+    axis=(xlabel="θ", ylabel="Density", title="MCMC vs Analytical Posterior"))
 
 θ_plot = 0:0.001:1
 lines!(θ_plot, pdf.(posterior_dist, θ_plot),
-	linewidth = 3, label = "Analytical Posterior")
+    linewidth=3, label="Analytical Posterior")
 axislegend()
 fig
 ```
@@ -167,11 +166,11 @@ fig
 ```{julia}
 # Define Bayesian model in Turing
 @model function coinflip_model(y)
-	# Prior
-	θ ~ Beta(5, 5)
+    # Prior
+    θ ~ Beta(5, 5)
 
-	# Likelihood  
-	y .~ Bernoulli(θ)
+    # Likelihood  
+    y .~ Bernoulli(θ)
 end
 
 # Sample from posterior
@@ -187,12 +186,12 @@ summarystats(chain)
 # Extract samples
 θ_samples = chain[:θ]
 
-fig = hist(θ_samples, bins = 50, normalization = :pdf,
-	label = "Turing Samples",
-	axis = (xlabel = "θ", ylabel = "Density", title = "Turing.jl vs Analytical Posterior"))
+fig = hist(θ_samples, bins=50, normalization=:pdf,
+    label="Turing Samples",
+    axis=(xlabel="θ", ylabel="Density", title="Turing.jl vs Analytical Posterior"))
 
 lines!(θ_plot, pdf.(posterior_dist, θ_plot),
-	linewidth = 3, label = "Analytical Posterior")
+    linewidth=3, label="Analytical Posterior")
 axislegend()
 fig
 ```
@@ -214,8 +213,8 @@ n_years = 30
 surge_data = rand(LogNormal(true_μ, true_σ), n_years)
 
 fig = scatter(1:n_years, surge_data,
-	axis = (xlabel = "Year", ylabel = "Annual Max Surge Height (m)",
-		title = "Synthetic Storm Surge Data"))
+    axis=(xlabel="Year", ylabel="Annual Max Surge Height (m)",
+        title="Synthetic Storm Surge Data"))
 ```
 
 ### Bayesian Model
@@ -223,10 +222,10 @@ fig = scatter(1:n_years, surge_data,
 ```{julia}
 # Define Bayesian model for LogNormal distribution
 @model function lognormal_model(y, μ_prior, σ_prior)
-	μ ~ μ_prior
-	σ ~ σ_prior
+    μ ~ μ_prior
+    σ ~ σ_prior
 
-	y .~ LogNormal(μ, σ)
+    y .~ LogNormal(μ, σ)
 end
 ```
 
@@ -241,20 +240,20 @@ end
 prior_samples = sample(lognormal_model(surge_data, μ_prior, σ_prior), Prior(), 1_000)
 
 # Plot some prior predictive realizations
-fig = lines(1:n_years, surge_data, linewidth = 3, label = "Observed Data",
-	axis = (xlabel = "Year", ylabel = "Surge Height (m)",
-		title = "Prior Predictive Checks"))
+fig = lines(1:n_years, surge_data, linewidth=3, label="Observed Data",
+    axis=(xlabel="Year", ylabel="Surge Height (m)",
+        title="Prior Predictive Checks"))
 
 for i in 1:10
-	μ_sample = prior_samples[:μ][i]
-	σ_sample = prior_samples[:σ][i]
-	simulated = rand(LogNormal(μ_sample, σ_sample), n_years)
-	lines!(1:n_years, simulated, color = (:blue, 0.3), linewidth = 1)
+    μ_sample = prior_samples[:μ][i]
+    σ_sample = prior_samples[:σ][i]
+    simulated = rand(LogNormal(μ_sample, σ_sample), n_years)
+    lines!(1:n_years, simulated, color=(:blue, 0.3), linewidth=1)
 end
 
 # Add label for simulated data
 lines!(1:n_years, rand(LogNormal(prior_samples[:μ][1], prior_samples[:σ][1]), n_years),
-	color = (:blue, 0.3), linewidth = 1, label = "Prior Predictive")
+    color=(:blue, 0.3), linewidth=1, label="Prior Predictive")
 axislegend()
 fig
 ```
@@ -287,30 +286,30 @@ exceedance_probs = 1 .- 1 ./ return_periods
 # Calculate return level distributions
 return_level_samples = []
 for (i, aep) in enumerate(exceedance_probs)
-	levels = [quantile(LogNormal(μ_posterior[j], σ_posterior[j]), aep)
-			  for j in 1:length(μ_posterior)]
-	push!(return_level_samples, levels)
+    levels = [quantile(LogNormal(μ_posterior[j], σ_posterior[j]), aep)
+              for j in 1:length(μ_posterior)]
+    push!(return_level_samples, levels)
 end
 
 # Plot return level uncertainty
 fig = scatter(return_periods, [quantile(levels, 0.5) for levels in return_level_samples],
-	axis = (xlabel = "Return Period (years)", ylabel = "Return Level (m)",
-		title = "Return Levels with Uncertainty", xscale = log10),
-	label = "Median", markersize = 8)
+    axis=(xlabel="Return Period (years)", ylabel="Return Level (m)",
+        title="Return Levels with Uncertainty", xscale=log10),
+    label="Median", markersize=8)
 
 # Add uncertainty bands  
 for (i, levels) in enumerate(return_level_samples)
-	lower = quantile(levels, 0.1)
-	upper = quantile(levels, 0.9)
-	# Add error bars
-	scatter!([return_periods[i]], [quantile(levels, 0.5)],
-		yerror = [quantile(levels, 0.5) - lower, upper - quantile(levels, 0.5)],
-		color = :blue, alpha = 0.5)
+    lower = quantile(levels, 0.1)
+    upper = quantile(levels, 0.9)
+    # Add error bars
+    scatter!([return_periods[i]], [quantile(levels, 0.5)],
+        yerror=[quantile(levels, 0.5) - lower, upper - quantile(levels, 0.5)],
+        color=:blue, alpha=0.5)
 end
 
 # Add true values for comparison
 true_levels = [quantile(LogNormal(true_μ, true_σ), aep) for aep in exceedance_probs]
-lines!(return_periods, true_levels, color = :red, linewidth = 2, label = "True Values")
+lines!(return_periods, true_levels, color=:red, linewidth=2, label="True Values")
 
 axislegend()
 fig

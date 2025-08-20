@@ -1,6 +1,5 @@
 ---
 title: Probability and Statistics ✏️
-status: "draft"
 ---
 
 ## Learning Objectives {.unnumbered}
@@ -187,23 +186,23 @@ dist = Gamma(2, 1)
 N = 10_000 # number of samples
 J = 300 # draws per sample
 ȳ = [
-    mean(rand(dist, J)) for i in 1:N
+	mean(rand(dist, J)) for i in 1:N
 ]
 fig = hist(
-    ȳ;
-    bins=30,
-    axis=(
-        xlabel=L"$\bar{y}$",
-    ),
-    normalization=:probability,
-    label="$N sample means"
+	ȳ;
+	bins = 30,
+	axis = (
+		xlabel = L"$\bar{y}$",
+	),
+	normalization = :probability,
+	label = "$N sample means",
 )
 vlines!(
-    [mean(dist)],
-    color=:red,
-    linestyle=:dash,
-    label="True mean",
-    linewidth=2,
+	[mean(dist)],
+	color = :red,
+	linestyle = :dash,
+	label = "True mean",
+	linewidth = 2,
 )
 axislegend()
 fig

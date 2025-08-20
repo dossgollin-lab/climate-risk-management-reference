@@ -1,6 +1,5 @@
 ---
 title: Spatiotemporal Processes ✏️
-status: "draft"
 ---
 
 ## See First {.unnumbered}

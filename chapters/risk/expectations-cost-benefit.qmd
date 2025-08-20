@@ -1,6 +1,5 @@
 ---
 title: Cost-Benefit Analysis and Net Present Value ✏️
-status: "draft"
 ---
 
 ## Learning Objectives {.unnumbered}

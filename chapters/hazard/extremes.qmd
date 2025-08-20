@@ -1,7 +1,6 @@
 ---
 title: Extreme Value Theory ✏️
 notebook-links: true
-status: "draft"
 ---
 
 ## See First {.unnumbered}

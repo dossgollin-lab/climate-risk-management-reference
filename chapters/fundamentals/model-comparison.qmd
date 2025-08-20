@@ -1,6 +1,5 @@
 ---
 title: Model Validation and Comparison ✏️
-status: "draft"
 ---
 
 ## See First {.unnumbered}

@@ -1,7 +1,4 @@
----
-title: "Model Validation Examples: Diagnostic Plots and Information Criteria ✏️"
-status: "draft"
----
+# Model Validation Examples: Diagnostic Plots and Information Criteria ✏️ {.unnumbered}
 
 This companion file provides computational examples for model validation and comparison concepts covered in the [Model Validation and Comparison](/chapters/fundamentals/model-comparison.qmd) chapter.
 
@@ -17,7 +14,7 @@ using LaTeXStrings
 using StatsBase
 using Random
 Random.seed!(123)
-CairoMakie.activate!(; type = "svg")
+CairoMakie.activate!(; type="svg")
 ```
 
 ## Case Study: Extreme Value Model Selection
@@ -43,20 +40,20 @@ precip_data = rand(true_dist, n_years)
 
 # Create DataFrame
 houston_data = DataFrame(
-	year = 1980:(1980+n_years-1),
-	precip_in = precip_data,
+    year=1980:(1980+n_years-1),
+    precip_in=precip_data,
 )
 
 # Plot the data
-fig = Figure(size = (800, 400))
+fig = Figure(size=(800, 400))
 
-ax1 = Axis(fig[1, 1], xlabel = "Year", ylabel = "Annual Max Precipitation (in)",
-	title = "Houston Annual Maximum Precipitation")
-scatter!(ax1, houston_data.year, houston_data.precip_in, markersize = 8)
+ax1 = Axis(fig[1, 1], xlabel="Year", ylabel="Annual Max Precipitation (in)",
+    title="Houston Annual Maximum Precipitation")
+scatter!(ax1, houston_data.year, houston_data.precip_in, markersize=8)
 
-ax2 = Axis(fig[1, 2], xlabel = "Precipitation (in)", ylabel = "Frequency",
-	title = "Histogram of Annual Maxima")
-hist!(ax2, houston_data.precip_in, bins = 12)
+ax2 = Axis(fig[1, 2], xlabel="Precipitation (in)", ylabel="Frequency",
+    title="Histogram of Annual Maxima")
+hist!(ax2, houston_data.precip_in, bins=12)
 
 fig
 ```
@@ -88,37 +85,37 @@ years_centered = houston_data.year .- mean(houston_data.year)
 
 # Simple trend fitting (in practice, would use specialized EVT packages)
 function gev_trend_loglik(params, data, years)
-	μ₀, μ₁, σ, ξ = params
-	loglik = 0.0
-	for (i, (x, t)) in enumerate(zip(data, years))
-		μ_t = μ₀ + μ₁ * t
-		try
-			dist = GeneralizedExtremeValue(μ_t, σ, ξ)
-			loglik += logpdf(dist, x)
-		catch
-			return -Inf
-		end
-	end
-	return loglik
+    μ₀, μ₁, σ, ξ = params
+    loglik = 0.0
+    for (i, (x, t)) in enumerate(zip(data, years))
+        μ_t = μ₀ + μ₁ * t
+        try
+            dist = GeneralizedExtremeValue(μ_t, σ, ξ)
+            loglik += logpdf(dist, x)
+        catch
+            return -Inf
+        end
+    end
+    return loglik
 end
 
 # Simple optimization for trend model (normally would use EVT-specific tools)
 using Optim
 
 function fit_gev_trend(data, years)
-	function objective(params)
-		-gev_trend_loglik(params, data, years)
-	end
+    function objective(params)
+        -gev_trend_loglik(params, data, years)
+    end
 
-	# Initial guess
-	x0 = [mean(data), 0.0, std(data) * 0.8, 0.1]
+    # Initial guess
+    x0 = [mean(data), 0.0, std(data) * 0.8, 0.1]
 
-	# Bounds to ensure valid parameters
-	lower = [-Inf, -0.1, 0.001, -0.5]
-	upper = [Inf, 0.1, Inf, 0.5]
+    # Bounds to ensure valid parameters
+    lower = [-Inf, -0.1, 0.001, -0.5]
+    upper = [Inf, 0.1, Inf, 0.5]
 
-	result = optimize(objective, lower, upper, x0, Fminbox(LBFGS()))
-	return Optim.minimizer(result), -Optim.minimum(result)
+    result = optimize(objective, lower, upper, x0, Fminbox(LBFGS()))
+    return Optim.minimizer(result), -Optim.minimum(result)
 end
 
 gev_trend_params, gev_trend_loglik = fit_gev_trend(houston_data.precip_in, years_centered)
@@ -136,22 +133,22 @@ println("GEV Trend: μ₀=$(round(gev_trend_params[1], digits=2)), μ₁=$(round
 
 ```{julia}
 # Plot histogram with fitted densities
-fig = hist(houston_data.precip_in, bins = 15, normalization = :pdf,
-	label = "Data", alpha = 0.7,
-	axis = (xlabel = "Precipitation (in)", ylabel = "Density",
-		title = "Model Comparison: Probability Density Functions"))
+fig = hist(houston_data.precip_in, bins=15, normalization=:pdf,
+    label="Data", alpha=0.7,
+    axis=(xlabel="Precipitation (in)", ylabel="Density",
+        title="Model Comparison: Probability Density Functions"))
 
 # Add fitted distributions
-x_range = range(1, 8, length = 200)
+x_range = range(1, 8, length=200)
 
 lines!(x_range, pdf.(normal_fit, x_range),
-	linewidth = 3, label = "Normal", color = :red)
+    linewidth=3, label="Normal", color=:red)
 
 lines!(x_range, pdf.(lognormal_fit, x_range),
-	linewidth = 3, label = "LogNormal", color = :blue)
+    linewidth=3, label="LogNormal", color=:blue)
 
 lines!(x_range, pdf.(gev_fit, x_range),
-	linewidth = 3, label = "GEV", color = :green)
+    linewidth=3, label="GEV", color=:green)
 
 axislegend()
 fig
@@ -164,11 +161,11 @@ Compare empirical and fitted CDFs:
 ```{julia}
 # Calculate empirical CDF using plotting positions
 function empirical_cdf(data)
-	sorted_data = sort(data)
-	n = length(data)
-	# Weibull plotting positions
-	plotting_positions = [(i - 0.5) / n for i in 1:n]
-	return sorted_data, plotting_positions
+    sorted_data = sort(data)
+    n = length(data)
+    # Weibull plotting positions
+    plotting_positions = [(i - 0.5) / n for i in 1:n]
+    return sorted_data, plotting_positions
 end
 
 sorted_data, emp_probs = empirical_cdf(houston_data.precip_in)
@@ -178,18 +175,18 @@ normal_cdf = cdf.(normal_fit, sorted_data)
 lognormal_cdf = cdf.(lognormal_fit, sorted_data)
 gev_cdf = cdf.(gev_fit, sorted_data)
 
-fig = Figure(size = (800, 600))
+fig = Figure(size=(800, 600))
 
-ax = Axis(fig[1, 1], xlabel = "Fitted CDF", ylabel = "Empirical CDF",
-	title = "Probability Plots: Empirical vs Fitted CDFs")
+ax = Axis(fig[1, 1], xlabel="Fitted CDF", ylabel="Empirical CDF",
+    title="Probability Plots: Empirical vs Fitted CDFs")
 
 # Add perfect fit line
-lines!(ax, [0, 1], [0, 1], color = :black, linestyle = :dash, linewidth = 2, label = "Perfect Fit")
+lines!(ax, [0, 1], [0, 1], color=:black, linestyle=:dash, linewidth=2, label="Perfect Fit")
 
 # Plot each model
-scatter!(ax, normal_cdf, emp_probs, color = :red, markersize = 8, label = "Normal")
-scatter!(ax, lognormal_cdf, emp_probs, color = :blue, markersize = 6, label = "LogNormal")
-scatter!(ax, gev_cdf, emp_probs, color = :green, markersize = 6, label = "GEV")
+scatter!(ax, normal_cdf, emp_probs, color=:red, markersize=8, label="Normal")
+scatter!(ax, lognormal_cdf, emp_probs, color=:blue, markersize=6, label="LogNormal")
+scatter!(ax, gev_cdf, emp_probs, color=:green, markersize=6, label="GEV")
 
 axislegend()
 fig
@@ -207,21 +204,21 @@ normal_quantiles = quantile.(normal_fit, quantile_probs)
 lognormal_quantiles = quantile.(lognormal_fit, quantile_probs)
 gev_quantiles = quantile.(gev_fit, quantile_probs)
 
-fig = Figure(size = (800, 600))
+fig = Figure(size=(800, 600))
 
-ax = Axis(fig[1, 1], xlabel = "Fitted Quantiles", ylabel = "Data Quantiles",
-	title = "Q-Q Plots: Data vs Fitted Quantiles")
+ax = Axis(fig[1, 1], xlabel="Fitted Quantiles", ylabel="Data Quantiles",
+    title="Q-Q Plots: Data vs Fitted Quantiles")
 
 # Perfect fit line
 min_val = minimum([sorted_data; normal_quantiles; lognormal_quantiles; gev_quantiles])
 max_val = maximum([sorted_data; normal_quantiles; lognormal_quantiles; gev_quantiles])
 lines!(ax, [min_val, max_val], [min_val, max_val],
-	color = :black, linestyle = :dash, linewidth = 2, label = "Perfect Fit")
+    color=:black, linestyle=:dash, linewidth=2, label="Perfect Fit")
 
 # Plot each model
-scatter!(ax, normal_quantiles, sorted_data, color = :red, markersize = 8, label = "Normal")
-scatter!(ax, lognormal_quantiles, sorted_data, color = :blue, markersize = 6, label = "LogNormal")
-scatter!(ax, gev_quantiles, sorted_data, color = :green, markersize = 6, label = "GEV")
+scatter!(ax, normal_quantiles, sorted_data, color=:red, markersize=8, label="Normal")
+scatter!(ax, lognormal_quantiles, sorted_data, color=:blue, markersize=6, label="LogNormal")
+scatter!(ax, gev_quantiles, sorted_data, color=:green, markersize=6, label="GEV")
 
 axislegend()
 fig
@@ -243,13 +240,13 @@ gev_levels = quantile.(gev_fit, exceedance_probs)
 emp_return_periods = 1 ./ (1 .- emp_probs)
 
 fig = scatter(emp_return_periods, sorted_data,
-	label = "Observed", markersize = 8, alpha = 0.7,
-	axis = (xlabel = "Return Period (years)", ylabel = "Precipitation (in)",
-		title = "Return Period Analysis", xscale = log10))
+    label="Observed", markersize=8, alpha=0.7,
+    axis=(xlabel="Return Period (years)", ylabel="Precipitation (in)",
+        title="Return Period Analysis", xscale=log10))
 
-lines!(return_periods, normal_levels, linewidth = 3, color = :red, label = "Normal")
-lines!(return_periods, lognormal_levels, linewidth = 3, color = :blue, label = "LogNormal")
-lines!(return_periods, gev_levels, linewidth = 3, color = :green, label = "GEV")
+lines!(return_periods, normal_levels, linewidth=3, color=:red, label="Normal")
+lines!(return_periods, lognormal_levels, linewidth=3, color=:blue, label="LogNormal")
+lines!(return_periods, gev_levels, linewidth=3, color=:green, label="GEV")
 
 axislegend()
 fig
@@ -299,16 +296,16 @@ gev_trend_bic = gev_trend_k * log(n) - 2 * gev_trend_loglik
 
 # Create summary table
 results_df = DataFrame(
-	Model = ["Normal", "LogNormal", "GEV", "GEV Trend"],
-	Parameters = [normal_k, lognormal_k, gev_k, gev_trend_k],
-	LogLik = [normal_loglik, lognormal_loglik, gev_loglik, gev_trend_loglik],
-	AIC = [normal_aic, lognormal_aic, gev_aic, gev_trend_aic],
-	BIC = [normal_bic, lognormal_bic, gev_bic, gev_trend_bic],
+    Model=["Normal", "LogNormal", "GEV", "GEV Trend"],
+    Parameters=[normal_k, lognormal_k, gev_k, gev_trend_k],
+    LogLik=[normal_loglik, lognormal_loglik, gev_loglik, gev_trend_loglik],
+    AIC=[normal_aic, lognormal_aic, gev_aic, gev_trend_aic],
+    BIC=[normal_bic, lognormal_bic, gev_bic, gev_trend_bic],
 )
 
 # Round for display
 for col in [:LogLik, :AIC, :BIC]
-	results_df[!, col] = round.(results_df[!, col], digits = 2)
+    results_df[!, col] = round.(results_df[!, col], digits=2)
 end
 
 println("Information Criteria Comparison:")
@@ -341,13 +338,13 @@ println("due to stronger penalty for additional parameters.")
 println("\nModel Ranking by AIC:")
 sorted_aic = sort(results_df, :AIC)
 for (i, row) in enumerate(eachrow(sorted_aic))
-	println("  $i. $(row.Model) (ΔAIC = $(row.ΔAIC))")
+    println("  $i. $(row.Model) (ΔAIC = $(row.ΔAIC))")
 end
 
 println("\nModel Ranking by BIC:")
 sorted_bic = sort(results_df, :BIC)
 for (i, row) in enumerate(eachrow(sorted_bic))
-	println("  $i. $(row.Model) (ΔBIC = $(row.ΔBIC))")
+    println("  $i. $(row.Model) (ΔBIC = $(row.ΔBIC))")
 end
 ```
 
@@ -358,19 +355,19 @@ Instead of selecting a single "best" model, we can average across models weighte
 ```{julia}
 # Calculate AIC weights (Burnham & Anderson approach)
 function calculate_aic_weights(aic_values)
-	min_aic = minimum(aic_values)
-	delta_aic = aic_values .- min_aic
-	rel_likelihood = exp.(-0.5 .* delta_aic)
-	weights = rel_likelihood ./ sum(rel_likelihood)
-	return weights
+    min_aic = minimum(aic_values)
+    delta_aic = aic_values .- min_aic
+    rel_likelihood = exp.(-0.5 .* delta_aic)
+    weights = rel_likelihood ./ sum(rel_likelihood)
+    return weights
 end
 
 aic_weights = calculate_aic_weights(results_df.AIC)
-results_df[!, :AIC_Weight] = round.(aic_weights, digits = 3)
+results_df[!, :AIC_Weight] = round.(aic_weights, digits=3)
 
 println("AIC Model Weights:")
 for row in eachrow(results_df)
-	println("$(row.Model): $(row.AIC_Weight)")
+    println("$(row.Model): $(row.AIC_Weight)")
 end
 
 # Model-averaged return level prediction
@@ -394,7 +391,7 @@ averaged_rl = sum(return_levels .* aic_weights)
 
 println("\n$(return_period_target)-Year Return Level Estimates:")
 for (i, model) in enumerate(results_df.Model)
-	println("$(model): $(round(return_levels[i], digits=2)) in (weight: $(aic_weights[i]))")
+    println("$(model): $(round(return_levels[i], digits=2)) in (weight: $(aic_weights[i]))")
 end
 println("Model Average: $(round(averaged_rl, digits=2)) in")
 ```

@@ -1,6 +1,5 @@
 ---
 title: Fundamentals of Climate Science ✏️
-status: "draft"
 ---
 
 ## Learning Objectives {.unnumbered}

@@ -1,6 +1,5 @@
 ---
 title: Optimization ✏️
-status: "draft"
 ---
 
 ## See First {.unnumbered}

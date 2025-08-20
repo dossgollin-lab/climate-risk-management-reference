@@ -1,6 +1,5 @@
 ---
 title: Stochastic Weather Generators 🚧
-status: "planning"
 ---
 
 ## Learning Objectives {.unnumbered}

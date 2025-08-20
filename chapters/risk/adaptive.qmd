@@ -1,6 +1,5 @@
 ---
 title: Adaptive Planning and Flexibility 🚧
-status: "planning"
 ---
 
 ## See First {.unnumbered}
