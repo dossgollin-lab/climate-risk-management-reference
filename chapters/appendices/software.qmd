@@ -99,5 +99,4 @@ You can learn more at:
 
 - [Git and GitHub for Poets](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV) - beginner-friendly video series
 - [GitHub Hello World](https://docs.github.com/en/get-started/start-your-journey/hello-world) -- official docs
-- [Git Basics](https://www.theodinproject.com/lessons/foundations-git-basics) - fundamental concepts from The Odin Project
 - [Version Control](https://missing.csail.mit.edu/2020/version-control/) - comprehensive guide from MIT's "Missing Semester"
