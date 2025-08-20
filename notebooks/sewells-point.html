@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Bayesian extreme value analysis of tidal gauge water level data">
 
-<title>25&nbsp; Water Levels at Sewell’s Point, VA – Climate Risk Assessment and Management</title>
+<title>Water Levels at Sewell’s Point, VA ✏️ – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/references.html" rel="next">
-<link href="../notebooks/nonstationary-gev-fooled.html" rel="prev">
+<link href="../notebooks/mosquitos.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -263,7 +262,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/sewells-point.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Water Levels at Sewell’s Point, VA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/sewells-point.html">Water Levels at Sewell’s Point, VA ✏️</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -291,7 +290,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome 🎯</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -306,25 +305,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/about/license.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">License 🎯</span></a>
+ <span class="menu-text">License</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contributing 🎯</span></a>
+ <span class="menu-text">Contributing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Citing 🎯</span></a>
+ <span class="menu-text">Citing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Further Reading 🎯</span></a>
+ <span class="menu-text">Further Reading</span></a>
   </div>
 </li>
       </ul>
@@ -347,43 +346,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Climate Science ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentals of Climate Science ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Statistics ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability and Statistics ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Optimization ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Monte Carlo Methods ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Machine Learning ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/spatiotemporal.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatiotemporal Processes ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatiotemporal Processes ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Validation and Comparison ✏️</span></span></a>
   </div>
 </li>
       </ul>
@@ -400,37 +399,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Extreme Value Theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/perturbations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Modifying Past Events 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modifying Past Events 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optimal Sampling 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hazard/model-chains.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hazard Model Chains 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hazard Model Chains 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -447,49 +446,49 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Robustness ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Robustness ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -506,37 +505,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview 🎯</span></a>
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/block-maxima.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Block Maxima 📝</span></a>
+ <span class="menu-text">Block Maxima ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/lake-problem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Dynamic Policy Search: The Lake Problem</span></span></a>
+ <span class="menu-text">Dynamic Policy Search: The Lake Problem 🚧</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Statistics Without the Agonizing Details</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/nonstationary-gev-fooled.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fooled by Randomness</span></span></a>
+ <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/sewells-point.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Water Levels at Sewell’s Point, VA</span></span></a>
+ <span class="menu-text">Water Levels at Sewell’s Point, VA ✏️</span></a>
   </div>
 </li>
       </ul>
@@ -558,14 +551,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Julia ✏️</span></span></a>
+  <a href="../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Setup ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Other Software Tools ✏️</span></span></a>
+  <a href="../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Julia Learning Resources ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -579,7 +572,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p>This project is <strong>under construction.</strong> Each page is either: 🚧 Planning, 📝 Draft, ✏️ Revision, or 🎯 Ready.</p>
+<p>This project is <strong>under construction.</strong> Each page is either: 🚧 Planning, ✏️ Draft, or complete.</p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -588,20 +581,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#water-levels-at-sewells-point-va" id="toc-water-levels-at-sewells-point-va" class="nav-link active" data-scroll-target="#water-levels-at-sewells-point-va">Water Levels at Sewell’s Point, VA 🎯</a>
-  <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#read-the-data" id="toc-read-the-data" class="nav-link" data-scroll-target="#read-the-data"><span class="header-section-number">25.1</span> Read the data</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#read-the-data" id="toc-read-the-data" class="nav-link" data-scroll-target="#read-the-data">Read the data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/sewells-point.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Water Levels at Sewell’s Point, VA</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/sewells-point.html">Water Levels at Sewell’s Point, VA ✏️</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Water Levels at Sewell’s Point, VA</span></h1>
+<h1 class="title">Water Levels at Sewell’s Point, VA ✏️</h1>
 </div>
 
 
@@ -618,8 +608,6 @@ window.Quarto = {
 </header>
 
 
-<section id="water-levels-at-sewells-point-va" class="level1 unnumbered">
-<h1 class="unnumbered">Water Levels at Sewell’s Point, VA 🎯</h1>
 <section id="learning-objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
@@ -629,9 +617,9 @@ window.Quarto = {
 <li>Analyze water level data from tidal gauge observations</li>
 </ul>
 </section>
-<section id="read-the-data" class="level2" data-number="25.1">
-<h2 data-number="25.1" class="anchored" data-anchor-id="read-the-data"><span class="header-section-number">25.1</span> Read the data</h2>
-<div id="4df434d1" class="cell" data-execution_count="1">
+<section id="read-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-data">Read the data</h2>
+<div id="e4612a54" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">CSV</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
@@ -642,12 +630,12 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8"></a><span class="im">using</span> <span class="bu">Turing</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="im">using</span> <span class="bu">Unitful</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a>CairoMakie.<span class="fu">activate!</span>(; <span class="kw">type</span> <span class="op">=</span> <span class="st">"svg"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>CairoMakie.<span class="fu">activate!</span>(; <span class="kw">type</span><span class="op">=</span><span class="st">"svg"</span>)</span>
 <span id="cb1-12"><a href="#cb1-12"></a></span>
 <span id="cb1-13"><a href="#cb1-13"></a><span class="kw">function</span> <span class="fu">read_tides</span>(year<span class="op">::</span><span class="dt">Int</span>)</span>
 <span id="cb1-14"><a href="#cb1-14"></a>    fname <span class="op">=</span> <span class="st">"./data/8638610/tidesandcurrents-8638610-</span><span class="sc">$</span>(year)<span class="st">-NAVD-GMT-metric.csv"</span></span>
 <span id="cb1-15"><a href="#cb1-15"></a>    date_format <span class="op">=</span> <span class="st">"yyyy-mm-dd HH:MM"</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    df <span class="op">=</span> CSV.<span class="fu">read</span>(fname, DataFrame; dateformat <span class="op">=</span> date_format)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    df <span class="op">=</span> CSV.<span class="fu">read</span>(fname, DataFrame; dateformat<span class="op">=</span>date_format)</span>
 <span id="cb1-17"><a href="#cb1-17"></a>    df[!, <span class="st">" Water Level"</span>] <span class="op">.*=</span> u<span class="st">"m"</span></span>
 <span id="cb1-18"><a href="#cb1-18"></a>    <span class="fu">rename!</span>(df, <span class="st">" Water Level"</span> <span class="op">=&gt;</span> <span class="st">"water_level"</span>, <span class="st">"Date Time"</span> <span class="op">=&gt;</span> <span class="st">"datetime"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19"></a>    <span class="cf">return</span> df[!, [<span class="st">"datetime"</span>, <span class="st">"water_level"</span>]]</span>
@@ -703,7 +691,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Convert to annual maximums</p>
-<div id="dc3dfcdb" class="cell" data-execution_count="2">
+<div id="15daa688" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>hourly[!, <span class="op">:</span>year] <span class="op">=</span> <span class="fu">year</span>.(hourly.datetime)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>annmax <span class="op">=</span> <span class="fu">combine</span>(</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="fu">groupby</span>(hourly, <span class="op">:</span>year),</span>
@@ -765,35 +753,35 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="72a59f17" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>fig <span class="op">=</span> <span class="fu">Figure</span>(; size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">400</span>))</span>
+<div id="b69b88c6" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">400</span>))</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    xlabel <span class="op">=</span> <span class="st">"Year"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    ylabel <span class="op">=</span> <span class="st">"Ann. Max. Water Level [ft]"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    ylabel<span class="op">=</span><span class="st">"Ann. Max. Water Level [ft]"</span>,</span>
 <span id="cb3-7"><a href="#cb3-7"></a>)</span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="fu">scatter!</span>(ax1, annmax.year, annmax.lsl_ft)</span>
 <span id="cb3-9"><a href="#cb3-9"></a></span>
 <span id="cb3-10"><a href="#cb3-10"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(</span>
 <span id="cb3-11"><a href="#cb3-11"></a>    fig[<span class="fl">1</span>, <span class="fl">2</span>];</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    ylabel <span class="op">=</span> <span class="st">""</span>,</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    yticklabelsvisible <span class="op">=</span> <span class="cn">false</span>,</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    ylabel<span class="op">=</span><span class="st">""</span>,</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
 <span id="cb3-14"><a href="#cb3-14"></a>)</span>
 <span id="cb3-15"><a href="#cb3-15"></a></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">hist!</span>(</span>
 <span id="cb3-17"><a href="#cb3-17"></a>    ax2,</span>
 <span id="cb3-18"><a href="#cb3-18"></a>    annmax.lsl_ft;</span>
-<span id="cb3-19"><a href="#cb3-19"></a>    direction <span class="op">=</span> <span class="op">:</span>x,</span>
-<span id="cb3-20"><a href="#cb3-20"></a>    bins <span class="op">=</span> <span class="fu">range</span>(<span class="fl">2</span>, <span class="fl">8</span>, <span class="fl">20</span>),</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    normalization <span class="op">=</span> <span class="op">:</span>pdf,</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    direction<span class="op">=:</span>x,</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    bins<span class="op">=</span><span class="fu">range</span>(<span class="fl">2</span>, <span class="fl">8</span>, <span class="fl">20</span>),</span>
+<span id="cb3-21"><a href="#cb3-21"></a>    normalization<span class="op">=:</span>pdf,</span>
 <span id="cb3-22"><a href="#cb3-22"></a>)</span>
 <span id="cb3-23"><a href="#cb3-23"></a></span>
 <span id="cb3-24"><a href="#cb3-24"></a><span class="fu">linkyaxes!</span>(ax1, ax2)</span>
 <span id="cb3-25"><a href="#cb3-25"></a><span class="fu">ylims!</span>(ax1, <span class="fl">2</span>, <span class="fl">8</span>)</span>
 <span id="cb3-26"><a href="#cb3-26"></a><span class="fu">xlims!</span>(ax2, <span class="fl">0</span>, <span class="fl">0.8</span>)</span>
 <span id="cb3-27"><a href="#cb3-27"></a></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="fu">Label</span>(fig[<span class="fl">0</span>, <span class="op">:</span>], <span class="st">"Sewell's Point, VA"</span>; fontsize <span class="op">=</span> <span class="fl">20</span>)</span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="fu">Label</span>(fig[<span class="fl">0</span>, <span class="op">:</span>], <span class="st">"Sewell's Point, VA"</span>; fontsize<span class="op">=</span><span class="fl">20</span>)</span>
 <span id="cb3-29"><a href="#cb3-29"></a></span>
 <span id="cb3-30"><a href="#cb3-30"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -813,7 +801,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Define a LogNormal distribution with very diffuse (flat) priors</p>
-<div id="8c7aea30" class="cell" data-execution_count="4">
+<div id="0f33e822" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">lognormal_flatpriors</span>(y)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    μ <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">10</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    σ <span class="op">~</span> <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">10</span>), <span class="fl">0</span>, <span class="cn">Inf</span>)</span>
@@ -824,14 +812,14 @@ window.Quarto = {
 <span id="cb4-8"><a href="#cb4-8"></a>    model <span class="op">=</span> <span class="fu">lognormal_flatpriors</span>(annmax.lsl_ft)</span>
 <span id="cb4-9"><a href="#cb4-9"></a>    sampler <span class="op">=</span> <span class="fu">externalsampler</span>(DynamicHMC.<span class="fu">NUTS</span>())</span>
 <span id="cb4-10"><a href="#cb4-10"></a>    nsamples <span class="op">=</span> <span class="fl">20_000</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>    <span class="fu">sample</span>(model, sampler, nsamples; drop_warmup <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="fu">sample</span>(model, sampler, nsamples; drop_warmup<span class="op">=</span><span class="cn">true</span>)</span>
 <span id="cb4-12"><a href="#cb4-12"></a><span class="kw">end</span></span>
 <span id="cb4-13"><a href="#cb4-13"></a><span class="fu">summarystats</span>(ln_flat_chn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-green-fg">Sampling:  12%|████▉                                    |  ETA: 0:00:01</span>
+<pre><span class="ansi-green-fg">Sampling:  12%|█████▏                                   |  ETA: 0:00:01</span>
 
-<span class="ansi-green-fg">Sampling: 100%|█████████████████████████████████████████| Time: 0:00:00</span>
+<span class="ansi-green-fg">Sampling: 100%|█████████████████████████████████████████| Time: 0:00:01</span>
 
 </pre>
 </div>
@@ -841,18 +829,18 @@ window.Quarto = {
 <pre>Summary Statistics
  <span class="ansi-bold"> parameters </span> <span class="ansi-bold">    mean </span> <span class="ansi-bold">     std </span> <span class="ansi-bold">    mcse </span> <span class="ansi-bold">   ess_bulk </span> <span class="ansi-bold">   ess_tail </span> <span class="ansi-bold">    rhat</span> ⋯
  <span class="ansi-bright-black-fg">     Symbol </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg">    Float64 </span> <span class="ansi-bright-black-fg">    Float64 </span> <span class="ansi-bright-black-fg"> Float64</span> ⋯
-           μ    1.2222    0.0265    0.0002   17492.8351   12927.5826    1.0000 ⋯
-           σ    0.2585    0.0193    0.0001   18919.8763   14050.3653    1.0000 ⋯
+           μ    1.2221    0.0267    0.0002   15488.3878   11773.1382    1.0002 ⋯
+           σ    0.2583    0.0193    0.0002   14000.1918   12812.5859    1.0002 ⋯
 <span class="ansi-cyan-fg">                                                                1 column omitted</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="dbaf8e74" class="cell" data-execution_count="5">
+<div id="32ad9dee" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>post1_scatter <span class="op">=</span> <span class="kw">let</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">600</span>))</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"Diffuse Priors"</span>, xlabel <span class="op">=</span> L<span class="st">"\mu"</span>, ylabel <span class="op">=</span> L<span class="st">"\sigma"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="fu">scatter!</span>(ax, ln_flat_chn[<span class="op">:</span>μ][<span class="op">:</span>], ln_flat_chn[<span class="op">:</span>σ][<span class="op">:</span>], color <span class="op">=</span> <span class="op">:</span>blue, markersize <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">"Diffuse Priors"</span>, xlabel<span class="op">=</span>L<span class="st">"\mu"</span>, ylabel<span class="op">=</span>L<span class="st">"\sigma"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="fu">scatter!</span>(ax, ln_flat_chn[<span class="op">:</span>μ][<span class="op">:</span>], ln_flat_chn[<span class="op">:</span>σ][<span class="op">:</span>], color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="cn">false</span>)</span>
 <span id="cb5-5"><a href="#cb5-5"></a>    fig</span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -873,15 +861,15 @@ window.Quarto = {
 </div>
 <p>Each draw from the posterior represents a plausible value of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. We can use these to explore the distribution of return periods.</p>
 <div id="cell-fig-return-scatter" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>rts <span class="op">=</span> <span class="fu">exp</span>.(<span class="fu">range</span>(<span class="fu">log</span>(<span class="fl">1.01</span>), <span class="fu">log</span>(<span class="fl">250</span>); length <span class="op">=</span> <span class="fl">500</span>))</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>rts <span class="op">=</span> <span class="fu">exp</span>.(<span class="fu">range</span>(<span class="fu">log</span>(<span class="fl">1.01</span>), <span class="fu">log</span>(<span class="fl">250</span>); length<span class="op">=</span><span class="fl">500</span>))</span>
 <span id="cb6-2"><a href="#cb6-2"></a>aeps <span class="op">=</span> <span class="fl">1</span> <span class="op">.-</span> <span class="fl">1</span> <span class="op">./</span> rts</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
 <span id="cb6-4"><a href="#cb6-4"></a>xticks <span class="op">=</span> [<span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">250</span>, <span class="fl">500</span>]</span>
 <span id="cb6-5"><a href="#cb6-5"></a>yticks <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">9</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a></span>
 <span id="cb6-7"><a href="#cb6-7"></a>plt_rt_base <span class="op">=</span> <span class="kw">let</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">600</span>))</span>
-<span id="cb6-9"><a href="#cb6-9"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"Return Period with Uncertainty"</span>, xlabel <span class="op">=</span> <span class="st">"Return Period [years]"</span>, ylabel <span class="op">=</span> <span class="st">"Return Level [ft]"</span>, xscale <span class="op">=</span> log10, yscale <span class="op">=</span> log10)</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">"Return Period with Uncertainty"</span>, xlabel<span class="op">=</span><span class="st">"Return Period [years]"</span>, ylabel<span class="op">=</span><span class="st">"Return Level [ft]"</span>, xscale<span class="op">=</span>log10, yscale<span class="op">=</span>log10)</span>
 <span id="cb6-10"><a href="#cb6-10"></a>    ax.xticks <span class="op">=</span> (xticks, <span class="fu">string</span>.(xticks))</span>
 <span id="cb6-11"><a href="#cb6-11"></a>    ax.yticks <span class="op">=</span> (yticks, <span class="fu">string</span>.(yticks))</span>
 <span id="cb6-12"><a href="#cb6-12"></a>    fig</span>
@@ -889,7 +877,7 @@ window.Quarto = {
 <span id="cb6-14"><a href="#cb6-14"></a></span>
 <span id="cb6-15"><a href="#cb6-15"></a><span class="kw">function</span> <span class="fu">weibull_plot_pos</span>(y)</span>
 <span id="cb6-16"><a href="#cb6-16"></a>    N <span class="op">=</span> <span class="fu">length</span>(y)</span>
-<span id="cb6-17"><a href="#cb6-17"></a>    ys <span class="op">=</span> <span class="fu">sort</span>(y; rev <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>    ys <span class="op">=</span> <span class="fu">sort</span>(y; rev<span class="op">=</span><span class="cn">false</span>)</span>
 <span id="cb6-18"><a href="#cb6-18"></a>    nxp <span class="op">=</span> xp <span class="op">=</span> [r <span class="op">/</span> (N <span class="op">+</span> <span class="fl">1</span>) for r <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N]</span>
 <span id="cb6-19"><a href="#cb6-19"></a>    xp <span class="op">=</span> <span class="fl">1</span> <span class="op">.-</span> nxp</span>
 <span id="cb6-20"><a href="#cb6-20"></a>    <span class="cf">return</span> xp, ys</span>
@@ -900,13 +888,13 @@ window.Quarto = {
 <span id="cb6-25"><a href="#cb6-25"></a></span>
 <span id="cb6-26"><a href="#cb6-26"></a>    fig <span class="op">=</span> plt_rt_base</span>
 <span id="cb6-27"><a href="#cb6-27"></a>    ax <span class="op">=</span> fig[<span class="fl">1</span>, <span class="fl">1</span>]</span>
-<span id="cb6-28"><a href="#cb6-28"></a>    <span class="fu">scatter!</span>(ax, <span class="fl">1</span> <span class="op">./</span> xp, ys, label <span class="op">=</span> <span class="st">"Observations"</span>, color <span class="op">=</span> <span class="op">:</span>gray, alpha <span class="op">=</span> <span class="fl">1</span>)</span>
+<span id="cb6-28"><a href="#cb6-28"></a>    <span class="fu">scatter!</span>(ax, <span class="fl">1</span> <span class="op">./</span> xp, ys, label<span class="op">=</span><span class="st">"Observations"</span>, color<span class="op">=:</span>gray, alpha<span class="op">=</span><span class="fl">1</span>)</span>
 <span id="cb6-29"><a href="#cb6-29"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">500</span></span>
 <span id="cb6-30"><a href="#cb6-30"></a>        μ <span class="op">=</span> ln_flat_chn[<span class="op">:</span>μ][idx]</span>
 <span id="cb6-31"><a href="#cb6-31"></a>        σ <span class="op">=</span> ln_flat_chn[<span class="op">:</span>σ][idx]</span>
 <span id="cb6-32"><a href="#cb6-32"></a>        rt <span class="op">=</span> <span class="fu">quantile</span>.(<span class="fu">LogNormal</span>(μ, σ), aeps)</span>
 <span id="cb6-33"><a href="#cb6-33"></a>        label <span class="op">=</span> idx <span class="op">==</span> <span class="fl">1</span> ? <span class="st">"Posterior"</span> <span class="op">:</span> <span class="cn">false</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a>        <span class="fu">lines!</span>(ax, rts, rt, color <span class="op">=</span> <span class="op">:</span>black, alpha <span class="op">=</span> <span class="fl">0.05</span>, label <span class="op">=</span> label, linewidth <span class="op">=</span> <span class="fl">0.5</span>)</span>
+<span id="cb6-34"><a href="#cb6-34"></a>        <span class="fu">lines!</span>(ax, rts, rt, color<span class="op">=:</span>black, alpha<span class="op">=</span><span class="fl">0.05</span>, label<span class="op">=</span>label, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb6-35"><a href="#cb6-35"></a>    <span class="cf">end</span></span>
 <span id="cb6-36"><a href="#cb6-36"></a>    fig</span>
 <span id="cb6-37"><a href="#cb6-37"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -925,25 +913,25 @@ window.Quarto = {
 <img src="sewells-point_files/figure-html/fig-return-scatter-output-2.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-return-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;25.1: Return Period with Uncertainty
+Figure&nbsp;1: Return Period with Uncertainty
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Visualize the samples as a <em>chain</em></p>
-<div id="9530f274" class="cell" data-execution_count="7">
+<div id="00971ea6" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">let</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>    μ_trace <span class="op">=</span> ln_flat_chn[<span class="op">:</span>μ]</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    σ_trace <span class="op">=</span> ln_flat_chn[<span class="op">:</span>σ]</span>
 <span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
 <span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"Trace Plot for μ"</span>, xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> L<span class="st">"\mu"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="fu">lines!</span>(ax1, μ_trace[<span class="op">:</span>], color <span class="op">=</span> <span class="op">:</span>blue, linewidth <span class="op">=</span> <span class="fl">0.25</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">"Trace Plot for μ"</span>, xlabel<span class="op">=</span><span class="st">"Iteration"</span>, ylabel<span class="op">=</span>L<span class="st">"\mu"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="fu">lines!</span>(ax1, μ_trace[<span class="op">:</span>], color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
 <span id="cb7-9"><a href="#cb7-9"></a></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>], title <span class="op">=</span> <span class="st">"Trace Plot for σ"</span>, xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> L<span class="st">"\sigma"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="fu">lines!</span>(ax2, σ_trace[<span class="op">:</span>], color <span class="op">=</span> <span class="op">:</span>red, linewidth <span class="op">=</span> <span class="fl">0.25</span>)</span>
+<span id="cb7-10"><a href="#cb7-10"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>], title<span class="op">=</span><span class="st">"Trace Plot for σ"</span>, xlabel<span class="op">=</span><span class="st">"Iteration"</span>, ylabel<span class="op">=</span>L<span class="st">"\sigma"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="fu">lines!</span>(ax2, σ_trace[<span class="op">:</span>], color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
 <span id="cb7-12"><a href="#cb7-12"></a></span>
 <span id="cb7-13"><a href="#cb7-13"></a>    fig</span>
 <span id="cb7-14"><a href="#cb7-14"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -965,7 +953,6 @@ Figure&nbsp;25.1: Return Period with Uncertainty
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1409,8 +1396,8 @@ Figure&nbsp;25.1: Return Period with Uncertainty
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../notebooks/nonstationary-gev-fooled.html" class="pagination-link" aria-label="Fooled by Randomness">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fooled by Randomness</span></span>
+      <a href="../notebooks/mosquitos.html" class="pagination-link" aria-label="Statistics Without the Agonizing Details ✏️">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistics Without the Agonizing Details ✏️</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

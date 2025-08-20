@@ -1,5 +1,6 @@
 ---
 title: "Parameter Uncertainty and Risk Assessment: Computational Examples ✏️"
+status: "draft"
 ---
 
 This companion file provides computational examples for parameter uncertainty and Monte Carlo methods covered in the [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd) chapter.

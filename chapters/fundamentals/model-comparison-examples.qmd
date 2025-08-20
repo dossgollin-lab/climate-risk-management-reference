@@ -1,5 +1,6 @@
 ---
 title: "Model Validation Examples: Diagnostic Plots and Information Criteria ✏️"
+status: "draft"
 ---
 
 This companion file provides computational examples for model validation and comparison concepts covered in the [Model Validation and Comparison](/chapters/fundamentals/model-comparison.qmd) chapter.
