@@ -88,6 +88,7 @@ More generally, observations $Y_1, \ldots, Y_n$ are exchangeable if their joint 
 
 For climate applications, exchangeability justifies using historical flood records to estimate future flood risk, or using temperature measurements from different years to understand temperature variability.
 However, exchangeability can break down when the underlying system changes—for instance, due to climate change or urbanization affecting flood patterns.
+Non-stationarity and climate change impacts on statistical properties are discussed in [Fundamentals of Climate Science](/chapters/fundamentals/climate-science.qmd).
 
 ### Axiomatic foundations
 
@@ -230,6 +231,8 @@ For catastrophic risk assessment, this means:
 - Historical averages of rare event frequencies converge to true rates (given stationarity)
 - Complex expectations over joint distributions of multiple hazards can be reliably estimated
 
+Spatial and temporal dependence in climate data requires specialized methods covered in [Correlation and Dimensionality](/chapters/fundamentals/correlation-dimensionality.qmd).
+
 However, for extreme events, convergence can be **slow** due to heavy tails and rare events.
 Estimating expectations of catastrophic losses may require many thousands of simulations to achieve reasonable accuracy.
 
@@ -313,6 +316,7 @@ Unlike continuous variables, discrete variables can assign non-zero probability 
 
 Catastrophic events often involve multiple interacting hazards—storm surge and wind speed during hurricanes, temperature and drought severity during heat waves, or rainfall intensity and duration during floods.
 Understanding these **compound extremes** requires working with multiple random variables simultaneously.
+Spatial dependence and correlation structures are explored in detail in [Correlation and Dimensionality](/chapters/fundamentals/correlation-dimensionality.qmd).
 
 **Joint probability** describes multiple extreme events occurring together: $p(x, y)$ for joint densities or $\Pr(X = x, Y = y)$ for discrete events.
 This answers questions like "what's the probability of both extreme storm surge AND category 4+ winds?" — critical for compound hurricane risk.
@@ -359,6 +363,7 @@ The first few moments have direct interpretations for catastrophe modeling:
 
 For catastrophic events, **skewness** and **kurtosis** are crucial.
 Storm surge heights typically show positive skew (most events are small, rare events are catastrophic), while wildfire burned areas often exhibit heavy tails with extreme kurtosis during exceptional fire seasons.
+The physical processes driving these statistical characteristics are discussed in [Fundamentals of Climate Science](/chapters/fundamentals/climate-science.qmd).
 
 
 ## Further reading {.unnumbered}
