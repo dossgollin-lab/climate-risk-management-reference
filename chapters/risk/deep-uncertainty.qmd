@@ -1,5 +1,5 @@
 ---
-title: Deep Uncertainty and Model Structure ✏️
+title: Deep Uncertainty and Model Structure 🚧
 ---
 
 ## See first {.unnumbered}
