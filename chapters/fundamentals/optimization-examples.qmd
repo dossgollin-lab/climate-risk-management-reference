@@ -1,4 +1,4 @@
-# Maximum Likelihood Estimation: Computational Examples ✏️ {.unnumbered}
+# Maximum Likelihood Estimation: Computational Examples 🚧 {.unnumbered}
 
 This companion file provides computational examples for maximum likelihood estimation concepts covered in the [Optimization](/chapters/fundamentals/optimization.qmd) chapter.
 

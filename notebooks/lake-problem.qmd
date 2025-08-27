@@ -1,0 +1,18 @@
+---
+description: "Apply dynamic policy search to optimal lake management under uncertainty"
+---
+
+# Dynamic Policy Search: The Lake Problem 🚧 {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Apply dynamic policy search to optimal lake management
+- Understand how threshold models create path dependence
+- Compare different policy structures and their performance
+- Analyze tradeoffs between economic benefits and environmental protection
+
+We're building on the lake problem as described in @quinn_dps:2017.
+
+The lake problem involves a hypothetical town on a lake that faces a pollution control problem.
+The town wants to maximize its economic benefits by discharging phosphorus (P) into the lake.
+However, excessive P can cause the lake to cross a critical threshold and become irreversibly eutrophic (polluted).
