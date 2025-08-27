@@ -1,6 +1,8 @@
 ---
 listing:
-  contents: "*.qmd"
+  contents: 
+    - "*.qmd"
+    - "*.ipynb"
   type: table
   fields: 
     - title

@@ -1,6 +1,19 @@
 ---
-title: Probability and Statistics ✏️
+title: Probability and Inference ✏️
+
+engine: julia
+cache: true
+fig-format: svg
 ---
+
+```{julia}
+#| echo: false
+#| output: false
+# set up packages
+using CairoMakie
+using Distributions
+using LaTeXStrings
+```
 
 ## Learning objectives {.unnumbered}
 
@@ -10,305 +23,345 @@ After reading this chapter, you should be able to:
 - Apply descriptive and inferential statistical methods to climate-related datasets.
 - Recognize when and why certain probability models are appropriate for climate variables.
 
-## Probability
+## Three steps of probabilistic inference
 
-Probability is a mathematical framework for quantifying uncertainty.
-In this textbook we will not get into measure theory.
+Before diving into the mathematical foundations, let's establish what we're trying to accomplish with probabilistic methods in climate risk assessment.
+**Probabilistic inference** is fundamentally about learning from data to make decisions under uncertainty.
 
-### Axiomatic definition
+Following @gelman_bda3:2014, we can organize all of probabilistic modeling into three essential steps:
 
-- Non-negativity: $\Pr(A) \geq 0$ for any event $A$
-- Normalization: $\Pr(S) = 1$ where $S$ is the sample space
-- Additivity: $\Pr(A \cup B) = \Pr(A) + \Pr(B)$ for any two mutually exclusive events $A$ and $B$
+1. **Set up a full probability model**: Define a joint probability distribution for all observable and unobservable quantities in your problem
+2. **Condition on observed data**: Calculate the posterior distribution of unknown quantities given what you've observed
+3. **Evaluate the fit and implications**: Check how well the model captures reality and what it implies for decisions
 
-### CDFs, PDFs, and PMFs
+This three-step workflow applies whether you're estimating flood return periods, projecting future hurricane intensities, or evaluating adaptation strategies.
+Let's see this in action with a simple example before diving into the mathematical machinery.
 
-If $F_X$ is the *cumulative distribution function* (CDF) of $X$ and $f_X$ is the {{< glossary pdf >}} of $X$, then:
-$$
-F_X ( x ) = \int_{-\infty}^x f_X(u) \, du,
-$$
-and (if $f_X$ is continuous at $x$ which it typically will be)
-$$
-f_{X}(x)={\frac {d}{dx}}F_{X}(x).
-$$
-A useful property is
-$$
-\Pr[a\leq X\leq b]=\int _{a}^{b}f_{X}(x)\,dx
-$$
+### A simple example: Coin flipping
 
-::: {.callout-important}
-We can only talk about the probability that $y$ is in some interval $[a, b]$, which is given by the integral of the PDF over that interval.
-The probability that $y$ takes on the value $y^*$, written $p(y=y^*)$, is zero.
-:::
+Let's start with the simplest possible example to illustrate the three-step workflow.
+Suppose you have a coin and want to know if it's fair.
+This simple model is analogous to many real-world risk problems: for example, asking if a given year has a 'high' or 'low' chance of experiencing a major flood based on a complex climate model's binary prediction.
+In both cases, we have a binary outcome and want to infer the underlying probability.
 
-- Discrete distributions (like the Poisson) have a *probability mass function* (PMF) instead of a PDF
-- For PMFs, $p(y=y^*)$ is the probability that $y$ takes on the value $y^*$, and is defined
+**Step 1 - Set up the model**: 
+- Parameter of interest: $\theta$ = probability the coin lands heads
+- Prior belief: maybe the coin is fair, so $\theta$ could be around 0.5
+- Data model: each flip follows $\text{Bernoulli}(\theta)$
 
-### Marginal, conditional, and joint distributions
+**Step 2 - Learn from data**: 
+You flip the coin 10 times and observe 7 heads.
+Use Bayes' theorem to update your belief about $\theta$.
 
-Understanding relationships between multiple random variables is essential for climate risk modeling, where we often need to consider how different variables interact.
+**Step 3 - Make decisions**: 
+Based on your posterior distribution for $\theta$, decide whether the coin is likely fair or biased.
 
-#### Marginal probability
+This simple example captures the essence of probabilistic inference.
+We'll formalize this logic throughout the chapter, then apply it to much more complex climate risk problems.
 
-Probability of event $A$: $\Pr(A)$
+## The language of uncertainty
 
-We write the marginal probability density function as:
-$$
-p(\theta) \quad \text{or} \quad p(y)
-$$
+We assume you have taken courses in probability and statistics and are familiar with basic concepts.
+This section provides a focused review of essential foundations, emphasizing how they serve probabilistic inference for climate risk.
+For more mathematical details, [Michael Betancourt's writing](https://betanalpha.github.io/writing/) is an outstanding resource.
 
-#### Joint probability  
+### General notation for statistical inference
 
-Probability of events $A$ and $B$ both occurring: $\Pr(A \cap B)$
+Before developing the theory, let's establish clear notation that we'll use throughout the book.
+Following @gelman_bda3:2014, we distinguish three types of quantities:
 
-The joint probability density function is written as:
-$$
-p(\theta, y)
-$$
+- **Parameters** ($\theta$): Unknown quantities we want to learn about (e.g., the true 100-year flood level, hurricane intensity parameters, or climate sensitivity)
+- **Observed data** ($y$): Quantities we have measured (e.g., historical flood heights, satellite temperature measurements, or storm track records)
+- **Unobserved predictions** ($\tilde{y}$): Unknown but potentially observable quantities (e.g., next year's maximum temperature, future sea level, or the outcome of a proposed adaptation strategy)
 
-#### Conditional probability
+The **joint probability model** $p(\theta, y, \tilde{y})$ describes our beliefs about all these quantities and their relationships.
+This joint distribution is the central object in probabilistic inference—everything else flows from asking questions of this distribution.
 
-Probability of event $A$ given that event $B$ has occurred: $\Pr(A | B)$
+For climate risk assessment, $\theta$ might represent physical parameters like climate sensitivity or return period parameters, $y$ represents our historical observations and measurements, and $\tilde{y}$ represents future climate conditions we need to predict for planning.
 
-The conditional probability density function is:
-$$
-p(\theta | y) \quad \text{or} \quad p(y | \theta)
-$$
+### Exchangeability
 
-#### Example: Two-Dice Wager
+A fundamental assumption underlying most statistical models is **exchangeability**: the idea that we can learn about future observations from past observations because they share some common underlying structure.
 
-A gambler presents you with an even-money wager. You will roll two dice, and if the highest number showing is one, two, three or four, then you win. If the highest number on either die is five or six, then she wins. Should you take the bet?
+Two random variables $Y_1$ and $Y_2$ are exchangeable if their joint distribution is unchanged by swapping their labels: $p(Y_1, Y_2) = p(Y_2, Y_1)$.
+More generally, observations $Y_1, \ldots, Y_n$ are exchangeable if their joint distribution is invariant under permutations.
 
-This problem illustrates how joint and conditional probabilities help us evaluate complex scenarios involving multiple random events.
+For climate applications, exchangeability justifies using historical flood records to estimate future flood risk, or using temperature measurements from different years to understand temperature variability.
+However, exchangeability can break down when the underlying system changes—for instance, due to climate change or urbanization affecting flood patterns.
+
+### Axiomatic foundations
+
+Probability theory rests on three simple axioms that ensure probabilities behave consistently: they're non-negative, total probability equals one, and probabilities of mutually exclusive events add up.
+From these basic rules, we can derive all the mathematical machinery needed for probabilistic inference [@jaynes_probability:2003].
+
+### Joint distributions
+
+The central concept in probabilistic inference is the **joint probability distribution**.
+For any problem involving uncertainty, our goal is to specify a joint distribution over all relevant quantities—both observed and unobserved.
+
+The joint distribution $p(\theta, y, \tilde{y})$ completely characterizes our knowledge state about:
+
+- What we want to learn (parameters $\theta$)
+- What we have observed (data $y$)  
+- What we want to predict (future observations $\tilde{y}$)
+
+Everything else in probabilistic inference involves asking questions of this joint distribution:
+
+- **Learning from data**: $p(\theta | y) \propto p(\theta, y)$ (conditioning)
+- **Making predictions**: $p(\tilde{y} | y) = \int p(\tilde{y}, \theta | y) d\theta$ (marginalization)
+- **Quantifying decision-relevant quantities**: $\mathbb{E}[f(\theta, \tilde{y}) | y]$ (expectation of functions)
+
+This perspective—that statistical modeling is about building joint distributions—provides the foundation for the computational methods we'll develop later.
 
 ### Bayes' theorem
 
-Bayes' theorem provides the fundamental relationship between joint, marginal, and conditional probabilities:
+**Bayes' theorem** connects the different types of probability statements and provides the foundation for updating beliefs based on evidence.
+Since joint probability can be decomposed as $p(\theta, y) = p(\theta) p(y | \theta) = p(y) p(\theta | y)$, we can derive:
 
 $$
-p(\theta, y) = p(\theta) p(y | \theta)
+p(\theta | y) = \frac{p(\theta) p(y | \theta)}{p(y)}
 $$
 
-and thus:
+This equation has a powerful interpretation: $p(\theta)$ represents our **prior** beliefs about parameters $\theta$, $p(y | \theta)$ represents the **likelihood** of observing data $y$ given parameters $\theta$, and $p(\theta | y)$ represents our **posterior** beliefs after seeing the data.
+
+In many applications, we work with the **proportional form** $p(\theta | y) \propto p(\theta) p(y | \theta)$ since the denominator $p(y)$ doesn't depend on $\theta$.
+This framework is essential for **Bayesian inference** in climate science, where we often want to update our understanding of physical processes based on observations.
+
+
+## Using probability models to learn from data
+
+**Probability theory** gives us the language for representing uncertainty, but **probabilistic inference** is about using that language to answer specific questions.
+Given a joint probability model $p(\theta, y, \tilde{y})$, we need computational tools to extract the information relevant for decision-making.
+
+All probabilistic inference involves two fundamental operations on the joint distribution:
+
+### The two fundamental operations
+
+#### 1. Conditioning: Learning from data
+
+**Conditioning** answers: "How does observing data $y$ change our beliefs about parameters $\theta$?"
+
+We use **Bayes' theorem** to compute the posterior distribution:
+$$p(\theta | y) = \frac{p(\theta, y)}{p(y)} = \frac{p(\theta) p(y | \theta)}{\int p(\theta) p(y | \theta) d\theta}$$
+
+The posterior $p(\theta | y)$ represents our updated knowledge about $\theta$ after seeing data $y$.
+This is the mathematical engine for learning—it tells us how to rationally update our beliefs based on evidence.
+
+For climate risk assessment, conditioning might update our beliefs about:
+
+- Hurricane intensity parameters after observing a new storm season
+- Flood return levels after observing recent extreme events  
+- Climate sensitivity parameters after incorporating new temperature data
+
+#### 2. Marginalization: Focusing on what matters
+
+**Marginalization** answers: "What do we know about quantity $\theta_1$ while ignoring nuisance parameters $\theta_2$?"
+
+We integrate out unwanted variables to focus on quantities of interest:
+$$p(\theta_1 | y) = \int p(\theta_1, \theta_2 | y) d\theta_2$$
+
+This allows us to extract the uncertainty in specific parameters while averaging over everything else we don't care about for a particular decision.
+
+For example, when estimating flood risk, we might marginalize over uncertain rainfall distribution parameters to focus solely on the flood frequency we need for infrastructure planning.
+
+### Computing expectations
+
+These two operations ultimately serve one purpose: computing **expectations** that inform decisions.
+When we need to know the probability of an event or the expected value of some quantity of interest, we often need to apply both conditioning and marginalization to extract that information from our joint distribution.
+
+The goal of probabilistic inference is computing **expectations** — probability-weighted averages of quantities we care about.
+Most decision-relevant quantities can be expressed as an expectation:
+
+- The **mean** is $\mathbb{E}[X]$ 
+- The **variance** is $\mathbb{E}[(X - \mathbb{E}[X])^2]$
+- The **probability of an event** is $\mathbb{E}[\mathbf{1}_{\text{event}}]$ (expectation of an indicator function)
+- **Expected annual damages** from hurricanes integrate over storm intensity, frequency, and damage functions
+- **Failure probabilities** for infrastructure under extreme heat integrate over temperature distributions and failure thresholds
+
+Formally, we want to compute:
+$$\mathbb{E}[g(\theta, \tilde{y}) | y] = \int g(\theta, \tilde{y}) p(\theta, \tilde{y} | y) d\theta d\tilde{y}$$
+
+where $g(\theta, \tilde{y})$ is some function of our parameters and predictions that captures what we need for decision-making.
+
+#### Analytical vs computational approaches
+
+For simple models, we can sometimes compute expectations analytically by solving integrals directly.
+But for the complex, high-dimensional problems typical in climate risk assessment, we need computational approaches:
+
+**Monte Carlo estimation** approximates expectations by:
+1. Drawing many samples from the probability model: $(\theta^{(1)}, \tilde{y}^{(1)}), \ldots, (\theta^{(S)}, \tilde{y}^{(S)})$
+2. Computing the function of interest: $g(\theta^{(s)}, \tilde{y}^{(s)})$ for each sample
+3. Averaging: $\mathbb{E}[g(\theta, \tilde{y}) | y] \approx \frac{1}{S} \sum_{s=1}^S g(\theta^{(s)}, \tilde{y}^{(s)})$
+
+This approach forms the foundation for computational methods we'll develop in subsequent chapters.
+
+### Interpreting probability
+
+Now that we've seen how expectations drive decision-making, it's worth reflecting on what the probabilities in these expectations *mean*.
+This philosophical question becomes crucial when studying extreme events and catastrophic risks that cannot be objectively verified through repeated experimentation.
+
+**Frequentist (objective) interpretation** views probability as limiting frequencies of repeatable events.
+Under this view, statements like "the probability of a category 5 hurricane is 0.02" refer to long-run frequencies we could observe if we repeated the same conditions many times.
+
+**Bayesian (subjective/epistemic) interpretation** views probability as degrees of belief or states of knowledge.
+Here, probability statements reflect our uncertainty given available information, even for unique events like "the probability that sea level rise exceeds 1 meter by 2100."
+
+For extreme events and catastrophic risks, the Bayesian interpretation is often more useful because:
+
+- Many catastrophic events are rare or unique (we can't repeat the experiment)
+- We often need to reason about future scenarios that have never occurred
+- Scientific knowledge combines multiple sources of uncertain information
+
+### Computational approaches
+
+The Bayesian framework naturally leads us to computational methods for calculating expectations, since the required integrals are often intractable analytically.
+
+#### Law of large numbers
+
+The **law of large numbers** justifies this approach by formalizing that sample averages converge to true expectations.
+For independent, identically distributed random variables $X_1, X_2, \ldots$ with mean $\mu$:
 $$
-p(\theta | y) = \frac{p(\theta, y)}{p(y)} = \frac{p(\theta) p(y | \theta)}{p(y)}
-$$
-
-In many applications, we work with the proportional form:
-$$
-p(\theta | y) \propto p(\theta) p(y | \theta)
-$$
-
-This theorem is fundamental to Bayesian inference and updating beliefs based on new evidence.
-
-### Example: Regression as a Conditional Distribution
-
-Standard linear regression model, let's assume $x \in \mathbb{R}$ for simplicity (1 predictor):
-$$
-y_i = ax_i + b + \epsilon_i
-$$
-where $\epsilon_i \sim N(0, \sigma^2)$.
-
-The conditional probability density of $y_i$ given $x_i$ is
-$$
-p(y_i | x_i, a, b, \sigma) = N(ax_i + b, \sigma^2)
-$$
-which is a shorthand for writing out the full equation for the Normal PDF.
-We can (and often will) write this as
-$$
-y_i \sim \mathcal{N}(ax_i + b, \sigma^2)
-$$
-Finally, we will sometimes write $p(y_i | x_i)$ as a shorthand for $p(y_i | x_i, a, b, \sigma)$.
-While fine in many circumstances, we should take care to make sure we are extremely clear about what parameters we are conditioning on.
-
-The marginal probability density of $y_i$ is
-$$
-p(y_i | a, b, \sigma) = \int p(y_i | x_i, a, b, \sigma) p(x_i) \, dx_i
-$$
-where $p(x_i)$ is the probability density of $x_i$.
-
-The joint probability density of $y_i$ and $x_i$ is
-$$
-p(y_i, x_i | a, b, \sigma) = p(y_i | x_i, a, b, \sigma) p(x_i)
-$$
-where $p(x_i)$ is the probability density of $x_i$.
-
-
-## Statistics
-
-### Expectations
-
-### Descriptive statistics (mean, variance, quantiles)
-
-#### Mean
-
-The mean of a sample is the sample average:
-$$
-\bar{y} = \frac{1}{N} \sum_{i=1}^N y_i
-$$
-
-The mean of a distribution is the expected value:
-$$
-\mathbb{E}(u) = \int u p(u) \, du
-$$
-
-#### Variance
-
-Variance measures how points differ from the mean. 
-
-Sample variance:
-$$
-S^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n - 1}
-$$
-
-For a distribution:
-$$
-\mathbb{V}(u) = \int (u - \mathbb{E}(u))^2 p(u) \, du
-$$
-or, for a vector
-$$
-\mathbb{V}(u) = \int (u - \mathbb{E}(u)) (u - \mathbb{E}(u))^T p(u) \, du
-$$
-
-### Central Limit Theorem
-
-The *central limit theorem* says that the sum of many independent random variables is approximately normally distributed.
-
-```{julia}
-#| code-fold: true
-#| label: fig-sample-means
-#| fig-cap: "Illustration of the central limit theorem"
-using CairoMakie
-using Distributions
-using LaTeXStrings
-
-dist = Gamma(2, 1)
-N = 10_000 # number of samples
-J = 300 # draws per sample
-ȳ = [
-	mean(rand(dist, J)) for i in 1:N
-]
-fig = hist(
-	ȳ;
-	bins = 30,
-	axis = (
-		xlabel = L"$\bar{y}$",
-	),
-	normalization = :probability,
-	label = "$N sample means",
-)
-vlines!(
-	[mean(dist)],
-	color = :red,
-	linestyle = :dash,
-	label = "True mean",
-	linewidth = 2,
-)
-axislegend()
-fig
-```
-
-### Common Probability Distributions
-
-#### Normal Distribution
-
-The Normal (Gaussian) distribution has probability density function:
-
-$$
-p(y | \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}} \exp
-\left(
--\frac{1}{2}\left(
-\frac{y-\mu}{\sigma}
-\right)^{\!2}
-\,
-\right)
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i = \mu
 $$
 
-- Mean $\mu$
-- Variance $\sigma^2$ 
-- Symmetric
-- Often written as shorthand: $y \sim \mathcal{N}(\mu, \sigma^2)$
+For catastrophic risk assessment, this means:
 
-#### Bernoulli Distribution
+- Monte Carlo estimates of expected annual losses become more accurate with more simulations
+- Historical averages of rare event frequencies converge to true rates (given stationarity)
+- Complex expectations over joint distributions of multiple hazards can be reliably estimated
 
-Models a coin flip with probability $p$ of success.
+However, for extreme events, convergence can be **slow** due to heavy tails and rare events.
+Estimating expectations of catastrophic losses may require many thousands of simulations to achieve reasonable accuracy.
 
-```{julia}
-p = 0.5 # probability of heads
-rand(Bernoulli(p), 5)
-```
+#### Central limit theorem
 
-#### Binomial Distribution
+The law of large numbers tells us that Monte Carlo estimates converge, but how uncertain are our estimates?
+The **central limit theorem** quantifies this uncertainty: our sample average $\bar{Y}$ is approximately normally distributed around the true expectation $\mu$:
 
-Models the number of successes in $n$ consecutive trials with probability $p$.
+$$\bar{Y} \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$
 
-```{julia}
-p = 0.5
-N = 5
-rand(Binomial(N, p), 5)
-```
+For catastrophic risk assessment, this means we can quantify the **Monte Carlo uncertainty** in our estimates of expected annual losses, failure probabilities, and other risk metrics.
+This is crucial for decision-making because it distinguishes between uncertainty in our estimates (which decreases with more simulation) and fundamental uncertainty about the underlying extreme event processes.
 
-#### Multinomial Distribution
+Statistical inference for extreme events involves making conclusions about catastrophic risks from limited data.
+Two fundamentally different philosophical approaches dominate, each with important implications for how we understand and communicate about rare event risks.
 
-Extends the Binomial to multiple categories. Note that `p` is a *vector*.
+#### Frequentist vs Bayesian approaches
 
-```{julia}
-p = [0.5, 0.3, 0.2]
-N = 5
-dist = Multinomial(N, p)
-rand(dist, 5)
-```
+**Frequentist inference** treats the parameters of extreme event distributions (like hurricane intensity parameters or flood return levels) as fixed but unknown quantities.
+Under this approach, uncertainty comes from sampling variability—we'd get different parameter estimates if we observed different historical samples.
+Confidence intervals represent the variability we'd expect across many hypothetical repetitions of the same data collection process.
 
-#### Poisson Distribution
+**Bayesian inference** treats parameters as random variables representing our knowledge state.
+Prior distributions encode our beliefs about plausible parameter values (perhaps from physical understanding or regional climate information), which get updated with observed data to produce posterior distributions representing our updated knowledge.
 
-Used to model count data. It is the limit of a Binomial distribution with $p=\lambda/N$, as $N \rightarrow \infty$.
-A Poisson distribution has mean and variance equal to $\lambda$.
+For catastrophic risk assessment, the philosophical difference matters:
 
-```{julia}
-dist = Poisson(2.5)
-rand(dist, 10)
-```
+- Frequentist: "Given these fixed (unknown) hurricane parameters, there's a 5% chance our confidence interval won't contain the true 100-year return level"
+- Bayesian: "Given our data and prior knowledge, there's a 95% probability the 100-year return level lies in this credible interval"
 
-#### Negative Binomial Distribution
+#### Why Bayesian methods suit extreme events
 
-The Negative Binomial distribution relaxes the Poisson's assumption that $\text{mean} = \text{variance}$.
-This distribution models the number of successes before a specified number of failures occurs.
+Bayesian approaches prove particularly valuable for extreme event analysis because:
 
-#### Mixture models
+- **Limited data**: Extreme events are rare, making prior knowledge from physical processes crucial
+- **Decision focus**: Decisions require acting on current knowledge, not hypothetical repetitions
+- **Unique events**: Many catastrophic scenarios (like worst-case sea level rise) are inherently unique
+- **Uncertainty propagation**: Complex models benefit from full uncertainty characterization
 
-The Negative Binomial distribution (see last lecture) can be interpreted as a Gamma-Poisson *mixture*:
+#### Hypothesis testing for extremes
 
-$$
-\begin{aligned}
-y &\sim \textrm{Poisson}(\lambda) \\
-\lambda &\sim \textrm{Gamma}\left(r, \frac{p}{1-p} \right)
-\end{aligned}
-$$
+A common practical question is whether observed data are consistent with specific hypotheses about extreme event behavior—for instance, testing whether hurricane intensities show trends or whether flood frequencies have changed.
+Both frequentist and Bayesian frameworks provide tools for these questions, though they interpret the results differently.
 
-We can show mathematically that if $y ~ \textrm{Negative Binomial}(r, p)$, that is equivalent to the mixture model $y ~ \textrm{Poisson}(\lambda)$ and $\lambda ~ \textrm{Gamma}(r, p / (1 - p))$.
-$$
-\begin{aligned}
-& \int_0^{\infty} f_{\text {Poisson }(\lambda)}(y) \times f_{\operatorname{Gamma}\left(r, \frac{p}{1-p}\right)}(\lambda) \mathrm{d} \lambda \\
-& = \int_0^{\infty} \frac{\lambda^y}{y !} e^{-\lambda} \times \frac{1}{\Gamma(r)}\left(\frac{p}{1-p} \lambda\right)^{r-1} e^{-\frac{p}{1-p} \lambda}\left(\frac{p}{1-p} \mathrm{~d} \lambda\right) \\
-\ldots \\
-&= f_{\text {Negative Binomial }(r, p)}(y)
-\end{aligned}
-$$
-For all the steps see [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution#Gamma%E2%80%93Poisson_mixture){target=_blank}.
+## Probability building blocks
 
-### Hypothesis Testing
+The inference framework above relies on several key probability concepts.
+This section provides the essential building blocks for constructing probability models.
 
-A common goal of statistical analysis is to quantify how consistent a set of observations is with a given hypothesis.
+### Random variables
 
-#### Case Study: Statistics Without the Agonizing Pain
+A **random variable** is a function that assigns numerical values to outcomes of random experiments.
+We use capital letters ($X$, $Y$, $Z$) to denote random variables and lowercase letters ($x$, $y$, $z$) for their specific realizations or values.
 
-See [the notebook](/notebooks/mosquitos.qmd).)
+For catastrophic risk applications, $X$ might represent "maximum storm surge height during a hurricane" and $x = 4.2$ meters would be a specific observation.
+**Continuous random variables** (like storm surge heights, wildfire burned area, or drought duration) can take any value in an interval, while **discrete random variables** (like the annual number of Category 4+ hurricanes or power outage events) take countable values.
+
+### CDFs, PDFs, and PMFs
+
+To work with random variables, we need functions that describe how probability is distributed across possible values.
+
+The **cumulative distribution function (CDF)** answers "what is the probability that $X$ is at most $x$?":
+$$F_X(x) = \Pr(X \leq x)$$
+
+For continuous random variables, we work with **probability density functions (PDFs)**.
+The density $f_X(x)$ represents probability per unit length, related to the CDF through calculus:
+$$F_X(x) = \int_{-\infty}^x f_X(u) \, du \quad \text{and} \quad f_X(x) = \frac{d}{dx}F_X(x)$$
+
+We calculate probabilities by integrating the PDF over intervals:
+$$\Pr[a \leq X \leq b] = \int_a^b f_X(x) \, dx$$
+
+::: {.callout-important}
+For continuous random variables, $\Pr(X = x^*) = 0$ for any specific value $x^*$.
+Probability is concentrated over intervals, not points.
+:::
+
+**Discrete random variables** use **probability mass functions (PMFs)** instead: $p_X(x) = \Pr(X = x)$.
+Unlike continuous variables, discrete variables can assign non-zero probability to individual values.
+
+### Marginal, conditional, and joint distributions
+
+Catastrophic events often involve multiple interacting hazards—storm surge and wind speed during hurricanes, temperature and drought severity during heat waves, or rainfall intensity and duration during floods.
+Understanding these **compound extremes** requires working with multiple random variables simultaneously.
+
+**Joint probability** describes multiple extreme events occurring together: $p(x, y)$ for joint densities or $\Pr(X = x, Y = y)$ for discrete events.
+This answers questions like "what's the probability of both extreme storm surge AND category 4+ winds?" — critical for compound hurricane risk.
+
+**Marginal probability** focuses on one hazard while ignoring others: $p(x)$ for continuous variables or $\Pr(X = x)$ for discrete events.
+For instance, the marginal distribution of wildfire burned area ignores weather conditions, even though they strongly influence fire behavior.
+
+**Conditional probability** describes one extreme given another has occurred: $p(x | y)$ for conditional densities or $\Pr(X = x | Y = y) = \frac{\Pr(X = x, Y = y)}{\Pr(Y = y)}$ for discrete events.
+This answers questions like "given an extreme heat event, what's the distribution of drought severity?" — essential for cascading risk assessment.
+
+### Independence
+
+Two events $A$ and $B$ are **independent** if knowing that one occurred provides no information about the other.
+Mathematically, independence means:
+$$\Pr(A \cap B) = \Pr(A) \cdot \Pr(B)$$
+
+Equivalently, for independent events: $\Pr(A | B) = \Pr(A)$ and $\Pr(B | A) = \Pr(B)$.
+
+For random variables $X$ and $Y$, independence means the joint density factorizes: $p(x, y) = p(x) \cdot p(y)$.
+This is a strong assumption that often doesn't hold in climate systems—temperature and precipitation are typically dependent, as are wind speed and atmospheric pressure.
+
+**Conditional independence** is also important: $X$ and $Y$ may be dependent overall but independent given knowledge of a third variable $Z$.
+This concept is crucial for understanding how climate variables relate through mediating factors.
+
+### Common probability distributions
+
+Several key distributions appear frequently in catastrophe modeling and extreme event analysis:
+
+- The **Poisson distribution** $Y \sim \text{Poisson}(\lambda)$ models rare event counts like annual numbers of Category 4+ hurricanes, major earthquakes, or wildfire ignitions over fixed periods.
+- The **Negative Binomial distribution** handles overdispersed extreme event counts when variance exceeds the mean—common when events cluster in time (like hurricane seasons).
+- The **Gamma distribution** models positive-valued extremes like maximum daily rainfall amounts, drought durations, and time between major flood events.
+- The **Weibull distribution** is fundamental for extreme value analysis, modeling phenomena like maximum wind speeds, peak storm surge heights, and infrastructure failure times.
+- **Generalized Extreme Value (GEV)** and **Generalized Pareto (GP)** distributions specifically model the statistical behavior of extreme values and exceedances over high thresholds—foundational for catastrophe risk assessment.
+
+#### Moments
+
+The **moments** of a distribution characterize its shape and properties—particularly important for understanding extreme event behavior.
+The first few moments have direct interpretations for catastrophe modeling:
+
+- **First moment (mean)**: $\mathbb{E}[X] = \mu$ - the center of the distribution
+- **Second central moment (variance)**: $\text{Var}(X) = \mathbb{E}[(X - \mu)^2] = \sigma^2$ - spread around the mean  
+- **Third central moment (skewness)**: measures asymmetry - positive skew indicates long right tails with rare extreme values
+- **Fourth central moment (kurtosis)**: measures tail heaviness - higher kurtosis means more frequent extreme values
+
+For catastrophic events, **skewness** and **kurtosis** are crucial.
+Storm surge heights typically show positive skew (most events are small, rare events are catastrophic), while wildfire burned areas often exhibit heavy tails with extreme kurtosis during exceptional fire seasons.
+
 
 ## Further reading {.unnumbered}
 
-If most of this content is unfamiliar to you, it may be worth reviewing a more comprehensive introduction to probability and statistics before proceeding.
-While introductory statistics is often taught in an exhaustingly dry way, there are a few excellent resources
-
-- **@blitzstein_probability:2019** rovides a thorough introduction to key concepts and ideas in probability. The book accompanies a free online course, [Stat 110](https://projects.iq.harvard.edu/stat110/home), which is a great resource for learning probability and statistics. Practice problems and solutions, handouts, and lecture videos are all available online.
-- **@downey_thinkbayes:2021**  offers an introduction to Bayesian statistics using computational methods. It’s not focused on environmental variables or extremes but provides code and a clear explanation of core concepts.
-- **@gelman_regression:2021** is an examples-centric introduction to probability, statistics, and statistical modeling. Andrew Gelman is the professor who got me passionate about statistics, and this is an excellent resource.
+If most of this content is unfamiliar to you, reviewing a more comprehensive introduction to probability and statistics before proceeding may be helpful.
+While introductory statistics is often taught in a dry way, @blitzstein_probability:2019, @downey_thinkbayes:2021, and @gelman_regression:2021 are three excellent resources that I highly recommend (see [recommended reading](/chapters/about/resources.qmd) for more suggestions).
