@@ -272,11 +272,11 @@ The challenge: we need $p_i \in (0, 1)$ but linear predictors $\alpha + \beta x_
 
 The canonical link function is the **logit**:
 $$
-\begin{align}
+\begin{aligned}
 \textrm{logit}(p_i) &= \alpha + \beta x_i \\
 \log \frac{p_i}{1 - p_i} &= \alpha + \beta x_i \\
 p_i &= \frac{\exp(\alpha + \beta x_i)}{1 + \exp(\alpha + \beta x_i)}
-\end{align}
+\end{aligned}
 $$
 
 This maps the linear space $(-\infty, \infty)$ onto the probability space $(0, 1)$.

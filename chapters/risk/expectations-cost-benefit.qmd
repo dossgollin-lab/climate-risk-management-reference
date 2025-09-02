@@ -31,11 +31,6 @@ Then, we can compare the goodness of different decisions.
 As a motivating example, consider that we are have been asked to help a homeowner decide whether to elevate their home by 5ft to protect against future flooding, or whether to leave it as-is.
 :::
 
-::: {#fig-floodproofing}
-![](../_assets/img/lee-meyerland-elevation.jpg)
-
-Floodproofing in Houston, TX ([Houston Public Media](https://www.houstonpublicmedia.org/articles/news/2017/10/06/240934/many-houstonians-seek-home-elevation-after-repetitive-flooding/))
-:::
 
 ## Quantifying costs and benefits
 

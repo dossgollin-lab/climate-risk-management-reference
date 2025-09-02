@@ -1,178 +1,40 @@
 ---
-title: Fundamentals of climate science 🚧
+title: Climate science 🚧
 ---
 
 ## Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
-- Understand the three essential questions climate science answers for risk assessment
-- Identify key statistical characteristics of climate hazards that challenge traditional approaches
-- Recognize sources of uncertainty in climate information and their implications
-- Grasp how physical climate processes drive variability across multiple timescales
-- Understand the decision-theoretic foundation connecting climate science to risk management
+- Understand why climate science is essential for risk assessment
+- Identify key climate science topics you should study for effective risk management
+- Navigate to appropriate resources for learning climate science fundamentals
 
 ## Why climate science matters for risk assessment
 
-A hurricane generates storm surge that floods a coastal community. A multi-year drought strains water supplies and agricultural systems. An atmospheric river overwhelms an urban drainage system.
+Climate hazards don't occur in isolation.
+A hurricane's intensity depends on sea surface temperatures and atmospheric conditions.
+Droughts emerge from large-scale circulation patterns and ocean-atmosphere interactions.
+Floods reflect not just local rainfall but also broader weather systems and seasonal cycles.
 
-These hazardous events are the direct concern of risk management. While they feel like local phenomena, they are not isolated acts of nature. They are the final expression of a complex, interconnected system of climate drivers that operate on scales from planetary to local. Understanding this multi-scale system is the core task of climate science in risk assessment. It allows us to build a causal chain from the large-scale drivers to the local impacts, helping us answer three fundamental questions:
+Understanding these connections is crucial for risk assessment because climate science helps us answer three fundamental questions:
 
-- What physical processes create the specific weather patterns like hurricanes or droughts that drive hazards?
-- How do these patterns vary naturally over years and decades?
-- How might the statistics of these patterns be shifting?
+1. **What physical processes create hazardous weather patterns?** Understanding the mechanisms behind hurricanes, droughts, heat waves, and floods helps us identify when and where they're most likely to occur.
 
-This chapter provides the physical foundation for this understanding. We will trace the flow of energy and water through the climate system to see how global patterns shape the regional hazards we must manage.
+2. **How do these patterns vary naturally over time?** Climate systems exhibit variability on multiple timescales—from seasonal cycles to multi-decadal oscillations—that affect the frequency and intensity of extreme events.
 
-## Global energy budget and radiative forcing
+3. **How might climate change alter these patterns?** As greenhouse gas concentrations rise, the statistical properties of weather and climate are shifting, requiring us to account for non-stationarity in our risk assessments.
 
-Earth's climate system is fundamentally driven by the balance between incoming solar (shortwave) radiation and outgoing terrestrial (longwave) radiation.
-The sun provides essentially all the energy that drives weather and climate.
-This solar energy heats the surface, which then radiates energy back to space as infrared radiation.
+## Essential climate science topics
 
-Greenhouse gases in the atmosphere trap some of this outgoing longwave radiation, warming the surface.
-This greenhouse effect is essential for making Earth habitable—without it, the planet would be about 33°C cooler.
-However, human activities have increased atmospheric concentrations of greenhouse gases, creating an energy imbalance.
-
-Radiative forcing—an imposed change in the balance between absorbed solar and outgoing terrestrial radiation—drives climate change by creating an energy imbalance.
-That imbalance is gradually reduced through increased outgoing radiation as the planet warms and through heat storage, especially in the oceans.
-Climate sensitivity, the equilibrium temperature response to doubled atmospheric CO₂, remains uncertain but is estimated at 2.5–4.0°C.
-This uncertainty about the magnitude of warming from a given forcing propagates through climate projections.
-
-This fundamental warming directly intensifies the global water cycle. The amount of water vapor the atmosphere can hold is governed by the Clausius–Clapeyron equation, which dictates a roughly 7% increase in moisture per degree Celsius of warming. This thermodynamic effect is a primary mechanism through which the energy balance translates into tangible changes in hydroclimate hazards.
-
-## Planetary circulation patterns
-
-The energy imbalance between tropical and polar regions drives large-scale atmospheric and oceanic circulation patterns that distribute heat around the globe.
-These planetary circulation systems create the framework within which all weather and climate variability occurs.
-
-Atmospheric circulation includes the Hadley cells that transport heat from the equator toward the poles, creating trade winds and the Intertropical Convergence Zone where much of the world's precipitation occurs.
-The jet streams, driven by temperature gradients between warm tropics and cold poles, guide the paths of storm systems in midlatitudes.
-Monsoons represent seasonal shifts in these circulation patterns as land masses heat and cool relative to adjacent oceans.
-
-Oceanic circulation redistributes heat through the thermohaline (meridional overturning) circulation driven by temperature and salinity differences (e.g., the Atlantic Meridional Overturning Circulation, AMOC).
-The Gulf Stream carries warm water northward along the U.S. East Coast before crossing the Atlantic.
-The Antarctic Circumpolar Current connects all ocean basins.
-These currents influence regional climates and can change over time as the climate system evolves.
-
-## Modes of climate variability
-
-Within these overall circulation patterns, the climate system exhibits natural fluctuations that occur on interannual to multidecadal timescales.
-These modes of variability represent the primary source of year-to-year climate predictability that risk managers must consider.
-
-El Niño–Southern Oscillation (ENSO) exemplifies how ocean–atmosphere interactions create climate variability.
-Changes in Pacific Ocean temperatures alter atmospheric circulation patterns, affecting precipitation and temperature around the globe.
-El Niño events typically bring wetter conditions to the southern United States and drier conditions to Australia and Indonesia.
-La Niña tends to have opposite effects.
-The phase of ENSO doesn't determine the weather, but it shifts the probability distributions of temperature and precipitation across many regions.
-
-Atlantic Multidecadal Variability (AMV; often called AMO) influences hurricane activity and rainfall patterns around the Atlantic basin over 60–80-year periods.
-The Pacific Decadal Oscillation (PDO) affects climate variability along the Pacific rim.
-The Arctic Oscillation (AO) influences winter weather patterns across the Northern Hemisphere.
-
-These natural modes of variability interact with externally forced long-term climate trends.
-For example, a strong El Niño event superimposed on a warming climate can create record-breaking temperatures.
-The timing of natural variability can temporarily mask or amplify underlying climate change signals.
-
-## Regional climate and local weather patterns
-
-The interplay between large-scale circulation patterns and modes of variability creates the specific weather patterns that lead to local hazards.
-Understanding these connections requires drawing from several branches of climate science.
-
-Atmospheric dynamics explains why storms form where they do and how circulation patterns like jet streams influence weather.
-A meandering jet stream can create atmospheric river events that transport moisture from tropical regions to cause flooding in California.
-When weather patterns like atmospheric rivers form, they now tap into this thermodynamically enhanced atmospheric moisture, leading to more intense rainfall and a higher flood risk than the same pattern would have produced in a cooler climate.
-Blocking patterns in the jet stream can create persistent high-pressure systems that lead to heat domes over large regions.
-
-Tropical meteorology focuses on hurricanes, monsoons, and other phenomena that dominate hazards in many regions.
-Hurricane development requires specific combinations of sea surface temperatures, atmospheric instability, and circulation patterns.
-Changes in these large-scale conditions affect where storms form, how they track, and how intense they become.
-
-Hydrology examines how precipitation becomes streamflow and how watersheds respond to different rainfall patterns.
-The same amount of rainfall can produce very different flood responses depending on antecedent soil moisture, snowpack conditions, and the spatial and temporal distribution of precipitation.
-
-Ocean processes affect regional climate through heat transport and moisture sources.
-Sea surface temperature patterns influence evaporation rates and atmospheric moisture content.
-Changes in ocean circulation can alter regional temperature and precipitation patterns.
-
- 
-
-## Sources of uncertainty in climate projections
-
-As we move from understanding the past climate to projecting the future, our analysis must account for three distinct sources of uncertainty. These are not interchangeable forms of statistical noise; they arise from different processes and dominate at different time horizons.
-
-### Scenario Uncertainty
-
-This uncertainty stems from our inability to predict future human activities, primarily greenhouse gas emissions, land-use change, and aerosol concentrations. It is fundamentally a socioeconomic uncertainty, not a physical climate-science uncertainty. Projections are therefore conditioned on a set of plausible futures, or scenarios (e.g., Shared Socioeconomic Pathways, SSPs), each representing a different trajectory of global development. For long-term projections (e.g., post-2050), scenario uncertainty is typically the largest contributor to the total uncertainty in global mean temperature and many regional climate variables.
-
-### Model Uncertainty
-
-This reflects the limitations of our scientific understanding and our ability to represent the climate system numerically. Global Climate Models (GCMs) are based on the fundamental laws of physics, but they must approximate or parameterize processes that are too small or complex to be explicitly resolved, such as cloud formation, ocean turbulence, and vegetation dynamics. Different modeling centers make different, scientifically defensible choices for these parameterizations. The resulting spread in projections from a multi-model ensemble (e.g., CMIP6) represents our structural uncertainty about the true response of the climate system to a given forcing. This is because GCMs must approximate or parameterize processes that are too small or complex to be explicitly resolved, such as individual thunderstorms or cloud formation, leading to scientifically defensible differences between models.
-
-### Internal Variability
-
-This is the natural, unforced variability inherent in the chaotic climate system. It arises from the complex, nonlinear interactions between the atmosphere, oceans, land, and ice. Phenomena like the El Niño–Southern Oscillation (ENSO) or the North Atlantic Oscillation (NAO) are expressions of this internal variability. Even with a perfect model and a perfectly known future emissions scenario, the precise timing of these natural fluctuations is not predictable beyond a few weeks or months. This aleatoric (inherent randomness) uncertainty is the dominant source of uncertainty for projections on short time horizons (e.g., the next 10–20 years), as natural climate swings can easily mask or amplify the long-term forced trend.
-
-## Statistical characteristics of climate hazards
-
-Climate hazards exhibit statistical properties that challenge traditional risk assessment approaches.
-Understanding why these challenges arise connects the physical climate science we've just described to the probabilistic methods needed for risk assessment.
-
-### Properties that challenge traditional approaches
-
-The physical processes described above create several statistical characteristics that make standard statistical methods problematic.
-
-Extreme events occur more frequently than a normal distribution predicts.
-This heavy-tailed ("fat-tailed") behavior emerges from the nonlinear dynamics of atmospheric and oceanic systems, such as the blocking patterns and atmospheric river events described earlier.
-Small changes in initial conditions or boundary forcing can lead to disproportionately large changes in outcomes.
-This has profound implications for infrastructure design based on return periods and for insurance mechanisms that assume lighter-tailed distributions.
-
-Climate change violates the stationarity assumption that underlies most traditional statistical analysis, because, as discussed, radiative forcing from greenhouse gases is altering the fundamental energy balance of the planet.
-Statistical properties do not remain constant over time.
-Mean values change as global temperatures rise.
-Variability patterns shift as circulation patterns evolve.
-The modes of climate variability we described—ENSO, AMV—may themselves change in a warming climate.
-
-The multi-scale nature of climate processes creates challenges for statistical analysis.
-Interannual variability like ENSO affects weather patterns globally over 2–7-year cycles.
-Decadal patterns can dominate regional climate for decades.
-This means that short observational records may miss important modes of variability that could affect risk assessment.
-Each source of uncertainty—internal variability, model uncertainty, and scenario uncertainty—contributes to uncertainty in the posterior predictive distributions used for decisions.
-
-Extreme events often affect large regions simultaneously, challenging assumptions of spatial independence that underlie many risk models, because planetary-scale circulation patterns like the jet stream and modes of variability like ENSO create spatial coherence in climate anomalies.
-Heat waves can span entire continents when jet stream patterns create persistent blocking.
-Droughts affect multiple countries within a river basin when large-scale circulation anomalies reduce precipitation over wide areas.
-Understanding and modeling these spatial dependencies requires methods covered in [Correlation and Dimensionality](/chapters/fundamentals/correlation-dimensionality.qmd).
-
-### Implications for climate information
-
-These characteristics, rooted in the physics of the climate system, create requirements for climate information that supports decision-making.
-Climate characterizations should be consistent with known physical processes rather than purely statistical constructs.
-They should provide sufficient spatial and temporal resolution for the impact assessment at hand.
-Large ensembles help quantify the uncertainty sources described above rather than providing single-valued projections.
-Multiple plausible scenarios acknowledge deep uncertainties about future emissions, policies, and system responses.
-
-## Using Climate Models in Risk Assessment
-
-### The uncertainty cascade
-
-Climate impact projections involve an uncertainty cascade from emissions to impacts.
-Different socioeconomic pathways lead to different greenhouse gas concentrations.
-Climate sensitivity—the global temperature response to doubled CO₂—remains uncertain, with current estimates ranging from 2.5-4.0°C.
-Global temperature changes translate to regional climate patterns through complex atmospheric and oceanic dynamics.
-Regional climate changes then drive local impacts through sector-specific models for floods, droughts, agriculture, and other consequences.
-
-Uncertainty compounds at each step.
-For near-term projections (2030), internal climate variability often dominates uncertainty, meaning that natural fluctuations can mask or amplify climate change signals.
-For long-term projections (2100), scenario uncertainty becomes most important, as different emissions pathways lead to dramatically different climate outcomes.
-At regional scales and for extreme events, model uncertainty often dominates throughout the century.
-
-Climate models are evaluated against historical observations, process understanding, and paleoclimate data.
-A model that reproduces observed climate trends and captures realistic physical mechanisms provides more confidence for future projections.
-However, good historical performance doesn't guarantee accurate future projections, especially for unprecedented conditions or potential tipping point behaviors that lie outside historical experience.
+1. Climate models and modeling
+1. Multi-scale variability
+1. Specific weather patterns
+1. Climate change and sensitivity
+1. Hydrologic cycle
 
 ## Further reading {.unnumbered}
 
-For statistical approaches to climate extremes, @mudelsee_statistical:2020 provides excellent technical background on time series analysis and extreme value methods for climate applications.
-@merz_review:2014 offers a comprehensive review of flood risk assessment methods with practical examples that illustrate many concepts covered in this chapter.
-For a mathematically rigorous treatment grounded in dynamical systems theory, @ghil_extremes:2011 connects physical climate processes to statistical extreme value behavior.
+- @mudelsee_statistical:2020: statistical approaches to climate extremes
+- @merz_review:2014: flood risk methods connecting climate to impacts
+- @ghil_extremes:2011: physical processes and extreme value behavior

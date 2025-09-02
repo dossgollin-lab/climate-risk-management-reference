@@ -61,6 +61,7 @@ book:
     - part: "**Computational Case Studies**"
       chapters: 
         - notebooks/index.qmd
+        - notebooks/mosquitos.qmd
 
     - chapters/references.qmd
 
@@ -109,6 +110,14 @@ format:
     html-math-method: mathjax
     date-format: iso
     notebook-links: true
+  pdf:
+    papersize: letter
+    number-sections: true
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=1in
+      - right=1in
 
 glossary:
   path: _glossary.yml
@@ -116,7 +125,5 @@ glossary:
   show: true
 
 # execution options
-execute:
-  freeze: true
-  cache: true
-  jupyter: julia-1.11
+cache: true
+fig-format: svg

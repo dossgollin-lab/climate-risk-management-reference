@@ -5,8 +5,7 @@ title: Model Validation and Comparison 🚧
 ## See first {.unnumbered}
 
 This chapter builds on concepts from:
-- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
-- [Optimization](/chapters/fundamentals/optimization.qmd) (maximum likelihood estimation)
+- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd) (including maximum likelihood estimation)
 - [Monte Carlo Methods](/chapters/fundamentals/monte-carlo.qmd) (Bayesian inference)
 
 ## Learning objectives {.unnumbered}
@@ -107,10 +106,10 @@ Another interpretation is the amount of information lost when $Q$ is used to app
 
 In practice, we don't know the true distribution, so we approximate the log pointwise predictive density (lppd):
 $$
-\begin{align}
+\begin{aligned}
 \text{lppd} &= \log \prod_{i=1}^N p_\text{post}(y_i) = \sum_{i=1}^N \log \int p(y_i | \theta) p_\text{post} (\theta) d \theta \\
 &\approx \sum_{i=1}^N \log \left[ \frac{1}{S} \sum_{s=1}^S p(y_i | \theta^s) \right]
-\end{align}
+\end{aligned}
 $$
 where we have approximated the posterior with $S$ simulations from the posterior (e.g., using MCMC).
 

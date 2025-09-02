@@ -177,12 +177,12 @@ With this information, they can compute metrics like the expected annual damage,
 
 Plugging in a bounded logistic model for $d(h)$ and our lognormal model for $h$:
 $$
-\begin{align}
+\begin{aligned}
 p(d) &= \int_h d(h) p(h) \, dh \\
 &= \int_{-\infty}^\infty \mathbb{I}[h > 0] \text{logistic}(h) \mathcal{N}(h | \mu, \sigma^2) \, dh\\
 &= \int_0^\infty \text{logistic}(h) \mathcal{N}(\mu, \sigma^2) \, dh\\
 &= \int_0^\infty \frac{1}{1 + \exp(-k * (x - x0))} \frac {1}{\sigma {\sqrt {2\pi }}} \exp \left\{-{\frac {1}{2}}\left({\frac {x-\mu }{\sigma }}\right)^{2} \right\} \, dh
-\end{align}
+\end{aligned}
 $$
 
 ### Limitations: analytic approach
@@ -257,10 +257,6 @@ p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}
 $$
 
 If we are drawing samples from a distribution, we can calculate up to a constant of proportionality and -- since $p(y)$ doesn't depend on $\theta$ -- we can usually ignore it.
-
-$$
-\overbrace{p(\theta \mid y)}^\rm{posterior} \propto \underbrace{p(y \mid \theta)}_\rm{likelihood} \overbrace{p(\theta)}^\rm{prior}
-$$
 
 ### Markov Chain Monte Carlo (MCMC)
 

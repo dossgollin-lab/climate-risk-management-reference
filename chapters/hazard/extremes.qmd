@@ -211,10 +211,6 @@ Shape parameter $\xi$ should be approximately constant above appropriate thresho
 
 **Practical consideration**: Balance between removing dependence and preserving extreme values.
 
-{{< embed ../../notebooks/block-maxima.qmd#fig-mean-residual-life >}}
-
-{{< embed ../../notebooks/sewells-point.qmd#fig-return-scatter >}}
-
 ### Parameter Estimation
 
 Several approaches exist for fitting extreme value distributions:
