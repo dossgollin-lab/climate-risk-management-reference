@@ -1,16 +1,22 @@
 ---
-title: Stochastic Weather Generators 🚧
+title: Stochastic weather generators 🚧
 ---
 
 ## Learning objectives {.unnumbered}
 
+After reading this chapter, you should be able to:
 
-## Example: Hidden Markov Models (HMMs)
+- Understand the principles of stochastic weather generation
+- Apply statistical models for synthetic weather data
+- Use weather generators for downscaling climate model output
+- Evaluate the performance of weather generation models
 
-We can pull one of Andy's examples into a notebook
+## Essential concepts
 
-## Generators for Downscaling
-
-Generators can be used as a form of downscaling, where some credibly simulated variables from a climate model are used as input to a stattistical generator.
+1. Hidden Markov models for weather state modeling
+1. Multi-site and multi-variable generation
+1. Statistical downscaling applications
+1. Synthetic data validation and evaluation
+1. Integration with physical models
 
 ## Further reading {.unnumbered}

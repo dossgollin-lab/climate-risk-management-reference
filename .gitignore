@@ -23,3 +23,9 @@ site_libs/*
 
 notebooks/.jupyter_cache/
 notebooks/*_files/*
+
+*.tex
+*.pdf
+notebooks/.cache
+*/.cache
+.cache

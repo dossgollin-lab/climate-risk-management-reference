@@ -2,111 +2,23 @@
 title: Optimization 🚧
 ---
 
-## See first {.unnumbered}
-
-This chapter builds on concepts from:
-- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
-
 ## Learning objectives {.unnumbered}
 
-- Understand the components of an optimization problem: decision variables, objective functions, and constraints.
-- Learn how optimization is applied in statistics and policy search.
-- Explore the trade-offs between problem complexity and solution accuracy.
+After reading this chapter, you should be able to:
 
-Optimization is a field of study unto itself, and forms an essential backbone of statistics, machine learning, and operations research.
-Here, we briefly summarize key concepts and techniques in optimization, with a focus on their application to statistics and policy search.
+- Understand the components of optimization problems: decision variables, objectives, constraints
+- Apply optimization methods to climate policy and decision problems
+- Recognize trade-offs between problem complexity and solution accuracy
+- Connect optimization techniques to statistical inference and policy search
 
-## Overview
+## Essential optimization concepts
 
-Optimization is the study of finding the best solution to a problem from a set of feasible solutions.
-Thus, optimization problems typically consist of
-
-1. A set of decision variables , $x$, which are the inputs we can control (or the "dials" we can turn).
-1. One (or more) objective function(s), $f(x)$, which we want to minimize or maximize.
-1. A set of constraints which define the feasible region.
-
-Optimization is an incredibly diverse field.
-Problems can have many constraints or none; can have discrete or continuous decision variables (or both); can be static or dynamic; deterministic or stochastic; linear or nonlinear; or much more.
-When you encounter an optimization problem in the wild, you should always make sure you understand the decision variables (which define what is being optimized), the objective function(s), which define what makes a solution "good", and the constraints, which define what solutions are being considered.
-When you build an optimization model, you should always make sure to communicate these three components clearly.
-
-Because optimization is a widely studied field, exact solutions to some classes of problems are known, and nearly exact solutions to many others are known.
-However, these exact solutions often require formulating the problem in a very specific way.
-Thus, there is generally a trade-off between designing an optimization problem that is (relatively) easy to solve vs. one that represents the relevant system dynamics and uncertainties (relatively) accurately.
-Consequently, converting a decision problem into an optimization problem is somewhat of an art form, rather than an exact science; this is largely the field of operations research.
-
-## Connection to statistics
-
-Statistical inference often involves optimization problems.
-For example, maximum likelihood estimation (covered in [Probability and Inference](/chapters/fundamentals/probability-stats.qmd)) finds parameter values that maximize the likelihood function.
-The least squares regression problem is equivalent to maximizing a Normal likelihood.
-
-However, the real power of optimization emerges in policy and decision problems, where we must choose actions under uncertainty.
-
-## Motivation: Policy search
-
-Climate risk management often requires choosing optimal policies or strategies from many alternatives.
-Unlike curve fitting, these problems typically involve:
-
-- **Complex objectives**: balancing costs, benefits, and risks
-- **Multiple constraints**: budget limits, physical feasibility, political acceptability
-- **Uncertainty**: unknown future climate conditions and policy outcomes
-- **Dynamic decisions**: policies that adapt over time
-
-### Examples of policy optimization problems
-
-**Seawall design**: Choose the height of coastal protection to minimize total expected costs (construction + expected flood damages).
-- Decision variables: seawall height
-- Objective: minimize construction cost + expected annual damages  
-- Constraints: engineering feasibility, budget limits
-
-**Water allocation**: Allocate limited water supplies among competing uses during drought.
-- Decision variables: allocation to agriculture, urban, environmental uses
-- Objective: maximize economic value while meeting minimum requirements
-- Constraints: total water available, minimum environmental flows, equity requirements
-
-**Portfolio adaptation**: Choose a mix of adaptation strategies for a city.
-- Decision variables: investment levels in flood barriers, green infrastructure, building codes, etc.
-- Objective: minimize climate risk while staying within budget
-- Constraints: budget, implementation capacity, co-benefits
-
-**Evacuation planning**: Design evacuation routes and timing for hurricane threats.
-- Decision variables: which routes to use, when to order evacuation  
-- Objective: minimize evacuation time and risk
-- Constraints: road capacity, population distribution, forecast uncertainty
-
-These problems share common features that make them much more challenging than simple curve fitting:
-- Multiple competing objectives that must be traded off
-- Constraints that define feasible solutions
-- Uncertainty about outcomes and parameter values
-- High-dimensional decision spaces with many variables
-
-## Optimization toolkit
-
-### Gradient-Based Optimization
-
-This is useful for thinking about neural networks, but also for many other optimization problems.
-The key idea is that we can use the gradient of the objective function to find the direction in which to move to improve our solution.
-This is often called **gradient descent**.
-The basic idea is to take a step in the direction of the gradient, which is the direction of steepest ascent.
-In the simplest case,
-$$
-\Delta x = -\alpha \nabla f(x)
-$$
-where $\alpha$ is the step size or learning rate.
-This is a hyperparameter that we can tune.
-
-The primary limitation of gradient descent is that it can get stuck in local minima.
-This is especially true for non-convex problems, where there may be many local minima.
-A vast range of techniques, a treatment of which merits a textbook on its own, have been developed to address this issue, including for example the Adam optimizer [@kingma_adam:2017].
-
-### Stochastic Optimization
-
-### Sequential Decision Problems
-
-### High-Dimensional Optimization
+1. Decision variables, objective functions, and constraints
+1. Gradient-based optimization methods
+1. Stochastic and sequential optimization
+1. Policy optimization in climate risk management
+1. Trade-offs between problem formulation and solution methods
 
 ## Further reading {.unnumbered}
 
-- **@sutton_reinforcement:2018** provides a comprehensive introduction to reinforcement learning, which is broadly the study of sequential decision-making under uncertainty.
-- **@powell_textbook:2022** provides a comprehensive treatment of sequential decision-making under uncertainty, aiming at a unified framework
+- @sutton_reinforcement:2018: Reinforcement learning and sequential decision-making

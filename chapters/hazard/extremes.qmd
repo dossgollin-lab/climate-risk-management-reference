@@ -1,772 +1,183 @@
 ---
-title: Extreme Value Theory 🚧
+title: "Extreme value theory ✏️"
 notebook-links: true
 ---
 
-## See first {.unnumbered}
+### See first {.unnumbered}
 
-This chapter builds on concepts from:
-- [Probability and Statistics](/chapters/fundamentals/probability-stats.qmd)
-- [Fundamentals of Climate Science](/chapters/fundamentals/climate-science.qmd)
+This chapter builds on concepts from [Probability and Statistics](../fundamentals/probability-stats.qmd).
 
-## Learning objectives {.unnumbered}
+### Learning objectives {.unnumbered}
 
 After reading this chapter, you should be able to:
 
-- Understand the motivation for extreme value theory in climate risk assessment
-- Distinguish between block maxima and peak-over-threshold approaches  
-- Select and fit appropriate extreme value distributions (GEV, GPD)
-- Calculate return periods, return levels, and exceedance probabilities
-- Quantify and interpret different sources of uncertainty in extreme value analysis
-- Recognize the challenges posed by non-stationarity and climate change
-- Apply extreme value methods to real-world case studies
+- Understand the motivation for extreme value theory in climate risk assessment.
+- Distinguish between block maxima and peak-over-threshold approaches.
+- Select and fit appropriate extreme value distributions (GEV, GPD).
+- Calculate return periods, return levels, and exceedance probabilities.
+- Quantify and interpret different sources of uncertainty in extreme value analysis.
+- Recognize the challenges posed by non-stationarity and climate change.
+- Apply extreme value methods to real-world case studies.
 
-## Overview
+## Motivation
 
-Extreme value theory (EVT) provides the statistical foundation for analyzing rare, high-impact events.
+The design of reliable infrastructure, such as stormwater systems in Harris County, Texas, depends on a quantitative understanding of extreme environmental events.
+Engineers must characterize the magnitude and frequency of rare phenomena.
+For example, they might need to determine the expected recurrence interval of a daily rainfall total that exceeds a critical design threshold, such as 300 mm.
 
-### Applications
+An initial, intuitive approach is to analyze the historical record.
 
-Key applications include:
+{{< embed ../../notebooks/extremes-examples.qmd#houston-data >}}
 
-- **Engineering design**: Infrastructure sizing for extreme loads
-- **Emergency management**: Planning for rare but catastrophic events  
-- **Regulation**: Setting safety standards and building codes
-- **Insurance**: Pricing catastrophic risk and managing tail exposures
-- **Financial risk**: Managing extreme market movements and operational risks
+Analysis of over 70 years of daily precipitation data from a station in Houston reveals 13 days where rainfall exceeded 150 mm.
+This allows for a simple empirical estimate of the event's frequency.
+Thirteen exceedances in 71 years suggests an average recurrence interval of approximately 5.5 years.
+For the 300 mm threshold, however, the historical record contains zero events.
+An empirical estimate of the probability is therefore zero, which is uninformative for risk assessment and infrastructure design.
+We require a method for extrapolating beyond the range of observed data.
 
-### Variables of Interest
+A natural extension would be to fit a standard parametric probability distribution—such as a Gamma distribution, which is commonly used for precipitation—to the entire set of daily rainfall observations.
+One could then use the extreme upper tail of the fitted distribution to estimate the probability of exceeding 300 mm.
 
-Common applications in climate risk include:
-- Streamflow extremes for flood risk assessment
-- Precipitation rates and totals for stormwater design
-- Wind speeds for structural engineering
-- Temperature extremes for energy planning and public health
+This approach, however, is fundamentally unreliable.
+The goodness-of-fit of a parametric model is driven by its ability to describe the bulk of the data, where observations are plentiful.
+Minor model misspecifications in this high-density region can translate into substantial errors in the far tails of the distribution, where data are sparse or nonexistent.
+As stated by @coles_extremes:2001, the foundational text on this topic, "very small discrepancies in the estimate of F can lead to substantial discrepancies for F^n^".
 
-### Why Extremes Are Challenging
+The models that best describe the central tendency of a process are not necessarily suitable for describing its extremes.
+This fragility of tail extrapolation necessitates a theoretical framework developed specifically for modeling the behavior of extreme values.
 
-Extremes present unique statistical challenges:
+A naive empirical estimator for the exceedance probability of a value $x$ based on $n$ observations $X_i$ is the simple proportion of exceedances:
 
-- **Rarity**: By definition, we have limited data on extreme events
-- **Extrapolation**: Need to estimate probabilities beyond observed range  
-- **High stakes**: Errors in extreme value estimates have large consequences
-- **Fundamental challenge**: Extrapolation is inherently difficult
-
-**Key sources of uncertainty**:
-
-1. **Parametric uncertainty**: Multiple parameter values consistent with data
-2. **Model structure uncertainty**: Different distributional assumptions
-3. **Sampling uncertainty**: Finite data for rare event estimation
-4. **Non-stationarity**: Climate change affects extreme value statistics
-
-## Theoretical Frameworks
-
-Two primary approaches exist for extreme value analysis:
-
-## Block Maxima Approach
-
-### Methodology
-
-**Block maxima** divides data into blocks (typically years) and models the maximum in each block:
-
-1. **Define blocks**: Usually annual (but definition of "year" matters)
-2. **Extract maxima**: One extreme value per block
-3. **Model distribution**: Fit theoretical distribution to block maxima
-
-### Advantages and Disadvantages
-
-**Advantages**:
-- Easier to communicate and implement
-- Flexible modeling frameworks available
-- Direct connection to return periods
-- Well-established theoretical foundation
-
-**Disadvantages**:
-- Timing of extremes within blocks not captured
-- Multiple extremes in one block ignored
-- Sometimes block maximum not particularly "extreme"
-- Potential waste of information
-
-### Generalized Extreme Value (GEV) Distribution
-
-The **GEV distribution** is the natural choice for block maxima.
-For properly standardized maxima, the distribution has cumulative distribution function:
-
-$$F(x) = \exp\left\{-\left[1 + \xi\left(\frac{x - \mu}{\sigma}\right)\right]^{-1/\xi}\right\}$$
-
-where:
-- $\mu$: location parameter (center of distribution)
-- $\sigma > 0$: scale parameter (spread of distribution) 
-- $\xi$: shape parameter (tail behavior)
-
-### Shape Parameter Interpretation
-
-The shape parameter $\xi$ determines tail behavior:
-
-- **$\xi > 0$ (Fréchet)**: Heavy tails, no upper bound
-- **$\xi = 0$ (Gumbel)**: Light tails, unbounded but exponentially decreasing
-- **$\xi < 0$ (Weibull)**: Light tails, finite upper bound at $\mu - \sigma/\xi$
-
-**Critical insight**: Shape parameter estimation is challenging but crucial for extrapolation.
-
-## Peak-Over-Threshold (POT) Approach
-
-### Methodology
-
-**Peak-over-threshold** models all events exceeding a chosen threshold:
-
-1. **Define threshold** $u$: Values above this level considered "extreme"
-2. **Extract exceedances**: All values $x_i > u$
-3. **Model excesses**: Fit distribution to $y_i = x_i - u$ 
-4. **Model arrivals**: Separately model frequency of threshold exceedances
-
-### Advantages and Disadvantages
-
-**Advantages**:
-- Focuses on meaningful events regardless of timing
-- Uses more extreme data than block maxima approach
-- Can capture multiple extremes per time period
-- More efficient use of available extreme value information
-
-**Disadvantages**:  
-- Threshold selection is subjective and critical
-- Arrival process modeling adds complexity
-- Potential dependence between threshold exceedances
-
-### Generalized Pareto Distribution (GPD)
-
-For threshold excesses $Y = X - u | X > u$, the **GPD** is the natural choice:
-
-$$F(y) = 1 - \left(1 + \xi \frac{y}{\sigma}\right)^{-1/\xi}$$
-
-where $y \geq 0$, $\sigma > 0$, and:
-- $\sigma$: scale parameter  
-- $\xi$: shape parameter (same interpretation as GEV)
-
-**Connection to GEV**: GPD and GEV have the same shape parameter by theoretical construction.
-
-## Terminology and Key Concepts
-
-### Return Periods and Levels
-
-Fundamental concepts for communicating extreme value results:
-
-- **Exceedance probability**: $p$ = probability of exceeding a level in any given year
-- **Return period/recurrence interval**: $T = 1/p$ = average time between exceedances  
-- **Return level**: Value exceeded with probability $1/T$ = quantile corresponding to return period $T$
-
-**Example**: 100-year flood has:
-- Exceedance probability: $p = 0.01$ (1% chance per year)
-- Return period: $T = 100$ years
-- Return level: Discharge exceeded on average once per century
-
-**Important**: Return period is an **average** - a 100-year event can occur multiple times in a decade or not at all for centuries.
-
-### Plotting Positions
-
-For visualization, need to assign return periods to observed data:
-
-- **Ranks**: Largest observation = rank 1, second largest = rank 2, etc.
-- **Weibull plotting position**: $p = m/(N+1)$ where $m$ = rank, $N$ = sample size
-- **Return period**: $T = 1/p = (N+1)/m$
-
-**Note**: Various plotting position formulas exist in literature - choice affects visualization but not fitted model parameters.
-
-### Threshold Selection
-
-**Central challenge**: Balance bias vs. variance
-- **Too low**: Model not asymptotically valid → bias
-- **Too high**: Few exceedances → large uncertainty
-
-### Mean Residual Life Plot
-
-Based on GPD mean excess property:
-
-If $Y_i \sim \text{GPD}(\sigma, \xi)$, then the mean is given by
 $$
-\mathbb{E}[Y] = \frac{\sigma}{1 - \xi}, \quad \xi < 1.
-$$ {#eq-gpd-mean}
-
-For threshold exceedances:
-$$
-\mathbb{E}[X - u | X > u] = \frac{\sigma_u}{1 - \xi}, \quad \xi < 1
-$$ {#eq-gpd-mean-excess}
-
-If GPD is appropriate above threshold $u_0$, then mean excess should be approximately linear in $u$ for $u > u_0$.
-This forms the basis of the "mean residual life plot" - subjective but useful diagnostic.
-
-### Parameter Stability Plot
-
-Alternative approach: estimate GPD parameters for range of thresholds.
-Shape parameter $\xi$ should be approximately constant above appropriate threshold.
-
-### Declustering
-
-**Problem**: Successive threshold exceedances may be dependent (e.g., multi-day storms)
-**Solution**: "Decluster" by combining nearby exceedances or imposing minimum separation
-
-**Methods**:
-- **Runs declustering**: Combine exceedances separated by < threshold for < specified duration
-- **Peak identification**: Extract local maxima with minimum separation
-
-**Practical consideration**: Balance between removing dependence and preserving extreme values.
-
-### Parameter Estimation
-
-Several approaches exist for fitting extreme value distributions:
-
-#### Maximum Likelihood Estimation (MLE)
-
-**Most common approach**: Find parameters that maximize likelihood of observed data
-
-**Advantages**:
-- Asymptotically efficient and unbiased
-- Provides uncertainty estimates via Fisher information
-- Standard statistical inference procedures apply
-
-**Disadvantages**:
-- Can be unstable for small samples
-- May not exist for some parameter combinations
-- Sensitive to outliers
-
-#### Probability Weighted Moments (PWM)
-
-**Alternative approach**: Match theoretical and sample probability weighted moments
-
-**Advantages**:
-- Often more robust than MLE for small samples
-- Computationally simpler
-- Less sensitive to outliers
-
-**Disadvantages**:
-- Less efficient than MLE asymptotically
-- Uncertainty quantification more complex
-
-#### Bayesian Methods
-
-**Modern approach**: Specify prior distributions and compute posterior
-
-**Advantages**:
-- Natural uncertainty quantification
-- Can incorporate prior knowledge
-- Regularizes parameter estimates
-- Handles model selection coherently
-
-**Disadvantages**:
-- Requires prior specification
-- Computationally intensive
-- Results depend on prior choice
-
-## Challenges in Extreme Value Analysis
-
-### Parametric Uncertainty
-
-**Problem**: Many parameter values consistent with limited extreme data
-**Consequence**: Very different conclusions about rare event probabilities
-**Example**: Shape parameter uncertainty leads to large confidence intervals for return levels
-
-**Management approaches**:
-- Bayesian methods for uncertainty quantification
-- Regional information to stabilize estimates
-- Informative priors based on physical understanding
-
-### Model Structure Uncertainty
-
-**Problem**: Different distributional assumptions yield different results
-**Common comparisons**:
-- GEV vs. alternative distributions (Log-Pearson III, etc.)
-- Stationary vs. non-stationary models
-- Block maxima vs. POT approaches
-
-**Management approaches**:
-- Information criteria for model selection
-- Model averaging across plausible alternatives
-- Sensitivity analysis across model choices
-
-### Sampling Uncertainty 
-
-**Problem**: Finite samples for rare event estimation
-**Key insight**: If Hurricane Harvey had never occurred, 100-year rainfall estimates would be very different
-
-**Implications**:
-- Confidence intervals grow rapidly with return period
-- Need for longer records or supplementary information
-- Regional pooling to increase effective sample size
-
-## Non-Stationarity and Climate Change
-
-**Traditional assumption**: Statistical properties constant over time
-**Climate reality**: Extreme value characteristics changing due to:
-- Rising temperatures affecting heat extremes
-- Changing precipitation patterns
-- Shifting storm tracks and intensity
-- Sea level rise affecting coastal extremes
-
-### Covariate Methods
-
-Allow extreme value parameters to depend on covariates:
-
-$$\mu(t) = \mu_0 + \mu_1 \cdot \text{covariate}(t)$$
-
-**Common covariates**:
-- Time trends (linear, polynomial)
-- Climate indices (ENSO, AMO)
-- Global temperature anomalies
-- Physical process variables
-
-**Benefits**: Called "process-informed" approaches [@schlef_idf:2023]
-**Reviews**: See @salas_review:2018 for comprehensive treatment
-
-### Implementation Challenges
-
-- **Model selection**: Which covariates to include?
-- **Functional form**: Linear vs. nonlinear relationships?
-- **Parameter dependence**: Which parameters vary with covariates?
-- **Prediction**: How to project covariates into future?
-
-### Practical Considerations
-
-**Design implications**: Traditional return period concept breaks down
-**Risk assessment**: Need for time-varying risk measures
-**Decision-making**: Robust strategies under non-stationarity
-
-## Non-Stationary Extreme Value Analysis: Theory and Practice
-
-### The Stationarity Assumption and Its Breakdown
-
-Extreme value theory is based on the assumption that the data are independent and identically distributed (iid):
-- Each draw comes from the same distribution
-- Statistical properties remain constant over time
-
-This assumption is violated by:
-- Climate change effects on temperature and precipitation extremes
-- Low-frequency variability (e.g., Pacific Decadal Oscillation)
-- Memory processes in the climate system
-- Urbanization and land use changes
-
-### What is Stationarity?
-
-A stationary process is a stochastic process whose unconditional joint probability distribution does not change when shifted in time.
-A stochastic process is a model for a *sequence* of random variables (e.g., random walk, MCMC).
-
-As famously stated by @milly_stationary:2008: "Stationarity is dead."
-
-### Climate Change Impacts on Extremes
-
-**Thermodynamic Effects:**
-- Clausius-Clapeyron relation: $e_s(T) = e_0 \exp\left(\frac{L_v}{R_v T}\right)$
-- Approximately 7% increase in atmospheric moisture per degree K of warming
-- Direct impacts on precipitation intensity
-
-**Dynamic Effects:**
-- Longer, hotter summers due to slower seasonal transitions
-- Poleward expansion of tropical circulation patterns
-- Changes in storm structure and intensity
-- Shifts in jet stream patterns affecting extreme weather
-
-The following content draws from @seneviratne_IPCC:2021 executive summary:
-
-**Climate Change Impacts on Precipitation:**
-- The frequency and intensity of heavy precipitation events have likely increased at the global scale over a majority of land regions with good observational coverage
-- Heavy precipitation has likely increased on the continental scale over three continents: North America, Europe, and Asia
-- Heavy precipitation will generally become more frequent and more intense with additional global warming
-- At a global warming level of 4°C relative to the pre-industrial level, very rare (e.g., one in 10 or more years) heavy precipitation events would become more frequent and more intense than in the recent past, on the global scale (virtually certain) and in all continents and AR6 regions
-- The projected increase in the intensity of extreme precipitation translates to an increase in the frequency and magnitude of pluvial floods – surface water and flash floods – (high confidence)
-
-**Climate Change Impacts on River Floods:**
-- Significant trends in peak streamflow have been observed in some regions over the past decades (high confidence)
-- The seasonality of river floods has changed in cold regions where snow-melt is involved, with an earlier occurrence of peak streamflow (high confidence)
-- Global hydrological models project a larger fraction of land areas to be affected by an increase in river floods than by a decrease in river floods (medium confidence)
-
-**Climate Change Impacts on Extreme Temperatures:**
-- The frequency and intensity of hot extremes (including heatwaves) have increased, and those of cold extremes have decreased on the global scale since 1950 (virtually certain)
-- Human-induced greenhouse gas forcing is the main driver of the observed changes in hot and cold extremes on the global scale (virtually certain) and on most continents (very likely)
-- The frequency and intensity of hot extremes will continue to increase and those of cold extremes will continue to decrease, at global and continental scales and in nearly all inhabited regions with increasing global warming levels
-
-**Climate Change Impacts on Tropical Cyclones:**
-- The average and maximum rain rates associated with tropical cyclones (TCs), extratropical cyclones and atmospheric rivers across the globe, and severe convective storms in some regions, increase in a warming world (high confidence)
-- It is likely that the global proportion of Category 3–5 tropical cyclone instances has increased over the past four decades
-- The proportion of intense TCs, average peak TC wind speeds, and peak wind speeds of the most intense TCs will increase on the global scale with increasing global warming (high confidence)
-- Future wind speed changes are expected to be small, although poleward shifts in the storm tracks could lead to substantial changes in extreme wind speeds in some regions (medium confidence)
-
-**El Niño-Southern Oscillation Effects:**
-El Niño-Southern Oscillation remains a major driver of interannual climate variability, affecting extreme value statistics through teleconnections that modify regional precipitation and temperature patterns.
-
-### Non-Stationary Modeling Approaches
-
-**Rolling Window Approach:**
-- Simple method that estimates parameters using moving time windows
-- **Advantages**: Simple and interpretable
-- **Disadvantages**: Noisy estimates, potential loss of extreme events at window boundaries
-- Less bias but more variance compared to stationary models
-
-**Regression Models for Parameters:**
-In linear regression and GLMs, every data point is drawn from its own distribution that depends on parameters and covariates.
-We can apply this approach to extreme value models by allowing GEV or GPD parameters to vary with covariates.
-
-**Types of Parameter Variation:**
-What can vary with time/covariates?
-1. Location parameter: $\mu(t) = f(X(t))$
-2. Scale parameter: $\sigma(t) = f(X(t))$
-3. Both location and scale parameters
-4. Scale and coefficient of variation: $\mu(t) = \phi \sigma(t)$
-5. Varying shape parameter (impractical but theoretically allowed)
-
-**Functional Forms for Parameter Variation:**
-How parameters vary with covariates:
-1. Linear relationships: $\theta(t) = \alpha + \beta_1 X_1(t) + \beta_2 X_2(t) + \cdots$
-2. Nonlinear relationships using splines, GAMs, or other flexible approaches
-3. Anything is theoretically allowed, but not everything is practical for extreme value analysis
-
-### Covariate Selection
-
-**General Guidance:**
-- Physical theory and domain knowledge are invaluable for covariate selection
-- For precipitation extremes, logarithm of CO2 concentration is often a useful covariate because:
-  - It isolates the global warming signal from natural variability like ENSO
-  - It provides a monotonic trend that matches expected thermodynamic responses
-
-**Common Covariates:**
-- Time (linear or polynomial trends)
-- Global mean temperature anomalies
-- Logarithm of atmospheric CO2 concentration
-- Climate oscillation indices (ENSO, AMO, PDO)
-- Local environmental variables (sea surface temperatures, soil moisture)
-
-### Case Study: Houston Hobby Airport Precipitation Analysis
-
-**Motivation:** Analysis of trends in extreme precipitation at Houston Hobby Airport demonstrates practical implementation of non-stationary extreme value methods.
-
-**Data Considerations:**
-- Annual maximum daily precipitation from NOAA GHCND
-- Quality control: keep only years with at least 350 days of data
-- Need to address potential non-stationarity due to climate change
-
-**Trend Analysis:**
-The Mann-Kendall test is commonly used to assess the presence of trends in time series data.
-Rank correlation between precipitation ranks and years provides initial evidence of trends.
-
-**Model Formulations:**
-
-*Location Trend Model:*
-$$
-\begin{aligned}
-y_t &\sim \text{GEV} \left( \mu_t, \sigma, \xi \right) \\
-\mu_t &= \alpha + \beta X_t
-\end{aligned}
+\hat{P}(X > x) = \frac{1}{n}\sum_{i=1}^{n} \mathbf{1}(X_i > x)
 $$
 
-*Scale Trend Model:*
+where $\mathbf{1}(\cdot)$ is the indicator function.
+This is useful when the number of exceedances is large, but fails for extrapolation when the sum is zero, as was the case for the 300mm threshold.
+This mathematically demonstrates the limitations of simple empirical methods and motivates the specialized approaches that follow.
+
+## Approaches for modeling extreme values
+
+Extreme Value Theory (EVT) provides such a framework.
+Rather than modeling the entire distribution of a process, EVT focuses on the distribution of its extreme values.
+There are two primary methods for extracting these values from a time series.
+
+### Block maxima
+
+In this method, the period of observation is divided into non-overlapping blocks of equal duration (e.g., years).
+For each block of size $n$, we define the block maximum as $M_n = \max\{X_1, \dots, X_n\}$.
+This yields a new time series of block maxima.
+A crucial conceptual point is that we are not studying a single maximum possible value of the process.
+Instead, we are studying the distribution of the sample maximum, $M_n$, which is itself a random variable.
+This is why a distribution like the GEV is needed to describe its behavior.
+This approach is intuitive and directly relates to concepts of annual risk, but it can be inefficient as it discards other potentially extreme events within a block.
+
+### Peaks-over-threshold
+
+The peaks-over-threshold (POT) method defines a set of exceedances over a high threshold $u$ as $\{X_i : X_i > u\}$.
+The variable of interest is the value of the **excesses** themselves, $Y = X_i - u$, for all $X_i$ in the set of exceedances.
+The GPD is a model for these excess amounts, not the raw values.
+This approach is more data-efficient than the block maxima method.
+Its primary challenge lies in selecting an appropriate threshold, which involves a trade-off between bias (if the threshold is too low) and variance (if the threshold is too high, yielding too few data points).
+
+## Asymptotic theory for extremes
+
+The statistical justification for both the block maxima and POT approaches comes from asymptotic theorems that describe the limiting distributions of extreme values.
+
+### Theory for block maxima: The GEV distribution
+
+The theoretical justification for the block maxima approach is the **Extremal Types Theorem**.
+This theorem states that for a large class of underlying distributions, the distribution of the normalized block maximum $M_n$ converges to the **Generalized Extreme Value (GEV)** distribution as $n \to \infty$.
+The GEV is a flexible three-parameter family with a cumulative distribution function (CDF) given by:
+
 $$
-\begin{aligned}
-y_t &\sim \text{GEV} \left( \mu, \sigma_t, \xi \right) \\
-\log(\sigma_t) &= \alpha + \beta X_t
-\end{aligned}
-$$
-
-*Combined Location and Scale Trend:*
-$$
-\begin{aligned}
-y_t &\sim \text{GEV} \left( \mu_t, \sigma_t, \xi \right) \\
-\mu_t &= \alpha_\mu + \beta_\mu X_t \\
-\log(\sigma_t) &= \alpha_\sigma + \beta_\sigma X_t
-\end{aligned}
-$$
-
-### Implementation Considerations
-
-**Computational Tools:**
-- `Extremes.jl` package provides `gevfitbayes()` function with covariate support
-- Can specify `locationcovid` and `logscalecovid` parameters for regression modeling
-- Default uniform priors may not be ideal - custom priors often needed
-
-**Model Comparison:**
-Comparison between stationary and various non-stationary models helps identify:
-- Which parameters are most sensitive to climate change
-- How return level estimates change with different trend assumptions
-- Uncertainty in future projections under continued warming
-
-### Key Insights from Non-Stationary Analysis
-
-**Bias-Variance Trade-off:**
-- Non-stationary models reduce bias by accounting for trends
-- But increase variance due to additional parameters to estimate
-- Physical process knowledge helps guide model selection
-
-**Parametric Uncertainty:**
-- Non-stationary models typically have larger parametric uncertainty
-- Future projections require assumptions about covariate evolution
-- Model comparison becomes even more critical
-
-**Practical Implications:**
-- Traditional design standards may need updating
-- Infrastructure planning must account for changing risk profiles
-- Adaptive management strategies become more important
-
-## Regionalization and Spatial Methods
-
-**Motivation**: Single-site records often too short for reliable extreme value analysis
-
-Nearby stations should (usually) have similar precipitation, flood, or other extreme event probabilities.
-Regionalization methods reduce estimation error by pooling information while reducing sampling error from random variation between nearby stations.
-However, regionalization does NOT reduce sampling error from major regional events that affect all stations simultaneously.
-
-### Classical Regional Frequency Analysis
-
-**L-Moment Estimators:**
-L-moments are linear combinations of order statistics that can be used to match theoretical and empirical distribution moments.
-
-**Advantages**:
-- Computationally efficient
-- Work well in practice
-- Robust parameter estimation
-
-**Disadvantages**:
-- Less flexible than likelihood-based methods
-- Difficult to quantify parametric uncertainty
-- Limited ability to incorporate covariates
-
-**Regional Frequency Analysis Process:**
-1. **Assign sites to regions** based on climate, geography, or other similarity measures
-2. **Estimate L-moments for each site** using observed data
-3. **Check for regional homogeneity** using statistical tests
-4. **Take regional L-moments** as the weighted mean of site L-moments
-5. **Apply scaling factors** (e.g., average annual maximum flood for each site)
-
-This approach is best implemented using the R `lmomRFA` package, which can be called from Julia using `RCall.jl`.
-
-### Region of Influence Approach
-
-**Motivation:** RFA assumes all sites are assigned to a single region, but often regions are not distinct.
-
-**Methodology:**
-1. **Define similarity measures** between each pair of sites (e.g., distance, land use, elevation, climate indices)
-2. **For estimates at site i**, define its "region of influence" as the most similar sites (analogous to k-nearest neighbors)
-3. **Estimate L-moments** for each site and compute weighted average as in RFA
-4. **Allow flexible, site-specific regions** rather than rigid regional boundaries
-
-**Advantages**:
-- More flexible than traditional RFA
-- Can adapt region definition to local characteristics
-- Better handles sites near regional boundaries
-
-### Hierarchical Bayesian Models
-
-Modern spatial approaches use hierarchical models to balance between "full pooling" (all sites identical) and "no pooling" (each site independent).
-
-### Full Pooling Approach
-
-**Concept**: Assume within a region, all sites have the same distribution.
-Estimate a single distribution for the entire region.
-This is analogous to classical regional frequency analysis.
-
-**Bayesian Implementation:**
-```julia
-@model function gev_fully_pooled(y::AbstractMatrix)
-    N_yr, N_stn = size(y)
-    μ ~ Normal(5, 5)
-    σ ~ LogNormal(0, 2)
-    ξ ~ Uniform(-0.5, 0.5)
-    for s in 1:N_stn
-        for t in 1:N_yr
-            if !ismissing(y[t, s])
-                y[t, s] ~ GeneralizedExtremeValue(μ, σ, ξ)
-            end
-        end
-    end
-end
-```
-
-**Advantages**: 
-- Fast sampling due to high data-to-parameter ratio
-- Simple to implement and interpret
-- Maximizes information sharing across sites
-
-**Important Limitation**: 
-This approach weights each observation equally, regardless of site or year.
-If some years have more observations than others, those years are implicitly weighted more heavily.
-A better model would weight each year equally.
-
-### Partial Pooling Approach
-
-**Concept**: Model parameters at each site as being drawn from a common distribution.
-This balances between full pooling and no pooling by sharing information while allowing site-specific variation.
-
-**Mathematical Framework:**
-$$
-\begin{aligned}
-    y_{s,t} &\sim \text{GEV}(\mu_s, \sigma_s, \xi_s) \\
-    \mu_s &\sim \text{Normal}(\mu^0, \tau^\mu) \\
-    \sigma_s &\sim \text{LogNormal}(\sigma^0, \tau^\sigma) \\
-    \xi &\sim \text{Uniform}(-0.5, 0.5) \text{ (fully pooled)}
-\end{aligned}
+G(z) = \exp\left\{ -\left[ 1 + \xi \left( \frac{z - \mu}{\sigma} \right) \right]^{-1/\xi} \right\}
 $$
 
-where $s$ is the site index and $t$ is the year index.
+This is defined on the set $\{z: 1 + \xi(z - \mu)/\sigma > 0\}$.
+The parameters are location ($\mu$), scale ($\sigma > 0$), and shape ($\xi$).
+These parameters depend on the block size $n$.
+For example, if you change from annual to biennial blocks, the parameters will change in a predictable way.
 
-**Hyperparameters**: In Bayesian statistics, hyperparameters like $\mu^0$ and $\tau^\mu$ are learned as part of the model.
-These describe the distribution from which site-specific parameters are drawn.
+### Theory for threshold exceedances: The GPD
 
-**Implementation Example:**
-```julia
-@model function gev_partial_pool(y::AbstractMatrix)
-    N_yr, N_stn = size(y)
+The corresponding theory for the POT approach is the **Pickands–Balkema–de Haan Theorem**.
+It states that for a wide range of distributions, the distribution of excesses over a high threshold $u$ can be approximated by the **Generalized Pareto Distribution (GPD)**.
+Conceptually, if the GEV describes the behavior of the maximum of a large block, the GPD describes the behavior of the distribution's tail that produced that maximum.
+It is the distribution one would expect to see by "zooming in" on the tail of a distribution above a high threshold.
+The GPD is a two-parameter family with a CDF for excesses $Y = X - u$ given by:
 
-    # Define hyperparameters with informative priors
-    μ₀ ~ Normal(5, 3)
-    τμ ~ LogNormal(0, 0.5)
-    σ₀ ~ LogNormal(0.5, 0.5)
-    τσ ~ LogNormal(0, 0.5)
-
-    # Site-specific parameters depend on hyperparameters
-    μ ~ filldist(Normal(μ₀, τμ), N_stn)
-    σ ~ filldist(truncated(Normal(σ₀, τσ), 0, Inf), N_stn)
-
-    # Fully pooled shape parameter
-    ξ ~ Uniform(-0.5, 0.5)
-
-    # Likelihood
-    for s in 1:N_stn
-        for t in 1:N_yr
-            y[t, s] ~ GeneralizedExtremeValue(μ[s], σ[s], ξ)
-        end
-    end
-end
-```
-
-**Computational Considerations**: 
-With $N$ stations, we have $4 + N + N + 1 = 5 + 2N$ parameters to estimate, making sampling slower than full pooling.
-Careful prior specification becomes more important with increased model complexity.
-
-### Spatial Regression Models
-
-**Alternative Approach**: Model parameters as functions of geographical location and environmental covariates.
-This can simplify the model by reducing the number of parameters to estimate.
-
-**Simple Spatial Model Example:**
 $$
-\begin{aligned}
-    \mu(s) &= \alpha^\mu + \beta^\mu_1 \cdot \text{lat}(s) + \beta^\mu_2 \cdot \text{lon}(s) \\
-    \sigma(s) &= \alpha^\sigma + \beta^\sigma_1 \cdot \text{lat}(s) + \beta^\sigma_2 \cdot \text{lon}(s) \\
-    y_{s,t} &\sim \text{GEV}(\mu(s), \sigma(s), \xi)
-\end{aligned}
+H(y) = 1 - \left( 1 + \frac{\xi y}{\sigma_u} \right)^{-1/\xi}
 $$
 
-**Extensions**:
-- Include elevation, distance to coast, climate indices as covariates
-- Use flexible relationships (splines, GAMs) instead of linear functions
-- Incorporate spatial correlation through Gaussian process priors
-- Combine with temporal trends for spatiotemporal modeling
+This is defined on $\{y: y > 0 \text{ and } (1 + \xi y / \sigma_u) > 0\}$.
+The parameters are scale ($\sigma_u > 0$) and shape ($\xi$).
 
-### Practical Implementation Considerations
+### The shape parameter ($\xi$): A unifying concept
 
-**Data Challenges:**
-- Missing data requires careful treatment in likelihood calculations
-- Different record lengths across sites
-- Need for quality control and homogenization
+The **shape parameter, $\xi$**, is the most critical parameter in extreme value analysis and has the same interpretation in both the GEV and GPD.
+It governs the tail behavior of the distribution.
 
-**Model Selection:**
-- Compare full pooling, partial pooling, and no pooling approaches
-- Use cross-validation or information criteria
-- Consider out-of-sample prediction performance
+-   $\xi = 0$ (**Gumbel-type tail**): The tail decays exponentially (light tail).
+-   $\xi > 0$ (**Fréchet-type tail**): The tail decays as a polynomial (heavy tail), with no upper bound.
+-   $\xi < 0$ (**Weibull-type tail**): The distribution has a finite upper bound.
 
-**Uncertainty Quantification:**
-- Hierarchical models naturally provide uncertainty estimates
-- Can propagate parameter uncertainty to return level calculations
-- Important for decision-making under uncertainty
+### Connection between GEV and GPD
 
-### Regional Frequency Analysis
+The GEV and GPD models are intrinsically linked.
+If the block maxima of a process follow a GEV distribution with parameters $(\mu, \sigma, \xi)$, then for a high threshold $u$, the threshold excesses follow a GPD with the same shape parameter $\xi$.
+This provides a theoretical consistency between the two primary modeling approaches.
 
-**Approach**: Pool information across "similar" sites
+## Return periods and return levels
 
-1. **Identify regions**: Group sites with similar extreme value behavior
-2. **Normalize data**: Scale to common distribution
-3. **Fit regional model**: Estimate shape parameter regionally
-4. **Scale back**: Apply regional parameters to individual sites
+### Definitions
 
-**Advantages**:
-- Increased effective sample size
-- More stable parameter estimates
-- Better extrapolation to rare events
+The output of an extreme value analysis is typically expressed in terms of **return periods** and **return levels**.
+The **N-year return level**, $z_N$, is the level expected to be exceeded on average once every $N$ years.
+It corresponds to the quantile of the distribution with an annual exceedance probability of $p = 1/N$.
+For the GEV distribution, it is calculated by inverting the CDF:
 
-**Challenges**:
-- Defining hydrologically similar regions
-- Testing regional homogeneity
-- Accounting for cross-site dependence
+$$
+z_N = \mu - \frac{\sigma}{\xi} \left[ 1 - (-\ln(1-p))^{-\xi} \right]
+$$
 
-### Modern Spatial Approaches
+### Return level plots
 
-**Hierarchical models**: Borrow strength across space while allowing local variation
-**Spatial random effects**: Model spatial correlation in extreme value parameters
-**Machine learning**: Use environmental covariates to predict extreme value parameters
+A standard diagnostic and visualization tool is the return level plot.
+This plot graphs the estimated return level $z_N$ against the return period $N$, with $N$ typically plotted on a logarithmic scale.
+The curvature of the fitted line is a direct visualization of the shape parameter, $\xi$: a straight line implies $\xi=0$, a concave curve implies $\xi>0$, and a convex curve implies $\xi<0$.
 
-## Case Studies
+[Placeholder for a Return Level Plot showing a fitted GEV or GPD curve with confidence intervals.]
 
-### Hurricane Harvey and the Addicks/Barker Reservoirs
+## Plotting positions
 
-**Context**: Legal case requiring extreme precipitation frequency analysis
+To visually assess model fit, the fitted model is plotted against the observed maxima.
+For this purpose, we require a method to assign a non-exceedance probability (and thus a return period) to each observed maximum.
+For a sample of $n$ block maxima, let $z_{(1)} < z_{(2)} < \dots < z_{(n)}$ be the ordered values.
+We estimate the probability $P(Z \le z_{(k)})$ using a plotting position formula.
+These formulas generally take the form:
 
-**Challenges**:
-- Interacting drivers of non-stationarity
-- Short observational records
-- High stakes for affected communities
+$$
+p_k = \frac{k - a}{n + 1 - 2a}
+$$
 
-**Key insights**:
-- Plausible assumptions led to vastly different estimates
-- No single "objective" answer exists
-- Uncertainty quantification crucial for decision-making
+where $k$ is the rank of the observation and $a$ is a parameter.
+Common choices include:
 
-### Texas Precipitation Frequency Analysis
+-   **Weibull:** $a=0$, giving $p_k = k/(n+1)$.
+-   **Gringorten:** $a=0.44$, giving $p_k = (k-0.44)/(n+0.12)$. This is often recommended as an unbiased choice for Gumbel-type distributions.
 
-**Project**: Joint TWDB/TAMU/Rice effort to update Atlas 14
+The empirical return period for the $k$-th observation is then estimated as $1/(1-p_k)$.
 
-**Motivation**: 
-- NOAA Atlas 14 doesn't account for climate change
-- Need state-wide consistent methodology
-- Multiple durations and return periods required
+## Modeling assumptions and considerations
 
-**Approach**:
-- More stations than federal analysis
-- Climate change considerations
-- Advanced uncertainty quantification
+Application of these models requires careful consideration of underlying assumptions.
 
-### Winter Storm Uri Analysis
+-   **Stationarity**: The classical GEV and GPD models assume **stationarity**: the parameters are constant in time. This implies that the statistical properties of extreme events do not change. In the context of climate change, this assumption may be invalid and requires more advanced non-stationary models.
+-   **Practical Choices**: The chosen methodology dictates key practical decisions. For the BM approach, the **block size** must be large enough for the asymptotic theory to hold but small enough to retain a reasonable sample size. For the POT approach, the **threshold selection** is a critical step that balances bias and variance.
 
-**Questions**: How likely was this event? Should we have been prepared?
+Further reading {.unnumbered}
 
-**Variables studied**:
-- Temperature at individual grid cells
-- Population-weighted temperature indices
-- Duration and spatial extent
-
-**Findings**: Illustrated challenges of:
-- Compound extremes (cold + widespread)
-- Infrastructure vulnerability to rare events
-- Need for robust planning under uncertainty
-
-## Computational Tools
-
-**R packages**: 
-- `ismev`: Classical extreme value methods
-- `evd`: Extended extreme value distributions
-- `POT`: Peak-over-threshold methods
-
-**Julia packages**:
-- `Extremes.jl`: Comprehensive extreme value toolkit
-- Well-documented with practical examples
-
-**Python packages**:
-- `scipy.stats`: Basic extreme value distributions
-- `pyextremes`: Specialized extreme value analysis
-
-## Further reading {.unnumbered}
-
-**Essential texts**:
-- @coles_extremes:2001: Canonical extreme value textbook with mathematical rigor and practical examples
-
-**Current research directions**:
-- Sampling uncertainty: @lu_spatiotemporal:2025 discusses spatial approaches
-- Non-independence: Accounting for temporal and spatial dependence
-- Climate change: Non-stationary extreme value models
-- Machine learning: Neural networks for extreme value analysis
-- Multivariate extremes: Joint behavior of multiple variables
+-   [@coles_extremes:2001]: Canonical extreme value textbook with mathematical rigor and practical examples

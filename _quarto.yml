@@ -63,7 +63,8 @@ book:
         - notebooks/index.qmd
         - notebooks/mosquitos.qmd
 
-    - chapters/references.qmd
+    - href: chapters/references.qmd
+      text: "**References**"
 
   appendices: 
     - "chapters/appendices/software.qmd"
