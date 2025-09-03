@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Correlation and Dimensionality 🚧 – Climate Risk Assessment and Management</title>
+<title>6&nbsp; Correlation and dimensionality 🚧 – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -126,35 +91,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -205,6 +141,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Extreme events: Dynamics, statistics and prediction;,citation_abstract=We review work on extreme events, their causes and consequences, by a group of European and American researchers involved in a three-year project on these topics. The review covers theoretical aspects of time series analysis and of extreme value theory, as well as of the deterministic modeling of extreme events, via continuous and discrete dynamic models. The applications include climatic, seismic and socio-economic events, along with their prediction. $&amp;amp;amp;lt;$br$&amp;gt;&amp;lt;$br$&amp;gt;$ Two important results refer to (i) the complementarity of spectral analysis of a time series in terms of the continuous and the discrete part of its power spectrum; and (ii) the need for coupled modeling of natural and socio-economic systems. Both these results have implications for the study and prediction of natural hazards and their human impacts.;,citation_author=M Ghil;,citation_author=P Yiou;,citation_author=S Hallegatte;,citation_author=B D Malamud;,citation_author=P Naveau;,citation_author=A Soloviev;,citation_author=P Friederichs;,citation_author=V Keilis-Borok;,citation_author=D Kondrashov;,citation_author=V Kossobokov;,citation_author=O Mestre;,citation_author=C Nicolis;,citation_author=H W Rust;,citation_author=P Shebalin;,citation_author=M Vrac;,citation_author=A Witt;,citation_author=I Zaliapin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=http://www.nonlin-processes-geophys.net/18/295/2011/;,citation_issue=3;,citation_doi=10/fvzxvv;,citation_volume=18;,citation_journal_title=Nonlinear Processes in Geophysics;,citation_publisher=Copernicus GmbH;">
 <meta name="citation_reference" content="citation_title=Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review;,citation_abstract=AbstractHighway bridges are one of the most vulnerable constituents of transportation networks when exposed to one or more natural hazards, such as earthquakes, hurricanes, tsunamis, and riverine floods. To facilitate and enhance prehazard and posthazard ...;,citation_author=Ioannis Gidaris;,citation_author=Jamie E. Padgett;,citation_author=Andre R. Barbosa;,citation_author=Suren Chen;,citation_author=Daniel Cox;,citation_author=Bret Webb;,citation_author=Amy Cerato;,citation_publication_date=2017-03-01;,citation_cover_date=2017-03-01;,citation_year=2017;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29ST.1943-541X.0001672;,citation_issue=3;,citation_doi=10.1061/(ASCE)ST.1943-541X.0001672;,citation_issn=1943-541X;,citation_volume=143;,citation_journal_title=Journal of Structural Engineering;,citation_publisher=American Society of Civil Engineers;">
 <meta name="citation_reference" content="citation_title=Beyond wickedness: Managing complex systems and climate change;,citation_author=Jonathan M. Gilligan;,citation_author=Michael P. Vandenbergh;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://wp0.vanderbilt.edu/lawreview/2020/12/beyond-wickedness-managing-complex-systems-and-climate-change/;,citation_volume=73;,citation_journal_title=Vanderbilt Law Review;,citation_journal_abbrev=Vand. L. Rev.;">
+<meta name="citation_reference" content="citation_title=Extreme Value Theory and Statistics of Univariate Extremes: A Review;,citation_abstract=SummaryStatistical issues arising in modelling univariate extremes of a random sample have been successfully used in the most diverse fields, such as biometrics, finance, insurance and risk theory. Statistics of univariate extremes (SUE), the subject to be dealt with in this review paper, has recently faced a huge development, partially because rare events can have catastrophic consequences for human activities, through their impact on the natural and constructed environments. In the last decades, there has been a shift from the area of parametric SUE, based on probabilistic asymptotic results in extreme value theory, towards semi-parametric approaches. After a brief reference to Gumbel’s block methodology and more recent improvements in the parametric framework, we present an overview of the developments on the estimation of parameters of extreme events and on the testing of extreme value conditions under a semi-parametric framework. We further discuss a few challenging topics in the area of SUE. © 2014 The Authors. International Statistical Review © 2014 International Statistical Institute;,citation_author=M. Ivette Gomes;,citation_author=Armelle Guillou;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/insr.12058;,citation_issue=2;,citation_doi=10.1111/insr.12058;,citation_issn=1751-5823;,citation_volume=83;,citation_journal_title=International Statistical Review;">
 <meta name="citation_reference" content="citation_title=Downscaling projections of Indian monsoon rainfall using a non‐homogeneous hidden Markov model;,citation_author=Arthur M Greene;,citation_author=Andrew W Robertson;,citation_author=Padhraic Smyth;,citation_author=Scott Triglia;,citation_publication_date=2011-01;,citation_cover_date=2011-01;,citation_year=2011;,citation_issue=655;,citation_doi=10.1002/qj.788;,citation_volume=137;,citation_journal_title=Quart J Royal Meteoro Soc;,citation_publisher=Wiley Online Library;">
 <meta name="citation_reference" content="citation_title=Emissions – the ’business as usual’ story is misleading;,citation_abstract=Stop using the worst-case scenario for climate warming as the most likely outcome — more-realistic baselines make for better policy.;,citation_author=Zeke Hausfather;,citation_author=Glen P. Peters;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/d41586-020-00177-3;,citation_issue=7792, 7792;,citation_doi=10.1038/d41586-020-00177-3;,citation_volume=577;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
@@ -228,8 +165,10 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
 <meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Computing return times or return periods with rare event algorithms;,citation_abstract=The average time between two occurrences of the same event, referred to as its return time (or return period), is a useful statistical concept for practical applications. For instance insurances or public agencies may be interested by the return time of a 10 m flood of the Seine river in Paris. However, due to their scarcity, reliably estimating return times for rare events is very difficult using either observational data or direct numerical simulations. For rare events, an estimator for return times can be built from the extrema of the observable on trajectory blocks. Here, we show that this estimator can be improved to remain accurate for return times of the order of the block size. More importantly, we show that this approach can be generalised to estimate return times from numerical algorithms specifically designed to sample rare events. So far those algorithms often compute probabilities, rather than return times. The approach we propose provides a computationally extremely efficient way to estimate numerically the return times of rare events for a dynamical system, gaining several orders of magnitude of computational costs. We illustrate the method on two kinds of observables, instantaneous and time-averaged, using two different rare event algorithms, for a simple stochastic process, the Ornstein–Uhlenbeck process. As an example of realistic applications to complex systems, we finally discuss extreme values of the drag on an object in a turbulent flow.;,citation_author=Thibault Lestang;,citation_author=Francesco Ragone;,citation_author=Charles-Edouard Bréhier;,citation_author=Corentin Herbert;,citation_author=Freddy Bouchet;,citation_publication_date=2018-04;,citation_cover_date=2018-04;,citation_year=2018;,citation_fulltext_html_url=https://dx.doi.org/10.1088/1742-5468/aab856;,citation_issue=4;,citation_doi=10.1088/1742-5468/aab856;,citation_issn=1742-5468;,citation_volume=2018;,citation_journal_title=Journal of Statistical Mechanics: Theory and Experiment;,citation_journal_abbrev=J. Stat. Mech.;,citation_publisher=IOP Publishing and SISSA;">
 <meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
 <meta name="citation_reference" content="citation_title=Bayesian spatiotemporal nonstationary model quantifies robust increases in daily extreme rainfall across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like National Oceanographic and Atmospheric Administration (NOAA) Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in statistical modeling of extreme precipitation has faced practical challenges, which have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Benjamin Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-08;,citation_cover_date=2025-08;,citation_year=2025;,citation_fulltext_html_url=https://dx.doi.org/10.1088/2752-5295/adf56e;,citation_issue=3;,citation_doi=10.1088/2752-5295/adf56e;,citation_issn=2752-5295;,citation_volume=4;,citation_journal_title=Environmental Research: Climate;,citation_journal_abbrev=Environ. Res.: Climate;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Plotting Positions in Extreme Value Analysis;,citation_abstract=Plotting order-ranked data is a standard technique that is used in estimating the probability of extreme weather events. Typically, observations, say, annual extremes of a period of N years, are ranked in order of magnitude and plotted on probability paper. Some statistical model is then fitted to the order-ranked data by which the return periods of specific extreme events are estimated. A key question in this method is as follows: What is the cumulative probability P that should be associated with the sample of rank m? This issue of the so-called plotting positions has been debated for almost a century, and a number of plotting rules and computational methods have been proposed. Here, it is shown that in estimating the return periods there is only one correct plotting position: P = m/(N + 1). This formula predicts much shorter return periods of extreme events than the other commonly used methods. Thus, many estimates of the weather-related risks should be reevaluated and the related building codes and other related regulations updated.;,citation_author=Lasse Makkonen;,citation_publication_date=2006-02-01;,citation_cover_date=2006-02-01;,citation_year=2006;,citation_fulltext_html_url=https://journals.ametsoc.org/view/journals/apme/45/2/jam2349.1.xml;,citation_issue=2;,citation_doi=10.1175/JAM2349.1;,citation_issn=1558-8424, 1558-8432;,citation_volume=45;,citation_journal_title=Journal of Applied Meteorology and Climatology;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
 <meta name="citation_reference" content="citation_title=6. Water-Resource Systems Planning.;,citation_author=Nicholas C Matalas;,citation_author=Myron B Fiering;,citation_publication_date=1977;,citation_cover_date=1977;,citation_year=1977;,citation_fulltext_html_url=https://www.nap.edu/read/185/chapter/11;,citation_inbook_title=Climate, Climatic Change, and Water Supply;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
@@ -291,7 +230,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/correlation-dimensionality.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/correlation-dimensionality.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -375,13 +314,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of climate science 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Climate science 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Inference ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -393,25 +332,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -428,7 +367,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -440,25 +379,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-Based Models and Calibration 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -537,12 +476,18 @@ window.Quarto = {
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References 🎯</span></a>
+ <span class="menu-text"><strong>References</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -586,49 +531,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#see-first" id="toc-see-first" class="nav-link active" data-scroll-target="#see-first">See first</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#spatial-statistics" id="toc-spatial-statistics" class="nav-link" data-scroll-target="#spatial-statistics"><span class="header-section-number">6.1</span> Spatial Statistics</a>
-  <ul class="collapse">
-  <li><a href="#spatial-autocorrelation-and-variograms" id="toc-spatial-autocorrelation-and-variograms" class="nav-link" data-scroll-target="#spatial-autocorrelation-and-variograms"><span class="header-section-number">6.1.1</span> Spatial Autocorrelation and Variograms</a></li>
-  <li><a href="#interpolation-methods" id="toc-interpolation-methods" class="nav-link" data-scroll-target="#interpolation-methods"><span class="header-section-number">6.1.2</span> Interpolation Methods</a></li>
-  <li><a href="#kriging" id="toc-kriging" class="nav-link" data-scroll-target="#kriging"><span class="header-section-number">6.1.3</span> Kriging</a></li>
-  <li><a href="#gaussian-processes-in-1d" id="toc-gaussian-processes-in-1d" class="nav-link" data-scroll-target="#gaussian-processes-in-1d"><span class="header-section-number">6.1.4</span> Gaussian Processes in 1D</a></li>
-  <li><a href="#gaussian-processes-in-multiple-dimensions" id="toc-gaussian-processes-in-multiple-dimensions" class="nav-link" data-scroll-target="#gaussian-processes-in-multiple-dimensions"><span class="header-section-number">6.1.5</span> Gaussian Processes in Multiple Dimensions</a></li>
-  </ul></li>
-  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><span class="header-section-number">6.2</span> Time Series Analysis</a>
-  <ul class="collapse">
-  <li><a href="#autocorrelation-functions" id="toc-autocorrelation-functions" class="nav-link" data-scroll-target="#autocorrelation-functions"><span class="header-section-number">6.2.1</span> Autocorrelation Functions</a></li>
-  <li><a href="#frequency-analysis" id="toc-frequency-analysis" class="nav-link" data-scroll-target="#frequency-analysis"><span class="header-section-number">6.2.2</span> Frequency Analysis</a></li>
-  <li><a href="#wavelets" id="toc-wavelets" class="nav-link" data-scroll-target="#wavelets"><span class="header-section-number">6.2.3</span> Wavelets</a></li>
-  <li><a href="#autoregressive-models" id="toc-autoregressive-models" class="nav-link" data-scroll-target="#autoregressive-models"><span class="header-section-number">6.2.4</span> Autoregressive Models</a></li>
-  <li><a href="#trends" id="toc-trends" class="nav-link" data-scroll-target="#trends"><span class="header-section-number">6.2.5</span> Trends</a></li>
-  <li><a href="#other-time-series-models" id="toc-other-time-series-models" class="nav-link" data-scroll-target="#other-time-series-models"><span class="header-section-number">6.2.6</span> Other Time Series Models</a></li>
-  </ul></li>
-  <li><a href="#high-dimensional-methods" id="toc-high-dimensional-methods" class="nav-link" data-scroll-target="#high-dimensional-methods"><span class="header-section-number">6.3</span> High-Dimensional Methods</a>
-  <ul class="collapse">
-  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">6.3.1</span> Covariance and Correlation</a></li>
-  <li><a href="#structured-variability" id="toc-structured-variability" class="nav-link" data-scroll-target="#structured-variability"><span class="header-section-number">6.3.2</span> Structured Variability</a></li>
-  <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction"><span class="header-section-number">6.3.3</span> Dimension Reduction</a></li>
-  <li><a href="#copulas" id="toc-copulas" class="nav-link" data-scroll-target="#copulas"><span class="header-section-number">6.3.4</span> Copulas</a></li>
-  <li><a href="#deep-models" id="toc-deep-models" class="nav-link" data-scroll-target="#deep-models"><span class="header-section-number">6.3.5</span> Deep Models</a></li>
-  </ul></li>
-  <li><a href="#spatiotemporal-integration" id="toc-spatiotemporal-integration" class="nav-link" data-scroll-target="#spatiotemporal-integration"><span class="header-section-number">6.4</span> Spatiotemporal Integration</a>
-  <ul class="collapse">
-  <li><a href="#spatiotemporal-covariance-structures" id="toc-spatiotemporal-covariance-structures" class="nav-link" data-scroll-target="#spatiotemporal-covariance-structures"><span class="header-section-number">6.4.1</span> Spatiotemporal Covariance Structures</a></li>
-  <li><a href="#spatiotemporal-kriging" id="toc-spatiotemporal-kriging" class="nav-link" data-scroll-target="#spatiotemporal-kriging"><span class="header-section-number">6.4.2</span> Spatiotemporal Kriging</a></li>
-  <li><a href="#state-space-models-for-climate-data" id="toc-state-space-models-for-climate-data" class="nav-link" data-scroll-target="#state-space-models-for-climate-data"><span class="header-section-number">6.4.3</span> State-Space Models for Climate Data</a></li>
-  <li><a href="#climate-field-reconstruction" id="toc-climate-field-reconstruction" class="nav-link" data-scroll-target="#climate-field-reconstruction"><span class="header-section-number">6.4.4</span> Climate Field Reconstruction</a></li>
-  <li><a href="#empirical-orthogonal-functions-eofs" id="toc-empirical-orthogonal-functions-eofs" class="nav-link" data-scroll-target="#empirical-orthogonal-functions-eofs"><span class="header-section-number">6.4.5</span> Empirical Orthogonal Functions (EOFs)</a></li>
-  <li><a href="#machine-learning-for-spatiotemporal-climate-data" id="toc-machine-learning-for-spatiotemporal-climate-data" class="nav-link" data-scroll-target="#machine-learning-for-spatiotemporal-climate-data"><span class="header-section-number">6.4.6</span> Machine Learning for Spatiotemporal Climate Data</a></li>
-  </ul></li>
-  <li><a href="#applications-to-climate-data" id="toc-applications-to-climate-data" class="nav-link" data-scroll-target="#applications-to-climate-data"><span class="header-section-number">6.5</span> Applications to Climate Data</a>
-  <ul class="collapse">
-  <li><a href="#gridded-climate-data-analysis" id="toc-gridded-climate-data-analysis" class="nav-link" data-scroll-target="#gridded-climate-data-analysis"><span class="header-section-number">6.5.1</span> Gridded Climate Data Analysis</a></li>
-  <li><a href="#climate-mode-analysis" id="toc-climate-mode-analysis" class="nav-link" data-scroll-target="#climate-mode-analysis"><span class="header-section-number">6.5.2</span> Climate Mode Analysis</a></li>
-  <li><a href="#extreme-event-detection-in-spatiotemporal-fields" id="toc-extreme-event-detection-in-spatiotemporal-fields" class="nav-link" data-scroll-target="#extreme-event-detection-in-spatiotemporal-fields"><span class="header-section-number">6.5.3</span> Extreme Event Detection in Spatiotemporal Fields</a></li>
-  <li><a href="#model-evaluation-and-intercomparison" id="toc-model-evaluation-and-intercomparison" class="nav-link" data-scroll-target="#model-evaluation-and-intercomparison"><span class="header-section-number">6.5.4</span> Model Evaluation and Intercomparison</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#essential-concepts" id="toc-essential-concepts" class="nav-link" data-scroll-target="#essential-concepts"><span class="header-section-number">6.1</span> Essential concepts</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
@@ -636,9 +540,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/correlation-dimensionality.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/correlation-dimensionality.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></h1>
 </div>
 
 
@@ -655,261 +559,37 @@ window.Quarto = {
 </header>
 
 
-<section id="see-first" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="see-first">See first</h2>
-<p>This chapter builds on concepts from: - <a href="../../chapters/fundamentals/probability-stats.html">Probability and Statistics</a> - <a href="../../chapters/fundamentals/ml-nonparametric.html">Machine Learning and Nonparametric Methods</a></p>
-</section>
 <section id="learning-objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>After reading this chapter, you should be able to:</p>
 <ul>
 <li>Model and interpret spatial dependence in climate fields</li>
-<li>Perform kriging and other geostatistical interpolations for mapping hazards</li>
-<li>Understand the fundamentals of spatial autocorrelation and variogram analysis</li>
 <li>Apply time series analysis methods to detect trends and patterns in climate data</li>
 <li>Use dimension reduction techniques for high-dimensional climate datasets</li>
 <li>Integrate spatial and temporal methods for spatiotemporal climate analysis</li>
 </ul>
 </section>
-<section id="spatial-statistics" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="spatial-statistics"><span class="header-section-number">6.1</span> Spatial Statistics</h2>
-<section id="spatial-autocorrelation-and-variograms" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="spatial-autocorrelation-and-variograms"><span class="header-section-number">6.1.1</span> Spatial Autocorrelation and Variograms</h3>
-</section>
-<section id="interpolation-methods" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="interpolation-methods"><span class="header-section-number">6.1.2</span> Interpolation Methods</h3>
-</section>
-<section id="kriging" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="kriging"><span class="header-section-number">6.1.3</span> Kriging</h3>
-<ul>
-<li>(ordinary, universal)</li>
-</ul>
-</section>
-<section id="gaussian-processes-in-1d" class="level3" data-number="6.1.4">
-<h3 data-number="6.1.4" class="anchored" data-anchor-id="gaussian-processes-in-1d"><span class="header-section-number">6.1.4</span> Gaussian Processes in 1D</h3>
-</section>
-<section id="gaussian-processes-in-multiple-dimensions" class="level3" data-number="6.1.5">
-<h3 data-number="6.1.5" class="anchored" data-anchor-id="gaussian-processes-in-multiple-dimensions"><span class="header-section-number">6.1.5</span> Gaussian Processes in Multiple Dimensions</h3>
-</section>
-</section>
-<section id="time-series-analysis" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="time-series-analysis"><span class="header-section-number">6.2</span> Time Series Analysis</h2>
-<section id="autocorrelation-functions" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="autocorrelation-functions"><span class="header-section-number">6.2.1</span> Autocorrelation Functions</h3>
-</section>
-<section id="frequency-analysis" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="frequency-analysis"><span class="header-section-number">6.2.2</span> Frequency Analysis</h3>
-</section>
-<section id="wavelets" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="wavelets"><span class="header-section-number">6.2.3</span> Wavelets</h3>
-</section>
-<section id="autoregressive-models" class="level3" data-number="6.2.4">
-<h3 data-number="6.2.4" class="anchored" data-anchor-id="autoregressive-models"><span class="header-section-number">6.2.4</span> Autoregressive Models</h3>
-<p>Sometimes used in practice, but most useful as a didactic tool.</p>
-</section>
-<section id="trends" class="level3" data-number="6.2.5">
-<h3 data-number="6.2.5" class="anchored" data-anchor-id="trends"><span class="header-section-number">6.2.5</span> Trends</h3>
-<p>We are often interested in the following sorts of trends:</p>
-<ul>
-<li>Changing Mean
-<ul>
-<li>Shifts</li>
-<li>Smooth Changes
-<ul>
-<li>Monotonic</li>
-<li>Cyclical</li>
-</ul></li>
-</ul></li>
-<li>Changing Variance</li>
-<li>Changing Event Frequency</li>
-<li>Changing Seasonality</li>
-</ul>
-<p>Probability Distribution of the Process changes slowly with time: due to identifiable or unknown causes</p>
-<p>Key questions:</p>
-<ul>
-<li>is change “natural” or can it be attributed to specific human activity?</li>
-<li>did change in recording method or station location change the “record”</li>
-<li>are policies working?</li>
-<li>if trend is removed, are underlying causal factors revealed?</li>
-<li>are time series models valid if process has trends?</li>
-</ul>
-<section id="example" class="level4" data-number="6.2.5.1">
-<h4 data-number="6.2.5.1" class="anchored" data-anchor-id="example"><span class="header-section-number">6.2.5.1</span> Example</h4>
-<p>TODO: add the Folosm River data with a vertical line at 1945</p>
-<p>This is the annual maximum flood time series from the Fair Oaks station on the American River above Sacramento. Folsom Dam was built as a multi-purpose structure in 1945. The system of dam and dikes was designed to provide Sacramento with flood protection at a level between the 200- to 500-year return period flood as estimated from the 1912 to 1942 annual maximum flood data. There have now been 6 annual maximum floods larger than the largest observed in the pre-dam construction period. As a result, if the recent data is used, the estimated flood protection is below FEMA’s nominal level of 100 years, which makes the property in Sacramento uninsurable for flood risk. Moving windows of two different lengths are used to estimate the 100-year flood using the Log-Normal distribution. The estimate is reported at the center of each moving window. The 21-year moving window shows nearly a four-fold increase in the magnitude of the 100-year flood over time, with most of the increase coming in the period after 1940. The 51-year window shows a 1.8-fold increase in the estimated 100-year flood magnitude, with a nearly monotonic increase starting post-dam construction. Are the changes just due to chance? Do they reflect changes in the basin, leading to higher floods with the same rainfall? Do they reflect changes in global climate?</p>
-</section>
-<section id="mann-kendall" class="level4" data-number="6.2.5.2">
-<h4 data-number="6.2.5.2" class="anchored" data-anchor-id="mann-kendall"><span class="header-section-number">6.2.5.2</span> Mann-Kendall</h4>
-<p>There’s an example in <span class="citation" data-cites="helsel_waterresources:2020">Helsel et al. (<a href="../references.html#ref-helsel_waterresources:2020" role="doc-biblioref">2020</a>)</span> for the Potomac River that we can work through</p>
-</section>
-</section>
-<section id="other-time-series-models" class="level3" data-number="6.2.6">
-<h3 data-number="6.2.6" class="anchored" data-anchor-id="other-time-series-models"><span class="header-section-number">6.2.6</span> Other Time Series Models</h3>
-<ul>
-<li>ARIMA</li>
-<li>Generalized Additive Models</li>
-<li>State Space Models</li>
-<li>LSTMs</li>
-<li>and beyond</li>
-</ul>
-</section>
-</section>
-<section id="high-dimensional-methods" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="high-dimensional-methods"><span class="header-section-number">6.3</span> High-Dimensional Methods</h2>
-<section id="covariance-and-correlation" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">6.3.1</span> Covariance and Correlation</h3>
-</section>
-<section id="structured-variability" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="structured-variability"><span class="header-section-number">6.3.2</span> Structured Variability</h3>
-<ul>
-<li>e.g., model grid</li>
-</ul>
-</section>
-<section id="dimension-reduction" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">6.3.3</span> Dimension Reduction</h3>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Motivate with some example scatterplots
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What is the true dimensionality of this data?</p>
-</div>
-</div>
-<ul>
-<li>Goal: summarize data with many (<span class="math inline">\(p\)</span>) variables by a smaller set of <span class="math inline">\(k\)</span> derived (synthetic, composite) variables</li>
-<li>Start with <span class="math inline">\(A_{n \times p}\)</span>, <span class="math inline">\(n\)</span> samples of <span class="math inline">\(p\)</span> variables. Get <span class="math inline">\(X_{n \times k}\)</span>, <span class="math inline">\(k &lt; p\)</span>.</li>
-<li>You will lose <em>some</em> information in <span class="math inline">\(A\)</span> that is not in <span class="math inline">\(X\)</span></li>
-<li>balancing act betwen clarity of represenation (ease of understanding) vs loss of relevant information</li>
-</ul>
-<section id="principal-component-analysis-pca" class="level4" data-number="6.3.3.1">
-<h4 data-number="6.3.3.1" class="anchored" data-anchor-id="principal-component-analysis-pca"><span class="header-section-number">6.3.3.1</span> Principal Component Analysis (PCA)</h4>
-<p><strong>Overview and Motivation:</strong></p>
-<p>High-dimensional data presents several challenges: - Difficult to visualize and interpret - Contains redundant or irrelevant dimensions - Computational challenges in high dimensions (“curse of dimensionality”) - Need to identify meaningful patterns in complex datasets</p>
-<p>PCA addresses these challenges by finding low-dimensional representations that preserve as much variation as possible in the original data.</p>
-<p><strong>Mathematical Foundation:</strong></p>
-<p>For <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> features <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>, PCA finds a low-dimensional representation that captures maximum variance.</p>
-<p>The first <strong>principal component</strong> is the <strong>linear combination</strong> of features that maximizes variance: <span class="math display">\[Z_1  = \phi_{11}X_1 + \phi_{21}X_2 + \ldots + \phi_{p1}X_p\]</span></p>
-<p>with normalization constraint: <span class="math inline">\(\sum_{j=1}^p \phi_{j1}^2 = 1\)</span></p>
-<p>The <strong>loading vector</strong> <span class="math inline">\(\phi_1 = (\phi_{11}, \phi_{21}, \ldots, \phi_{p1})^T\)</span> defines a direction in feature space along which the data vary the most.</p>
-<p><strong>PCA as an Optimization Problem:</strong></p>
-<p>We can formulate PCA as finding the best linear approximation to the data: <span class="math display">\[f(Z) = \mu + \phi_q Z\]</span></p>
-<p>where: - <span class="math inline">\(\mu\)</span> is a location vector (typically zero for centered data) - <span class="math inline">\(\phi_q\)</span> is a <span class="math inline">\(p \times q\)</span> matrix with <span class="math inline">\(q\)</span> <strong>orthogonal</strong> unit vectors as columns - <span class="math inline">\(Z\)</span> is a <span class="math inline">\(q\)</span>-dimensional vector of <strong>coefficients</strong> or <strong>scores</strong></p>
-<p>The optimization problem becomes: <span class="math display">\[\min \sum_{i=1}^n \| X_i - \phi_q Z_i \|_2^2\]</span></p>
-<p><strong>Connection to Singular Value Decomposition (SVD):</strong></p>
-<p>The solution can be written as a singular value decomposition of the empirical covariance matrix. This assumes that variance is an appropriate measure of variability in the data.</p>
-<p><strong>Important caveat:</strong> This assumption may be poor when: - Variables have very different scales - Outliers are present - Non-Gaussian distributions where variance doesn’t capture the relevant structure</p>
-<p><strong>Uniqueness and Interpretation:</strong></p>
-<p>Each principal component loading vector is unique up to a sign flip. The choice of sign is arbitrary and doesn’t affect the interpretation.</p>
-<p><strong>Climate Science Applications:</strong></p>
-<p>In climate science, we commonly work with space-time data where PCA components can be interpreted as:</p>
+<section id="essential-concepts" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="essential-concepts"><span class="header-section-number">6.1</span> Essential concepts</h2>
 <ol type="1">
-<li><strong>Spatial patterns</strong> (<span class="math inline">\(Z\)</span>): The “EOFs” (Empirical Orthogonal Functions) or principal components represent dominant spatial patterns of variability</li>
-<li><strong>Time series</strong> (<span class="math inline">\(\phi\)</span>): The loadings represent time evolution of each spatial pattern</li>
-<li><strong>Data reconstruction</strong>: Can reconstruct the full field at time <span class="math inline">\(t\)</span> from the EOFs and their time series</li>
+<li>Spatial statistics and geostatistical methods</li>
+<li>Time series analysis and trend detection</li>
+<li>Principal component analysis and empirical orthogonal functions</li>
+<li>High-dimensional methods for climate data</li>
+<li>Spatiotemporal integration approaches</li>
 </ol>
-<p><strong>Preprocessing Considerations:</strong></p>
-<p><strong>Centering:</strong> - Variables should have mean zero for standard PCA - Variance is the average squared deviation from the mean - Centered and non-centered data will have different covariance matrices</p>
-<p><strong>Standardization:</strong> - Optional: standardize variables to unit variance - Important when variables have different units or scales - Equivalent to weighting variables by inverse of their variances</p>
-<p><strong>Climate Anomalies:</strong> In climate science, it’s common to decompose time series into climatology and anomalies: <span class="math display">\[x(t) = \overline{x}(t) + x'(t)\]</span> where <span class="math inline">\(\overline{x}(t)\)</span> is the <strong>climatology</strong> and <span class="math inline">\(x'(t)\)</span> is the <strong>anomaly</strong>.</p>
-<p>Common approaches for defining climatology: 1. <strong>Time-mean</strong> over a reference period 2. <strong>Seasonal climatology</strong> computed separately for each month or season (DJF, MAM, JJA, SON) 3. <strong>Harmonic climatology</strong> with seasonal cycle removed using sinusoidal terms</p>
-<p><strong>Spatial Data Considerations:</strong></p>
-<p><strong>Weighting:</strong> - <strong>Area weighting</strong>: Use <span class="math inline">\(\sqrt{\cos(\phi)}\)</span> where <span class="math inline">\(\phi\)</span> is latitude to weight by grid cell area - <strong>Variance weighting</strong>: Weight by inverse variance (equivalent to standardization) - <strong>Physical considerations</strong>: Weight variables based on measurement uncertainty or physical importance</p>
-<p><strong>Model Selection:</strong></p>
-<p><strong>How Many Components to Retain?</strong> - <strong>Scree plot</strong>: Look for “elbow” where eigenvalues level off - <strong>Cumulative variance</strong>: Retain components explaining desired percentage (e.g., 90%) - <strong>Cross-validation</strong>: Choose number based on out-of-sample performance - <strong>Physical interpretation</strong>: Retain components with clear physical meaning</p>
-<p><strong>Computational Implementation:</strong></p>
-<p><strong>Julia Packages:</strong> - <a href="https://kmarkert.github.io/EmpiricalOrthogonalFunctions.jl/dev/"><code>EmpiricalOrthogonalFunctions.jl</code></a>: Climate-focused PCA/EOF analysis, based on Python’s EOFS library - <a href="https://juliastats.org/MultivariateStats.jl/dev/pca/"><code>MultivariateStats.jl</code></a>: General-purpose multivariate statistics including PCA</p>
-<p><strong>Practical Workflow:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">EmpiricalOrthogonalFunctions</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Assume data matrix with time × space structure</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>solver <span class="op">=</span> EmpiricalOrthogonalFunctions.<span class="fu">Eof</span>(data)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Get EOFs (spatial patterns)</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>eofs <span class="op">=</span> solver.<span class="fu">eofs</span>()</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Get principal components (time series)  </span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>pcs <span class="op">=</span> solver.<span class="fu">pcs</span>()</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># Get explained variance</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>variance <span class="op">=</span> solver.<span class="fu">varianceFraction</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Extensions and Advanced Methods:</strong></p>
-<p><strong>Probabilistic PCA</strong>: Provides probabilistic framework with uncertainty quantification <strong>Robust PCA</strong>: Less sensitive to outliers and non-Gaussian distributions<br>
-<strong>Sparse PCA</strong>: Produces interpretable loadings with many zero entries <strong>Canonical Correlation Analysis</strong>: Analyzes relationships between two sets of variables</p>
-<p><strong>Climate Applications:</strong></p>
-<p><strong>Mode Analysis</strong>: Identify dominant climate variability patterns (ENSO, NAO, etc.) <strong>Model Evaluation</strong>: Compare spatial patterns between observations and climate models <strong>Dimension Reduction</strong>: Reduce high-dimensional climate model output for analysis <strong>Data Compression</strong>: Efficiently store and transmit large climate datasets</p>
-<p><strong>Further Reading:</strong></p>
-<ul>
-<li><a href="https://youtube.com/watch?v=nbBvuuNVfco&amp;feature=shared">SVD Mathematical Overview</a> by Steven Brunton provides conceptual SVD overview</li>
-<li><a href="https://computationalthinking.mit.edu/Fall23/data_science/pca/">MIT Computational Thinking PCA Lecture</a></li>
-<li>Chapter 10.2 of <span class="citation" data-cites="james_statlearn:2013">James et al. (<a href="../references.html#ref-james_statlearn:2013" role="doc-biblioref">2013</a>)</span> for statistical learning perspective</li>
-<li><a href="https://climatedataguide.ucar.edu/climate-tools/empirical-orthogonal-function-eof-analysis-and-rotated-eof-analysis">NCAR EOF Tutorial</a> for climate applications</li>
-</ul>
-</section>
-</section>
-<section id="copulas" class="level3" data-number="6.3.4">
-<h3 data-number="6.3.4" class="anchored" data-anchor-id="copulas"><span class="header-section-number">6.3.4</span> Copulas</h3>
-</section>
-<section id="deep-models" class="level3" data-number="6.3.5">
-<h3 data-number="6.3.5" class="anchored" data-anchor-id="deep-models"><span class="header-section-number">6.3.5</span> Deep Models</h3>
-<p>Many generative AI models are fundamentally sampling from high-dimensional conditional distributions. Handling the high dimensionality of these distributions is a key challenge.</p>
-<ul>
-<li>GAN</li>
-<li>cGAN</li>
-<li>Diffusion Models</li>
-</ul>
-</section>
-</section>
-<section id="spatiotemporal-integration" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="spatiotemporal-integration"><span class="header-section-number">6.4</span> Spatiotemporal Integration</h2>
-<section id="spatiotemporal-covariance-structures" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="spatiotemporal-covariance-structures"><span class="header-section-number">6.4.1</span> Spatiotemporal Covariance Structures</h3>
-</section>
-<section id="spatiotemporal-kriging" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="spatiotemporal-kriging"><span class="header-section-number">6.4.2</span> Spatiotemporal Kriging</h3>
-</section>
-<section id="state-space-models-for-climate-data" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="state-space-models-for-climate-data"><span class="header-section-number">6.4.3</span> State-Space Models for Climate Data</h3>
-</section>
-<section id="climate-field-reconstruction" class="level3" data-number="6.4.4">
-<h3 data-number="6.4.4" class="anchored" data-anchor-id="climate-field-reconstruction"><span class="header-section-number">6.4.4</span> Climate Field Reconstruction</h3>
-</section>
-<section id="empirical-orthogonal-functions-eofs" class="level3" data-number="6.4.5">
-<h3 data-number="6.4.5" class="anchored" data-anchor-id="empirical-orthogonal-functions-eofs"><span class="header-section-number">6.4.5</span> Empirical Orthogonal Functions (EOFs)</h3>
-</section>
-<section id="machine-learning-for-spatiotemporal-climate-data" class="level3" data-number="6.4.6">
-<h3 data-number="6.4.6" class="anchored" data-anchor-id="machine-learning-for-spatiotemporal-climate-data"><span class="header-section-number">6.4.6</span> Machine Learning for Spatiotemporal Climate Data</h3>
-</section>
-</section>
-<section id="applications-to-climate-data" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="applications-to-climate-data"><span class="header-section-number">6.5</span> Applications to Climate Data</h2>
-<section id="gridded-climate-data-analysis" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="gridded-climate-data-analysis"><span class="header-section-number">6.5.1</span> Gridded Climate Data Analysis</h3>
-<p>Almost all the high-dimensional data we deal with in climate science are spatial (e.g., gridded climate model output, reanalysis products, satellite observations).</p>
-</section>
-<section id="climate-mode-analysis" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="climate-mode-analysis"><span class="header-section-number">6.5.2</span> Climate Mode Analysis</h3>
-</section>
-<section id="extreme-event-detection-in-spatiotemporal-fields" class="level3" data-number="6.5.3">
-<h3 data-number="6.5.3" class="anchored" data-anchor-id="extreme-event-detection-in-spatiotemporal-fields"><span class="header-section-number">6.5.3</span> Extreme Event Detection in Spatiotemporal Fields</h3>
-</section>
-<section id="model-evaluation-and-intercomparison" class="level3" data-number="6.5.4">
-<h3 data-number="6.5.4" class="anchored" data-anchor-id="model-evaluation-and-intercomparison"><span class="header-section-number">6.5.4</span> Model Evaluation and Intercomparison</h3>
-</section>
 </section>
 <section id="further-reading" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>For spatial and temporal analysis in climate science:</p>
+<ul>
+<li><span class="citation" data-cites="cressie_spatiotemporal:2011">Cressie and Wikle (<a href="../references.html#ref-cressie_spatiotemporal:2011" role="doc-biblioref">2011</a>)</span>: Comprehensive treatment of spatial statistics</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-helsel_waterresources:2020" class="csl-entry" role="listitem">
-Helsel, Dennis R., Robert M. Hirsch, Karen R. Ryberg, Stacey A. Archfield, and Edward J. Gilroy. 2020. <em>Statistical Methods in Water Resources</em>. <em>Techniques and Methods</em>. U.S. Geological Survey. <a href="https://doi.org/10.3133/tm4A3">https://doi.org/10.3133/tm4A3</a>.
-</div>
-<div id="ref-james_statlearn:2013" class="csl-entry" role="listitem">
-James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An <span>Introduction</span> to <span>Statistical Learning</span></em>. Vol. 103. Springer <span>Texts</span> in <span>Statistics</span>. New York, NY: Springer New York.
+<div id="ref-cressie_spatiotemporal:2011" class="csl-entry" role="listitem">
+Cressie, Noel A. C., and Christopher K. Wikle. 2011. <em>Statistics for Spatio-Temporal Data</em>. Hoboken, N.J.: Wiley.
 </div>
 </div>
 </section>
@@ -1355,13 +1035,13 @@ James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>A
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapters/fundamentals/ml-nonparametric.html" class="pagination-link" aria-label="Machine Learning 🚧">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span>
+      <a href="../../chapters/fundamentals/ml-nonparametric.html" class="pagination-link" aria-label="Machine learning and nonparametric methods 🚧">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/fundamentals/model-comparison.html" class="pagination-link" aria-label="Model Validation and Comparison 🚧">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/fundamentals/model-comparison.html" class="pagination-link" aria-label="Model validation and comparison 🚧">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Monte Carlo Methods 🚧 – Climate Risk Assessment and Management</title>
+<title>4&nbsp; Monte Carlo methods 🚧 – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,35 +91,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -150,6 +141,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Extreme events: Dynamics, statistics and prediction;,citation_abstract=We review work on extreme events, their causes and consequences, by a group of European and American researchers involved in a three-year project on these topics. The review covers theoretical aspects of time series analysis and of extreme value theory, as well as of the deterministic modeling of extreme events, via continuous and discrete dynamic models. The applications include climatic, seismic and socio-economic events, along with their prediction. $&amp;amp;amp;lt;$br$&amp;gt;&amp;lt;$br$&amp;gt;$ Two important results refer to (i) the complementarity of spectral analysis of a time series in terms of the continuous and the discrete part of its power spectrum; and (ii) the need for coupled modeling of natural and socio-economic systems. Both these results have implications for the study and prediction of natural hazards and their human impacts.;,citation_author=M Ghil;,citation_author=P Yiou;,citation_author=S Hallegatte;,citation_author=B D Malamud;,citation_author=P Naveau;,citation_author=A Soloviev;,citation_author=P Friederichs;,citation_author=V Keilis-Borok;,citation_author=D Kondrashov;,citation_author=V Kossobokov;,citation_author=O Mestre;,citation_author=C Nicolis;,citation_author=H W Rust;,citation_author=P Shebalin;,citation_author=M Vrac;,citation_author=A Witt;,citation_author=I Zaliapin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=http://www.nonlin-processes-geophys.net/18/295/2011/;,citation_issue=3;,citation_doi=10/fvzxvv;,citation_volume=18;,citation_journal_title=Nonlinear Processes in Geophysics;,citation_publisher=Copernicus GmbH;">
 <meta name="citation_reference" content="citation_title=Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review;,citation_abstract=AbstractHighway bridges are one of the most vulnerable constituents of transportation networks when exposed to one or more natural hazards, such as earthquakes, hurricanes, tsunamis, and riverine floods. To facilitate and enhance prehazard and posthazard ...;,citation_author=Ioannis Gidaris;,citation_author=Jamie E. Padgett;,citation_author=Andre R. Barbosa;,citation_author=Suren Chen;,citation_author=Daniel Cox;,citation_author=Bret Webb;,citation_author=Amy Cerato;,citation_publication_date=2017-03-01;,citation_cover_date=2017-03-01;,citation_year=2017;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29ST.1943-541X.0001672;,citation_issue=3;,citation_doi=10.1061/(ASCE)ST.1943-541X.0001672;,citation_issn=1943-541X;,citation_volume=143;,citation_journal_title=Journal of Structural Engineering;,citation_publisher=American Society of Civil Engineers;">
 <meta name="citation_reference" content="citation_title=Beyond wickedness: Managing complex systems and climate change;,citation_author=Jonathan M. Gilligan;,citation_author=Michael P. Vandenbergh;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://wp0.vanderbilt.edu/lawreview/2020/12/beyond-wickedness-managing-complex-systems-and-climate-change/;,citation_volume=73;,citation_journal_title=Vanderbilt Law Review;,citation_journal_abbrev=Vand. L. Rev.;">
+<meta name="citation_reference" content="citation_title=Extreme Value Theory and Statistics of Univariate Extremes: A Review;,citation_abstract=SummaryStatistical issues arising in modelling univariate extremes of a random sample have been successfully used in the most diverse fields, such as biometrics, finance, insurance and risk theory. Statistics of univariate extremes (SUE), the subject to be dealt with in this review paper, has recently faced a huge development, partially because rare events can have catastrophic consequences for human activities, through their impact on the natural and constructed environments. In the last decades, there has been a shift from the area of parametric SUE, based on probabilistic asymptotic results in extreme value theory, towards semi-parametric approaches. After a brief reference to Gumbel’s block methodology and more recent improvements in the parametric framework, we present an overview of the developments on the estimation of parameters of extreme events and on the testing of extreme value conditions under a semi-parametric framework. We further discuss a few challenging topics in the area of SUE. © 2014 The Authors. International Statistical Review © 2014 International Statistical Institute;,citation_author=M. Ivette Gomes;,citation_author=Armelle Guillou;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/insr.12058;,citation_issue=2;,citation_doi=10.1111/insr.12058;,citation_issn=1751-5823;,citation_volume=83;,citation_journal_title=International Statistical Review;">
 <meta name="citation_reference" content="citation_title=Downscaling projections of Indian monsoon rainfall using a non‐homogeneous hidden Markov model;,citation_author=Arthur M Greene;,citation_author=Andrew W Robertson;,citation_author=Padhraic Smyth;,citation_author=Scott Triglia;,citation_publication_date=2011-01;,citation_cover_date=2011-01;,citation_year=2011;,citation_issue=655;,citation_doi=10.1002/qj.788;,citation_volume=137;,citation_journal_title=Quart J Royal Meteoro Soc;,citation_publisher=Wiley Online Library;">
 <meta name="citation_reference" content="citation_title=Emissions – the ’business as usual’ story is misleading;,citation_abstract=Stop using the worst-case scenario for climate warming as the most likely outcome — more-realistic baselines make for better policy.;,citation_author=Zeke Hausfather;,citation_author=Glen P. Peters;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/d41586-020-00177-3;,citation_issue=7792, 7792;,citation_doi=10.1038/d41586-020-00177-3;,citation_volume=577;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
@@ -173,8 +165,10 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
 <meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Computing return times or return periods with rare event algorithms;,citation_abstract=The average time between two occurrences of the same event, referred to as its return time (or return period), is a useful statistical concept for practical applications. For instance insurances or public agencies may be interested by the return time of a 10 m flood of the Seine river in Paris. However, due to their scarcity, reliably estimating return times for rare events is very difficult using either observational data or direct numerical simulations. For rare events, an estimator for return times can be built from the extrema of the observable on trajectory blocks. Here, we show that this estimator can be improved to remain accurate for return times of the order of the block size. More importantly, we show that this approach can be generalised to estimate return times from numerical algorithms specifically designed to sample rare events. So far those algorithms often compute probabilities, rather than return times. The approach we propose provides a computationally extremely efficient way to estimate numerically the return times of rare events for a dynamical system, gaining several orders of magnitude of computational costs. We illustrate the method on two kinds of observables, instantaneous and time-averaged, using two different rare event algorithms, for a simple stochastic process, the Ornstein–Uhlenbeck process. As an example of realistic applications to complex systems, we finally discuss extreme values of the drag on an object in a turbulent flow.;,citation_author=Thibault Lestang;,citation_author=Francesco Ragone;,citation_author=Charles-Edouard Bréhier;,citation_author=Corentin Herbert;,citation_author=Freddy Bouchet;,citation_publication_date=2018-04;,citation_cover_date=2018-04;,citation_year=2018;,citation_fulltext_html_url=https://dx.doi.org/10.1088/1742-5468/aab856;,citation_issue=4;,citation_doi=10.1088/1742-5468/aab856;,citation_issn=1742-5468;,citation_volume=2018;,citation_journal_title=Journal of Statistical Mechanics: Theory and Experiment;,citation_journal_abbrev=J. Stat. Mech.;,citation_publisher=IOP Publishing and SISSA;">
 <meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
 <meta name="citation_reference" content="citation_title=Bayesian spatiotemporal nonstationary model quantifies robust increases in daily extreme rainfall across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like National Oceanographic and Atmospheric Administration (NOAA) Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in statistical modeling of extreme precipitation has faced practical challenges, which have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Benjamin Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-08;,citation_cover_date=2025-08;,citation_year=2025;,citation_fulltext_html_url=https://dx.doi.org/10.1088/2752-5295/adf56e;,citation_issue=3;,citation_doi=10.1088/2752-5295/adf56e;,citation_issn=2752-5295;,citation_volume=4;,citation_journal_title=Environmental Research: Climate;,citation_journal_abbrev=Environ. Res.: Climate;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Plotting Positions in Extreme Value Analysis;,citation_abstract=Plotting order-ranked data is a standard technique that is used in estimating the probability of extreme weather events. Typically, observations, say, annual extremes of a period of N years, are ranked in order of magnitude and plotted on probability paper. Some statistical model is then fitted to the order-ranked data by which the return periods of specific extreme events are estimated. A key question in this method is as follows: What is the cumulative probability P that should be associated with the sample of rank m? This issue of the so-called plotting positions has been debated for almost a century, and a number of plotting rules and computational methods have been proposed. Here, it is shown that in estimating the return periods there is only one correct plotting position: P = m/(N + 1). This formula predicts much shorter return periods of extreme events than the other commonly used methods. Thus, many estimates of the weather-related risks should be reevaluated and the related building codes and other related regulations updated.;,citation_author=Lasse Makkonen;,citation_publication_date=2006-02-01;,citation_cover_date=2006-02-01;,citation_year=2006;,citation_fulltext_html_url=https://journals.ametsoc.org/view/journals/apme/45/2/jam2349.1.xml;,citation_issue=2;,citation_doi=10.1175/JAM2349.1;,citation_issn=1558-8424, 1558-8432;,citation_volume=45;,citation_journal_title=Journal of Applied Meteorology and Climatology;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
 <meta name="citation_reference" content="citation_title=6. Water-Resource Systems Planning.;,citation_author=Nicholas C Matalas;,citation_author=Myron B Fiering;,citation_publication_date=1977;,citation_cover_date=1977;,citation_year=1977;,citation_fulltext_html_url=https://www.nap.edu/read/185/chapter/11;,citation_inbook_title=Climate, Climatic Change, and Water Supply;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
@@ -236,7 +230,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/monte-carlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/monte-carlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -320,13 +314,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of climate science 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Climate science 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Inference ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,25 +332,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,7 +367,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -385,25 +379,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-Based Models and Calibration 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,12 +476,18 @@ window.Quarto = {
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References 🎯</span></a>
+ <span class="menu-text"><strong>References</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -531,66 +531,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#see-first" id="toc-see-first" class="nav-link active" data-scroll-target="#see-first">See first</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
-  <li><a href="#motivation-bayesian-inference" id="toc-motivation-bayesian-inference" class="nav-link" data-scroll-target="#motivation-bayesian-inference"><span class="header-section-number">4.2</span> Motivation: Bayesian inference</a>
-  <ul class="collapse">
-  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem"><span class="header-section-number">4.2.1</span> Bayes’ theorem</a></li>
-  <li><a href="#the-challenge" id="toc-the-challenge" class="nav-link" data-scroll-target="#the-challenge"><span class="header-section-number">4.2.2</span> The challenge</a></li>
-  <li><a href="#markov-chain-monte-carlo-mcmc" id="toc-markov-chain-monte-carlo-mcmc" class="nav-link" data-scroll-target="#markov-chain-monte-carlo-mcmc"><span class="header-section-number">4.2.3</span> Markov Chain Monte Carlo (MCMC)</a></li>
-  </ul></li>
-  <li><a href="#motivation-parameter-uncertainty" id="toc-motivation-parameter-uncertainty" class="nav-link" data-scroll-target="#motivation-parameter-uncertainty"><span class="header-section-number">4.3</span> Motivation: parameter uncertainty</a>
-  <ul class="collapse">
-  <li><a href="#the-challenge-1" id="toc-the-challenge-1" class="nav-link" data-scroll-target="#the-challenge-1"><span class="header-section-number">4.3.1</span> The challenge</a></li>
-  <li><a href="#monte-carlo-solution" id="toc-monte-carlo-solution" class="nav-link" data-scroll-target="#monte-carlo-solution"><span class="header-section-number">4.3.2</span> Monte Carlo Solution</a></li>
-  </ul></li>
-  <li><a href="#monte-carlo-theory" id="toc-monte-carlo-theory" class="nav-link" data-scroll-target="#monte-carlo-theory"><span class="header-section-number">4.4</span> Monte Carlo Theory</a>
-  <ul class="collapse">
-  <li><a href="#fundamental-theorem" id="toc-fundamental-theorem" class="nav-link" data-scroll-target="#fundamental-theorem"><span class="header-section-number">4.4.1</span> Fundamental theorem</a></li>
-  <li><a href="#advantages-over-deterministic-integration" id="toc-advantages-over-deterministic-integration" class="nav-link" data-scroll-target="#advantages-over-deterministic-integration"><span class="header-section-number">4.4.2</span> Advantages over deterministic integration</a></li>
-  </ul></li>
-  <li><a href="#motivation-resilience" id="toc-motivation-resilience" class="nav-link" data-scroll-target="#motivation-resilience"><span class="header-section-number">4.5</span> Motivation: resilience</a></li>
-  <li><a href="#motivation-sensitivity-analysis" id="toc-motivation-sensitivity-analysis" class="nav-link" data-scroll-target="#motivation-sensitivity-analysis"><span class="header-section-number">4.6</span> Motivation: sensitivity analysis</a>
-  <ul class="collapse">
-  <li><a href="#parameter-sensitivity" id="toc-parameter-sensitivity" class="nav-link" data-scroll-target="#parameter-sensitivity"><span class="header-section-number">4.6.1</span> Parameter sensitivity</a></li>
-  <li><a href="#global-sensitivity-analysis" id="toc-global-sensitivity-analysis" class="nav-link" data-scroll-target="#global-sensitivity-analysis"><span class="header-section-number">4.6.2</span> Global sensitivity analysis</a></li>
-  </ul></li>
-  <li><a href="#bayesian-decision-theory-context" id="toc-bayesian-decision-theory-context" class="nav-link" data-scroll-target="#bayesian-decision-theory-context"><span class="header-section-number">4.7</span> Bayesian Decision Theory Context</a></li>
-  <li><a href="#practical-problem-flood-risk-assessment" id="toc-practical-problem-flood-risk-assessment" class="nav-link" data-scroll-target="#practical-problem-flood-risk-assessment"><span class="header-section-number">4.8</span> Practical problem: flood risk assessment</a></li>
-  <li><a href="#functions-of-random-variables-the-challenge" id="toc-functions-of-random-variables-the-challenge" class="nav-link" data-scroll-target="#functions-of-random-variables-the-challenge"><span class="header-section-number">4.9</span> Functions of random variables: the challenge</a>
-  <ul class="collapse">
-  <li><a href="#limitations-analytic-approach" id="toc-limitations-analytic-approach" class="nav-link" data-scroll-target="#limitations-analytic-approach"><span class="header-section-number">4.9.1</span> Limitations: analytic approach</a></li>
-  <li><a href="#monte-carlo-solution-strategy" id="toc-monte-carlo-solution-strategy" class="nav-link" data-scroll-target="#monte-carlo-solution-strategy"><span class="header-section-number">4.9.2</span> Monte Carlo Solution Strategy</a></li>
-  </ul></li>
-  <li><a href="#parameter-uncertainty-propagation" id="toc-parameter-uncertainty-propagation" class="nav-link" data-scroll-target="#parameter-uncertainty-propagation"><span class="header-section-number">4.10</span> Parameter uncertainty propagation</a>
-  <ul class="collapse">
-  <li><a href="#the-core-problem" id="toc-the-core-problem" class="nav-link" data-scroll-target="#the-core-problem"><span class="header-section-number">4.10.1</span> The core problem</a></li>
-  <li><a href="#parameter-uncertainty-impact" id="toc-parameter-uncertainty-impact" class="nav-link" data-scroll-target="#parameter-uncertainty-impact"><span class="header-section-number">4.10.2</span> Parameter uncertainty impact</a></li>
-  </ul></li>
-  <li><a href="#bayesian-inference-with-mcmc" id="toc-bayesian-inference-with-mcmc" class="nav-link" data-scroll-target="#bayesian-inference-with-mcmc"><span class="header-section-number">4.11</span> Bayesian Inference with MCMC</a>
-  <ul class="collapse">
-  <li><a href="#prior-information-a-simple-example" id="toc-prior-information-a-simple-example" class="nav-link" data-scroll-target="#prior-information-a-simple-example"><span class="header-section-number">4.11.1</span> Prior Information: A Simple Example</a></li>
-  <li><a href="#bayes-rule-discrete-event-version" id="toc-bayes-rule-discrete-event-version" class="nav-link" data-scroll-target="#bayes-rule-discrete-event-version"><span class="header-section-number">4.11.2</span> Bayes’ Rule: Discrete Event Version</a></li>
-  <li><a href="#key-ideas-for-bayesian-inference" id="toc-key-ideas-for-bayesian-inference" class="nav-link" data-scroll-target="#key-ideas-for-bayesian-inference"><span class="header-section-number">4.11.3</span> Key Ideas for Bayesian Inference</a></li>
-  <li><a href="#bayes-rule-for-distributions" id="toc-bayes-rule-for-distributions" class="nav-link" data-scroll-target="#bayes-rule-for-distributions"><span class="header-section-number">4.11.4</span> Bayes’ Rule for Distributions</a></li>
-  <li><a href="#markov-chain-monte-carlo-mcmc-1" id="toc-markov-chain-monte-carlo-mcmc-1" class="nav-link" data-scroll-target="#markov-chain-monte-carlo-mcmc-1"><span class="header-section-number">4.11.5</span> Markov Chain Monte Carlo (MCMC)</a></li>
-  <li><a href="#mcmc-limitations-and-modern-solutions" id="toc-mcmc-limitations-and-modern-solutions" class="nav-link" data-scroll-target="#mcmc-limitations-and-modern-solutions"><span class="header-section-number">4.11.6</span> MCMC Limitations and Modern Solutions</a></li>
-  </ul></li>
-  <li><a href="#value-of-bayesian-inference" id="toc-value-of-bayesian-inference" class="nav-link" data-scroll-target="#value-of-bayesian-inference"><span class="header-section-number">4.12</span> Value of Bayesian Inference</a>
-  <ul class="collapse">
-  <li><a href="#key-benefits" id="toc-key-benefits" class="nav-link" data-scroll-target="#key-benefits"><span class="header-section-number">4.12.1</span> Key Benefits</a></li>
-  <li><a href="#the-posterior-as-compromise" id="toc-the-posterior-as-compromise" class="nav-link" data-scroll-target="#the-posterior-as-compromise"><span class="header-section-number">4.12.2</span> The Posterior as Compromise</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#essential-monte-carlo-concepts" id="toc-essential-monte-carlo-concepts" class="nav-link" data-scroll-target="#essential-monte-carlo-concepts"><span class="header-section-number">4.1</span> Essential Monte Carlo concepts</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/monte-carlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/monte-carlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></h1>
 </div>
 
 
@@ -607,274 +559,38 @@ window.Quarto = {
 </header>
 
 
-<section id="see-first" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="see-first">See first</h2>
-<p>This chapter builds on concepts from: - <a href="../../chapters/fundamentals/probability-stats.html">Probability and Statistics</a></p>
-</section>
 <section id="learning-objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>After reading this chapter, you should be able to:</p>
 <ul>
 <li>Apply Monte Carlo methods to approximate integrals and expectations</li>
-<li>Use Markov Chain Monte Carlo (MCMC) techniques to estimate posterior distributions</li>
+<li>Use Markov Chain Monte Carlo (MCMC) techniques for Bayesian inference</li>
 <li>Understand parameter uncertainty propagation in decision-making</li>
 <li>Implement Monte Carlo simulation for climate risk assessment</li>
 </ul>
-<p>Monte Carlo is a powerful class of methods used to estimate the properties of a distribution by generating random samples from that distribution. Specifically, Monte Carlo methods are used to estimate the expected value of a function of random variables.</p>
 </section>
-<section id="overview" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
-<p>Monte Carlo methods are used to approximate integrals using sums. If we want to compute an expectation <span class="math inline">\(\mathbb{E}[f(X)]\)</span> where <span class="math inline">\(X\)</span> has probability density <span class="math inline">\(p(x)\)</span>:</p>
-<p><span class="math display">\[
-\mathbb{E}[f(X)] = \int f(x) p(x) dx
-\]</span></p>
-<p>we can approximate this using Monte Carlo: <span class="math display">\[
-\mathbb{E}[f(X)] \approx \frac{1}{N} \sum_{i=1}^N f(x_i)
-\]</span> where <span class="math inline">\(x_1, x_2, \ldots, x_N\)</span> are samples drawn from <span class="math inline">\(p(x)\)</span>.</p>
-<p>This is particularly powerful when <span class="math inline">\(p(x)\)</span> is a complex posterior distribution that we can only sample from, not evaluate directly.</p>
+<section id="essential-monte-carlo-concepts" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="essential-monte-carlo-concepts"><span class="header-section-number">4.1</span> Essential Monte Carlo concepts</h2>
+<ol type="1">
+<li>Monte Carlo integration and expectation approximation</li>
+<li>Bayesian inference and posterior sampling</li>
+<li>Markov Chain Monte Carlo (MCMC) methods</li>
+<li>Parameter uncertainty propagation</li>
+<li>Sensitivity analysis and global uncertainty quantification</li>
+</ol>
 </section>
-<section id="motivation-bayesian-inference" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="motivation-bayesian-inference"><span class="header-section-number">4.2</span> Motivation: Bayesian inference</h2>
-<p>Bayesian inference provides a principled framework for updating our beliefs about parameters given observed data. The key insight is that parameters have probability distributions, not single point values.</p>
-<section id="bayes-theorem" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">4.2.1</span> Bayes’ theorem</h3>
-<p>For continuous parameters, Bayes’ theorem states: <span class="math display">\[
-p(\theta | y) = \frac{p(y | \theta) p(\theta)}{p(y)}
-\]</span></p>
-<p>where: - <span class="math inline">\(p(\theta | y)\)</span> is the <strong>posterior</strong> distribution (what we want) - <span class="math inline">\(p(y | \theta)\)</span> is the <strong>likelihood</strong> (probability of data given parameters) - <span class="math inline">\(p(\theta)\)</span> is the <strong>prior</strong> distribution (our initial beliefs) - <span class="math inline">\(p(y)\)</span> is the <strong>marginal likelihood</strong> (normalizing constant)</p>
-<p>Since <span class="math inline">\(p(y)\)</span> doesn’t depend on <span class="math inline">\(\theta\)</span>, we often work with: <span class="math display">\[
-p(\theta | y) \propto p(y | \theta) p(\theta)
-\]</span></p>
-</section>
-<section id="the-challenge" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="the-challenge"><span class="header-section-number">4.2.2</span> The challenge</h3>
-<p>For most real-world problems, the posterior distribution <span class="math inline">\(p(\theta | y)\)</span> cannot be computed analytically. This is where Monte Carlo methods become essential - we use them to draw samples from complex posterior distributions.</p>
-</section>
-<section id="markov-chain-monte-carlo-mcmc" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="markov-chain-monte-carlo-mcmc"><span class="header-section-number">4.2.3</span> Markov Chain Monte Carlo (MCMC)</h3>
-<p>MCMC methods generate samples from posterior distributions by: 1. Starting at some initial parameter values 2. Proposing new parameter values 3. Accepting or rejecting proposals based on the posterior probability 4. Repeating to create a “chain” of samples</p>
-<p>Modern MCMC algorithms like the No-U-Turn Sampler (NUTS) use gradient information to efficiently explore high-dimensional parameter spaces.</p>
-</section>
-</section>
-<section id="motivation-parameter-uncertainty" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="motivation-parameter-uncertainty"><span class="header-section-number">4.3</span> Motivation: parameter uncertainty</h2>
-<p>A fundamental challenge in climate risk assessment is that model parameters are uncertain. Consider a simple flood risk assessment problem:</p>
+<section id="further-reading" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
 <ul>
-<li>We have a probability distribution for flood heights: <span class="math inline">\(p(h)\)</span></li>
-<li>We have a damage function: <span class="math inline">\(d(h)\)</span> (damages as a function of height)</li>
-<li>We want the probability distribution of damages: <span class="math inline">\(p(d)\)</span></li>
+<li><span class="citation" data-cites="gelman_bda3:2014">Gelman et al. (<a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">2014</a>)</span>: Bayesian data analysis with computational focus</li>
 </ul>
-<p>Mathematically: <span class="math display">\[
-p(d) = \int_h d(h) p(h) \, dh
-\]</span></p>
-<section id="the-challenge-1" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="the-challenge-1"><span class="header-section-number">4.3.1</span> The challenge</h3>
-<p>This integral is often impossible to solve analytically, especially when: 1. We use realistic (non-analytical) damage functions 2. We want to account for parameter uncertainty in <span class="math inline">\(p(h)\)</span> 3. We have multiple uncertain parameters</p>
-</section>
-<section id="monte-carlo-solution" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="monte-carlo-solution"><span class="header-section-number">4.3.2</span> Monte Carlo Solution</h3>
-<p>Instead of solving the integral analytically: 1. Sample flood heights: <span class="math inline">\(h_1, h_2, \ldots, h_N \sim p(h)\)</span> 2. Apply damage function: <span class="math inline">\(d_i = d(h_i)\)</span> for each sample 3. Analyze the resulting damage samples: <span class="math inline">\(\{d_1, d_2, \ldots, d_N\}\)</span></p>
-<p>This approach generalizes to complex, multi-parameter problems where analytical solutions are impossible.</p>
-</section>
-</section>
-<section id="monte-carlo-theory" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="monte-carlo-theory"><span class="header-section-number">4.4</span> Monte Carlo Theory</h2>
-<section id="fundamental-theorem" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="fundamental-theorem"><span class="header-section-number">4.4.1</span> Fundamental theorem</h3>
-<p>If <span class="math inline">\(\theta^s \sim p(\theta)\)</span>, then by the Law of Large Numbers: <span class="math display">\[
-\mathbb{E}[f(\theta)] = \int_{\theta} f(\theta) p(\theta) d\theta \approx \frac{1}{S} \sum_{s=1}^S f(\theta^s)
-\]</span></p>
-<p>This convergence is <strong>guaranteed</strong> as <span class="math inline">\(S \to \infty\)</span>, making Monte Carlo a robust approach for complex problems.</p>
-</section>
-<section id="advantages-over-deterministic-integration" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="advantages-over-deterministic-integration"><span class="header-section-number">4.4.2</span> Advantages over deterministic integration</h3>
-<p><strong>Deterministic approach</strong>: - Sample <span class="math inline">\(\theta\)</span> at regular grid points - Compute <span class="math inline">\(f(\theta)\)</span> at each point and sum - <strong>Problems</strong>: Curse of dimensionality, choice of grid spacing, boundary handling</p>
-<p><strong>Monte Carlo approach</strong>: - Sample <span class="math inline">\(\theta\)</span> from the actual distribution <span class="math inline">\(p(\theta)\)</span> - Automatically focuses computational effort where probability is high - <strong>Benefits</strong>: Scales well to high dimensions, handles complex domains</p>
-</section>
-</section>
-<section id="motivation-resilience" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="motivation-resilience"><span class="header-section-number">4.5</span> Motivation: resilience</h2>
-<p>Monte Carlo methods are essential for resilience analysis because they can handle: - Multiple uncertain hazards occurring simultaneously - Complex system interactions and cascading failures - Non-linear damage functions and thresholds - Rare but high-impact events</p>
-</section>
-<section id="motivation-sensitivity-analysis" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="motivation-sensitivity-analysis"><span class="header-section-number">4.6</span> Motivation: sensitivity analysis</h2>
-<p>Monte Carlo methods excel at sensitivity analysis - understanding how uncertain inputs affect outputs.</p>
-<section id="parameter-sensitivity" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="parameter-sensitivity"><span class="header-section-number">4.6.1</span> Parameter sensitivity</h3>
-<p>By systematically varying parameters and observing changes in Monte Carlo outputs, we can: 1. <strong>Identify critical parameters</strong>: Which uncertainties matter most? 2. <strong>Quantify sensitivity</strong>: How much does output uncertainty change with input uncertainty? 3. <strong>Guide data collection</strong>: Where would additional measurements be most valuable?</p>
-</section>
-<section id="global-sensitivity-analysis" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="global-sensitivity-analysis"><span class="header-section-number">4.6.2</span> Global sensitivity analysis</h3>
-<p>Unlike local sensitivity (derivatives at a point), Monte Carlo enables <strong>global sensitivity analysis</strong> across the entire parameter space, capturing: - Non-linear relationships - Parameter interactions - Threshold effects - Tail behavior</p>
-</section>
-</section>
-<section id="bayesian-decision-theory-context" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="bayesian-decision-theory-context"><span class="header-section-number">4.7</span> Bayesian Decision Theory Context</h2>
-<p>Recall from decision theory: <span class="math display">\[
-\mathbb{E}\left[L(a, \theta) \right] = \int_\theta L(a, \theta) p(\theta) d\theta
-\]</span> Where <span class="math inline">\(\theta\)</span> is a vector of parameters, <span class="math inline">\(a\)</span> is some action or decision, and <span class="math inline">\(L\)</span> is the loss function.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>We previously called <span class="math inline">\(\theta\)</span> a “state of the world” and <span class="math inline">\(L\)</span> a “reward function”.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="practical-problem-flood-risk-assessment" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="practical-problem-flood-risk-assessment"><span class="header-section-number">4.8</span> Practical problem: flood risk assessment</h2>
-<p>You have been commissioned by a client to assess their exposure to flooding. Specifically, they want to know the probability distribution of annual flood damages at their property if they do not elevate or floodproof their building.</p>
-<ol type="1">
-<li><span class="math inline">\(p(h)\)</span>: probability distribution of annual maximum flood heights at their property</li>
-<li><span class="math inline">\(d(h)\)</span>: flood damages as a deterministic function of flood height</li>
-<li><span class="math inline">\(p(d) = \int_h d(h) p(h) \, dh\)</span></li>
-</ol>
-<p>With this information, they can compute metrics like the expected annual damage, the 99th percentile annual damage, and the probability of any flood occurring that will help them make a decision.</p>
-</section>
-<section id="functions-of-random-variables-the-challenge" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="functions-of-random-variables-the-challenge"><span class="header-section-number">4.9</span> Functions of random variables: the challenge</h2>
-<p>Plugging in a bounded logistic model for <span class="math inline">\(d(h)\)</span> and our lognormal model for <span class="math inline">\(h\)</span>: <span class="math display">\[
-\begin{align}
-p(d) &amp;= \int_h d(h) p(h) \, dh \\
-&amp;= \int_{-\infty}^\infty \mathbb{I}[h &gt; 0] \text{logistic}(h) \mathcal{N}(h | \mu, \sigma^2) \, dh\\
-&amp;= \int_0^\infty \text{logistic}(h) \mathcal{N}(\mu, \sigma^2) \, dh\\
-&amp;= \int_0^\infty \frac{1}{1 + \exp(-k * (x - x0))} \frac {1}{\sigma {\sqrt {2\pi }}} \exp \left\{-{\frac {1}{2}}\left({\frac {x-\mu }{\sigma }}\right)^{2} \right\} \, dh
-\end{align}
-\]</span></p>
-<section id="limitations-analytic-approach" class="level3" data-number="4.9.1">
-<h3 data-number="4.9.1" class="anchored" data-anchor-id="limitations-analytic-approach"><span class="header-section-number">4.9.1</span> Limitations: analytic approach</h3>
-<p>We might be able to solve this analytically (Wolfram Alpha can’t…). But:</p>
-<ol type="1">
-<li>Numerous simplifying assumptions and approximations.</li>
-<li>What if we want to use a different distribution?</li>
-<li>A different damage model?</li>
-</ol>
-</section>
-<section id="monte-carlo-solution-strategy" class="level3" data-number="4.9.2">
-<h3 data-number="4.9.2" class="anchored" data-anchor-id="monte-carlo-solution-strategy"><span class="header-section-number">4.9.2</span> Monte Carlo Solution Strategy</h3>
-<p>A deterministic strategy: 1. sample <span class="math inline">\(h^s = 0, \Delta h, 2\Delta h, \ldots, (S-1)\Delta h\)</span> 2. compute <span class="math inline">\(\text{logistic}(h^s) \mathcal{N}(h^s | \mu, \sigma^2)\)</span> at each point and sum 3. drawbacks: we have to go to <span class="math inline">\(\infty\)</span> and select <span class="math inline">\(\Delta h\)</span>.</p>
-<p>A sampling strategy: 1. sample <span class="math inline">\(h^1, h^2, \ldots, h^S \sim p(h)\)</span> – which we can do because we have a model for <span class="math inline">\(p(h)\)</span> 2. for each value: compute <span class="math inline">\(\mathbb{I}(h^s &gt; 0) \text{logistic}(h^s)\)</span> and take the average 3. this converges to the correct expectation!</p>
-</section>
-</section>
-<section id="parameter-uncertainty-propagation" class="level2" data-number="4.10">
-<h2 data-number="4.10" class="anchored" data-anchor-id="parameter-uncertainty-propagation"><span class="header-section-number">4.10</span> Parameter uncertainty propagation</h2>
-<section id="the-core-problem" class="level3" data-number="4.10.1">
-<h3 data-number="4.10.1" class="anchored" data-anchor-id="the-core-problem"><span class="header-section-number">4.10.1</span> The core problem</h3>
-<p>We have been working with a single probability distribution for flood depths, which we computed by maximum likelihood.</p>
-<p>These values are not precise. What happens if we consider the lognormal distribution with slightly different, but still plausible, parameters?</p>
-<p>What about the depth-damage parameters <span class="math inline">\(x_0\)</span> and <span class="math inline">\(k\)</span>?</p>
-</section>
-<section id="parameter-uncertainty-impact" class="level3" data-number="4.10.2">
-<h3 data-number="4.10.2" class="anchored" data-anchor-id="parameter-uncertainty-impact"><span class="header-section-number">4.10.2</span> Parameter uncertainty impact</h3>
-<ul>
-<li>Uncertainties in our model parameters propagate to uncertainties in the things we care about.</li>
-<li>As we collect more data, fewer combinations of parameters are consistent with observations</li>
-<li>Different parameter combinations can lead to substantially different risk assessments</li>
-</ul>
-</section>
-</section>
-<section id="bayesian-inference-with-mcmc" class="level2" data-number="4.11">
-<h2 data-number="4.11" class="anchored" data-anchor-id="bayesian-inference-with-mcmc"><span class="header-section-number">4.11</span> Bayesian Inference with MCMC</h2>
-<section id="prior-information-a-simple-example" class="level3" data-number="4.11.1">
-<h3 data-number="4.11.1" class="anchored" data-anchor-id="prior-information-a-simple-example"><span class="header-section-number">4.11.1</span> Prior Information: A Simple Example</h3>
-<p>Everyone is tested for CEVE543acitis, a rare and deadly disease: 1. It is known that 1 in 1,000 people have CEVE543acitis 2. The test is 99% accurate 3. Your test comes back positive. What is the probability that you have CEVE543acitis?</p>
-</section>
-<section id="bayes-rule-discrete-event-version" class="level3" data-number="4.11.2">
-<h3 data-number="4.11.2" class="anchored" data-anchor-id="bayes-rule-discrete-event-version"><span class="header-section-number">4.11.2</span> Bayes’ Rule: Discrete Event Version</h3>
-<p><span class="math display">\[
-\Pr \left\{ \theta | y \right\} = \frac{\Pr \left\{ y | \theta \right\} \Pr \left\{ \theta \right\}}{\Pr \left\{ y \right\}}
-\]</span></p>
-<p>Define <span class="math inline">\(y\)</span> is getting a positive test result and <span class="math inline">\(\theta\)</span> is having the underlying condition. Note that we do not observe <span class="math inline">\(\theta\)</span> directly! Here <span class="math inline">\(y=1\)</span> and we want to know <span class="math inline">\(\Pr\left\{\theta = 1 \mid y=1 \right\}\)</span>.</p>
-<p>A naive application of maximum likelihood: <span class="math inline">\(\Pr\left\{y=1 \mid \theta=1 \right\} &gt; \Pr\left\{y=1 \mid \theta=0 \right\}\)</span> so best estimate is <span class="math inline">\(\theta=1\)</span></p>
-</section>
-<section id="key-ideas-for-bayesian-inference" class="level3" data-number="4.11.3">
-<h3 data-number="4.11.3" class="anchored" data-anchor-id="key-ideas-for-bayesian-inference"><span class="header-section-number">4.11.3</span> Key Ideas for Bayesian Inference</h3>
-<ol type="1">
-<li>Parameters have <strong>probability distributions</strong>, not single point values</li>
-<li>Start with some prior distribution for parameters</li>
-<li>Goal: what is the distribution of the parameters given the data?</li>
-</ol>
-</section>
-<section id="bayes-rule-for-distributions" class="level3" data-number="4.11.4">
-<h3 data-number="4.11.4" class="anchored" data-anchor-id="bayes-rule-for-distributions"><span class="header-section-number">4.11.4</span> Bayes’ Rule for Distributions</h3>
-<p><span class="math display">\[
-p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}
-\]</span></p>
-<p>If we are drawing samples from a distribution, we can calculate up to a constant of proportionality and – since <span class="math inline">\(p(y)\)</span> doesn’t depend on <span class="math inline">\(\theta\)</span> – we can usually ignore it.</p>
-<p><span class="math display">\[
-\overbrace{p(\theta \mid y)}^\rm{posterior} \propto \underbrace{p(y \mid \theta)}_\rm{likelihood} \overbrace{p(\theta)}^\rm{prior}
-\]</span></p>
-</section>
-<section id="markov-chain-monte-carlo-mcmc-1" class="level3" data-number="4.11.5">
-<h3 data-number="4.11.5" class="anchored" data-anchor-id="markov-chain-monte-carlo-mcmc-1"><span class="header-section-number">4.11.5</span> Markov Chain Monte Carlo (MCMC)</h3>
-<ol type="1">
-<li>A class of methods for sampling from a probability distribution</li>
-<li>Random walkers:
-<ol type="1">
-<li>Start at some value</li>
-<li>Propose a new value</li>
-<li>Accept or reject the new value based on some criteria</li>
-</ol></li>
-<li>Repeat to get a “chain” of samples</li>
-</ol>
-</section>
-<section id="mcmc-limitations-and-modern-solutions" class="level3" data-number="4.11.6">
-<h3 data-number="4.11.6" class="anchored" data-anchor-id="mcmc-limitations-and-modern-solutions"><span class="header-section-number">4.11.6</span> MCMC Limitations and Modern Solutions</h3>
-<ol type="1">
-<li>Works great for a very simple problem</li>
-<li>Computation blows up in higher dimensions (<code>p_accept</code> gets very small)</li>
-<li>Have to code a new sampler for each problem</li>
-</ol>
-<p>Modern samplers leverage gradients and clever tricks to draw better samples for harder problems.</p>
-</section>
-</section>
-<section id="value-of-bayesian-inference" class="level2" data-number="4.12">
-<h2 data-number="4.12" class="anchored" data-anchor-id="value-of-bayesian-inference"><span class="header-section-number">4.12</span> Value of Bayesian Inference</h2>
-<section id="key-benefits" class="level3" data-number="4.12.1">
-<h3 data-number="4.12.1" class="anchored" data-anchor-id="key-benefits"><span class="header-section-number">4.12.1</span> Key Benefits</h3>
-<ol type="1">
-<li>Draw samples from tricky posteriors to compute expectations <span class="math inline">\(\mathbb{E}[f(\theta)]\)</span></li>
-<li>Quantify parametric uncertainty
-<ul>
-<li>In practice, sometimes this is a big deal and sometimes model structure uncertainties matter more</li>
-</ul></li>
-<li>Force us to specify a data generating process</li>
-<li>Computational methods fail loudly</li>
-</ol>
-</section>
-<section id="the-posterior-as-compromise" class="level3" data-number="4.12.2">
-<h3 data-number="4.12.2" class="anchored" data-anchor-id="the-posterior-as-compromise"><span class="header-section-number">4.12.2</span> The Posterior as Compromise</h3>
-<p>The posterior is a compromise between the prior and the likelihood.</p>
-<ul>
-<li>Bad priors lead to bad inferences</li>
-<li>The choice of prior is subjective, which some people hate</li>
-<li>We approach this in a principled manner</li>
-<li>Lots of other steps are also subjective (choice of likelihood model, which data to use, problem framing, etc)</li>
-<li>False sense of objectivity is dangerous anyways!</li>
-</ul>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Computational examples
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For detailed computational examples, see the companion files:</p>
-<ol type="1">
-<li><p><a href="../../chapters/fundamentals/monte-carlo-bayesian.qmd">Bayesian Inference and MCMC: Computational Examples</a> - MCMC sampling, prior/posterior analysis, Turing.jl usage</p></li>
-<li><p><a href="../../chapters/fundamentals/monte-carlo-uncertainty.qmd">Parameter Uncertainty and Risk Assessment: Computational Examples</a> - Monte Carlo simulation for flood risk, parameter uncertainty propagation, sensitivity analysis</p></li>
-</ol>
-<p>Examples include: - Flood risk assessment with uncertain parameters - Depth-damage function analysis - Parameter sensitivity studies - Return period analysis with uncertainty - Bayesian model specification and sampling - Prior predictive checks - MCMC diagnostics and trace plots</p>
-</div>
-</div>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-gelman_bda3:2014" class="csl-entry" role="listitem">
+Gelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014. <em>Bayesian <span>Data Analysis</span></em>. 3rd ed. Chapman &amp; Hall/CRC Boca Raton, FL, USA.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1323,8 +1039,8 @@ Computational examples
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/fundamentals/ml-nonparametric.html" class="pagination-link" aria-label="Machine Learning 🚧">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/fundamentals/ml-nonparametric.html" class="pagination-link" aria-label="Machine learning and nonparametric methods 🚧">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

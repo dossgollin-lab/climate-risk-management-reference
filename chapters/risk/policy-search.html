@@ -71,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -150,6 +121,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Extreme events: Dynamics, statistics and prediction;,citation_abstract=We review work on extreme events, their causes and consequences, by a group of European and American researchers involved in a three-year project on these topics. The review covers theoretical aspects of time series analysis and of extreme value theory, as well as of the deterministic modeling of extreme events, via continuous and discrete dynamic models. The applications include climatic, seismic and socio-economic events, along with their prediction. $&amp;amp;amp;lt;$br$&amp;gt;&amp;lt;$br$&amp;gt;$ Two important results refer to (i) the complementarity of spectral analysis of a time series in terms of the continuous and the discrete part of its power spectrum; and (ii) the need for coupled modeling of natural and socio-economic systems. Both these results have implications for the study and prediction of natural hazards and their human impacts.;,citation_author=M Ghil;,citation_author=P Yiou;,citation_author=S Hallegatte;,citation_author=B D Malamud;,citation_author=P Naveau;,citation_author=A Soloviev;,citation_author=P Friederichs;,citation_author=V Keilis-Borok;,citation_author=D Kondrashov;,citation_author=V Kossobokov;,citation_author=O Mestre;,citation_author=C Nicolis;,citation_author=H W Rust;,citation_author=P Shebalin;,citation_author=M Vrac;,citation_author=A Witt;,citation_author=I Zaliapin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=http://www.nonlin-processes-geophys.net/18/295/2011/;,citation_issue=3;,citation_doi=10/fvzxvv;,citation_volume=18;,citation_journal_title=Nonlinear Processes in Geophysics;,citation_publisher=Copernicus GmbH;">
 <meta name="citation_reference" content="citation_title=Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review;,citation_abstract=AbstractHighway bridges are one of the most vulnerable constituents of transportation networks when exposed to one or more natural hazards, such as earthquakes, hurricanes, tsunamis, and riverine floods. To facilitate and enhance prehazard and posthazard ...;,citation_author=Ioannis Gidaris;,citation_author=Jamie E. Padgett;,citation_author=Andre R. Barbosa;,citation_author=Suren Chen;,citation_author=Daniel Cox;,citation_author=Bret Webb;,citation_author=Amy Cerato;,citation_publication_date=2017-03-01;,citation_cover_date=2017-03-01;,citation_year=2017;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29ST.1943-541X.0001672;,citation_issue=3;,citation_doi=10.1061/(ASCE)ST.1943-541X.0001672;,citation_issn=1943-541X;,citation_volume=143;,citation_journal_title=Journal of Structural Engineering;,citation_publisher=American Society of Civil Engineers;">
 <meta name="citation_reference" content="citation_title=Beyond wickedness: Managing complex systems and climate change;,citation_author=Jonathan M. Gilligan;,citation_author=Michael P. Vandenbergh;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://wp0.vanderbilt.edu/lawreview/2020/12/beyond-wickedness-managing-complex-systems-and-climate-change/;,citation_volume=73;,citation_journal_title=Vanderbilt Law Review;,citation_journal_abbrev=Vand. L. Rev.;">
+<meta name="citation_reference" content="citation_title=Extreme Value Theory and Statistics of Univariate Extremes: A Review;,citation_abstract=SummaryStatistical issues arising in modelling univariate extremes of a random sample have been successfully used in the most diverse fields, such as biometrics, finance, insurance and risk theory. Statistics of univariate extremes (SUE), the subject to be dealt with in this review paper, has recently faced a huge development, partially because rare events can have catastrophic consequences for human activities, through their impact on the natural and constructed environments. In the last decades, there has been a shift from the area of parametric SUE, based on probabilistic asymptotic results in extreme value theory, towards semi-parametric approaches. After a brief reference to Gumbel’s block methodology and more recent improvements in the parametric framework, we present an overview of the developments on the estimation of parameters of extreme events and on the testing of extreme value conditions under a semi-parametric framework. We further discuss a few challenging topics in the area of SUE. © 2014 The Authors. International Statistical Review © 2014 International Statistical Institute;,citation_author=M. Ivette Gomes;,citation_author=Armelle Guillou;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/insr.12058;,citation_issue=2;,citation_doi=10.1111/insr.12058;,citation_issn=1751-5823;,citation_volume=83;,citation_journal_title=International Statistical Review;">
 <meta name="citation_reference" content="citation_title=Downscaling projections of Indian monsoon rainfall using a non‐homogeneous hidden Markov model;,citation_author=Arthur M Greene;,citation_author=Andrew W Robertson;,citation_author=Padhraic Smyth;,citation_author=Scott Triglia;,citation_publication_date=2011-01;,citation_cover_date=2011-01;,citation_year=2011;,citation_issue=655;,citation_doi=10.1002/qj.788;,citation_volume=137;,citation_journal_title=Quart J Royal Meteoro Soc;,citation_publisher=Wiley Online Library;">
 <meta name="citation_reference" content="citation_title=Emissions – the ’business as usual’ story is misleading;,citation_abstract=Stop using the worst-case scenario for climate warming as the most likely outcome — more-realistic baselines make for better policy.;,citation_author=Zeke Hausfather;,citation_author=Glen P. Peters;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/d41586-020-00177-3;,citation_issue=7792, 7792;,citation_doi=10.1038/d41586-020-00177-3;,citation_volume=577;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
@@ -173,8 +145,10 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
 <meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Computing return times or return periods with rare event algorithms;,citation_abstract=The average time between two occurrences of the same event, referred to as its return time (or return period), is a useful statistical concept for practical applications. For instance insurances or public agencies may be interested by the return time of a 10 m flood of the Seine river in Paris. However, due to their scarcity, reliably estimating return times for rare events is very difficult using either observational data or direct numerical simulations. For rare events, an estimator for return times can be built from the extrema of the observable on trajectory blocks. Here, we show that this estimator can be improved to remain accurate for return times of the order of the block size. More importantly, we show that this approach can be generalised to estimate return times from numerical algorithms specifically designed to sample rare events. So far those algorithms often compute probabilities, rather than return times. The approach we propose provides a computationally extremely efficient way to estimate numerically the return times of rare events for a dynamical system, gaining several orders of magnitude of computational costs. We illustrate the method on two kinds of observables, instantaneous and time-averaged, using two different rare event algorithms, for a simple stochastic process, the Ornstein–Uhlenbeck process. As an example of realistic applications to complex systems, we finally discuss extreme values of the drag on an object in a turbulent flow.;,citation_author=Thibault Lestang;,citation_author=Francesco Ragone;,citation_author=Charles-Edouard Bréhier;,citation_author=Corentin Herbert;,citation_author=Freddy Bouchet;,citation_publication_date=2018-04;,citation_cover_date=2018-04;,citation_year=2018;,citation_fulltext_html_url=https://dx.doi.org/10.1088/1742-5468/aab856;,citation_issue=4;,citation_doi=10.1088/1742-5468/aab856;,citation_issn=1742-5468;,citation_volume=2018;,citation_journal_title=Journal of Statistical Mechanics: Theory and Experiment;,citation_journal_abbrev=J. Stat. Mech.;,citation_publisher=IOP Publishing and SISSA;">
 <meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
 <meta name="citation_reference" content="citation_title=Bayesian spatiotemporal nonstationary model quantifies robust increases in daily extreme rainfall across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like National Oceanographic and Atmospheric Administration (NOAA) Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in statistical modeling of extreme precipitation has faced practical challenges, which have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Benjamin Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-08;,citation_cover_date=2025-08;,citation_year=2025;,citation_fulltext_html_url=https://dx.doi.org/10.1088/2752-5295/adf56e;,citation_issue=3;,citation_doi=10.1088/2752-5295/adf56e;,citation_issn=2752-5295;,citation_volume=4;,citation_journal_title=Environmental Research: Climate;,citation_journal_abbrev=Environ. Res.: Climate;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Plotting Positions in Extreme Value Analysis;,citation_abstract=Plotting order-ranked data is a standard technique that is used in estimating the probability of extreme weather events. Typically, observations, say, annual extremes of a period of N years, are ranked in order of magnitude and plotted on probability paper. Some statistical model is then fitted to the order-ranked data by which the return periods of specific extreme events are estimated. A key question in this method is as follows: What is the cumulative probability P that should be associated with the sample of rank m? This issue of the so-called plotting positions has been debated for almost a century, and a number of plotting rules and computational methods have been proposed. Here, it is shown that in estimating the return periods there is only one correct plotting position: P = m/(N + 1). This formula predicts much shorter return periods of extreme events than the other commonly used methods. Thus, many estimates of the weather-related risks should be reevaluated and the related building codes and other related regulations updated.;,citation_author=Lasse Makkonen;,citation_publication_date=2006-02-01;,citation_cover_date=2006-02-01;,citation_year=2006;,citation_fulltext_html_url=https://journals.ametsoc.org/view/journals/apme/45/2/jam2349.1.xml;,citation_issue=2;,citation_doi=10.1175/JAM2349.1;,citation_issn=1558-8424, 1558-8432;,citation_volume=45;,citation_journal_title=Journal of Applied Meteorology and Climatology;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
 <meta name="citation_reference" content="citation_title=6. Water-Resource Systems Planning.;,citation_author=Nicholas C Matalas;,citation_author=Myron B Fiering;,citation_publication_date=1977;,citation_cover_date=1977;,citation_year=1977;,citation_fulltext_html_url=https://www.nap.edu/read/185/chapter/11;,citation_inbook_title=Climate, Climatic Change, and Water Supply;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
@@ -320,13 +294,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of climate science 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Climate science 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Inference ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,25 +312,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,7 +347,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -385,25 +359,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-Based Models and Calibration 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,12 +456,18 @@ window.Quarto = {
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References 🎯</span></a>
+ <span class="menu-text"><strong>References</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -526,48 +506,8 @@ window.Quarto = {
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#see-first" id="toc-see-first" class="nav-link active" data-scroll-target="#see-first">See first</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">16.1</span> Overview</a>
-  <ul class="collapse">
-  <li><a href="#review-of-notation" id="toc-review-of-notation" class="nav-link" data-scroll-target="#review-of-notation"><span class="header-section-number">16.1.1</span> Review of notation</a></li>
-  <li><a href="#key-components-of-an-optimization-problem" id="toc-key-components-of-an-optimization-problem" class="nav-link" data-scroll-target="#key-components-of-an-optimization-problem"><span class="header-section-number">16.1.2</span> Key components of an optimization problem</a></li>
-  <li><a href="#why-optimize" id="toc-why-optimize" class="nav-link" data-scroll-target="#why-optimize"><span class="header-section-number">16.1.3</span> Why optimize?</a></li>
-  </ul></li>
-  <li><a href="#optimization-in-the-wild" id="toc-optimization-in-the-wild" class="nav-link" data-scroll-target="#optimization-in-the-wild"><span class="header-section-number">16.2</span> Optimization in the wild</a>
-  <ul class="collapse">
-  <li><a href="#where-have-you-seen-optimization-used" id="toc-where-have-you-seen-optimization-used" class="nav-link" data-scroll-target="#where-have-you-seen-optimization-used"><span class="header-section-number">16.2.1</span> Where have you seen optimization used?</a></li>
-  <li><a href="#linear-programming" id="toc-linear-programming" class="nav-link" data-scroll-target="#linear-programming"><span class="header-section-number">16.2.2</span> Linear programming</a></li>
-  <li><a href="#linear-programming-with-discrete-decisions" id="toc-linear-programming-with-discrete-decisions" class="nav-link" data-scroll-target="#linear-programming-with-discrete-decisions"><span class="header-section-number">16.2.3</span> Linear programming with discrete decisions</a></li>
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">16.2.4</span> Gradient descent</a></li>
-  <li><a href="#simulation-optimization" id="toc-simulation-optimization" class="nav-link" data-scroll-target="#simulation-optimization"><span class="header-section-number">16.2.5</span> Simulation-optimization</a></li>
-  </ul></li>
-  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points"><span class="header-section-number">16.3</span> Key points</a></li>
-  <li><a href="#multiobjective-policy-search-and-optimization" id="toc-multiobjective-policy-search-and-optimization" class="nav-link" data-scroll-target="#multiobjective-policy-search-and-optimization"><span class="header-section-number">16.4</span> Multiobjective Policy Search and Optimization</a>
-  <ul class="collapse">
-  <li><a href="#enriching-our-notation" id="toc-enriching-our-notation" class="nav-link" data-scroll-target="#enriching-our-notation"><span class="header-section-number">16.4.1</span> Enriching our notation</a></li>
-  <li><a href="#single-objective-policy-search" id="toc-single-objective-policy-search" class="nav-link" data-scroll-target="#single-objective-policy-search"><span class="header-section-number">16.4.2</span> Single-objective policy search</a></li>
-  <li><a href="#objectives-can-be-hard-to-combine" id="toc-objectives-can-be-hard-to-combine" class="nav-link" data-scroll-target="#objectives-can-be-hard-to-combine"><span class="header-section-number">16.4.3</span> Objectives can be hard to combine</a></li>
-  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals"><span class="header-section-number">16.4.4</span> Goals</a></li>
-  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link" data-scroll-target="#mathematical-formulation"><span class="header-section-number">16.4.5</span> Mathematical formulation</a></li>
-  <li><a href="#dominance" id="toc-dominance" class="nav-link" data-scroll-target="#dominance"><span class="header-section-number">16.4.6</span> Dominance</a></li>
-  <li><a href="#goals-of-multiobjective-optimization" id="toc-goals-of-multiobjective-optimization" class="nav-link" data-scroll-target="#goals-of-multiobjective-optimization"><span class="header-section-number">16.4.7</span> Goals of multiobjective optimization</a></li>
-  <li><a href="#implementation-approaches" id="toc-implementation-approaches" class="nav-link" data-scroll-target="#implementation-approaches"><span class="header-section-number">16.4.8</span> Implementation Approaches</a></li>
-  <li><a href="#weighted-sum-method" id="toc-weighted-sum-method" class="nav-link" data-scroll-target="#weighted-sum-method"><span class="header-section-number">16.4.9</span> Weighted Sum Method</a></li>
-  <li><a href="#genetic-algorithms-for-multi-objective-optimization" id="toc-genetic-algorithms-for-multi-objective-optimization" class="nav-link" data-scroll-target="#genetic-algorithms-for-multi-objective-optimization"><span class="header-section-number">16.4.10</span> Genetic Algorithms for Multi-Objective Optimization</a></li>
-  <li><a href="#a-population-of-trade-off-solutions" id="toc-a-population-of-trade-off-solutions" class="nav-link" data-scroll-target="#a-population-of-trade-off-solutions"><span class="header-section-number">16.4.11</span> A Population of Trade-off Solutions</a></li>
-  <li><a href="#convergence-assessment-and-quality-control" id="toc-convergence-assessment-and-quality-control" class="nav-link" data-scroll-target="#convergence-assessment-and-quality-control"><span class="header-section-number">16.4.12</span> Convergence Assessment and Quality Control</a></li>
-  <li><a href="#the-challenge-of-many-objectives" id="toc-the-challenge-of-many-objectives" class="nav-link" data-scroll-target="#the-challenge-of-many-objectives"><span class="header-section-number">16.4.13</span> The challenge of Many Objectives</a></li>
-  </ul></li>
-  <li><a href="#constraints-political-feasibility-budget-limits" id="toc-constraints-political-feasibility-budget-limits" class="nav-link" data-scroll-target="#constraints-political-feasibility-budget-limits"><span class="header-section-number">16.5</span> Constraints (political feasibility, budget limits)</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -591,250 +531,8 @@ window.Quarto = {
 </header>
 
 
-<section id="see-first" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="see-first">See first</h2>
-<p>This chapter builds on concepts from: - <a href="../../chapters/fundamentals/optimization.html">Optimization</a> - <a href="../../chapters/risk/expectations-cost-benefit.html">Expectations and Discounting</a></p>
-</section>
-<section id="learning-objectives" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<ul>
-<li>Formulate policy design problems as optimization tasks.</li>
-<li>Explore multi-objective policy search (e.g., cost, emissions, equity).</li>
-<li>Evaluate strategies (carbon taxes, cap-and-trade) under uncertainty.</li>
-</ul>
-<p>You’ll want to refer heavily to the chapter on <a href="../../chapters/fundamentals/optimization.html">optimization</a></p>
-</section>
-<section id="overview" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">16.1</span> Overview</h2>
-<section id="review-of-notation" class="level3" data-number="16.1.1">
-<h3 data-number="16.1.1" class="anchored" data-anchor-id="review-of-notation"><span class="header-section-number">16.1.1</span> Review of notation</h3>
-<p>Notation for our system dynamics:</p>
-<ul>
-<li>State of the world: encapsulates all inputs to our model</li>
-<li>Decisions: can be very simple (how high do we elevate a house right now?) or very complex (spatial and/or temporal optimization problems)</li>
-<li>Outcomes: can be a single number (scalar) or a vector if there are multiple outcomes we care about</li>
-</ul>
-</section>
-<section id="key-components-of-an-optimization-problem" class="level3" data-number="16.1.2">
-<h3 data-number="16.1.2" class="anchored" data-anchor-id="key-components-of-an-optimization-problem"><span class="header-section-number">16.1.2</span> Key components of an optimization problem</h3>
-<ol type="1">
-<li>Objective function</li>
-<li>Constraints</li>
-<li>Decision variables</li>
-</ol>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Reflect
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To what extent is this [in]consistent with exploratory modeling?</p>
-</div>
-</div>
-</section>
-<section id="why-optimize" class="level3" data-number="16.1.3">
-<h3 data-number="16.1.3" class="anchored" data-anchor-id="why-optimize"><span class="header-section-number">16.1.3</span> Why optimize?</h3>
-<p>Large action spaces (many decision variables) make it difficult to find the best solution by trial and error.</p>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Today we’ll say <em>optimization</em> but even an exact solution is only optimal in our model, not the real world. I prefer the term <em>policy search</em> which emphasizes the use of computers to suggest promising strategies.</p>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="optimization-in-the-wild" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="optimization-in-the-wild"><span class="header-section-number">16.2</span> Optimization in the wild</h2>
-<section id="where-have-you-seen-optimization-used" class="level3" data-number="16.2.1">
-<h3 data-number="16.2.1" class="anchored" data-anchor-id="where-have-you-seen-optimization-used"><span class="header-section-number">16.2.1</span> Where have you seen optimization used?</h3>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Reflect
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Take 2-3 minutes, then share.</p>
-</div>
-</div>
-</section>
-<section id="linear-programming" class="level3" data-number="16.2.2">
-<h3 data-number="16.2.2" class="anchored" data-anchor-id="linear-programming"><span class="header-section-number">16.2.2</span> Linear programming</h3>
-<p>Find a vector <span class="math inline">\(\mathbf{x}\)</span> that maximizes <span class="math inline">\(c^T \mathbf{x}\)</span> subject to <span class="math inline">\(A \mathbf{x} \leq \mathbf{b}\)</span> and <span class="math inline">\(\mathbf{x} \geq 0\)</span></p>
-<ol type="1">
-<li><strong>Limitations:</strong> requires strong assumptions (is linearizing your function a good approximation?)</li>
-<li><strong>Strengths:</strong> very fast (can scale to large problems)</li>
-<li><strong>Examples:</strong> how much should each pump in a water distribution network be run at a given time step to maintain pressure?</li>
-</ol>
-</section>
-<section id="linear-programming-with-discrete-decisions" class="level3" data-number="16.2.3">
-<h3 data-number="16.2.3" class="anchored" data-anchor-id="linear-programming-with-discrete-decisions"><span class="header-section-number">16.2.3</span> Linear programming with discrete decisions</h3>
-<ul>
-<li>Fixed costs create discontinuities in the objective function</li>
-<li>Example: which electricity generators should be on/off?</li>
-<li>Need to create new indicator variables which flag on/off status: <span class="math inline">\(\mathbb{I}_i = \begin{cases} 0 &amp; \textrm{off} \\ 1 &amp; \textrm{on} \end{cases}\)</span>.</li>
-<li>Can be solved with mixed-integer linear programming (MILP)</li>
-</ul>
-</section>
-<section id="gradient-descent" class="level3" data-number="16.2.4">
-<h3 data-number="16.2.4" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">16.2.4</span> Gradient descent</h3>
-<p>If you have a differentiable function, you can use gradient descent to find the minimum.</p>
-<p><span class="math display">\[
-\mathbf{x}_{n+1} = \mathbf{x}_n - \alpha \nabla f(\mathbf{x}_n)
-\]</span></p>
-</section>
-<section id="simulation-optimization" class="level3" data-number="16.2.5">
-<h3 data-number="16.2.5" class="anchored" data-anchor-id="simulation-optimization"><span class="header-section-number">16.2.5</span> Simulation-optimization</h3>
-<ul>
-<li><strong>Strengths:</strong> can handle complex, non-linear systems (model can be a black box)</li>
-<li><strong>Limitations:</strong> slow (“guess and check”), rely on “heuristics” to decide a solution is good enough</li>
-<li><strong>Examples:</strong> design of water resource systems under uncertainty</li>
-</ul>
-</section>
-</section>
-<section id="key-points" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="key-points"><span class="header-section-number">16.3</span> Key points</h2>
-<ol type="1">
-<li>Optimization can be used at a high level (e.g., system design) or can be embedded in a problem (e.g., operations at each time step).</li>
-<li>Every optimization problem has an objective and decision variables. Many have constraints.</li>
-<li>Optimization is a field, with many techniques.</li>
-<li>In this course, I want you to understand and critique how optimization problems are framed in the wild. Take other courses to focus on the techniques.</li>
-</ol>
-</section>
-<section id="multiobjective-policy-search-and-optimization" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="multiobjective-policy-search-and-optimization"><span class="header-section-number">16.4</span> Multiobjective Policy Search and Optimization</h2>
-<section id="enriching-our-notation" class="level3" data-number="16.4.1">
-<h3 data-number="16.4.1" class="anchored" data-anchor-id="enriching-our-notation"><span class="header-section-number">16.4.1</span> Enriching our notation</h3>
-<p>When we move from single to multiple objectives, our system dynamics notation becomes more complex: - We may have multiple outcome functions rather than a single scalar outcome</p>
-</section>
-<section id="single-objective-policy-search" class="level3" data-number="16.4.2">
-<h3 data-number="16.4.2" class="anchored" data-anchor-id="single-objective-policy-search"><span class="header-section-number">16.4.2</span> Single-objective policy search</h3>
-<p>Using this notation, we want to <span class="math inline">\(\min / \max g(a)\)</span>, subject to constraints.</p>
-<p>In other words, we want <em>a single solution</em> that scores the best according to <span class="math inline">\(g(a)\)</span>.</p>
-</section>
-<section id="objectives-can-be-hard-to-combine" class="level3" data-number="16.4.3">
-<h3 data-number="16.4.3" class="anchored" data-anchor-id="objectives-can-be-hard-to-combine"><span class="header-section-number">16.4.3</span> Objectives can be hard to combine</h3>
-<p>Sometimes, combining objectives into a single function is difficult.</p>
-<ol type="1">
-<li>Operating a reservoir to maximize power generation, minimize flood risk, and supply water to a city.</li>
-<li>Designing a levee to balance cost, financial flood risk, ecological impact, and human safety.</li>
-</ol>
-<p>Addressing multiple, sometimes-competing, needs is often called “multi-criteria decision analysis”</p>
-</section>
-<section id="goals" class="level3" data-number="16.4.4">
-<h3 data-number="16.4.4" class="anchored" data-anchor-id="goals"><span class="header-section-number">16.4.4</span> Goals</h3>
-<p>Goal: find a <strong>set of solutions</strong> that are not <strong>dominated</strong> by any other solution</p>
-<p>We call this the <em>Pareto front</em> or <em>Pareto set</em>.</p>
-</section>
-<section id="mathematical-formulation" class="level3" data-number="16.4.5">
-<h3 data-number="16.4.5" class="anchored" data-anchor-id="mathematical-formulation"><span class="header-section-number">16.4.5</span> Mathematical formulation</h3>
-<p><span class="math display">\[
-\begin{align}
-&amp; \min / \max f_m(x), &amp; \quad m = 1, 2, \ldots, M \\
-\text{subject to} \quad &amp;g_j(x) \leq 0, &amp;\quad  j = 1, 2, \ldots, J \\
-&amp;h_k(x) = 0, &amp;\quad  k = 1, 2, \ldots, K \\
-&amp;x_i^{(L)} \leq x_i \leq x_i^{(U)}, &amp;\quad  i = 1, 2, \ldots, N
-\end{align}
-\]</span></p>
-<p>What’s new? - <span class="math inline">\(M\)</span> objective functions - Lots of notation for constraints</p>
-</section>
-<section id="dominance" class="level3" data-number="16.4.6">
-<h3 data-number="16.4.6" class="anchored" data-anchor-id="dominance"><span class="header-section-number">16.4.6</span> Dominance</h3>
-<p><strong>Concept of Dominance:</strong> 1. <strong>Single-objective</strong>: Goodness of solution defined by objective function value 2. <strong>Multi-objective</strong>: Goodness of solution defined by dominance relationships</p>
-<p><strong>Definition</strong>: Solution <span class="math inline">\(a_1\)</span> dominates solution <span class="math inline">\(a_2\)</span> if: 1. <span class="math inline">\(a_1\)</span> is no worse than <span class="math inline">\(a_2\)</span> in <strong>all</strong> objectives 2. <span class="math inline">\(a_1\)</span> is <strong>strictly better</strong> than <span class="math inline">\(a_2\)</span> in <strong>at least one</strong> objective</p>
-<p><strong>Example Analysis:</strong> Consider 5 solutions with objectives <span class="math inline">\(f_1\)</span> (maximize) and <span class="math inline">\(f_2\)</span> (minimize): - Solution 1: <span class="math inline">\((2, 2)\)</span> - Solution 2: <span class="math inline">\((1, 4)\)</span> - Solution 3: <span class="math inline">\((4, 1)\)</span> - Solution 4: <span class="math inline">\((3, 3)\)</span> - Solution 5: <span class="math inline">\((5, 2)\)</span></p>
-<p><strong>Dominance relationships:</strong> - Solution 1 vs 2: Solution 1 dominates (better in <span class="math inline">\(f_1\)</span>: 2&gt;1, better in <span class="math inline">\(f_2\)</span>: 2&lt;4) - Solution 1 vs 5: Solution 5 dominates (better in <span class="math inline">\(f_1\)</span>: 5&gt;2, same in <span class="math inline">\(f_2\)</span>: 2=2) - Solution 1 vs 4: Neither dominates (trade-offs exist)</p>
-<p>Solutions that are not dominated by any other feasible solution form the <strong>Pareto front</strong>.</p>
-</section>
-<section id="goals-of-multiobjective-optimization" class="level3" data-number="16.4.7">
-<h3 data-number="16.4.7" class="anchored" data-anchor-id="goals-of-multiobjective-optimization"><span class="header-section-number">16.4.7</span> Goals of multiobjective optimization</h3>
-<ol type="1">
-<li>Find solutions as close to Pareto front as possible</li>
-<li>Find solutions as diverse as possible (since infinite points lie along the Pareto front but we can only sample a finite number)</li>
-</ol>
-</section>
-<section id="implementation-approaches" class="level3" data-number="16.4.8">
-<h3 data-number="16.4.8" class="anchored" data-anchor-id="implementation-approaches"><span class="header-section-number">16.4.8</span> Implementation Approaches</h3>
-</section>
-<section id="weighted-sum-method" class="level3" data-number="16.4.9">
-<h3 data-number="16.4.9" class="anchored" data-anchor-id="weighted-sum-method"><span class="header-section-number">16.4.9</span> Weighted Sum Method</h3>
-<p>We can <em>scalarize</em> the multi-objective problem into a single-objective problem using a weighted sum:</p>
-<p><span class="math display">\[
-\min F(x) =\sum_{m=1}^M w_m f_m(x)
-\]</span> subject to the same constraints as before.</p>
-<p><strong>Advantages:</strong> - <strong>Simplicity</strong>: Easy to understand and implement - <strong>Computational efficiency</strong>: Can use existing single-objective optimization algorithms - <strong>Pareto front exploration</strong>: Can vary weights systematically to explore trade-offs</p>
-<p><strong>Disadvantages:</strong> - <strong>Weight selection</strong>: Requires a priori knowledge of preferences - <strong>Pareto front coverage</strong>: May miss parts of the Pareto front, especially in non-convex regions - <strong>Uniform weight distribution</strong>: Does not guarantee uniform distribution of solutions along Pareto front</p>
-<p><strong>Convex vs.&nbsp;Non-Convex Pareto Fronts:</strong></p>
-<p>For <strong>convex</strong> Pareto fronts, the weighted sum method can find any point on the front by varying weights.</p>
-<p>For <strong>non-convex</strong> Pareto fronts, the weighted sum method cannot find solutions in concave regions - certain trade-offs are mathematically unreachable regardless of weight selection.</p>
-<p>This limitation motivates the need for population-based methods like genetic algorithms.</p>
-</section>
-<section id="genetic-algorithms-for-multi-objective-optimization" class="level3" data-number="16.4.10">
-<h3 data-number="16.4.10" class="anchored" data-anchor-id="genetic-algorithms-for-multi-objective-optimization"><span class="header-section-number">16.4.10</span> Genetic Algorithms for Multi-Objective Optimization</h3>
-<p><strong>Evolutionary Approach:</strong> Genetic algorithms are particularly well-suited for multi-objective optimization because they work with <strong>populations</strong> of solutions rather than single points.</p>
-<p><strong>Core Principles:</strong> 1. <strong>Population-based</strong>: GAs operate on a set (“population” or “generation”) of candidate solutions 2. <strong>Evolutionary inspiration</strong>: The best solutions are more likely to survive and reproduce 3. <strong>Fitness evaluation</strong>: Compute a <em>fitness score</em> for each solution based on objectives and diversity 4. <strong>Selection and reproduction</strong>: Use fitness scores to select solutions for reproduction (crossover) 5. <strong>Mutation</strong>: Add controlled noise (mutation) to create the next “generation” 6. <strong>Algorithmic variety</strong>: Many specific algorithms exist (NSGA-II, SPEA2, etc.)</p>
-<p><strong>Multi-Objective Fitness:</strong> Unlike single-objective GAs, multi-objective versions must balance: - <strong>Convergence</strong>: Solutions should be close to the true Pareto front - <strong>Diversity</strong>: Solutions should be well-distributed along the Pareto front</p>
-<p><strong>Selection Mechanisms:</strong> - <strong>Non-dominated sorting</strong>: Rank solutions by dominance levels - <strong>Crowding distance</strong>: Maintain diversity by favoring solutions in less crowded regions - <strong>Archive maintenance</strong>: Preserve best non-dominated solutions across generations</p>
-<p><strong>Advantages:</strong> - <strong>Global search</strong>: Can handle complex, multimodal objective spaces - <strong>Non-convex fronts</strong>: Can find solutions in concave regions of Pareto fronts - <strong>No weight specification</strong>: Does not require a priori preference information - <strong>Population diversity</strong>: Naturally maintains diverse set of trade-off solutions</p>
-<p><strong>Disadvantages:</strong> - <strong>Computational cost</strong>: Requires many function evaluations - <strong>Parameter tuning</strong>: Multiple algorithm parameters need careful adjustment - <strong>Stochastic nature</strong>: Results may vary between runs - <strong>Convergence uncertainty</strong>: Difficult to guarantee global optimality</p>
-</section>
-<section id="a-population-of-trade-off-solutions" class="level3" data-number="16.4.11">
-<h3 data-number="16.4.11" class="anchored" data-anchor-id="a-population-of-trade-off-solutions"><span class="header-section-number">16.4.11</span> A Population of Trade-off Solutions</h3>
-<p><strong>Final Output:</strong> Multi-objective optimization produces a <strong>set of solutions</strong> rather than a single optimal solution.</p>
-<p><strong>Characteristics:</strong> 1. <strong>Non-dominated solutions</strong>: A set of solutions where no solution dominates any other 2. <strong>Trade-off representation</strong>: Each solution represents a different trade-off between objectives<br>
-3. <strong>Pareto front coverage</strong>: Solutions collectively approximate different parts of the Pareto front</p>
-<p><strong>Interpretation and Value:</strong> One key insight of multi-objective optimization is that it <strong>maps out the trade-offs</strong> between competing objectives.</p>
-<p>This is valuable because: - <strong>Decision support</strong>: Shows range of feasible trade-offs to decision-makers - <strong>Trade-off quantification</strong>: Makes explicit the costs of improving one objective at expense of others - <strong>Robust analysis</strong>: Multiple good solutions provide options under different preference structures - <strong>Stakeholder engagement</strong>: Different solutions may appeal to different stakeholders or constituencies</p>
-<p><strong>Example Applications:</strong> - <strong>Reservoir operation</strong>: Trade-offs between flood protection, water supply, and hydropower generation - <strong>Urban planning</strong>: Balance between development density, green space, and transportation access - <strong>Climate policy</strong>: Trade-offs between mitigation costs, emission reductions, and economic impacts</p>
-</section>
-<section id="convergence-assessment-and-quality-control" class="level3" data-number="16.4.12">
-<h3 data-number="16.4.12" class="anchored" data-anchor-id="convergence-assessment-and-quality-control"><span class="header-section-number">16.4.12</span> Convergence Assessment and Quality Control</h3>
-<p><strong>Challenge of Heuristic Methods:</strong> Genetic algorithms are not exact optimization methods. They rely on <strong>heuristics</strong> to decide when a solution is “good enough” even if it’s not a global optimum. This creates challenges for assessing solution quality and algorithm convergence.</p>
-<p><strong>Quality Assessment Strategies:</strong></p>
-<p><strong>1. Multiple Runs with Different Seeds:</strong> - Repeat optimization with different random initial conditions - Compare results across runs to assess robustness - If results vary significantly, may need longer runs or parameter adjustment</p>
-<p><strong>2. Hypervolume Indicator:</strong> - <strong>Definition</strong>: Volume of objective space dominated by the solution set - <strong>Purpose</strong>: Measures both convergence (proximity to true front) and diversity (spread along front)<br>
-- <strong>Application</strong>: Track hypervolume over generations to assess convergence - <strong>Advantages</strong>: Single metric combining multiple quality aspects</p>
-<p><strong>3. Method Comparison:</strong> - Compare genetic algorithm results to weighted sum method - Check if GA finds solutions in regions missed by weighted sum (especially non-convex areas) - Cross-validate using different algorithmic approaches (NSGA-II, SPEA2, etc.)</p>
-<p><strong>4. Benchmark Comparison:</strong> - Compare optimization results to human-generated or expert solutions - Verify that algorithm finds solutions that dominate known alternatives - Use analytical solutions for simplified test problems to validate implementation</p>
-<p><strong>5. Convergence Monitoring:</strong> - Track solution set changes over generations - Monitor when new non-dominated solutions stop being found - Use metrics like generational distance and inverted generational distance</p>
-<p><strong>Practical Implementation Guidelines:</strong> - <strong>Run length</strong>: Balance computational cost with solution quality - <strong>Population size</strong>: Larger populations provide better diversity but increase cost - <strong>Multiple objectives</strong>: More objectives exponentially increase difficulty - <strong>Archive management</strong>: Maintain external archive of best solutions found</p>
-</section>
-<section id="the-challenge-of-many-objectives" class="level3" data-number="16.4.13">
-<h3 data-number="16.4.13" class="anchored" data-anchor-id="the-challenge-of-many-objectives"><span class="header-section-number">16.4.13</span> The challenge of Many Objectives</h3>
-<p><strong>Diminishing Returns from Additional Objectives:</strong></p>
-<p>While it may seem beneficial to include all relevant objectives explicitly, there are significant <strong>drawbacks</strong> to adding more objectives:</p>
-<p><strong>Computational Challenges:</strong> - <strong>Exponential scaling</strong>: The number of solutions needed grows exponentially with objectives - <strong>Pareto front explosion</strong>: In high dimensions, most solutions become non-dominated - <strong>Search difficulty</strong>: Algorithms struggle to maintain diversity across many objectives</p>
-<p><strong>Cognitive and Communication Challenges:</strong><br>
-- <strong>Conceptual complexity</strong>: Humans cannot easily visualize or understand trade-offs among many objectives - <strong>Decision paralysis</strong>: Too many options can make decision-making more difficult - <strong>Communication barriers</strong>: Difficult to present and discuss results with stakeholders</p>
-<p><strong>The “Curse of Dimensionality” in Objective Space:</strong> As the number of objectives increases, the volume of the Pareto front grows exponentially relative to the volume of the entire objective space. This makes it increasingly difficult to find truly inferior solutions, reducing the effectiveness of dominance-based selection.</p>
-<p><strong>Practical Guidelines:</strong></p>
-<p><strong>Objective Consolidation:</strong> - Combine related objectives into composite indices when appropriate - Use weighted sums for objectives that can be meaningfully combined - Focus on the most critical and independent objectives</p>
-<p><strong>Objective Hierarchy:</strong> - Distinguish between primary objectives (core concerns) and secondary objectives (constraints or preferences) - Consider using some objectives as constraints rather than explicit objectives - Implement lexicographic ordering for objectives with clear priority structure</p>
-<p><strong>Rule of Thumb:</strong> - <strong>2-3 objectives</strong>: Manageable and interpretable - <strong>4-6 objectives</strong>: Possible but requires careful analysis - <strong>&gt;6 objectives</strong>: Generally not recommended without specialized techniques</p>
-<p><strong>When Many Objectives Are Necessary:</strong> - Use techniques like objective reduction or dimensionality reduction in objective space - Consider interactive optimization where decision-maker preferences guide the search - Apply many-objective evolutionary algorithms (e.g., NSGA-III) specifically designed for high-dimensional objective spaces</p>
-<p><strong>Conclusion:</strong> The goal is to find the <strong>minimum number</strong> of objectives that adequately capture the essential trade-offs in the decision problem. Quality over quantity applies strongly in multi-objective optimization.</p>
-</section>
-</section>
-<section id="constraints-political-feasibility-budget-limits" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="constraints-political-feasibility-budget-limits"><span class="header-section-number">16.5</span> Constraints (political feasibility, budget limits)</h2>
-<p><em>Content to be developed</em></p>
-</section>
-<section id="further-reading" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

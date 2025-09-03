@@ -71,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -150,6 +121,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Extreme events: Dynamics, statistics and prediction;,citation_abstract=We review work on extreme events, their causes and consequences, by a group of European and American researchers involved in a three-year project on these topics. The review covers theoretical aspects of time series analysis and of extreme value theory, as well as of the deterministic modeling of extreme events, via continuous and discrete dynamic models. The applications include climatic, seismic and socio-economic events, along with their prediction. $&amp;amp;amp;lt;$br$&amp;gt;&amp;lt;$br$&amp;gt;$ Two important results refer to (i) the complementarity of spectral analysis of a time series in terms of the continuous and the discrete part of its power spectrum; and (ii) the need for coupled modeling of natural and socio-economic systems. Both these results have implications for the study and prediction of natural hazards and their human impacts.;,citation_author=M Ghil;,citation_author=P Yiou;,citation_author=S Hallegatte;,citation_author=B D Malamud;,citation_author=P Naveau;,citation_author=A Soloviev;,citation_author=P Friederichs;,citation_author=V Keilis-Borok;,citation_author=D Kondrashov;,citation_author=V Kossobokov;,citation_author=O Mestre;,citation_author=C Nicolis;,citation_author=H W Rust;,citation_author=P Shebalin;,citation_author=M Vrac;,citation_author=A Witt;,citation_author=I Zaliapin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=http://www.nonlin-processes-geophys.net/18/295/2011/;,citation_issue=3;,citation_doi=10/fvzxvv;,citation_volume=18;,citation_journal_title=Nonlinear Processes in Geophysics;,citation_publisher=Copernicus GmbH;">
 <meta name="citation_reference" content="citation_title=Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review;,citation_abstract=AbstractHighway bridges are one of the most vulnerable constituents of transportation networks when exposed to one or more natural hazards, such as earthquakes, hurricanes, tsunamis, and riverine floods. To facilitate and enhance prehazard and posthazard ...;,citation_author=Ioannis Gidaris;,citation_author=Jamie E. Padgett;,citation_author=Andre R. Barbosa;,citation_author=Suren Chen;,citation_author=Daniel Cox;,citation_author=Bret Webb;,citation_author=Amy Cerato;,citation_publication_date=2017-03-01;,citation_cover_date=2017-03-01;,citation_year=2017;,citation_fulltext_html_url=https://ascelibrary.org/doi/10.1061/%28ASCE%29ST.1943-541X.0001672;,citation_issue=3;,citation_doi=10.1061/(ASCE)ST.1943-541X.0001672;,citation_issn=1943-541X;,citation_volume=143;,citation_journal_title=Journal of Structural Engineering;,citation_publisher=American Society of Civil Engineers;">
 <meta name="citation_reference" content="citation_title=Beyond wickedness: Managing complex systems and climate change;,citation_author=Jonathan M. Gilligan;,citation_author=Michael P. Vandenbergh;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://wp0.vanderbilt.edu/lawreview/2020/12/beyond-wickedness-managing-complex-systems-and-climate-change/;,citation_volume=73;,citation_journal_title=Vanderbilt Law Review;,citation_journal_abbrev=Vand. L. Rev.;">
+<meta name="citation_reference" content="citation_title=Extreme Value Theory and Statistics of Univariate Extremes: A Review;,citation_abstract=SummaryStatistical issues arising in modelling univariate extremes of a random sample have been successfully used in the most diverse fields, such as biometrics, finance, insurance and risk theory. Statistics of univariate extremes (SUE), the subject to be dealt with in this review paper, has recently faced a huge development, partially because rare events can have catastrophic consequences for human activities, through their impact on the natural and constructed environments. In the last decades, there has been a shift from the area of parametric SUE, based on probabilistic asymptotic results in extreme value theory, towards semi-parametric approaches. After a brief reference to Gumbel’s block methodology and more recent improvements in the parametric framework, we present an overview of the developments on the estimation of parameters of extreme events and on the testing of extreme value conditions under a semi-parametric framework. We further discuss a few challenging topics in the area of SUE. © 2014 The Authors. International Statistical Review © 2014 International Statistical Institute;,citation_author=M. Ivette Gomes;,citation_author=Armelle Guillou;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/insr.12058;,citation_issue=2;,citation_doi=10.1111/insr.12058;,citation_issn=1751-5823;,citation_volume=83;,citation_journal_title=International Statistical Review;">
 <meta name="citation_reference" content="citation_title=Downscaling projections of Indian monsoon rainfall using a non‐homogeneous hidden Markov model;,citation_author=Arthur M Greene;,citation_author=Andrew W Robertson;,citation_author=Padhraic Smyth;,citation_author=Scott Triglia;,citation_publication_date=2011-01;,citation_cover_date=2011-01;,citation_year=2011;,citation_issue=655;,citation_doi=10.1002/qj.788;,citation_volume=137;,citation_journal_title=Quart J Royal Meteoro Soc;,citation_publisher=Wiley Online Library;">
 <meta name="citation_reference" content="citation_title=Emissions – the ’business as usual’ story is misleading;,citation_abstract=Stop using the worst-case scenario for climate warming as the most likely outcome — more-realistic baselines make for better policy.;,citation_author=Zeke Hausfather;,citation_author=Glen P. Peters;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://www.nature.com/articles/d41586-020-00177-3;,citation_issue=7792, 7792;,citation_doi=10.1038/d41586-020-00177-3;,citation_volume=577;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Statistical methods in water resources;,citation_abstract=This text began as a collection of class notes for a course on applied statistical methods for hydrologists taught at the U.S. Geological Survey (USGS) National Training Center. Course material was formalized and organized into a textbook, first published in 1992 by Elsevier as part of their Studies in Environmental Science series. In 2002, the work was made available online as a USGS report.The text has now been updated as a USGS Techniques and Methods Report. It is intended to be a text in applied statistics for hydrology, environmental science, environmental engineering, geology, or biology that addresses distinctive features of environmental data. For example, water resources data tend to have many variables with a lower bound of zero, tend to be more skewed than data from many other disciplines, commonly contain censored data (less than values), and assumptions that the data are normally distributed are not appropriate. Computer-intensive methods (bootstrapping...;,citation_author=Dennis R. Helsel;,citation_author=Robert M. Hirsch;,citation_author=Karen R. Ryberg;,citation_author=Stacey A. Archfield;,citation_author=Edward J. Gilroy;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://pubs.usgs.gov/publication/tm4A3;,citation_doi=10.3133/tm4A3;,citation_issn=2328-7055;,citation_book_title=Techniques and Methods;">
@@ -173,8 +145,10 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Think Julia: How to think like a computer scientist;,citation_author=Ben Lauwens;,citation_author=Allen B Downey;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://benlauwens.github.io/ThinkJulia.jl/latest/book.html;,citation_isbn=1-4920-4500-4;">
 <meta name="citation_reference" content="citation_title=The Impact of Neglecting Climate Change and Variability on ERCOT’s Forecasts of Electricity Demand in Texas;,citation_abstract=Abstract The Electric Reliability Council of Texas (ERCOT) manages the electric power across most of Texas. They make short-term assessments of electricity demand on the basis of historical weather over the last two decades, thereby ignoring the effects of climate change and the possibility of weather variability outside the recent historical range. In this paper, we develop an empirical method to predict the impact of weather on energy demand. We use that with a large ensemble of climate model runs to construct a probability distribution of power demand on the ERCOT grid for summer and winter 2021. We find that the most severe weather events will use 100% of available power—if anything goes wrong, as it did during the 2021 winter, there will not be sufficient available power. More quantitatively, we estimate a 5% chance that maximum power demand would be within 4.3 and 7.9 GW of ERCOT’s estimate of best-case available resources during summer and winter 2021, respectively, and a 20% chance it would be within 7.1 and 17 GW. The shortage of power on the ERCOT grid is partially hidden by the fact that ERCOTs seasonal assessments, which are based entirely on historical weather, are too low. Prior to the 2021 winter blackout, ERCOT forecast an extreme peak load of 67 GW. In reality, we estimate hourly peak demand was 82 GW, 22% above ERCOT’s most extreme forecast and about equal to the best-case available power. Given the high stakes, ERCOT should develop probabilistic estimates using modern scientific tools to predict the range of power demand more accurately.;,citation_author=Jangho Lee;,citation_author=Andrew E. Dessler;,citation_publication_date=2022-04-01;,citation_cover_date=2022-04-01;,citation_year=2022;,citation_fulltext_html_url=http://journals.ametsoc.org/view/journals/wcas/14/2/WCAS-D-21-0140.1.xml;,citation_issue=2;,citation_doi=10.1175/WCAS-D-21-0140.1;,citation_issn=1948-8327, 1948-8335;,citation_volume=14;,citation_journal_title=Weather, Climate, and Society;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Robust strategies for abating climate change;,citation_abstract=The need for climate-change decisionmakers to craft strategies that are robust in the face of an unpredictable future is addressed. The climate-change policymaking community could do policymakers a great service by examining signposts that might provide a better basis for building near-term climate-change policies.;,citation_author=Robert J. Lempert;,citation_author=Michael E. Schlesinger;,citation_publication_date=2000-06;,citation_cover_date=2000-06;,citation_year=2000;,citation_fulltext_html_url=https://www.proquest.com/docview/198492640/abstract/7534863C60614053PQ/1;,citation_issue=3–4;,citation_doi=10.1023/A:1005698407365;,citation_issn=01650009;,citation_volume=45;,citation_journal_title=Climatic Change;,citation_publisher=Springer Nature B.V.;">
+<meta name="citation_reference" content="citation_title=Computing return times or return periods with rare event algorithms;,citation_abstract=The average time between two occurrences of the same event, referred to as its return time (or return period), is a useful statistical concept for practical applications. For instance insurances or public agencies may be interested by the return time of a 10 m flood of the Seine river in Paris. However, due to their scarcity, reliably estimating return times for rare events is very difficult using either observational data or direct numerical simulations. For rare events, an estimator for return times can be built from the extrema of the observable on trajectory blocks. Here, we show that this estimator can be improved to remain accurate for return times of the order of the block size. More importantly, we show that this approach can be generalised to estimate return times from numerical algorithms specifically designed to sample rare events. So far those algorithms often compute probabilities, rather than return times. The approach we propose provides a computationally extremely efficient way to estimate numerically the return times of rare events for a dynamical system, gaining several orders of magnitude of computational costs. We illustrate the method on two kinds of observables, instantaneous and time-averaged, using two different rare event algorithms, for a simple stochastic process, the Ornstein–Uhlenbeck process. As an example of realistic applications to complex systems, we finally discuss extreme values of the drag on an object in a turbulent flow.;,citation_author=Thibault Lestang;,citation_author=Francesco Ragone;,citation_author=Charles-Edouard Bréhier;,citation_author=Corentin Herbert;,citation_author=Freddy Bouchet;,citation_publication_date=2018-04;,citation_cover_date=2018-04;,citation_year=2018;,citation_fulltext_html_url=https://dx.doi.org/10.1088/1742-5468/aab856;,citation_issue=4;,citation_doi=10.1088/1742-5468/aab856;,citation_issn=1742-5468;,citation_volume=2018;,citation_journal_title=Journal of Statistical Mechanics: Theory and Experiment;,citation_journal_abbrev=J. Stat. Mech.;,citation_publisher=IOP Publishing and SISSA;">
 <meta name="citation_reference" content="citation_title=Water resource systems planning and management: An introduction to methods, models, and applications;,citation_author=Daniel P. Loucks;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_isbn=978-3-319-44234-1;">
 <meta name="citation_reference" content="citation_title=Bayesian spatiotemporal nonstationary model quantifies robust increases in daily extreme rainfall across the Western Gulf Coast;,citation_abstract=Precipitation exceedance probabilities are widely used in engineering design, risk assessment, and floodplain management. While common approaches like National Oceanographic and Atmospheric Administration (NOAA) Atlas 14 assume that extreme precipitation characteristics are stationary over time, this assumption may underestimate current and future hazards due to anthropogenic climate change. However, the incorporation of nonstationarity in statistical modeling of extreme precipitation has faced practical challenges, which have restricted its applications. In particular, random sampling variability challenges the reliable estimation of trends and parameters, especially when observational records are limited. To address this methodological gap, we propose the Spatially Varying Covariates Model, a hierarchical Bayesian spatial framework that integrates nonstationarity and regionalization for robust frequency analysis of extreme precipitation. This model draws from extreme value theory, spatial statistics, and Bayesian statistics, and is validated through cross-validation and multiple performance metrics. Applying this framework to a case study of daily rainfall in the Western Gulf Coast, we identify robustly increasing trends in extreme precipitation intensity and variability throughout the study area, with notable spatial heterogeneity. This flexible model accommodates stations with varying observation records, yields smooth return level estimates, and can be straightforwardly adapted to the analysis of precipitation frequencies at different durations and for other regions.;,citation_author=Yuchen Lu;,citation_author=Benjamin Seiyon Lee;,citation_author=James Doss-Gollin;,citation_publication_date=2025-08;,citation_cover_date=2025-08;,citation_year=2025;,citation_fulltext_html_url=https://dx.doi.org/10.1088/2752-5295/adf56e;,citation_issue=3;,citation_doi=10.1088/2752-5295/adf56e;,citation_issn=2752-5295;,citation_volume=4;,citation_journal_title=Environmental Research: Climate;,citation_journal_abbrev=Environ. Res.: Climate;,citation_publisher=IOP Publishing;">
+<meta name="citation_reference" content="citation_title=Plotting Positions in Extreme Value Analysis;,citation_abstract=Plotting order-ranked data is a standard technique that is used in estimating the probability of extreme weather events. Typically, observations, say, annual extremes of a period of N years, are ranked in order of magnitude and plotted on probability paper. Some statistical model is then fitted to the order-ranked data by which the return periods of specific extreme events are estimated. A key question in this method is as follows: What is the cumulative probability P that should be associated with the sample of rank m? This issue of the so-called plotting positions has been debated for almost a century, and a number of plotting rules and computational methods have been proposed. Here, it is shown that in estimating the return periods there is only one correct plotting position: P = m/(N + 1). This formula predicts much shorter return periods of extreme events than the other commonly used methods. Thus, many estimates of the weather-related risks should be reevaluated and the related building codes and other related regulations updated.;,citation_author=Lasse Makkonen;,citation_publication_date=2006-02-01;,citation_cover_date=2006-02-01;,citation_year=2006;,citation_fulltext_html_url=https://journals.ametsoc.org/view/journals/apme/45/2/jam2349.1.xml;,citation_issue=2;,citation_doi=10.1175/JAM2349.1;,citation_issn=1558-8424, 1558-8432;,citation_volume=45;,citation_journal_title=Journal of Applied Meteorology and Climatology;,citation_publisher=American Meteorological Society;">
 <meta name="citation_reference" content="citation_title=Decision making under deep uncertainty: From theory to practice;,citation_editor=Vincent A. W. J. Marchau;,citation_editor=Warren E. Walker;,citation_editor=Pieter J. T. M. Bloemen;,citation_editor=Steven W. Popper;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-3-030-05251-5;">
 <meta name="citation_reference" content="citation_title=6. Water-Resource Systems Planning.;,citation_author=Nicholas C Matalas;,citation_author=Myron B Fiering;,citation_publication_date=1977;,citation_cover_date=1977;,citation_year=1977;,citation_fulltext_html_url=https://www.nap.edu/read/185/chapter/11;,citation_inbook_title=Climate, Climatic Change, and Water Supply;">
 <meta name="citation_reference" content="citation_title=Statistical rethinking: A Bayesian course with examples in R and Stan;,citation_author=Richard McElreath;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_isbn=978-0-429-63914-2;,citation_series_title=Texts in statistical science series;">
@@ -320,13 +294,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of climate science 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Climate science 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and Inference ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,25 +312,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Dimensionality 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Validation and Comparison 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,7 +347,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme Value Theory 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -385,25 +359,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic Weather Generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-Based Models and Calibration 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal Sampling Methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global Sensitivity Analysis 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,12 +456,18 @@ window.Quarto = {
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References 🎯</span></a>
+ <span class="menu-text"><strong>References</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -531,45 +511,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#value-judgements-in-climate-risk-analysis" id="toc-value-judgements-in-climate-risk-analysis" class="nav-link active" data-scroll-target="#value-judgements-in-climate-risk-analysis"><span class="header-section-number">21.1</span> Value Judgements in Climate Risk Analysis</a>
-  <ul class="collapse">
-  <li><a href="#ethical-frameworks-for-decision-analysis" id="toc-ethical-frameworks-for-decision-analysis" class="nav-link" data-scroll-target="#ethical-frameworks-for-decision-analysis"><span class="header-section-number">21.1.1</span> Ethical Frameworks for Decision Analysis</a></li>
-  </ul></li>
-  <li><a href="#climate-justice-and-distributional-equity" id="toc-climate-justice-and-distributional-equity" class="nav-link" data-scroll-target="#climate-justice-and-distributional-equity"><span class="header-section-number">21.2</span> Climate Justice and Distributional Equity</a>
-  <ul class="collapse">
-  <li><a href="#dimensions-of-climate-justice" id="toc-dimensions-of-climate-justice" class="nav-link" data-scroll-target="#dimensions-of-climate-justice"><span class="header-section-number">21.2.1</span> Dimensions of Climate Justice</a></li>
-  <li><a href="#intergenerational-ethics" id="toc-intergenerational-ethics" class="nav-link" data-scroll-target="#intergenerational-ethics"><span class="header-section-number">21.2.2</span> Intergenerational Ethics</a></li>
-  <li><a href="#environmental-justice-frameworks" id="toc-environmental-justice-frameworks" class="nav-link" data-scroll-target="#environmental-justice-frameworks"><span class="header-section-number">21.2.3</span> Environmental Justice Frameworks</a></li>
-  <li><a href="#practical-considerations-for-equity-assessment" id="toc-practical-considerations-for-equity-assessment" class="nav-link" data-scroll-target="#practical-considerations-for-equity-assessment"><span class="header-section-number">21.2.4</span> Practical Considerations for Equity Assessment</a></li>
-  <li><a href="#distributional-analysis" id="toc-distributional-analysis" class="nav-link" data-scroll-target="#distributional-analysis"><span class="header-section-number">21.2.5</span> Distributional Analysis</a></li>
-  </ul></li>
-  <li><a href="#participatory-methods-and-stakeholder-engagement" id="toc-participatory-methods-and-stakeholder-engagement" class="nav-link" data-scroll-target="#participatory-methods-and-stakeholder-engagement"><span class="header-section-number">21.3</span> Participatory Methods and Stakeholder Engagement</a>
-  <ul class="collapse">
-  <li><a href="#why-participation-matters" id="toc-why-participation-matters" class="nav-link" data-scroll-target="#why-participation-matters"><span class="header-section-number">21.3.1</span> Why Participation Matters</a></li>
-  <li><a href="#spectrum-of-participation" id="toc-spectrum-of-participation" class="nav-link" data-scroll-target="#spectrum-of-participation"><span class="header-section-number">21.3.2</span> Spectrum of Participation</a></li>
-  <li><a href="#methods-for-stakeholder-engagement" id="toc-methods-for-stakeholder-engagement" class="nav-link" data-scroll-target="#methods-for-stakeholder-engagement"><span class="header-section-number">21.3.3</span> Methods for Stakeholder Engagement</a></li>
-  <li><a href="#challenges-in-participation" id="toc-challenges-in-participation" class="nav-link" data-scroll-target="#challenges-in-participation"><span class="header-section-number">21.3.4</span> Challenges in Participation</a></li>
-  </ul></li>
-  <li><a href="#communicating-climate-risk-and-uncertainty" id="toc-communicating-climate-risk-and-uncertainty" class="nav-link" data-scroll-target="#communicating-climate-risk-and-uncertainty"><span class="header-section-number">21.4</span> Communicating Climate Risk and Uncertainty</a>
-  <ul class="collapse">
-  <li><a href="#challenges-in-risk-communication" id="toc-challenges-in-risk-communication" class="nav-link" data-scroll-target="#challenges-in-risk-communication"><span class="header-section-number">21.4.1</span> Challenges in Risk Communication</a></li>
-  <li><a href="#effective-communication-strategies" id="toc-effective-communication-strategies" class="nav-link" data-scroll-target="#effective-communication-strategies"><span class="header-section-number">21.4.2</span> Effective Communication Strategies</a></li>
-  <li><a href="#science-policy-interfaces" id="toc-science-policy-interfaces" class="nav-link" data-scroll-target="#science-policy-interfaces"><span class="header-section-number">21.4.3</span> Science-Policy Interfaces</a></li>
-  </ul></li>
-  <li><a href="#case-studies-in-participatory-climate-risk-management" id="toc-case-studies-in-participatory-climate-risk-management" class="nav-link" data-scroll-target="#case-studies-in-participatory-climate-risk-management"><span class="header-section-number">21.5</span> Case Studies in Participatory Climate Risk Management</a>
-  <ul class="collapse">
-  <li><a href="#community-based-adaptation-in-bangladesh" id="toc-community-based-adaptation-in-bangladesh" class="nav-link" data-scroll-target="#community-based-adaptation-in-bangladesh"><span class="header-section-number">21.5.1</span> Community-Based Adaptation in Bangladesh</a></li>
-  <li><a href="#indigenous-knowledge-integration-in-arctic-planning" id="toc-indigenous-knowledge-integration-in-arctic-planning" class="nav-link" data-scroll-target="#indigenous-knowledge-integration-in-arctic-planning"><span class="header-section-number">21.5.2</span> Indigenous Knowledge Integration in Arctic Planning</a></li>
-  <li><a href="#urban-climate-resilience-planning-in-european-cities" id="toc-urban-climate-resilience-planning-in-european-cities" class="nav-link" data-scroll-target="#urban-climate-resilience-planning-in-european-cities"><span class="header-section-number">21.5.3</span> Urban Climate Resilience Planning in European Cities</a></li>
-  <li><a href="#multi-stakeholder-water-management-in-river-basins" id="toc-multi-stakeholder-water-management-in-river-basins" class="nav-link" data-scroll-target="#multi-stakeholder-water-management-in-river-basins"><span class="header-section-number">21.5.4</span> Multi-Stakeholder Water Management in River Basins</a></li>
-  </ul></li>
-  <li><a href="#building-capacity-for-participation" id="toc-building-capacity-for-participation" class="nav-link" data-scroll-target="#building-capacity-for-participation"><span class="header-section-number">21.6</span> Building Capacity for Participation</a>
-  <ul class="collapse">
-  <li><a href="#institutional-design" id="toc-institutional-design" class="nav-link" data-scroll-target="#institutional-design"><span class="header-section-number">21.6.1</span> Institutional Design</a></li>
-  <li><a href="#skills-and-training" id="toc-skills-and-training" class="nav-link" data-scroll-target="#skills-and-training"><span class="header-section-number">21.6.2</span> Skills and Training</a></li>
-  <li><a href="#technology-and-tools" id="toc-technology-and-tools" class="nav-link" data-scroll-target="#technology-and-tools"><span class="header-section-number">21.6.3</span> Technology and Tools</a></li>
-  </ul></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link active" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -614,366 +556,6 @@ Learning objectives
 </ul>
 </div>
 </div>
-<section id="value-judgements-in-climate-risk-analysis" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="value-judgements-in-climate-risk-analysis"><span class="header-section-number">21.1</span> Value Judgements in Climate Risk Analysis</h2>
-<p>All climate risk assessments embed value judgements, whether explicit or implicit:</p>
-<ul>
-<li>What time horizons matter?</li>
-<li>How should we weigh costs and benefits across different groups?</li>
-<li>What discount rates reflect appropriate intergenerational concern?</li>
-<li>How much should we pay to avoid low-probability, high-impact risks?</li>
-</ul>
-<p>Making these judgements explicit and subjecting them to democratic deliberation is essential for legitimate decision-making.</p>
-<section id="ethical-frameworks-for-decision-analysis" class="level3" data-number="21.1.1">
-<h3 data-number="21.1.1" class="anchored" data-anchor-id="ethical-frameworks-for-decision-analysis"><span class="header-section-number">21.1.1</span> Ethical Frameworks for Decision Analysis</h3>
-<section id="utilitarianism" class="level4" data-number="21.1.1.1">
-<h4 data-number="21.1.1.1" class="anchored" data-anchor-id="utilitarianism"><span class="header-section-number">21.1.1.1</span> Utilitarianism</h4>
-<ul>
-<li>Maximize aggregate welfare across all affected parties</li>
-<li>Standard cost-benefit analysis embeds utilitarian assumptions</li>
-<li>Challenges: measurement of welfare, distribution blindness</li>
-</ul>
-</section>
-<section id="rawlsian-justice" class="level4" data-number="21.1.1.2">
-<h4 data-number="21.1.1.2" class="anchored" data-anchor-id="rawlsian-justice"><span class="header-section-number">21.1.1.2</span> Rawlsian Justice</h4>
-<ul>
-<li>Focus on impacts on worst-off groups (“maximin” criterion)</li>
-<li>Relevant for climate justice and adaptation prioritization</li>
-<li>Challenges: identifying worst-off, potential inefficiencies</li>
-</ul>
-</section>
-<section id="rights-based-approaches" class="level4" data-number="21.1.1.3">
-<h4 data-number="21.1.1.3" class="anchored" data-anchor-id="rights-based-approaches"><span class="header-section-number">21.1.1.3</span> Rights-Based Approaches</h4>
-<ul>
-<li>Certain fundamental rights should not be violated regardless of aggregate benefits</li>
-<li>Relevant for displacement, cultural preservation, procedural justice</li>
-<li>Challenges: defining rights, resolving conflicts between rights</li>
-</ul>
-</section>
-<section id="capabilities-approach" class="level4" data-number="21.1.1.4">
-<h4 data-number="21.1.1.4" class="anchored" data-anchor-id="capabilities-approach"><span class="header-section-number">21.1.1.4</span> Capabilities Approach</h4>
-<ul>
-<li>Focus on enabling human capabilities and functioning</li>
-<li>Emphasizes what people can do and be, not just what they have</li>
-<li>Relevant for adaptation and development co-benefits</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="climate-justice-and-distributional-equity" class="level2" data-number="21.2">
-<h2 data-number="21.2" class="anchored" data-anchor-id="climate-justice-and-distributional-equity"><span class="header-section-number">21.2</span> Climate Justice and Distributional Equity</h2>
-<section id="dimensions-of-climate-justice" class="level3" data-number="21.2.1">
-<h3 data-number="21.2.1" class="anchored" data-anchor-id="dimensions-of-climate-justice"><span class="header-section-number">21.2.1</span> Dimensions of Climate Justice</h3>
-<section id="distributive-justice" class="level4" data-number="21.2.1.1">
-<h4 data-number="21.2.1.1" class="anchored" data-anchor-id="distributive-justice"><span class="header-section-number">21.2.1.1</span> Distributive Justice</h4>
-<ul>
-<li>Who bears the costs and receives the benefits of climate policies?</li>
-<li>How are climate risks distributed across space, time, and social groups?</li>
-<li>What constitutes fair allocation of adaptation resources?</li>
-</ul>
-</section>
-<section id="procedural-justice" class="level4" data-number="21.2.1.2">
-<h4 data-number="21.2.1.2" class="anchored" data-anchor-id="procedural-justice"><span class="header-section-number">21.2.1.2</span> Procedural Justice</h4>
-<ul>
-<li>Who participates in decision-making processes?</li>
-<li>Are affected communities meaningfully involved?</li>
-<li>How are traditional and local knowledge systems included?</li>
-</ul>
-</section>
-<section id="recognition-justice" class="level4" data-number="21.2.1.3">
-<h4 data-number="21.2.1.3" class="anchored" data-anchor-id="recognition-justice"><span class="header-section-number">21.2.1.3</span> Recognition Justice</h4>
-<ul>
-<li>Whose knowledge and values are recognized as legitimate?</li>
-<li>How are different ways of life and cultural practices acknowledged?</li>
-<li>What constitutes appropriate representation of diverse stakeholders?</li>
-</ul>
-</section>
-</section>
-<section id="intergenerational-ethics" class="level3" data-number="21.2.2">
-<h3 data-number="21.2.2" class="anchored" data-anchor-id="intergenerational-ethics"><span class="header-section-number">21.2.2</span> Intergenerational Ethics</h3>
-<p>Climate change raises fundamental questions about obligations to future generations:</p>
-<ul>
-<li><strong>Discount rates</strong>: How much should we weigh future costs and benefits?</li>
-<li><strong>Intergenerational equity</strong>: What do we owe future generations?</li>
-<li><strong>Irreversibility</strong>: How should irreversible changes affect our decisions?</li>
-<li><strong>Uncertainty</strong>: How do we make decisions on behalf of people whose preferences we cannot know?</li>
-</ul>
-</section>
-<section id="environmental-justice-frameworks" class="level3" data-number="21.2.3">
-<h3 data-number="21.2.3" class="anchored" data-anchor-id="environmental-justice-frameworks"><span class="header-section-number">21.2.3</span> Environmental Justice Frameworks</h3>
-<p>Environmental justice provides a critical lens for understanding climate risks and policy impacts. As defined by Bullard (1999):</p>
-<blockquote class="blockquote">
-<p>Environmental racism refers to any environmental policy, practice or directive that differentially affects or disadvantages (whether intended or unintended) individuals, groups or communities based on race or colour.</p>
-</blockquote>
-<p>This definition importantly focuses on <strong>effects rather than intent</strong>, recognizing that policies can create disparate impacts regardless of intention.</p>
-<section id="five-dimensions-of-justice" class="level4" data-number="21.2.3.1">
-<h4 data-number="21.2.3.1" class="anchored" data-anchor-id="five-dimensions-of-justice"><span class="header-section-number">21.2.3.1</span> Five Dimensions of Justice</h4>
-<p>Following Wutich et al.&nbsp;(2023), environmental justice encompasses multiple dimensions:</p>
-<ol type="1">
-<li><strong>Distributive Justice</strong>: Fair and equitable access to resources and outcomes across social groups
-<ul>
-<li>Example: No disparities in flood protection measures between low-income and high-income neighborhoods</li>
-</ul></li>
-<li><strong>Interpersonal Justice</strong>: Fair and equitable treatment of individuals regardless of identity
-<ul>
-<li>Example: Equal consideration for post-flood assistance regardless of income level</li>
-</ul></li>
-<li><strong>Procedural Justice</strong>: Fair and equitable rules, norms, and decision-making processes
-<ul>
-<li>Example: Equal opportunities for community participation in flood risk management decisions</li>
-</ul></li>
-<li><strong>Recognition Justice</strong>: Fair and equitable representation of different worldviews and values
-<ul>
-<li>Example: Including Indigenous knowledge in flood risk management strategies</li>
-</ul></li>
-<li><strong>Transformative (Restorative) Justice</strong>: Collaborative addressing of root causes of systemic oppression
-<ul>
-<li>Example: Targeted investments to address historical inequities in flood risk exposure</li>
-</ul></li>
-</ol>
-</section>
-<section id="quantitative-frameworks-for-equity-assessment" class="level4" data-number="21.2.3.2">
-<h4 data-number="21.2.3.2" class="anchored" data-anchor-id="quantitative-frameworks-for-equity-assessment"><span class="header-section-number">21.2.3.2</span> Quantitative Frameworks for Equity Assessment</h4>
-<p>Different moral frameworks provide different approaches to quantifying equity (Jafino et al., 2022):</p>
-<p><strong>Utilitarian</strong>: Maximize aggregate welfare - Maximize: <span class="math inline">\(\sum_{i=1}^n u(x_i)\)</span></p>
-<p><strong>Strict Egalitarian</strong>: Minimize inequality of outcomes - Minimize: <span class="math inline">\(\max(u(x_i)) - \min(u(x_i))\)</span></p>
-<p><strong>Rawlsian Difference Principle</strong>: Benefit the least advantaged - Maximize: <span class="math inline">\(\min(u(x_i))\)</span></p>
-<p><strong>Prioritarian</strong>: Weight welfare of worse-off individuals more heavily - Maximize: <span class="math inline">\(\frac{1}{1-\gamma} \sum_{i=1}^n u(\frac{u(x_i)}{u(\bar{x})})^{1-\gamma}\)</span> where <span class="math inline">\(\gamma\)</span> is the inequality aversion factor</p>
-<p><strong>Sufficientarian</strong>: Ensure all individuals meet minimum welfare thresholds - Maximize: <span class="math inline">\(\{i \in n : u(x_i) \geq u(s)\}\)</span> where <span class="math inline">\(u(s)\)</span> is the minimum sufficient welfare level</p>
-<p>Note that quantifying welfare functions is notoriously challenging, involving fundamental questions about value comparison and measurement.</p>
-</section>
-</section>
-<section id="practical-considerations-for-equity-assessment" class="level3" data-number="21.2.4">
-<h3 data-number="21.2.4" class="anchored" data-anchor-id="practical-considerations-for-equity-assessment"><span class="header-section-number">21.2.4</span> Practical Considerations for Equity Assessment</h3>
-<section id="equity-in-what" class="level4" data-number="21.2.4.1">
-<h4 data-number="21.2.4.1" class="anchored" data-anchor-id="equity-in-what"><span class="header-section-number">21.2.4.1</span> Equity in What?</h4>
-<p>Environmental justice analysis should examine both burdens and benefits: - <strong>Risk</strong>: Distribution of potential consequences across groups - <strong>Funding</strong>: Allocation of resources for risk management and recovery - <strong>Recovery</strong>: Different groups’ ability to recover from climate impacts - <strong>Benefits</strong>: Distribution of positive outcomes like reduced risk or improved quality of life</p>
-</section>
-<section id="equity-at-what-scale" class="level4" data-number="21.2.4.2">
-<h4 data-number="21.2.4.2" class="anchored" data-anchor-id="equity-at-what-scale"><span class="header-section-number">21.2.4.2</span> Equity at What Scale?</h4>
-<p>The choice of spatial aggregation significantly impacts equity assessments: - <strong>Individual level</strong>: Household or building-level outcomes - <strong>Neighborhood level</strong>: Community-defined boundaries important for environmental justice - <strong>Small areas</strong>: Administrative boundaries like census tracts - <strong>Large areas</strong>: Cities or regions</p>
-<p>Different scales can reveal or obscure disparities, so the choice should reflect where inequities are produced and experienced.</p>
-</section>
-<section id="equity-with-respect-to-what" class="level4" data-number="21.2.4.3">
-<h4 data-number="21.2.4.3" class="anchored" data-anchor-id="equity-with-respect-to-what"><span class="header-section-number">21.2.4.3</span> Equity with Respect to What?</h4>
-<p>Equity can be assessed across multiple dimensions: - <strong>Demographics</strong>: Income, race, ethnicity, age, or composite vulnerability indices - <strong>Environmental burden</strong>: Exposure to pollution, access to environmental amenities - <strong>Procedural factors</strong>: Historical discrimination, differential policy treatment - <strong>Causal factors</strong>: Root causes that produce inequities rather than just describing disparities</p>
-</section>
-</section>
-<section id="distributional-analysis" class="level3" data-number="21.2.5">
-<h3 data-number="21.2.5" class="anchored" data-anchor-id="distributional-analysis"><span class="header-section-number">21.2.5</span> Distributional Analysis</h3>
-<p>Tools for analyzing how climate risks and policies affect different groups:</p>
-<ul>
-<li><strong>Incidence analysis</strong>: Who bears costs and receives benefits?</li>
-<li><strong>Vulnerability mapping</strong>: Which groups face highest risks?</li>
-<li><strong>Equity weighting</strong>: How to adjust welfare measures for distributional concerns?</li>
-<li><strong>Environmental justice screening</strong>: Identifying cumulative impacts on disadvantaged communities</li>
-</ul>
-</section>
-</section>
-<section id="participatory-methods-and-stakeholder-engagement" class="level2" data-number="21.3">
-<h2 data-number="21.3" class="anchored" data-anchor-id="participatory-methods-and-stakeholder-engagement"><span class="header-section-number">21.3</span> Participatory Methods and Stakeholder Engagement</h2>
-<section id="why-participation-matters" class="level3" data-number="21.3.1">
-<h3 data-number="21.3.1" class="anchored" data-anchor-id="why-participation-matters"><span class="header-section-number">21.3.1</span> Why Participation Matters</h3>
-<ul>
-<li><strong>Legitimacy</strong>: Democratic participation is intrinsically valuable</li>
-<li><strong>Effectiveness</strong>: Local knowledge improves decision quality</li>
-<li><strong>Equity</strong>: Ensures voices of affected communities are heard</li>
-<li><strong>Capacity</strong>: Builds local capacity for ongoing adaptation</li>
-</ul>
-</section>
-<section id="spectrum-of-participation" class="level3" data-number="21.3.2">
-<h3 data-number="21.3.2" class="anchored" data-anchor-id="spectrum-of-participation"><span class="header-section-number">21.3.2</span> Spectrum of Participation</h3>
-<section id="information-provision" class="level4" data-number="21.3.2.1">
-<h4 data-number="21.3.2.1" class="anchored" data-anchor-id="information-provision"><span class="header-section-number">21.3.2.1</span> Information Provision</h4>
-<ul>
-<li>One-way communication of technical information</li>
-<li>Public meetings, websites, reports</li>
-<li>Limited role for public input</li>
-</ul>
-</section>
-<section id="consultation" class="level4" data-number="21.3.2.2">
-<h4 data-number="21.3.2.2" class="anchored" data-anchor-id="consultation"><span class="header-section-number">21.3.2.2</span> Consultation</h4>
-<ul>
-<li>Seeking public input on predetermined options</li>
-<li>Surveys, focus groups, public hearings</li>
-<li>Input may or may not influence decisions</li>
-</ul>
-</section>
-<section id="involvement" class="level4" data-number="21.3.2.3">
-<h4 data-number="21.3.2.3" class="anchored" data-anchor-id="involvement"><span class="header-section-number">21.3.2.3</span> Involvement</h4>
-<ul>
-<li>Working with stakeholders to understand issues and develop alternatives</li>
-<li>Workshops, citizen panels, deliberative polls</li>
-<li>Commitment to consider public input seriously</li>
-</ul>
-</section>
-<section id="collaboration" class="level4" data-number="21.3.2.4">
-<h4 data-number="21.3.2.4" class="anchored" data-anchor-id="collaboration"><span class="header-section-number">21.3.2.4</span> Collaboration</h4>
-<ul>
-<li>Partnering with stakeholders in decision-making</li>
-<li>Co-design processes, collaborative modeling</li>
-<li>Shared responsibility for outcomes</li>
-</ul>
-</section>
-<section id="empowerment" class="level4" data-number="21.3.2.5">
-<h4 data-number="21.3.2.5" class="anchored" data-anchor-id="empowerment"><span class="header-section-number">21.3.2.5</span> Empowerment</h4>
-<ul>
-<li>Final decision-making authority placed with stakeholders</li>
-<li>Community-based adaptation, participatory budgeting</li>
-<li>Transfer of power to affected communities</li>
-</ul>
-</section>
-</section>
-<section id="methods-for-stakeholder-engagement" class="level3" data-number="21.3.3">
-<h3 data-number="21.3.3" class="anchored" data-anchor-id="methods-for-stakeholder-engagement"><span class="header-section-number">21.3.3</span> Methods for Stakeholder Engagement</h3>
-<section id="deliberative-processes" class="level4" data-number="21.3.3.1">
-<h4 data-number="21.3.3.1" class="anchored" data-anchor-id="deliberative-processes"><span class="header-section-number">21.3.3.1</span> Deliberative Processes</h4>
-<ul>
-<li><strong>Citizens’ juries</strong>: Small groups deliberate on specific questions</li>
-<li><strong>Consensus conferences</strong>: Structured dialogue between experts and citizens</li>
-<li><strong>Deliberative polling</strong>: Combines representative sampling with informed deliberation</li>
-</ul>
-</section>
-<section id="collaborative-modeling" class="level4" data-number="21.3.3.2">
-<h4 data-number="21.3.3.2" class="anchored" data-anchor-id="collaborative-modeling"><span class="header-section-number">21.3.3.2</span> Collaborative Modeling</h4>
-<ul>
-<li><strong>Group model building</strong>: Stakeholders participate in creating models</li>
-<li><strong>Participatory scenario development</strong>: Co-creating future scenarios</li>
-<li><strong>Shared vision planning</strong>: Collaborative visioning and goal-setting</li>
-</ul>
-</section>
-<section id="community-based-approaches" class="level4" data-number="21.3.3.3">
-<h4 data-number="21.3.3.3" class="anchored" data-anchor-id="community-based-approaches"><span class="header-section-number">21.3.3.3</span> Community-Based Approaches</h4>
-<ul>
-<li><strong>Participatory rural appraisal</strong>: Community-led data collection and analysis</li>
-<li><strong>Participatory mapping</strong>: Communities map their own resources and risks</li>
-<li><strong>Community-based monitoring</strong>: Local monitoring of environmental conditions</li>
-</ul>
-</section>
-</section>
-<section id="challenges-in-participation" class="level3" data-number="21.3.4">
-<h3 data-number="21.3.4" class="anchored" data-anchor-id="challenges-in-participation"><span class="header-section-number">21.3.4</span> Challenges in Participation</h3>
-<ul>
-<li><strong>Power imbalances</strong>: Unequal resources and capacities among participants</li>
-<li><strong>Technical complexity</strong>: Difficulty communicating complex climate science</li>
-<li><strong>Scale mismatches</strong>: Local participation in regional/global problems</li>
-<li><strong>Tokenism</strong>: Superficial consultation without real influence</li>
-<li><strong>Participation fatigue</strong>: Over-consultation without visible results</li>
-</ul>
-<section id="addressing-power-dynamics" class="level4" data-number="21.3.4.1">
-<h4 data-number="21.3.4.1" class="anchored" data-anchor-id="addressing-power-dynamics"><span class="header-section-number">21.3.4.1</span> Addressing Power Dynamics</h4>
-<p>Following Fletcher et al.&nbsp;(2022), effective participatory processes must explicitly address power imbalances:</p>
-<p><strong>Beyond inclusion to equitable participation</strong>: Simply including marginalized communities is insufficient; the quality and equity of participation matters more than just presence.</p>
-<p><strong>Power shapes knowledge prioritization</strong>: Power imbalances determine whose knowledge is considered legitimate and valuable, and who ultimately benefits from participatory processes.</p>
-<p><strong>Explicit power analysis is essential</strong>: Successful participatory processes must identify existing power dynamics and create mechanisms for participants to share power more equitably.</p>
-<p><strong>Skilled facilitation matters</strong>: Professional facilitation and collaboration with boundary organizations can help address power imbalances and create more equitable participation.</p>
-<p><strong>Sustained engagement required</strong>: Building trust and shifting power dynamics requires long-term commitment rather than one-off consultation events.</p>
-</section>
-</section>
-</section>
-<section id="communicating-climate-risk-and-uncertainty" class="level2" data-number="21.4">
-<h2 data-number="21.4" class="anchored" data-anchor-id="communicating-climate-risk-and-uncertainty"><span class="header-section-number">21.4</span> Communicating Climate Risk and Uncertainty</h2>
-<section id="challenges-in-risk-communication" class="level3" data-number="21.4.1">
-<h3 data-number="21.4.1" class="anchored" data-anchor-id="challenges-in-risk-communication"><span class="header-section-number">21.4.1</span> Challenges in Risk Communication</h3>
-<ul>
-<li><strong>Uncertainty communication</strong>: How to convey deep uncertainty without paralysis</li>
-<li><strong>Probability translation</strong>: Making probabilistic information accessible</li>
-<li><strong>Scale comprehension</strong>: Helping people understand long time horizons and large spatial scales</li>
-<li><strong>Behavioral biases</strong>: Accounting for cognitive limitations and heuristics</li>
-</ul>
-</section>
-<section id="effective-communication-strategies" class="level3" data-number="21.4.2">
-<h3 data-number="21.4.2" class="anchored" data-anchor-id="effective-communication-strategies"><span class="header-section-number">21.4.2</span> Effective Communication Strategies</h3>
-<section id="visualization-approaches" class="level4" data-number="21.4.2.1">
-<h4 data-number="21.4.2.1" class="anchored" data-anchor-id="visualization-approaches"><span class="header-section-number">21.4.2.1</span> Visualization Approaches</h4>
-<ul>
-<li><strong>Scenario storytelling</strong>: Narrative descriptions of plausible futures</li>
-<li><strong>Risk ladders</strong>: Comparing climate risks to familiar risks</li>
-<li><strong>Interactive visualizations</strong>: Allowing exploration of uncertainty ranges</li>
-<li><strong>Local contextualization</strong>: Translating global changes to local impacts</li>
-</ul>
-</section>
-<section id="framing-and-messaging" class="level4" data-number="21.4.2.2">
-<h4 data-number="21.4.2.2" class="anchored" data-anchor-id="framing-and-messaging"><span class="header-section-number">21.4.2.2</span> Framing and Messaging</h4>
-<ul>
-<li><strong>Solution-focused framing</strong>: Emphasizing response options alongside risks</li>
-<li><strong>Co-benefits messaging</strong>: Highlighting multiple benefits of climate action</li>
-<li><strong>Trusted messengers</strong>: Using credible local voices and institutions</li>
-<li><strong>Cultural adaptation</strong>: Tailoring messages to cultural contexts and values</li>
-</ul>
-</section>
-<section id="uncertainty-communication" class="level4" data-number="21.4.2.3">
-<h4 data-number="21.4.2.3" class="anchored" data-anchor-id="uncertainty-communication"><span class="header-section-number">21.4.2.3</span> Uncertainty Communication</h4>
-<ul>
-<li><strong>Confidence levels</strong>: Expressing confidence in different aspects of projections</li>
-<li><strong>Scenario ranges</strong>: Showing plausible bounds rather than single predictions</li>
-<li><strong>Known unknowns</strong>: Being explicit about what we don’t know</li>
-<li><strong>Decision relevance</strong>: Focusing on uncertainty that matters for decisions</li>
-</ul>
-</section>
-</section>
-<section id="science-policy-interfaces" class="level3" data-number="21.4.3">
-<h3 data-number="21.4.3" class="anchored" data-anchor-id="science-policy-interfaces"><span class="header-section-number">21.4.3</span> Science-Policy Interfaces</h3>
-<section id="boundary-organizations" class="level4" data-number="21.4.3.1">
-<h4 data-number="21.4.3.1" class="anchored" data-anchor-id="boundary-organizations"><span class="header-section-number">21.4.3.1</span> Boundary Organizations</h4>
-<ul>
-<li>Organizations that span science and policy domains</li>
-<li>Examples: IPCC, national assessment programs, regional climate consortia</li>
-<li>Functions: translation, legitimation, boundary work</li>
-</ul>
-</section>
-<section id="co-production-of-knowledge" class="level4" data-number="21.4.3.2">
-<h4 data-number="21.4.3.2" class="anchored" data-anchor-id="co-production-of-knowledge"><span class="header-section-number">21.4.3.2</span> Co-production of Knowledge</h4>
-<ul>
-<li>Joint production of knowledge by scientists and decision-makers</li>
-<li>Ensures research relevance and usability</li>
-<li>Builds trust and shared understanding</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="case-studies-in-participatory-climate-risk-management" class="level2" data-number="21.5">
-<h2 data-number="21.5" class="anchored" data-anchor-id="case-studies-in-participatory-climate-risk-management"><span class="header-section-number">21.5</span> Case Studies in Participatory Climate Risk Management</h2>
-<section id="community-based-adaptation-in-bangladesh" class="level3" data-number="21.5.1">
-<h3 data-number="21.5.1" class="anchored" data-anchor-id="community-based-adaptation-in-bangladesh"><span class="header-section-number">21.5.1</span> Community-Based Adaptation in Bangladesh</h3>
-</section>
-<section id="indigenous-knowledge-integration-in-arctic-planning" class="level3" data-number="21.5.2">
-<h3 data-number="21.5.2" class="anchored" data-anchor-id="indigenous-knowledge-integration-in-arctic-planning"><span class="header-section-number">21.5.2</span> Indigenous Knowledge Integration in Arctic Planning</h3>
-</section>
-<section id="urban-climate-resilience-planning-in-european-cities" class="level3" data-number="21.5.3">
-<h3 data-number="21.5.3" class="anchored" data-anchor-id="urban-climate-resilience-planning-in-european-cities"><span class="header-section-number">21.5.3</span> Urban Climate Resilience Planning in European Cities</h3>
-</section>
-<section id="multi-stakeholder-water-management-in-river-basins" class="level3" data-number="21.5.4">
-<h3 data-number="21.5.4" class="anchored" data-anchor-id="multi-stakeholder-water-management-in-river-basins"><span class="header-section-number">21.5.4</span> Multi-Stakeholder Water Management in River Basins</h3>
-</section>
-</section>
-<section id="building-capacity-for-participation" class="level2" data-number="21.6">
-<h2 data-number="21.6" class="anchored" data-anchor-id="building-capacity-for-participation"><span class="header-section-number">21.6</span> Building Capacity for Participation</h2>
-<section id="institutional-design" class="level3" data-number="21.6.1">
-<h3 data-number="21.6.1" class="anchored" data-anchor-id="institutional-design"><span class="header-section-number">21.6.1</span> Institutional Design</h3>
-<ul>
-<li>Creating durable institutions for ongoing participation</li>
-<li>Ensuring adequate funding and staffing</li>
-<li>Developing appropriate legal and regulatory frameworks</li>
-</ul>
-</section>
-<section id="skills-and-training" class="level3" data-number="21.6.2">
-<h3 data-number="21.6.2" class="anchored" data-anchor-id="skills-and-training"><span class="header-section-number">21.6.2</span> Skills and Training</h3>
-<ul>
-<li>Building facilitation and communication skills</li>
-<li>Training in participatory methods and tools</li>
-<li>Developing cultural competency and inclusive practices</li>
-</ul>
-</section>
-<section id="technology-and-tools" class="level3" data-number="21.6.3">
-<h3 data-number="21.6.3" class="anchored" data-anchor-id="technology-and-tools"><span class="header-section-number">21.6.3</span> Technology and Tools</h3>
-<ul>
-<li>Digital platforms for remote and hybrid participation</li>
-<li>Decision support tools accessible to non-experts</li>
-<li>Translation and interpretation capabilities</li>
-</ul>
-</section>
-</section>
 <section id="further-reading" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
 
