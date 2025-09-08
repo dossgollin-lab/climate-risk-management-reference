@@ -225,771 +225,749 @@
   {
     "objectID": "chapters/fundamentals/probability-stats.html",
     "href": "chapters/fundamentals/probability-stats.html",
-    "title": "2  Probability and inference 🚧",
+    "title": "2  Probability and inference ✏️",
     "section": "",
-    "text": "2.1 Key terms and ideas",
+    "text": "Learning objectives\nThis chapter covers the fundamental concepts of probabilistic modeling and statistical inference. Data analysis proceeds by building a generative model—a formal, probabilistic hypothesis about how data are created. Inference is the inverse problem of using observed data to learn about model parameters. Computational methods make complex inference problems tractable.\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference 🚧</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
     ]
   },
   {
-    "objectID": "chapters/fundamentals/probability-stats.html#key-terms-and-ideas",
-    "href": "chapters/fundamentals/probability-stats.html#key-terms-and-ideas",
-    "title": "2  Probability and inference 🚧",
-    "section": "",
-    "text": "Probability as an axiomatic language for uncertainty\nJoint, conditional, and marginal distributions\nBayes’ rule\nLikelihood functions\nMaximum likelihood",
+    "objectID": "chapters/fundamentals/probability-stats.html#probability-theory-fundamentals",
+    "href": "chapters/fundamentals/probability-stats.html#probability-theory-fundamentals",
+    "title": "2  Probability and inference ✏️",
+    "section": "2.1 Probability theory fundamentals",
+    "text": "2.1 Probability theory fundamentals\nThe concepts in this section are essential building blocks for generative models. These mathematical tools support practical modeling applications.\n\n2.1.1 Basic concepts\n\n2.1.1.1 Random variables\nA random variable is a function that assigns numerical values to the outcomes of a random experiment. Random variables provide the mathematical foundation for describing uncertainty.\n\n\n2.1.1.2 Notation conventions\n\nRandom variables: Capital letters (\\(X\\), \\(Y\\), \\(Z\\))\nRealizations (specific values): Lowercase letters (\\(x\\), \\(y\\), \\(z\\))\nParameters: Greek letters (\\(\\theta\\), \\(\\mu\\), \\(\\sigma\\))\nObserved data: \\(y\\) (following Bayesian convention)\nPredictions: \\(\\tilde{y}\\) (y-tilde)\n\n\n\n2.1.1.3 Types of random variables\n\nDiscrete random variables take on countable values (e.g., number of floods per year)\nContinuous random variables take on uncountable values (e.g., temperature, precipitation amount)\n\nThe type of random variable determines which mathematical tools we use to describe its behavior.\n\n\n\n2.1.2 Key distribution functions\n\n2.1.2.1 Key functions\nThe foundation of probability theory rests on three fundamental functions that describe random variables.\n\n\n2.1.2.2 Probability Mass Function (PMF)\nFor discrete random variables, \\(P(X = x)\\) gives the probability that the variable takes on a specific value \\(x\\). The PMF satisfies \\(\\sum_x P(X = x) = 1\\).\n\n\n2.1.2.3 Probability Density Function (PDF)\nFor continuous random variables, \\(p(x)\\) describes the relative likelihood of different values. Crucially, \\(p(x)\\) is not a probability but a density. Since probability is density multiplied by a (potentially very small) interval of \\(x\\), the value of \\(p(x)\\) itself can exceed 1 without violating the laws of probability. Probabilities are areas under the curve: \\(P(a \\leq X \\leq b) = \\int_a^b p(x) \\, dx\\).\n\n\n2.1.2.4 Cumulative Distribution Function (CDF)\n\\(F(x) = P(X \\leq x)\\) gives the probability that a random variable is less than or equal to \\(x\\). The CDF is the most fundamental descriptor, defined for all random variables (discrete and continuous). It unifies probability concepts and is essential for quantiles and return periods.\n\n\n2.1.2.5 Quantile function\nThe quantile function \\(Q(p) = F^{-1}(p)\\) is the inverse of the CDF. It takes a probability \\(p \\in [0,1]\\) and returns the value \\(x\\) such that \\(P(X \\leq x) = p\\).\n\nThe median is \\(Q(0.5)\\)\nThe \\(N\\)-year return level in extreme value analysis is \\(Q(1 - 1/N)\\)\nQuantiles enable inverse transform sampling for Monte Carlo simulation\n\nThe quantile function has direct applications in climate risk assessment. For example, the 100-year flood has return period 100, meaning it has probability 0.01 in any given year, corresponding to quantile \\(Q(0.99)\\).\n\n\n\n2.1.3 Multiple variables\n\n2.1.3.1 Joint, marginal, and conditional distributions\nReal systems involve multiple random variables, requiring tools to describe their relationships. This machinery allows construction of complex models from simpler components.\n\n\n2.1.3.2 Joint Distribution\n\\(p(x,y)\\) for continuous or \\(P(X=x, Y=y)\\) for discrete gives the probability of events occurring together.\n\n\n2.1.3.3 Marginal Distribution\n\\(p(x)\\) or \\(P(X=x)\\) gives the probability of an event, irrespective of other variables. Calculated by summing or integrating over the other variables: \\(p(x) = \\int p(x,y) \\, dy\\).\n\n\n2.1.3.4 Conditional Distribution\n\\(p(y \\mid x)\\) or \\(P(Y=y \\mid X=x)\\) gives the probability of an event given that another event has occurred. Conditional distributions describe how variables depend on each other.\n\n\n2.1.3.5 Independence\nTwo random variables \\(X\\) and \\(Y\\) are independent if their joint distribution is the product of their marginal distributions: \\(p(x,y) = p(x)p(y)\\) for continuous variables, and \\(P(X=x, Y=y) = P(X=x)P(Y=y)\\) for discrete variables. For example, temperature and rainfall on a given day are typically not independent—hot days often have lower rainfall probability.\n\n\n2.1.3.6 IID (Independent and Identically Distributed)\nA sequence of random variables that are independent and have the same distribution.\n\n\n2.1.3.7 Bayes’ rule\nThe mechanical relationship between joint, marginal, and conditional distributions:\n\\[p(y \\mid x) = \\frac{p(x \\mid y) p(y)}{p(x)}\\]\nBayes’ rule is a consequence of the definition of conditional probability. It becomes a tool for inference when interpreted probabilistically.\n\n\n\n2.1.4 Examples\n\n2.1.4.1 Distribution examples\nThese examples illustrate the key concepts of probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions. Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).\nThe normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves. The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.\n\n\nCode\n# Helper function to add area under curve\nfunction add_pdf_area!(ax, dist, a, b; color=(:orange, 0.4), label=nothing)\n    x_fill = a:0.01:b\n    pdf_fill = pdf.(dist, x_fill)\n    band!(ax, x_fill, zeros(length(x_fill)), pdf_fill, color=color, label=label)\n    prob = cdf(dist, b) - cdf(dist, a)\n    return prob\nend\n\n# Helper function to show forward CDF operation\nfunction add_forward_cdf!(ax, dist, x_point; color=:red, x_min=-4)\n    y_point = cdf(dist, x_point)\n    scatter!(ax, [x_point], [y_point], color=color, markersize=8)\n    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)\n    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)\n    return y_point\nend\n\n# Helper function to show inverse CDF operation\nfunction add_inverse_cdf!(ax, dist, p_target; color=:green, x_min=-4)\n    x_inv = quantile(dist, p_target)\n    y_actual = cdf(dist, x_inv)\n    scatter!(ax, [x_inv], [y_actual], color=color, markersize=8)\n    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)\n    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)\n    return x_inv, y_actual\nend\n\nfunction plot_normal_pdf_cdf()\n    μ, σ = 0.0, 1.0\n    x_range = -4:0.01:4\n    normal_dist = Normal(μ, σ)\n\n    fig = Figure(size=(900, 400))\n\n    # Left panel: PDF with area under curve\n    ax1 = Axis(fig[1, 1],\n        xlabel=L\"x\",\n        ylabel=L\"\\text{Density } p(x)\",\n        title=L\"\\text{Normal}(0, 1) \\text{ PDF}\")\n\n    # Plot PDF\n    lines!(ax1, x_range, pdf.(normal_dist, x_range),\n        color=:blue, linewidth=2, label=L\"p(x)\")\n\n    # Add shaded area\n    prob_area = add_pdf_area!(ax1, normal_dist, -1, 1,\n        label=L\"P(-1 \\leq X \\leq 1)\")\n\n    # Add area annotation\n    text!(ax1, -0.6, 0.125,\n        text=L\"\\text{Area} = %$(round(prob_area, digits=3))\",\n        fontsize=14, color=:black)\n\n    axislegend(ax1, position=:rt)\n\n    # Right panel: CDF with forward and inverse operations\n    ax2 = Axis(fig[1, 2],\n        xlabel=L\"x\",\n        ylabel=L\"\\text{Probability } F(x)\",\n        title=L\"\\text{Normal CDF: Forward and Inverse}\")\n\n    # Plot CDF\n    lines!(ax2, x_range, cdf.(normal_dist, x_range),\n        color=:blue, linewidth=2, label=L\"F(x)\")\n\n    # Forward operation: F(1)\n    y_point = add_forward_cdf!(ax2, normal_dist, 1.0)\n    text!(ax2, 1.2, y_point - 0.1,\n        text=L\"F(1) = %$(round(y_point, digits=3))\", color=:red)\n\n    # Inverse operation: F⁻¹(0.25)\n    x_inv, _ = add_inverse_cdf!(ax2, normal_dist, 0.25)\n    text!(ax2, x_inv - 0.8, 0.35,\n        text=L\"F^{-1}(0.25) = %$(round(x_inv, digits=2))\", color=:green)\n\n    axislegend(ax2, position=:rb)\n    return fig\nend\n\nfig_normal = plot_normal_pdf_cdf()\nfig_normal\n\n\n\n\n\n\n\n\n\nNext, a Poisson distribution example for discrete random variables.\n\n\nCode\n# Helper function to plot discrete PMF as stem plot\nfunction plot_pmf_stems!(ax, dist, x_range; color=:blue, linewidth=3, markersize=8)\n    pmf_vals = pdf.(dist, x_range)\n    for (i, x) in enumerate(x_range)\n        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=linewidth)\n        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=markersize)\n    end\n    return pmf_vals\nend\n\n# Helper function to highlight discrete probability mass\nfunction highlight_pmf_mass!(ax, dist, x_range; color=:orange)\n    pmf_vals = pdf.(dist, x_range)\n    for (i, x) in enumerate(x_range)\n        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=5)\n        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=10)\n    end\n    return sum(pmf_vals)\nend\n\n# Helper function to plot discrete CDF as step function\nfunction plot_discrete_cdf!(ax, dist, x_range; color=:blue, linewidth=2, markersize=6)\n    cdf_vals = cdf.(dist, x_range)\n    # Plot horizontal segments\n    for i in 1:(length(x_range)-1)\n        lines!(ax, [x_range[i], x_range[i+1]], [cdf_vals[i], cdf_vals[i]],\n            color=color, linewidth=linewidth)\n    end\n    # Plot points\n    scatter!(ax, x_range, cdf_vals, color=color, markersize=markersize)\n    return cdf_vals\nend\n\n# Helper function for discrete forward CDF operation\nfunction add_discrete_forward_cdf!(ax, dist, x_point; color=:red, x_min=0)\n    y_point = cdf(dist, x_point)\n    scatter!(ax, [x_point], [y_point], color=color, markersize=10)\n    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)\n    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)\n    return y_point\nend\n\n# Helper function for discrete inverse CDF operation  \nfunction add_discrete_inverse_cdf!(ax, dist, p_target; color=:green, x_min=0)\n    x_inv = quantile(dist, p_target)\n    y_actual = cdf(dist, x_inv)\n    scatter!(ax, [x_inv], [y_actual], color=color, markersize=10)\n    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)\n    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)\n    return x_inv, y_actual\nend\n\nfunction plot_poisson_pmf_cdf()\n    λ = 3.0\n    x_range = 0:10\n    poisson_dist = Poisson(λ)\n\n    fig = Figure(size=(900, 400))\n\n    # Left panel: PMF with probability mass\n    ax1 = Axis(fig[1, 1],\n        xlabel=L\"x\",\n        ylabel=L\"P(X = x)\",\n        title=L\"\\text{Poisson}(3) \\text{ PMF}\")\n\n    # Plot full PMF\n    plot_pmf_stems!(ax1, poisson_dist, x_range)\n\n    # Highlight mass for X ≤ 2\n    prob_mass = highlight_pmf_mass!(ax1, poisson_dist, 0:2)\n\n    # Add probability annotation\n    text!(ax1, 6, 0.15,\n        text=L\"P(X \\leq 2) = %$(round(prob_mass, digits=3))\",\n        fontsize=14, color=:black)\n\n    # Right panel: CDF with forward and inverse operations\n    ax2 = Axis(fig[1, 2],\n        xlabel=L\"x\",\n        ylabel=L\"\\text{Probability } F(x)\",\n        title=L\"\\text{Poisson CDF: Forward and Inverse}\")\n\n    # Plot CDF\n    plot_discrete_cdf!(ax2, poisson_dist, x_range)\n\n    # Forward operation: F(4)\n    y_point = add_discrete_forward_cdf!(ax2, poisson_dist, 4)\n    text!(ax2, 4.2, y_point - 0.1,\n        text=L\"F(4) = %$(round(y_point, digits=3))\", color=:red)\n\n    # Inverse operation: F⁻¹(0.4)\n    x_inv, _ = add_discrete_inverse_cdf!(ax2, poisson_dist, 0.4)\n    text!(ax2, x_inv - 1.5, 0.5,\n        text=L\"F^{-1}(0.4) = %$(Int(x_inv))\", color=:green)\n\n    return fig\nend\n\nfig_poisson = plot_poisson_pmf_cdf()\nfig_poisson\n\n\n\n\n\n\n\n\n\n\n\n\n2.1.5 Summary statistics\n\n2.1.5.1 Key descriptors: expectation and moments\nProbability distributions are completely described by their PDF/PMF and CDF, but we often need summary statistics that capture essential properties.\n\n\n2.1.5.2 Expectation (Expected Value)\nThe expectation is the formal definition of the quantity we approximate with the sample mean in a Monte Carlo simulation. The expectation of a function \\(g(X)\\) is:\n\\[\\mathbb{E}[g(X)] = \\int g(x) p(x) \\, dx\\]\nfor continuous variables, or \\(\\mathbb{E}[g(X)] = \\sum_x g(x) P(X = x)\\) for discrete variables.\n\n\n2.1.5.3 Moments of a distribution\n\nMean: \\(\\mu = \\mathbb{E}[X]\\) measures central tendency\nVariance: \\(\\sigma^2 = \\mathbb{E}[(X - \\mu)^2]\\) measures spread or scale; standard deviation is \\(\\sigma = \\sqrt{\\sigma^2}\\)\nHigher-order moments: Skewness measures asymmetry, kurtosis measures tail weight\n\nFor heavy-tailed distributions used in extreme value theory, some higher-order moments (or even the variance) may not exist because the defining integrals diverge.",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference 🚧</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/fundamentals/probability-stats.html#generative-models",
+    "href": "chapters/fundamentals/probability-stats.html#generative-models",
+    "title": "2  Probability and inference ✏️",
+    "section": "2.2 Generative models",
+    "text": "2.2 Generative models\nThe probability theory we’ve covered provides the mathematical language for uncertainty. Now we turn to its primary application: building models that describe how data are created. These generative models form the foundation for statistical inference—the process of learning from data.\nStatistical modeling proceeds by creating a forward model—a formal, probabilistic description of how data are created. These models serve two purposes for scientific inference and decision-making.\nFirst, they function as simulation engines. A generative model enables simulation of data under different parameter settings. This supports uncertainty propagation through complex systems, model checking by comparing simulated and observed data, and exploration of model assumptions.\nSecond, they provide a systematic framework for building complex models from simple pieces. A complicated joint distribution can be decomposed into a sequence of simpler conditional distributions. This modular approach supports hierarchical modeling and incorporation of domain knowledge at each stage.\n\n2.2.1 Building models from conditional blocks\nA complex joint distribution can be decomposed into a sequence of simpler conditional distributions. This decomposition constitutes the model structure.\nThe chain rule of probability (this is where Bayes’ theorem comes from) tells us that any joint distribution can be factored as: \\[\np(A, B) = p(A) \\cdot p(B \\mid A)\n\\] or, for three variables: \\[p(A,B,C) = p(A) \\cdot p(B \\mid A) \\cdot p(C \\mid A,B)\\]\n\n\n2.2.2 Visualizing model structure with graphical models\nWe can represent the conditional dependence structure of our generative story visually using a Directed Acyclic Graph (DAG).\nNodes represent random variables (parameters or data). Arrows represent conditional dependence. An arrow from A to B means that the value of B is generated based on the value of A.\nThis provides a clear, unambiguous map of the model’s assumptions. DAGs support model design, communication, and debugging.\n\n\n2.2.3 Common examples\nExamples of generative models include:\n\nSignal + Noise: The classic model, e.g., \\(y = f(x; \\beta) + \\epsilon\\), where we specify a distribution for the noise term \\(\\epsilon\\).\nDynamical Systems: A system of Ordinary Differential Equations (ODEs) with unknown parameters that govern the system’s evolution.\nDifference Equations: Models of processes over discrete time, potentially including random walks.",
+    "crumbs": [
+      "**I: Foundations**",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/fundamentals/probability-stats.html#inference",
+    "href": "chapters/fundamentals/probability-stats.html#inference",
+    "title": "2  Probability and inference ✏️",
+    "section": "2.3 Inference",
+    "text": "2.3 Inference\nForward modeling simulates data given parameters. Inference solves the inverse problem: finding parameters that explain observed data. The forward direction is direct: given parameters, simulate data. The inverse direction requires mathematical machinery to work backwards from data to parameters.\n\n2.3.1 Transformation of variables\nA core task in probabilistic modeling is understanding how randomness propagates through a system. If we have a random variable \\(X\\) with a known probability density function (PDF), \\(p_X(x)\\), and we create a new random variable \\(Y\\) by applying a function, \\(Y = g(X)\\), what is the PDF of \\(Y\\), denoted \\(p_Y(y)\\)?\nIt’s tempting to just substitute \\(x\\) with \\(g^{-1}(y)\\) in the original PDF. This is incorrect because the function \\(g\\) can stretch or compress the space of outcomes. We must account for this distortion to ensure the total probability remains 1.\n\n2.3.1.1 Using the cumulative distribution function\nThe CDF of the new variable relates to the original CDF through a three-step process.\nThe most reliable way to solve this is to start with the CDF, \\(F(x) = P(X \\leq x)\\), because probabilities are always conserved. Assume that \\(Y = g(X)\\) is a strictly increasing function (like \\(Y = e^X\\)).\nBy definition, the CDF of \\(Y\\) is \\(F_Y(y) = P(Y \\leq y)\\).\n\nSubstitute the function: \\(F_Y(y) = P(g(X) \\leq y)\\)\nApply the inverse function: Since \\(g\\) is increasing, we can apply its inverse, \\(g^{-1}\\), to both sides of the inequality without flipping the sign: \\(F_Y(y) = P(X \\leq g^{-1}(y))\\)\nRecognize the original CDF: The expression on the right is the CDF of \\(X\\) evaluated at the point \\(g^{-1}(y)\\): \\(F_Y(y) = F_X(g^{-1}(y))\\)\n\n\n\n2.3.1.2 From CDF to PDF: the final step with the chain rule\nTo find the PDF, we differentiate the CDF with respect to \\(y\\). Applying the chain rule to the expression above gives us our answer:\n\\[p_Y(y) = \\frac{d}{dy} F_Y(y) = \\frac{d}{dy} F_X(g^{-1}(y))\\]\n\\[p_Y(y) = p_X(g^{-1}(y)) \\cdot \\frac{d}{dy} g^{-1}(y)\\]\nIf \\(g(X)\\) were a decreasing function, we would get a negative sign, which is handled by taking the absolute value. This gives us the general change of variables formula:\n\\[p_Y(y) = p_X(g^{-1}(y)) \\left| \\frac{d}{dy} g^{-1}(y) \\right|\\]\n\n\n2.3.1.3 Conservation of probability mass\nThink of the PDF as describing how a unit of “probability mass” is spread along the \\(x\\)-axis. The total area under the curve must be 1. When we apply the function \\(Y = g(X)\\), we are stretching and compressing the axis itself.\n\nIf the function stretches a region, the probability density must decrease proportionally to keep the area constant.\nIf the function compresses a region, the density must increase.\n\nThe term \\(\\left| \\frac{d}{dy} g^{-1}(y) \\right|\\) is the Jacobian of the transformation. It is precisely the “stretching factor” that tells us how much the coordinate system is distorted at each point, ensuring our total probability mass is conserved.\nFor more on this somewhat unintuitive point, see section 1.8 of Gelman et al. (2014) or this blog post.\n\n\n\n2.3.2 The inverse problem and the likelihood function\nThe central tool for connecting data to parameters is the likelihood function. The likelihood is the conditional probability \\(p(y \\mid \\theta)\\), where \\(y\\) represents our observed data.\n\n2.3.2.1 Definition\nThe likelihood tells us how likely we are to see the observed data \\(y\\) for some value of the parameters \\(\\theta\\).\n\n\n2.3.2.2 Crucial distinction\nThe likelihood is not the probability of the parameters. It’s the probability (or probability density) of the data given the parameters.\nThis confusion is common: \\(p(\\text{data}|\\text{parameters})\\) tells us about data likelihood, not parameter probability. Only Bayesian inference gives us \\(p(\\text{parameters}|\\text{data})\\).\nFor continuous variables, since we’re dealing with a density, the probability of getting exactly that value is zero, but the probability of getting near it is the integral of the PDF over a small interval.\n\n\n2.3.2.3 Independence and the product form\nIf we assume our data points are independent and identically distributed (IID), then by the definition of independence: \\[p(y_1, y_2, \\ldots, y_n \\mid \\theta) = \\prod_{i=1}^n p(y_i \\mid \\theta)\\]\n\n\n2.3.2.4 The log-likelihood\nProducts are numerically unstable and difficult to work with. Since the logarithm is monotonic, \\(\\max_\\theta p(y \\mid \\theta)\\) has the same solution as \\(\\max_\\theta \\log p(y \\mid \\theta)\\). For IID data, this gives us: \\[\\log p(y \\mid \\theta) = \\sum_{i=1}^n \\log p(y_i \\mid \\theta)\\]\n\n\n\n2.3.3 Maximum likelihood estimation\nMaximum likelihood estimation (MLE) finds the parameter values that maximize the likelihood function: \\[\\hat{\\theta}_{\\text{MLE}} = \\arg\\max_\\theta p(y \\mid \\theta)\\]\n\n2.3.3.1 Why maximum likelihood makes sense\nThe likelihood function \\(p(y \\mid \\theta)\\) gives the probability of observed data under different parameter values. Maximum likelihood estimation finds the parameter values that maximize the probability of the observed data. The approach selects parameters that best explain the observations.\nIn climate applications, MLE estimates parameters of distributions describing rainfall, temperature, or wind speed by finding values that maximize the probability of historical observations. The estimates inform risk assessments and infrastructure design.\n\n\n2.3.3.2 Implementation\nWe find the actual parameter values using optimization approaches. This may involve analytical differentiation (setting derivatives to zero) or numerical optimization methods when closed-form solutions don’t exist.\nThis reframes the statistical problem of inference as a numerical problem of optimization.\n\n\n2.3.3.3 Properties and theoretical foundations\nUnderstanding when and why MLE works requires defining estimator quality. An estimator should be consistent (converge to the true value as sample size increases), efficient (achieve low variance), and unbiased (correct on average).\nUnder regularity conditions, MLE estimators have desirable asymptotic properties. As the sample size \\(n\\) grows large, the MLE estimator \\(\\hat{\\theta}_{\\text{MLE}}\\) becomes consistent—it converges to the true parameter value \\(\\theta_0\\). The estimator also becomes asymptotically normal, meaning its sampling distribution approaches a normal distribution centered on the true value. Finally, MLE achieves the Cramér-Rao lower bound, making it asymptotically efficient among unbiased estimators.\nThe Fisher Information \\(I(\\theta) = -\\mathbb{E}\\left[\\frac{d^2}{d\\theta^2} \\log p(Y \\mid \\theta)\\right]\\) quantifies how much information the data contains about the parameter. Higher Fisher Information means the likelihood function is more peaked, leading to more precise parameter estimates.\n\n\n2.3.3.4 The assumption of “true” parameters\nThese theoretical properties assume there exists a single “true” parameter value \\(\\theta_0\\) that generated our data, and that our model is correctly specified. But in climate science, we often use simplified models to describe extremely complex phenomena. Is there really a single “true” rainfall parameter for a location when climate is nonstationary, multiple physical processes interact, and our models are necessarily approximations of reality?\nThis question motivates the Bayesian approach to inference. Bayesian methods acknowledge that parameter values are uncertain and provide probability distributions that quantify this uncertainty. The Bayesian perspective is valuable for complex, imperfect models of climate systems.\n\n\n2.3.3.5 Computational considerations\nFinding maximum likelihood estimates requires different approaches depending on the complexity of the model.\nAnalytical solutions exist when we can solve \\(\\frac{d}{d\\theta} \\log p(y \\mid \\theta) = 0\\) in closed form. This works for simple models like Normal distributions with known variance, or the coin flip example we examine below. These cases provide valuable intuition and serve as building blocks for more complex problems. Additional computational implementations of these methods are provided in the companion notebook.\nNumerical optimization becomes necessary when no closed-form solution exists. Common algorithms include gradient-based methods like Newton-Raphson and BFGS, which use derivative information to efficiently locate the maximum. The Expectation-Maximization (EM) algorithm handles models with latent variables by iteratively estimating missing data and updating parameters. Grid search remains useful for low-dimensional problems where visualization of the likelihood surface provides insight.\nPractical challenges arise in applications. The likelihood surface may contain multiple local maxima, requiring different starting values to find the global optimum. Numerical stability requires working with log-likelihoods rather than products of small probabilities. Flat likelihood surfaces indicate that data contain limited information about parameters. All methods assume correct model specification—poor model approximations yield misleading results regardless of optimization quality.\n\n\n\n2.3.4 Bayesian inference\nBayesian inference takes a fundamentally different approach to the inverse problem. Rather than finding a single “best” parameter value, we use the data to update our beliefs about the parameters, resulting in a full probability distribution that naturally quantifies uncertainty.\nThe Bayesian interpretation of Bayes’ rule: \\[\np(\\theta \\mid y) = \\frac{p(y \\mid \\theta) p(\\theta)}{p(y)}\n\\]\nwhere \\(p(\\theta)\\) is our prior belief about the parameters before seeing the data, \\(p(y \\mid \\theta)\\) is the likelihood (the same function used in maximum likelihood estimation), \\(p(\\theta \\mid y)\\) is the posterior distribution representing our updated beliefs, and \\(p(y)\\) is a normalizing constant ensuring the posterior integrates to 1.\nSince \\(p(y)\\) doesn’t depend on \\(\\theta\\) for a fixed dataset, we often write: \\[\np(\\theta \\mid y) \\propto p(y \\mid \\theta) p(\\theta)\n\\]\nThe posterior distribution is the primary output of Bayesian analysis. It tells us not just what parameter values are most plausible, but also how uncertain we should be about them. However, computing this posterior distribution requires different approaches depending on the complexity of the model.\n\n2.3.4.1 Maximum A Posteriori (MAP) estimation\nThe simplest approach to Bayesian inference is to find the mode of the posterior distribution—the parameter value that is most probable given the data. This is called Maximum A Posteriori (MAP) estimation:\n\\[\\hat{\\theta}_{MAP} = \\arg\\max_\\theta p(\\theta \\mid y) = \\arg\\max_\\theta p(y \\mid \\theta) p(\\theta)\\]\nSince the logarithm is monotonic, this is equivalent to: \\[\\hat{\\theta}_{MAP} = \\arg\\max_\\theta [\\log p(y \\mid \\theta) + \\log p(\\theta)]\\]\nMAP estimation provides a natural bridge between maximum likelihood and full Bayesian inference. When the prior is uniform (non-informative), MAP reduces to maximum likelihood estimation. When the prior is informative, it regularizes the estimate, preventing overfitting.\nHowever, MAP gives only a point estimate and doesn’t quantify uncertainty. To get the full benefit of the Bayesian approach, we need the entire posterior distribution.\n\n\n2.3.4.2 Analytic posterior (conjugate priors)\nIn special cases, we can compute the posterior distribution analytically using conjugate priors. A prior is conjugate to a likelihood if the posterior has the same functional form as the prior. This mathematical convenience allows us to update our beliefs with a simple algebraic formula.\nConjugacy provides exact formulas for belief updating. The posterior parameters are the prior parameters plus contributions from the data. As data accumulate, the prior influence diminishes relative to the likelihood.\nConjugate priors exist for several important distributions, including exponential family distributions like the Normal, Binomial, and Poisson. However, conjugate priors exist for only a limited set of models. Most real-world problems require computational approaches.\n\n\n2.3.4.3 Computational posterior (MCMC)\nFor most real problems, the posterior distribution cannot be computed analytically. The denominator \\(p(y)\\) requires integrating over all possible parameter values, which is often intractable. Markov Chain Monte Carlo (MCMC) methods become essential.\nMCMC algorithms create a Markov chain whose stationary distribution is the target posterior distribution. Instead of computing the posterior directly, we simulate from it by drawing samples \\(\\theta^{(1)}, \\theta^{(2)}, \\ldots, \\theta^{(N)}\\). These samples allow us to approximate any posterior quantity of interest:\n\\[\\mathbb{E}[g(\\theta) \\mid y] \\approx \\frac{1}{N} \\sum_{i=1}^N g(\\theta^{(i)})\\]\nCommon MCMC algorithms include:\n\nMetropolis-Hastings: A general-purpose algorithm that uses a proposal distribution and an acceptance criterion\nGibbs sampling: Efficient for multivariate problems where conditional distributions are available\nHamiltonian Monte Carlo: Uses gradient information for more efficient exploration of the parameter space\n\nMCMC requires only the posterior up to a constant of proportionality: \\(p(\\theta \\mid y) \\propto p(y \\mid \\theta) p(\\theta)\\). This enables MCMC for complex models where computing the normalizing constant is impossible.\nMCMC diagnostics assess whether chains have converged to the target distribution. Poor convergence leads to biased estimates, making diagnostic checking essential for reliable inference.",
+    "crumbs": [
+      "**I: Foundations**",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/fundamentals/probability-stats.html#computational-methods-and-asymptotic-foundations",
+    "href": "chapters/fundamentals/probability-stats.html#computational-methods-and-asymptotic-foundations",
+    "title": "2  Probability and inference ✏️",
+    "section": "2.4 Computational methods and asymptotic foundations",
+    "text": "2.4 Computational methods and asymptotic foundations\n\n2.4.1 Asymptotic theory\nTwo fundamental theorems justify statistical estimation and Monte Carlo methods:\n\n2.4.1.1 Law of Large Numbers\nAs sample size \\(N\\) grows, the sample mean converges to the true expected value. This theorem underlies both parameter estimation and Monte Carlo methods.\n\n\n2.4.1.2 Central Limit Theorem\nThe distribution of a sample mean approaches a Normal distribution as the sample size increases. This enables uncertainty quantification and justifies confidence intervals and bootstrap methods.\n\n\n\n2.4.2 Monte Carlo methods\nMost decision-relevant quantities can be expressed as expectations. Simulation approximates expectations when analytical calculation is difficult.\n\n2.4.2.1 Simulation and expectations\nThe basic Monte Carlo estimate of an expectation is:\n\\[\\mathbb{E}[X] \\approx \\frac{1}{N} \\sum_{i=1}^N x_i\\]\nwhere \\(x_1, x_2, \\ldots, x_N\\) are independent samples from the distribution of \\(X\\).\nThe Monte Carlo standard error is approximately \\(\\sigma/\\sqrt{N}\\), where \\(\\sigma\\) is the standard deviation of the quantity being estimated.\n\n\n2.4.2.2 Markov Chain Monte Carlo (MCMC) for Bayesian inference\nFor most real problems, the posterior distribution cannot be computed analytically. MCMC methods create a Markov chain whose stationary distribution is the posterior distribution. Common algorithms include Metropolis-Hastings and Gibbs sampling. MCMC diagnostics help us assess whether our chains have converged to the target distribution.\n\n\n2.4.2.3 Bootstrap methods for frequentist inference\nBootstrap methods quantify uncertainty around maximum likelihood estimates. Bootstrap resampling provides a Monte Carlo approach to estimate sampling distributions of estimators.",
+    "crumbs": [
+      "**I: Foundations**",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/fundamentals/probability-stats.html#examples-and-applications",
+    "href": "chapters/fundamentals/probability-stats.html#examples-and-applications",
+    "title": "2  Probability and inference ✏️",
+    "section": "2.5 Examples and applications",
+    "text": "2.5 Examples and applications\nThese examples demonstrate progression from analytical solutions to computational methods for complex problems. Computational implementations are provided in the companion notebook.\n\n2.5.1 The coin flip (Beta-Binomial model)\nA series of coin flips are independent Bernoulli trials with fixed probability of heads, \\(\\theta\\). Given \\(y\\) heads in \\(n\\) flips, the goal is to infer \\(\\theta\\).\n\n2.5.1.1 Likelihood\nFor \\(n\\) independent coin flips with probability \\(\\theta\\) of heads, if we observe \\(y\\) heads, the likelihood is given by the Binomial distribution:\n\\[\np(y \\mid \\theta, n) = \\binom{n}{y} \\theta^y (1-\\theta)^{n-y}\n\\]\nwhere \\(\\binom{n}{y}\\) is the binomial coefficient. Since we condition on the observed data \\(y\\) and \\(n\\), the binomial coefficient is a constant, so for inference purposes we can work with the proportional likelihood:\n\\[\np(y \\mid \\theta) \\propto \\theta^y (1-\\theta)^{n-y}\n\\]\nThe following implementation visualizes how the likelihood varies with \\(\\theta\\):\n\n\nCode\nfunction plot_binomial_likelihood(y, n)\n    θ_grid = 0.01:0.01:0.99\n\n    # Using Distributions.jl\n    likelihood_vals = [pdf(Binomial(n, θ), y) for θ in θ_grid]\n\n    fig = Figure(size=(800, 500))\n    ax = Axis(fig[1, 1],\n        xlabel=L\"$\\theta$ (probability of heads)\",\n        ylabel=\"Likelihood\",\n        title=\"Likelihood for $(y) heads in $(n) flips\")\n\n    lines!(ax, θ_grid, likelihood_vals, label=\"Full likelihood\", linewidth=2, color=:blue)\n\n    # Mark the MLE\n    mle = y / n\n    vlines!(ax, [mle], color=:black, linestyle=:dot, linewidth=2, label=\"MLE = $(round(mle, digits=2))\")\n\n    axislegend(ax, position=:lt)\n    return fig\nend\n\n# Example with 7 heads in 10 flips\nfig_likelihood = plot_binomial_likelihood(7, 10)\nfig_likelihood\n\n\n\n\n\n\n\n\n\nThe likelihood peaks at the observed proportion of heads, \\(\\hat{\\theta}_{MLE} = y/n\\), though many other values of \\(\\theta\\) remain plausible given limited data. A value of \\(\\theta=0.1\\) would make the observed data very unlikely.\n\n\n2.5.1.2 Maximum likelihood solution\nThe maximum likelihood estimate can be derived analytically by maximizing the log-likelihood:\n\\[\n\\log p(y \\mid \\theta) = \\log \\left( \\binom{n}{y} \\theta^y (1-\\theta)^{n-y} \\right)\n\\]\nwhich simplifies to:\n\\[\n\\log p(y \\mid \\theta) = y \\log \\theta + (n-y) \\log(1-\\theta) + \\text{const}.\n\\]\nWe don’t need to keep track of the constant because it doesn’t depend on \\(\\theta\\). Taking the derivative with respect to \\(\\theta\\) and setting to zero:\n\\[\\frac{d}{d\\theta} \\log p(y \\mid \\theta) = \\frac{y}{\\theta} - \\frac{n-y}{1-\\theta} = 0\\]\nSolving for \\(\\theta\\):\n\\[\\frac{y}{\\theta} = \\frac{n-y}{1-\\theta} \\implies y(1-\\theta) = (n-y)\\theta \\implies y = n\\theta\\]\nTherefore: \\(\\hat{\\theta}_{MLE} = \\frac{y}{n}\\)\nThe maximum likelihood estimate is the observed proportion of heads. This example demonstrates the general MLE procedure: write down the likelihood function, take the log, differentiate with respect to the parameters, set the derivative to zero, and solve for the parameter values. This analytical approach works for simple models and provides the template for more complex problems that require numerical optimization. This pattern holds across different experimental outcomes:\n\n\nCode\nfunction demonstrate_mle_estimation(y_values, n)\n    θ_grid = 0.01:0.01:0.99\n\n    fig = Figure(size=(800, 600))\n\n    for (i, y) in enumerate(y_values)\n        ax = Axis(fig[div(i - 1, 2)+1, ((i-1)%2)+1],\n            xlabel=\"θ\",\n            ylabel=\"Log-likelihood\",\n            title=\"$(y)/$(n) heads\")\n\n        # Calculate log-likelihood\n        log_likelihood = [y * log(θ) + (n - y) * log(1 - θ) for θ in θ_grid]\n\n        lines!(ax, θ_grid, log_likelihood, linewidth=2, color=:blue)\n\n        # Mark MLE\n        mle = y / n\n        vlines!(ax, [mle], color=:red, linestyle=:dash, linewidth=2,\n            label=\"MLE\")\n\n        if i == 1\n            axislegend(ax, position=:cb)\n        end\n    end\n\n    return fig\nend\n\n# Show MLE for different outcomes\nfig_mle = demonstrate_mle_estimation([3, 5, 7, 9], 10)\nfig_mle\n\n\n\n\n\n\n\n\n\n\n\n2.5.1.3 Bayesian solution\nThe Beta distribution is conjugate to the Binomial likelihood. That means that if we choose a Beta prior for \\(\\theta\\), the posterior will also be a Beta distribution.\nPrior: Our prior is \\(\\theta \\sim \\text{Beta}(\\alpha, \\beta)\\) with density: \\[\np(\\alpha, \\beta) = \\frac{\\Gamma(\\alpha + \\beta)}{\\Gamma(\\alpha)\\Gamma(\\beta)} \\theta^{\\alpha-1} (1-\\theta)^{\\beta-1}\n\\] The likelihood is as before: \\[\np(y \\mid \\theta) = \\binom{n}{y} \\theta^y (1-\\theta)^{n-y}\n\\] Using Bayes’ rule: \\[\np(\\theta \\mid y) \\propto p(y \\mid \\theta) p(\\theta)\n\\] Substituting and collecting terms: \\[\np(\\theta \\mid y) \\propto \\theta^y (1-\\theta)^{n-y} \\cdot \\theta^{\\alpha-1} (1-\\theta)^{\\beta-1}\n\\] so \\[\np(\\theta \\mid y) \\propto \\theta^{(y + \\alpha) - 1} (1-\\theta)^{(n - y + \\beta) - 1}\n\\] This has the form of a Beta distribution! Therefore: \\[\n\\theta \\mid y \\sim \\text{Beta}(\\alpha + y, \\beta + n - y)\n\\]\nThe posterior parameters are the prior parameters plus contributions from the data:\n\n\\(\\alpha\\) (prior “successes”) + \\(y\\) (observed successes)\n\n\\(\\beta\\) (prior “failures”) + \\((n-y)\\) (observed failures)\n\nThe following compares the analytical solution with MCMC sampling using Turing.jl:\n\n\nCode\n# Turing model for coin flipping\n\nusing Printf\n\n@model function coin_flip_model(y, n, prior_α, prior_β)\n    θ ~ Beta(prior_α, prior_β)\n    y ~ Binomial(n, θ)\n    return θ\nend\n\nfunction compare_analytical_mcmc(y, n; prior_α=1, prior_β=1, n_samples=5000)\n    # Analytical posterior\n    post_α = prior_α + y\n    post_β = prior_β + n - y\n    analytical_posterior = Beta(post_α, post_β)\n\n    # MCMC sampling\n    model = coin_flip_model(y, n, prior_α, prior_β)\n    chain = sample(model, NUTS(), n_samples, verbose=false, progress=false)\n    mcmc_samples = Array(chain[:θ])\n\n    # Return data for plotting instead of creating plots\n    return (analytical_posterior=analytical_posterior, mcmc_samples=mcmc_samples, n_samples=n_samples)\nend\n\n# Generate data by calling the same function twice  \ndata_low = compare_analytical_mcmc(7, 10, n_samples=500)\ndata_high = compare_analytical_mcmc(7, 10, n_samples=50_000)\n\n# Combine plots\nfig_comparison = Figure(size=(1200, 500))\nax1 = Axis(fig_comparison[1, 1],\n    xlabel=L\"$\\theta$ (probability of heads)\",\n    ylabel=\"Density\",\n    title=\"MCMC with 500 samples\")\nax2 = Axis(fig_comparison[1, 2],\n    xlabel=L\"$\\theta$ (probability of heads)\",\n    title=\"MCMC with 50,000 samples\")\n\n# Link y-axes for comparison\nlinkaxes!(ax1, ax2)\n\n# Plot using the same plotting logic for both panels\nfor (ax, data) in [(ax1, data_low), (ax2, data_high)]\n    # Plot analytical posterior\n    θ_grid = 0.01:0.01:0.99\n    analytical_density = pdf.(data.analytical_posterior, θ_grid)\n    lines!(ax, θ_grid, analytical_density, label=\"Analytical\",\n        linewidth=3, color=:blue)\n\n    # Plot MCMC histogram\n    hist!(ax, vec(data.mcmc_samples), bins=40, normalization=:pdf,\n        color=(:red, 0.6), label=\"MCMC samples\")\n\n    # Add summary statistics\n    analytical_mean = mean(data.analytical_posterior)\n    mcmc_mean = mean(data.mcmc_samples)\n\n    # Vertical lines for means\n    vlines!(ax, [analytical_mean], color=:blue, linestyle=:dash, alpha=0.8)\n    vlines!(ax, [mcmc_mean], color=:red, linestyle=:dot, alpha=0.8)\n\n    # Add vertical line at 0.3 to show tail cutoff\n    vlines!(ax, [0.3], color=:gray, linestyle=:solid, alpha=0.6)\n\n    # Add text annotations with statistics  \n    text!(ax, 0.35, maximum(analytical_density) * 0.95,\n        text=L\"\\text{Analytical: Mean} = %$(round(analytical_mean, digits=3))\",\n        fontsize=10, color=:blue)\n    text!(ax, 0.35, maximum(analytical_density) * 0.85,\n        text=L\"\\text{MCMC: Mean} = %$(round(mcmc_mean, digits=3))\",\n        fontsize=10, color=:red)\n\n    # Calculate P(θ &lt; 0.25) - tail probability\n    tail = 0.25\n    analytical_tail_prob = cdf(data.analytical_posterior, tail)\n    analytical_tail_prob = @sprintf(\"%.2E\", analytical_tail_prob)\n    mcmc_tail_prob = mean(data.mcmc_samples .&lt; tail)\n    mcmc_tail_prob = @sprintf(\"%.2E\", mcmc_tail_prob)\n    text!(ax, 0.05, maximum(analytical_density) * 0.55,\n        text=L\"\\text{Analytical}: $P(\\theta &lt; %$(tail))$ = %$(analytical_tail_prob)\",\n        fontsize=10, color=:blue)\n    text!(ax, 0.05, maximum(analytical_density) * 0.45,\n        text=L\"\\text{MCMC}: $P(\\theta &lt; %$(tail))$ = %$(mcmc_tail_prob)\",\n        fontsize=10, color=:red)\n\n    axislegend(ax, position=:rt)\nend\n\nfig_comparison\n\n\n\n┌ Info: Found initial step size\n└   ϵ = 1.6\n┌ Info: Found initial step size\n└   ϵ = 0.8250000000000001\n\n\n\n\n\n\n\n\n\n\n\nThe analytical and MCMC results match closely, demonstrating that the Beta-Binomial conjugacy gives exact results, MCMC provides a general computational approach when analytical solutions don’t exist, and both approaches quantify uncertainty through the full posterior distribution.\nMCMC accuracy varies across the distribution. The method provides better estimates in the center of the distribution than in the tails. For example, computing \\(\\mathbb{E}[\\theta]\\) requires fewer samples than computing the probability that \\(\\theta \\leq 0.3\\) (formally, \\(\\mathbb{E}[\\mathbf{1}(\\theta &lt; 0.25)]\\) where \\(\\mathbf{1}\\) is the indicator function), since the latter depends on accurately characterizing the probability mass in the tail. This reflects a general principle: quantities that depend on rare events or extreme values require more samples and/or more sophisticated sampling strategies for accurate estimation.\nJust as we infer θ from coin flips, we estimate the probability of extreme rainfall from historical data. The same statistical principles apply whether we’re analyzing controlled experiments or climate observations.\n\n\n\n2.5.2 Linear regression\nGiven \\(n\\) observations of response variable \\(y_i\\) and predictor variable \\(x_i\\), the goal is to understand the relationship between \\(x\\) and \\(y\\). Linear regression principles apply directly to modeling relationships like temperature trends over time or the relationship between atmospheric CO₂ and global temperature.\n\n2.5.2.1 Generative story\nThe response follows a linear relationship with added noise:\n\\[y_i = a + b x_i + \\epsilon_i\\]\nwhere:\n\n\\(a\\) is the intercept (value of \\(y\\) when \\(x = 0\\))\n\\(b\\) is the slope (change in \\(y\\) per unit change in \\(x\\))\n\n\\(\\epsilon_i \\sim \\text{Normal}(0, \\sigma^2)\\) is independent random noise\n\nThis says that each observation is the “true” linear relationship plus some random variation.\n\n\n2.5.2.2 Curve fitting by minimizing loss\nWithout a probabilistic model, this becomes a curve fitting problem: find the line that “best fits” the data.\nThis requires a loss function to measure estimation quality. A natural choice is the mean squared error (MSE):\n\\[\\text{MSE}(a, b) = \\frac{1}{n} \\sum_{i=1}^n (y_i - (a + b x_i))^2\\]\nMSE measures the average squared distance between predictions \\((a + b x_i)\\) and observed values \\(y_i\\).\nMinimizing this loss function yields the best-fitting line:\n\\[(\\hat{a}, \\hat{b}) = \\arg\\min_{a,b} \\sum_{i=1}^n (y_i - (a + b x_i))^2\\]\nTaking partial derivatives and setting to zero:\n\\[\\frac{\\partial}{\\partial a} \\sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \\sum_{i=1}^n (y_i - a - b x_i) = 0\\]\n\\[\\frac{\\partial}{\\partial b} \\sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \\sum_{i=1}^n x_i(y_i - a - b x_i) = 0\\]\nFrom the first equation: \\(\\sum y_i = na + b\\sum x_i\\), so \\(\\hat{a} = \\bar{y} - \\hat{b}\\bar{x}\\)\nSubstituting into the second equation and solving: \\[\\hat{b} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\]\nwhere \\(\\bar{x} = \\frac{1}{n}\\sum x_i\\) and \\(\\bar{y} = \\frac{1}{n}\\sum y_i\\).\nThe following visualizes this curve fitting approach:\n\n\nCode\nfunction demonstrate_least_squares(x_data, y_data)\n    # Calculate least squares estimates\n    x_bar = mean(x_data)\n    y_bar = mean(y_data)\n\n    b_hat = sum((x_data .- x_bar) .* (y_data .- y_bar)) / sum((x_data .- x_bar) .^ 2)\n    a_hat = y_bar - b_hat * x_bar\n\n    # Create plot\n    fig = Figure(size=(800, 500))\n    ax = Axis(fig[1, 1],\n        xlabel=\"x\",\n        ylabel=\"y\",\n        title=\"Curve Fitting by Minimizing MSE\")\n\n    # Plot data points\n    scatter!(ax, x_data, y_data, color=:blue, markersize=8, label=\"Data\")\n\n    # Plot fitted line\n    x_line = range(minimum(x_data), maximum(x_data), length=100)\n    y_line = a_hat .+ b_hat .* x_line\n    lines!(ax, x_line, y_line, color=:red, linewidth=2,\n        label=\"Fitted line: y = $(round(a_hat, digits=2)) + $(round(b_hat, digits=2))x\")\n\n    # Show residuals\n    y_pred = a_hat .+ b_hat .* x_data\n    for i in eachindex(x_data)\n        lines!(ax, [x_data[i], x_data[i]], [y_data[i], y_pred[i]],\n            color=:gray, linestyle=:dash, alpha=0.6)\n    end\n\n    axislegend(ax, position=:lb)\n    return fig\nend\n\n# Example with some synthetic data\nslope_true = 2.5\nintercept_true = 1.0\nϵ_true = 1.0\nN = 25\nx_example = rand(Uniform(0, 10), N)\ny_example = intercept_true .+ slope_true .* x_example .+ rand(Normal(0, ϵ_true), N)\n\nfig_ols = demonstrate_least_squares(x_example, y_example)\nfig_ols\n\n\n\n\n\n\n\n\n\nThis approach works as a pure optimization problem without probability.\n\n\n2.5.2.3 Maximum likelihood solution\nThe probabilistic model provides the same result with additional benefits. Since \\(\\epsilon_i \\sim \\text{Normal}(0, \\sigma^2)\\), we have:\n\\[y_i \\mid x_i, a, b, \\sigma^2 \\sim \\text{Normal}(a + b x_i, \\sigma^2)\\]\nThe likelihood for all observations is:\n\\[p(\\mathbf{y} \\mid \\mathbf{x}, a, b, \\sigma^2) = \\prod_{i=1}^n \\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp\\left\\{-\\frac{(y_i - a - b x_i)^2}{2\\sigma^2}\\right\\}\\]\nTaking the log-likelihood:\n\\[\\log p(\\mathbf{y} \\mid \\mathbf{x}, a, b, \\sigma^2) = -\\frac{n}{2}\\log(2\\pi\\sigma^2) - \\frac{1}{2\\sigma^2}\\sum_{i=1}^n (y_i - a - b x_i)^2\\]\nTo maximize this with respect to \\(a\\) and \\(b\\), we need to minimize:\n\\[\\sum_{i=1}^n (y_i - a - b x_i)^2\\]\nThis is exactly the same optimization problem as minimizing MSE!\nMaximum likelihood estimation for linear regression with Normal errors is equivalent to ordinary least squares. The probabilistic model gives the same answer as curve-fitting but also provides a framework for quantifying uncertainty.\nTherefore: \\(\\hat{a} = \\bar{y} - \\hat{b}\\bar{x}\\) and \\(\\hat{b} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\)\nThese are identical to the formulas derived from minimizing MSE.\nThis connection between statistical and machine learning approaches extends far beyond linear regression. Many machine learning methods can be understood as maximum likelihood estimation under specific distributional assumptions, while statistical methods often reduce to familiar optimization problems. This curve-fitting perspective connects to the machine learning and nonparametric methods covered in Chapter on Machine Learning, which address cases without specific functional form assumptions.\n\n\n\n2.5.3 Logistic regression\n\n2.5.3.1 Generative Story\nThe outcome \\(y_i\\) is a Bernoulli trial, where the probability of success \\(p_i\\) is related to a predictor \\(x_i\\) via the logistic function: \\(p_i = \\frac{1}{1 + \\exp\\{-(\\beta_0 + \\beta_1 x_i)\\}}\\).\n\n\n2.5.3.2 Maximum likelihood solution\nNo closed-form solution exists. Numerical optimization methods are required to find maximum likelihood estimates.\n\n\n2.5.3.3 Bayesian solution\nNo conjugate priors exist for logistic regression. MCMC methods are required to sample from the posterior distribution.\n\n\n2.5.3.4 Computational aspects\nThis example demonstrates problems where computational methods are essential rather than optional.",
+    "crumbs": [
+      "**I: Foundations**",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/probability-stats.html#further-reading",
     "href": "chapters/fundamentals/probability-stats.html#further-reading",
-    "title": "2  Probability and inference 🚧",
+    "title": "2  Probability and inference ✏️",
     "section": "Further reading",
-    "text": "Further reading\nFor deeper study of probability and statistics:\n\nBlitzstein and Hwang (2019) provides excellent intuition with computational examples\nDowney (2021) emphasizes Bayesian thinking with practical applications\n\nGelman (2021) connects regression to broader statistical modeling\nMosquito Example demonstrates simulation-based statistical testing with concrete data analysis\n\n\n\n\n\nBlitzstein, Joseph K., and Jessica Hwang. 2019. Introduction to Probability, Second Edition. 2nd Edition. Boca Raton: Chapman and Hall/CRC. http://probabilitybook.net.\n\n\nDowney, Allen B. 2021. Think Bayes. \"O’Reilly Media, Inc.\". https://allendowney.github.io/ThinkBayes2/.\n\n\nGelman, Andrew. 2021. Regression and Other Stories. Analytical Methods for Social Research. Cambridge, United Kingdom ; Cambridge University Press.",
+    "text": "Further reading\nFor deeper study of probability and statistics:\n\nBlitzstein and Hwang (2019) provides excellent intuition with computational examples\nDowney (2021) emphasizes Bayesian thinking with practical applications\n\nGelman (2021) connects regression to broader statistical modeling\nGelman et al. (2014) comprehensive treatment of Bayesian computation\nComputational Examples demonstrates all methods with working code\n\n\n\n\n\nBlitzstein, Joseph K., and Jessica Hwang. 2019. Introduction to Probability, Second Edition. 2nd Edition. Boca Raton: Chapman and Hall/CRC. http://probabilitybook.net.\n\n\nDowney, Allen B. 2021. Think Bayes. \"O’Reilly Media, Inc.\". https://allendowney.github.io/ThinkBayes2/.\n\n\nGelman, Andrew. 2021. Regression and Other Stories. Analytical Methods for Social Research. Cambridge, United Kingdom ; Cambridge University Press.\n\n\nGelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014. Bayesian Data Analysis. 3rd ed. Chapman & Hall/CRC Boca Raton, FL, USA.",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/optimization.html",
-    "href": "chapters/fundamentals/optimization.html",
-    "title": "3  Optimization 🚧",
-    "section": "",
-    "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Optimization 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/optimization.html#learning-objectives",
-    "href": "chapters/fundamentals/optimization.html#learning-objectives",
-    "title": "3  Optimization 🚧",
-    "section": "",
-    "text": "Understand the components of optimization problems: decision variables, objectives, constraints\nApply optimization methods to climate policy and decision problems\nRecognize trade-offs between problem complexity and solution accuracy\nConnect optimization techniques to statistical inference and policy search",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Optimization 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/optimization.html#essential-optimization-concepts",
-    "href": "chapters/fundamentals/optimization.html#essential-optimization-concepts",
-    "title": "3  Optimization 🚧",
-    "section": "3.1 Essential optimization concepts",
-    "text": "3.1 Essential optimization concepts\n\nDecision variables, objective functions, and constraints\nGradient-based optimization methods\nStochastic and sequential optimization\nPolicy optimization in climate risk management\nTrade-offs between problem formulation and solution methods",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Optimization 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/optimization.html#further-reading",
-    "href": "chapters/fundamentals/optimization.html#further-reading",
-    "title": "3  Optimization 🚧",
-    "section": "Further reading",
-    "text": "Further reading\n\nSutton and Barto (2018): Reinforcement learning and sequential decision-making\n\n\n\n\n\nSutton, Richard S, and Andrew G Barto. 2018. Reinforcement Learning: An Introduction. Second Edition. Cambridge, Massachusetts; London, England: MIT Press.",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Optimization 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/monte-carlo.html",
-    "href": "chapters/fundamentals/monte-carlo.html",
-    "title": "4  Monte Carlo methods 🚧",
-    "section": "",
-    "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Monte Carlo methods 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/monte-carlo.html#learning-objectives",
-    "href": "chapters/fundamentals/monte-carlo.html#learning-objectives",
-    "title": "4  Monte Carlo methods 🚧",
-    "section": "",
-    "text": "Apply Monte Carlo methods to approximate integrals and expectations\nUse Markov Chain Monte Carlo (MCMC) techniques for Bayesian inference\nUnderstand parameter uncertainty propagation in decision-making\nImplement Monte Carlo simulation for climate risk assessment",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Monte Carlo methods 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/monte-carlo.html#essential-monte-carlo-concepts",
-    "href": "chapters/fundamentals/monte-carlo.html#essential-monte-carlo-concepts",
-    "title": "4  Monte Carlo methods 🚧",
-    "section": "4.1 Essential Monte Carlo concepts",
-    "text": "4.1 Essential Monte Carlo concepts\n\nMonte Carlo integration and expectation approximation\nBayesian inference and posterior sampling\nMarkov Chain Monte Carlo (MCMC) methods\nParameter uncertainty propagation\nSensitivity analysis and global uncertainty quantification",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Monte Carlo methods 🚧</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/fundamentals/monte-carlo.html#further-reading",
-    "href": "chapters/fundamentals/monte-carlo.html#further-reading",
-    "title": "4  Monte Carlo methods 🚧",
-    "section": "Further reading",
-    "text": "Further reading\n\nGelman et al. (2014): Bayesian data analysis with computational focus\n\n\n\n\n\nGelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014. Bayesian Data Analysis. 3rd ed. Chapman & Hall/CRC Boca Raton, FL, USA.",
-    "crumbs": [
-      "**I: Foundations**",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Monte Carlo methods 🚧</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probability and inference ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/ml-nonparametric.html",
     "href": "chapters/fundamentals/ml-nonparametric.html",
-    "title": "5  Machine learning and nonparametric methods 🚧",
+    "title": "3  Machine learning and nonparametric methods 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/ml-nonparametric.html#learning-objectives",
     "href": "chapters/fundamentals/ml-nonparametric.html#learning-objectives",
-    "title": "5  Machine learning and nonparametric methods 🚧",
+    "title": "3  Machine learning and nonparametric methods 🚧",
     "section": "",
     "text": "Apply fundamental supervised learning concepts to climate hazard assessment problems\nUnderstand nonparametric and semiparametric methods for flexible modeling\nCritically evaluate machine learning applications in climate risk literature\nUnderstand bias-variance tradeoffs and model validation approaches",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/ml-nonparametric.html#essential-machine-learning-concepts",
     "href": "chapters/fundamentals/ml-nonparametric.html#essential-machine-learning-concepts",
-    "title": "5  Machine learning and nonparametric methods 🚧",
-    "section": "5.1 Essential machine learning concepts",
-    "text": "5.1 Essential machine learning concepts\n\nSupervised and unsupervised learning paradigms\nParametric vs nonparametric methods\nBias-variance tradeoff and regularization\nCross-validation and model selection\nTree-based methods and ensemble learning",
+    "title": "3  Machine learning and nonparametric methods 🚧",
+    "section": "3.1 Essential machine learning concepts",
+    "text": "3.1 Essential machine learning concepts\n\nSupervised and unsupervised learning paradigms\nParametric vs nonparametric methods\nBias-variance tradeoff and regularization\nCross-validation and model selection\nTree-based methods and ensemble learning",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/ml-nonparametric.html#further-reading",
     "href": "chapters/fundamentals/ml-nonparametric.html#further-reading",
-    "title": "5  Machine learning and nonparametric methods 🚧",
+    "title": "3  Machine learning and nonparametric methods 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Machine learning and nonparametric methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/correlation-dimensionality.html",
     "href": "chapters/fundamentals/correlation-dimensionality.html",
-    "title": "6  Correlation and dimensionality 🚧",
+    "title": "4  Correlation and dimensionality 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/correlation-dimensionality.html#learning-objectives",
     "href": "chapters/fundamentals/correlation-dimensionality.html#learning-objectives",
-    "title": "6  Correlation and dimensionality 🚧",
+    "title": "4  Correlation and dimensionality 🚧",
     "section": "",
     "text": "Model and interpret spatial dependence in climate fields\nApply time series analysis methods to detect trends and patterns in climate data\nUse dimension reduction techniques for high-dimensional climate datasets\nIntegrate spatial and temporal methods for spatiotemporal climate analysis",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/correlation-dimensionality.html#essential-concepts",
     "href": "chapters/fundamentals/correlation-dimensionality.html#essential-concepts",
-    "title": "6  Correlation and dimensionality 🚧",
-    "section": "6.1 Essential concepts",
-    "text": "6.1 Essential concepts\n\nSpatial statistics and geostatistical methods\nTime series analysis and trend detection\nPrincipal component analysis and empirical orthogonal functions\nHigh-dimensional methods for climate data\nSpatiotemporal integration approaches",
+    "title": "4  Correlation and dimensionality 🚧",
+    "section": "4.1 Essential concepts",
+    "text": "4.1 Essential concepts\n\nSpatial statistics and geostatistical methods\nTime series analysis and trend detection\nPrincipal component analysis and empirical orthogonal functions\nHigh-dimensional methods for climate data\nSpatiotemporal integration approaches",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/correlation-dimensionality.html#further-reading",
     "href": "chapters/fundamentals/correlation-dimensionality.html#further-reading",
-    "title": "6  Correlation and dimensionality 🚧",
+    "title": "4  Correlation and dimensionality 🚧",
     "section": "Further reading",
     "text": "Further reading\nFor spatial and temporal analysis in climate science:\n\nCressie and Wikle (2011): Comprehensive treatment of spatial statistics\n\n\n\n\n\nCressie, Noel A. C., and Christopher K. Wikle. 2011. Statistics for Spatio-Temporal Data. Hoboken, N.J.: Wiley.",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Correlation and dimensionality 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/model-comparison.html",
     "href": "chapters/fundamentals/model-comparison.html",
-    "title": "7  Model validation and comparison 🚧",
+    "title": "5  Model validation and comparison 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/model-comparison.html#learning-objectives",
     "href": "chapters/fundamentals/model-comparison.html#learning-objectives",
-    "title": "7  Model validation and comparison 🚧",
+    "title": "5  Model validation and comparison 🚧",
     "section": "",
     "text": "Apply graphical diagnostic methods to assess model fit quality\nUse information criteria (AIC, DIC, BIC) for quantitative model comparison\nUnderstand the relationship between model selection and predictive accuracy\nRecognize the subjective nature of model selection and make transparent choices",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/model-comparison.html#essential-model-validation-concepts",
     "href": "chapters/fundamentals/model-comparison.html#essential-model-validation-concepts",
-    "title": "7  Model validation and comparison 🚧",
-    "section": "7.1 Essential model validation concepts",
-    "text": "7.1 Essential model validation concepts\n\nGraphical diagnostic methods and model checking\nInformation criteria for model comparison\nPredictive accuracy and cross-validation\nModel selection philosophy and transparency\nEnsemble methods and model averaging",
+    "title": "5  Model validation and comparison 🚧",
+    "section": "5.1 Essential model validation concepts",
+    "text": "5.1 Essential model validation concepts\n\nGraphical diagnostic methods and model checking\nInformation criteria for model comparison\nPredictive accuracy and cross-validation\nModel selection philosophy and transparency\nEnsemble methods and model averaging",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/fundamentals/model-comparison.html#further-reading",
     "href": "chapters/fundamentals/model-comparison.html#further-reading",
-    "title": "7  Model validation and comparison 🚧",
+    "title": "5  Model validation and comparison 🚧",
     "section": "Further reading",
     "text": "Further reading\n\nPiironen and Vehtari (2017): Technical treatment of predictive accuracy\n\n\n\n\n\nPiironen, Juho, and Aki Vehtari. 2017. “Comparison of Bayesian Predictive Methods for Model Selection.” Statistics and Computing 27 (3): 711–35. https://doi.org/10.1007/s11222-016-9649-y.",
     "crumbs": [
       "**I: Foundations**",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Model validation and comparison 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html",
     "href": "chapters/hazard/extremes.html",
-    "title": "8  Extreme value theory ✏️",
+    "title": "6  Extreme value theory ✏️",
     "section": "",
     "text": "See first\nThis chapter builds on concepts from Probability and Statistics.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html#motivation",
     "href": "chapters/hazard/extremes.html#motivation",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.1 Motivation",
-    "text": "8.1 Motivation\nThe design of reliable infrastructure, such as stormwater systems in Harris County, Texas, depends on a quantitative understanding of extreme environmental events. Engineers must characterize the magnitude and frequency of rare phenomena. For example, they might need to determine the expected recurrence interval of a daily rainfall total that exceeds a critical design threshold, such as 300 mm.\nAn initial, intuitive approach is to analyze the historical record.\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of over 70 years of daily precipitation data from a station in Houston reveals 13 days where rainfall exceeded 150 mm. This allows for a simple empirical estimate of the event’s frequency. Thirteen exceedances in 71 years suggests an average recurrence interval of approximately 5.5 years. For the 300 mm threshold, however, the historical record contains zero events. An empirical estimate of the probability is therefore zero, which is uninformative for risk assessment and infrastructure design. We require a method for extrapolating beyond the range of observed data.\nA natural extension would be to fit a standard parametric probability distribution—such as a Gamma distribution, which is commonly used for precipitation—to the entire set of daily rainfall observations. One could then use the extreme upper tail of the fitted distribution to estimate the probability of exceeding 300 mm.\nThis approach, however, is fundamentally unreliable. The goodness-of-fit of a parametric model is driven by its ability to describe the bulk of the data, where observations are plentiful. Minor model misspecifications in this high-density region can translate into substantial errors in the far tails of the distribution, where data are sparse or nonexistent. As stated by Coles (2001), the foundational text on this topic, “very small discrepancies in the estimate of \\(F\\) can lead to substantial discrepancies for \\(F^n\\)”, where in our example \\(F\\) is the cumulative distribution function (CDF) of daily rainfall while \\(F^n\\) is the CDF of the maximum daily rainfall over \\(n\\) days.\nThe models that best describe the central tendency of a process are not necessarily suitable for describing its extremes. This fragility of tail extrapolation necessitates a theoretical framework developed specifically for modeling the behavior of extreme values.\nA naive empirical estimator for the exceedance probability of a value \\(x\\) based on \\(n\\) observations \\(X_i\\) is the simple proportion of exceedances:\n\\[\n\\hat{P}(X &gt; x) = \\frac{1}{n}\\sum_{i=1}^{n} \\mathbf{1}(X_i &gt; x)\n\\]\nwhere \\(\\mathbf{1}(\\cdot)\\) is the indicator function. This is useful when the number of exceedances is large, but fails for extrapolation when the sum is zero, as was the case for the 300mm threshold. This mathematically demonstrates the limitations of simple empirical methods and motivates the specialized approaches that follow.",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.1 Motivation",
+    "text": "6.1 Motivation\nThe design of reliable infrastructure, such as stormwater systems in Harris County, Texas, depends on a quantitative understanding of extreme environmental events. Engineers must characterize the magnitude and frequency of rare phenomena. For example, they might need to determine the expected recurrence interval of a daily rainfall total that exceeds a critical design threshold, such as 300 mm.\nAn initial, intuitive approach is to analyze the historical record.\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of over 70 years of daily precipitation data from a station in Houston reveals 13 days where rainfall exceeded 150 mm. This allows for a simple empirical estimate of the event’s frequency. Thirteen exceedances in 71 years suggests an average recurrence interval of approximately 5.5 years. For the 300 mm threshold, however, the historical record contains zero events. An empirical estimate of the probability is therefore zero, which is uninformative for risk assessment and infrastructure design. We require a method for extrapolating beyond the range of observed data.\nA natural extension would be to fit a standard parametric probability distribution—such as a Gamma distribution, which is commonly used for precipitation—to the entire set of daily rainfall observations. One could then use the extreme upper tail of the fitted distribution to estimate the probability of exceeding 300 mm.\nThis approach, however, is fundamentally unreliable. The goodness-of-fit of a parametric model is driven by its ability to describe the bulk of the data, where observations are plentiful. Minor model misspecifications in this high-density region can translate into substantial errors in the far tails of the distribution, where data are sparse or nonexistent. As stated by Coles (2001), the foundational text on this topic, “very small discrepancies in the estimate of \\(F\\) can lead to substantial discrepancies for \\(F^n\\)”, where in our example \\(F\\) is the cumulative distribution function (CDF) of daily rainfall while \\(F^n\\) is the CDF of the maximum daily rainfall over \\(n\\) days.\nThe models that best describe the central tendency of a process are not necessarily suitable for describing its extremes. This fragility of tail extrapolation necessitates a theoretical framework developed specifically for modeling the behavior of extreme values.\nA naive empirical estimator for the exceedance probability of a value \\(x\\) based on \\(n\\) observations \\(X_i\\) is the simple proportion of exceedances:\n\\[\n\\hat{P}(X &gt; x) = \\frac{1}{n}\\sum_{i=1}^{n} \\mathbf{1}(X_i &gt; x)\n\\]\nwhere \\(\\mathbf{1}(\\cdot)\\) is the indicator function. This is useful when the number of exceedances is large, but fails for extrapolation when the sum is zero, as was the case for the 300mm threshold. This mathematically demonstrates the limitations of simple empirical methods and motivates the specialized approaches that follow.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html#approaches-for-modeling-extreme-values",
     "href": "chapters/hazard/extremes.html#approaches-for-modeling-extreme-values",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.2 Approaches for modeling extreme values",
-    "text": "8.2 Approaches for modeling extreme values\nExtreme Value Theory (EVT) provides such a framework. Rather than modeling the entire distribution of a process, EVT focuses on the distribution of its extreme values. There are two primary methods for extracting these values from a time series.\n\n8.2.1 Block maxima\nIn this method, the period of observation is divided into non-overlapping blocks of equal duration (e.g., years). For each block of size \\(n\\), we define the block maximum as \\(M_n = \\max\\{X_1, \\dots, X_n\\}\\). This yields a new time series of block maxima. A crucial conceptual point is that we are not studying a single maximum possible value of the process. Instead, we are studying the distribution of the sample maximum, \\(M_n\\), which is itself a random variable. This is why a distribution like the GEV is needed to describe its behavior. This approach is intuitive and directly relates to concepts of annual risk, but it can be inefficient as it discards other potentially extreme events within a block.\n\n\n8.2.2 Peaks-over-threshold\nThe peaks-over-threshold (POT) method defines a set of exceedances over a high threshold \\(u\\) as \\(\\{X_i : X_i &gt; u\\}\\). The variable of interest is the value of the excesses themselves, \\(Y = X_i - u\\), for all \\(X_i\\) in the set of exceedances. The GPD is a model for these excess amounts, not the raw values. This approach is more data-efficient than the block maxima method. Its primary challenge lies in selecting an appropriate threshold, which involves a trade-off between bias (if the threshold is too low) and variance (if the threshold is too high, yielding too few data points). In practice, exceedances may occur in clusters (e.g., during a multi-day storm event). Therefore, a declustering algorithm is often applied to the raw exceedances to ensure that the events being modeled are approximately independent.",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.2 Approaches for modeling extreme values",
+    "text": "6.2 Approaches for modeling extreme values\nExtreme Value Theory (EVT) provides such a framework. Rather than modeling the entire distribution of a process, EVT focuses on the distribution of its extreme values. There are two primary methods for extracting these values from a time series.\n\n6.2.1 Block maxima\nIn this method, the period of observation is divided into non-overlapping blocks of equal duration (e.g., years). For each block of size \\(n\\), we define the block maximum as \\(M_n = \\max\\{X_1, \\dots, X_n\\}\\). This yields a new time series of block maxima. A crucial conceptual point is that we are not studying a single maximum possible value of the process. Instead, we are studying the distribution of the sample maximum, \\(M_n\\), which is itself a random variable. This is why a distribution like the GEV is needed to describe its behavior. This approach is intuitive and directly relates to concepts of annual risk, but it can be inefficient as it discards other potentially extreme events within a block.\n\n\n6.2.2 Peaks-over-threshold\nThe peaks-over-threshold (POT) method defines a set of exceedances over a high threshold \\(u\\) as \\(\\{X_i : X_i &gt; u\\}\\). The variable of interest is the value of the excesses themselves, \\(Y = X_i - u\\), for all \\(X_i\\) in the set of exceedances. The GPD is a model for these excess amounts, not the raw values. This approach is more data-efficient than the block maxima method. Its primary challenge lies in selecting an appropriate threshold, which involves a trade-off between bias (if the threshold is too low) and variance (if the threshold is too high, yielding too few data points). In practice, exceedances may occur in clusters (e.g., during a multi-day storm event). Therefore, a declustering algorithm is often applied to the raw exceedances to ensure that the events being modeled are approximately independent.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html#asymptotic-theory-for-extremes",
     "href": "chapters/hazard/extremes.html#asymptotic-theory-for-extremes",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.3 Asymptotic theory for extremes",
-    "text": "8.3 Asymptotic theory for extremes\nThe statistical justification for both the block maxima and POT approaches comes from asymptotic theorems that describe the limiting distributions of extreme values.\n\n8.3.1 Theory for block maxima: The GEV distribution\nThe theoretical justification for the block maxima approach is the Extremal Types Theorem. This theorem states that for a large class of underlying distributions, if a stable, non-degenerate limiting distribution for the block maximum \\(M_n\\) exists, it must be the Generalized Extreme Value (GEV) distribution.\nA critical point is that the theorem applies to a linearly rescaled or normalized maximum. Consider the raw maximum, \\(M_n\\). As the block size \\(n\\) increases, the expected value of \\(M_n\\) will also increase (or stay the same)—its distribution drifts towards larger values and does not converge. A similar issue arises in the Central Limit Theorem (CLT), which describes the convergence of a sample mean. The CLT does not apply to the raw sum of random variables, but to a normalized version of it.\nThe Extremal Types Theorem is the direct analog of the CLT for maxima. It states that there exist sequences of normalizing constants, a location parameter \\(b_n\\) and a scale parameter \\(a_n &gt; 0\\), such that the distribution of the normalized maximum, \\((M_n - b_n)/a_n\\), converges to the GEV distribution as \\(n \\to \\infty\\).\nIn practice, we do not need to know the specific functional forms of \\(a_n\\) and \\(b_n\\). Instead, for a fixed, large block size \\(n\\) (e.g., one year of daily data), we fit the GEV distribution directly to the series of block maxima. The GEV’s location and scale parameters, \\(\\mu\\) and \\(\\sigma\\), effectively absorb and account for the normalization that the theory requires. The GEV is a flexible three-parameter family with a cumulative distribution function (CDF) given by:\n\\[\nG(z) = \\exp\\left\\{ -\\left[ 1 + \\xi \\left( \\frac{z - \\mu}{\\sigma} \\right) \\right]^{-1/\\xi} \\right\\}\n\\]\nThis is defined on the set \\(\\{z: 1 + \\xi(z - \\mu)/\\sigma &gt; 0\\}\\). The parameters are location (\\(\\mu\\)), scale (\\(\\sigma &gt; 0\\)), and shape (\\(\\xi\\)). These parameters implicitly depend on the block size \\(n\\).\n\n\n8.3.2 Theory for threshold exceedances: The GPD\nThe corresponding theory for the POT approach is the Pickands–Balkema–de Haan Theorem. It states that for a wide range of distributions, the distribution of excesses over a high threshold \\(u\\) can be approximated by the Generalized Pareto Distribution (GPD). Conceptually, if the GEV describes the behavior of the maximum of a large block, the GPD describes the behavior of the distribution’s tail that produced that maximum. It is the distribution one would expect to see by “zooming in” on the tail of a distribution above a high threshold.\nThe GPD is a two-parameter family with a CDF for excesses \\(Y = X - u\\) given by:\n\\[\nH(y) = 1 - \\left( 1 + \\frac{\\xi y}{\\sigma_u} \\right)^{-1/\\xi}\n\\]\nThis is defined on \\(\\{y: y &gt; 0 \\text{ and } (1 + \\xi y / \\sigma_u) &gt; 0\\}\\). The parameters are the shape, \\(\\xi\\), and a scale parameter \\(\\sigma_u\\) that depends on the threshold \\(u\\). If the parent distribution’s maxima are GEV-distributed with parameters \\((\\mu, \\sigma, \\xi)\\), then the GPD scale parameter is given by \\(\\sigma_u = \\sigma + \\xi(u - \\mu)\\). This key result shows that the GPD scale parameter is a linear function of the threshold \\(u\\), a property that is used in advanced diagnostics for threshold selection.\n\n\n8.3.3 The shape parameter (\\(\\xi\\)): A unifying concept\nThe shape parameter, \\(\\xi\\), is the most critical parameter in extreme value analysis and has the same interpretation in both the GEV and GPD. It governs the tail behavior of the distribution.\n\n\\(\\xi = 0\\) (Gumbel-type tail): The tail decays exponentially (light tail).\n\\(\\xi &gt; 0\\) (Fréchet-type tail): The tail decays as a polynomial (heavy tail), with no upper bound.\n\\(\\xi &lt; 0\\) (Weibull-type tail): The distribution has a finite upper bound.\n\n\n\n8.3.4 Connection between GEV and GPD\nThe GEV and GPD models are intrinsically linked. If the block maxima of a process follow a GEV distribution with parameters \\((\\mu, \\sigma, \\xi)\\), then for a high threshold \\(u\\), the threshold excesses follow a GPD with the same shape parameter \\(\\xi\\). This provides a theoretical consistency between the two primary modeling approaches.",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.3 Asymptotic theory for extremes",
+    "text": "6.3 Asymptotic theory for extremes\nThe statistical justification for both the block maxima and POT approaches comes from asymptotic theorems that describe the limiting distributions of extreme values.\n\n6.3.1 Theory for block maxima: The GEV distribution\nThe theoretical justification for the block maxima approach is the Extremal Types Theorem. This theorem states that for a large class of underlying distributions, if a stable, non-degenerate limiting distribution for the block maximum \\(M_n\\) exists, it must be the Generalized Extreme Value (GEV) distribution.\nA critical point is that the theorem applies to a linearly rescaled or normalized maximum. Consider the raw maximum, \\(M_n\\). As the block size \\(n\\) increases, the expected value of \\(M_n\\) will also increase (or stay the same)—its distribution drifts towards larger values and does not converge. A similar issue arises in the Central Limit Theorem (CLT), which describes the convergence of a sample mean. The CLT does not apply to the raw sum of random variables, but to a normalized version of it.\nThe Extremal Types Theorem is the direct analog of the CLT for maxima. It states that there exist sequences of normalizing constants, a location parameter \\(b_n\\) and a scale parameter \\(a_n &gt; 0\\), such that the distribution of the normalized maximum, \\((M_n - b_n)/a_n\\), converges to the GEV distribution as \\(n \\to \\infty\\).\nIn practice, we do not need to know the specific functional forms of \\(a_n\\) and \\(b_n\\). Instead, for a fixed, large block size \\(n\\) (e.g., one year of daily data), we fit the GEV distribution directly to the series of block maxima. The GEV’s location and scale parameters, \\(\\mu\\) and \\(\\sigma\\), effectively absorb and account for the normalization that the theory requires. The GEV is a flexible three-parameter family with a cumulative distribution function (CDF) given by:\n\\[\nG(z) = \\exp\\left\\{ -\\left[ 1 + \\xi \\left( \\frac{z - \\mu}{\\sigma} \\right) \\right]^{-1/\\xi} \\right\\}\n\\]\nThis is defined on the set \\(\\{z: 1 + \\xi(z - \\mu)/\\sigma &gt; 0\\}\\). The parameters are location (\\(\\mu\\)), scale (\\(\\sigma &gt; 0\\)), and shape (\\(\\xi\\)). These parameters implicitly depend on the block size \\(n\\).\n\n\n6.3.2 Theory for threshold exceedances: The GPD\nThe corresponding theory for the POT approach is the Pickands–Balkema–de Haan Theorem. It states that for a wide range of distributions, the distribution of excesses over a high threshold \\(u\\) can be approximated by the Generalized Pareto Distribution (GPD). Conceptually, if the GEV describes the behavior of the maximum of a large block, the GPD describes the behavior of the distribution’s tail that produced that maximum. It is the distribution one would expect to see by “zooming in” on the tail of a distribution above a high threshold.\nThe GPD is a two-parameter family with a CDF for excesses \\(Y = X - u\\) given by:\n\\[\nH(y) = 1 - \\left( 1 + \\frac{\\xi y}{\\sigma_u} \\right)^{-1/\\xi}\n\\]\nThis is defined on \\(\\{y: y &gt; 0 \\text{ and } (1 + \\xi y / \\sigma_u) &gt; 0\\}\\). The parameters are the shape, \\(\\xi\\), and a scale parameter \\(\\sigma_u\\) that depends on the threshold \\(u\\).\nIf the parent distribution’s maxima are GEV-distributed with parameters \\((\\mu, \\sigma, \\xi)\\), then the GPD scale parameter is given by \\(\\sigma_u = \\sigma + \\xi(u - \\mu)\\). This key result shows that the GPD scale parameter is a linear function of the threshold \\(u\\), a property that is used in advanced diagnostics for threshold selection, and illustrates the links between the GPD and GEV models for extremes.\n\n\n6.3.3 The shape parameter\nThe shape parameter, \\(\\xi\\), is the most critical parameter in extreme value analysis and has the same interpretation in both the GEV and GPD. It governs the tail behavior of the distribution.\n\n\\(\\xi = 0\\) (Gumbel-type tail): The tail decays exponentially (light tail).\n\\(\\xi &gt; 0\\) (Fréchet-type tail): The tail decays as a polynomial (heavy tail), with no upper bound.\n\\(\\xi &lt; 0\\) (Weibull-type tail): The distribution has a finite upper bound.\n\n\n\n6.3.4 Connection between GEV and GPD\nThe GEV and GPD models are intrinsically linked. If the block maxima of a process follow a GEV distribution with parameters \\((\\mu, \\sigma, \\xi)\\), then for a high threshold \\(u\\), the threshold excesses follow a GPD with the same shape parameter \\(\\xi\\). This provides a theoretical consistency between the two primary modeling approaches.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html#return-periods-and-return-levels",
     "href": "chapters/hazard/extremes.html#return-periods-and-return-levels",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.4 Return periods and return levels",
-    "text": "8.4 Return periods and return levels\n\n8.4.1 Definitions and Calculation\nThe output of an extreme value analysis is typically expressed in terms of return periods and return levels. The N-year return level, \\(z_N\\), is the level expected to be exceeded on average once every \\(N\\) years. It corresponds to the quantile of the distribution with an annual exceedance probability of \\(p = 1/N\\).\nFor the GEV distribution, it is calculated by inverting the CDF:\n\\[\nz_N = \\mu - \\frac{\\sigma}{\\xi} \\left[ 1 - (-\\ln(1-p))^{-\\xi} \\right]\n\\]\nCalculating return levels from a GPD model requires an additional step. If \\(\\zeta_u\\) is the rate of threshold exceedances (e.g., the average number of exceedances per year), the \\(N\\)-year return level is the value \\(z_N\\) that is exceeded with probability \\(1/(N \\zeta_u)\\). It is calculated by adding the threshold back to the corresponding quantile of the GPD:\n\\[\nz_N = u + \\frac{\\sigma_u}{\\xi} \\left[ (N \\zeta_u)^\\xi - 1 \\right]\n\\]\n\n\n8.4.2 Return level plots\nA standard diagnostic and visualization tool is the return level plot. This plot graphs the estimated return level \\(z_N\\) against the return period \\(N\\), with \\(N\\) typically plotted on a logarithmic scale. The curvature of the fitted line is a direct visualization of the shape parameter, \\(\\xi\\): a straight line implies \\(\\xi=0\\), a concave curve implies \\(\\xi&gt;0\\), and a convex curve implies \\(\\xi&lt;0\\).\n[Placeholder for a Return Level Plot showing a fitted GEV or GPD curve with confidence intervals.]",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.4 Return periods and return levels",
+    "text": "6.4 Return periods and return levels\n\n6.4.1 Definitions and Calculation\nThe output of an extreme value analysis is typically expressed in terms of return periods and return levels. The N-year return level, \\(z_N\\), is the level expected to be exceeded on average once every \\(N\\) years. It corresponds to the quantile of the distribution with an annual exceedance probability of \\(p = 1/N\\).\nFor the GEV distribution, it is calculated by inverting the CDF:\n\\[\nz_N = \\mu - \\frac{\\sigma}{\\xi} \\left[ 1 - (-\\ln(1-p))^{-\\xi} \\right]\n\\]\nCalculating return levels from a GPD model requires an additional step. If \\(\\zeta_u\\) is the rate of threshold exceedances (e.g., the average number of exceedances per year), the \\(N\\)-year return level is the value \\(z_N\\) that is exceeded with probability \\(1/(N \\zeta_u)\\). It is calculated by adding the threshold back to the corresponding quantile of the GPD:\n\\[\nz_N = u + \\frac{\\sigma_u}{\\xi} \\left[ (N \\zeta_u)^\\xi - 1 \\right]\n\\]\n\n\n6.4.2 Return level plots\nA standard diagnostic and visualization tool is the return level plot. This plot graphs the estimated return level \\(z_N\\) against the return period \\(N\\), with \\(N\\) typically plotted on a logarithmic scale. The curvature of the fitted line is a direct visualization of the shape parameter, \\(\\xi\\): a straight line implies \\(\\xi=0\\), a concave curve implies \\(\\xi&gt;0\\), and a convex curve implies \\(\\xi&lt;0\\).\n[Placeholder for a Return Level Plot showing a fitted GEV or GPD curve with confidence intervals.]",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
-    "objectID": "chapters/hazard/extremes.html#plotting-positions",
-    "href": "chapters/hazard/extremes.html#plotting-positions",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.5 Plotting positions",
-    "text": "8.5 Plotting positions\nTo visually assess model fit, the fitted model is plotted against the observed maxima. For this purpose, we require a method to assign a non-exceedance probability (and thus a return period) to each observed maximum. For a sample of \\(n\\) block maxima, let \\(z_{(1)} &lt; z_{(2)} &lt; \\dots &lt; z_{(n)}\\) be the ordered values. We estimate the probability \\(P(Z \\le z_{(k)})\\) using a plotting position formula. These formulas generally take the form:\n\\[\np_k = \\frac{k - a}{n + 1 - 2a}\n\\]\nwhere \\(k\\) is the rank of the observation and \\(a\\) is a parameter. Common choices include:\n\nWeibull: \\(a=0\\), giving \\(p_k = k/(n+1)\\).\nGringorten: \\(a=0.44\\), giving \\(p_k = (k-0.44)/(n+0.12)\\). This is often recommended as an unbiased choice for Gumbel-type distributions.\n\nThe empirical return period for the \\(k\\)-th observation is then estimated as \\(1/(1-p_k)\\).",
+    "objectID": "chapters/hazard/extremes.html#inference",
+    "href": "chapters/hazard/extremes.html#inference",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.5 Inference",
+    "text": "6.5 Inference\n\n6.5.1 Plotting Positions\nTo visually assess model fit, the fitted model is plotted against the observed maxima. For this purpose, we require a method to assign a non-exceedance probability (and thus a return period) to each observed maximum. For a sample of \\(n\\) block maxima, let \\(z_{(1)} &lt; z_{(2)} &lt; \\dots &lt; z_{(n)}\\) be the ordered values. We estimate the probability \\(P(Z \\le z_{(k)})\\) using a plotting position formula. These formulas generally take the form:\n\\[\np_k = \\frac{k - a}{n + 1 - 2a}\n\\]\nwhere \\(k\\) is the rank of the observation and \\(a\\) is a parameter. Common choices include:\n\nWeibull: \\(a=0\\), giving \\(p_k = k/(n+1)\\).\nGringorten: \\(a=0.44\\), giving \\(p_k = (k-0.44)/(n+0.12)\\). This is often recommended as an unbiased choice for Gumbel-type distributions.\n\nThe empirical return period for the \\(k\\)-th observation is then estimated as \\(1/(1-p_k)\\).\n\n\n6.5.2 Moments\n\n\n6.5.3 MLE\n\n\n6.5.4 Bayesian",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
-    "objectID": "chapters/hazard/extremes.html#modeling-assumptions-and-considerations",
-    "href": "chapters/hazard/extremes.html#modeling-assumptions-and-considerations",
-    "title": "8  Extreme value theory ✏️",
-    "section": "8.6 Modeling assumptions and considerations",
-    "text": "8.6 Modeling assumptions and considerations\nApplication of these models requires careful consideration of underlying assumptions.\n\nStationarity: The classical GEV and GPD models assume stationarity: the parameters are constant in time. This implies that the statistical properties of extreme events do not change. In the context of climate change, this assumption may be invalid and requires more advanced non-stationary models.\nPractical Choices: The chosen methodology dictates key practical decisions. For the BM approach, the block size must be large enough for the asymptotic theory to hold but small enough to retain a reasonable sample size. For the POT approach, the threshold selection is a critical step that balances bias and variance.",
+    "objectID": "chapters/hazard/extremes.html#sampling-variability",
+    "href": "chapters/hazard/extremes.html#sampling-variability",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.6 Sampling variability",
+    "text": "6.6 Sampling variability",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/hazard/extremes.html#regionalization",
+    "href": "chapters/hazard/extremes.html#regionalization",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.7 Regionalization",
+    "text": "6.7 Regionalization",
+    "crumbs": [
+      "**II: Hazard Assessment**",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/hazard/extremes.html#nonstationarity",
+    "href": "chapters/hazard/extremes.html#nonstationarity",
+    "title": "6  Extreme value theory ✏️",
+    "section": "6.8 Nonstationarity",
+    "text": "6.8 Nonstationarity",
+    "crumbs": [
+      "**II: Hazard Assessment**",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/extremes.html#further-reading",
     "href": "chapters/hazard/extremes.html#further-reading",
-    "title": "8  Extreme value theory ✏️",
+    "title": "6  Extreme value theory ✏️",
     "section": "Further reading",
     "text": "Further reading\n\n(Coles 2001): Canonical extreme value textbook with mathematical rigor and practical examples\n\n\n\n\n\nColes, Stuart. 2001. An Introduction to Statistical Modeling of Extreme Values. Springer Series in Statistics. London: Springer.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Extreme value theory ✏️</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/downscaling-bias-correction.html",
     "href": "chapters/hazard/downscaling-bias-correction.html",
-    "title": "9  Downscaling and Bias Correction 🚧",
+    "title": "7  Downscaling and Bias Correction 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/downscaling-bias-correction.html#learning-objectives",
     "href": "chapters/hazard/downscaling-bias-correction.html#learning-objectives",
-    "title": "9  Downscaling and Bias Correction 🚧",
+    "title": "7  Downscaling and Bias Correction 🚧",
     "section": "",
     "text": "Distinguish between supervised and distributional downscaling approaches\nUnderstand the motivation for downscaling climate model outputs\nApply bias correction and quantile-quantile mapping techniques\nRecognize the stationarity assumption and its implications\nEvaluate different downscaling methods for specific applications\nUnderstand modern machine learning approaches to climate downscaling",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/downscaling-bias-correction.html#further-reading",
     "href": "chapters/hazard/downscaling-bias-correction.html#further-reading",
-    "title": "9  Downscaling and Bias Correction 🚧",
+    "title": "7  Downscaling and Bias Correction 🚧",
     "section": "Further reading",
     "text": "Further reading\n\nLanzante et al. (2018) for comprehensive review of downscaling challenges\nLafferty and Sriver (2023)\nFarnham, Doss-Gollin, and Lall (2018)\n\n\n\n\n\nFarnham, David J, James Doss-Gollin, and Upmanu Lall. 2018. “Regional Extreme Precipitation Events: Robust Inference from Credibly Simulated GCM Variables.” Water Resources Research 54 (6). https://doi.org/10.1002/2017wr021318.\n\n\nLafferty, David C., and Ryan L. Sriver. 2023. “Downscaling and Bias-Correction Contribute Considerable Uncertainty to Local Climate Projections in CMIP6.” Npj Climate and Atmospheric Science 6 (1, 1): 1–13. https://doi.org/10.1038/s41612-023-00486-0.\n\n\nLanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and Dennis Adams-Smith. 2018. “Some Pitfalls in Statistical Downscaling of Future Climate.” Bulletin of the American Meteorological Society 99 (4): 791–803. https://doi.org/10.1175/bams-d-17-0046.1.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Downscaling and Bias Correction 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/generators.html",
     "href": "chapters/hazard/generators.html",
-    "title": "10  Stochastic weather generators 🚧",
+    "title": "8  Stochastic weather generators 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/generators.html#learning-objectives",
     "href": "chapters/hazard/generators.html#learning-objectives",
-    "title": "10  Stochastic weather generators 🚧",
+    "title": "8  Stochastic weather generators 🚧",
     "section": "",
     "text": "Understand the principles of stochastic weather generation\nApply statistical models for synthetic weather data\nUse weather generators for downscaling climate model output\nEvaluate the performance of weather generation models",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/generators.html#essential-concepts",
     "href": "chapters/hazard/generators.html#essential-concepts",
-    "title": "10  Stochastic weather generators 🚧",
-    "section": "10.1 Essential concepts",
-    "text": "10.1 Essential concepts\n\nHidden Markov models for weather state modeling\nMulti-site and multi-variable generation\nStatistical downscaling applications\nSynthetic data validation and evaluation\nIntegration with physical models",
+    "title": "8  Stochastic weather generators 🚧",
+    "section": "8.1 Essential concepts",
+    "text": "8.1 Essential concepts\n\nHidden Markov models for weather state modeling\nMulti-site and multi-variable generation\nStatistical downscaling applications\nSynthetic data validation and evaluation\nIntegration with physical models",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/generators.html#further-reading",
     "href": "chapters/hazard/generators.html#further-reading",
-    "title": "10  Stochastic weather generators 🚧",
+    "title": "8  Stochastic weather generators 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Stochastic weather generators 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/physics-models.html",
     "href": "chapters/hazard/physics-models.html",
-    "title": "11  Physics-based models and calibration 🚧",
+    "title": "9  Physics-based models and calibration 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/physics-models.html#learning-objectives",
     "href": "chapters/hazard/physics-models.html#learning-objectives",
-    "title": "11  Physics-based models and calibration 🚧",
+    "title": "9  Physics-based models and calibration 🚧",
     "section": "",
     "text": "Navigate trade-offs between model complexity, interpretability, and computational cost\nCharacterize and communicate within- and between-model uncertainty\nUse surrogate models to approximate complex model output\nApply model calibration techniques for climate applications",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/physics-models.html#essential-concepts",
     "href": "chapters/hazard/physics-models.html#essential-concepts",
-    "title": "11  Physics-based models and calibration 🚧",
-    "section": "11.1 Essential concepts",
-    "text": "11.1 Essential concepts\n\nPhysics-based vs data-driven modeling spectrum\nModel chaining and uncertainty propagation\nCalibration methods and parameter estimation\nSurrogate modeling for computational efficiency\nModel structure uncertainty quantification",
+    "title": "9  Physics-based models and calibration 🚧",
+    "section": "9.1 Essential concepts",
+    "text": "9.1 Essential concepts\n\nPhysics-based vs data-driven modeling spectrum\nModel chaining and uncertainty propagation\nCalibration methods and parameter estimation\nSurrogate modeling for computational efficiency\nModel structure uncertainty quantification",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/physics-models.html#further-reading",
     "href": "chapters/hazard/physics-models.html#further-reading",
-    "title": "11  Physics-based models and calibration 🚧",
+    "title": "9  Physics-based models and calibration 🚧",
     "section": "Further reading",
     "text": "Further reading\nFor physics-based modeling in climate applications:\n\nRackauckas et al. (2020): Scientific machine learning for differential equations\n\n\n\n\n\nRackauckas, Christopher, Yingbo Ma, Julius Martensen, Collin Warner, Kirill Zubov, Rohit Supekar, Dominic Skinner, Ali Ramadhan, and Alan Edelman. 2020. “Universal Differential Equations for Scientific Machine Learning.” 2020. https://doi.org/10.48550/ARXIV.2001.04385.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Physics-based models and calibration 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sampling.html",
     "href": "chapters/hazard/sampling.html",
-    "title": "12  Optimal sampling methods 🚧",
+    "title": "10  Optimal sampling methods 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sampling.html#learning-objectives",
     "href": "chapters/hazard/sampling.html#learning-objectives",
-    "title": "12  Optimal sampling methods 🚧",
+    "title": "10  Optimal sampling methods 🚧",
     "section": "",
     "text": "Apply sampling techniques to generate synthetic event sets\nUse importance and stratified sampling to improve efficiency in hazard modeling\nEvaluate how sampling choices affect estimates of extreme risk\nBalance computational cost vs accuracy in climate risk estimation",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sampling.html#essential-sampling-concepts",
     "href": "chapters/hazard/sampling.html#essential-sampling-concepts",
-    "title": "12  Optimal sampling methods 🚧",
-    "section": "12.1 Essential sampling concepts",
-    "text": "12.1 Essential sampling concepts\n\nMonte Carlo sampling and variance reduction\nImportance sampling for rare events\nStratified sampling strategies\nSynthetic event generation methods\nComputational efficiency optimization",
+    "title": "10  Optimal sampling methods 🚧",
+    "section": "10.1 Essential sampling concepts",
+    "text": "10.1 Essential sampling concepts\n\nMonte Carlo sampling and variance reduction\nImportance sampling for rare events\nStratified sampling strategies\nSynthetic event generation methods\nComputational efficiency optimization",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sampling.html#further-reading",
     "href": "chapters/hazard/sampling.html#further-reading",
-    "title": "12  Optimal sampling methods 🚧",
+    "title": "10  Optimal sampling methods 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Optimal sampling methods 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sensitivity-analysis.html",
     "href": "chapters/hazard/sensitivity-analysis.html",
-    "title": "13  Global sensitivity analysis 🚧",
+    "title": "11  Global sensitivity analysis 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sensitivity-analysis.html#learning-objectives",
     "href": "chapters/hazard/sensitivity-analysis.html#learning-objectives",
-    "title": "13  Global sensitivity analysis 🚧",
+    "title": "11  Global sensitivity analysis 🚧",
     "section": "",
     "text": "Understand the role of sensitivity analysis in climate risk modeling\nApply variance-based sensitivity methods (Sobol indices) to identify key parameters\nUse Morris screening methods for initial parameter importance ranking\nInterpret sensitivity analysis results for model simplification and uncertainty reduction",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sensitivity-analysis.html#essential-sensitivity-analysis-concepts",
     "href": "chapters/hazard/sensitivity-analysis.html#essential-sensitivity-analysis-concepts",
-    "title": "13  Global sensitivity analysis 🚧",
-    "section": "13.1 Essential sensitivity analysis concepts",
-    "text": "13.1 Essential sensitivity analysis concepts\n\nGlobal vs local sensitivity analysis approaches\nSobol indices and variance decomposition\nMorris elementary effects for screening\nMulti-model sensitivity analysis\nImplementation strategies for complex model chains",
+    "title": "11  Global sensitivity analysis 🚧",
+    "section": "11.1 Essential sensitivity analysis concepts",
+    "text": "11.1 Essential sensitivity analysis concepts\n\nGlobal vs local sensitivity analysis approaches\nSobol indices and variance decomposition\nMorris elementary effects for screening\nMulti-model sensitivity analysis\nImplementation strategies for complex model chains",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/hazard/sensitivity-analysis.html#further-reading",
     "href": "chapters/hazard/sensitivity-analysis.html#further-reading",
-    "title": "13  Global sensitivity analysis 🚧",
+    "title": "11  Global sensitivity analysis 🚧",
     "section": "Further reading",
     "text": "Further reading\nFor global sensitivity analysis:\n\nSaltelli et al. (2008): Comprehensive introduction to GSA methods\nHerman and Usher (2017): Practical implementation guide with software tools\n\n\n\n\n\nHerman, Jon, and Will Usher. 2017. “SALib: An Open-Source Python Library for Sensitivity Analysis.” Journal of Open Source Software 2 (9): 97. https://doi.org/10.21105/joss.00097.\n\n\nSaltelli, Andrea, Marco Ratto, Terry Andres, Francesca Campolongo, Jessica Cariboni, Debora Gatelli, Michaela Saisana, and Stefano Tarantola. 2008. Global Sensitivity Analysis: The Primer. John Wiley & Sons, Ltd. http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1.",
     "crumbs": [
       "**II: Hazard Assessment**",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Global sensitivity analysis 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/exposure-vulnerability.html",
     "href": "chapters/risk/exposure-vulnerability.html",
-    "title": "14  Exposure and Vulnerability 🚧",
+    "title": "12  Exposure and Vulnerability 🚧",
     "section": "",
-    "text": "14.1 Learning objectives\nBy the end of this chapter, you should be able to:",
+    "text": "12.1 Learning objectives\nBy the end of this chapter, you should be able to:",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/exposure-vulnerability.html#learning-objectives",
     "href": "chapters/risk/exposure-vulnerability.html#learning-objectives",
-    "title": "14  Exposure and Vulnerability 🚧",
+    "title": "12  Exposure and Vulnerability 🚧",
     "section": "",
     "text": "Define exposure and vulnerability in the context of climate risk assessment\nDistinguish between different types of vulnerability (physical, social, economic)\nUnderstand methods for quantifying and mapping exposure\nApply vulnerability assessment frameworks to real-world scenarios\nIntegrate exposure and vulnerability data with hazard information for risk assessment",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/exposure-vulnerability.html#further-reading",
     "href": "chapters/risk/exposure-vulnerability.html#further-reading",
-    "title": "14  Exposure and Vulnerability 🚧",
-    "section": "14.2 Further reading",
-    "text": "14.2 Further reading",
+    "title": "12  Exposure and Vulnerability 🚧",
+    "section": "12.2 Further reading",
+    "text": "12.2 Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Exposure and Vulnerability 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/expectations-cost-benefit.html",
     "href": "chapters/risk/expectations-cost-benefit.html",
-    "title": "15  Cost-Benefit Analysis and Net Present Value 🚧",
+    "title": "13  Cost-Benefit Analysis and Net Present Value 🚧",
     "section": "",
     "text": "Learning objectives\nAfter reading this chapter, you should be able to:",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/expectations-cost-benefit.html#learning-objectives",
     "href": "chapters/risk/expectations-cost-benefit.html#learning-objectives",
-    "title": "15  Cost-Benefit Analysis and Net Present Value 🚧",
+    "title": "13  Cost-Benefit Analysis and Net Present Value 🚧",
     "section": "",
     "text": "Understand the theoretical foundation of cost-benefit analysis and Bayesian decision theory\nApply net present value calculations with appropriate discount rates\nQuantify costs and benefits using utility functions for climate risk decisions\nHandle uncertainty in cost-benefit frameworks using expected value\nRecognize the limitations and appropriate applications of cost-benefit analysis\nEvaluate economic trade-offs over different time horizons and scenarios",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/expectations-cost-benefit.html#further-reading",
     "href": "chapters/risk/expectations-cost-benefit.html#further-reading",
-    "title": "15  Cost-Benefit Analysis and Net Present Value 🚧",
+    "title": "13  Cost-Benefit Analysis and Net Present Value 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Cost-Benefit Analysis and Net Present Value 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html",
     "href": "chapters/risk/risk-transfer.html",
-    "title": "17  Risk Transfer 🚧",
+    "title": "15  Risk Transfer 🚧",
     "section": "",
     "text": "See first\nThis chapter builds on concepts from: - Exposure and Vulnerability - Expectations and Discounting",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#learning-objectives",
     "href": "chapters/risk/risk-transfer.html#learning-objectives",
-    "title": "17  Risk Transfer 🚧",
+    "title": "15  Risk Transfer 🚧",
     "section": "Learning objectives",
     "text": "Learning objectives\n\nExplore financial instruments (insurance, reinsurance, catastrophe bonds) for spreading or transferring climate risk.\nUnderstand parametric insurance triggers and how they differ from indemnity-based approaches.\nAssess the role of public-private partnerships in risk transfer mechanisms.",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#insurancereinsurance-fundamentals",
     "href": "chapters/risk/risk-transfer.html#insurancereinsurance-fundamentals",
-    "title": "17  Risk Transfer 🚧",
-    "section": "17.1 Insurance/reinsurance fundamentals",
-    "text": "17.1 Insurance/reinsurance fundamentals",
+    "title": "15  Risk Transfer 🚧",
+    "section": "15.1 Insurance/reinsurance fundamentals",
+    "text": "15.1 Insurance/reinsurance fundamentals",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#parametric-vs.-indemnity-coverage",
     "href": "chapters/risk/risk-transfer.html#parametric-vs.-indemnity-coverage",
-    "title": "17  Risk Transfer 🚧",
-    "section": "17.2 Parametric vs. indemnity coverage",
-    "text": "17.2 Parametric vs. indemnity coverage",
+    "title": "15  Risk Transfer 🚧",
+    "section": "15.2 Parametric vs. indemnity coverage",
+    "text": "15.2 Parametric vs. indemnity coverage",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#catastrophe-bonds-index-based-schemes",
     "href": "chapters/risk/risk-transfer.html#catastrophe-bonds-index-based-schemes",
-    "title": "17  Risk Transfer 🚧",
-    "section": "17.3 Catastrophe bonds, index-based schemes",
-    "text": "17.3 Catastrophe bonds, index-based schemes",
+    "title": "15  Risk Transfer 🚧",
+    "section": "15.3 Catastrophe bonds, index-based schemes",
+    "text": "15.3 Catastrophe bonds, index-based schemes",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#challenges-in-emerging-markets-and-vulnerable-regions",
     "href": "chapters/risk/risk-transfer.html#challenges-in-emerging-markets-and-vulnerable-regions",
-    "title": "17  Risk Transfer 🚧",
-    "section": "17.4 Challenges in emerging markets and vulnerable regions",
-    "text": "17.4 Challenges in emerging markets and vulnerable regions",
+    "title": "15  Risk Transfer 🚧",
+    "section": "15.4 Challenges in emerging markets and vulnerable regions",
+    "text": "15.4 Challenges in emerging markets and vulnerable regions",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/risk-transfer.html#further-reading",
     "href": "chapters/risk/risk-transfer.html#further-reading",
-    "title": "17  Risk Transfer 🚧",
+    "title": "15  Risk Transfer 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Risk Transfer 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/deep-uncertainty.html",
     "href": "chapters/risk/deep-uncertainty.html",
-    "title": "18  Deep Uncertainty and Model Structure 🚧",
+    "title": "16  Deep Uncertainty and Model Structure 🚧",
     "section": "",
     "text": "See first\nThis chapter builds on concepts from: - Probability and Statistics - Model Validation and Comparison",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/deep-uncertainty.html#learning-objectives",
     "href": "chapters/risk/deep-uncertainty.html#learning-objectives",
-    "title": "18  Deep Uncertainty and Model Structure 🚧",
+    "title": "16  Deep Uncertainty and Model Structure 🚧",
     "section": "Learning objectives",
     "text": "Learning objectives\n\nDistinguish between aleatory and epistemic uncertainty in climate risk assessment\nUnderstand the challenges posed by structural uncertainty and model disagreement\nApply Bayesian Model Averaging (BMA) and stacking approaches to combine multiple models\nRecognize when deep uncertainty invalidates traditional decision frameworks\nIdentify sources of deep uncertainty in exposure and impact modeling",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/deep-uncertainty.html#further-reading",
     "href": "chapters/risk/deep-uncertainty.html#further-reading",
-    "title": "18  Deep Uncertainty and Model Structure 🚧",
+    "title": "16  Deep Uncertainty and Model Structure 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Deep Uncertainty and Model Structure 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/adaptive.html",
     "href": "chapters/risk/adaptive.html",
-    "title": "20  Adaptive Planning and Flexibility 🚧",
+    "title": "18  Adaptive Planning and Flexibility 🚧",
     "section": "",
     "text": "See first\nThis chapter builds on concepts from: - Deep Uncertainty - Robustness",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/adaptive.html#learning-objectives",
     "href": "chapters/risk/adaptive.html#learning-objectives",
-    "title": "20  Adaptive Planning and Flexibility 🚧",
+    "title": "18  Adaptive Planning and Flexibility 🚧",
     "section": "Learning objectives",
     "text": "Learning objectives\n\nPlan for uncertainty with adaptive management and iterative risk strategies.\nDevelop adaptation pathways that evolve with new information (e.g., climate data, impacts).\nIncorporate monitoring and feedback loops into long-term climate policy.",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/adaptive.html#further-reading",
     "href": "chapters/risk/adaptive.html#further-reading",
-    "title": "20  Adaptive Planning and Flexibility 🚧",
+    "title": "18  Adaptive Planning and Flexibility 🚧",
     "section": "Further reading",
     "text": "Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Adaptive Planning and Flexibility 🚧</span>"
     ]
   },
   {
     "objectID": "chapters/risk/social-science.html",
     "href": "chapters/risk/social-science.html",
-    "title": "21  Working with People: Values, Participation, and Communication 🚧",
+    "title": "19  Working with People: Values, Participation, and Communication 🚧",
     "section": "",
     "text": "Further reading",
     "crumbs": [
       "**III: Risk Management**",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Working with People: Values, Participation, and Communication 🚧</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Working with People: Values, Participation, and Communication 🚧</span>"
     ]
   },
   {
@@ -997,10 +975,32 @@
     "href": "notebooks/index.html",
     "title": "Overview",
     "section": "",
-    "text": "This collection of computational notebooks demonstrates the methods and concepts discussed in the main text through practical applications. Each notebook is designed to be standalone and self-contained, using the Julia programming language for all computations.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\n\n\n\n\n\nStatistics Without the Agonizing Details ✏️\n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\nNo matching items",
+    "text": "This collection of computational notebooks demonstrates the methods and concepts discussed in the main text through practical applications. Each notebook is designed to be standalone and self-contained, using the Julia programming language for all computations.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\n\n\n\n\n\nProbability, inference, and computation: examples\n\n\n\n\n\n\nStatistics Without the Agonizing Details ✏️\n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\n \n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "**Computational Case Studies**",
       "Overview"
+    ]
+  },
+  {
+    "objectID": "notebooks/probability-stats-examples.html",
+    "href": "notebooks/probability-stats-examples.html",
+    "title": "20  Probability, inference, and computation: examples",
+    "section": "",
+    "text": "20.1 Examples to be added\nThis notebook provides computational examples to accompany the Probability and inference chapter.",
+    "crumbs": [
+      "**Computational Case Studies**",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Probability, inference, and computation: examples</span>"
+    ]
+  },
+  {
+    "objectID": "notebooks/probability-stats-examples.html#examples-to-be-added",
+    "href": "notebooks/probability-stats-examples.html#examples-to-be-added",
+    "title": "20  Probability, inference, and computation: examples",
+    "section": "",
+    "text": "20.1.1 Monte Carlo basics and asymptotic theory\n\nMonte Carlo simulation of coin flips (demonstrating Law of Large Numbers)\nCentral Limit Theorem visualization with simulation\nMonte Carlo integration examples\n\n\n\n20.1.2 Coin flip example\n\nAnalytical maximum likelihood estimation\nBootstrap confidence intervals for coin flip parameter\nBayesian inference with conjugate Beta-Binomial model\nMCMC sampling for coin flip (comparison with analytical solution)\n\n\n\n20.1.3 Linear regression example\n\nOrdinary least squares implementation\nBootstrap confidence intervals for regression parameters\nBayesian linear regression with conjugate normal priors\nMCMC sampling for Bayesian linear regression\n\n\n\n20.1.4 Logistic regression example\n\nNumerical maximum likelihood optimization\nBootstrap confidence intervals for logistic regression\nMCMC sampling for Bayesian logistic regression\nMCMC diagnostics and convergence assessment\n\n\n\n20.1.5 Advanced topics\n\nPropagating parameter uncertainty to predictions\nComparing frequentist and Bayesian uncertainty quantification\nWhen to use analytical vs. numerical vs. simulation methods",
+    "crumbs": [
+      "**Computational Case Studies**",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Probability, inference, and computation: examples</span>"
     ]
   },
   {
@@ -1063,7 +1063,7 @@
     "href": "chapters/references.html",
     "title": "References 🎯",
     "section": "",
-    "text": "Abernathey, Ryan. 2024. An Introduction to\nEarth and Environmental Data Science. https://earth-env-data-science.github.io/intro.html.\n\n\nApplegate, Patrick, and Klaus Keller. 2015. Risk\nAnalysis in the Earth Sciences. Leanpub.\nhttps://leanpub.next/raes.\n\n\nBastani, Hamsa, Osbert Bastani, Alp Sungu, Haosen Ge, Özge Kabakcı, and\nRei Mariman. 2025. “Generative AI Without Guardrails\nCan Harm Learning: Evidence from High School\nMathematics.” Proceedings of the National Academy of\nSciences 122 (26): e2422633122. https://doi.org/10.1073/pnas.2422633122.\n\n\nBishop, Christopher M., and Hugh Bishop. 2024. Deep\nLearning: Foundations and\nConcepts. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-45468-4.\n\n\nBlitzstein, Joseph K., and Jessica Hwang. 2019. Introduction to\nProbability, Second Edition. 2nd Edition.\nBoca Raton: Chapman and Hall/CRC. http://probabilitybook.net.\n\n\nColes, Stuart. 2001. An Introduction to Statistical Modeling of\nExtreme Values. Springer Series in Statistics. London: Springer.\n\n\nCressie, Noel A. C., and Christopher K. Wikle. 2011. Statistics for\nSpatio-Temporal Data. Hoboken, N.J.: Wiley.\n\n\nDowney, Allen B. 2021. Think Bayes. \"O’Reilly\nMedia, Inc.\". https://allendowney.github.io/ThinkBayes2/.\n\n\nFarnham, David J, James Doss-Gollin, and Upmanu Lall. 2018.\n“Regional Extreme Precipitation Events: Robust Inference from\nCredibly Simulated GCM Variables.” Water\nResources Research 54 (6). https://doi.org/10.1002/2017wr021318.\n\n\nFriedman, Jerome, Trevor Hastie, and Robert Tibshirani. 2001. The\nElements of Statistical Learning. Vol. 1.\nSpringer series in statistics Springer, Berlin.\n\n\nGelman, Andrew. 2021. Regression and Other Stories. Analytical\nMethods for Social Research. Cambridge, United Kingdom ; Cambridge\nUniversity Press.\n\n\nGelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014.\nBayesian Data Analysis. 3rd ed. Chapman &\nHall/CRC Boca Raton, FL, USA.\n\n\nGhil, M, P Yiou, S Hallegatte, B D Malamud, P Naveau, A Soloviev, P\nFriederichs, et al. 2011. “Extreme Events: Dynamics, Statistics\nand Prediction.” Nonlinear Processes in Geophysics 18\n(3): 295–350. https://doi.org/10/fvzxvv.\n\n\nHelsel, Dennis R., Robert M. Hirsch, Karen R. Ryberg, Stacey A.\nArchfield, and Edward J. Gilroy. 2020. Statistical Methods in Water\nResources. Techniques and Methods. U.S. Geological Survey.\nhttps://doi.org/10.3133/tm4A3.\n\n\nHerman, Jon, and Will Usher. 2017. “SALib:\nAn Open-Source Python Library for\nSensitivity Analysis.” Journal of Open Source\nSoftware 2 (9): 97. https://doi.org/10.21105/joss.00097.\n\n\nJaynes, Edwin T. 2003. Probability Theory: The Logic of\nScience. New York, NY: Cambridge University Press.\n\n\nKosmyna, Nataliya, Eugene Hauptmann, Ye Tong Yuan, Jessica Situ,\nXian-Hao Liao, Ashly Vivian Beresnitzky, Iris Braunstein, and Pattie\nMaes. 2025. “Your Brain on ChatGPT:\nAccumulation of Cognitive Debt When\nUsing an AI Assistant for Essay Writing\nTask.” June 10, 2025. https://doi.org/10.48550/arXiv.2506.08872.\n\n\nLafferty, David C., and Ryan L. Sriver. 2023. “Downscaling and\nBias-Correction Contribute Considerable Uncertainty to Local Climate\nProjections in CMIP6.” Npj Climate and\nAtmospheric Science 6 (1, 1): 1–13. https://doi.org/10.1038/s41612-023-00486-0.\n\n\nLanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and\nDennis Adams-Smith. 2018. “Some Pitfalls in\nStatistical Downscaling of Future\nClimate.” Bulletin of the American Meteorological\nSociety 99 (4): 791–803. https://doi.org/10.1175/bams-d-17-0046.1.\n\n\nMcElreath, Richard. 2020. Statistical Rethinking: A\nBayesian Course with Examples in R and\nStan. Second edition. Texts in Statistical Science\nSeries. Boca Raton ; CRC Press, Taylor & Francis Group.\n\n\nMerz, Bruno, Jeroen C J H Aerts, Karsten Arnbjerg-Nielsen, M Baldi, A\nBecker, A Bichet, Günter Blöschl, et al. 2014. “Floods and\nClimate: Emerging Perspectives for Flood Risk Assessment and\nManagement.” Natural Hazards and Earth System Science 14\n(7): 1921–42. https://doi.org/10/gb9nzm.\n\n\nMignan, Arnaud. 2024. Introduction to Catastrophe Risk\nModelling: A Physics-based\nApproach. Cambridge: Cambridge University Press. https://doi.org/10.1017/9781009437370.\n\n\nMudelsee, Manfred. 2020. “Statistical Analysis of Climate Extremes\n/ Manfred Mudelsee.” In Statistical Analysis of\nClimate Extremes. Cambridge, United Kingdom ; Cambridge University\nPress.\n\n\nNaghettini, Mauro, ed. 2017. Fundamentals of Statistical\nHydrology. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-319-43561-9.\n\n\nPiironen, Juho, and Aki Vehtari. 2017. “Comparison of\nBayesian Predictive Methods for Model Selection.”\nStatistics and Computing 27 (3): 711–35. https://doi.org/10.1007/s11222-016-9649-y.\n\n\nPyrcz, Michael J. 2024. Applied Machine Learning in\nPython: A Hands-on Guide with\nCode. https://geostatsguy.github.io/MachineLearningDemos_Book.\n\n\nRackauckas, Christopher, Yingbo Ma, Julius Martensen, Collin Warner,\nKirill Zubov, Rohit Supekar, Dominic Skinner, Ali Ramadhan, and Alan\nEdelman. 2020. “Universal Differential Equations for\nScientific Machine Learning.” 2020. https://doi.org/10.48550/ARXIV.2001.04385.\n\n\nSaltelli, Andrea, Marco Ratto, Terry Andres, Francesca Campolongo,\nJessica Cariboni, Debora Gatelli, Michaela Saisana, and Stefano\nTarantola. 2008. Global Sensitivity Analysis: The Primer. John\nWiley & Sons, Ltd. http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1.\n\n\nSutton, Richard S, and Andrew G Barto. 2018. Reinforcement Learning:\nAn Introduction. Second Edition. Cambridge,\nMassachusetts; London, England: MIT Press.\n\n\nThuerey, N., B. Holzschuh, P. Holl, G. Kohl, M. Lino, Q. Liu, P.\nSchnell, and F. Trost. 2024. Physics-Based Deep Learning. https://physicsbaseddeeplearning.org.",
+    "text": "Abernathey, Ryan. 2024. An Introduction to\nEarth and Environmental Data Science. https://earth-env-data-science.github.io/intro.html.\n\n\nApplegate, Patrick, and Klaus Keller. 2015. Risk\nAnalysis in the Earth Sciences. Leanpub.\nhttps://leanpub.next/raes.\n\n\nBastani, Hamsa, Osbert Bastani, Alp Sungu, Haosen Ge, Özge Kabakcı, and\nRei Mariman. 2025. “Generative AI Without Guardrails\nCan Harm Learning: Evidence from High School\nMathematics.” Proceedings of the National Academy of\nSciences 122 (26): e2422633122. https://doi.org/10.1073/pnas.2422633122.\n\n\nBishop, Christopher M., and Hugh Bishop. 2024. Deep\nLearning: Foundations and\nConcepts. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-031-45468-4.\n\n\nBlitzstein, Joseph K., and Jessica Hwang. 2019. Introduction to\nProbability, Second Edition. 2nd Edition.\nBoca Raton: Chapman and Hall/CRC. http://probabilitybook.net.\n\n\nColes, Stuart. 2001. An Introduction to Statistical Modeling of\nExtreme Values. Springer Series in Statistics. London: Springer.\n\n\nCressie, Noel A. C., and Christopher K. Wikle. 2011. Statistics for\nSpatio-Temporal Data. Hoboken, N.J.: Wiley.\n\n\nDowney, Allen B. 2021. Think Bayes. \"O’Reilly\nMedia, Inc.\". https://allendowney.github.io/ThinkBayes2/.\n\n\nFarnham, David J, James Doss-Gollin, and Upmanu Lall. 2018.\n“Regional Extreme Precipitation Events: Robust Inference from\nCredibly Simulated GCM Variables.” Water\nResources Research 54 (6). https://doi.org/10.1002/2017wr021318.\n\n\nFriedman, Jerome, Trevor Hastie, and Robert Tibshirani. 2001. The\nElements of Statistical Learning. Vol. 1.\nSpringer series in statistics Springer, Berlin.\n\n\nGelman, Andrew. 2021. Regression and Other Stories. Analytical\nMethods for Social Research. Cambridge, United Kingdom ; Cambridge\nUniversity Press.\n\n\nGelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014.\nBayesian Data Analysis. 3rd ed. Chapman &\nHall/CRC Boca Raton, FL, USA.\n\n\nGhil, M, P Yiou, S Hallegatte, B D Malamud, P Naveau, A Soloviev, P\nFriederichs, et al. 2011. “Extreme Events: Dynamics, Statistics\nand Prediction.” Nonlinear Processes in Geophysics 18\n(3): 295–350. https://doi.org/10/fvzxvv.\n\n\nHelsel, Dennis R., Robert M. Hirsch, Karen R. Ryberg, Stacey A.\nArchfield, and Edward J. Gilroy. 2020. Statistical Methods in Water\nResources. Techniques and Methods. U.S. Geological Survey.\nhttps://doi.org/10.3133/tm4A3.\n\n\nHerman, Jon, and Will Usher. 2017. “SALib:\nAn Open-Source Python Library for\nSensitivity Analysis.” Journal of Open Source\nSoftware 2 (9): 97. https://doi.org/10.21105/joss.00097.\n\n\nJaynes, Edwin T. 2003. Probability Theory: The Logic of\nScience. New York, NY: Cambridge University Press.\n\n\nKosmyna, Nataliya, Eugene Hauptmann, Ye Tong Yuan, Jessica Situ,\nXian-Hao Liao, Ashly Vivian Beresnitzky, Iris Braunstein, and Pattie\nMaes. 2025. “Your Brain on ChatGPT:\nAccumulation of Cognitive Debt When\nUsing an AI Assistant for Essay Writing\nTask.” June 10, 2025. https://doi.org/10.48550/arXiv.2506.08872.\n\n\nLafferty, David C., and Ryan L. Sriver. 2023. “Downscaling and\nBias-Correction Contribute Considerable Uncertainty to Local Climate\nProjections in CMIP6.” Npj Climate and\nAtmospheric Science 6 (1, 1): 1–13. https://doi.org/10.1038/s41612-023-00486-0.\n\n\nLanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and\nDennis Adams-Smith. 2018. “Some Pitfalls in\nStatistical Downscaling of Future\nClimate.” Bulletin of the American Meteorological\nSociety 99 (4): 791–803. https://doi.org/10.1175/bams-d-17-0046.1.\n\n\nMcElreath, Richard. 2020. Statistical Rethinking: A\nBayesian Course with Examples in R and\nStan. Second edition. Texts in Statistical Science\nSeries. Boca Raton ; CRC Press, Taylor & Francis Group.\n\n\nMerz, Bruno, Jeroen C J H Aerts, Karsten Arnbjerg-Nielsen, M Baldi, A\nBecker, A Bichet, Günter Blöschl, et al. 2014. “Floods and\nClimate: Emerging Perspectives for Flood Risk Assessment and\nManagement.” Natural Hazards and Earth System Science 14\n(7): 1921–42. https://doi.org/10/gb9nzm.\n\n\nMignan, Arnaud. 2024. Introduction to Catastrophe Risk\nModelling: A Physics-based\nApproach. Cambridge: Cambridge University Press. https://doi.org/10.1017/9781009437370.\n\n\nMudelsee, Manfred. 2020. “Statistical Analysis of Climate Extremes\n/ Manfred Mudelsee.” In Statistical Analysis of\nClimate Extremes. Cambridge, United Kingdom ; Cambridge University\nPress.\n\n\nNaghettini, Mauro, ed. 2017. Fundamentals of Statistical\nHydrology. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-319-43561-9.\n\n\nPiironen, Juho, and Aki Vehtari. 2017. “Comparison of\nBayesian Predictive Methods for Model Selection.”\nStatistics and Computing 27 (3): 711–35. https://doi.org/10.1007/s11222-016-9649-y.\n\n\nPyrcz, Michael J. 2024. Applied Machine Learning in\nPython: A Hands-on Guide with\nCode. https://geostatsguy.github.io/MachineLearningDemos_Book.\n\n\nRackauckas, Christopher, Yingbo Ma, Julius Martensen, Collin Warner,\nKirill Zubov, Rohit Supekar, Dominic Skinner, Ali Ramadhan, and Alan\nEdelman. 2020. “Universal Differential Equations for\nScientific Machine Learning.” 2020. https://doi.org/10.48550/ARXIV.2001.04385.\n\n\nSaltelli, Andrea, Marco Ratto, Terry Andres, Francesca Campolongo,\nJessica Cariboni, Debora Gatelli, Michaela Saisana, and Stefano\nTarantola. 2008. Global Sensitivity Analysis: The Primer. John\nWiley & Sons, Ltd. http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1.\n\n\nThuerey, N., B. Holzschuh, P. Holl, G. Kohl, M. Lino, Q. Liu, P.\nSchnell, and F. Trost. 2024. Physics-Based Deep Learning. https://physicsbaseddeeplearning.org.",
     "crumbs": [
       "**References**"
     ]

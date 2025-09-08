@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Probability and inference 🚧 – Climate Risk Assessment and Management</title>
+<title>2&nbsp; Probability and inference ✏️ – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -50,7 +85,7 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/fundamentals/optimization.html" rel="next">
+<link href="../../chapters/fundamentals/ml-nonparametric.html" rel="next">
 <link href="../../chapters/fundamentals/climate-science.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -58,7 +93,7 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -91,6 +126,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -230,7 +294,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/probability-stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/probability-stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference ✏️</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -320,37 +384,25 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/optimization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Optimization 🚧</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,37 +419,37 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -414,49 +466,49 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Robustness 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Robustness 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
   </div>
 </li>
       </ul>
@@ -474,6 +526,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../notebooks/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/probability-stats-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -531,7 +589,39 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#key-terms-and-ideas" id="toc-key-terms-and-ideas" class="nav-link active" data-scroll-target="#key-terms-and-ideas"><span class="header-section-number">2.1</span> Key terms and ideas</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#probability-theory-fundamentals" id="toc-probability-theory-fundamentals" class="nav-link" data-scroll-target="#probability-theory-fundamentals"><span class="header-section-number">2.1</span> Probability theory fundamentals</a>
+  <ul class="collapse">
+  <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts"><span class="header-section-number">2.1.1</span> Basic concepts</a></li>
+  <li><a href="#key-distribution-functions" id="toc-key-distribution-functions" class="nav-link" data-scroll-target="#key-distribution-functions"><span class="header-section-number">2.1.2</span> Key distribution functions</a></li>
+  <li><a href="#multiple-variables" id="toc-multiple-variables" class="nav-link" data-scroll-target="#multiple-variables"><span class="header-section-number">2.1.3</span> Multiple variables</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">2.1.4</span> Examples</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2.1.5</span> Summary statistics</a></li>
+  </ul></li>
+  <li><a href="#generative-models" id="toc-generative-models" class="nav-link" data-scroll-target="#generative-models"><span class="header-section-number">2.2</span> Generative models</a>
+  <ul class="collapse">
+  <li><a href="#building-models-from-conditional-blocks" id="toc-building-models-from-conditional-blocks" class="nav-link" data-scroll-target="#building-models-from-conditional-blocks"><span class="header-section-number">2.2.1</span> Building models from conditional blocks</a></li>
+  <li><a href="#visualizing-model-structure-with-graphical-models" id="toc-visualizing-model-structure-with-graphical-models" class="nav-link" data-scroll-target="#visualizing-model-structure-with-graphical-models"><span class="header-section-number">2.2.2</span> Visualizing model structure with graphical models</a></li>
+  <li><a href="#common-examples" id="toc-common-examples" class="nav-link" data-scroll-target="#common-examples"><span class="header-section-number">2.2.3</span> Common examples</a></li>
+  </ul></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">2.3</span> Inference</a>
+  <ul class="collapse">
+  <li><a href="#transformation-of-variables" id="toc-transformation-of-variables" class="nav-link" data-scroll-target="#transformation-of-variables"><span class="header-section-number">2.3.1</span> Transformation of variables</a></li>
+  <li><a href="#the-inverse-problem-and-the-likelihood-function" id="toc-the-inverse-problem-and-the-likelihood-function" class="nav-link" data-scroll-target="#the-inverse-problem-and-the-likelihood-function"><span class="header-section-number">2.3.2</span> The inverse problem and the likelihood function</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">2.3.3</span> Maximum likelihood estimation</a></li>
+  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference"><span class="header-section-number">2.3.4</span> Bayesian inference</a></li>
+  </ul></li>
+  <li><a href="#computational-methods-and-asymptotic-foundations" id="toc-computational-methods-and-asymptotic-foundations" class="nav-link" data-scroll-target="#computational-methods-and-asymptotic-foundations"><span class="header-section-number">2.4</span> Computational methods and asymptotic foundations</a>
+  <ul class="collapse">
+  <li><a href="#asymptotic-theory" id="toc-asymptotic-theory" class="nav-link" data-scroll-target="#asymptotic-theory"><span class="header-section-number">2.4.1</span> Asymptotic theory</a></li>
+  <li><a href="#monte-carlo-methods" id="toc-monte-carlo-methods" class="nav-link" data-scroll-target="#monte-carlo-methods"><span class="header-section-number">2.4.2</span> Monte Carlo methods</a></li>
+  </ul></li>
+  <li><a href="#examples-and-applications" id="toc-examples-and-applications" class="nav-link" data-scroll-target="#examples-and-applications"><span class="header-section-number">2.5</span> Examples and applications</a>
+  <ul class="collapse">
+  <li><a href="#the-coin-flip-beta-binomial-model" id="toc-the-coin-flip-beta-binomial-model" class="nav-link" data-scroll-target="#the-coin-flip-beta-binomial-model"><span class="header-section-number">2.5.1</span> The coin flip (Beta-Binomial model)</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">2.5.2</span> Linear regression</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">2.5.3</span> Logistic regression</a></li>
+  </ul></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
@@ -539,9 +629,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/probability-stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fundamentals/climate-science.html"><strong>I: Foundations</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/fundamentals/probability-stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference ✏️</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference 🚧</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference ✏️</span></h1>
 </div>
 
 
@@ -558,15 +648,932 @@ div.csl-indent {
 </header>
 
 
-<section id="key-terms-and-ideas" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="key-terms-and-ideas"><span class="header-section-number">2.1</span> Key terms and ideas</h2>
+<div id="2" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Import necessary packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">using</span> <span class="bu">LaTeXStrings</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">using</span> <span class="bu">Turing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This chapter covers the fundamental concepts of probabilistic modeling and statistical inference. Data analysis proceeds by building a generative model—a formal, probabilistic hypothesis about how data are created. Inference is the inverse problem of using observed data to learn about model parameters. Computational methods make complex inference problems tractable.</p>
+<section id="learning-objectives" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h3>
+<p>After reading this chapter, you should be able to:</p>
 <ul>
-<li>Probability as an axiomatic language for uncertainty</li>
-<li>Joint, conditional, and marginal distributions</li>
-<li>Bayes’ rule</li>
-<li>Likelihood functions</li>
-<li>Maximum likelihood</li>
+<li>Build generative models using probability distributions.</li>
+<li>Apply maximum likelihood and Bayesian inference to estimate parameters.</li>
+<li>Use Monte Carlo methods when analytical solutions don’t exist.</li>
+<li>Recognize when computational methods are required versus analytical approaches.</li>
 </ul>
+</section>
+<section id="probability-theory-fundamentals" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="probability-theory-fundamentals"><span class="header-section-number">2.1</span> Probability theory fundamentals</h2>
+<p>The concepts in this section are essential building blocks for generative models. These mathematical tools support practical modeling applications.</p>
+<section id="basic-concepts" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="basic-concepts"><span class="header-section-number">2.1.1</span> Basic concepts</h3>
+<section id="random-variables" class="level4" data-number="2.1.1.1">
+<h4 data-number="2.1.1.1" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">2.1.1.1</span> Random variables</h4>
+<p>A random variable is a function that assigns numerical values to the outcomes of a random experiment. Random variables provide the mathematical foundation for describing uncertainty.</p>
+</section>
+<section id="notation-conventions" class="level4" data-number="2.1.1.2">
+<h4 data-number="2.1.1.2" class="anchored" data-anchor-id="notation-conventions"><span class="header-section-number">2.1.1.2</span> Notation conventions</h4>
+<ul>
+<li>Random variables: Capital letters (<span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(Z\)</span>)</li>
+<li>Realizations (specific values): Lowercase letters (<span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, <span class="math inline">\(z\)</span>)</li>
+<li>Parameters: Greek letters (<span class="math inline">\(\theta\)</span>, <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</li>
+<li>Observed data: <span class="math inline">\(y\)</span> (following Bayesian convention)</li>
+<li>Predictions: <span class="math inline">\(\tilde{y}\)</span> (y-tilde)</li>
+</ul>
+</section>
+<section id="types-of-random-variables" class="level4" data-number="2.1.1.3">
+<h4 data-number="2.1.1.3" class="anchored" data-anchor-id="types-of-random-variables"><span class="header-section-number">2.1.1.3</span> Types of random variables</h4>
+<ul>
+<li>Discrete random variables take on countable values (e.g., number of floods per year)</li>
+<li>Continuous random variables take on uncountable values (e.g., temperature, precipitation amount)</li>
+</ul>
+<p>The type of random variable determines which mathematical tools we use to describe its behavior.</p>
+</section>
+</section>
+<section id="key-distribution-functions" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="key-distribution-functions"><span class="header-section-number">2.1.2</span> Key distribution functions</h3>
+<section id="key-functions" class="level4" data-number="2.1.2.1">
+<h4 data-number="2.1.2.1" class="anchored" data-anchor-id="key-functions"><span class="header-section-number">2.1.2.1</span> Key functions</h4>
+<p>The foundation of probability theory rests on three fundamental functions that describe random variables.</p>
+</section>
+<section id="probability-mass-function-pmf" class="level4" data-number="2.1.2.2">
+<h4 data-number="2.1.2.2" class="anchored" data-anchor-id="probability-mass-function-pmf"><span class="header-section-number">2.1.2.2</span> Probability Mass Function (PMF)</h4>
+<p>For discrete random variables, <span class="math inline">\(P(X = x)\)</span> gives the probability that the variable takes on a specific value <span class="math inline">\(x\)</span>. The PMF satisfies <span class="math inline">\(\sum_x P(X = x) = 1\)</span>.</p>
+</section>
+<section id="probability-density-function-pdf" class="level4" data-number="2.1.2.3">
+<h4 data-number="2.1.2.3" class="anchored" data-anchor-id="probability-density-function-pdf"><span class="header-section-number">2.1.2.3</span> Probability Density Function (PDF)</h4>
+<p>For continuous random variables, <span class="math inline">\(p(x)\)</span> describes the relative likelihood of different values. Crucially, <span class="math inline">\(p(x)\)</span> is not a probability but a density. Since probability is density multiplied by a (potentially very small) interval of <span class="math inline">\(x\)</span>, the value of <span class="math inline">\(p(x)\)</span> itself can exceed 1 without violating the laws of probability. Probabilities are areas under the curve: <span class="math inline">\(P(a \leq X \leq b) = \int_a^b p(x) \, dx\)</span>.</p>
+</section>
+<section id="cumulative-distribution-function-cdf" class="level4" data-number="2.1.2.4">
+<h4 data-number="2.1.2.4" class="anchored" data-anchor-id="cumulative-distribution-function-cdf"><span class="header-section-number">2.1.2.4</span> Cumulative Distribution Function (CDF)</h4>
+<p><span class="math inline">\(F(x) = P(X \leq x)\)</span> gives the probability that a random variable is less than or equal to <span class="math inline">\(x\)</span>. The CDF is the most fundamental descriptor, defined for all random variables (discrete and continuous). It unifies probability concepts and is essential for quantiles and return periods.</p>
+</section>
+<section id="quantile-function" class="level4" data-number="2.1.2.5">
+<h4 data-number="2.1.2.5" class="anchored" data-anchor-id="quantile-function"><span class="header-section-number">2.1.2.5</span> Quantile function</h4>
+<p>The quantile function <span class="math inline">\(Q(p) = F^{-1}(p)\)</span> is the inverse of the CDF. It takes a probability <span class="math inline">\(p \in [0,1]\)</span> and returns the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(X \leq x) = p\)</span>.</p>
+<ul>
+<li>The median is <span class="math inline">\(Q(0.5)\)</span></li>
+<li>The <span class="math inline">\(N\)</span>-year return level in extreme value analysis is <span class="math inline">\(Q(1 - 1/N)\)</span></li>
+<li>Quantiles enable inverse transform sampling for Monte Carlo simulation</li>
+</ul>
+<p>The quantile function has direct applications in climate risk assessment. For example, the 100-year flood has return period 100, meaning it has probability 0.01 in any given year, corresponding to quantile <span class="math inline">\(Q(0.99)\)</span>.</p>
+</section>
+</section>
+<section id="multiple-variables" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="multiple-variables"><span class="header-section-number">2.1.3</span> Multiple variables</h3>
+<section id="joint-marginal-and-conditional-distributions" class="level4" data-number="2.1.3.1">
+<h4 data-number="2.1.3.1" class="anchored" data-anchor-id="joint-marginal-and-conditional-distributions"><span class="header-section-number">2.1.3.1</span> Joint, marginal, and conditional distributions</h4>
+<p>Real systems involve multiple random variables, requiring tools to describe their relationships. This machinery allows construction of complex models from simpler components.</p>
+</section>
+<section id="joint-distribution" class="level4" data-number="2.1.3.2">
+<h4 data-number="2.1.3.2" class="anchored" data-anchor-id="joint-distribution"><span class="header-section-number">2.1.3.2</span> Joint Distribution</h4>
+<p><span class="math inline">\(p(x,y)\)</span> for continuous or <span class="math inline">\(P(X=x, Y=y)\)</span> for discrete gives the probability of events occurring together.</p>
+</section>
+<section id="marginal-distribution" class="level4" data-number="2.1.3.3">
+<h4 data-number="2.1.3.3" class="anchored" data-anchor-id="marginal-distribution"><span class="header-section-number">2.1.3.3</span> Marginal Distribution</h4>
+<p><span class="math inline">\(p(x)\)</span> or <span class="math inline">\(P(X=x)\)</span> gives the probability of an event, irrespective of other variables. Calculated by summing or integrating over the other variables: <span class="math inline">\(p(x) = \int p(x,y) \, dy\)</span>.</p>
+</section>
+<section id="conditional-distribution" class="level4" data-number="2.1.3.4">
+<h4 data-number="2.1.3.4" class="anchored" data-anchor-id="conditional-distribution"><span class="header-section-number">2.1.3.4</span> Conditional Distribution</h4>
+<p><span class="math inline">\(p(y \mid x)\)</span> or <span class="math inline">\(P(Y=y \mid X=x)\)</span> gives the probability of an event given that another event has occurred. Conditional distributions describe how variables depend on each other.</p>
+</section>
+<section id="independence" class="level4" data-number="2.1.3.5">
+<h4 data-number="2.1.3.5" class="anchored" data-anchor-id="independence"><span class="header-section-number">2.1.3.5</span> Independence</h4>
+<p>Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if their joint distribution is the product of their marginal distributions: <span class="math inline">\(p(x,y) = p(x)p(y)\)</span> for continuous variables, and <span class="math inline">\(P(X=x, Y=y) = P(X=x)P(Y=y)\)</span> for discrete variables. For example, temperature and rainfall on a given day are typically <strong>not</strong> independent—hot days often have lower rainfall probability.</p>
+</section>
+<section id="iid-independent-and-identically-distributed" class="level4" data-number="2.1.3.6">
+<h4 data-number="2.1.3.6" class="anchored" data-anchor-id="iid-independent-and-identically-distributed"><span class="header-section-number">2.1.3.6</span> IID (Independent and Identically Distributed)</h4>
+<p>A sequence of random variables that are independent and have the same distribution.</p>
+</section>
+<section id="bayes-rule" class="level4" data-number="2.1.3.7">
+<h4 data-number="2.1.3.7" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">2.1.3.7</span> Bayes’ rule</h4>
+<p>The mechanical relationship between joint, marginal, and conditional distributions:</p>
+<p><span class="math display">\[p(y \mid x) = \frac{p(x \mid y) p(y)}{p(x)}\]</span></p>
+<p>Bayes’ rule is a consequence of the definition of conditional probability. It becomes a tool for inference when interpreted probabilistically.</p>
+</section>
+</section>
+<section id="examples" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="examples"><span class="header-section-number">2.1.4</span> Examples</h3>
+<section id="distribution-examples" class="level4" data-number="2.1.4.1">
+<h4 data-number="2.1.4.1" class="anchored" data-anchor-id="distribution-examples"><span class="header-section-number">2.1.4.1</span> Distribution examples</h4>
+<p>These examples illustrate the key concepts of probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions. Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).</p>
+<p>The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves. The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.</p>
+<div id="4" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Helper function to add area under curve</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">function</span> <span class="fu">add_pdf_area!</span>(ax, dist, a, b; color<span class="op">=</span>(<span class="op">:</span>orange, <span class="fl">0.4</span>), label<span class="op">=</span><span class="cn">nothing</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    x_fill <span class="op">=</span> a<span class="op">:</span><span class="fl">0.01</span><span class="op">:</span>b</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    pdf_fill <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_fill)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">band!</span>(ax, x_fill, <span class="fu">zeros</span>(<span class="fu">length</span>(x_fill)), pdf_fill, color<span class="op">=</span>color, label<span class="op">=</span>label)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    prob <span class="op">=</span> <span class="fu">cdf</span>(dist, b) <span class="op">-</span> <span class="fu">cdf</span>(dist, a)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">return</span> prob</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">end</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Helper function to show forward CDF operation</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">function</span> <span class="fu">add_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="cf">return</span> y_point</span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">end</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Helper function to show inverse CDF operation</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">function</span> <span class="fu">add_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
+<span id="cb2-22"><a href="#cb2-22"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="cb2-24"><a href="#cb2-24"></a>    <span class="fu">lines!</span>(ax, [x_inv, x_inv], [<span class="fl">0</span>, y_actual], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb2-25"><a href="#cb2-25"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="cf">return</span> x_inv, y_actual</span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">end</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="kw">function</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
+<span id="cb2-30"><a href="#cb2-30"></a>    μ, σ <span class="op">=</span> <span class="fl">0.0</span>, <span class="fl">1.0</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    x_range <span class="op">=</span> <span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>    normal_dist <span class="op">=</span> <span class="fu">Normal</span>(μ, σ)</span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
+<span id="cb2-35"><a href="#cb2-35"></a></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    <span class="co"># Left panel: PDF with area under curve</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb2-38"><a href="#cb2-38"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="cb2-39"><a href="#cb2-39"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Density } p(x)"</span>,</span>
+<span id="cb2-40"><a href="#cb2-40"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Normal}(0, 1) </span><span class="sc">\t</span><span class="st">ext{ PDF}"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a>    <span class="co"># Plot PDF</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a>    <span class="fu">lines!</span>(ax1, x_range, <span class="fu">pdf</span>.(normal_dist, x_range),</span>
+<span id="cb2-44"><a href="#cb2-44"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"p(x)"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a>    <span class="co"># Add shaded area</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a>    prob_area <span class="op">=</span> <span class="fu">add_pdf_area!</span>(ax1, normal_dist, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>,</span>
+<span id="cb2-48"><a href="#cb2-48"></a>        label<span class="op">=</span>L<span class="st">"P(-1 \leq X \leq 1)"</span>)</span>
+<span id="cb2-49"><a href="#cb2-49"></a></span>
+<span id="cb2-50"><a href="#cb2-50"></a>    <span class="co"># Add area annotation</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a>    <span class="fu">text!</span>(ax1, <span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.125</span>,</span>
+<span id="cb2-52"><a href="#cb2-52"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Area} = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_area, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="cb2-53"><a href="#cb2-53"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
+<span id="cb2-54"><a href="#cb2-54"></a></span>
+<span id="cb2-55"><a href="#cb2-55"></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>rt)</span>
+<span id="cb2-56"><a href="#cb2-56"></a></span>
+<span id="cb2-57"><a href="#cb2-57"></a>    <span class="co"># Right panel: CDF with forward and inverse operations</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="cb2-59"><a href="#cb2-59"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="cb2-60"><a href="#cb2-60"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } F(x)"</span>,</span>
+<span id="cb2-61"><a href="#cb2-61"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Normal CDF: Forward and Inverse}"</span>)</span>
+<span id="cb2-62"><a href="#cb2-62"></a></span>
+<span id="cb2-63"><a href="#cb2-63"></a>    <span class="co"># Plot CDF</span></span>
+<span id="cb2-64"><a href="#cb2-64"></a>    <span class="fu">lines!</span>(ax2, x_range, <span class="fu">cdf</span>.(normal_dist, x_range),</span>
+<span id="cb2-65"><a href="#cb2-65"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"F(x)"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66"></a></span>
+<span id="cb2-67"><a href="#cb2-67"></a>    <span class="co"># Forward operation: F(1)</span></span>
+<span id="cb2-68"><a href="#cb2-68"></a>    y_point <span class="op">=</span> <span class="fu">add_forward_cdf!</span>(ax2, normal_dist, <span class="fl">1.0</span>)</span>
+<span id="cb2-69"><a href="#cb2-69"></a>    <span class="fu">text!</span>(ax2, <span class="fl">1.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb2-70"><a href="#cb2-70"></a>        text<span class="op">=</span>L<span class="st">"F(1) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
+<span id="cb2-71"><a href="#cb2-71"></a></span>
+<span id="cb2-72"><a href="#cb2-72"></a>    <span class="co"># Inverse operation: F⁻¹(0.25)</span></span>
+<span id="cb2-73"><a href="#cb2-73"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_inverse_cdf!</span>(ax2, normal_dist, <span class="fl">0.25</span>)</span>
+<span id="cb2-74"><a href="#cb2-74"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">0.8</span>, <span class="fl">0.35</span>,</span>
+<span id="cb2-75"><a href="#cb2-75"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.25) = %</span><span class="sc">$</span>(<span class="fu">round</span>(x_inv, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
+<span id="cb2-76"><a href="#cb2-76"></a></span>
+<span id="cb2-77"><a href="#cb2-77"></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rb)</span>
+<span id="cb2-78"><a href="#cb2-78"></a>    <span class="cf">return</span> fig</span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="kw">end</span></span>
+<span id="cb2-80"><a href="#cb2-80"></a></span>
+<span id="cb2-81"><a href="#cb2-81"></a>fig_normal <span class="op">=</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
+<span id="cb2-82"><a href="#cb2-82"></a>fig_normal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-3-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Next, a Poisson distribution example for discrete random variables.</p>
+<div id="6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Helper function to plot discrete PMF as stem plot</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">function</span> <span class="fu">plot_pmf_stems!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">3</span>, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">end</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="cf">return</span> pmf_vals</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">end</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># Helper function to highlight discrete probability mass</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">function</span> <span class="fu">highlight_pmf_mass!</span>(ax, dist, x_range; color<span class="op">=:</span>orange)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span><span class="fl">5</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">end</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="cf">return</span> <span class="fu">sum</span>(pmf_vals)</span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">end</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co"># Helper function to plot discrete CDF as step function</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">function</span> <span class="fu">plot_discrete_cdf!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, markersize<span class="op">=</span><span class="fl">6</span>)</span>
+<span id="cb3-23"><a href="#cb3-23"></a>    cdf_vals <span class="op">=</span> <span class="fu">cdf</span>.(dist, x_range)</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    <span class="co"># Plot horizontal segments</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>(<span class="fu">length</span>(x_range)<span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb3-26"><a href="#cb3-26"></a>        <span class="fu">lines!</span>(ax, [x_range[i], x_range[i<span class="op">+</span><span class="fl">1</span>]], [cdf_vals[i], cdf_vals[i]],</span>
+<span id="cb3-27"><a href="#cb3-27"></a>            color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    <span class="cf">end</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="co"># Plot points</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>    <span class="fu">scatter!</span>(ax, x_range, cdf_vals, color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">return</span> cdf_vals</span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="kw">end</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co"># Helper function for discrete forward CDF operation</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="kw">function</span> <span class="fu">add_discrete_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb3-36"><a href="#cb3-36"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
+<span id="cb3-37"><a href="#cb3-37"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="cb3-38"><a href="#cb3-38"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb3-39"><a href="#cb3-39"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb3-40"><a href="#cb3-40"></a>    <span class="cf">return</span> y_point</span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="kw">end</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="co"># Helper function for discrete inverse CDF operation  </span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="kw">function</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb3-45"><a href="#cb3-45"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
+<span id="cb3-46"><a href="#cb3-46"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
+<span id="cb3-47"><a href="#cb3-47"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="cb3-48"><a href="#cb3-48"></a>    <span class="fu">lines!</span>(ax, [x_inv, x_inv], [<span class="fl">0</span>, y_actual], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb3-49"><a href="#cb3-49"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb3-50"><a href="#cb3-50"></a>    <span class="cf">return</span> x_inv, y_actual</span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="kw">end</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="kw">function</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
+<span id="cb3-54"><a href="#cb3-54"></a>    λ <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a>    x_range <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a>    poisson_dist <span class="op">=</span> <span class="fu">Poisson</span>(λ)</span>
+<span id="cb3-57"><a href="#cb3-57"></a></span>
+<span id="cb3-58"><a href="#cb3-58"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
+<span id="cb3-59"><a href="#cb3-59"></a></span>
+<span id="cb3-60"><a href="#cb3-60"></a>    <span class="co"># Left panel: PMF with probability mass</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb3-62"><a href="#cb3-62"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="cb3-63"><a href="#cb3-63"></a>        ylabel<span class="op">=</span>L<span class="st">"P(X = x)"</span>,</span>
+<span id="cb3-64"><a href="#cb3-64"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson}(3) </span><span class="sc">\t</span><span class="st">ext{ PMF}"</span>)</span>
+<span id="cb3-65"><a href="#cb3-65"></a></span>
+<span id="cb3-66"><a href="#cb3-66"></a>    <span class="co"># Plot full PMF</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a>    <span class="fu">plot_pmf_stems!</span>(ax1, poisson_dist, x_range)</span>
+<span id="cb3-68"><a href="#cb3-68"></a></span>
+<span id="cb3-69"><a href="#cb3-69"></a>    <span class="co"># Highlight mass for X ≤ 2</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a>    prob_mass <span class="op">=</span> <span class="fu">highlight_pmf_mass!</span>(ax1, poisson_dist, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>)</span>
+<span id="cb3-71"><a href="#cb3-71"></a></span>
+<span id="cb3-72"><a href="#cb3-72"></a>    <span class="co"># Add probability annotation</span></span>
+<span id="cb3-73"><a href="#cb3-73"></a>    <span class="fu">text!</span>(ax1, <span class="fl">6</span>, <span class="fl">0.15</span>,</span>
+<span id="cb3-74"><a href="#cb3-74"></a>        text<span class="op">=</span>L<span class="st">"P(X \leq 2) = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_mass, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="cb3-75"><a href="#cb3-75"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
+<span id="cb3-76"><a href="#cb3-76"></a></span>
+<span id="cb3-77"><a href="#cb3-77"></a>    <span class="co"># Right panel: CDF with forward and inverse operations</span></span>
+<span id="cb3-78"><a href="#cb3-78"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="cb3-79"><a href="#cb3-79"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="cb3-80"><a href="#cb3-80"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } F(x)"</span>,</span>
+<span id="cb3-81"><a href="#cb3-81"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson CDF: Forward and Inverse}"</span>)</span>
+<span id="cb3-82"><a href="#cb3-82"></a></span>
+<span id="cb3-83"><a href="#cb3-83"></a>    <span class="co"># Plot CDF</span></span>
+<span id="cb3-84"><a href="#cb3-84"></a>    <span class="fu">plot_discrete_cdf!</span>(ax2, poisson_dist, x_range)</span>
+<span id="cb3-85"><a href="#cb3-85"></a></span>
+<span id="cb3-86"><a href="#cb3-86"></a>    <span class="co"># Forward operation: F(4)</span></span>
+<span id="cb3-87"><a href="#cb3-87"></a>    y_point <span class="op">=</span> <span class="fu">add_discrete_forward_cdf!</span>(ax2, poisson_dist, <span class="fl">4</span>)</span>
+<span id="cb3-88"><a href="#cb3-88"></a>    <span class="fu">text!</span>(ax2, <span class="fl">4.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb3-89"><a href="#cb3-89"></a>        text<span class="op">=</span>L<span class="st">"F(4) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
+<span id="cb3-90"><a href="#cb3-90"></a></span>
+<span id="cb3-91"><a href="#cb3-91"></a>    <span class="co"># Inverse operation: F⁻¹(0.4)</span></span>
+<span id="cb3-92"><a href="#cb3-92"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax2, poisson_dist, <span class="fl">0.4</span>)</span>
+<span id="cb3-93"><a href="#cb3-93"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">1.5</span>, <span class="fl">0.5</span>,</span>
+<span id="cb3-94"><a href="#cb3-94"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.4) = %</span><span class="sc">$</span>(<span class="fu">Int</span>(x_inv))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
+<span id="cb3-95"><a href="#cb3-95"></a></span>
+<span id="cb3-96"><a href="#cb3-96"></a>    <span class="cf">return</span> fig</span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="kw">end</span></span>
+<span id="cb3-98"><a href="#cb3-98"></a></span>
+<span id="cb3-99"><a href="#cb3-99"></a>fig_poisson <span class="op">=</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
+<span id="cb3-100"><a href="#cb3-100"></a>fig_poisson</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-4-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary-statistics" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">2.1.5</span> Summary statistics</h3>
+<section id="key-descriptors-expectation-and-moments" class="level4" data-number="2.1.5.1">
+<h4 data-number="2.1.5.1" class="anchored" data-anchor-id="key-descriptors-expectation-and-moments"><span class="header-section-number">2.1.5.1</span> Key descriptors: expectation and moments</h4>
+<p>Probability distributions are completely described by their PDF/PMF and CDF, but we often need summary statistics that capture essential properties.</p>
+</section>
+<section id="expectation-expected-value" class="level4" data-number="2.1.5.2">
+<h4 data-number="2.1.5.2" class="anchored" data-anchor-id="expectation-expected-value"><span class="header-section-number">2.1.5.2</span> Expectation (Expected Value)</h4>
+<p>The expectation is the formal definition of the quantity we approximate with the sample mean in a Monte Carlo simulation. The expectation of a function <span class="math inline">\(g(X)\)</span> is:</p>
+<p><span class="math display">\[\mathbb{E}[g(X)] = \int g(x) p(x) \, dx\]</span></p>
+<p>for continuous variables, or <span class="math inline">\(\mathbb{E}[g(X)] = \sum_x g(x) P(X = x)\)</span> for discrete variables.</p>
+</section>
+<section id="moments-of-a-distribution" class="level4" data-number="2.1.5.3">
+<h4 data-number="2.1.5.3" class="anchored" data-anchor-id="moments-of-a-distribution"><span class="header-section-number">2.1.5.3</span> Moments of a distribution</h4>
+<ul>
+<li>Mean: <span class="math inline">\(\mu = \mathbb{E}[X]\)</span> measures central tendency</li>
+<li>Variance: <span class="math inline">\(\sigma^2 = \mathbb{E}[(X - \mu)^2]\)</span> measures spread or scale; standard deviation is <span class="math inline">\(\sigma = \sqrt{\sigma^2}\)</span></li>
+<li>Higher-order moments: Skewness measures asymmetry, kurtosis measures tail weight</li>
+</ul>
+<p>For heavy-tailed distributions used in extreme value theory, some higher-order moments (or even the variance) may not exist because the defining integrals diverge.</p>
+</section>
+</section>
+</section>
+<section id="generative-models" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="generative-models"><span class="header-section-number">2.2</span> Generative models</h2>
+<p>The probability theory we’ve covered provides the mathematical language for uncertainty. Now we turn to its primary application: building models that describe how data are created. These generative models form the foundation for statistical inference—the process of learning from data.</p>
+<p>Statistical modeling proceeds by creating a forward model—a formal, probabilistic description of how data are created. These models serve two purposes for scientific inference and decision-making.</p>
+<p>First, they function as simulation engines. A generative model enables simulation of data under different parameter settings. This supports uncertainty propagation through complex systems, model checking by comparing simulated and observed data, and exploration of model assumptions.</p>
+<p>Second, they provide a systematic framework for building complex models from simple pieces. A complicated joint distribution can be decomposed into a sequence of simpler conditional distributions. This modular approach supports hierarchical modeling and incorporation of domain knowledge at each stage.</p>
+<section id="building-models-from-conditional-blocks" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="building-models-from-conditional-blocks"><span class="header-section-number">2.2.1</span> Building models from conditional blocks</h3>
+<p>A complex joint distribution can be decomposed into a sequence of simpler conditional distributions. This decomposition constitutes the model structure.</p>
+<p>The chain rule of probability (this is where Bayes’ theorem comes from) tells us that any joint distribution can be factored as: <span class="math display">\[
+p(A, B) = p(A) \cdot p(B \mid A)
+\]</span> or, for three variables: <span class="math display">\[p(A,B,C) = p(A) \cdot p(B \mid A) \cdot p(C \mid A,B)\]</span></p>
+</section>
+<section id="visualizing-model-structure-with-graphical-models" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="visualizing-model-structure-with-graphical-models"><span class="header-section-number">2.2.2</span> Visualizing model structure with graphical models</h3>
+<p>We can represent the conditional dependence structure of our generative story visually using a Directed Acyclic Graph (DAG).</p>
+<p>Nodes represent random variables (parameters or data). Arrows represent conditional dependence. An arrow from A to B means that the value of B is generated based on the value of A.</p>
+<p>This provides a clear, unambiguous map of the model’s assumptions. DAGs support model design, communication, and debugging.</p>
+</section>
+<section id="common-examples" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="common-examples"><span class="header-section-number">2.2.3</span> Common examples</h3>
+<p>Examples of generative models include:</p>
+<ul>
+<li><strong>Signal + Noise</strong>: The classic model, e.g., <span class="math inline">\(y = f(x; \beta) + \epsilon\)</span>, where we specify a distribution for the noise term <span class="math inline">\(\epsilon\)</span>.</li>
+<li><strong>Dynamical Systems</strong>: A system of Ordinary Differential Equations (ODEs) with unknown parameters that govern the system’s evolution.</li>
+<li><strong>Difference Equations</strong>: Models of processes over discrete time, potentially including random walks.</li>
+</ul>
+</section>
+</section>
+<section id="inference" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="inference"><span class="header-section-number">2.3</span> Inference</h2>
+<p>Forward modeling simulates data given parameters. Inference solves the inverse problem: finding parameters that explain observed data. The forward direction is direct: given parameters, simulate data. The inverse direction requires mathematical machinery to work backwards from data to parameters.</p>
+<section id="transformation-of-variables" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="transformation-of-variables"><span class="header-section-number">2.3.1</span> Transformation of variables</h3>
+<p>A core task in probabilistic modeling is understanding how randomness propagates through a system. If we have a random variable <span class="math inline">\(X\)</span> with a known probability density function (PDF), <span class="math inline">\(p_X(x)\)</span>, and we create a new random variable <span class="math inline">\(Y\)</span> by applying a function, <span class="math inline">\(Y = g(X)\)</span>, what is the PDF of <span class="math inline">\(Y\)</span>, denoted <span class="math inline">\(p_Y(y)\)</span>?</p>
+<p>It’s tempting to just substitute <span class="math inline">\(x\)</span> with <span class="math inline">\(g^{-1}(y)\)</span> in the original PDF. This is incorrect because the function <span class="math inline">\(g\)</span> can stretch or compress the space of outcomes. We must account for this distortion to ensure the total probability remains 1.</p>
+<section id="using-the-cumulative-distribution-function" class="level4" data-number="2.3.1.1">
+<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="using-the-cumulative-distribution-function"><span class="header-section-number">2.3.1.1</span> Using the cumulative distribution function</h4>
+<p>The CDF of the new variable relates to the original CDF through a three-step process.</p>
+<p>The most reliable way to solve this is to start with the CDF, <span class="math inline">\(F(x) = P(X \leq x)\)</span>, because probabilities are always conserved. Assume that <span class="math inline">\(Y = g(X)\)</span> is a strictly increasing function (like <span class="math inline">\(Y = e^X\)</span>).</p>
+<p>By definition, the CDF of <span class="math inline">\(Y\)</span> is <span class="math inline">\(F_Y(y) = P(Y \leq y)\)</span>.</p>
+<ol type="1">
+<li><p>Substitute the function: <span class="math inline">\(F_Y(y) = P(g(X) \leq y)\)</span></p></li>
+<li><p>Apply the inverse function: Since <span class="math inline">\(g\)</span> is increasing, we can apply its inverse, <span class="math inline">\(g^{-1}\)</span>, to both sides of the inequality without flipping the sign: <span class="math inline">\(F_Y(y) = P(X \leq g^{-1}(y))\)</span></p></li>
+<li><p>Recognize the original CDF: The expression on the right is the CDF of <span class="math inline">\(X\)</span> evaluated at the point <span class="math inline">\(g^{-1}(y)\)</span>: <span class="math inline">\(F_Y(y) = F_X(g^{-1}(y))\)</span></p></li>
+</ol>
+</section>
+<section id="from-cdf-to-pdf-the-final-step-with-the-chain-rule" class="level4" data-number="2.3.1.2">
+<h4 data-number="2.3.1.2" class="anchored" data-anchor-id="from-cdf-to-pdf-the-final-step-with-the-chain-rule"><span class="header-section-number">2.3.1.2</span> From CDF to PDF: the final step with the chain rule</h4>
+<p>To find the PDF, we differentiate the CDF with respect to <span class="math inline">\(y\)</span>. Applying the chain rule to the expression above gives us our answer:</p>
+<p><span class="math display">\[p_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X(g^{-1}(y))\]</span></p>
+<p><span class="math display">\[p_Y(y) = p_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)\]</span></p>
+<p>If <span class="math inline">\(g(X)\)</span> were a decreasing function, we would get a negative sign, which is handled by taking the absolute value. This gives us the general change of variables formula:</p>
+<p><span class="math display">\[p_Y(y) = p_X(g^{-1}(y)) \left| \frac{d}{dy} g^{-1}(y) \right|\]</span></p>
+</section>
+<section id="conservation-of-probability-mass" class="level4" data-number="2.3.1.3">
+<h4 data-number="2.3.1.3" class="anchored" data-anchor-id="conservation-of-probability-mass"><span class="header-section-number">2.3.1.3</span> Conservation of probability mass</h4>
+<p>Think of the PDF as describing how a unit of “probability mass” is spread along the <span class="math inline">\(x\)</span>-axis. The total area under the curve must be 1. When we apply the function <span class="math inline">\(Y = g(X)\)</span>, we are stretching and compressing the axis itself.</p>
+<ul>
+<li>If the function stretches a region, the probability density must decrease proportionally to keep the area constant.</li>
+<li>If the function compresses a region, the density must increase.</li>
+</ul>
+<p>The term <span class="math inline">\(\left| \frac{d}{dy} g^{-1}(y) \right|\)</span> is the Jacobian of the transformation. It is precisely the “stretching factor” that tells us how much the coordinate system is distorted at each point, ensuring our total probability mass is conserved.</p>
+<p>For more on this somewhat unintuitive point, see section 1.8 of <span class="citation" data-cites="gelman_bda3:2014">Gelman et al. (<a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">2014</a>)</span> or <a href="https://www.mariushobbhahn.com/2021-05-20-Change_of_variable/">this blog post</a>.</p>
+</section>
+</section>
+<section id="the-inverse-problem-and-the-likelihood-function" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="the-inverse-problem-and-the-likelihood-function"><span class="header-section-number">2.3.2</span> The inverse problem and the likelihood function</h3>
+<p>The central tool for connecting data to parameters is the likelihood function. The likelihood is the conditional probability <span class="math inline">\(p(y \mid \theta)\)</span>, where <span class="math inline">\(y\)</span> represents our observed data.</p>
+<section id="definition" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">2.3.2.1</span> Definition</h4>
+<p>The likelihood tells us how likely we are to see the observed data <span class="math inline">\(y\)</span> for some value of the parameters <span class="math inline">\(\theta\)</span>.</p>
+</section>
+<section id="crucial-distinction" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="crucial-distinction"><span class="header-section-number">2.3.2.2</span> Crucial distinction</h4>
+<p>The likelihood is not the probability of the parameters. It’s the probability (or probability density) of the data given the parameters.</p>
+<p>This confusion is common: <span class="math inline">\(p(\text{data}|\text{parameters})\)</span> tells us about data likelihood, not parameter probability. Only Bayesian inference gives us <span class="math inline">\(p(\text{parameters}|\text{data})\)</span>.</p>
+<p>For continuous variables, since we’re dealing with a density, the probability of getting exactly that value is zero, but the probability of getting near it is the integral of the PDF over a small interval.</p>
+</section>
+<section id="independence-and-the-product-form" class="level4" data-number="2.3.2.3">
+<h4 data-number="2.3.2.3" class="anchored" data-anchor-id="independence-and-the-product-form"><span class="header-section-number">2.3.2.3</span> Independence and the product form</h4>
+<p>If we assume our data points are independent and identically distributed (IID), then by the definition of independence: <span class="math display">\[p(y_1, y_2, \ldots, y_n \mid \theta) = \prod_{i=1}^n p(y_i \mid \theta)\]</span></p>
+</section>
+<section id="the-log-likelihood" class="level4" data-number="2.3.2.4">
+<h4 data-number="2.3.2.4" class="anchored" data-anchor-id="the-log-likelihood"><span class="header-section-number">2.3.2.4</span> The log-likelihood</h4>
+<p>Products are numerically unstable and difficult to work with. Since the logarithm is monotonic, <span class="math inline">\(\max_\theta p(y \mid \theta)\)</span> has the same solution as <span class="math inline">\(\max_\theta \log p(y \mid \theta)\)</span>. For IID data, this gives us: <span class="math display">\[\log p(y \mid \theta) = \sum_{i=1}^n \log p(y_i \mid \theta)\]</span></p>
+</section>
+</section>
+<section id="maximum-likelihood-estimation" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">2.3.3</span> Maximum likelihood estimation</h3>
+<p>Maximum likelihood estimation (MLE) finds the parameter values that maximize the likelihood function: <span class="math display">\[\hat{\theta}_{\text{MLE}} = \arg\max_\theta p(y \mid \theta)\]</span></p>
+<section id="why-maximum-likelihood-makes-sense" class="level4" data-number="2.3.3.1">
+<h4 data-number="2.3.3.1" class="anchored" data-anchor-id="why-maximum-likelihood-makes-sense"><span class="header-section-number">2.3.3.1</span> Why maximum likelihood makes sense</h4>
+<p>The likelihood function <span class="math inline">\(p(y \mid \theta)\)</span> gives the probability of observed data under different parameter values. Maximum likelihood estimation finds the parameter values that maximize the probability of the observed data. The approach selects parameters that best explain the observations.</p>
+<p>In climate applications, MLE estimates parameters of distributions describing rainfall, temperature, or wind speed by finding values that maximize the probability of historical observations. The estimates inform risk assessments and infrastructure design.</p>
+</section>
+<section id="implementation" class="level4" data-number="2.3.3.2">
+<h4 data-number="2.3.3.2" class="anchored" data-anchor-id="implementation"><span class="header-section-number">2.3.3.2</span> Implementation</h4>
+<p>We find the actual parameter values using optimization approaches. This may involve analytical differentiation (setting derivatives to zero) or numerical optimization methods when closed-form solutions don’t exist.</p>
+<p>This reframes the statistical problem of inference as a numerical problem of optimization.</p>
+</section>
+<section id="properties-and-theoretical-foundations" class="level4" data-number="2.3.3.3">
+<h4 data-number="2.3.3.3" class="anchored" data-anchor-id="properties-and-theoretical-foundations"><span class="header-section-number">2.3.3.3</span> Properties and theoretical foundations</h4>
+<p>Understanding when and why MLE works requires defining estimator quality. An estimator should be consistent (converge to the true value as sample size increases), efficient (achieve low variance), and unbiased (correct on average).</p>
+<p>Under regularity conditions, MLE estimators have desirable asymptotic properties. As the sample size <span class="math inline">\(n\)</span> grows large, the MLE estimator <span class="math inline">\(\hat{\theta}_{\text{MLE}}\)</span> becomes consistent—it converges to the true parameter value <span class="math inline">\(\theta_0\)</span>. The estimator also becomes asymptotically normal, meaning its sampling distribution approaches a normal distribution centered on the true value. Finally, MLE achieves the Cramér-Rao lower bound, making it asymptotically efficient among unbiased estimators.</p>
+<p>The Fisher Information <span class="math inline">\(I(\theta) = -\mathbb{E}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]\)</span> quantifies how much information the data contains about the parameter. Higher Fisher Information means the likelihood function is more peaked, leading to more precise parameter estimates.</p>
+</section>
+<section id="the-assumption-of-true-parameters" class="level4" data-number="2.3.3.4">
+<h4 data-number="2.3.3.4" class="anchored" data-anchor-id="the-assumption-of-true-parameters"><span class="header-section-number">2.3.3.4</span> The assumption of “true” parameters</h4>
+<p>These theoretical properties assume there exists a single “true” parameter value <span class="math inline">\(\theta_0\)</span> that generated our data, and that our model is correctly specified. But in climate science, we often use simplified models to describe extremely complex phenomena. Is there really a single “true” rainfall parameter for a location when climate is nonstationary, multiple physical processes interact, and our models are necessarily approximations of reality?</p>
+<p>This question motivates the Bayesian approach to inference. Bayesian methods acknowledge that parameter values are uncertain and provide probability distributions that quantify this uncertainty. The Bayesian perspective is valuable for complex, imperfect models of climate systems.</p>
+</section>
+<section id="computational-considerations" class="level4" data-number="2.3.3.5">
+<h4 data-number="2.3.3.5" class="anchored" data-anchor-id="computational-considerations"><span class="header-section-number">2.3.3.5</span> Computational considerations</h4>
+<p>Finding maximum likelihood estimates requires different approaches depending on the complexity of the model.</p>
+<p>Analytical solutions exist when we can solve <span class="math inline">\(\frac{d}{d\theta} \log p(y \mid \theta) = 0\)</span> in closed form. This works for simple models like Normal distributions with known variance, or the coin flip example we examine below. These cases provide valuable intuition and serve as building blocks for more complex problems. Additional computational implementations of these methods are provided in the <a href="../../notebooks/probability-stats-examples.html">companion notebook</a>.</p>
+<p>Numerical optimization becomes necessary when no closed-form solution exists. Common algorithms include gradient-based methods like Newton-Raphson and BFGS, which use derivative information to efficiently locate the maximum. The Expectation-Maximization (EM) algorithm handles models with latent variables by iteratively estimating missing data and updating parameters. Grid search remains useful for low-dimensional problems where visualization of the likelihood surface provides insight.</p>
+<p>Practical challenges arise in applications. The likelihood surface may contain multiple local maxima, requiring different starting values to find the global optimum. Numerical stability requires working with log-likelihoods rather than products of small probabilities. Flat likelihood surfaces indicate that data contain limited information about parameters. All methods assume correct model specification—poor model approximations yield misleading results regardless of optimization quality.</p>
+</section>
+</section>
+<section id="bayesian-inference" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">2.3.4</span> Bayesian inference</h3>
+<p>Bayesian inference takes a fundamentally different approach to the inverse problem. Rather than finding a single “best” parameter value, we use the data to update our beliefs about the parameters, resulting in a full probability distribution that naturally quantifies uncertainty.</p>
+<p>The Bayesian interpretation of Bayes’ rule: <span class="math display">\[
+p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}
+\]</span></p>
+<p>where <span class="math inline">\(p(\theta)\)</span> is our <strong>prior</strong> belief about the parameters before seeing the data, <span class="math inline">\(p(y \mid \theta)\)</span> is the <strong>likelihood</strong> (the same function used in maximum likelihood estimation), <span class="math inline">\(p(\theta \mid y)\)</span> is the <strong>posterior</strong> distribution representing our updated beliefs, and <span class="math inline">\(p(y)\)</span> is a normalizing constant ensuring the posterior integrates to 1.</p>
+<p>Since <span class="math inline">\(p(y)\)</span> doesn’t depend on <span class="math inline">\(\theta\)</span> for a fixed dataset, we often write: <span class="math display">\[
+p(\theta \mid y) \propto p(y \mid \theta) p(\theta)
+\]</span></p>
+<p>The posterior distribution is the primary output of Bayesian analysis. It tells us not just what parameter values are most plausible, but also how uncertain we should be about them. However, computing this posterior distribution requires different approaches depending on the complexity of the model.</p>
+<section id="maximum-a-posteriori-map-estimation" class="level4" data-number="2.3.4.1">
+<h4 data-number="2.3.4.1" class="anchored" data-anchor-id="maximum-a-posteriori-map-estimation"><span class="header-section-number">2.3.4.1</span> Maximum A Posteriori (MAP) estimation</h4>
+<p>The simplest approach to Bayesian inference is to find the mode of the posterior distribution—the parameter value that is most probable given the data. This is called Maximum A Posteriori (MAP) estimation:</p>
+<p><span class="math display">\[\hat{\theta}_{MAP} = \arg\max_\theta p(\theta \mid y) = \arg\max_\theta p(y \mid \theta) p(\theta)\]</span></p>
+<p>Since the logarithm is monotonic, this is equivalent to: <span class="math display">\[\hat{\theta}_{MAP} = \arg\max_\theta [\log p(y \mid \theta) + \log p(\theta)]\]</span></p>
+<p>MAP estimation provides a natural bridge between maximum likelihood and full Bayesian inference. When the prior is uniform (non-informative), MAP reduces to maximum likelihood estimation. When the prior is informative, it regularizes the estimate, preventing overfitting.</p>
+<p>However, MAP gives only a point estimate and doesn’t quantify uncertainty. To get the full benefit of the Bayesian approach, we need the entire posterior distribution.</p>
+</section>
+<section id="analytic-posterior-conjugate-priors" class="level4" data-number="2.3.4.2">
+<h4 data-number="2.3.4.2" class="anchored" data-anchor-id="analytic-posterior-conjugate-priors"><span class="header-section-number">2.3.4.2</span> Analytic posterior (conjugate priors)</h4>
+<p>In special cases, we can compute the posterior distribution analytically using conjugate priors. A prior is conjugate to a likelihood if the posterior has the same functional form as the prior. This mathematical convenience allows us to update our beliefs with a simple algebraic formula.</p>
+<p>Conjugacy provides exact formulas for belief updating. The posterior parameters are the prior parameters plus contributions from the data. As data accumulate, the prior influence diminishes relative to the likelihood.</p>
+<p>Conjugate priors exist for several important distributions, including exponential family distributions like the Normal, Binomial, and Poisson. However, conjugate priors exist for only a limited set of models. Most real-world problems require computational approaches.</p>
+</section>
+<section id="computational-posterior-mcmc" class="level4" data-number="2.3.4.3">
+<h4 data-number="2.3.4.3" class="anchored" data-anchor-id="computational-posterior-mcmc"><span class="header-section-number">2.3.4.3</span> Computational posterior (MCMC)</h4>
+<p>For most real problems, the posterior distribution cannot be computed analytically. The denominator <span class="math inline">\(p(y)\)</span> requires integrating over all possible parameter values, which is often intractable. Markov Chain Monte Carlo (MCMC) methods become essential.</p>
+<p>MCMC algorithms create a Markov chain whose stationary distribution is the target posterior distribution. Instead of computing the posterior directly, we simulate from it by drawing samples <span class="math inline">\(\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\)</span>. These samples allow us to approximate any posterior quantity of interest:</p>
+<p><span class="math display">\[\mathbb{E}[g(\theta) \mid y] \approx \frac{1}{N} \sum_{i=1}^N g(\theta^{(i)})\]</span></p>
+<p>Common MCMC algorithms include:</p>
+<ul>
+<li><strong>Metropolis-Hastings</strong>: A general-purpose algorithm that uses a proposal distribution and an acceptance criterion</li>
+<li><strong>Gibbs sampling</strong>: Efficient for multivariate problems where conditional distributions are available</li>
+<li><strong>Hamiltonian Monte Carlo</strong>: Uses gradient information for more efficient exploration of the parameter space</li>
+</ul>
+<p>MCMC requires only the posterior up to a constant of proportionality: <span class="math inline">\(p(\theta \mid y) \propto p(y \mid \theta) p(\theta)\)</span>. This enables MCMC for complex models where computing the normalizing constant is impossible.</p>
+<p>MCMC diagnostics assess whether chains have converged to the target distribution. Poor convergence leads to biased estimates, making diagnostic checking essential for reliable inference.</p>
+</section>
+</section>
+</section>
+<section id="computational-methods-and-asymptotic-foundations" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="computational-methods-and-asymptotic-foundations"><span class="header-section-number">2.4</span> Computational methods and asymptotic foundations</h2>
+<section id="asymptotic-theory" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="asymptotic-theory"><span class="header-section-number">2.4.1</span> Asymptotic theory</h3>
+<p>Two fundamental theorems justify statistical estimation and Monte Carlo methods:</p>
+<section id="law-of-large-numbers" class="level4" data-number="2.4.1.1">
+<h4 data-number="2.4.1.1" class="anchored" data-anchor-id="law-of-large-numbers"><span class="header-section-number">2.4.1.1</span> Law of Large Numbers</h4>
+<p>As sample size <span class="math inline">\(N\)</span> grows, the sample mean converges to the true expected value. This theorem underlies both parameter estimation and Monte Carlo methods.</p>
+</section>
+<section id="central-limit-theorem" class="level4" data-number="2.4.1.2">
+<h4 data-number="2.4.1.2" class="anchored" data-anchor-id="central-limit-theorem"><span class="header-section-number">2.4.1.2</span> Central Limit Theorem</h4>
+<p>The distribution of a sample mean approaches a Normal distribution as the sample size increases. This enables uncertainty quantification and justifies confidence intervals and bootstrap methods.</p>
+</section>
+</section>
+<section id="monte-carlo-methods" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="monte-carlo-methods"><span class="header-section-number">2.4.2</span> Monte Carlo methods</h3>
+<p>Most decision-relevant quantities can be expressed as expectations. Simulation approximates expectations when analytical calculation is difficult.</p>
+<section id="simulation-and-expectations" class="level4" data-number="2.4.2.1">
+<h4 data-number="2.4.2.1" class="anchored" data-anchor-id="simulation-and-expectations"><span class="header-section-number">2.4.2.1</span> Simulation and expectations</h4>
+<p>The basic Monte Carlo estimate of an expectation is:</p>
+<p><span class="math display">\[\mathbb{E}[X] \approx \frac{1}{N} \sum_{i=1}^N x_i\]</span></p>
+<p>where <span class="math inline">\(x_1, x_2, \ldots, x_N\)</span> are independent samples from the distribution of <span class="math inline">\(X\)</span>.</p>
+<p>The Monte Carlo standard error is approximately <span class="math inline">\(\sigma/\sqrt{N}\)</span>, where <span class="math inline">\(\sigma\)</span> is the standard deviation of the quantity being estimated.</p>
+</section>
+<section id="markov-chain-monte-carlo-mcmc-for-bayesian-inference" class="level4" data-number="2.4.2.2">
+<h4 data-number="2.4.2.2" class="anchored" data-anchor-id="markov-chain-monte-carlo-mcmc-for-bayesian-inference"><span class="header-section-number">2.4.2.2</span> Markov Chain Monte Carlo (MCMC) for Bayesian inference</h4>
+<p>For most real problems, the posterior distribution cannot be computed analytically. MCMC methods create a Markov chain whose stationary distribution is the posterior distribution. Common algorithms include Metropolis-Hastings and Gibbs sampling. MCMC diagnostics help us assess whether our chains have converged to the target distribution.</p>
+</section>
+<section id="bootstrap-methods-for-frequentist-inference" class="level4" data-number="2.4.2.3">
+<h4 data-number="2.4.2.3" class="anchored" data-anchor-id="bootstrap-methods-for-frequentist-inference"><span class="header-section-number">2.4.2.3</span> Bootstrap methods for frequentist inference</h4>
+<p>Bootstrap methods quantify uncertainty around maximum likelihood estimates. Bootstrap resampling provides a Monte Carlo approach to estimate sampling distributions of estimators.</p>
+</section>
+</section>
+</section>
+<section id="examples-and-applications" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="examples-and-applications"><span class="header-section-number">2.5</span> Examples and applications</h2>
+<p>These examples demonstrate progression from analytical solutions to computational methods for complex problems. Computational implementations are provided in the <a href="../../notebooks/probability-stats-examples.html">companion notebook</a>.</p>
+<section id="the-coin-flip-beta-binomial-model" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="the-coin-flip-beta-binomial-model"><span class="header-section-number">2.5.1</span> The coin flip (Beta-Binomial model)</h3>
+<p>A series of coin flips are independent Bernoulli trials with fixed probability of heads, <span class="math inline">\(\theta\)</span>. Given <span class="math inline">\(y\)</span> heads in <span class="math inline">\(n\)</span> flips, the goal is to infer <span class="math inline">\(\theta\)</span>.</p>
+<section id="likelihood" class="level4" data-number="2.5.1.1">
+<h4 data-number="2.5.1.1" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">2.5.1.1</span> Likelihood</h4>
+<p>For <span class="math inline">\(n\)</span> independent coin flips with probability <span class="math inline">\(\theta\)</span> of heads, if we observe <span class="math inline">\(y\)</span> heads, the likelihood is given by the Binomial distribution:</p>
+<p><span class="math display">\[
+p(y \mid \theta, n) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
+\]</span></p>
+<p>where <span class="math inline">\(\binom{n}{y}\)</span> is the binomial coefficient. Since we condition on the observed data <span class="math inline">\(y\)</span> and <span class="math inline">\(n\)</span>, the binomial coefficient is a constant, so for inference purposes we can work with the proportional likelihood:</p>
+<p><span class="math display">\[
+p(y \mid \theta) \propto \theta^y (1-\theta)^{n-y}
+\]</span></p>
+<p>The following implementation visualizes how the likelihood varies with <span class="math inline">\(\theta\)</span>:</p>
+<div id="8" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">plot_binomial_likelihood</span>(y, n)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="co"># Using Distributions.jl</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    likelihood_vals <span class="op">=</span> [<span class="fu">pdf</span>(<span class="fu">Binomial</span>(n, θ), y) for θ <span class="kw">in</span> θ_grid]</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        ylabel<span class="op">=</span><span class="st">"Likelihood"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11"></a>        title<span class="op">=</span><span class="st">"Likelihood for </span><span class="sc">$</span>(y)<span class="st"> heads in </span><span class="sc">$</span>(n)<span class="st"> flips"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="fu">lines!</span>(ax, θ_grid, likelihood_vals, label<span class="op">=</span><span class="st">"Full likelihood"</span>, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="co"># Mark the MLE</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    mle <span class="op">=</span> y <span class="op">/</span> n</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>black, linestyle<span class="op">=:</span>dot, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"MLE = </span><span class="sc">$</span>(<span class="fu">round</span>(mle, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>lt)</span>
+<span id="cb4-20"><a href="#cb4-20"></a>    <span class="cf">return</span> fig</span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="kw">end</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># Example with 7 heads in 10 flips</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>fig_likelihood <span class="op">=</span> <span class="fu">plot_binomial_likelihood</span>(<span class="fl">7</span>, <span class="fl">10</span>)</span>
+<span id="cb4-25"><a href="#cb4-25"></a>fig_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-5-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The likelihood peaks at the observed proportion of heads, <span class="math inline">\(\hat{\theta}_{MLE} = y/n\)</span>, though many other values of <span class="math inline">\(\theta\)</span> remain plausible given limited data. A value of <span class="math inline">\(\theta=0.1\)</span> would make the observed data very unlikely.</p>
+</section>
+<section id="maximum-likelihood-solution" class="level4" data-number="2.5.1.2">
+<h4 data-number="2.5.1.2" class="anchored" data-anchor-id="maximum-likelihood-solution"><span class="header-section-number">2.5.1.2</span> Maximum likelihood solution</h4>
+<p>The maximum likelihood estimate can be derived analytically by maximizing the log-likelihood:</p>
+<p><span class="math display">\[
+\log p(y \mid \theta) = \log \left( \binom{n}{y} \theta^y (1-\theta)^{n-y} \right)
+\]</span></p>
+<p>which simplifies to:</p>
+<p><span class="math display">\[
+\log p(y \mid \theta) = y \log \theta + (n-y) \log(1-\theta) + \text{const}.
+\]</span></p>
+<p>We don’t need to keep track of the constant because it doesn’t depend on <span class="math inline">\(\theta\)</span>. Taking the derivative with respect to <span class="math inline">\(\theta\)</span> and setting to zero:</p>
+<p><span class="math display">\[\frac{d}{d\theta} \log p(y \mid \theta) = \frac{y}{\theta} - \frac{n-y}{1-\theta} = 0\]</span></p>
+<p>Solving for <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[\frac{y}{\theta} = \frac{n-y}{1-\theta} \implies y(1-\theta) = (n-y)\theta \implies y = n\theta\]</span></p>
+<p>Therefore: <span class="math inline">\(\hat{\theta}_{MLE} = \frac{y}{n}\)</span></p>
+<p>The maximum likelihood estimate is the observed proportion of heads. This example demonstrates the general MLE procedure: write down the likelihood function, take the log, differentiate with respect to the parameters, set the derivative to zero, and solve for the parameter values. This analytical approach works for simple models and provides the template for more complex problems that require numerical optimization. This pattern holds across different experimental outcomes:</p>
+<div id="10" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">function</span> <span class="fu">demonstrate_mle_estimation</span>(y_values, n)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="cf">for</span> (i, y) <span class="kw">in</span> <span class="fu">enumerate</span>(y_values)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>        ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fu">div</span>(i <span class="op">-</span> <span class="fl">1</span>, <span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>, ((i<span class="op">-</span><span class="fl">1</span>)<span class="op">%</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>],</span>
+<span id="cb5-8"><a href="#cb5-8"></a>            xlabel<span class="op">=</span><span class="st">"θ"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>            ylabel<span class="op">=</span><span class="st">"Log-likelihood"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>            title<span class="op">=</span><span class="st">"</span><span class="sc">$</span>(y)<span class="st">/</span><span class="sc">$</span>(n)<span class="st"> heads"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a>        <span class="co"># Calculate log-likelihood</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        log_likelihood <span class="op">=</span> [y <span class="op">*</span> <span class="fu">log</span>(θ) <span class="op">+</span> (n <span class="op">-</span> y) <span class="op">*</span> <span class="fu">log</span>(<span class="fl">1</span> <span class="op">-</span> θ) for θ <span class="kw">in</span> θ_grid]</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a>        <span class="fu">lines!</span>(ax, θ_grid, log_likelihood, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>        <span class="co"># Mark MLE</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>        mle <span class="op">=</span> y <span class="op">/</span> n</span>
+<span id="cb5-19"><a href="#cb5-19"></a>        <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb5-20"><a href="#cb5-20"></a>            label<span class="op">=</span><span class="st">"MLE"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>            <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>cb)</span>
+<span id="cb5-24"><a href="#cb5-24"></a>        <span class="cf">end</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>    <span class="cf">end</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    <span class="cf">return</span> fig</span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="kw">end</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co"># Show MLE for different outcomes</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>fig_mle <span class="op">=</span> <span class="fu">demonstrate_mle_estimation</span>([<span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span>], <span class="fl">10</span>)</span>
+<span id="cb5-32"><a href="#cb5-32"></a>fig_mle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-6-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesian-solution" class="level4" data-number="2.5.1.3">
+<h4 data-number="2.5.1.3" class="anchored" data-anchor-id="bayesian-solution"><span class="header-section-number">2.5.1.3</span> Bayesian solution</h4>
+<p>The Beta distribution is conjugate to the Binomial likelihood. That means that if we choose a Beta prior for <span class="math inline">\(\theta\)</span>, the posterior will also be a Beta distribution.</p>
+<p><strong>Prior</strong>: Our prior is <span class="math inline">\(\theta \sim \text{Beta}(\alpha, \beta)\)</span> with density: <span class="math display">\[
+p(\alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha-1} (1-\theta)^{\beta-1}
+\]</span> The likelihood is as before: <span class="math display">\[
+p(y \mid \theta) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
+\]</span> Using Bayes’ rule: <span class="math display">\[
+p(\theta \mid y) \propto p(y \mid \theta) p(\theta)
+\]</span> Substituting and collecting terms: <span class="math display">\[
+p(\theta \mid y) \propto \theta^y (1-\theta)^{n-y} \cdot \theta^{\alpha-1} (1-\theta)^{\beta-1}
+\]</span> so <span class="math display">\[
+p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) - 1}
+\]</span> This has the form of a Beta distribution! Therefore: <span class="math display">\[
+\theta \mid y \sim \text{Beta}(\alpha + y, \beta + n - y)
+\]</span></p>
+<p>The posterior parameters are the prior parameters plus contributions from the data:</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> (prior “successes”) + <span class="math inline">\(y\)</span> (observed successes)<br>
+</li>
+<li><span class="math inline">\(\beta\)</span> (prior “failures”) + <span class="math inline">\((n-y)\)</span> (observed failures)</li>
+</ul>
+<p>The following compares the analytical solution with MCMC sampling using Turing.jl:</p>
+<div id="12" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Turing model for coin flipping</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">using</span> <span class="bu">Printf</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    θ <span class="op">~</span> <span class="fu">Beta</span>(prior_α, prior_β)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    y <span class="op">~</span> <span class="fu">Binomial</span>(n, θ)</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="cf">return</span> θ</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">end</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">function</span> <span class="fu">compare_analytical_mcmc</span>(y, n; prior_α<span class="op">=</span><span class="fl">1</span>, prior_β<span class="op">=</span><span class="fl">1</span>, n_samples<span class="op">=</span><span class="fl">5000</span>)</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="co"># Analytical posterior</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    post_α <span class="op">=</span> prior_α <span class="op">+</span> y</span>
+<span id="cb6-14"><a href="#cb6-14"></a>    post_β <span class="op">=</span> prior_β <span class="op">+</span> n <span class="op">-</span> y</span>
+<span id="cb6-15"><a href="#cb6-15"></a>    analytical_posterior <span class="op">=</span> <span class="fu">Beta</span>(post_α, post_β)</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a>    <span class="co"># MCMC sampling</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>    model <span class="op">=</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
+<span id="cb6-19"><a href="#cb6-19"></a>    chain <span class="op">=</span> <span class="fu">sample</span>(model, <span class="fu">NUTS</span>(), n_samples, verbose<span class="op">=</span><span class="cn">false</span>, progress<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb6-20"><a href="#cb6-20"></a>    mcmc_samples <span class="op">=</span> <span class="fu">Array</span>(chain[<span class="op">:</span>θ])</span>
+<span id="cb6-21"><a href="#cb6-21"></a></span>
+<span id="cb6-22"><a href="#cb6-22"></a>    <span class="co"># Return data for plotting instead of creating plots</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>    <span class="cf">return</span> (analytical_posterior<span class="op">=</span>analytical_posterior, mcmc_samples<span class="op">=</span>mcmc_samples, n_samples<span class="op">=</span>n_samples)</span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="kw">end</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co"># Generate data by calling the same function twice  </span></span>
+<span id="cb6-27"><a href="#cb6-27"></a>data_low <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">500</span>)</span>
+<span id="cb6-28"><a href="#cb6-28"></a>data_high <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">50_000</span>)</span>
+<span id="cb6-29"><a href="#cb6-29"></a></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co"># Combine plots</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a>fig_comparison <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">1200</span>, <span class="fl">500</span>))</span>
+<span id="cb6-32"><a href="#cb6-32"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb6-33"><a href="#cb6-33"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="cb6-34"><a href="#cb6-34"></a>    ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb6-35"><a href="#cb6-35"></a>    title<span class="op">=</span><span class="st">"MCMC with 500 samples"</span>)</span>
+<span id="cb6-36"><a href="#cb6-36"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="cb6-37"><a href="#cb6-37"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="cb6-38"><a href="#cb6-38"></a>    title<span class="op">=</span><span class="st">"MCMC with 50,000 samples"</span>)</span>
+<span id="cb6-39"><a href="#cb6-39"></a></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co"># Link y-axes for comparison</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="fu">linkaxes!</span>(ax1, ax2)</span>
+<span id="cb6-42"><a href="#cb6-42"></a></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co"># Plot using the same plotting logic for both panels</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="cf">for</span> (ax, data) <span class="kw">in</span> [(ax1, data_low), (ax2, data_high)]</span>
+<span id="cb6-45"><a href="#cb6-45"></a>    <span class="co"># Plot analytical posterior</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a>    analytical_density <span class="op">=</span> <span class="fu">pdf</span>.(data.analytical_posterior, θ_grid)</span>
+<span id="cb6-48"><a href="#cb6-48"></a>    <span class="fu">lines!</span>(ax, θ_grid, analytical_density, label<span class="op">=</span><span class="st">"Analytical"</span>,</span>
+<span id="cb6-49"><a href="#cb6-49"></a>        linewidth<span class="op">=</span><span class="fl">3</span>, color<span class="op">=:</span>blue)</span>
+<span id="cb6-50"><a href="#cb6-50"></a></span>
+<span id="cb6-51"><a href="#cb6-51"></a>    <span class="co"># Plot MCMC histogram</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a>    <span class="fu">hist!</span>(ax, <span class="fu">vec</span>(data.mcmc_samples), bins<span class="op">=</span><span class="fl">40</span>, normalization<span class="op">=:</span>pdf,</span>
+<span id="cb6-53"><a href="#cb6-53"></a>        color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>), label<span class="op">=</span><span class="st">"MCMC samples"</span>)</span>
+<span id="cb6-54"><a href="#cb6-54"></a></span>
+<span id="cb6-55"><a href="#cb6-55"></a>    <span class="co"># Add summary statistics</span></span>
+<span id="cb6-56"><a href="#cb6-56"></a>    analytical_mean <span class="op">=</span> <span class="fu">mean</span>(data.analytical_posterior)</span>
+<span id="cb6-57"><a href="#cb6-57"></a>    mcmc_mean <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples)</span>
+<span id="cb6-58"><a href="#cb6-58"></a></span>
+<span id="cb6-59"><a href="#cb6-59"></a>    <span class="co"># Vertical lines for means</span></span>
+<span id="cb6-60"><a href="#cb6-60"></a>    <span class="fu">vlines!</span>(ax, [analytical_mean], color<span class="op">=:</span>blue, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-61"><a href="#cb6-61"></a>    <span class="fu">vlines!</span>(ax, [mcmc_mean], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dot, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-62"><a href="#cb6-62"></a></span>
+<span id="cb6-63"><a href="#cb6-63"></a>    <span class="co"># Add vertical line at 0.3 to show tail cutoff</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0.3</span>], color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>solid, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb6-65"><a href="#cb6-65"></a></span>
+<span id="cb6-66"><a href="#cb6-66"></a>    <span class="co"># Add text annotations with statistics  </span></span>
+<span id="cb6-67"><a href="#cb6-67"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.95</span>,</span>
+<span id="cb6-68"><a href="#cb6-68"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(analytical_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="cb6-69"><a href="#cb6-69"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
+<span id="cb6-70"><a href="#cb6-70"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.85</span>,</span>
+<span id="cb6-71"><a href="#cb6-71"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(mcmc_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="cb6-72"><a href="#cb6-72"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
+<span id="cb6-73"><a href="#cb6-73"></a></span>
+<span id="cb6-74"><a href="#cb6-74"></a>    <span class="co"># Calculate P(θ &lt; 0.25) - tail probability</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a>    tail <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a>    analytical_tail_prob <span class="op">=</span> <span class="fu">cdf</span>(data.analytical_posterior, tail)</span>
+<span id="cb6-77"><a href="#cb6-77"></a>    analytical_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, analytical_tail_prob)</span>
+<span id="cb6-78"><a href="#cb6-78"></a>    mcmc_tail_prob <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples <span class="op">.&lt;</span> tail)</span>
+<span id="cb6-79"><a href="#cb6-79"></a>    mcmc_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, mcmc_tail_prob)</span>
+<span id="cb6-80"><a href="#cb6-80"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.55</span>,</span>
+<span id="cb6-81"><a href="#cb6-81"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(analytical_tail_prob)<span class="st">"</span>,</span>
+<span id="cb6-82"><a href="#cb6-82"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
+<span id="cb6-83"><a href="#cb6-83"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.45</span>,</span>
+<span id="cb6-84"><a href="#cb6-84"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(mcmc_tail_prob)<span class="st">"</span>,</span>
+<span id="cb6-85"><a href="#cb6-85"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
+<span id="cb6-86"><a href="#cb6-86"></a></span>
+<span id="cb6-87"><a href="#cb6-87"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rt)</span>
+<span id="cb6-88"><a href="#cb6-88"></a><span class="cf">end</span></span>
+<span id="cb6-89"><a href="#cb6-89"></a></span>
+<span id="cb6-90"><a href="#cb6-90"></a>fig_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 1.6
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.8250000000000001
+</pre>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-7-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The analytical and MCMC results match closely, demonstrating that the Beta-Binomial conjugacy gives exact results, MCMC provides a general computational approach when analytical solutions don’t exist, and both approaches quantify uncertainty through the full posterior distribution.</p>
+<p>MCMC accuracy varies across the distribution. The method provides better estimates in the center of the distribution than in the tails. For example, computing <span class="math inline">\(\mathbb{E}[\theta]\)</span> requires fewer samples than computing the probability that <span class="math inline">\(\theta \leq 0.3\)</span> (formally, <span class="math inline">\(\mathbb{E}[\mathbf{1}(\theta &lt; 0.25)]\)</span> where <span class="math inline">\(\mathbf{1}\)</span> is the indicator function), since the latter depends on accurately characterizing the probability mass in the tail. This reflects a general principle: quantities that depend on rare events or extreme values require more samples and/or more sophisticated sampling strategies for accurate estimation.</p>
+<p>Just as we infer θ from coin flips, we estimate the probability of extreme rainfall from historical data. The same statistical principles apply whether we’re analyzing controlled experiments or climate observations.</p>
+</section>
+</section>
+<section id="linear-regression" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">2.5.2</span> Linear regression</h3>
+<p>Given <span class="math inline">\(n\)</span> observations of response variable <span class="math inline">\(y_i\)</span> and predictor variable <span class="math inline">\(x_i\)</span>, the goal is to understand the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Linear regression principles apply directly to modeling relationships like temperature trends over time or the relationship between atmospheric CO₂ and global temperature.</p>
+<section id="generative-story" class="level4" data-number="2.5.2.1">
+<h4 data-number="2.5.2.1" class="anchored" data-anchor-id="generative-story"><span class="header-section-number">2.5.2.1</span> Generative story</h4>
+<p>The response follows a linear relationship with added noise:</p>
+<p><span class="math display">\[y_i = a + b x_i + \epsilon_i\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(a\)</span> is the intercept (value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x = 0\)</span>)</li>
+<li><span class="math inline">\(b\)</span> is the slope (change in <span class="math inline">\(y\)</span> per unit change in <span class="math inline">\(x\)</span>)<br>
+</li>
+<li><span class="math inline">\(\epsilon_i \sim \text{Normal}(0, \sigma^2)\)</span> is independent random noise</li>
+</ul>
+<p>This says that each observation is the “true” linear relationship plus some random variation.</p>
+</section>
+<section id="curve-fitting-by-minimizing-loss" class="level4" data-number="2.5.2.2">
+<h4 data-number="2.5.2.2" class="anchored" data-anchor-id="curve-fitting-by-minimizing-loss"><span class="header-section-number">2.5.2.2</span> Curve fitting by minimizing loss</h4>
+<p>Without a probabilistic model, this becomes a curve fitting problem: find the line that “best fits” the data.</p>
+<p>This requires a loss function to measure estimation quality. A natural choice is the mean squared error (MSE):</p>
+<p><span class="math display">\[\text{MSE}(a, b) = \frac{1}{n} \sum_{i=1}^n (y_i - (a + b x_i))^2\]</span></p>
+<p>MSE measures the average squared distance between predictions <span class="math inline">\((a + b x_i)\)</span> and observed values <span class="math inline">\(y_i\)</span>.</p>
+<p>Minimizing this loss function yields the best-fitting line:</p>
+<p><span class="math display">\[(\hat{a}, \hat{b}) = \arg\min_{a,b} \sum_{i=1}^n (y_i - (a + b x_i))^2\]</span></p>
+<p>Taking partial derivatives and setting to zero:</p>
+<p><span class="math display">\[\frac{\partial}{\partial a} \sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \sum_{i=1}^n (y_i - a - b x_i) = 0\]</span></p>
+<p><span class="math display">\[\frac{\partial}{\partial b} \sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \sum_{i=1}^n x_i(y_i - a - b x_i) = 0\]</span></p>
+<p>From the first equation: <span class="math inline">\(\sum y_i = na + b\sum x_i\)</span>, so <span class="math inline">\(\hat{a} = \bar{y} - \hat{b}\bar{x}\)</span></p>
+<p>Substituting into the second equation and solving: <span class="math display">\[\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}\]</span></p>
+<p>where <span class="math inline">\(\bar{x} = \frac{1}{n}\sum x_i\)</span> and <span class="math inline">\(\bar{y} = \frac{1}{n}\sum y_i\)</span>.</p>
+<p>The following visualizes this curve fitting approach:</p>
+<div id="14" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">function</span> <span class="fu">demonstrate_least_squares</span>(x_data, y_data)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co"># Calculate least squares estimates</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    x_bar <span class="op">=</span> <span class="fu">mean</span>(x_data)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    y_bar <span class="op">=</span> <span class="fu">mean</span>(y_data)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    b_hat <span class="op">=</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.*</span> (y_data <span class="op">.-</span> y_bar)) <span class="op">/</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.^</span> <span class="fl">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    a_hat <span class="op">=</span> y_bar <span class="op">-</span> b_hat <span class="op">*</span> x_bar</span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="co"># Create plot</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb7-12"><a href="#cb7-12"></a>        xlabel<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>        ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>        title<span class="op">=</span><span class="st">"Curve Fitting by Minimizing MSE"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="co"># Plot data points</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">8</span>, label<span class="op">=</span><span class="st">"Data"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a>    <span class="co"># Plot fitted line</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length<span class="op">=</span><span class="fl">100</span>)</span>
+<span id="cb7-21"><a href="#cb7-21"></a>    y_line <span class="op">=</span> a_hat <span class="op">.+</span> b_hat <span class="op">.*</span> x_line</span>
+<span id="cb7-22"><a href="#cb7-22"></a>    <span class="fu">lines!</span>(ax, x_line, y_line, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb7-23"><a href="#cb7-23"></a>        label<span class="op">=</span><span class="st">"Fitted line: y = </span><span class="sc">$</span>(<span class="fu">round</span>(a_hat, digits<span class="op">=</span><span class="fl">2</span>))<span class="st"> + </span><span class="sc">$</span>(<span class="fu">round</span>(b_hat, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">x"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a>    <span class="co"># Show residuals</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>    y_pred <span class="op">=</span> a_hat <span class="op">.+</span> b_hat <span class="op">.*</span> x_data</span>
+<span id="cb7-27"><a href="#cb7-27"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x_data)</span>
+<span id="cb7-28"><a href="#cb7-28"></a>        <span class="fu">lines!</span>(ax, [x_data[i], x_data[i]], [y_data[i], y_pred[i]],</span>
+<span id="cb7-29"><a href="#cb7-29"></a>            color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb7-30"><a href="#cb7-30"></a>    <span class="cf">end</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>lb)</span>
+<span id="cb7-33"><a href="#cb7-33"></a>    <span class="cf">return</span> fig</span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">end</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co"># Example with some synthetic data</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a>slope_true <span class="op">=</span> <span class="fl">2.5</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a>intercept_true <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a>ϵ_true <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a>N <span class="op">=</span> <span class="fl">25</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a>x_example <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">Uniform</span>(<span class="fl">0</span>, <span class="fl">10</span>), N)</span>
+<span id="cb7-42"><a href="#cb7-42"></a>y_example <span class="op">=</span> intercept_true <span class="op">.+</span> slope_true <span class="op">.*</span> x_example <span class="op">.+</span> <span class="fu">rand</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, ϵ_true), N)</span>
+<span id="cb7-43"><a href="#cb7-43"></a></span>
+<span id="cb7-44"><a href="#cb7-44"></a>fig_ols <span class="op">=</span> <span class="fu">demonstrate_least_squares</span>(x_example, y_example)</span>
+<span id="cb7-45"><a href="#cb7-45"></a>fig_ols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This approach works as a pure optimization problem without probability.</p>
+</section>
+<section id="maximum-likelihood-solution-1" class="level4" data-number="2.5.2.3">
+<h4 data-number="2.5.2.3" class="anchored" data-anchor-id="maximum-likelihood-solution-1"><span class="header-section-number">2.5.2.3</span> Maximum likelihood solution</h4>
+<p>The probabilistic model provides the same result with additional benefits. Since <span class="math inline">\(\epsilon_i \sim \text{Normal}(0, \sigma^2)\)</span>, we have:</p>
+<p><span class="math display">\[y_i \mid x_i, a, b, \sigma^2 \sim \text{Normal}(a + b x_i, \sigma^2)\]</span></p>
+<p>The likelihood for all observations is:</p>
+<p><span class="math display">\[p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}\]</span></p>
+<p>Taking the log-likelihood:</p>
+<p><span class="math display">\[\log p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - a - b x_i)^2\]</span></p>
+<p>To maximize this with respect to <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, we need to minimize:</p>
+<p><span class="math display">\[\sum_{i=1}^n (y_i - a - b x_i)^2\]</span></p>
+<p>This is exactly the same optimization problem as minimizing MSE!</p>
+<p>Maximum likelihood estimation for linear regression with Normal errors is equivalent to ordinary least squares. The probabilistic model gives the same answer as curve-fitting but also provides a framework for quantifying uncertainty.</p>
+<p>Therefore: <span class="math inline">\(\hat{a} = \bar{y} - \hat{b}\bar{x}\)</span> and <span class="math inline">\(\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}\)</span></p>
+<p>These are identical to the formulas derived from minimizing MSE.</p>
+<p>This connection between statistical and machine learning approaches extends far beyond linear regression. Many machine learning methods can be understood as maximum likelihood estimation under specific distributional assumptions, while statistical methods often reduce to familiar optimization problems. This curve-fitting perspective connects to the machine learning and nonparametric methods covered in <a href="../../chapters/fundamentals/ml-nonparametric.html">Chapter on Machine Learning</a>, which address cases without specific functional form assumptions.</p>
+</section>
+</section>
+<section id="logistic-regression" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">2.5.3</span> Logistic regression</h3>
+<section id="generative-story-1" class="level4" data-number="2.5.3.1">
+<h4 data-number="2.5.3.1" class="anchored" data-anchor-id="generative-story-1"><span class="header-section-number">2.5.3.1</span> Generative Story</h4>
+<p>The outcome <span class="math inline">\(y_i\)</span> is a Bernoulli trial, where the probability of success <span class="math inline">\(p_i\)</span> is related to a predictor <span class="math inline">\(x_i\)</span> via the logistic function: <span class="math inline">\(p_i = \frac{1}{1 + \exp\{-(\beta_0 + \beta_1 x_i)\}}\)</span>.</p>
+</section>
+<section id="maximum-likelihood-solution-2" class="level4" data-number="2.5.3.2">
+<h4 data-number="2.5.3.2" class="anchored" data-anchor-id="maximum-likelihood-solution-2"><span class="header-section-number">2.5.3.2</span> Maximum likelihood solution</h4>
+<p>No closed-form solution exists. Numerical optimization methods are required to find maximum likelihood estimates.</p>
+</section>
+<section id="bayesian-solution-1" class="level4" data-number="2.5.3.3">
+<h4 data-number="2.5.3.3" class="anchored" data-anchor-id="bayesian-solution-1"><span class="header-section-number">2.5.3.3</span> Bayesian solution</h4>
+<p>No conjugate priors exist for logistic regression. MCMC methods are required to sample from the posterior distribution.</p>
+</section>
+<section id="computational-aspects" class="level4" data-number="2.5.3.4">
+<h4 data-number="2.5.3.4" class="anchored" data-anchor-id="computational-aspects"><span class="header-section-number">2.5.3.4</span> Computational aspects</h4>
+<p>This example demonstrates problems where computational methods are essential rather than optional.</p>
+</section>
+</section>
 </section>
 <section id="further-reading" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
@@ -576,7 +1583,8 @@ div.csl-indent {
 <li><span class="citation" data-cites="downey_thinkbayes:2021">Downey (<a href="../references.html#ref-downey_thinkbayes:2021" role="doc-biblioref">2021</a>)</span> emphasizes Bayesian thinking with practical applications<br>
 </li>
 <li><span class="citation" data-cites="gelman_regression:2021">Gelman (<a href="../references.html#ref-gelman_regression:2021" role="doc-biblioref">2021</a>)</span> connects regression to broader statistical modeling</li>
-<li><a href="../../notebooks/mosquitos.html">Mosquito Example</a> demonstrates simulation-based statistical testing with concrete data analysis</li>
+<li><span class="citation" data-cites="gelman_bda3:2014">Gelman et al. (<a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">2014</a>)</span> comprehensive treatment of Bayesian computation</li>
+<li><a href="../../notebooks/probability-stats-examples.html">Computational Examples</a> demonstrates all methods with working code</li>
 </ul>
 
 
@@ -589,6 +1597,9 @@ Downey, Allen B. 2021. <em>Think <span>Bayes</span></em>. "O’Reilly Media, Inc
 </div>
 <div id="ref-gelman_regression:2021" class="csl-entry" role="listitem">
 Gelman, Andrew. 2021. <em>Regression and Other Stories</em>. Analytical Methods for Social Research. Cambridge, United Kingdom ; Cambridge University Press.
+</div>
+<div id="ref-gelman_bda3:2014" class="csl-entry" role="listitem">
+Gelman, Andrew, John B Carlin, Hal S Stern, and Donald B Rubin. 2014. <em>Bayesian <span>Data Analysis</span></em>. 3rd ed. Chapman &amp; Hall/CRC Boca Raton, FL, USA.
 </div>
 </div>
 </section>
@@ -1039,8 +2050,8 @@ Gelman, Andrew. 2021. <em>Regression and Other Stories</em>. Analytical Methods 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/fundamentals/optimization.html" class="pagination-link" aria-label="Optimization 🚧">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Optimization 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/fundamentals/ml-nonparametric.html" class="pagination-link" aria-label="Machine learning and nonparametric methods 🚧">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
