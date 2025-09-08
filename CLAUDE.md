@@ -120,16 +120,18 @@ This is *really* important.
 
 Use consistent notation throughout:
 
-- **Densities and continuous distributions**: Use lowercase `p(x)`, `p(x, y)`, `p(θ | y)`
-- **Discrete probabilities and events**: Use `Pr(X = x)`, `Pr(A ∩ B)`
+- **Continuous distributions and densities**: Use lowercase `p(x)`, `p(x, y)`, `p(θ | y)`
+- **Discrete probabilities and events**: Use `P(X = x)`, `P(X = x, Y = y)`
 - **Parameters**: `θ` (theta)
 - **Observed data**: `y`
 - **Predictions**: `ỹ` (y-tilde)
+- **Independence**: `p(x,y) = p(x)p(y)` or `P(X=x, Y=y) = P(X=x)P(Y=y)`
+- **IID**: Independent and identically distributed
 
 ```markdown
 <!-- Good -->
 The posterior density p(θ | y) represents our updated beliefs.
-The probability Pr(flood next year) = 0.1 represents a discrete event.
+The discrete probability P(flood next year) = 0.1 represents an event.
 
 <!-- Inconsistent -->
 The posterior P(θ | y) and probability p(flood) = 0.1
@@ -140,14 +142,25 @@ The posterior P(θ | y) and probability p(flood) = 0.1
 - Always use proper LaTeX notation in dollar signs, never Unicode symbols
 - Use `\mathbb{E}` for expectation, `\text{}` for text in math mode
 - Use `\sim` for "distributed as": `Y \sim \text{Normal}(0, 1)`
+- Use `\exp{...}` instead of `e^{...}` for exponential functions
+- Use linear algebra notation: `\mathbf{y}`, `\mathbf{X}`, `\boldsymbol{\beta}`
 
 ```markdown
 <!-- Good -->
 $$\mathbb{E}[X] = \int_{-\infty}^{\infty} x p(x) dx$$
+$$p_i = \frac{1}{1 + \exp\{-(\beta_0 + \beta_1 x_i)\}}$$
+$$\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}$$
 
 <!-- Bad -->
 E[X] = ∫ x p(x) dx (Unicode symbols)
+p_i = 1/(1 + e^{-(β₀ + β₁xᵢ)}) (Unicode and inconsistent notation)
 ```
+
+## Coding
+
+This project uses the Julia language
+
+- NEVER edit `Project.toml` directly. Always use the Julia package manager (`Pkg.add`).
 
 ## Pedagogical Approach
 

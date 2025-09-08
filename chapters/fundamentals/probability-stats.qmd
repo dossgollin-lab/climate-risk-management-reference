@@ -1,16 +1,1105 @@
 ---
-title: Probability and inference 🚧
+title: Probability and inference ✏️
 
 engine: julia
 ---
 
-## Key terms and ideas
+```{julia}
+#| code-fold: true
+#| output: false
+# Import necessary packages
+using CairoMakie
+using Distributions
+using LaTeXStrings
+using Turing
+```
 
-- Probability as an axiomatic language for uncertainty
-- Joint, conditional, and marginal distributions
-- Bayes' rule
-- Likelihood functions
-- Maximum likelihood
+This chapter covers the fundamental concepts of probabilistic modeling and statistical inference.
+Data analysis proceeds by building a generative model—a formal, probabilistic hypothesis about how data are created.
+Inference is the inverse problem of using observed data to learn about model parameters.
+Computational methods make complex inference problems tractable.
+
+### Learning objectives {.unnumbered}
+
+After reading this chapter, you should be able to:
+
+- Build generative models using probability distributions.
+- Apply maximum likelihood and Bayesian inference to estimate parameters.
+- Use Monte Carlo methods when analytical solutions don't exist.
+- Recognize when computational methods are required versus analytical approaches.
+
+## Probability theory fundamentals
+
+The concepts in this section are essential building blocks for generative models.
+These mathematical tools support practical modeling applications.
+
+### Basic concepts
+
+#### Random variables
+
+A random variable is a function that assigns numerical values to the outcomes of a random experiment.
+Random variables provide the mathematical foundation for describing uncertainty.
+
+#### Notation conventions
+
+- Random variables: Capital letters ($X$, $Y$, $Z$)
+- Realizations (specific values): Lowercase letters ($x$, $y$, $z$)
+- Parameters: Greek letters ($\theta$, $\mu$, $\sigma$)
+- Observed data: $y$ (following Bayesian convention)
+- Predictions: $\tilde{y}$ (y-tilde)
+
+#### Types of random variables
+
+- Discrete random variables take on countable values (e.g., number of floods per year)
+- Continuous random variables take on uncountable values (e.g., temperature, precipitation amount)
+
+The type of random variable determines which mathematical tools we use to describe its behavior.
+
+### Key distribution functions
+
+#### Key functions
+
+The foundation of probability theory rests on three fundamental functions that describe random variables.
+
+#### Probability Mass Function (PMF)
+
+For discrete random variables, $P(X = x)$ gives the probability that the variable takes on a specific value $x$.
+The PMF satisfies $\sum_x P(X = x) = 1$.
+
+#### Probability Density Function (PDF)
+
+For continuous random variables, $p(x)$ describes the relative likelihood of different values.
+Crucially, $p(x)$ is not a probability but a density.
+Since probability is density multiplied by a (potentially very small) interval of $x$, the value of $p(x)$ itself can exceed 1 without violating the laws of probability.
+Probabilities are areas under the curve: $P(a \leq X \leq b) = \int_a^b p(x) \, dx$.
+
+#### Cumulative Distribution Function (CDF)
+
+$F(x) = P(X \leq x)$ gives the probability that a random variable is less than or equal to $x$.
+The CDF is the most fundamental descriptor, defined for all random variables (discrete and continuous).
+It unifies probability concepts and is essential for quantiles and return periods.
+
+#### Quantile function
+
+The quantile function $Q(p) = F^{-1}(p)$ is the inverse of the CDF.
+It takes a probability $p \in [0,1]$ and returns the value $x$ such that $P(X \leq x) = p$.
+
+- The median is $Q(0.5)$
+- The $N$-year return level in extreme value analysis is $Q(1 - 1/N)$
+- Quantiles enable inverse transform sampling for Monte Carlo simulation
+
+The quantile function has direct applications in climate risk assessment.
+For example, the 100-year flood has return period 100, meaning it has probability 0.01 in any given year, corresponding to quantile $Q(0.99)$.
+
+### Multiple variables
+
+#### Joint, marginal, and conditional distributions
+
+Real systems involve multiple random variables, requiring tools to describe their relationships.
+This machinery allows construction of complex models from simpler components.
+
+#### Joint Distribution
+
+$p(x,y)$ for continuous or $P(X=x, Y=y)$ for discrete gives the probability of events occurring together.
+
+#### Marginal Distribution
+
+$p(x)$ or $P(X=x)$ gives the probability of an event, irrespective of other variables.
+Calculated by summing or integrating over the other variables: $p(x) = \int p(x,y) \, dy$.
+
+#### Conditional Distribution
+
+$p(y \mid x)$ or $P(Y=y \mid X=x)$ gives the probability of an event given that another event has occurred.
+Conditional distributions describe how variables depend on each other.
+
+#### Independence
+
+Two random variables $X$ and $Y$ are independent if their joint distribution is the product of their marginal distributions: $p(x,y) = p(x)p(y)$ for continuous variables, and $P(X=x, Y=y) = P(X=x)P(Y=y)$ for discrete variables.
+For example, temperature and rainfall on a given day are typically **not** independent—hot days often have lower rainfall probability.
+
+#### IID (Independent and Identically Distributed)
+
+A sequence of random variables that are independent and have the same distribution.
+
+#### Bayes' rule
+
+The mechanical relationship between joint, marginal, and conditional distributions:
+
+$$p(y \mid x) = \frac{p(x \mid y) p(y)}{p(x)}$$
+
+Bayes' rule is a consequence of the definition of conditional probability.
+It becomes a tool for inference when interpreted probabilistically.
+
+### Examples
+
+#### Distribution examples
+
+These examples illustrate the key concepts of probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions.
+Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).
+
+The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves.
+The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.
+
+```{julia}
+#| code-fold: true
+
+# Helper function to add area under curve
+function add_pdf_area!(ax, dist, a, b; color=(:orange, 0.4), label=nothing)
+    x_fill = a:0.01:b
+    pdf_fill = pdf.(dist, x_fill)
+    band!(ax, x_fill, zeros(length(x_fill)), pdf_fill, color=color, label=label)
+    prob = cdf(dist, b) - cdf(dist, a)
+    return prob
+end
+
+# Helper function to show forward CDF operation
+function add_forward_cdf!(ax, dist, x_point; color=:red, x_min=-4)
+    y_point = cdf(dist, x_point)
+    scatter!(ax, [x_point], [y_point], color=color, markersize=8)
+    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
+    return y_point
+end
+
+# Helper function to show inverse CDF operation
+function add_inverse_cdf!(ax, dist, p_target; color=:green, x_min=-4)
+    x_inv = quantile(dist, p_target)
+    y_actual = cdf(dist, x_inv)
+    scatter!(ax, [x_inv], [y_actual], color=color, markersize=8)
+    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
+    return x_inv, y_actual
+end
+
+function plot_normal_pdf_cdf()
+    μ, σ = 0.0, 1.0
+    x_range = -4:0.01:4
+    normal_dist = Normal(μ, σ)
+
+    fig = Figure(size=(900, 400))
+
+    # Left panel: PDF with area under curve
+    ax1 = Axis(fig[1, 1],
+        xlabel=L"x",
+        ylabel=L"\text{Density } p(x)",
+        title=L"\text{Normal}(0, 1) \text{ PDF}")
+
+    # Plot PDF
+    lines!(ax1, x_range, pdf.(normal_dist, x_range),
+        color=:blue, linewidth=2, label=L"p(x)")
+
+    # Add shaded area
+    prob_area = add_pdf_area!(ax1, normal_dist, -1, 1,
+        label=L"P(-1 \leq X \leq 1)")
+
+    # Add area annotation
+    text!(ax1, -0.6, 0.125,
+        text=L"\text{Area} = %$(round(prob_area, digits=3))",
+        fontsize=14, color=:black)
+
+    axislegend(ax1, position=:rt)
+
+    # Right panel: CDF with forward and inverse operations
+    ax2 = Axis(fig[1, 2],
+        xlabel=L"x",
+        ylabel=L"\text{Probability } F(x)",
+        title=L"\text{Normal CDF: Forward and Inverse}")
+
+    # Plot CDF
+    lines!(ax2, x_range, cdf.(normal_dist, x_range),
+        color=:blue, linewidth=2, label=L"F(x)")
+
+    # Forward operation: F(1)
+    y_point = add_forward_cdf!(ax2, normal_dist, 1.0)
+    text!(ax2, 1.2, y_point - 0.1,
+        text=L"F(1) = %$(round(y_point, digits=3))", color=:red)
+
+    # Inverse operation: F⁻¹(0.25)
+    x_inv, _ = add_inverse_cdf!(ax2, normal_dist, 0.25)
+    text!(ax2, x_inv - 0.8, 0.35,
+        text=L"F^{-1}(0.25) = %$(round(x_inv, digits=2))", color=:green)
+
+    axislegend(ax2, position=:rb)
+    return fig
+end
+
+fig_normal = plot_normal_pdf_cdf()
+fig_normal
+```
+
+Next, a Poisson distribution example for discrete random variables.
+
+```{julia}
+#| code-fold: true
+
+# Helper function to plot discrete PMF as stem plot
+function plot_pmf_stems!(ax, dist, x_range; color=:blue, linewidth=3, markersize=8)
+    pmf_vals = pdf.(dist, x_range)
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=linewidth)
+        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=markersize)
+    end
+    return pmf_vals
+end
+
+# Helper function to highlight discrete probability mass
+function highlight_pmf_mass!(ax, dist, x_range; color=:orange)
+    pmf_vals = pdf.(dist, x_range)
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=5)
+        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=10)
+    end
+    return sum(pmf_vals)
+end
+
+# Helper function to plot discrete CDF as step function
+function plot_discrete_cdf!(ax, dist, x_range; color=:blue, linewidth=2, markersize=6)
+    cdf_vals = cdf.(dist, x_range)
+    # Plot horizontal segments
+    for i in 1:(length(x_range)-1)
+        lines!(ax, [x_range[i], x_range[i+1]], [cdf_vals[i], cdf_vals[i]],
+            color=color, linewidth=linewidth)
+    end
+    # Plot points
+    scatter!(ax, x_range, cdf_vals, color=color, markersize=markersize)
+    return cdf_vals
+end
+
+# Helper function for discrete forward CDF operation
+function add_discrete_forward_cdf!(ax, dist, x_point; color=:red, x_min=0)
+    y_point = cdf(dist, x_point)
+    scatter!(ax, [x_point], [y_point], color=color, markersize=10)
+    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
+    return y_point
+end
+
+# Helper function for discrete inverse CDF operation  
+function add_discrete_inverse_cdf!(ax, dist, p_target; color=:green, x_min=0)
+    x_inv = quantile(dist, p_target)
+    y_actual = cdf(dist, x_inv)
+    scatter!(ax, [x_inv], [y_actual], color=color, markersize=10)
+    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
+    return x_inv, y_actual
+end
+
+function plot_poisson_pmf_cdf()
+    λ = 3.0
+    x_range = 0:10
+    poisson_dist = Poisson(λ)
+
+    fig = Figure(size=(900, 400))
+
+    # Left panel: PMF with probability mass
+    ax1 = Axis(fig[1, 1],
+        xlabel=L"x",
+        ylabel=L"P(X = x)",
+        title=L"\text{Poisson}(3) \text{ PMF}")
+
+    # Plot full PMF
+    plot_pmf_stems!(ax1, poisson_dist, x_range)
+
+    # Highlight mass for X ≤ 2
+    prob_mass = highlight_pmf_mass!(ax1, poisson_dist, 0:2)
+
+    # Add probability annotation
+    text!(ax1, 6, 0.15,
+        text=L"P(X \leq 2) = %$(round(prob_mass, digits=3))",
+        fontsize=14, color=:black)
+
+    # Right panel: CDF with forward and inverse operations
+    ax2 = Axis(fig[1, 2],
+        xlabel=L"x",
+        ylabel=L"\text{Probability } F(x)",
+        title=L"\text{Poisson CDF: Forward and Inverse}")
+
+    # Plot CDF
+    plot_discrete_cdf!(ax2, poisson_dist, x_range)
+
+    # Forward operation: F(4)
+    y_point = add_discrete_forward_cdf!(ax2, poisson_dist, 4)
+    text!(ax2, 4.2, y_point - 0.1,
+        text=L"F(4) = %$(round(y_point, digits=3))", color=:red)
+
+    # Inverse operation: F⁻¹(0.4)
+    x_inv, _ = add_discrete_inverse_cdf!(ax2, poisson_dist, 0.4)
+    text!(ax2, x_inv - 1.5, 0.5,
+        text=L"F^{-1}(0.4) = %$(Int(x_inv))", color=:green)
+
+    return fig
+end
+
+fig_poisson = plot_poisson_pmf_cdf()
+fig_poisson
+```
+
+### Summary statistics
+
+#### Key descriptors: expectation and moments
+
+Probability distributions are completely described by their PDF/PMF and CDF, but we often need summary statistics that capture essential properties.
+
+#### Expectation (Expected Value)
+
+The expectation is the formal definition of the quantity we approximate with the sample mean in a Monte Carlo simulation.
+The expectation of a function $g(X)$ is:
+
+$$\mathbb{E}[g(X)] = \int g(x) p(x) \, dx$$
+
+for continuous variables, or $\mathbb{E}[g(X)] = \sum_x g(x) P(X = x)$ for discrete variables.
+
+#### Moments of a distribution
+
+- Mean: $\mu = \mathbb{E}[X]$ measures central tendency
+- Variance: $\sigma^2 = \mathbb{E}[(X - \mu)^2]$ measures spread or scale; standard deviation is $\sigma = \sqrt{\sigma^2}$
+- Higher-order moments: Skewness measures asymmetry, kurtosis measures tail weight
+
+For heavy-tailed distributions used in extreme value theory, some higher-order moments (or even the variance) may not exist because the defining integrals diverge.
+
+## Generative models
+
+The probability theory we've covered provides the mathematical language for uncertainty.
+Now we turn to its primary application: building models that describe how data are created.
+These generative models form the foundation for statistical inference—the process of learning from data.
+
+Statistical modeling proceeds by creating a forward model—a formal, probabilistic description of how data are created.
+These models serve two purposes for scientific inference and decision-making.
+
+First, they function as simulation engines.
+A generative model enables simulation of data under different parameter settings.
+This supports uncertainty propagation through complex systems, model checking by comparing simulated and observed data, and exploration of model assumptions.
+
+Second, they provide a systematic framework for building complex models from simple pieces.
+A complicated joint distribution can be decomposed into a sequence of simpler conditional distributions.
+This modular approach supports hierarchical modeling and incorporation of domain knowledge at each stage.
+
+### Building models from conditional blocks
+
+A complex joint distribution can be decomposed into a sequence of simpler conditional distributions.
+This decomposition constitutes the model structure.
+
+The chain rule of probability (this is where Bayes' theorem comes from) tells us that any joint distribution can be factored as:
+$$
+p(A, B) = p(A) \cdot p(B \mid A)
+$$
+or, for three variables:
+$$p(A,B,C) = p(A) \cdot p(B \mid A) \cdot p(C \mid A,B)$$
+
+
+### Visualizing model structure with graphical models
+
+We can represent the conditional dependence structure of our generative story visually using a Directed Acyclic Graph (DAG).
+
+Nodes represent random variables (parameters or data).
+Arrows represent conditional dependence.
+An arrow from A to B means that the value of B is generated based on the value of A.
+
+This provides a clear, unambiguous map of the model's assumptions.
+DAGs support model design, communication, and debugging.
+
+### Common examples
+
+Examples of generative models include:
+
+- **Signal + Noise**: The classic model, e.g., $y = f(x; \beta) + \epsilon$, where we specify a distribution for the noise term $\epsilon$.
+- **Dynamical Systems**: A system of Ordinary Differential Equations (ODEs) with unknown parameters that govern the system's evolution.
+- **Difference Equations**: Models of processes over discrete time, potentially including random walks.
+
+## Inference
+
+Forward modeling simulates data given parameters.
+Inference solves the inverse problem: finding parameters that explain observed data.
+The forward direction is direct: given parameters, simulate data.
+The inverse direction requires mathematical machinery to work backwards from data to parameters.
+
+### Transformation of variables
+
+A core task in probabilistic modeling is understanding how randomness propagates through a system.
+If we have a random variable $X$ with a known probability density function (PDF), $p_X(x)$, and we create a new random variable $Y$ by applying a function, $Y = g(X)$, what is the PDF of $Y$, denoted $p_Y(y)$?
+
+It's tempting to just substitute $x$ with $g^{-1}(y)$ in the original PDF.
+This is incorrect because the function $g$ can stretch or compress the space of outcomes.
+We must account for this distortion to ensure the total probability remains 1.
+
+#### Using the cumulative distribution function
+
+The CDF of the new variable relates to the original CDF through a three-step process.
+
+The most reliable way to solve this is to start with the CDF, $F(x) = P(X \leq x)$, because probabilities are always conserved.
+Assume that $Y = g(X)$ is a strictly increasing function (like $Y = e^X$).
+
+By definition, the CDF of $Y$ is $F_Y(y) = P(Y \leq y)$.
+
+1. Substitute the function: $F_Y(y) = P(g(X) \leq y)$
+
+2. Apply the inverse function: Since $g$ is increasing, we can apply its inverse, $g^{-1}$, to both sides of the inequality without flipping the sign: $F_Y(y) = P(X \leq g^{-1}(y))$
+
+3. Recognize the original CDF: The expression on the right is the CDF of $X$ evaluated at the point $g^{-1}(y)$: $F_Y(y) = F_X(g^{-1}(y))$
+
+#### From CDF to PDF: the final step with the chain rule
+
+To find the PDF, we differentiate the CDF with respect to $y$.
+Applying the chain rule to the expression above gives us our answer:
+
+$$p_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X(g^{-1}(y))$$
+
+$$p_Y(y) = p_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)$$
+
+If $g(X)$ were a decreasing function, we would get a negative sign, which is handled by taking the absolute value.
+This gives us the general change of variables formula:
+
+$$p_Y(y) = p_X(g^{-1}(y)) \left| \frac{d}{dy} g^{-1}(y) \right|$$
+
+#### Conservation of probability mass
+
+Think of the PDF as describing how a unit of "probability mass" is spread along the $x$-axis.
+The total area under the curve must be 1.
+When we apply the function $Y = g(X)$, we are stretching and compressing the axis itself.
+
+- If the function stretches a region, the probability density must decrease proportionally to keep the area constant.
+- If the function compresses a region, the density must increase.
+
+The term $\left| \frac{d}{dy} g^{-1}(y) \right|$ is the Jacobian of the transformation.
+It is precisely the "stretching factor" that tells us how much the coordinate system is distorted at each point, ensuring our total probability mass is conserved.
+
+For more on this somewhat unintuitive point, see section 1.8 of @gelman_bda3:2014 or [this blog post](https://www.mariushobbhahn.com/2021-05-20-Change_of_variable/).
+
+### The inverse problem and the likelihood function
+
+The central tool for connecting data to parameters is the likelihood function.
+The likelihood is the conditional probability $p(y \mid \theta)$, where $y$ represents our observed data.
+
+#### Definition
+
+The likelihood tells us how likely we are to see the observed data $y$ for some value of the parameters $\theta$.
+
+#### Crucial distinction
+
+The likelihood is not the probability of the parameters.
+It's the probability (or probability density) of the data given the parameters.
+
+This confusion is common: $p(\text{data}|\text{parameters})$ tells us about data likelihood, not parameter probability.
+Only Bayesian inference gives us $p(\text{parameters}|\text{data})$.
+
+For continuous variables, since we're dealing with a density, the probability of getting exactly that value is zero, but the probability of getting near it is the integral of the PDF over a small interval.
+
+#### Independence and the product form
+
+If we assume our data points are independent and identically distributed (IID), then by the definition of independence:
+$$p(y_1, y_2, \ldots, y_n \mid \theta) = \prod_{i=1}^n p(y_i \mid \theta)$$
+
+#### The log-likelihood
+
+Products are numerically unstable and difficult to work with.
+Since the logarithm is monotonic, $\max_\theta p(y \mid \theta)$ has the same solution as $\max_\theta \log p(y \mid \theta)$.
+For IID data, this gives us:
+$$\log p(y \mid \theta) = \sum_{i=1}^n \log p(y_i \mid \theta)$$
+
+### Maximum likelihood estimation
+
+Maximum likelihood estimation (MLE) finds the parameter values that maximize the likelihood function:
+$$\hat{\theta}_{\text{MLE}} = \arg\max_\theta p(y \mid \theta)$$
+
+#### Why maximum likelihood makes sense
+
+The likelihood function $p(y \mid \theta)$ gives the probability of observed data under different parameter values.
+Maximum likelihood estimation finds the parameter values that maximize the probability of the observed data.
+The approach selects parameters that best explain the observations.
+
+In climate applications, MLE estimates parameters of distributions describing rainfall, temperature, or wind speed by finding values that maximize the probability of historical observations.
+The estimates inform risk assessments and infrastructure design.
+
+#### Implementation
+
+We find the actual parameter values using optimization approaches.
+This may involve analytical differentiation (setting derivatives to zero) or numerical optimization methods when closed-form solutions don't exist.
+
+This reframes the statistical problem of inference as a numerical problem of optimization.
+
+#### Properties and theoretical foundations
+
+Understanding when and why MLE works requires defining estimator quality.
+An estimator should be consistent (converge to the true value as sample size increases), efficient (achieve low variance), and unbiased (correct on average).
+
+Under regularity conditions, MLE estimators have desirable asymptotic properties.
+As the sample size $n$ grows large, the MLE estimator $\hat{\theta}_{\text{MLE}}$ becomes consistent—it converges to the true parameter value $\theta_0$.
+The estimator also becomes asymptotically normal, meaning its sampling distribution approaches a normal distribution centered on the true value.
+Finally, MLE achieves the Cramér-Rao lower bound, making it asymptotically efficient among unbiased estimators.
+
+The Fisher Information $I(\theta) = -\mathbb{E}\left[\frac{d^2}{d\theta^2} \log p(Y \mid \theta)\right]$ quantifies how much information the data contains about the parameter.
+Higher Fisher Information means the likelihood function is more peaked, leading to more precise parameter estimates.
+
+#### The assumption of "true" parameters
+
+These theoretical properties assume there exists a single "true" parameter value $\theta_0$ that generated our data, and that our model is correctly specified.
+But in climate science, we often use simplified models to describe extremely complex phenomena.
+Is there really a single "true" rainfall parameter for a location when climate is nonstationary, multiple physical processes interact, and our models are necessarily approximations of reality?
+
+This question motivates the Bayesian approach to inference.
+Bayesian methods acknowledge that parameter values are uncertain and provide probability distributions that quantify this uncertainty.
+The Bayesian perspective is valuable for complex, imperfect models of climate systems.
+
+#### Computational considerations
+
+Finding maximum likelihood estimates requires different approaches depending on the complexity of the model.
+
+Analytical solutions exist when we can solve $\frac{d}{d\theta} \log p(y \mid \theta) = 0$ in closed form.
+This works for simple models like Normal distributions with known variance, or the coin flip example we examine below.
+These cases provide valuable intuition and serve as building blocks for more complex problems.
+Additional computational implementations of these methods are provided in the [companion notebook](../../notebooks/probability-stats-examples.qmd).
+
+Numerical optimization becomes necessary when no closed-form solution exists.
+Common algorithms include gradient-based methods like Newton-Raphson and BFGS, which use derivative information to efficiently locate the maximum.
+The Expectation-Maximization (EM) algorithm handles models with latent variables by iteratively estimating missing data and updating parameters.
+Grid search remains useful for low-dimensional problems where visualization of the likelihood surface provides insight.
+
+Practical challenges arise in applications.
+The likelihood surface may contain multiple local maxima, requiring different starting values to find the global optimum.
+Numerical stability requires working with log-likelihoods rather than products of small probabilities.
+Flat likelihood surfaces indicate that data contain limited information about parameters.
+All methods assume correct model specification—poor model approximations yield misleading results regardless of optimization quality.
+
+### Bayesian inference
+
+Bayesian inference takes a fundamentally different approach to the inverse problem.
+Rather than finding a single "best" parameter value, we use the data to update our beliefs about the parameters, resulting in a full probability distribution that naturally quantifies uncertainty.
+
+The Bayesian interpretation of Bayes' rule:
+$$
+p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}
+$$
+
+where $p(\theta)$ is our **prior** belief about the parameters before seeing the data, $p(y \mid \theta)$ is the **likelihood** (the same function used in maximum likelihood estimation), $p(\theta \mid y)$ is the **posterior** distribution representing our updated beliefs, and $p(y)$ is a normalizing constant ensuring the posterior integrates to 1.
+
+Since $p(y)$ doesn't depend on $\theta$ for a fixed dataset, we often write:
+$$
+p(\theta \mid y) \propto p(y \mid \theta) p(\theta)
+$$
+
+The posterior distribution is the primary output of Bayesian analysis.
+It tells us not just what parameter values are most plausible, but also how uncertain we should be about them.
+However, computing this posterior distribution requires different approaches depending on the complexity of the model.
+
+#### Maximum A Posteriori (MAP) estimation
+
+The simplest approach to Bayesian inference is to find the mode of the posterior distribution—the parameter value that is most probable given the data.
+This is called Maximum A Posteriori (MAP) estimation:
+
+$$\hat{\theta}_{MAP} = \arg\max_\theta p(\theta \mid y) = \arg\max_\theta p(y \mid \theta) p(\theta)$$
+
+Since the logarithm is monotonic, this is equivalent to:
+$$\hat{\theta}_{MAP} = \arg\max_\theta [\log p(y \mid \theta) + \log p(\theta)]$$
+
+MAP estimation provides a natural bridge between maximum likelihood and full Bayesian inference.
+When the prior is uniform (non-informative), MAP reduces to maximum likelihood estimation.
+When the prior is informative, it regularizes the estimate, preventing overfitting.
+
+However, MAP gives only a point estimate and doesn't quantify uncertainty.
+To get the full benefit of the Bayesian approach, we need the entire posterior distribution.
+
+#### Analytic posterior (conjugate priors)
+
+In special cases, we can compute the posterior distribution analytically using conjugate priors.
+A prior is conjugate to a likelihood if the posterior has the same functional form as the prior.
+This mathematical convenience allows us to update our beliefs with a simple algebraic formula.
+
+Conjugacy provides exact formulas for belief updating.
+The posterior parameters are the prior parameters plus contributions from the data.
+As data accumulate, the prior influence diminishes relative to the likelihood.
+
+Conjugate priors exist for several important distributions, including exponential family distributions like the Normal, Binomial, and Poisson.
+However, conjugate priors exist for only a limited set of models.
+Most real-world problems require computational approaches.
+
+#### Computational posterior (MCMC)
+
+For most real problems, the posterior distribution cannot be computed analytically.
+The denominator $p(y)$ requires integrating over all possible parameter values, which is often intractable.
+Markov Chain Monte Carlo (MCMC) methods become essential.
+
+MCMC algorithms create a Markov chain whose stationary distribution is the target posterior distribution.
+Instead of computing the posterior directly, we simulate from it by drawing samples $\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}$.
+These samples allow us to approximate any posterior quantity of interest:
+
+$$\mathbb{E}[g(\theta) \mid y] \approx \frac{1}{N} \sum_{i=1}^N g(\theta^{(i)})$$
+
+Common MCMC algorithms include:
+
+- **Metropolis-Hastings**: A general-purpose algorithm that uses a proposal distribution and an acceptance criterion
+- **Gibbs sampling**: Efficient for multivariate problems where conditional distributions are available
+- **Hamiltonian Monte Carlo**: Uses gradient information for more efficient exploration of the parameter space
+
+MCMC requires only the posterior up to a constant of proportionality: $p(\theta \mid y) \propto p(y \mid \theta) p(\theta)$.
+This enables MCMC for complex models where computing the normalizing constant is impossible.
+
+MCMC diagnostics assess whether chains have converged to the target distribution.
+Poor convergence leads to biased estimates, making diagnostic checking essential for reliable inference.
+
+## Computational methods and asymptotic foundations
+
+### Asymptotic theory
+
+Two fundamental theorems justify statistical estimation and Monte Carlo methods:
+
+#### Law of Large Numbers
+
+As sample size $N$ grows, the sample mean converges to the true expected value.
+This theorem underlies both parameter estimation and Monte Carlo methods.
+
+#### Central Limit Theorem
+
+The distribution of a sample mean approaches a Normal distribution as the sample size increases.
+This enables uncertainty quantification and justifies confidence intervals and bootstrap methods.
+
+### Monte Carlo methods
+
+Most decision-relevant quantities can be expressed as expectations.
+Simulation approximates expectations when analytical calculation is difficult.
+
+#### Simulation and expectations
+
+The basic Monte Carlo estimate of an expectation is:
+
+$$\mathbb{E}[X] \approx \frac{1}{N} \sum_{i=1}^N x_i$$
+
+where $x_1, x_2, \ldots, x_N$ are independent samples from the distribution of $X$.
+
+The Monte Carlo standard error is approximately $\sigma/\sqrt{N}$, where $\sigma$ is the standard deviation of the quantity being estimated.
+
+#### Markov Chain Monte Carlo (MCMC) for Bayesian inference
+
+For most real problems, the posterior distribution cannot be computed analytically.
+MCMC methods create a Markov chain whose stationary distribution is the posterior distribution.
+Common algorithms include Metropolis-Hastings and Gibbs sampling.
+MCMC diagnostics help us assess whether our chains have converged to the target distribution.
+
+#### Bootstrap methods for frequentist inference
+
+Bootstrap methods quantify uncertainty around maximum likelihood estimates.
+Bootstrap resampling provides a Monte Carlo approach to estimate sampling distributions of estimators.
+
+## Examples and applications
+
+These examples demonstrate progression from analytical solutions to computational methods for complex problems.
+Computational implementations are provided in the [companion notebook](../../notebooks/probability-stats-examples.qmd).
+
+### The coin flip (Beta-Binomial model)
+
+A series of coin flips are independent Bernoulli trials with fixed probability of heads, $\theta$.
+Given $y$ heads in $n$ flips, the goal is to infer $\theta$.
+
+#### Likelihood
+
+For $n$ independent coin flips with probability $\theta$ of heads, if we observe $y$ heads, the likelihood is given by the Binomial distribution:
+
+$$
+p(y \mid \theta, n) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
+$$
+
+where $\binom{n}{y}$ is the binomial coefficient.
+Since we condition on the observed data $y$ and $n$, the binomial coefficient is a constant, so for inference purposes we can work with the proportional likelihood:
+
+$$
+p(y \mid \theta) \propto \theta^y (1-\theta)^{n-y}
+$$
+
+The following implementation visualizes how the likelihood varies with $\theta$:
+
+```{julia}
+#| code-fold: true
+
+function plot_binomial_likelihood(y, n)
+    θ_grid = 0.01:0.01:0.99
+
+    # Using Distributions.jl
+    likelihood_vals = [pdf(Binomial(n, θ), y) for θ in θ_grid]
+
+    fig = Figure(size=(800, 500))
+    ax = Axis(fig[1, 1],
+        xlabel=L"$\theta$ (probability of heads)",
+        ylabel="Likelihood",
+        title="Likelihood for $(y) heads in $(n) flips")
+
+    lines!(ax, θ_grid, likelihood_vals, label="Full likelihood", linewidth=2, color=:blue)
+
+    # Mark the MLE
+    mle = y / n
+    vlines!(ax, [mle], color=:black, linestyle=:dot, linewidth=2, label="MLE = $(round(mle, digits=2))")
+
+    axislegend(ax, position=:lt)
+    return fig
+end
+
+# Example with 7 heads in 10 flips
+fig_likelihood = plot_binomial_likelihood(7, 10)
+fig_likelihood
+```
+
+The likelihood peaks at the observed proportion of heads, $\hat{\theta}_{MLE} = y/n$, though many other values of $\theta$ remain plausible given limited data.
+A value of $\theta=0.1$ would make the observed data very unlikely.
+
+#### Maximum likelihood solution
+
+The maximum likelihood estimate can be derived analytically by maximizing the log-likelihood:
+
+$$
+\log p(y \mid \theta) = \log \left( \binom{n}{y} \theta^y (1-\theta)^{n-y} \right)
+$$
+
+which simplifies to:
+
+$$
+\log p(y \mid \theta) = y \log \theta + (n-y) \log(1-\theta) + \text{const}.
+$$
+
+We don't need to keep track of the constant because it doesn't depend on $\theta$.
+Taking the derivative with respect to $\theta$ and setting to zero:
+
+$$\frac{d}{d\theta} \log p(y \mid \theta) = \frac{y}{\theta} - \frac{n-y}{1-\theta} = 0$$
+
+Solving for $\theta$:
+
+$$\frac{y}{\theta} = \frac{n-y}{1-\theta} \implies y(1-\theta) = (n-y)\theta \implies y = n\theta$$
+
+Therefore: $\hat{\theta}_{MLE} = \frac{y}{n}$
+
+The maximum likelihood estimate is the observed proportion of heads.
+This example demonstrates the general MLE procedure: write down the likelihood function, take the log, differentiate with respect to the parameters, set the derivative to zero, and solve for the parameter values.
+This analytical approach works for simple models and provides the template for more complex problems that require numerical optimization.
+This pattern holds across different experimental outcomes:
+
+```{julia}
+#| code-fold: true
+
+function demonstrate_mle_estimation(y_values, n)
+    θ_grid = 0.01:0.01:0.99
+
+    fig = Figure(size=(800, 600))
+
+    for (i, y) in enumerate(y_values)
+        ax = Axis(fig[div(i - 1, 2)+1, ((i-1)%2)+1],
+            xlabel="θ",
+            ylabel="Log-likelihood",
+            title="$(y)/$(n) heads")
+
+        # Calculate log-likelihood
+        log_likelihood = [y * log(θ) + (n - y) * log(1 - θ) for θ in θ_grid]
+
+        lines!(ax, θ_grid, log_likelihood, linewidth=2, color=:blue)
+
+        # Mark MLE
+        mle = y / n
+        vlines!(ax, [mle], color=:red, linestyle=:dash, linewidth=2,
+            label="MLE")
+
+        if i == 1
+            axislegend(ax, position=:cb)
+        end
+    end
+
+    return fig
+end
+
+# Show MLE for different outcomes
+fig_mle = demonstrate_mle_estimation([3, 5, 7, 9], 10)
+fig_mle
+```
+
+#### Bayesian solution
+
+The Beta distribution is conjugate to the Binomial likelihood.
+That means that if we choose a Beta prior for $\theta$, the posterior will also be a Beta distribution.
+
+**Prior**: Our prior is $\theta \sim \text{Beta}(\alpha, \beta)$ with density:
+$$
+p(\alpha, \beta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha-1} (1-\theta)^{\beta-1}
+$$
+The likelihood is as before:
+$$
+p(y \mid \theta) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
+$$
+Using Bayes' rule:
+$$
+p(\theta \mid y) \propto p(y \mid \theta) p(\theta)
+$$
+Substituting and collecting terms:
+$$
+p(\theta \mid y) \propto \theta^y (1-\theta)^{n-y} \cdot \theta^{\alpha-1} (1-\theta)^{\beta-1}
+$$
+so
+$$
+p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) - 1}
+$$
+This has the form of a Beta distribution!
+Therefore:
+$$
+\theta \mid y \sim \text{Beta}(\alpha + y, \beta + n - y)
+$$
+
+The posterior parameters are the prior parameters plus contributions from the data:
+
+- $\alpha$ (prior "successes") + $y$ (observed successes)  
+- $\beta$ (prior "failures") + $(n-y)$ (observed failures)
+
+The following compares the analytical solution with MCMC sampling using Turing.jl:
+
+```{julia}
+#| code-fold: true
+# Turing model for coin flipping
+
+using Printf
+
+@model function coin_flip_model(y, n, prior_α, prior_β)
+    θ ~ Beta(prior_α, prior_β)
+    y ~ Binomial(n, θ)
+    return θ
+end
+
+function compare_analytical_mcmc(y, n; prior_α=1, prior_β=1, n_samples=5000)
+    # Analytical posterior
+    post_α = prior_α + y
+    post_β = prior_β + n - y
+    analytical_posterior = Beta(post_α, post_β)
+
+    # MCMC sampling
+    model = coin_flip_model(y, n, prior_α, prior_β)
+    chain = sample(model, NUTS(), n_samples, verbose=false, progress=false)
+    mcmc_samples = Array(chain[:θ])
+
+    # Return data for plotting instead of creating plots
+    return (analytical_posterior=analytical_posterior, mcmc_samples=mcmc_samples, n_samples=n_samples)
+end
+
+# Generate data by calling the same function twice  
+data_low = compare_analytical_mcmc(7, 10, n_samples=500)
+data_high = compare_analytical_mcmc(7, 10, n_samples=50_000)
+
+# Combine plots
+fig_comparison = Figure(size=(1200, 500))
+ax1 = Axis(fig_comparison[1, 1],
+    xlabel=L"$\theta$ (probability of heads)",
+    ylabel="Density",
+    title="MCMC with 500 samples")
+ax2 = Axis(fig_comparison[1, 2],
+    xlabel=L"$\theta$ (probability of heads)",
+    title="MCMC with 50,000 samples")
+
+# Link y-axes for comparison
+linkaxes!(ax1, ax2)
+
+# Plot using the same plotting logic for both panels
+for (ax, data) in [(ax1, data_low), (ax2, data_high)]
+    # Plot analytical posterior
+    θ_grid = 0.01:0.01:0.99
+    analytical_density = pdf.(data.analytical_posterior, θ_grid)
+    lines!(ax, θ_grid, analytical_density, label="Analytical",
+        linewidth=3, color=:blue)
+
+    # Plot MCMC histogram
+    hist!(ax, vec(data.mcmc_samples), bins=40, normalization=:pdf,
+        color=(:red, 0.6), label="MCMC samples")
+
+    # Add summary statistics
+    analytical_mean = mean(data.analytical_posterior)
+    mcmc_mean = mean(data.mcmc_samples)
+
+    # Vertical lines for means
+    vlines!(ax, [analytical_mean], color=:blue, linestyle=:dash, alpha=0.8)
+    vlines!(ax, [mcmc_mean], color=:red, linestyle=:dot, alpha=0.8)
+
+    # Add vertical line at 0.3 to show tail cutoff
+    vlines!(ax, [0.3], color=:gray, linestyle=:solid, alpha=0.6)
+
+    # Add text annotations with statistics  
+    text!(ax, 0.35, maximum(analytical_density) * 0.95,
+        text=L"\text{Analytical: Mean} = %$(round(analytical_mean, digits=3))",
+        fontsize=10, color=:blue)
+    text!(ax, 0.35, maximum(analytical_density) * 0.85,
+        text=L"\text{MCMC: Mean} = %$(round(mcmc_mean, digits=3))",
+        fontsize=10, color=:red)
+
+    # Calculate P(θ < 0.25) - tail probability
+    tail = 0.25
+    analytical_tail_prob = cdf(data.analytical_posterior, tail)
+    analytical_tail_prob = @sprintf("%.2E", analytical_tail_prob)
+    mcmc_tail_prob = mean(data.mcmc_samples .< tail)
+    mcmc_tail_prob = @sprintf("%.2E", mcmc_tail_prob)
+    text!(ax, 0.05, maximum(analytical_density) * 0.55,
+        text=L"\text{Analytical}: $P(\theta < %$(tail))$ = %$(analytical_tail_prob)",
+        fontsize=10, color=:blue)
+    text!(ax, 0.05, maximum(analytical_density) * 0.45,
+        text=L"\text{MCMC}: $P(\theta < %$(tail))$ = %$(mcmc_tail_prob)",
+        fontsize=10, color=:red)
+
+    axislegend(ax, position=:rt)
+end
+
+fig_comparison
+```
+
+The analytical and MCMC results match closely, demonstrating that the Beta-Binomial conjugacy gives exact results, MCMC provides a general computational approach when analytical solutions don't exist, and both approaches quantify uncertainty through the full posterior distribution.
+
+MCMC accuracy varies across the distribution.
+The method provides better estimates in the center of the distribution than in the tails.
+For example, computing $\mathbb{E}[\theta]$ requires fewer samples than computing the probability that $\theta \leq 0.3$ (formally, $\mathbb{E}[\mathbf{1}(\theta < 0.25)]$ where $\mathbf{1}$ is the indicator function), since the latter depends on accurately characterizing the probability mass in the tail.
+This reflects a general principle: quantities that depend on rare events or extreme values require more samples and/or more sophisticated sampling strategies for accurate estimation.
+
+Just as we infer θ from coin flips, we estimate the probability of extreme rainfall from historical data.
+The same statistical principles apply whether we're analyzing controlled experiments or climate observations.
+
+### Linear regression
+
+Given $n$ observations of response variable $y_i$ and predictor variable $x_i$, the goal is to understand the relationship between $x$ and $y$.
+Linear regression principles apply directly to modeling relationships like temperature trends over time or the relationship between atmospheric CO₂ and global temperature.
+
+#### Generative story
+
+The response follows a linear relationship with added noise:
+
+$$y_i = a + b x_i + \epsilon_i$$
+
+where:
+
+- $a$ is the intercept (value of $y$ when $x = 0$)
+- $b$ is the slope (change in $y$ per unit change in $x$)  
+- $\epsilon_i \sim \text{Normal}(0, \sigma^2)$ is independent random noise
+
+This says that each observation is the "true" linear relationship plus some random variation.
+
+#### Curve fitting by minimizing loss
+
+Without a probabilistic model, this becomes a curve fitting problem: find the line that "best fits" the data.
+
+This requires a loss function to measure estimation quality.
+A natural choice is the mean squared error (MSE):
+
+$$\text{MSE}(a, b) = \frac{1}{n} \sum_{i=1}^n (y_i - (a + b x_i))^2$$
+
+MSE measures the average squared distance between predictions $(a + b x_i)$ and observed values $y_i$.
+
+Minimizing this loss function yields the best-fitting line:
+
+$$(\hat{a}, \hat{b}) = \arg\min_{a,b} \sum_{i=1}^n (y_i - (a + b x_i))^2$$
+
+Taking partial derivatives and setting to zero:
+
+$$\frac{\partial}{\partial a} \sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \sum_{i=1}^n (y_i - a - b x_i) = 0$$
+
+$$\frac{\partial}{\partial b} \sum_{i=1}^n (y_i - a - b x_i)^2 = -2 \sum_{i=1}^n x_i(y_i - a - b x_i) = 0$$
+
+From the first equation: $\sum y_i = na + b\sum x_i$, so $\hat{a} = \bar{y} - \hat{b}\bar{x}$
+
+Substituting into the second equation and solving:
+$$\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}$$
+
+where $\bar{x} = \frac{1}{n}\sum x_i$ and $\bar{y} = \frac{1}{n}\sum y_i$.
+
+The following visualizes this curve fitting approach:
+
+```{julia}
+#| code-fold: true
+
+function demonstrate_least_squares(x_data, y_data)
+    # Calculate least squares estimates
+    x_bar = mean(x_data)
+    y_bar = mean(y_data)
+
+    b_hat = sum((x_data .- x_bar) .* (y_data .- y_bar)) / sum((x_data .- x_bar) .^ 2)
+    a_hat = y_bar - b_hat * x_bar
+
+    # Create plot
+    fig = Figure(size=(800, 500))
+    ax = Axis(fig[1, 1],
+        xlabel="x",
+        ylabel="y",
+        title="Curve Fitting by Minimizing MSE")
+
+    # Plot data points
+    scatter!(ax, x_data, y_data, color=:blue, markersize=8, label="Data")
+
+    # Plot fitted line
+    x_line = range(minimum(x_data), maximum(x_data), length=100)
+    y_line = a_hat .+ b_hat .* x_line
+    lines!(ax, x_line, y_line, color=:red, linewidth=2,
+        label="Fitted line: y = $(round(a_hat, digits=2)) + $(round(b_hat, digits=2))x")
+
+    # Show residuals
+    y_pred = a_hat .+ b_hat .* x_data
+    for i in eachindex(x_data)
+        lines!(ax, [x_data[i], x_data[i]], [y_data[i], y_pred[i]],
+            color=:gray, linestyle=:dash, alpha=0.6)
+    end
+
+    axislegend(ax, position=:lb)
+    return fig
+end
+
+# Example with some synthetic data
+slope_true = 2.5
+intercept_true = 1.0
+ϵ_true = 1.0
+N = 25
+x_example = rand(Uniform(0, 10), N)
+y_example = intercept_true .+ slope_true .* x_example .+ rand(Normal(0, ϵ_true), N)
+
+fig_ols = demonstrate_least_squares(x_example, y_example)
+fig_ols
+```
+
+This approach works as a pure optimization problem without probability.
+
+#### Maximum likelihood solution
+
+The probabilistic model provides the same result with additional benefits.
+Since $\epsilon_i \sim \text{Normal}(0, \sigma^2)$, we have:
+
+$$y_i \mid x_i, a, b, \sigma^2 \sim \text{Normal}(a + b x_i, \sigma^2)$$
+
+The likelihood for all observations is:
+
+$$p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}$$
+
+Taking the log-likelihood:
+
+$$\log p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - a - b x_i)^2$$
+
+To maximize this with respect to $a$ and $b$, we need to minimize:
+
+$$\sum_{i=1}^n (y_i - a - b x_i)^2$$
+
+This is exactly the same optimization problem as minimizing MSE!
+
+Maximum likelihood estimation for linear regression with Normal errors is equivalent to ordinary least squares.
+The probabilistic model gives the same answer as curve-fitting but also provides a framework for quantifying uncertainty.
+
+Therefore: $\hat{a} = \bar{y} - \hat{b}\bar{x}$ and $\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}$
+
+These are identical to the formulas derived from minimizing MSE.
+
+This connection between statistical and machine learning approaches extends far beyond linear regression.
+Many machine learning methods can be understood as maximum likelihood estimation under specific distributional assumptions, while statistical methods often reduce to familiar optimization problems.
+This curve-fitting perspective connects to the machine learning and nonparametric methods covered in [Chapter on Machine Learning](../fundamentals/ml-nonparametric.qmd), which address cases without specific functional form assumptions.
+
+### Logistic regression
+
+#### Generative Story
+
+The outcome $y_i$ is a Bernoulli trial, where the probability of success $p_i$ is related to a predictor $x_i$ via the logistic function: $p_i = \frac{1}{1 + \exp\{-(\beta_0 + \beta_1 x_i)\}}$.
+
+#### Maximum likelihood solution
+
+No closed-form solution exists.
+Numerical optimization methods are required to find maximum likelihood estimates.
+
+#### Bayesian solution
+
+No conjugate priors exist for logistic regression.
+MCMC methods are required to sample from the posterior distribution.
+
+#### Computational aspects
+
+This example demonstrates problems where computational methods are essential rather than optional.
 
 ## Further reading {.unnumbered}
 
@@ -19,4 +1108,5 @@ For deeper study of probability and statistics:
 - @blitzstein_probability:2019 provides excellent intuition with computational examples
 - @downey_thinkbayes:2021 emphasizes Bayesian thinking with practical applications  
 - @gelman_regression:2021 connects regression to broader statistical modeling
-- [Mosquito Example](/notebooks/mosquitos.qmd) demonstrates simulation-based statistical testing with concrete data analysis
+- @gelman_bda3:2014 comprehensive treatment of Bayesian computation
+- [Computational Examples](../../notebooks/probability-stats-examples.qmd) demonstrates all methods with working code

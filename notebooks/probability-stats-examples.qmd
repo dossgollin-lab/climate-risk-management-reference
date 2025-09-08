@@ -1,0 +1,36 @@
+---
+title: "Probability, inference, and computation: examples"
+engine: julia
+---
+
+This notebook provides computational examples to accompany the [Probability and inference](../chapters/fundamentals/probability-stats.qmd) chapter.
+
+## Examples to be added
+
+### Monte Carlo basics and asymptotic theory
+- Monte Carlo simulation of coin flips (demonstrating Law of Large Numbers)
+- Central Limit Theorem visualization with simulation
+- Monte Carlo integration examples
+
+### Coin flip example
+- Analytical maximum likelihood estimation
+- Bootstrap confidence intervals for coin flip parameter
+- Bayesian inference with conjugate Beta-Binomial model
+- MCMC sampling for coin flip (comparison with analytical solution)
+
+### Linear regression example  
+- Ordinary least squares implementation
+- Bootstrap confidence intervals for regression parameters
+- Bayesian linear regression with conjugate normal priors
+- MCMC sampling for Bayesian linear regression
+
+### Logistic regression example
+- Numerical maximum likelihood optimization
+- Bootstrap confidence intervals for logistic regression
+- MCMC sampling for Bayesian logistic regression
+- MCMC diagnostics and convergence assessment
+
+### Advanced topics
+- Propagating parameter uncertainty to predictions
+- Comparing frequentist and Bayesian uncertainty quantification
+- When to use analytical vs. numerical vs. simulation methods

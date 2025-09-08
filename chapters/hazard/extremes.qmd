@@ -126,11 +126,13 @@ $$
 H(y) = 1 - \left( 1 + \frac{\xi y}{\sigma_u} \right)^{-1/\xi}
 $$
 
-This is defined on $\{y: y > 0 \text{ and } (1 + \xi y / \sigma_u) > 0\}$. The parameters are the shape, $\xi$, and a scale parameter $\sigma_u$ that depends on the threshold $u$.
-If the parent distribution's maxima are GEV-distributed with parameters $(\mu, \sigma, \xi)$, then the GPD scale parameter is given by $\sigma_u = \sigma + \xi(u - \mu)$. 
-This key result shows that the GPD scale parameter is a linear function of the threshold $u$, a property that is used in advanced diagnostics for threshold selection.
+This is defined on $\{y: y > 0 \text{ and } (1 + \xi y / \sigma_u) > 0\}$.
+The parameters are the shape, $\xi$, and a scale parameter $\sigma_u$ that depends on the threshold $u$.
 
-### The shape parameter ($\xi$): A unifying concept
+If the parent distribution's maxima are GEV-distributed with parameters $(\mu, \sigma, \xi)$, then the GPD scale parameter is given by $\sigma_u = \sigma + \xi(u - \mu)$. 
+This key result shows that the GPD scale parameter is a linear function of the threshold $u$, a property that is used in advanced diagnostics for threshold selection, and illustrates the links between the GPD and GEV models for extremes.
+
+### The shape parameter
 
 The **shape parameter, $\xi$**, is the most critical parameter in extreme value analysis and has the same interpretation in both the GEV and GPD.
 It governs the tail behavior of the distribution.
@@ -175,7 +177,9 @@ The curvature of the fitted line is a direct visualization of the shape paramete
 
 [Placeholder for a Return Level Plot showing a fitted GEV or GPD curve with confidence intervals.]
 
-## Plotting positions
+## Inference
+
+### Plotting Positions
 
 To visually assess model fit, the fitted model is plotted against the observed maxima.
 For this purpose, we require a method to assign a non-exceedance probability (and thus a return period) to each observed maximum.
@@ -195,12 +199,17 @@ Common choices include:
 
 The empirical return period for the $k$-th observation is then estimated as $1/(1-p_k)$.
 
-## Modeling assumptions and considerations
+### Moments
 
-Application of these models requires careful consideration of underlying assumptions.
+### MLE
 
--   **Stationarity**: The classical GEV and GPD models assume **stationarity**: the parameters are constant in time. This implies that the statistical properties of extreme events do not change. In the context of climate change, this assumption may be invalid and requires more advanced non-stationary models.
--   **Practical Choices**: The chosen methodology dictates key practical decisions. For the BM approach, the **block size** must be large enough for the asymptotic theory to hold but small enough to retain a reasonable sample size. For the POT approach, the **threshold selection** is a critical step that balances bias and variance.
+### Bayesian
+
+## Sampling variability
+
+## Regionalization
+
+## Nonstationarity
 
 ## Further reading {.unnumbered}
 

@@ -5,6 +5,7 @@ project:
 
 book:
   title: "Climate Risk Assessment and Management"
+  subtitle: "Consolidated Lecture Notes"
   author: "James Doss-Gollin"
   
   page-footer:
@@ -34,8 +35,8 @@ book:
       chapters:
         - chapters/fundamentals/climate-science.qmd
         - chapters/fundamentals/probability-stats.qmd
-        - chapters/fundamentals/optimization.qmd
-        - chapters/fundamentals/monte-carlo.qmd
+        #- chapters/fundamentals/optimization.qmd
+        #- chapters/fundamentals/monte-carlo.qmd
         - chapters/fundamentals/ml-nonparametric.qmd
         - chapters/fundamentals/correlation-dimensionality.qmd
         - chapters/fundamentals/model-comparison.qmd
@@ -61,6 +62,7 @@ book:
     - part: "**Computational Case Studies**"
       chapters: 
         - notebooks/index.qmd
+        - notebooks/probability-stats-examples.qmd
         - notebooks/mosquitos.qmd
 
     - href: chapters/references.qmd
