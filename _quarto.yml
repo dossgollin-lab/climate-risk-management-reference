@@ -114,6 +114,7 @@ format:
     date-format: iso
     notebook-links: true
   pdf:
+    echo: false
     papersize: letter
     number-sections: true
     geometry:
