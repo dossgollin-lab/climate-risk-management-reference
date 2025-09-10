@@ -63,6 +63,7 @@ book:
       chapters: 
         - notebooks/index.qmd
         - notebooks/probability-stats-examples.qmd
+        - notebooks/extremes-examples.qmd
         - notebooks/mosquitos.qmd
 
     - href: chapters/references.qmd

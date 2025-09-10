@@ -139,11 +139,35 @@ The posterior P(θ | y) and probability p(flood) = 0.1
 
 ### LaTeX Math
 
-- Always use proper LaTeX notation in dollar signs, never Unicode symbols
-- Use `\mathbb{E}` for expectation, `\text{}` for text in math mode
+**Important distinction**: Unicode Greek letters are CORRECT in Julia code (idiomatic and encouraged), but must be LaTeX in text and annotations.
+
+#### In Julia Code (CORRECT - keep Unicode):
+```julia
+θ_grid = 0.01:0.01:0.99
+prior_α = 1.0
+Normal(μ, σ)
+```
+
+#### In Text and Annotations (use LaTeX):
+```markdown
+<!-- Good -->
+The parameter $\theta$ represents the probability of heads.
+We use a $\text{Beta}(\alpha, \beta)$ prior distribution.
+
+<!-- Bad -->  
+The parameter θ represents the probability of heads.
+We use a Beta(α, β) prior distribution.
+```
+
+#### General LaTeX Rules:
+- Always use proper LaTeX notation in dollar signs for text, never raw Unicode symbols
+- Use `\mathbb{E}` for expectation, `\text{}` for text in math mode  
 - Use `\sim` for "distributed as": `Y \sim \text{Normal}(0, 1)`
 - Use `\exp{...}` instead of `e^{...}` for exponential functions
 - Use linear algebra notation: `\mathbf{y}`, `\mathbf{X}`, `\boldsymbol{\beta}`
+- Use `\leq` and `\geq` instead of Unicode ≤ and ≥ symbols
+- Use `\neq` instead of Unicode ≠ symbol
+- Use `\theta`, `\alpha`, `\beta`, `\mu`, `\sigma`, `\lambda` in math mode for Greek letters
 
 ```markdown
 <!-- Good -->
@@ -154,6 +178,60 @@ $$\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}$$
 <!-- Bad -->
 E[X] = ∫ x p(x) dx (Unicode symbols)
 p_i = 1/(1 + e^{-(β₀ + β₁xᵢ)}) (Unicode and inconsistent notation)
+```
+
+## Code References in Text
+
+### Backticks for Code Elements
+
+Always use backticks when referring to code elements in text and annotations to avoid Quarto parsing errors:
+
+#### Function Names and Macros:
+```markdown
+<!-- Good -->
+We use the `@model` macro to define the model.
+The `Beta()` function creates a Beta distribution.
+Call `NUTS()` for sampling.
+
+<!-- Bad -->
+We use the @model macro to define the model. (Quarto treats this as citation)
+The Beta() function creates a Beta distribution.
+Call NUTS() for sampling.
+```
+
+#### Technical Terms and Abbreviations:
+```markdown
+<!-- Good -->
+`MCMC` sampling provides approximate inference.
+The `CDF` shows cumulative probabilities.
+`MLE` estimation finds the maximum likelihood.
+
+<!-- Bad -->
+MCMC sampling provides approximate inference.
+The CDF shows cumulative probabilities.
+MLE estimation finds the maximum likelihood.
+```
+
+#### Variable Names in Explanations:
+```markdown
+<!-- Good -->
+10. Extract $\theta$ samples from MCMC chain using `Array(chain[:θ])`
+The `prior_α` parameter controls the shape.
+
+<!-- Bad -->
+10. Extract θ samples from MCMC chain
+The prior_α parameter controls the shape.
+```
+
+#### Package Names:
+```markdown
+<!-- Good -->
+See the official [`Turing.jl` documentation](https://turinglang.org/).
+We use `CairoMakie` for plotting.
+
+<!-- Bad -->
+See the official [Turing.jl documentation](https://turinglang.org/).
+We use CairoMakie for plotting.
 ```
 
 ## Coding
