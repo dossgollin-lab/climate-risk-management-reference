@@ -2,6 +2,7 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/extremes-examples.html",
       "/notebooks/probability-stats-examples.html",
       "/notebooks/mosquitos.html"
     ]

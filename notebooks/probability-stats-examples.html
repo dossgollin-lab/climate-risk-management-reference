@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Probability, inference, and computation: examples – Climate Risk Assessment and Management</title>
+<title>Probability, inference, and computation: examples ✏️ – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/mosquitos.html" rel="next">
+<link href="../notebooks/extremes-examples.html" rel="next">
 <link href="../notebooks/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -41,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ff4a0bb939fed34ae4231fc9111ce8ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -210,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/probability-stats-examples.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/probability-stats-examples.html">Probability, inference, and computation: examples ✏️</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -447,7 +511,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/probability-stats-examples.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></span></a>
+ <span class="menu-text">Probability, inference, and computation: examples ✏️</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/extremes-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extreme Value Theory Examples ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -505,13 +575,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#examples-to-be-added" id="toc-examples-to-be-added" class="nav-link active" data-scroll-target="#examples-to-be-added"><span class="header-section-number">20.1</span> Examples to be added</a>
+  <li><a href="#distribution-examples" id="toc-distribution-examples" class="nav-link active" data-scroll-target="#distribution-examples">Distribution examples</a></li>
+  <li><a href="#coin-flip-examples" id="toc-coin-flip-examples" class="nav-link" data-scroll-target="#coin-flip-examples">Coin flip examples</a>
   <ul class="collapse">
-  <li><a href="#monte-carlo-basics-and-asymptotic-theory" id="toc-monte-carlo-basics-and-asymptotic-theory" class="nav-link" data-scroll-target="#monte-carlo-basics-and-asymptotic-theory"><span class="header-section-number">20.1.1</span> Monte Carlo basics and asymptotic theory</a></li>
-  <li><a href="#coin-flip-example" id="toc-coin-flip-example" class="nav-link" data-scroll-target="#coin-flip-example"><span class="header-section-number">20.1.2</span> Coin flip example</a></li>
-  <li><a href="#linear-regression-example" id="toc-linear-regression-example" class="nav-link" data-scroll-target="#linear-regression-example"><span class="header-section-number">20.1.3</span> Linear regression example</a></li>
-  <li><a href="#logistic-regression-example" id="toc-logistic-regression-example" class="nav-link" data-scroll-target="#logistic-regression-example"><span class="header-section-number">20.1.4</span> Logistic regression example</a></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">20.1.5</span> Advanced topics</a></li>
+  <li><a href="#likelihood-visualization" id="toc-likelihood-visualization" class="nav-link" data-scroll-target="#likelihood-visualization">Likelihood visualization</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum likelihood estimation</a></li>
+  <li><a href="#bayesian-analysis" id="toc-bayesian-analysis" class="nav-link" data-scroll-target="#bayesian-analysis">Bayesian analysis</a></li>
+  </ul></li>
+  <li><a href="#linear-regression-example" id="toc-linear-regression-example" class="nav-link" data-scroll-target="#linear-regression-example">Linear regression example</a>
+  <ul class="collapse">
+  <li><a href="#generating-synthetic-data" id="toc-generating-synthetic-data" class="nav-link" data-scroll-target="#generating-synthetic-data">Generating synthetic data</a></li>
+  <li><a href="#curve-fitting-by-minimizing-prediction-error" id="toc-curve-fitting-by-minimizing-prediction-error" class="nav-link" data-scroll-target="#curve-fitting-by-minimizing-prediction-error">Curve fitting by minimizing prediction error</a></li>
+  <li><a href="#maximum-likelihood-estimation-1" id="toc-maximum-likelihood-estimation-1" class="nav-link" data-scroll-target="#maximum-likelihood-estimation-1">Maximum likelihood estimation</a></li>
+  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference">Bayesian inference</a></li>
+  <li><a href="#mle-with-turing" id="toc-mle-with-turing" class="nav-link" data-scroll-target="#mle-with-turing">MLE with Turing</a></li>
+  <li><a href="#comparison-of-approaches" id="toc-comparison-of-approaches" class="nav-link" data-scroll-target="#comparison-of-approaches">Comparison of approaches</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -519,9 +597,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/probability-stats-examples.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/probability-stats-examples.html">Probability, inference, and computation: examples ✏️</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></h1>
+<h1 class="title">Probability, inference, and computation: examples ✏️</h1>
 </div>
 
 
@@ -538,51 +616,1180 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This notebook provides computational examples to accompany the <a href="../chapters/fundamentals/probability-stats.html">Probability and inference</a> chapter.</p>
-<section id="examples-to-be-added" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="examples-to-be-added"><span class="header-section-number">20.1</span> Examples to be added</h2>
-<section id="monte-carlo-basics-and-asymptotic-theory" class="level3" data-number="20.1.1">
-<h3 data-number="20.1.1" class="anchored" data-anchor-id="monte-carlo-basics-and-asymptotic-theory"><span class="header-section-number">20.1.1</span> Monte Carlo basics and asymptotic theory</h3>
-<ul>
-<li>Monte Carlo simulation of coin flips (demonstrating Law of Large Numbers)</li>
-<li>Central Limit Theorem visualization with simulation</li>
-<li>Monte Carlo integration examples</li>
-</ul>
+<p>This notebook provides computational examples to accompany the <a href="../chapters/fundamentals/probability-stats.html">Probability and inference</a> chapter. See also: <a href="../notebooks/mosquitos.html">Moquito bites and beer consumption</a></p>
+<div id="setup" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a><span class="im">using</span> <span class="bu">LaTeXStrings</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a><span class="im">using</span> <span class="bu">Turing</span></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a><span class="im">using</span> <span class="bu">Printf</span></span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a><span class="im">using</span> <span class="bu">StatsBase</span></span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a><span class="im">using</span> <span class="bu">HypothesisTests</span></span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a><span class="im">using</span> <span class="bu">Optim</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">We use <code>using</code> to import necessary packages</span>
+</dd>
+</dl>
+</div>
+</div>
+<section id="distribution-examples" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-examples">Distribution examples</h2>
+<p>Understanding probability distributions requires grasping three fundamental functions: the probability density function (PDF) or probability mass function (PMF), the cumulative distribution function (CDF), and the quantile function. These examples demonstrate how these functions work together using the normal distribution (continuous) and Poisson distribution (discrete).</p>
+<p>The visualizations show both forward operations (finding probabilities from values using the CDF) and inverse operations (finding values from probabilities using quantiles). This computational perspective reinforces the theoretical relationships discussed in the main chapter.</p>
+<p>We start by defining some helper functions.</p>
+<div id="distribution-helpers" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a><span class="kw">function</span> <span class="fu">add_pdf_area!</span>(ax, dist, a, b; color<span class="op">=</span>(<span class="op">:</span>orange, <span class="fl">0.4</span>), label<span class="op">=</span><span class="cn">nothing</span>)</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>    x_fill <span class="op">=</span> a<span class="op">:</span><span class="fl">0.01</span><span class="op">:</span>b</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>    pdf_fill <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_fill)</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>    <span class="fu">band!</span>(ax, x_fill, <span class="fu">zeros</span>(<span class="fu">length</span>(x_fill)), pdf_fill, color<span class="op">=</span>color, label<span class="op">=</span>label)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5"></a>    prob <span class="op">=</span> <span class="fu">cdf</span>(dist, b) <span class="op">-</span> <span class="fu">cdf</span>(dist, a)</span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a>    <span class="cf">return</span> prob</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7"></a><span class="kw">end</span></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-9" class="code-annotation-target"><a href="#annotated-cell-2-9"></a><span class="kw">function</span> <span class="fu">add_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14"></a>    <span class="cf">return</span> y_point</span>
+<span id="annotated-cell-2-15"><a href="#annotated-cell-2-15"></a><span class="kw">end</span></span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-17" class="code-annotation-target"><a href="#annotated-cell-2-17"></a><span class="kw">function</span> <span class="fu">add_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6">6</button><span id="annotated-cell-2-18" class="code-annotation-target"><a href="#annotated-cell-2-18"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
+<span id="annotated-cell-2-19"><a href="#annotated-cell-2-19"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
+<span id="annotated-cell-2-20"><a href="#annotated-cell-2-20"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="annotated-cell-2-21"><a href="#annotated-cell-2-21"></a>    <span class="fu">lines!</span>(ax, [x_inv, x_inv], [<span class="fl">0</span>, y_actual], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-2-22"><a href="#annotated-cell-2-22"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-2-23"><a href="#annotated-cell-2-23"></a>    <span class="cf">return</span> x_inv, y_actual</span>
+<span id="annotated-cell-2-24"><a href="#annotated-cell-2-24"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Creates function to shade area under <code>PDF</code> curve between bounds <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. By convention a function that ends in <code>!</code> modifies its arguments (in this case, a plot axis).</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Vectorized evaluation of <code>PDF</code> using broadcasting (the <code>.</code> operator)<br>
+</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="3">Calculate probability using <code>CDF</code> difference: <span class="math inline">\(P(a \leq X \leq b) = F(b) - F(a)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="4">Forward <code>CDF</code> operation: given <span class="math inline">\(x\)</span>, find <span class="math inline">\(F(x) = P(X \leq x)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="17" data-code-annotation="5">Inverse <code>CDF</code> operation: given probability <span class="math inline">\(p\)</span>, find <span class="math inline">\(x\)</span> such that <span class="math inline">\(F(x) = p\)</span><br>
+</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="18" data-code-annotation="6">The quantile function is the inverse of the <code>CDF</code></span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Next, we use <a href="https://docs.makie.org/"><code>Makie.jl</code></a> to creat the plot.</p>
+<div id="cell-normal-distribution-example" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="kw">function</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>    μ, σ <span class="op">=</span> <span class="fl">0.0</span>, <span class="fl">1.0</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>    x_range <span class="op">=</span> <span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">4</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>    normal_dist <span class="op">=</span> <span class="fu">Normal</span>(μ, σ)</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a></span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Density } </span><span class="sc">$</span>p<span class="st">(x)</span><span class="sc">$</span><span class="st">",</span></span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11"></a><span class="st">        </span>title<span class="st">="</span><span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">1</span>) PDF<span class="st">")</span></span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-13" class="code-annotation-target"><a href="#annotated-cell-3-13"></a>    <span class="fu">lines!</span>(ax1, x_range, <span class="fu">pdf</span>.(normal_dist, x_range),</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"p(x)"</span>)</span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15"></a></span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16"></a>    prob_area <span class="op">=</span> <span class="fu">add_pdf_area!</span>(ax1, normal_dist, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>,</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17"></a>        label<span class="op">=</span>L<span class="st">"P(-1 \leq X \leq 1)"</span>)</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18"></a></span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19"></a>    <span class="fu">text!</span>(ax1, <span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.125</span>,</span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Area} = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_area, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22"></a></span>
+<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23"></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>rt)</span>
+<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24"></a></span>
+<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } </span><span class="sc">$</span>F<span class="st">(x)</span><span class="sc">$</span><span class="st">",</span></span>
+<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28"></a><span class="st">        </span>title<span class="st">="</span>Normal CDF<span class="op">:</span> Forward and Inverse<span class="st">")</span></span>
+<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-30" class="code-annotation-target"><a href="#annotated-cell-3-30"></a>    <span class="fu">lines!</span>(ax2, x_range, <span class="fu">cdf</span>.(normal_dist, x_range),</span>
+<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span>F<span class="st">(x)</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32"></a></span>
+<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33"></a><span class="st">    </span>y_point<span class="st"> = add_forward_cdf!(ax2, normal_dist, 1.0)</span></span>
+<span id="annotated-cell-3-34"><a href="#annotated-cell-3-34"></a>    <span class="fu">text!</span>(ax2, <span class="fl">1.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
+<span id="annotated-cell-3-35"><a href="#annotated-cell-3-35"></a>        text<span class="op">=</span>L<span class="st">"F(1) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
+<span id="annotated-cell-3-36"><a href="#annotated-cell-3-36"></a></span>
+<span id="annotated-cell-3-37"><a href="#annotated-cell-3-37"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_inverse_cdf!</span>(ax2, normal_dist, <span class="fl">0.25</span>)</span>
+<span id="annotated-cell-3-38"><a href="#annotated-cell-3-38"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">0.8</span>, <span class="fl">0.35</span>,</span>
+<span id="annotated-cell-3-39"><a href="#annotated-cell-3-39"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.25) = %</span><span class="sc">$</span>(<span class="fu">round</span>(x_inv, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
+<span id="annotated-cell-3-40"><a href="#annotated-cell-3-40"></a></span>
+<span id="annotated-cell-3-41"><a href="#annotated-cell-3-41"></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rb)</span>
+<span id="annotated-cell-3-42"><a href="#annotated-cell-3-42"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-3-43"><a href="#annotated-cell-3-43"></a><span class="kw">end</span></span>
+<span id="annotated-cell-3-44"><a href="#annotated-cell-3-44"></a></span>
+<span id="annotated-cell-3-45"><a href="#annotated-cell-3-45"></a>fig_normal <span class="op">=</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
+<span id="annotated-cell-3-46"><a href="#annotated-cell-3-46"></a>fig_normal</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="1">Create <code>Normal(0,1)</code> distribution object from <code>Distributions.jl</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="13" data-code-annotation="2">Plot <code>PDF</code> using vectorized evaluation over x_range</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="30" data-code-annotation="3">Plot <code>CDF</code> showing cumulative probabilities</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/normal-distribution-example-output-1.svg" id="normal-distribution-example" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The normal distribution demonstrates these concepts for continuous variables, where probabilities correspond to areas under smooth curves. Next, we examine the Poisson distribution for discrete random variables, where probabilities correspond to point masses and the <code>CDF</code> becomes a step function.</p>
+<p>We define some more helper functions for discrete distributions.</p>
+<div id="discrete-helpers" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1"></a><span class="kw">function</span> <span class="fu">plot_pmf_stems!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">3</span>, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>    <span class="cf">return</span> pmf_vals</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a><span class="kw">end</span></span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10"></a><span class="kw">function</span> <span class="fu">highlight_pmf_mass!</span>(ax, dist, x_range; color<span class="op">=:</span>orange)</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span><span class="fl">5</span>)</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15"></a>    <span class="cf">end</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-16" class="code-annotation-target"><a href="#annotated-cell-4-16"></a>    <span class="cf">return</span> <span class="fu">sum</span>(pmf_vals)</span>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a><span class="kw">end</span></span>
+<span id="annotated-cell-4-18"><a href="#annotated-cell-4-18"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6">6</button><span id="annotated-cell-4-19" class="code-annotation-target"><a href="#annotated-cell-4-19"></a><span class="kw">function</span> <span class="fu">plot_discrete_cdf!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, markersize<span class="op">=</span><span class="fl">6</span>)</span>
+<span id="annotated-cell-4-20"><a href="#annotated-cell-4-20"></a>    cdf_vals <span class="op">=</span> <span class="fu">cdf</span>.(dist, x_range)</span>
+<span id="annotated-cell-4-21"><a href="#annotated-cell-4-21"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>(<span class="fu">length</span>(x_range)<span class="op">-</span><span class="fl">1</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7">7</button><span id="annotated-cell-4-22" class="code-annotation-target"><a href="#annotated-cell-4-22"></a>        <span class="fu">lines!</span>(ax, [x_range[i], x_range[i<span class="op">+</span><span class="fl">1</span>]], [cdf_vals[i], cdf_vals[i]],</span>
+<span id="annotated-cell-4-23"><a href="#annotated-cell-4-23"></a>            color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
+<span id="annotated-cell-4-24"><a href="#annotated-cell-4-24"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-4-25"><a href="#annotated-cell-4-25"></a>    <span class="fu">scatter!</span>(ax, x_range, cdf_vals, color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
+<span id="annotated-cell-4-26"><a href="#annotated-cell-4-26"></a>    <span class="cf">return</span> cdf_vals</span>
+<span id="annotated-cell-4-27"><a href="#annotated-cell-4-27"></a><span class="kw">end</span></span>
+<span id="annotated-cell-4-28"><a href="#annotated-cell-4-28"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8">8</button><span id="annotated-cell-4-29" class="code-annotation-target"><a href="#annotated-cell-4-29"></a><span class="kw">function</span> <span class="fu">add_discrete_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="annotated-cell-4-30"><a href="#annotated-cell-4-30"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
+<span id="annotated-cell-4-31"><a href="#annotated-cell-4-31"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="annotated-cell-4-32"><a href="#annotated-cell-4-32"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-4-33"><a href="#annotated-cell-4-33"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-4-34"><a href="#annotated-cell-4-34"></a>    <span class="cf">return</span> y_point</span>
+<span id="annotated-cell-4-35"><a href="#annotated-cell-4-35"></a><span class="kw">end</span></span>
+<span id="annotated-cell-4-36"><a href="#annotated-cell-4-36"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="9">9</button><span id="annotated-cell-4-37" class="code-annotation-target"><a href="#annotated-cell-4-37"></a><span class="kw">function</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="annotated-cell-4-38"><a href="#annotated-cell-4-38"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
+<span id="annotated-cell-4-39"><a href="#annotated-cell-4-39"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
+<span id="annotated-cell-4-40"><a href="#annotated-cell-4-40"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
+<span id="annotated-cell-4-41"><a href="#annotated-cell-4-41"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
+<span id="annotated-cell-4-42"><a href="#annotated-cell-4-42"></a>    <span class="cf">return</span> x_inv, y_actual</span>
+<span id="annotated-cell-4-43"><a href="#annotated-cell-4-43"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">Plots discrete PMF as stems (vertical lines) with points at the top</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="2">For discrete distributions, <code>pdf()</code> returns probability mass <span class="math inline">\(P(X = x)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="4" data-code-annotation="3">Draw vertical line from 0 to probability mass at each <span class="math inline">\(x\)</span> value</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="4">Highlights specific probability masses in different color</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="16" data-code-annotation="5">Sum individual masses to get cumulative probability <span class="math inline">\(P(X \leq 2)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="19" data-code-annotation="6">Creates step function visualization for discrete <code>CDF</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="22" data-code-annotation="7">Horizontal line segments show constant <code>CDF</code> values between integers</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="29" data-code-annotation="8">Same forward operation logic but adapted for discrete distributions</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="37" data-code-annotation="9">Inverse operation finds the smallest integer <span class="math inline">\(x\)</span> such that <span class="math inline">\(F(x) \geq p\)</span></span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Now we create the plot for the Poisson distribution.</p>
+<div id="cell-poisson-distribution-example" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a><span class="kw">function</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>    λ <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a>    x_range <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4"></a>    poisson_dist <span class="op">=</span> <span class="fu">Poisson</span>(λ)</span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a></span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7"></a></span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="annotated-cell-5-10"><a href="#annotated-cell-5-10"></a>        ylabel<span class="op">=</span>L<span class="st">"P(X = x)"</span>,</span>
+<span id="annotated-cell-5-11"><a href="#annotated-cell-5-11"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson}(3) </span><span class="sc">\t</span><span class="st">ext{ PMF}"</span>,</span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12"></a>        xticks<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>)</span>
+<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13"></a></span>
+<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14"></a>    <span class="fu">plot_pmf_stems!</span>(ax1, poisson_dist, x_range)</span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-16" class="code-annotation-target"><a href="#annotated-cell-5-16"></a>    prob_mass <span class="op">=</span> <span class="fu">highlight_pmf_mass!</span>(ax1, poisson_dist, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>)</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17"></a></span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18"></a>    <span class="fu">text!</span>(ax1, <span class="fl">6</span>, <span class="fl">0.15</span>,</span>
+<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19"></a>        text<span class="op">=</span>L<span class="st">"P(X \leq 2) = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_mass, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21"></a></span>
+<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
+<span id="annotated-cell-5-24"><a href="#annotated-cell-5-24"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } F(x)"</span>,</span>
+<span id="annotated-cell-5-25"><a href="#annotated-cell-5-25"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson CDF: Forward and Inverse}"</span>,</span>
+<span id="annotated-cell-5-26"><a href="#annotated-cell-5-26"></a>        xticks<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>)</span>
+<span id="annotated-cell-5-27"><a href="#annotated-cell-5-27"></a></span>
+<span id="annotated-cell-5-28"><a href="#annotated-cell-5-28"></a>    <span class="fu">plot_discrete_cdf!</span>(ax2, poisson_dist, x_range)</span>
+<span id="annotated-cell-5-29"><a href="#annotated-cell-5-29"></a></span>
+<span id="annotated-cell-5-30"><a href="#annotated-cell-5-30"></a>    y_point <span class="op">=</span> <span class="fu">add_discrete_forward_cdf!</span>(ax2, poisson_dist, <span class="fl">4</span>)</span>
+<span id="annotated-cell-5-31"><a href="#annotated-cell-5-31"></a>    <span class="fu">text!</span>(ax2, <span class="fl">4.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
+<span id="annotated-cell-5-32"><a href="#annotated-cell-5-32"></a>        text<span class="op">=</span>L<span class="st">"F(4) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
+<span id="annotated-cell-5-33"><a href="#annotated-cell-5-33"></a></span>
+<span id="annotated-cell-5-34"><a href="#annotated-cell-5-34"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax2, poisson_dist, <span class="fl">0.4</span>)</span>
+<span id="annotated-cell-5-35"><a href="#annotated-cell-5-35"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">1.5</span>, <span class="fl">0.5</span>,</span>
+<span id="annotated-cell-5-36"><a href="#annotated-cell-5-36"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.4) = %</span><span class="sc">$</span>(<span class="fu">Int</span>(x_inv))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
+<span id="annotated-cell-5-37"><a href="#annotated-cell-5-37"></a></span>
+<span id="annotated-cell-5-38"><a href="#annotated-cell-5-38"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-5-39"><a href="#annotated-cell-5-39"></a><span class="kw">end</span></span>
+<span id="annotated-cell-5-40"><a href="#annotated-cell-5-40"></a></span>
+<span id="annotated-cell-5-41"><a href="#annotated-cell-5-41"></a>fig_poisson <span class="op">=</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
+<span id="annotated-cell-5-42"><a href="#annotated-cell-5-42"></a>fig_poisson</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="1">Create Poisson distribution with rate parameter <span class="math inline">\(\lambda = 3\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="16" data-code-annotation="2">Calculate and highlight <span class="math inline">\(P(X \leq 2)\)</span> by summing individual probability masses</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/poisson-distribution-example-output-1.svg" id="poisson-distribution-example" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="coin-flip-example" class="level3" data-number="20.1.2">
-<h3 data-number="20.1.2" class="anchored" data-anchor-id="coin-flip-example"><span class="header-section-number">20.1.2</span> Coin flip example</h3>
-<ul>
-<li>Analytical maximum likelihood estimation</li>
-<li>Bootstrap confidence intervals for coin flip parameter</li>
-<li>Bayesian inference with conjugate Beta-Binomial model</li>
-<li>MCMC sampling for coin flip (comparison with analytical solution)</li>
-</ul>
+<section id="coin-flip-examples" class="level2">
+<h2 class="anchored" data-anchor-id="coin-flip-examples">Coin flip examples</h2>
+<p>Having explored the foundational concepts of probability distributions, we now turn to statistical inference—the process of learning about unknown parameters from observed data.</p>
+<p>The coin flip example provides a pedagogically clean introduction to statistical inference. We observe a series of coin flips and want to infer the probability <span class="math inline">\(\theta\)</span> of heads. This simple setup allows us to demonstrate maximum likelihood estimation, Bayesian inference, and the relationship between analytical and computational approaches.</p>
+<section id="likelihood-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-visualization">Likelihood visualization</h3>
+<p>The likelihood function shows how plausible different values of <span class="math inline">\(\theta\)</span> are given our observed data. For the <code>Binomial</code> model, this creates a clear peak at the observed proportion of heads.</p>
+<div id="cell-coin-flip-likelihood" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a><span class="kw">function</span> <span class="fu">plot_binomial_likelihood</span>(y, n)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<span id="annotated-cell-6-3"><a href="#annotated-cell-6-3"></a></span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4"></a>    <span class="co"># Using Distributions.jl</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5"></a>    likelihood_vals <span class="op">=</span> [<span class="fu">pdf</span>(<span class="fu">Binomial</span>(n, θ), y) for θ <span class="kw">in</span> θ_grid]</span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6"></a></span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9"></a>        xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10"></a>        ylabel<span class="op">=</span><span class="st">"Likelihood"</span>,</span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11"></a>        title<span class="op">=</span><span class="st">"Likelihood for </span><span class="sc">$</span>(y)<span class="st"> heads in </span><span class="sc">$</span>(n)<span class="st"> flips"</span>)</span>
+<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12"></a></span>
+<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13"></a>    <span class="fu">lines!</span>(ax, θ_grid, likelihood_vals, label<span class="op">=</span><span class="st">"Full likelihood"</span>, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
+<span id="annotated-cell-6-14"><a href="#annotated-cell-6-14"></a></span>
+<span id="annotated-cell-6-15"><a href="#annotated-cell-6-15"></a>    <span class="co"># Mark the MLE</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3">3</button><span id="annotated-cell-6-16" class="code-annotation-target"><a href="#annotated-cell-6-16"></a>    mle <span class="op">=</span> y <span class="op">/</span> n</span>
+<span id="annotated-cell-6-17"><a href="#annotated-cell-6-17"></a>    <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>black, linestyle<span class="op">=:</span>dot, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"MLE = </span><span class="sc">$</span>(<span class="fu">round</span>(mle, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-6-18"><a href="#annotated-cell-6-18"></a></span>
+<span id="annotated-cell-6-19"><a href="#annotated-cell-6-19"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>lt)</span>
+<span id="annotated-cell-6-20"><a href="#annotated-cell-6-20"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-6-21"><a href="#annotated-cell-6-21"></a><span class="kw">end</span></span>
+<span id="annotated-cell-6-22"><a href="#annotated-cell-6-22"></a></span>
+<span id="annotated-cell-6-23"><a href="#annotated-cell-6-23"></a><span class="co"># Example with 7 heads in 10 flips</span></span>
+<span id="annotated-cell-6-24"><a href="#annotated-cell-6-24"></a>fig_likelihood <span class="op">=</span> <span class="fu">plot_binomial_likelihood</span>(<span class="fl">7</span>, <span class="fl">10</span>)</span>
+<span id="annotated-cell-6-25"><a href="#annotated-cell-6-25"></a>fig_likelihood</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">Create grid of <span class="math inline">\(\theta\)</span> values from 0.01 to 0.99 to evaluate likelihood</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="2">Evaluate binomial likelihood <span class="math inline">\(L(\theta) = P(y|\theta,n)\)</span> for each <span class="math inline">\(\theta\)</span> value</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="16" data-code-annotation="3">Maximum likelihood estimate is simply the observed proportion <span class="math inline">\(\frac{y}{n}\)</span></span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/coin-flip-likelihood-output-1.svg" id="coin-flip-likelihood" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The likelihood peaks at <span class="math inline">\(\theta = 0.7\)</span> when we observe 7 heads out of 10 flips. This demonstrates that the maximum likelihood estimate is simply the observed proportion.</p>
 </section>
-<section id="linear-regression-example" class="level3" data-number="20.1.3">
-<h3 data-number="20.1.3" class="anchored" data-anchor-id="linear-regression-example"><span class="header-section-number">20.1.3</span> Linear regression example</h3>
-<ul>
-<li>Ordinary least squares implementation</li>
-<li>Bootstrap confidence intervals for regression parameters</li>
-<li>Bayesian linear regression with conjugate normal priors</li>
-<li>MCMC sampling for Bayesian linear regression</li>
-</ul>
+<section id="maximum-likelihood-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum likelihood estimation</h3>
+<p>Maximum likelihood estimation finds the parameter value that makes the observed data most probable. For the coin flip problem, we can solve this analytically by taking the derivative of the log-likelihood and setting it to zero. The following shows how the <code>MLE</code> varies with different numbers of observed heads:</p>
+<div id="cell-coin-flip-mle" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="kw">function</span> <span class="fu">demonstrate_mle_estimation</span>(y_values, n)</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a></span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-6" class="code-annotation-target"><a href="#annotated-cell-7-6"></a>    <span class="cf">for</span> (i, y) <span class="kw">in</span> <span class="fu">enumerate</span>(y_values)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7"></a>        ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fu">div</span>(i <span class="op">-</span> <span class="fl">1</span>, <span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>, ((i<span class="op">-</span><span class="fl">1</span>)<span class="op">%</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>],</span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8"></a>            xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">heta"</span>,</span>
+<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9"></a>            ylabel<span class="op">=</span><span class="st">"Log-likelihood"</span>,</span>
+<span id="annotated-cell-7-10"><a href="#annotated-cell-7-10"></a>            title<span class="op">=</span><span class="st">"</span><span class="sc">$</span>(y)<span class="st">/</span><span class="sc">$</span>(n)<span class="st"> heads"</span>)</span>
+<span id="annotated-cell-7-11"><a href="#annotated-cell-7-11"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3">3</button><span id="annotated-cell-7-12" class="code-annotation-target"><a href="#annotated-cell-7-12"></a>        log_likelihood <span class="op">=</span> [y <span class="op">*</span> <span class="fu">log</span>(θ) <span class="op">+</span> (n <span class="op">-</span> y) <span class="op">*</span> <span class="fu">log</span>(<span class="fl">1</span> <span class="op">-</span> θ) for θ <span class="kw">in</span> θ_grid]</span>
+<span id="annotated-cell-7-13"><a href="#annotated-cell-7-13"></a></span>
+<span id="annotated-cell-7-14"><a href="#annotated-cell-7-14"></a>        <span class="fu">lines!</span>(ax, θ_grid, log_likelihood, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
+<span id="annotated-cell-7-15"><a href="#annotated-cell-7-15"></a></span>
+<span id="annotated-cell-7-16"><a href="#annotated-cell-7-16"></a>        mle <span class="op">=</span> y <span class="op">/</span> n</span>
+<span id="annotated-cell-7-17"><a href="#annotated-cell-7-17"></a>        <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="annotated-cell-7-18"><a href="#annotated-cell-7-18"></a>            label<span class="op">=</span><span class="st">"MLE"</span>)</span>
+<span id="annotated-cell-7-19"><a href="#annotated-cell-7-19"></a></span>
+<span id="annotated-cell-7-20"><a href="#annotated-cell-7-20"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="fl">1</span></span>
+<span id="annotated-cell-7-21"><a href="#annotated-cell-7-21"></a>            <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>cb)</span>
+<span id="annotated-cell-7-22"><a href="#annotated-cell-7-22"></a>        <span class="cf">end</span></span>
+<span id="annotated-cell-7-23"><a href="#annotated-cell-7-23"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-7-24"><a href="#annotated-cell-7-24"></a></span>
+<span id="annotated-cell-7-25"><a href="#annotated-cell-7-25"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-7-26"><a href="#annotated-cell-7-26"></a><span class="kw">end</span></span>
+<span id="annotated-cell-7-27"><a href="#annotated-cell-7-27"></a></span>
+<span id="annotated-cell-7-28"><a href="#annotated-cell-7-28"></a><span class="co"># Show MLE for different outcomes</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4">4</button><span id="annotated-cell-7-29" class="code-annotation-target"><a href="#annotated-cell-7-29"></a>fig_mle <span class="op">=</span> <span class="fu">demonstrate_mle_estimation</span>([<span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span>], <span class="fl">10</span>)</span>
+<span id="annotated-cell-7-30"><a href="#annotated-cell-7-30"></a>fig_mle</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="6" data-code-annotation="1">Loop through different numbers of observed heads to show MLE behavior</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="2">Create <span class="math inline">\(2 \times 2\)</span> grid of subplots using integer division and modulo</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="12" data-code-annotation="3">Analytical log-likelihood: <span class="math inline">\(\ell(\theta) = y \ln(\theta) + (n-y) \ln(1-\theta)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="29" data-code-annotation="4">Demonstrate <code>MLE</code> for 3, 5, 7, and 9 heads out of 10 flips</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/coin-flip-mle-output-1.svg" id="coin-flip-mle" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each plot shows the log-likelihood function as a smooth curve with its maximum clearly indicated. Notice that the <code>MLE</code> is always at the observed proportion <span class="math inline">\(\frac{y}{n}\)</span>, confirming our analytical derivation.</p>
 </section>
-<section id="logistic-regression-example" class="level3" data-number="20.1.4">
-<h3 data-number="20.1.4" class="anchored" data-anchor-id="logistic-regression-example"><span class="header-section-number">20.1.4</span> Logistic regression example</h3>
-<ul>
-<li>Numerical maximum likelihood optimization</li>
-<li>Bootstrap confidence intervals for logistic regression</li>
-<li>MCMC sampling for Bayesian logistic regression</li>
-<li>MCMC diagnostics and convergence assessment</li>
-</ul>
+<section id="bayesian-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-analysis">Bayesian analysis</h3>
+<p>Bayesian inference treats the parameter <span class="math inline">\(\theta\)</span> as a random variable with its own probability distribution. We start with a prior belief about <span class="math inline">\(\theta\)</span>, observe data, and update our beliefs to get the posterior distribution.</p>
+<p>For the coin flip problem with a <code>Beta</code> prior, we can compute the posterior analytically using conjugacy. The posterior parameters are simply the prior parameters plus the observed successes and failures. This example compares the exact analytical solution with <code>MCMC</code> sampling.</p>
+<p>First we define the <code>Turing.jl</code> model and the comparison function. See the official <a href="https://turinglang.org/"><code>Turing.jl</code> documentation and tutorials</a>.</p>
+<div id="16" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="co"># Turing model for coin flipping</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>    θ <span class="op">~</span> <span class="fu">Beta</span>(prior_α, prior_β)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4"></a>    y <span class="op">~</span> <span class="fu">Binomial</span>(n, θ)</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a>    <span class="cf">return</span> θ</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1"><code>Turing.jl</code> probabilistic programming model specification using <code>@model</code> macro</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="2">Prior distribution: <span class="math inline">\(\theta \sim \text{Beta}(\alpha, \beta)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="3">Likelihood: <span class="math inline">\(y \sim \text{Binomial}(n, \theta)\)</span> connects data to parameter</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>coin_flip_model (generic function with 2 methods)</code></pre>
+</div>
+</div>
+<p>Next we define a function to help us create the data and fits</p>
+<div id="18" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4">4</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="kw">function</span> <span class="fu">compare_analytical_mcmc</span>(y, n; prior_α<span class="op">=</span><span class="fl">1</span>, prior_β<span class="op">=</span><span class="fl">1</span>, n_samples<span class="op">=</span><span class="fl">5000</span>)</span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>    <span class="co"># Analytical posterior</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5">5</button><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3"></a>    post_α <span class="op">=</span> prior_α <span class="op">+</span> y</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6">6</button><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4"></a>    post_β <span class="op">=</span> prior_β <span class="op">+</span> n <span class="op">-</span> y</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7">7</button><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5"></a>    analytical_posterior <span class="op">=</span> <span class="fu">Beta</span>(post_α, post_β)</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6"></a></span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7"></a>    <span class="co"># MCMC sampling</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8">8</button><span id="annotated-cell-9-8" class="code-annotation-target"><a href="#annotated-cell-9-8"></a>    model <span class="op">=</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9">9</button><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9"></a>    chain <span class="op">=</span> <span class="fu">sample</span>(model, <span class="fu">NUTS</span>(), n_samples, verbose<span class="op">=</span><span class="cn">false</span>, progress<span class="op">=</span><span class="cn">false</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="10">10</button><span id="annotated-cell-9-10" class="code-annotation-target"><a href="#annotated-cell-9-10"></a>    mcmc_samples <span class="op">=</span> <span class="fu">Array</span>(chain[<span class="op">:</span>θ])</span>
+<span id="annotated-cell-9-11"><a href="#annotated-cell-9-11"></a></span>
+<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12"></a>    <span class="co"># Return data for plotting instead of creating plots</span></span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13"></a>    <span class="cf">return</span> (analytical_posterior<span class="op">=</span>analytical_posterior, mcmc_samples<span class="op">=</span>mcmc_samples, n_samples<span class="op">=</span>n_samples)</span>
+<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14"></a><span class="kw">end</span></span>
+<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15"></a></span>
+<span id="annotated-cell-9-16"><a href="#annotated-cell-9-16"></a><span class="co"># Generate data by calling the same function twice  </span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="11">11</button><span id="annotated-cell-9-17" class="code-annotation-target"><a href="#annotated-cell-9-17"></a>data_low <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">500</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="12">12</button><span id="annotated-cell-9-18" class="code-annotation-target"><a href="#annotated-cell-9-18"></a>data_high <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">50_000</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="4">Function comparing analytical vs MCMC approaches</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="5">Posterior <span class="math inline">\(\alpha = \text{prior } \alpha + \text{successes}\)</span> (conjugate update)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="6">Posterior <span class="math inline">\(\beta = \text{prior } \beta + \text{failures}\)</span> (conjugate update)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="7">Exact posterior using <code>Beta</code>-Binomial conjugacy</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="8" data-code-annotation="8">Create Turing model instance with data and priors</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="9">MCMC sampling using No-U-Turn Sampler (<code>NUTS</code>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="10" data-code-annotation="10">Extract <span class="math inline">\(\theta\)</span> samples from MCMC chain using <code>Array(chain[:θ])</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="17" data-code-annotation="11">Low sample count (500) to show MCMC variability</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="12">12</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="18" data-code-annotation="12">High sample count (50,000) to show MCMC convergence</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 1.6
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 1.6
+</pre>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(analytical_posterior = Distributions.Beta{Float64}(α=8.0, β=4.0), mcmc_samples = [0.8072931234757614; 0.47570867256497573; … ; 0.39836176331365647; 0.9166400407435039;;], n_samples = 50000)</code></pre>
+</div>
+</div>
+<p>And then we plot</p>
+<div id="cell-coin-flip-bayesian" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a><span class="co"># Combine plots</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>fig_comparison <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">1200</span>, <span class="fl">500</span>))</span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>    ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>    title<span class="op">=</span><span class="st">"MCMC with 500 samples"</span>)</span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">2</span>],</span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
+<span id="annotated-cell-10-9"><a href="#annotated-cell-10-9"></a>    title<span class="op">=</span><span class="st">"MCMC with 50,000 samples"</span>)</span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10"></a></span>
+<span id="annotated-cell-10-11"><a href="#annotated-cell-10-11"></a><span class="co"># Link y-axes for comparison</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="13">13</button><span id="annotated-cell-10-12" class="code-annotation-target"><a href="#annotated-cell-10-12"></a><span class="fu">linkaxes!</span>(ax1, ax2)</span>
+<span id="annotated-cell-10-13"><a href="#annotated-cell-10-13"></a></span>
+<span id="annotated-cell-10-14"><a href="#annotated-cell-10-14"></a><span class="co"># Plot using the same plotting logic for both panels</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="14">14</button><span id="annotated-cell-10-15" class="code-annotation-target"><a href="#annotated-cell-10-15"></a><span class="cf">for</span> (ax, data) <span class="kw">in</span> [(ax1, data_low), (ax2, data_high)]</span>
+<span id="annotated-cell-10-16"><a href="#annotated-cell-10-16"></a>    <span class="co"># Plot analytical posterior</span></span>
+<span id="annotated-cell-10-17"><a href="#annotated-cell-10-17"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="15">15</button><span id="annotated-cell-10-18" class="code-annotation-target"><a href="#annotated-cell-10-18"></a>    analytical_density <span class="op">=</span> <span class="fu">pdf</span>.(data.analytical_posterior, θ_grid)</span>
+<span id="annotated-cell-10-19"><a href="#annotated-cell-10-19"></a>    <span class="fu">lines!</span>(ax, θ_grid, analytical_density, label<span class="op">=</span><span class="st">"Analytical"</span>,</span>
+<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20"></a>        linewidth<span class="op">=</span><span class="fl">3</span>, color<span class="op">=:</span>blue)</span>
+<span id="annotated-cell-10-21"><a href="#annotated-cell-10-21"></a></span>
+<span id="annotated-cell-10-22"><a href="#annotated-cell-10-22"></a>    <span class="co"># Plot MCMC histogram</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="16">16</button><span id="annotated-cell-10-23" class="code-annotation-target"><a href="#annotated-cell-10-23"></a>    <span class="fu">hist!</span>(ax, <span class="fu">vec</span>(data.mcmc_samples), bins<span class="op">=</span><span class="fl">40</span>, normalization<span class="op">=:</span>pdf,</span>
+<span id="annotated-cell-10-24"><a href="#annotated-cell-10-24"></a>        color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>), label<span class="op">=</span><span class="st">"MCMC samples"</span>)</span>
+<span id="annotated-cell-10-25"><a href="#annotated-cell-10-25"></a></span>
+<span id="annotated-cell-10-26"><a href="#annotated-cell-10-26"></a>    <span class="co"># Add summary statistics</span></span>
+<span id="annotated-cell-10-27"><a href="#annotated-cell-10-27"></a>    analytical_mean <span class="op">=</span> <span class="fu">mean</span>(data.analytical_posterior)</span>
+<span id="annotated-cell-10-28"><a href="#annotated-cell-10-28"></a>    mcmc_mean <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples)</span>
+<span id="annotated-cell-10-29"><a href="#annotated-cell-10-29"></a></span>
+<span id="annotated-cell-10-30"><a href="#annotated-cell-10-30"></a>    <span class="co"># Vertical lines for means</span></span>
+<span id="annotated-cell-10-31"><a href="#annotated-cell-10-31"></a>    <span class="fu">vlines!</span>(ax, [analytical_mean], color<span class="op">=:</span>blue, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-10-32"><a href="#annotated-cell-10-32"></a>    <span class="fu">vlines!</span>(ax, [mcmc_mean], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dot, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="annotated-cell-10-33"><a href="#annotated-cell-10-33"></a></span>
+<span id="annotated-cell-10-34"><a href="#annotated-cell-10-34"></a>    <span class="co"># Add vertical line at 0.3 to show tail cutoff</span></span>
+<span id="annotated-cell-10-35"><a href="#annotated-cell-10-35"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0.3</span>], color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>solid, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="annotated-cell-10-36"><a href="#annotated-cell-10-36"></a></span>
+<span id="annotated-cell-10-37"><a href="#annotated-cell-10-37"></a>    <span class="co"># Add text annotations with statistics  </span></span>
+<span id="annotated-cell-10-38"><a href="#annotated-cell-10-38"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.95</span>,</span>
+<span id="annotated-cell-10-39"><a href="#annotated-cell-10-39"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(analytical_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="annotated-cell-10-40"><a href="#annotated-cell-10-40"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
+<span id="annotated-cell-10-41"><a href="#annotated-cell-10-41"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.85</span>,</span>
+<span id="annotated-cell-10-42"><a href="#annotated-cell-10-42"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(mcmc_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
+<span id="annotated-cell-10-43"><a href="#annotated-cell-10-43"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
+<span id="annotated-cell-10-44"><a href="#annotated-cell-10-44"></a></span>
+<span id="annotated-cell-10-45"><a href="#annotated-cell-10-45"></a>    <span class="co"># Calculate P(theta &lt; 0.25) - tail probability</span></span>
+<span id="annotated-cell-10-46"><a href="#annotated-cell-10-46"></a>    tail <span class="op">=</span> <span class="fl">0.25</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="17">17</button><span id="annotated-cell-10-47" class="code-annotation-target"><a href="#annotated-cell-10-47"></a>    analytical_tail_prob <span class="op">=</span> <span class="fu">cdf</span>(data.analytical_posterior, tail)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="18">18</button><span id="annotated-cell-10-48" class="code-annotation-target"><a href="#annotated-cell-10-48"></a>    analytical_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, analytical_tail_prob)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="19">19</button><span id="annotated-cell-10-49" class="code-annotation-target"><a href="#annotated-cell-10-49"></a>    mcmc_tail_prob <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples <span class="op">.&lt;</span> tail)</span>
+<span id="annotated-cell-10-50"><a href="#annotated-cell-10-50"></a>    mcmc_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, mcmc_tail_prob)</span>
+<span id="annotated-cell-10-51"><a href="#annotated-cell-10-51"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.55</span>,</span>
+<span id="annotated-cell-10-52"><a href="#annotated-cell-10-52"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(analytical_tail_prob)<span class="st">"</span>,</span>
+<span id="annotated-cell-10-53"><a href="#annotated-cell-10-53"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
+<span id="annotated-cell-10-54"><a href="#annotated-cell-10-54"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.45</span>,</span>
+<span id="annotated-cell-10-55"><a href="#annotated-cell-10-55"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(mcmc_tail_prob)<span class="st">"</span>,</span>
+<span id="annotated-cell-10-56"><a href="#annotated-cell-10-56"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
+<span id="annotated-cell-10-57"><a href="#annotated-cell-10-57"></a></span>
+<span id="annotated-cell-10-58"><a href="#annotated-cell-10-58"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rt)</span>
+<span id="annotated-cell-10-59"><a href="#annotated-cell-10-59"></a><span class="cf">end</span></span>
+<span id="annotated-cell-10-60"><a href="#annotated-cell-10-60"></a></span>
+<span id="annotated-cell-10-61"><a href="#annotated-cell-10-61"></a>fig_comparison</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="13">13</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="12" data-code-annotation="13">Link axes for direct comparison between panels</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="14">14</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="15" data-code-annotation="14">Loop over both low and high sample datasets</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="15">15</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="18" data-code-annotation="15">Exact analytical posterior density</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="16">16</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="23" data-code-annotation="16">Normalized histogram of <code>MCMC</code> samples</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="17">17</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="47" data-code-annotation="17">Exact tail probability using <code>CDF</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="18">18</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="48" data-code-annotation="18">Format tail probability in scientific notation</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="19">19</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="49" data-code-annotation="19">Estimate tail probability from <code>MCMC</code> samples</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/coin-flip-bayesian-output-1.svg" id="coin-flip-bayesian" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The results show excellent agreement between analytical and <code>MCMC</code> approaches. With sufficient samples, <code>MCMC</code> accurately approximates the true posterior distribution. The comparison also illustrates how <code>MCMC</code> precision varies across the distribution—central quantities like the mean are estimated more accurately than tail probabilities.</p>
 </section>
-<section id="advanced-topics" class="level3" data-number="20.1.5">
-<h3 data-number="20.1.5" class="anchored" data-anchor-id="advanced-topics"><span class="header-section-number">20.1.5</span> Advanced topics</h3>
+</section>
+<section id="linear-regression-example" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-example">Linear regression example</h2>
+<p>The coin flip example demonstrated inference for a single parameter using a simple likelihood function. Real-world problems typically involve multiple parameters and more complex relationships between variables. Linear regression provides our first example of multivariate statistical inference while maintaining analytical tractability.</p>
+<p>This example demonstrates the progression from curve fitting to probabilistic inference. We’ll examine the same problem through three lenses: minimizing prediction error, maximum likelihood estimation, and Bayesian inference. All three approaches yield the same parameter estimates for the linear model with normal errors, but provide different ways of quantifying uncertainty.</p>
+<section id="generating-synthetic-data" class="level3">
+<h3 class="anchored" data-anchor-id="generating-synthetic-data">Generating synthetic data</h3>
+<p>We start by creating synthetic data from a known linear relationship with added noise. This allows us to verify that our inference methods recover the true parameters.</p>
+<div id="linear-regression-data" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a><span class="co"># Set parameters for data generation</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a>n_obs <span class="op">=</span> <span class="fl">30</span></span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4"></a>true_intercept <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a>true_slope <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6"></a>true_sigma <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7"></a></span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8"></a><span class="co"># Generate predictor variables</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-9" class="code-annotation-target"><a href="#annotated-cell-11-9"></a>x_reg <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">rand</span>(<span class="fu">Uniform</span>(<span class="fl">0</span>, <span class="fl">5</span>), n_obs))</span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10"></a></span>
+<span id="annotated-cell-11-11"><a href="#annotated-cell-11-11"></a><span class="co"># Generate response with linear relationship plus noise</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-12" class="code-annotation-target"><a href="#annotated-cell-11-12"></a>y_reg <span class="op">=</span> true_intercept <span class="op">.+</span> true_slope <span class="op">.*</span> x_reg <span class="op">.+</span> <span class="fu">rand</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, true_sigma), n_obs)</span>
+<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13"></a></span>
+<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14"></a><span class="co"># Store true parameter values for comparison</span></span>
+<span id="annotated-cell-11-15"><a href="#annotated-cell-11-15"></a>true_params <span class="op">=</span> (intercept<span class="op">=</span>true_intercept, slope<span class="op">=</span>true_slope, sigma<span class="op">=</span>true_sigma)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1">Set random seed for reproducible results</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="9" data-code-annotation="2">Generate sorted predictor values from uniform distribution</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="12" data-code-annotation="3">Generate response following <span class="math inline">\(y_i = \alpha + \beta x_i + \epsilon_i\)</span> where <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span></span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Let’s visualize our synthetic dataset:</p>
+<div id="cell-linear-regression-data-plot" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">function</span> <span class="fu">plot_synthetic_data</span>(x_data, y_data, true_params)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb3-4"><a href="#cb3-4"></a>        xlabel<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        title<span class="op">=</span><span class="st">"Synthetic Linear Regression Dataset"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="co"># Plot data points</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">8</span>, label<span class="op">=</span><span class="st">"Observed data"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co"># Plot true relationship</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length<span class="op">=</span><span class="fl">100</span>)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    y_true <span class="op">=</span> true_params.intercept <span class="op">.+</span> true_params.slope <span class="op">.*</span> x_line</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="fu">lines!</span>(ax, x_line, y_true, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">3</span>,</span>
+<span id="cb3-15"><a href="#cb3-15"></a>        label<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{True relationship: } </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(true_params.intercept)<span class="st"> + %</span><span class="sc">$</span>(true_params.slope)<span class="st"> x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="st">    # </span>Add<span class="st"> noise band to show true sigma</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    y_upper <span class="op">=</span> y_true <span class="op">.+</span> <span class="fl">2</span> <span class="op">*</span> true_params.sigma</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    y_lower <span class="op">=</span> y_true <span class="op">.-</span> <span class="fl">2</span> <span class="op">*</span> true_params.sigma</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="fu">band!</span>(ax, x_line, y_lower, y_upper, color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.2</span>),</span>
+<span id="cb3-21"><a href="#cb3-21"></a>        label<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>pm<span class="st"> 2 \sigma</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="st">    </span>axislegend<span class="st">(ax, position=:lt)</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>    <span class="cf">return</span> fig</span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="kw">end</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a>fig_data <span class="op">=</span> <span class="fu">plot_synthetic_data</span>(x_reg, y_reg, true_params)</span>
+<span id="cb3-28"><a href="#cb3-28"></a>fig_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/linear-regression-data-plot-output-1.svg" id="linear-regression-data-plot" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization shows our synthetic dataset with the true linear relationship and noise level. The scattered points represent our “observations,” while the red line shows the true underlying relationship we’re trying to recover. The shaded band indicates the expected range of observations given the noise level (<span class="math inline">\(\pm 2\sigma\)</span>).</p>
+</section>
+<section id="curve-fitting-by-minimizing-prediction-error" class="level3">
+<h3 class="anchored" data-anchor-id="curve-fitting-by-minimizing-prediction-error">Curve fitting by minimizing prediction error</h3>
+<p>Without probability theory, we can view regression as finding the line that best fits the data. This requires choosing a loss function to measure fit quality. The most common choice is mean squared error (<code>MSE</code>), which penalizes large prediction errors more than small ones. This is more of a “machine learning” perspective on the problem, and is one to which we return in <a href="../chapters/fundamentals/ml-nonparametric.html">the ML chapter</a>.</p>
+<div id="cell-linear-regression-curve-fitting" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="kw">function</span> <span class="fu">fit_least_squares</span>(x_data, y_data)</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2"></a>    n <span class="op">=</span> <span class="fu">length</span>(x_data)</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>    x_bar <span class="op">=</span> <span class="fu">mean</span>(x_data)</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>    y_bar <span class="op">=</span> <span class="fu">mean</span>(y_data)</span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a></span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>    <span class="co"># Analytical least squares formulas</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-7" class="code-annotation-target"><a href="#annotated-cell-13-7"></a>    slope <span class="op">=</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.*</span> (y_data <span class="op">.-</span> y_bar)) <span class="op">/</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.^</span> <span class="fl">2</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-8" class="code-annotation-target"><a href="#annotated-cell-13-8"></a>    intercept <span class="op">=</span> y_bar <span class="op">-</span> slope <span class="op">*</span> x_bar</span>
+<span id="annotated-cell-13-9"><a href="#annotated-cell-13-9"></a></span>
+<span id="annotated-cell-13-10"><a href="#annotated-cell-13-10"></a>    <span class="co"># Calculate residuals and MSE</span></span>
+<span id="annotated-cell-13-11"><a href="#annotated-cell-13-11"></a>    y_pred <span class="op">=</span> intercept <span class="op">.+</span> slope <span class="op">.*</span> x_data</span>
+<span id="annotated-cell-13-12"><a href="#annotated-cell-13-12"></a>    residuals <span class="op">=</span> y_data <span class="op">.-</span> y_pred</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-13" class="code-annotation-target"><a href="#annotated-cell-13-13"></a>    mse <span class="op">=</span> <span class="fu">mean</span>(residuals <span class="op">.^</span> <span class="fl">2</span>)</span>
+<span id="annotated-cell-13-14"><a href="#annotated-cell-13-14"></a></span>
+<span id="annotated-cell-13-15"><a href="#annotated-cell-13-15"></a>    <span class="cf">return</span> (intercept<span class="op">=</span>intercept, slope<span class="op">=</span>slope, mse<span class="op">=</span>mse, residuals<span class="op">=</span>residuals, predictions<span class="op">=</span>y_pred)</span>
+<span id="annotated-cell-13-16"><a href="#annotated-cell-13-16"></a><span class="kw">end</span></span>
+<span id="annotated-cell-13-17"><a href="#annotated-cell-13-17"></a></span>
+<span id="annotated-cell-13-18"><a href="#annotated-cell-13-18"></a><span class="kw">function</span> <span class="fu">plot_least_squares_fit</span>(x_data, y_data, fit_results)</span>
+<span id="annotated-cell-13-19"><a href="#annotated-cell-13-19"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="annotated-cell-13-20"><a href="#annotated-cell-13-20"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-13-21"><a href="#annotated-cell-13-21"></a>        xlabel<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="annotated-cell-13-22"><a href="#annotated-cell-13-22"></a>        ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="annotated-cell-13-23"><a href="#annotated-cell-13-23"></a>        title<span class="op">=</span><span class="st">"Least Squares Curve Fitting"</span>)</span>
+<span id="annotated-cell-13-24"><a href="#annotated-cell-13-24"></a></span>
+<span id="annotated-cell-13-25"><a href="#annotated-cell-13-25"></a>    <span class="co"># Plot data points</span></span>
+<span id="annotated-cell-13-26"><a href="#annotated-cell-13-26"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">8</span>, label<span class="op">=</span><span class="st">"Data"</span>)</span>
+<span id="annotated-cell-13-27"><a href="#annotated-cell-13-27"></a></span>
+<span id="annotated-cell-13-28"><a href="#annotated-cell-13-28"></a>    <span class="co"># Plot fitted line</span></span>
+<span id="annotated-cell-13-29"><a href="#annotated-cell-13-29"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length<span class="op">=</span><span class="fl">100</span>)</span>
+<span id="annotated-cell-13-30"><a href="#annotated-cell-13-30"></a>    y_line <span class="op">=</span> fit_results.intercept <span class="op">.+</span> fit_results.slope <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-13-31"><a href="#annotated-cell-13-31"></a>    <span class="fu">lines!</span>(ax, x_line, y_line, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="annotated-cell-13-32"><a href="#annotated-cell-13-32"></a>        label<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Fitted line:} </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(<span class="fu">round</span>(fit_results.intercept, digits<span class="op">=</span><span class="fl">2</span>))<span class="st"> + %</span><span class="sc">$</span>(<span class="fu">round</span>(fit_results.slope, digits<span class="op">=</span><span class="fl">2</span>))<span class="st"> x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="annotated-cell-13-33"><a href="#annotated-cell-13-33"></a></span>
+<span id="annotated-cell-13-34"><a href="#annotated-cell-13-34"></a><span class="st">    # </span>Show<span class="st"> residuals as vertical lines</span></span>
+<span id="annotated-cell-13-35"><a href="#annotated-cell-13-35"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x_data)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="5">5</button><span id="annotated-cell-13-36" class="code-annotation-target"><a href="#annotated-cell-13-36"></a>        <span class="fu">lines!</span>(ax, [x_data[i], x_data[i]], [y_data[i], fit_results.predictions[i]],</span>
+<span id="annotated-cell-13-37"><a href="#annotated-cell-13-37"></a>            color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.7</span>, linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="annotated-cell-13-38"><a href="#annotated-cell-13-38"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-13-39"><a href="#annotated-cell-13-39"></a></span>
+<span id="annotated-cell-13-40"><a href="#annotated-cell-13-40"></a>    <span class="co"># Add true line for comparison</span></span>
+<span id="annotated-cell-13-41"><a href="#annotated-cell-13-41"></a>    y_true_line <span class="op">=</span> true_params.intercept <span class="op">.+</span> true_params.slope <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-13-42"><a href="#annotated-cell-13-42"></a>    <span class="fu">lines!</span>(ax, x_line, y_true_line, color<span class="op">=:</span>green, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dot,</span>
+<span id="annotated-cell-13-43"><a href="#annotated-cell-13-43"></a>        label<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{True line: } </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(true_params.intercept)<span class="st"> + %</span><span class="sc">$</span>(true_params.slope)<span class="st">x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="annotated-cell-13-44"><a href="#annotated-cell-13-44"></a></span>
+<span id="annotated-cell-13-45"><a href="#annotated-cell-13-45"></a><span class="st">    </span>axislegend<span class="st">(ax, position=:lt)</span></span>
+<span id="annotated-cell-13-46"><a href="#annotated-cell-13-46"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-13-47"><a href="#annotated-cell-13-47"></a><span class="kw">end</span></span>
+<span id="annotated-cell-13-48"><a href="#annotated-cell-13-48"></a></span>
+<span id="annotated-cell-13-49"><a href="#annotated-cell-13-49"></a><span class="co"># Fit the model and create visualization</span></span>
+<span id="annotated-cell-13-50"><a href="#annotated-cell-13-50"></a>ols_fit <span class="op">=</span> <span class="fu">fit_least_squares</span>(x_reg, y_reg)</span>
+<span id="annotated-cell-13-51"><a href="#annotated-cell-13-51"></a>fig_curve_fit <span class="op">=</span> <span class="fu">plot_least_squares_fit</span>(x_reg, y_reg, ols_fit)</span>
+<span id="annotated-cell-13-52"><a href="#annotated-cell-13-52"></a>fig_curve_fit</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1">Calculate least squares estimates using analytical formulas</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="7" data-code-annotation="2">Slope: <span class="math inline">\(\hat{\beta} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="8" data-code-annotation="3">Intercept: <span class="math inline">\(\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}\)</span> (fitted line passes through centroid)</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="13" data-code-annotation="4">Mean squared error quantifies overall fit quality</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="36" data-code-annotation="5">Residual lines show prediction errors for each observation</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/linear-regression-curve-fitting-output-1.svg" id="linear-regression-curve-fitting" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The least squares method finds parameter estimates close to the true values. The residual lines visualize the model’s prediction errors, with shorter lines indicating better fit.</p>
+</section>
+<section id="maximum-likelihood-estimation-1" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation-1">Maximum likelihood estimation</h3>
+<p>The curve fitting approach works but provides no way to quantify uncertainty in our parameter estimates. By introducing a probabilistic model, we can use maximum likelihood estimation to both estimate parameters and assess their precision.</p>
+<p>For linear regression, we assume the response follows a normal distribution around the linear predictor:</p>
+<p><span class="math display">\[
+y_i \sim N(\alpha + \beta x_i, \sigma^2)
+\]</span></p>
+<p>as discussed in the theory section. Using the <code>Optim</code> package, we can numerically maximize the likelihood function to find the <code>MLE</code> estimates for <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\sigma\)</span>. In <code>Optim</code>, all functions are minimized, so we minimize the negative log-likelihood instead.</p>
+<div id="linear-regression-mle" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1"></a><span class="kw">function</span> <span class="fu">negative_log_likelihood</span>(params, x_data, y_data)</span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a>    α, β, σ <span class="op">=</span> params</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2">2</button><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3"></a>    <span class="cf">if</span> σ <span class="op">&lt;=</span> <span class="fl">0</span></span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4"></a>        <span class="cf">return</span> <span class="cn">Inf</span></span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6"></a></span>
+<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7"></a>    <span class="co"># Calculate predicted values</span></span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8"></a>    μ <span class="op">=</span> α <span class="op">.+</span> β <span class="op">.*</span> x_data</span>
+<span id="annotated-cell-14-9"><a href="#annotated-cell-14-9"></a></span>
+<span id="annotated-cell-14-10"><a href="#annotated-cell-14-10"></a>    <span class="co"># Sum of negative log-likelihoods for each observation</span></span>
+<span id="annotated-cell-14-11"><a href="#annotated-cell-14-11"></a>    nll <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="annotated-cell-14-12"><a href="#annotated-cell-14-12"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(y_data)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3">3</button><span id="annotated-cell-14-13" class="code-annotation-target"><a href="#annotated-cell-14-13"></a>        nll <span class="op">+=</span> <span class="fu">-logpdf</span>(<span class="fu">Normal</span>(μ[i], σ), y_data[i])</span>
+<span id="annotated-cell-14-14"><a href="#annotated-cell-14-14"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-14-15"><a href="#annotated-cell-14-15"></a>    <span class="cf">return</span> nll</span>
+<span id="annotated-cell-14-16"><a href="#annotated-cell-14-16"></a><span class="kw">end</span></span>
+<span id="annotated-cell-14-17"><a href="#annotated-cell-14-17"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="4">4</button><span id="annotated-cell-14-18" class="code-annotation-target"><a href="#annotated-cell-14-18"></a><span class="kw">function</span> <span class="fu">find_mle_estimates</span>(x_data, y_data; initial_guess<span class="op">=</span>[<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>])</span>
+<span id="annotated-cell-14-19"><a href="#annotated-cell-14-19"></a>    <span class="co"># Use optimization to find MLE</span></span>
+<span id="annotated-cell-14-20"><a href="#annotated-cell-14-20"></a>    result <span class="op">=</span> <span class="fu">optimize</span>(params <span class="op">-&gt;</span> <span class="fu">negative_log_likelihood</span>(params, x_data, y_data),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="5">5</button><span id="annotated-cell-14-21" class="code-annotation-target"><a href="#annotated-cell-14-21"></a>        initial_guess, <span class="fu">NelderMead</span>())</span>
+<span id="annotated-cell-14-22"><a href="#annotated-cell-14-22"></a></span>
+<span id="annotated-cell-14-23"><a href="#annotated-cell-14-23"></a>    <span class="cf">if</span> !Optim.<span class="fu">converged</span>(result)</span>
+<span id="annotated-cell-14-24"><a href="#annotated-cell-14-24"></a>        <span class="pp">@warn</span> <span class="st">"MLE optimization did not converge"</span></span>
+<span id="annotated-cell-14-25"><a href="#annotated-cell-14-25"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-14-26"><a href="#annotated-cell-14-26"></a></span>
+<span id="annotated-cell-14-27"><a href="#annotated-cell-14-27"></a>    mle_params <span class="op">=</span> Optim.<span class="fu">minimizer</span>(result)</span>
+<span id="annotated-cell-14-28"><a href="#annotated-cell-14-28"></a>    <span class="cf">return</span> (intercept<span class="op">=</span>mle_params[<span class="fl">1</span>], slope<span class="op">=</span>mle_params[<span class="fl">2</span>], sigma<span class="op">=</span>mle_params[<span class="fl">3</span>])</span>
+<span id="annotated-cell-14-29"><a href="#annotated-cell-14-29"></a><span class="kw">end</span></span>
+<span id="annotated-cell-14-30"><a href="#annotated-cell-14-30"></a></span>
+<span id="annotated-cell-14-31"><a href="#annotated-cell-14-31"></a><span class="co"># Find MLE estimates</span></span>
+<span id="annotated-cell-14-32"><a href="#annotated-cell-14-32"></a>mle_estimates <span class="op">=</span> <span class="fu">find_mle_estimates</span>(x_reg, y_reg)</span>
+<span id="annotated-cell-14-33"><a href="#annotated-cell-14-33"></a></span>
+<span id="annotated-cell-14-34"><a href="#annotated-cell-14-34"></a><span class="fu">println</span>(<span class="st">"MLE Estimates:"</span>)</span>
+<span id="annotated-cell-14-35"><a href="#annotated-cell-14-35"></a><span class="fu">println</span>(<span class="st">"  Intercept: </span><span class="sc">$</span>(<span class="fu">round</span>(mle_estimates.intercept, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-14-36"><a href="#annotated-cell-14-36"></a><span class="fu">println</span>(<span class="st">"  Slope: </span><span class="sc">$</span>(<span class="fu">round</span>(mle_estimates.slope, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-14-37"><a href="#annotated-cell-14-37"></a><span class="fu">println</span>(<span class="st">"  Sigma: </span><span class="sc">$</span>(<span class="fu">round</span>(mle_estimates.sigma, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-14-38"><a href="#annotated-cell-14-38"></a><span class="fu">println</span>()</span>
+<span id="annotated-cell-14-39"><a href="#annotated-cell-14-39"></a><span class="fu">println</span>(<span class="st">"True Parameters:"</span>)</span>
+<span id="annotated-cell-14-40"><a href="#annotated-cell-14-40"></a><span class="fu">println</span>(<span class="st">"  Intercept: </span><span class="sc">$</span>(true_params.intercept)<span class="st">"</span>)</span>
+<span id="annotated-cell-14-41"><a href="#annotated-cell-14-41"></a><span class="fu">println</span>(<span class="st">"  Slope: </span><span class="sc">$</span>(true_params.slope)<span class="st">"</span>)</span>
+<span id="annotated-cell-14-42"><a href="#annotated-cell-14-42"></a><span class="fu">println</span>(<span class="st">"  Sigma: </span><span class="sc">$</span>(true_params.sigma)<span class="st">"</span>)</span>
+<span id="annotated-cell-14-43"><a href="#annotated-cell-14-43"></a><span class="fu">println</span>()</span>
+<span id="annotated-cell-14-44"><a href="#annotated-cell-14-44"></a><span class="fu">println</span>(<span class="st">"Least Squares Estimates (for comparison):"</span>)</span>
+<span id="annotated-cell-14-45"><a href="#annotated-cell-14-45"></a><span class="fu">println</span>(<span class="st">"  Intercept: </span><span class="sc">$</span>(<span class="fu">round</span>(ols_fit.intercept, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-14-46"><a href="#annotated-cell-14-46"></a><span class="fu">println</span>(<span class="st">"  Slope: </span><span class="sc">$</span>(<span class="fu">round</span>(ols_fit.slope, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Negative log-likelihood function for optimization (we minimize this)</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="2">Enforce constraint that <span class="math inline">\(\sigma &gt; 0\)</span> by returning infinite cost for invalid values</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="13" data-code-annotation="3">Sum negative log-likelihoods: <span class="math inline">\(-\sum_i \log p(y_i | \alpha + \beta x_i, \sigma)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="18" data-code-annotation="4">Function to find <code>MLE</code> using numerical optimization</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="21" data-code-annotation="5">Use Nelder-Mead simplex algorithm for unconstrained optimization</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MLE Estimates:
+  Intercept: 1.92
+  Slope: 1.545
+  Sigma: 0.796
+
+True Parameters:
+  Intercept: 2.0
+  Slope: 1.5
+  Sigma: 0.8
+
+Least Squares Estimates (for comparison):
+  Intercept: 1.92
+  Slope: 1.545</code></pre>
+</div>
+</div>
+<p>The <code>MLE</code> estimates for the intercept and slope match the least squares results exactly. This confirms the theoretical result that for linear regression with normal errors, maximum likelihood estimation is equivalent to minimizing mean squared error. The <code>MLE</code> approach additionally estimates <span class="math inline">\(\sigma\)</span>, quantifying the noise level in the data.</p>
+</section>
+<section id="bayesian-inference" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-inference">Bayesian inference</h3>
+<p>Bayesian inference treats all parameters as random variables with probability distributions. We specify prior beliefs, observe data, and compute posterior distributions that quantify parameter uncertainty.</p>
+<div id="linear-regression-bayesian" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1"></a><span class="co"># Define Turing.jl model for Bayesian linear regression</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-2" class="code-annotation-target"><a href="#annotated-cell-15-2"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">linear_regression_model</span>(x, y)</span>
+<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3"></a>    n <span class="op">=</span> <span class="fu">length</span>(y)</span>
+<span id="annotated-cell-15-4"><a href="#annotated-cell-15-4"></a></span>
+<span id="annotated-cell-15-5"><a href="#annotated-cell-15-5"></a>    <span class="co"># Priors</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-6" class="code-annotation-target"><a href="#annotated-cell-15-6"></a>    α <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="3">3</button><span id="annotated-cell-15-7" class="code-annotation-target"><a href="#annotated-cell-15-7"></a>    β <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="4">4</button><span id="annotated-cell-15-8" class="code-annotation-target"><a href="#annotated-cell-15-8"></a>    σ <span class="op">~</span> <span class="fu">Exponential</span>(<span class="fl">1</span>)</span>
+<span id="annotated-cell-15-9"><a href="#annotated-cell-15-9"></a></span>
+<span id="annotated-cell-15-10"><a href="#annotated-cell-15-10"></a>    <span class="co"># Likelihood</span></span>
+<span id="annotated-cell-15-11"><a href="#annotated-cell-15-11"></a>    μ <span class="op">=</span> α <span class="op">.+</span> β <span class="op">.*</span> x</span>
+<span id="annotated-cell-15-12"><a href="#annotated-cell-15-12"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="5">5</button><span id="annotated-cell-15-13" class="code-annotation-target"><a href="#annotated-cell-15-13"></a>        y[i] <span class="op">~</span> <span class="fu">Normal</span>(μ[i], σ)</span>
+<span id="annotated-cell-15-14"><a href="#annotated-cell-15-14"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-15-15"><a href="#annotated-cell-15-15"></a><span class="kw">end</span></span>
+<span id="annotated-cell-15-16"><a href="#annotated-cell-15-16"></a></span>
+<span id="annotated-cell-15-17"><a href="#annotated-cell-15-17"></a><span class="kw">function</span> <span class="fu">run_bayesian_regression</span>(x_data, y_data; n_samples<span class="op">=</span><span class="fl">5000</span>)</span>
+<span id="annotated-cell-15-18"><a href="#annotated-cell-15-18"></a>    <span class="co"># Create model instance</span></span>
+<span id="annotated-cell-15-19"><a href="#annotated-cell-15-19"></a>    model <span class="op">=</span> <span class="fu">linear_regression_model</span>(x_data, y_data)</span>
+<span id="annotated-cell-15-20"><a href="#annotated-cell-15-20"></a></span>
+<span id="annotated-cell-15-21"><a href="#annotated-cell-15-21"></a>    <span class="co"># Sample from posterior using NUTS</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="6">6</button><span id="annotated-cell-15-22" class="code-annotation-target"><a href="#annotated-cell-15-22"></a>    chain <span class="op">=</span> <span class="fu">sample</span>(model, <span class="fu">NUTS</span>(), n_samples, verbose<span class="op">=</span><span class="cn">false</span>, progress<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="annotated-cell-15-23"><a href="#annotated-cell-15-23"></a></span>
+<span id="annotated-cell-15-24"><a href="#annotated-cell-15-24"></a>    <span class="cf">return</span> chain</span>
+<span id="annotated-cell-15-25"><a href="#annotated-cell-15-25"></a><span class="kw">end</span></span>
+<span id="annotated-cell-15-26"><a href="#annotated-cell-15-26"></a></span>
+<span id="annotated-cell-15-27"><a href="#annotated-cell-15-27"></a><span class="co"># Run Bayesian inference  </span></span>
+<span id="annotated-cell-15-28"><a href="#annotated-cell-15-28"></a>bayesian_chain <span class="op">=</span> <span class="fu">run_bayesian_regression</span>(x_reg, y_reg)</span>
+<span id="annotated-cell-15-29"><a href="#annotated-cell-15-29"></a></span>
+<span id="annotated-cell-15-30"><a href="#annotated-cell-15-30"></a><span class="co"># Extract posterior samples</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="7">7</button><span id="annotated-cell-15-31" class="code-annotation-target"><a href="#annotated-cell-15-31"></a>α_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chain[<span class="op">:</span>α]))</span>
+<span id="annotated-cell-15-32"><a href="#annotated-cell-15-32"></a>β_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chain[<span class="op">:</span>β]))</span>
+<span id="annotated-cell-15-33"><a href="#annotated-cell-15-33"></a>σ_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chain[<span class="op">:</span>σ]))</span>
+<span id="annotated-cell-15-34"><a href="#annotated-cell-15-34"></a></span>
+<span id="annotated-cell-15-35"><a href="#annotated-cell-15-35"></a><span class="co"># Calculate posterior summaries</span></span>
+<span id="annotated-cell-15-36"><a href="#annotated-cell-15-36"></a>bayesian_estimates <span class="op">=</span> (</span>
+<span id="annotated-cell-15-37"><a href="#annotated-cell-15-37"></a>    intercept<span class="op">=</span>(mean<span class="op">=</span><span class="fu">mean</span>(α_samples), std<span class="op">=</span><span class="fu">std</span>(α_samples)),</span>
+<span id="annotated-cell-15-38"><a href="#annotated-cell-15-38"></a>    slope<span class="op">=</span>(mean<span class="op">=</span><span class="fu">mean</span>(β_samples), std<span class="op">=</span><span class="fu">std</span>(β_samples)),</span>
+<span id="annotated-cell-15-39"><a href="#annotated-cell-15-39"></a>    sigma<span class="op">=</span>(mean<span class="op">=</span><span class="fu">mean</span>(σ_samples), std<span class="op">=</span><span class="fu">std</span>(σ_samples))</span>
+<span id="annotated-cell-15-40"><a href="#annotated-cell-15-40"></a>)</span>
+<span id="annotated-cell-15-41"><a href="#annotated-cell-15-41"></a></span>
+<span id="annotated-cell-15-42"><a href="#annotated-cell-15-42"></a><span class="fu">println</span>(<span class="st">"Bayesian Posterior Summaries:"</span>)</span>
+<span id="annotated-cell-15-43"><a href="#annotated-cell-15-43"></a><span class="fu">println</span>(<span class="st">"  Intercept: </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.intercept.mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st"> ± </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.intercept.std, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-15-44"><a href="#annotated-cell-15-44"></a><span class="fu">println</span>(<span class="st">"  Slope: </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.slope.mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st"> ± </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.slope.std, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-15-45"><a href="#annotated-cell-15-45"></a><span class="fu">println</span>(<span class="st">"  Sigma: </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.sigma.mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st"> ± </span><span class="sc">$</span>(<span class="fu">round</span>(bayesian_estimates.sigma.std, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="2" data-code-annotation="1">Turing.jl probabilistic programming model using <code>@model</code> macro</span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="6" data-code-annotation="2">Weakly informative prior for intercept: <span class="math inline">\(\alpha \sim N(0, 5^2)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="7" data-code-annotation="3">Weakly informative prior for slope: <span class="math inline">\(\beta \sim N(0, 5^2)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="8" data-code-annotation="4">Exponential prior for noise standard deviation: <span class="math inline">\(\sigma \sim \text{Exp}(1)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="13" data-code-annotation="5">Likelihood specification: each <span class="math inline">\(y_i \sim N(\alpha + \beta x_i, \sigma)\)</span></span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="22" data-code-annotation="6">Sample from posterior using No-U-Turn Sampler (<code>NUTS</code>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="31" data-code-annotation="7">Extract parameter samples from MCMC chain and flatten to vectors</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.0125
+Bayesian Posterior Summaries:
+  Intercept: 1.912 ± 0.28
+  Slope: 1.546 ± 0.101
+  Sigma: 0.846 ± 0.12
+</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="mle-with-turing" class="level3">
+<h3 class="anchored" data-anchor-id="mle-with-turing">MLE with Turing</h3>
+<p>We can also use <code>Turing.jl</code> to find the <code>MLE</code> by optimizing the model instead of sampling. This demonstrates how the same probabilistic model can be used for both optimization-based and sampling-based inference.</p>
+<div id="linear-regression-mle-turing" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a><span class="co"># Use the same Turing model but optimize instead of sample</span></span>
+<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2"></a><span class="kw">function</span> <span class="fu">find_turing_mle</span>(x_data, y_data)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-3" class="code-annotation-target"><a href="#annotated-cell-16-3"></a>    model <span class="op">=</span> <span class="fu">linear_regression_model</span>(x_data, y_data)</span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a></span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5"></a>    <span class="co"># Find MAP estimate using optimization</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-6" class="code-annotation-target"><a href="#annotated-cell-16-6"></a>    mle_result <span class="op">=</span> <span class="fu">optimize</span>(model, <span class="fu">MAP</span>())</span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7"></a></span>
+<span id="annotated-cell-16-8"><a href="#annotated-cell-16-8"></a>    <span class="co"># Extract parameter estimates</span></span>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9"></a>    estimates <span class="op">=</span> (</span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10"></a>        intercept<span class="op">=</span>mle_result.values[<span class="op">:</span>α],</span>
+<span id="annotated-cell-16-11"><a href="#annotated-cell-16-11"></a>        slope<span class="op">=</span>mle_result.values[<span class="op">:</span>β],</span>
+<span id="annotated-cell-16-12"><a href="#annotated-cell-16-12"></a>        sigma<span class="op">=</span>mle_result.values[<span class="op">:</span>σ]</span>
+<span id="annotated-cell-16-13"><a href="#annotated-cell-16-13"></a>    )</span>
+<span id="annotated-cell-16-14"><a href="#annotated-cell-16-14"></a></span>
+<span id="annotated-cell-16-15"><a href="#annotated-cell-16-15"></a>    <span class="cf">return</span> estimates</span>
+<span id="annotated-cell-16-16"><a href="#annotated-cell-16-16"></a><span class="kw">end</span></span>
+<span id="annotated-cell-16-17"><a href="#annotated-cell-16-17"></a></span>
+<span id="annotated-cell-16-18"><a href="#annotated-cell-16-18"></a><span class="co"># Find MLE using Turing optimization</span></span>
+<span id="annotated-cell-16-19"><a href="#annotated-cell-16-19"></a>turing_mle <span class="op">=</span> <span class="fu">find_turing_mle</span>(x_reg, y_reg)</span>
+<span id="annotated-cell-16-20"><a href="#annotated-cell-16-20"></a></span>
+<span id="annotated-cell-16-21"><a href="#annotated-cell-16-21"></a><span class="fu">println</span>(<span class="st">"Turing MLE Estimates:"</span>)</span>
+<span id="annotated-cell-16-22"><a href="#annotated-cell-16-22"></a><span class="fu">println</span>(<span class="st">"  Intercept: </span><span class="sc">$</span>(<span class="fu">round</span>(turing_mle.intercept, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-16-23"><a href="#annotated-cell-16-23"></a><span class="fu">println</span>(<span class="st">"  Slope: </span><span class="sc">$</span>(<span class="fu">round</span>(turing_mle.slope, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-16-24"><a href="#annotated-cell-16-24"></a><span class="fu">println</span>(<span class="st">"  Sigma: </span><span class="sc">$</span>(<span class="fu">round</span>(turing_mle.sigma, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-16-25"><a href="#annotated-cell-16-25"></a><span class="fu">println</span>()</span>
+<span id="annotated-cell-16-26"><a href="#annotated-cell-16-26"></a><span class="fu">println</span>(<span class="st">"Comparison with Manual MLE:"</span>)</span>
+<span id="annotated-cell-16-27"><a href="#annotated-cell-16-27"></a><span class="fu">println</span>(<span class="st">"  Intercept difference: </span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">abs</span>(turing_mle.intercept <span class="op">-</span> mle_estimates.intercept), digits<span class="op">=</span><span class="fl">6</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-16-28"><a href="#annotated-cell-16-28"></a><span class="fu">println</span>(<span class="st">"  Slope difference: </span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">abs</span>(turing_mle.slope <span class="op">-</span> mle_estimates.slope), digits<span class="op">=</span><span class="fl">6</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-16-29"><a href="#annotated-cell-16-29"></a><span class="fu">println</span>(<span class="st">"  Sigma difference: </span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">abs</span>(turing_mle.sigma <span class="op">-</span> mle_estimates.sigma), digits<span class="op">=</span><span class="fl">6</span>))<span class="st">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="3" data-code-annotation="1">Use the same probabilistic model defined earlier for Bayesian inference</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="6" data-code-annotation="2">Optimize using <code>MAP()</code> (Maximum A Posteriori) which reduces to <code>MLE</code> with flat priors</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Turing MLE Estimates:
+  Intercept: 1.916
+  Slope: 1.546
+  Sigma: 0.785
+
+Comparison with Manual MLE:
+  Intercept difference: 0.004083
+  Slope difference: 0.001082
+  Sigma difference: 0.010205</code></pre>
+</div>
+</div>
+<p>This approach shows that <code>Turing.jl</code> provides a unified framework: the same model definition can be used for both <code>MLE</code> optimization and <code>MCMC</code> sampling. The results should match our manual <code>MLE</code> implementation, demonstrating the consistency between different computational approaches, although small numerical differences may arise due to optimization tolerances.</p>
+</section>
+<section id="comparison-of-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-approaches">Comparison of approaches</h3>
+<p>All three approaches provide similar point estimates, but differ in their treatment of uncertainty:</p>
+<div id="cell-linear-regression-comparison" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1"></a><span class="kw">function</span> <span class="fu">create_regression_comparison_plot</span>()</span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">1200</span>, <span class="fl">800</span>))</span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3"></a></span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4"></a>    <span class="co"># Data and fits subplot</span></span>
+<span id="annotated-cell-17-5"><a href="#annotated-cell-17-5"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>],</span>
+<span id="annotated-cell-17-6"><a href="#annotated-cell-17-6"></a>        xlabel<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="annotated-cell-17-7"><a href="#annotated-cell-17-7"></a>        ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="annotated-cell-17-8"><a href="#annotated-cell-17-8"></a>        title<span class="op">=</span><span class="st">"Regression Results: All Methods"</span>)</span>
+<span id="annotated-cell-17-9"><a href="#annotated-cell-17-9"></a></span>
+<span id="annotated-cell-17-10"><a href="#annotated-cell-17-10"></a>    <span class="co"># Plot data</span></span>
+<span id="annotated-cell-17-11"><a href="#annotated-cell-17-11"></a>    <span class="fu">scatter!</span>(ax1, x_reg, y_reg, color<span class="op">=:</span>black, markersize<span class="op">=</span><span class="fl">6</span>, label<span class="op">=</span><span class="st">"Data"</span>)</span>
+<span id="annotated-cell-17-12"><a href="#annotated-cell-17-12"></a></span>
+<span id="annotated-cell-17-13"><a href="#annotated-cell-17-13"></a>    <span class="co"># Plot true relationship</span></span>
+<span id="annotated-cell-17-14"><a href="#annotated-cell-17-14"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_reg), <span class="fu">maximum</span>(x_reg), length<span class="op">=</span><span class="fl">100</span>)</span>
+<span id="annotated-cell-17-15"><a href="#annotated-cell-17-15"></a>    y_true <span class="op">=</span> true_params.intercept <span class="op">.+</span> true_params.slope <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-17-16"><a href="#annotated-cell-17-16"></a>    <span class="fu">lines!</span>(ax1, x_line, y_true, color<span class="op">=:</span>green, linewidth<span class="op">=</span><span class="fl">3</span>,</span>
+<span id="annotated-cell-17-17"><a href="#annotated-cell-17-17"></a>        label<span class="op">=</span><span class="st">"True: y = </span><span class="sc">$</span>(true_params.intercept)<span class="st"> + </span><span class="sc">$</span>(true_params.slope)<span class="st">x"</span>)</span>
+<span id="annotated-cell-17-18"><a href="#annotated-cell-17-18"></a></span>
+<span id="annotated-cell-17-19"><a href="#annotated-cell-17-19"></a>    <span class="co"># Plot least squares fit</span></span>
+<span id="annotated-cell-17-20"><a href="#annotated-cell-17-20"></a>    y_ols <span class="op">=</span> ols_fit.intercept <span class="op">.+</span> ols_fit.slope <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-17-21"><a href="#annotated-cell-17-21"></a>    <span class="fu">lines!</span>(ax1, x_line, y_ols, color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="annotated-cell-17-22"><a href="#annotated-cell-17-22"></a>        label<span class="op">=</span><span class="st">"Least squares"</span>)</span>
+<span id="annotated-cell-17-23"><a href="#annotated-cell-17-23"></a></span>
+<span id="annotated-cell-17-24"><a href="#annotated-cell-17-24"></a>    <span class="co"># Plot MLE fit  </span></span>
+<span id="annotated-cell-17-25"><a href="#annotated-cell-17-25"></a>    y_mle <span class="op">=</span> mle_estimates.intercept <span class="op">.+</span> mle_estimates.slope <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-17-26"><a href="#annotated-cell-17-26"></a>    <span class="fu">lines!</span>(ax1, x_line, y_mle, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash,</span>
+<span id="annotated-cell-17-27"><a href="#annotated-cell-17-27"></a>        label<span class="op">=</span><span class="st">"MLE"</span>)</span>
+<span id="annotated-cell-17-28"><a href="#annotated-cell-17-28"></a></span>
+<span id="annotated-cell-17-29"><a href="#annotated-cell-17-29"></a>    <span class="co"># Plot Bayesian posterior mean and credible interval</span></span>
+<span id="annotated-cell-17-30"><a href="#annotated-cell-17-30"></a>    y_bayes <span class="op">=</span> bayesian_estimates.intercept.mean <span class="op">.+</span> bayesian_estimates.slope.mean <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-17-31"><a href="#annotated-cell-17-31"></a>    <span class="fu">lines!</span>(ax1, x_line, y_bayes, color<span class="op">=:</span>purple, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dot,</span>
+<span id="annotated-cell-17-32"><a href="#annotated-cell-17-32"></a>        label<span class="op">=</span><span class="st">"Bayesian mean"</span>)</span>
+<span id="annotated-cell-17-33"><a href="#annotated-cell-17-33"></a></span>
+<span id="annotated-cell-17-34"><a href="#annotated-cell-17-34"></a>    <span class="co"># Calculate 95% credible interval for predictions</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-35" class="code-annotation-target"><a href="#annotated-cell-17-35"></a>    n_pred_samples <span class="op">=</span> <span class="fu">min</span>(<span class="fl">1000</span>, <span class="fu">length</span>(α_samples))</span>
+<span id="annotated-cell-17-36"><a href="#annotated-cell-17-36"></a>    y_pred_samples <span class="op">=</span> <span class="fu">zeros</span>(<span class="fu">length</span>(x_line), n_pred_samples)</span>
+<span id="annotated-cell-17-37"><a href="#annotated-cell-17-37"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_pred_samples</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-38" class="code-annotation-target"><a href="#annotated-cell-17-38"></a>        y_pred_samples[<span class="op">:</span>, i] <span class="op">=</span> α_samples[i] <span class="op">.+</span> β_samples[i] <span class="op">.*</span> x_line</span>
+<span id="annotated-cell-17-39"><a href="#annotated-cell-17-39"></a>    <span class="cf">end</span></span>
+<span id="annotated-cell-17-40"><a href="#annotated-cell-17-40"></a></span>
+<span id="annotated-cell-17-41"><a href="#annotated-cell-17-41"></a>    <span class="co"># Calculate percentiles for credible band</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="3">3</button><span id="annotated-cell-17-42" class="code-annotation-target"><a href="#annotated-cell-17-42"></a>    y_lower <span class="op">=</span> [<span class="fu">quantile</span>(y_pred_samples[i, <span class="op">:</span>], <span class="fl">0.025</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x_line)]</span>
+<span id="annotated-cell-17-43"><a href="#annotated-cell-17-43"></a>    y_upper <span class="op">=</span> [<span class="fu">quantile</span>(y_pred_samples[i, <span class="op">:</span>], <span class="fl">0.975</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x_line)]</span>
+<span id="annotated-cell-17-44"><a href="#annotated-cell-17-44"></a></span>
+<span id="annotated-cell-17-45"><a href="#annotated-cell-17-45"></a>    <span class="co"># Add credible interval band</span></span>
+<span id="annotated-cell-17-46"><a href="#annotated-cell-17-46"></a>    <span class="fu">band!</span>(ax1, x_line, y_lower, y_upper, color<span class="op">=</span>(<span class="op">:</span>purple, <span class="fl">0.2</span>),</span>
+<span id="annotated-cell-17-47"><a href="#annotated-cell-17-47"></a>        label<span class="op">=</span><span class="st">"95% credible interval"</span>)</span>
+<span id="annotated-cell-17-48"><a href="#annotated-cell-17-48"></a></span>
+<span id="annotated-cell-17-49"><a href="#annotated-cell-17-49"></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>lt)</span>
+<span id="annotated-cell-17-50"><a href="#annotated-cell-17-50"></a></span>
+<span id="annotated-cell-17-51"><a href="#annotated-cell-17-51"></a>    <span class="co"># Posterior distributions subplot</span></span>
+<span id="annotated-cell-17-52"><a href="#annotated-cell-17-52"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>],</span>
+<span id="annotated-cell-17-53"><a href="#annotated-cell-17-53"></a>        xlabel<span class="op">=</span>L<span class="st">"Intercept </span><span class="sc">$</span><span class="st">\</span>alpha<span class="sc">$</span><span class="st">",</span></span>
+<span id="annotated-cell-17-54"><a href="#annotated-cell-17-54"></a><span class="st">        </span>ylabel<span class="st">="</span>Density<span class="st">",</span></span>
+<span id="annotated-cell-17-55"><a href="#annotated-cell-17-55"></a>        title<span class="op">=</span><span class="st">"Parameter Uncertainty"</span>)</span>
+<span id="annotated-cell-17-56"><a href="#annotated-cell-17-56"></a></span>
+<span id="annotated-cell-17-57"><a href="#annotated-cell-17-57"></a>    <span class="fu">hist!</span>(ax2, <span class="fu">vec</span>(α_samples), bins<span class="op">=</span><span class="fl">30</span>, normalization<span class="op">=:</span>pdf,</span>
+<span id="annotated-cell-17-58"><a href="#annotated-cell-17-58"></a>        color<span class="op">=</span>(<span class="op">:</span>purple, <span class="fl">0.6</span>), label<span class="op">=</span><span class="st">"Posterior"</span>)</span>
+<span id="annotated-cell-17-59"><a href="#annotated-cell-17-59"></a>    <span class="fu">vlines!</span>(ax2, [true_params.intercept], color<span class="op">=:</span>green, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="annotated-cell-17-60"><a href="#annotated-cell-17-60"></a>        label<span class="op">=</span><span class="st">"True value"</span>)</span>
+<span id="annotated-cell-17-61"><a href="#annotated-cell-17-61"></a>    <span class="fu">vlines!</span>(ax2, [mle_estimates.intercept], color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="annotated-cell-17-62"><a href="#annotated-cell-17-62"></a>        label<span class="op">=</span><span class="st">"MLE"</span>)</span>
+<span id="annotated-cell-17-63"><a href="#annotated-cell-17-63"></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rt)</span>
+<span id="annotated-cell-17-64"><a href="#annotated-cell-17-64"></a></span>
+<span id="annotated-cell-17-65"><a href="#annotated-cell-17-65"></a>    ax3 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">2</span>],</span>
+<span id="annotated-cell-17-66"><a href="#annotated-cell-17-66"></a>        xlabel<span class="op">=</span>L<span class="st">"Slope </span><span class="sc">$</span><span class="st">\</span>beta<span class="sc">$</span><span class="st">",</span></span>
+<span id="annotated-cell-17-67"><a href="#annotated-cell-17-67"></a><span class="st">        </span>ylabel<span class="st">="</span>Density<span class="st">")</span></span>
+<span id="annotated-cell-17-68"><a href="#annotated-cell-17-68"></a></span>
+<span id="annotated-cell-17-69"><a href="#annotated-cell-17-69"></a>    <span class="fu">hist!</span>(ax3, <span class="fu">vec</span>(β_samples), bins<span class="op">=</span><span class="fl">30</span>, normalization<span class="op">=:</span>pdf,</span>
+<span id="annotated-cell-17-70"><a href="#annotated-cell-17-70"></a>        color<span class="op">=</span>(<span class="op">:</span>purple, <span class="fl">0.6</span>))</span>
+<span id="annotated-cell-17-71"><a href="#annotated-cell-17-71"></a>    <span class="fu">vlines!</span>(ax3, [true_params.slope], color<span class="op">=:</span>green, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="annotated-cell-17-72"><a href="#annotated-cell-17-72"></a>    <span class="fu">vlines!</span>(ax3, [mle_estimates.slope], color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="annotated-cell-17-73"><a href="#annotated-cell-17-73"></a></span>
+<span id="annotated-cell-17-74"><a href="#annotated-cell-17-74"></a>    <span class="cf">return</span> fig</span>
+<span id="annotated-cell-17-75"><a href="#annotated-cell-17-75"></a><span class="kw">end</span></span>
+<span id="annotated-cell-17-76"><a href="#annotated-cell-17-76"></a></span>
+<span id="annotated-cell-17-77"><a href="#annotated-cell-17-77"></a>fig_comparison <span class="op">=</span> <span class="fu">create_regression_comparison_plot</span>()</span>
+<span id="annotated-cell-17-78"><a href="#annotated-cell-17-78"></a>fig_comparison</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="35" data-code-annotation="1">Use subset of MCMC samples for computational efficiency</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="38" data-code-annotation="2">For each x-value, calculate predicted y using different parameter samples</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="42" data-code-annotation="3">Calculate 2.5th and 97.5th percentiles for 95% credible interval</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats-examples_files/figure-html/linear-regression-comparison-output-1.svg" id="linear-regression-comparison" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This comparison reveals several important points:</p>
 <ul>
-<li>Propagating parameter uncertainty to predictions</li>
-<li>Comparing frequentist and Bayesian uncertainty quantification</li>
-<li>When to use analytical vs.&nbsp;numerical vs.&nbsp;simulation methods</li>
+<li><strong>Point estimates agree</strong>: All methods produce nearly identical parameter estimates</li>
+<li><strong>Uncertainty quantification differs</strong>: Only the Bayesian approach provides full uncertainty distributions and credible intervals</li>
+<li><strong>Prediction uncertainty</strong>: The 95% credible interval shows the range of plausible regression lines given parameter uncertainty</li>
+<li><strong>Computational cost varies</strong>: Least squares is fastest, <code>MLE</code> requires optimization, <code>MCMC</code> is most expensive</li>
+<li><strong>Interpretability</strong>: Bayesian posteriors directly quantify “how certain should we be about these parameter values?”</li>
 </ul>
+<p>The Bayesian approach excels when we need to propagate parameter uncertainty through subsequent calculations or decision processes. The credible interval demonstrates how parameter uncertainty translates into prediction uncertainty—a crucial consideration for risk assessment and decision-making under uncertainty.</p>
 
 
 </section>
@@ -1034,8 +2241,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../notebooks/mosquitos.html" class="pagination-link" aria-label="Statistics Without the Agonizing Details ✏️">
-        <span class="nav-page-text">Statistics Without the Agonizing Details ✏️</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../notebooks/extremes-examples.html" class="pagination-link" aria-label="Extreme Value Theory Examples ✏️">
+        <span class="nav-page-text">Extreme Value Theory Examples ✏️</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

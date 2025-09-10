@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -96,7 +61,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b98571bc5706dc06fae35e1fc6a7506a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ff4a0bb939fed34ae4231fc9111ce8ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -531,7 +496,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notebooks/probability-stats-examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Probability, inference, and computation: examples</span></span></a>
+ <span class="menu-text">Probability, inference, and computation: examples ✏️</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/extremes-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extreme Value Theory Examples ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -648,16 +619,6 @@ window.Quarto = {
 </header>
 
 
-<div id="2" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Import necessary packages</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">using</span> <span class="bu">LaTeXStrings</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">using</span> <span class="bu">Turing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>This chapter covers the fundamental concepts of probabilistic modeling and statistical inference. Data analysis proceeds by building a generative model—a formal, probabilistic hypothesis about how data are created. Inference is the inverse problem of using observed data to learn about model parameters. Computational methods make complex inference problems tractable.</p>
 <section id="learning-objectives" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h3>
@@ -765,210 +726,26 @@ window.Quarto = {
 <h4 data-number="2.1.4.1" class="anchored" data-anchor-id="distribution-examples"><span class="header-section-number">2.1.4.1</span> Distribution examples</h4>
 <p>These examples illustrate the key concepts of probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions. Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).</p>
 <p>The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves. The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.</p>
-<div id="4" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Helper function to add area under curve</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">function</span> <span class="fu">add_pdf_area!</span>(ax, dist, a, b; color<span class="op">=</span>(<span class="op">:</span>orange, <span class="fl">0.4</span>), label<span class="op">=</span><span class="cn">nothing</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    x_fill <span class="op">=</span> a<span class="op">:</span><span class="fl">0.01</span><span class="op">:</span>b</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    pdf_fill <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_fill)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">band!</span>(ax, x_fill, <span class="fu">zeros</span>(<span class="fu">length</span>(x_fill)), pdf_fill, color<span class="op">=</span>color, label<span class="op">=</span>label)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    prob <span class="op">=</span> <span class="fu">cdf</span>(dist, b) <span class="op">-</span> <span class="fu">cdf</span>(dist, a)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">return</span> prob</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">end</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Helper function to show forward CDF operation</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">function</span> <span class="fu">add_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="cf">return</span> y_point</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">end</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># Helper function to show inverse CDF operation</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">function</span> <span class="fu">add_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=-</span><span class="fl">4</span>)</span>
-<span id="cb2-21"><a href="#cb2-21"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
-<span id="cb2-22"><a href="#cb2-22"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">8</span>)</span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="fu">lines!</span>(ax, [x_inv, x_inv], [<span class="fl">0</span>, y_actual], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb2-25"><a href="#cb2-25"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb2-26"><a href="#cb2-26"></a>    <span class="cf">return</span> x_inv, y_actual</span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">end</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="kw">function</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
-<span id="cb2-30"><a href="#cb2-30"></a>    μ, σ <span class="op">=</span> <span class="fl">0.0</span>, <span class="fl">1.0</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    x_range <span class="op">=</span> <span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">4</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a>    normal_dist <span class="op">=</span> <span class="fu">Normal</span>(μ, σ)</span>
-<span id="cb2-33"><a href="#cb2-33"></a></span>
-<span id="cb2-34"><a href="#cb2-34"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
-<span id="cb2-35"><a href="#cb2-35"></a></span>
-<span id="cb2-36"><a href="#cb2-36"></a>    <span class="co"># Left panel: PDF with area under curve</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb2-38"><a href="#cb2-38"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
-<span id="cb2-39"><a href="#cb2-39"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Density } p(x)"</span>,</span>
-<span id="cb2-40"><a href="#cb2-40"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Normal}(0, 1) </span><span class="sc">\t</span><span class="st">ext{ PDF}"</span>)</span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a>    <span class="co"># Plot PDF</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>    <span class="fu">lines!</span>(ax1, x_range, <span class="fu">pdf</span>.(normal_dist, x_range),</span>
-<span id="cb2-44"><a href="#cb2-44"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"p(x)"</span>)</span>
-<span id="cb2-45"><a href="#cb2-45"></a></span>
-<span id="cb2-46"><a href="#cb2-46"></a>    <span class="co"># Add shaded area</span></span>
-<span id="cb2-47"><a href="#cb2-47"></a>    prob_area <span class="op">=</span> <span class="fu">add_pdf_area!</span>(ax1, normal_dist, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>,</span>
-<span id="cb2-48"><a href="#cb2-48"></a>        label<span class="op">=</span>L<span class="st">"P(-1 \leq X \leq 1)"</span>)</span>
-<span id="cb2-49"><a href="#cb2-49"></a></span>
-<span id="cb2-50"><a href="#cb2-50"></a>    <span class="co"># Add area annotation</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>    <span class="fu">text!</span>(ax1, <span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.125</span>,</span>
-<span id="cb2-52"><a href="#cb2-52"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Area} = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_area, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
-<span id="cb2-53"><a href="#cb2-53"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>rt)</span>
-<span id="cb2-56"><a href="#cb2-56"></a></span>
-<span id="cb2-57"><a href="#cb2-57"></a>    <span class="co"># Right panel: CDF with forward and inverse operations</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
-<span id="cb2-59"><a href="#cb2-59"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
-<span id="cb2-60"><a href="#cb2-60"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } F(x)"</span>,</span>
-<span id="cb2-61"><a href="#cb2-61"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Normal CDF: Forward and Inverse}"</span>)</span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a>    <span class="co"># Plot CDF</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a>    <span class="fu">lines!</span>(ax2, x_range, <span class="fu">cdf</span>.(normal_dist, x_range),</span>
-<span id="cb2-65"><a href="#cb2-65"></a>        color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>L<span class="st">"F(x)"</span>)</span>
-<span id="cb2-66"><a href="#cb2-66"></a></span>
-<span id="cb2-67"><a href="#cb2-67"></a>    <span class="co"># Forward operation: F(1)</span></span>
-<span id="cb2-68"><a href="#cb2-68"></a>    y_point <span class="op">=</span> <span class="fu">add_forward_cdf!</span>(ax2, normal_dist, <span class="fl">1.0</span>)</span>
-<span id="cb2-69"><a href="#cb2-69"></a>    <span class="fu">text!</span>(ax2, <span class="fl">1.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
-<span id="cb2-70"><a href="#cb2-70"></a>        text<span class="op">=</span>L<span class="st">"F(1) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
-<span id="cb2-71"><a href="#cb2-71"></a></span>
-<span id="cb2-72"><a href="#cb2-72"></a>    <span class="co"># Inverse operation: F⁻¹(0.25)</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_inverse_cdf!</span>(ax2, normal_dist, <span class="fl">0.25</span>)</span>
-<span id="cb2-74"><a href="#cb2-74"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">0.8</span>, <span class="fl">0.35</span>,</span>
-<span id="cb2-75"><a href="#cb2-75"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.25) = %</span><span class="sc">$</span>(<span class="fu">round</span>(x_inv, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
-<span id="cb2-76"><a href="#cb2-76"></a></span>
-<span id="cb2-77"><a href="#cb2-77"></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rb)</span>
-<span id="cb2-78"><a href="#cb2-78"></a>    <span class="cf">return</span> fig</span>
-<span id="cb2-79"><a href="#cb2-79"></a><span class="kw">end</span></span>
-<span id="cb2-80"><a href="#cb2-80"></a></span>
-<span id="cb2-81"><a href="#cb2-81"></a>fig_normal <span class="op">=</span> <span class="fu">plot_normal_pdf_cdf</span>()</span>
-<span id="cb2-82"><a href="#cb2-82"></a>fig_normal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-normal-distribution-example">
+<div id="cell-normal-distribution-example" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-3-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-normal-distribution-example-output-1.svg" id="normal-distribution-example" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
 <p>Next, a Poisson distribution example for discrete random variables.</p>
-<div id="6" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Helper function to plot discrete PMF as stem plot</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">function</span> <span class="fu">plot_pmf_stems!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">3</span>, markersize<span class="op">=</span><span class="fl">8</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
-<span id="cb3-6"><a href="#cb3-6"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">end</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="cf">return</span> pmf_vals</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">end</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># Helper function to highlight discrete probability mass</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">function</span> <span class="fu">highlight_pmf_mass!</span>(ax, dist, x_range; color<span class="op">=:</span>orange)</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    pmf_vals <span class="op">=</span> <span class="fu">pdf</span>.(dist, x_range)</span>
-<span id="cb3-14"><a href="#cb3-14"></a>    <span class="cf">for</span> (i, x) <span class="kw">in</span> <span class="fu">enumerate</span>(x_range)</span>
-<span id="cb3-15"><a href="#cb3-15"></a>        <span class="fu">lines!</span>(ax, [x, x], [<span class="fl">0</span>, pmf_vals[i]], color<span class="op">=</span>color, linewidth<span class="op">=</span><span class="fl">5</span>)</span>
-<span id="cb3-16"><a href="#cb3-16"></a>        <span class="fu">scatter!</span>(ax, [x], [pmf_vals[i]], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">end</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="cf">return</span> <span class="fu">sum</span>(pmf_vals)</span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">end</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co"># Helper function to plot discrete CDF as step function</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">function</span> <span class="fu">plot_discrete_cdf!</span>(ax, dist, x_range; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, markersize<span class="op">=</span><span class="fl">6</span>)</span>
-<span id="cb3-23"><a href="#cb3-23"></a>    cdf_vals <span class="op">=</span> <span class="fu">cdf</span>.(dist, x_range)</span>
-<span id="cb3-24"><a href="#cb3-24"></a>    <span class="co"># Plot horizontal segments</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>(<span class="fu">length</span>(x_range)<span class="op">-</span><span class="fl">1</span>)</span>
-<span id="cb3-26"><a href="#cb3-26"></a>        <span class="fu">lines!</span>(ax, [x_range[i], x_range[i<span class="op">+</span><span class="fl">1</span>]], [cdf_vals[i], cdf_vals[i]],</span>
-<span id="cb3-27"><a href="#cb3-27"></a>            color<span class="op">=</span>color, linewidth<span class="op">=</span>linewidth)</span>
-<span id="cb3-28"><a href="#cb3-28"></a>    <span class="cf">end</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a>    <span class="co"># Plot points</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>    <span class="fu">scatter!</span>(ax, x_range, cdf_vals, color<span class="op">=</span>color, markersize<span class="op">=</span>markersize)</span>
-<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">return</span> cdf_vals</span>
-<span id="cb3-32"><a href="#cb3-32"></a><span class="kw">end</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="co"># Helper function for discrete forward CDF operation</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a><span class="kw">function</span> <span class="fu">add_discrete_forward_cdf!</span>(ax, dist, x_point; color<span class="op">=:</span>red, x_min<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb3-36"><a href="#cb3-36"></a>    y_point <span class="op">=</span> <span class="fu">cdf</span>(dist, x_point)</span>
-<span id="cb3-37"><a href="#cb3-37"></a>    <span class="fu">scatter!</span>(ax, [x_point], [y_point], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
-<span id="cb3-38"><a href="#cb3-38"></a>    <span class="fu">lines!</span>(ax, [x_point, x_point], [<span class="fl">0</span>, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb3-39"><a href="#cb3-39"></a>    <span class="fu">lines!</span>(ax, [x_min, x_point], [y_point, y_point], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb3-40"><a href="#cb3-40"></a>    <span class="cf">return</span> y_point</span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="kw">end</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a></span>
-<span id="cb3-43"><a href="#cb3-43"></a><span class="co"># Helper function for discrete inverse CDF operation  </span></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="kw">function</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax, dist, p_target; color<span class="op">=:</span>green, x_min<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb3-45"><a href="#cb3-45"></a>    x_inv <span class="op">=</span> <span class="fu">quantile</span>(dist, p_target)</span>
-<span id="cb3-46"><a href="#cb3-46"></a>    y_actual <span class="op">=</span> <span class="fu">cdf</span>(dist, x_inv)</span>
-<span id="cb3-47"><a href="#cb3-47"></a>    <span class="fu">scatter!</span>(ax, [x_inv], [y_actual], color<span class="op">=</span>color, markersize<span class="op">=</span><span class="fl">10</span>)</span>
-<span id="cb3-48"><a href="#cb3-48"></a>    <span class="fu">lines!</span>(ax, [x_inv, x_inv], [<span class="fl">0</span>, y_actual], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb3-49"><a href="#cb3-49"></a>    <span class="fu">lines!</span>(ax, [x_min, x_inv], [p_target, p_target], color<span class="op">=</span>color, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb3-50"><a href="#cb3-50"></a>    <span class="cf">return</span> x_inv, y_actual</span>
-<span id="cb3-51"><a href="#cb3-51"></a><span class="kw">end</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="kw">function</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
-<span id="cb3-54"><a href="#cb3-54"></a>    λ <span class="op">=</span> <span class="fl">3.0</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a>    x_range <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">10</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a>    poisson_dist <span class="op">=</span> <span class="fu">Poisson</span>(λ)</span>
-<span id="cb3-57"><a href="#cb3-57"></a></span>
-<span id="cb3-58"><a href="#cb3-58"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
-<span id="cb3-59"><a href="#cb3-59"></a></span>
-<span id="cb3-60"><a href="#cb3-60"></a>    <span class="co"># Left panel: PMF with probability mass</span></span>
-<span id="cb3-61"><a href="#cb3-61"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb3-62"><a href="#cb3-62"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
-<span id="cb3-63"><a href="#cb3-63"></a>        ylabel<span class="op">=</span>L<span class="st">"P(X = x)"</span>,</span>
-<span id="cb3-64"><a href="#cb3-64"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson}(3) </span><span class="sc">\t</span><span class="st">ext{ PMF}"</span>)</span>
-<span id="cb3-65"><a href="#cb3-65"></a></span>
-<span id="cb3-66"><a href="#cb3-66"></a>    <span class="co"># Plot full PMF</span></span>
-<span id="cb3-67"><a href="#cb3-67"></a>    <span class="fu">plot_pmf_stems!</span>(ax1, poisson_dist, x_range)</span>
-<span id="cb3-68"><a href="#cb3-68"></a></span>
-<span id="cb3-69"><a href="#cb3-69"></a>    <span class="co"># Highlight mass for X ≤ 2</span></span>
-<span id="cb3-70"><a href="#cb3-70"></a>    prob_mass <span class="op">=</span> <span class="fu">highlight_pmf_mass!</span>(ax1, poisson_dist, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>)</span>
-<span id="cb3-71"><a href="#cb3-71"></a></span>
-<span id="cb3-72"><a href="#cb3-72"></a>    <span class="co"># Add probability annotation</span></span>
-<span id="cb3-73"><a href="#cb3-73"></a>    <span class="fu">text!</span>(ax1, <span class="fl">6</span>, <span class="fl">0.15</span>,</span>
-<span id="cb3-74"><a href="#cb3-74"></a>        text<span class="op">=</span>L<span class="st">"P(X \leq 2) = %</span><span class="sc">$</span>(<span class="fu">round</span>(prob_mass, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
-<span id="cb3-75"><a href="#cb3-75"></a>        fontsize<span class="op">=</span><span class="fl">14</span>, color<span class="op">=:</span>black)</span>
-<span id="cb3-76"><a href="#cb3-76"></a></span>
-<span id="cb3-77"><a href="#cb3-77"></a>    <span class="co"># Right panel: CDF with forward and inverse operations</span></span>
-<span id="cb3-78"><a href="#cb3-78"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>],</span>
-<span id="cb3-79"><a href="#cb3-79"></a>        xlabel<span class="op">=</span>L<span class="st">"x"</span>,</span>
-<span id="cb3-80"><a href="#cb3-80"></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Probability } F(x)"</span>,</span>
-<span id="cb3-81"><a href="#cb3-81"></a>        title<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Poisson CDF: Forward and Inverse}"</span>)</span>
-<span id="cb3-82"><a href="#cb3-82"></a></span>
-<span id="cb3-83"><a href="#cb3-83"></a>    <span class="co"># Plot CDF</span></span>
-<span id="cb3-84"><a href="#cb3-84"></a>    <span class="fu">plot_discrete_cdf!</span>(ax2, poisson_dist, x_range)</span>
-<span id="cb3-85"><a href="#cb3-85"></a></span>
-<span id="cb3-86"><a href="#cb3-86"></a>    <span class="co"># Forward operation: F(4)</span></span>
-<span id="cb3-87"><a href="#cb3-87"></a>    y_point <span class="op">=</span> <span class="fu">add_discrete_forward_cdf!</span>(ax2, poisson_dist, <span class="fl">4</span>)</span>
-<span id="cb3-88"><a href="#cb3-88"></a>    <span class="fu">text!</span>(ax2, <span class="fl">4.2</span>, y_point <span class="op">-</span> <span class="fl">0.1</span>,</span>
-<span id="cb3-89"><a href="#cb3-89"></a>        text<span class="op">=</span>L<span class="st">"F(4) = %</span><span class="sc">$</span>(<span class="fu">round</span>(y_point, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>, color<span class="op">=:</span>red)</span>
-<span id="cb3-90"><a href="#cb3-90"></a></span>
-<span id="cb3-91"><a href="#cb3-91"></a>    <span class="co"># Inverse operation: F⁻¹(0.4)</span></span>
-<span id="cb3-92"><a href="#cb3-92"></a>    x_inv, _ <span class="op">=</span> <span class="fu">add_discrete_inverse_cdf!</span>(ax2, poisson_dist, <span class="fl">0.4</span>)</span>
-<span id="cb3-93"><a href="#cb3-93"></a>    <span class="fu">text!</span>(ax2, x_inv <span class="op">-</span> <span class="fl">1.5</span>, <span class="fl">0.5</span>,</span>
-<span id="cb3-94"><a href="#cb3-94"></a>        text<span class="op">=</span>L<span class="st">"F^{-1}(0.4) = %</span><span class="sc">$</span>(<span class="fu">Int</span>(x_inv))<span class="st">"</span>, color<span class="op">=:</span>green)</span>
-<span id="cb3-95"><a href="#cb3-95"></a></span>
-<span id="cb3-96"><a href="#cb3-96"></a>    <span class="cf">return</span> fig</span>
-<span id="cb3-97"><a href="#cb3-97"></a><span class="kw">end</span></span>
-<span id="cb3-98"><a href="#cb3-98"></a></span>
-<span id="cb3-99"><a href="#cb3-99"></a>fig_poisson <span class="op">=</span> <span class="fu">plot_poisson_pmf_cdf</span>()</span>
-<span id="cb3-100"><a href="#cb3-100"></a>fig_poisson</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-poisson-distribution-example">
+<div id="cell-poisson-distribution-example" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-4-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-poisson-distribution-example-output-1.svg" id="poisson-distribution-example" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1156,6 +933,27 @@ p(\theta \mid y) \propto p(y \mid \theta) p(\theta)
 <p>MCMC requires only the posterior up to a constant of proportionality: <span class="math inline">\(p(\theta \mid y) \propto p(y \mid \theta) p(\theta)\)</span>. This enables MCMC for complex models where computing the normalizing constant is impossible.</p>
 <p>MCMC diagnostics assess whether chains have converged to the target distribution. Poor convergence leads to biased estimates, making diagnostic checking essential for reliable inference.</p>
 </section>
+<section id="uncertainty-estimates-definitions" class="level4" data-number="2.3.4.4">
+<h4 data-number="2.3.4.4" class="anchored" data-anchor-id="uncertainty-estimates-definitions"><span class="header-section-number">2.3.4.4</span> Uncertainty estimates: definitions</h4>
+<section id="credible-interval-bayesian" class="level5" data-number="2.3.4.4.1">
+<h5 data-number="2.3.4.4.1" class="anchored" data-anchor-id="credible-interval-bayesian"><span class="header-section-number">2.3.4.4.1</span> Credible interval (Bayesian)</h5>
+<p>For a parameter <span class="math inline">\(\theta\)</span> with posterior density <span class="math inline">\(p(\theta \mid y)\)</span>, a <span class="math inline">\((1 - \alpha)\)</span> credible set <span class="math inline">\(C(y)\)</span> satisfies <span class="math display">\[\int_{C(y)} p(\theta \mid y)\, d\theta = 1 - \alpha.\]</span> For a univariate <span class="math inline">\(\theta\)</span>, a common choice is the equal-tailed credible interval <span class="math display">\[[\, Q_{\theta\mid y}(\alpha/2),\; Q_{\theta\mid y}(1-\alpha/2) \,],\]</span> where <span class="math inline">\(Q\)</span> denotes the posterior quantile function. Another choice is the highest posterior density (HPD) interval, the shortest interval whose posterior probability is <span class="math inline">\(1 - \alpha\)</span>. Credible intervals are probability statements about <span class="math inline">\(\theta\)</span> conditional on the observed data (and prior) <span class="citation" data-cites="gelman_bda3:2014 downey_thinkbayes:2021">(e.g., <a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">Gelman et al. 2014</a>; <a href="../references.html#ref-downey_thinkbayes:2021" role="doc-biblioref">Downey 2021</a>)</span>.</p>
+</section>
+<section id="confidence-interval-frequentist" class="level5" data-number="2.3.4.4.2">
+<h5 data-number="2.3.4.4.2" class="anchored" data-anchor-id="confidence-interval-frequentist"><span class="header-section-number">2.3.4.4.2</span> Confidence interval (frequentist)</h5>
+<p>A <span class="math inline">\((1 - \alpha)\)</span> confidence set is a data-dependent rule <span class="math inline">\(C(Y)\)</span> such that, for all fixed <span class="math inline">\(\theta\)</span>, <span class="math display">\[\Pr_{Y\sim p(\cdot\mid \theta)}\{\, \theta \in C(Y) \,\} \ge 1 - \alpha.\]</span> In words, if we were to repeat the experiment many times under the same <span class="math inline">\(\theta\)</span>, the procedure would cover the true <span class="math inline">\(\theta\)</span> at least <span class="math inline">\(1 - \alpha\)</span> of the time. The probability is over hypothetical repetitions of the data, not over <span class="math inline">\(\theta\)</span>. In simple models, confidence intervals arise from pivots or large-sample normal approximations <span class="citation" data-cites="gelman_regression:2021">(see, e.g., <a href="../references.html#ref-gelman_regression:2021" role="doc-biblioref">Gelman 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="credible-intervals-vs.-confidence-intervals" class="level4" data-number="2.3.4.5">
+<h4 data-number="2.3.4.5" class="anchored" data-anchor-id="credible-intervals-vs.-confidence-intervals"><span class="header-section-number">2.3.4.5</span> Credible intervals vs.&nbsp;confidence intervals</h4>
+<p>Practitioners often report “intervals,” but Bayesian credible intervals and frequentist confidence intervals answer different questions.</p>
+<ul>
+<li>Credible interval (Bayesian): An interval C such that P(θ ∈ C | y) = 1 − α. It is a probability statement about the parameter given the observed data and prior. Common choices are equal-tailed intervals and highest posterior density (HPD) intervals. Results depend on both the likelihood and the prior.</li>
+<li>Confidence interval (frequentist): A procedure that, under repeated sampling from the data-generating process, covers the true (fixed) parameter at rate 1 − α. After observing one dataset, the interval either contains the true value or it does not; the 1 − α statement refers to the long-run frequency of the procedure, not the probability for this particular dataset.</li>
+</ul>
+<p>The two intervals can coincide in simple regular problems (e.g., large samples with weak/flat priors), but they generally differ in finite samples or with informative priors. Be careful not to interpret a 95% confidence interval as “95% probability that θ lies in the interval” for a specific dataset—that interpretation is Bayesian and corresponds to a 95% credible interval.</p>
+<p>For clear discussions, see <span class="citation" data-cites="gelman_bda3:2014">Gelman et al. (<a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="gelman_regression:2021">Gelman (<a href="../references.html#ref-gelman_regression:2021" role="doc-biblioref">2021</a>)</span>; <span class="citation" data-cites="downey_thinkbayes:2021">Downey (<a href="../references.html#ref-downey_thinkbayes:2021" role="doc-biblioref">2021</a>)</span>.</p>
+</section>
 </section>
 </section>
 <section id="computational-methods-and-asymptotic-foundations" class="level2" data-number="2.4">
@@ -1209,40 +1007,14 @@ p(y \mid \theta, n) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
 p(y \mid \theta) \propto \theta^y (1-\theta)^{n-y}
 \]</span></p>
 <p>The following implementation visualizes how the likelihood varies with <span class="math inline">\(\theta\)</span>:</p>
-<div id="8" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">plot_binomial_likelihood</span>(y, n)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="co"># Using Distributions.jl</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>    likelihood_vals <span class="op">=</span> [<span class="fu">pdf</span>(<span class="fu">Binomial</span>(n, θ), y) for θ <span class="kw">in</span> θ_grid]</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
-<span id="cb4-8"><a href="#cb4-8"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb4-9"><a href="#cb4-9"></a>        xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10"></a>        ylabel<span class="op">=</span><span class="st">"Likelihood"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11"></a>        title<span class="op">=</span><span class="st">"Likelihood for </span><span class="sc">$</span>(y)<span class="st"> heads in </span><span class="sc">$</span>(n)<span class="st"> flips"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a>    <span class="fu">lines!</span>(ax, θ_grid, likelihood_vals, label<span class="op">=</span><span class="st">"Full likelihood"</span>, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
-<span id="cb4-14"><a href="#cb4-14"></a></span>
-<span id="cb4-15"><a href="#cb4-15"></a>    <span class="co"># Mark the MLE</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>    mle <span class="op">=</span> y <span class="op">/</span> n</span>
-<span id="cb4-17"><a href="#cb4-17"></a>    <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>black, linestyle<span class="op">=:</span>dot, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"MLE = </span><span class="sc">$</span>(<span class="fu">round</span>(mle, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>lt)</span>
-<span id="cb4-20"><a href="#cb4-20"></a>    <span class="cf">return</span> fig</span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="kw">end</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># Example with 7 heads in 10 flips</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>fig_likelihood <span class="op">=</span> <span class="fu">plot_binomial_likelihood</span>(<span class="fl">7</span>, <span class="fl">10</span>)</span>
-<span id="cb4-25"><a href="#cb4-25"></a>fig_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-likelihood">
+<div id="cell-coin-flip-likelihood" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-5-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-likelihood-output-1.svg" id="coin-flip-likelihood" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1264,47 +1036,14 @@ p(y \mid \theta) \propto \theta^y (1-\theta)^{n-y}
 <p><span class="math display">\[\frac{y}{\theta} = \frac{n-y}{1-\theta} \implies y(1-\theta) = (n-y)\theta \implies y = n\theta\]</span></p>
 <p>Therefore: <span class="math inline">\(\hat{\theta}_{MLE} = \frac{y}{n}\)</span></p>
 <p>The maximum likelihood estimate is the observed proportion of heads. This example demonstrates the general MLE procedure: write down the likelihood function, take the log, differentiate with respect to the parameters, set the derivative to zero, and solve for the parameter values. This analytical approach works for simple models and provides the template for more complex problems that require numerical optimization. This pattern holds across different experimental outcomes:</p>
-<div id="10" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">function</span> <span class="fu">demonstrate_mle_estimation</span>(y_values, n)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="cf">for</span> (i, y) <span class="kw">in</span> <span class="fu">enumerate</span>(y_values)</span>
-<span id="cb5-7"><a href="#cb5-7"></a>        ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fu">div</span>(i <span class="op">-</span> <span class="fl">1</span>, <span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>, ((i<span class="op">-</span><span class="fl">1</span>)<span class="op">%</span><span class="fl">2</span>)<span class="op">+</span><span class="fl">1</span>],</span>
-<span id="cb5-8"><a href="#cb5-8"></a>            xlabel<span class="op">=</span><span class="st">"θ"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9"></a>            ylabel<span class="op">=</span><span class="st">"Log-likelihood"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>            title<span class="op">=</span><span class="st">"</span><span class="sc">$</span>(y)<span class="st">/</span><span class="sc">$</span>(n)<span class="st"> heads"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11"></a></span>
-<span id="cb5-12"><a href="#cb5-12"></a>        <span class="co"># Calculate log-likelihood</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>        log_likelihood <span class="op">=</span> [y <span class="op">*</span> <span class="fu">log</span>(θ) <span class="op">+</span> (n <span class="op">-</span> y) <span class="op">*</span> <span class="fu">log</span>(<span class="fl">1</span> <span class="op">-</span> θ) for θ <span class="kw">in</span> θ_grid]</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a>        <span class="fu">lines!</span>(ax, θ_grid, log_likelihood, linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>blue)</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a>        <span class="co"># Mark MLE</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a>        mle <span class="op">=</span> y <span class="op">/</span> n</span>
-<span id="cb5-19"><a href="#cb5-19"></a>        <span class="fu">vlines!</span>(ax, [mle], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
-<span id="cb5-20"><a href="#cb5-20"></a>            label<span class="op">=</span><span class="st">"MLE"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="fl">1</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>            <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>cb)</span>
-<span id="cb5-24"><a href="#cb5-24"></a>        <span class="cf">end</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>    <span class="cf">end</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a></span>
-<span id="cb5-27"><a href="#cb5-27"></a>    <span class="cf">return</span> fig</span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="kw">end</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="co"># Show MLE for different outcomes</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a>fig_mle <span class="op">=</span> <span class="fu">demonstrate_mle_estimation</span>([<span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span>], <span class="fl">10</span>)</span>
-<span id="cb5-32"><a href="#cb5-32"></a>fig_mle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-mle">
+<div id="cell-coin-flip-mle" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-6-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-mle-output-1.svg" id="coin-flip-mle" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1332,114 +1071,14 @@ p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) -
 <li><span class="math inline">\(\beta\)</span> (prior “failures”) + <span class="math inline">\((n-y)\)</span> (observed failures)</li>
 </ul>
 <p>The following compares the analytical solution with MCMC sampling using Turing.jl:</p>
-<div id="12" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Turing model for coin flipping</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="im">using</span> <span class="bu">Printf</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
-<span id="cb6-6"><a href="#cb6-6"></a>    θ <span class="op">~</span> <span class="fu">Beta</span>(prior_α, prior_β)</span>
-<span id="cb6-7"><a href="#cb6-7"></a>    y <span class="op">~</span> <span class="fu">Binomial</span>(n, θ)</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="cf">return</span> θ</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">end</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">function</span> <span class="fu">compare_analytical_mcmc</span>(y, n; prior_α<span class="op">=</span><span class="fl">1</span>, prior_β<span class="op">=</span><span class="fl">1</span>, n_samples<span class="op">=</span><span class="fl">5000</span>)</span>
-<span id="cb6-12"><a href="#cb6-12"></a>    <span class="co"># Analytical posterior</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>    post_α <span class="op">=</span> prior_α <span class="op">+</span> y</span>
-<span id="cb6-14"><a href="#cb6-14"></a>    post_β <span class="op">=</span> prior_β <span class="op">+</span> n <span class="op">-</span> y</span>
-<span id="cb6-15"><a href="#cb6-15"></a>    analytical_posterior <span class="op">=</span> <span class="fu">Beta</span>(post_α, post_β)</span>
-<span id="cb6-16"><a href="#cb6-16"></a></span>
-<span id="cb6-17"><a href="#cb6-17"></a>    <span class="co"># MCMC sampling</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>    model <span class="op">=</span> <span class="fu">coin_flip_model</span>(y, n, prior_α, prior_β)</span>
-<span id="cb6-19"><a href="#cb6-19"></a>    chain <span class="op">=</span> <span class="fu">sample</span>(model, <span class="fu">NUTS</span>(), n_samples, verbose<span class="op">=</span><span class="cn">false</span>, progress<span class="op">=</span><span class="cn">false</span>)</span>
-<span id="cb6-20"><a href="#cb6-20"></a>    mcmc_samples <span class="op">=</span> <span class="fu">Array</span>(chain[<span class="op">:</span>θ])</span>
-<span id="cb6-21"><a href="#cb6-21"></a></span>
-<span id="cb6-22"><a href="#cb6-22"></a>    <span class="co"># Return data for plotting instead of creating plots</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a>    <span class="cf">return</span> (analytical_posterior<span class="op">=</span>analytical_posterior, mcmc_samples<span class="op">=</span>mcmc_samples, n_samples<span class="op">=</span>n_samples)</span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="kw">end</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="co"># Generate data by calling the same function twice  </span></span>
-<span id="cb6-27"><a href="#cb6-27"></a>data_low <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">500</span>)</span>
-<span id="cb6-28"><a href="#cb6-28"></a>data_high <span class="op">=</span> <span class="fu">compare_analytical_mcmc</span>(<span class="fl">7</span>, <span class="fl">10</span>, n_samples<span class="op">=</span><span class="fl">50_000</span>)</span>
-<span id="cb6-29"><a href="#cb6-29"></a></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="co"># Combine plots</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a>fig_comparison <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">1200</span>, <span class="fl">500</span>))</span>
-<span id="cb6-32"><a href="#cb6-32"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb6-33"><a href="#cb6-33"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
-<span id="cb6-34"><a href="#cb6-34"></a>    ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
-<span id="cb6-35"><a href="#cb6-35"></a>    title<span class="op">=</span><span class="st">"MCMC with 500 samples"</span>)</span>
-<span id="cb6-36"><a href="#cb6-36"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig_comparison[<span class="fl">1</span>, <span class="fl">2</span>],</span>
-<span id="cb6-37"><a href="#cb6-37"></a>    xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>theta<span class="st">$ (probability of heads)"</span>,</span>
-<span id="cb6-38"><a href="#cb6-38"></a>    title<span class="op">=</span><span class="st">"MCMC with 50,000 samples"</span>)</span>
-<span id="cb6-39"><a href="#cb6-39"></a></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="co"># Link y-axes for comparison</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="fu">linkaxes!</span>(ax1, ax2)</span>
-<span id="cb6-42"><a href="#cb6-42"></a></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="co"># Plot using the same plotting logic for both panels</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a><span class="cf">for</span> (ax, data) <span class="kw">in</span> [(ax1, data_low), (ax2, data_high)]</span>
-<span id="cb6-45"><a href="#cb6-45"></a>    <span class="co"># Plot analytical posterior</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a>    θ_grid <span class="op">=</span> <span class="fl">0.01</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">0.99</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a>    analytical_density <span class="op">=</span> <span class="fu">pdf</span>.(data.analytical_posterior, θ_grid)</span>
-<span id="cb6-48"><a href="#cb6-48"></a>    <span class="fu">lines!</span>(ax, θ_grid, analytical_density, label<span class="op">=</span><span class="st">"Analytical"</span>,</span>
-<span id="cb6-49"><a href="#cb6-49"></a>        linewidth<span class="op">=</span><span class="fl">3</span>, color<span class="op">=:</span>blue)</span>
-<span id="cb6-50"><a href="#cb6-50"></a></span>
-<span id="cb6-51"><a href="#cb6-51"></a>    <span class="co"># Plot MCMC histogram</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a>    <span class="fu">hist!</span>(ax, <span class="fu">vec</span>(data.mcmc_samples), bins<span class="op">=</span><span class="fl">40</span>, normalization<span class="op">=:</span>pdf,</span>
-<span id="cb6-53"><a href="#cb6-53"></a>        color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>), label<span class="op">=</span><span class="st">"MCMC samples"</span>)</span>
-<span id="cb6-54"><a href="#cb6-54"></a></span>
-<span id="cb6-55"><a href="#cb6-55"></a>    <span class="co"># Add summary statistics</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a>    analytical_mean <span class="op">=</span> <span class="fu">mean</span>(data.analytical_posterior)</span>
-<span id="cb6-57"><a href="#cb6-57"></a>    mcmc_mean <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples)</span>
-<span id="cb6-58"><a href="#cb6-58"></a></span>
-<span id="cb6-59"><a href="#cb6-59"></a>    <span class="co"># Vertical lines for means</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a>    <span class="fu">vlines!</span>(ax, [analytical_mean], color<span class="op">=:</span>blue, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb6-61"><a href="#cb6-61"></a>    <span class="fu">vlines!</span>(ax, [mcmc_mean], color<span class="op">=:</span>red, linestyle<span class="op">=:</span>dot, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb6-62"><a href="#cb6-62"></a></span>
-<span id="cb6-63"><a href="#cb6-63"></a>    <span class="co"># Add vertical line at 0.3 to show tail cutoff</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0.3</span>], color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>solid, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb6-65"><a href="#cb6-65"></a></span>
-<span id="cb6-66"><a href="#cb6-66"></a>    <span class="co"># Add text annotations with statistics  </span></span>
-<span id="cb6-67"><a href="#cb6-67"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.95</span>,</span>
-<span id="cb6-68"><a href="#cb6-68"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(analytical_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
-<span id="cb6-69"><a href="#cb6-69"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
-<span id="cb6-70"><a href="#cb6-70"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.35</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.85</span>,</span>
-<span id="cb6-71"><a href="#cb6-71"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC: Mean} = %</span><span class="sc">$</span>(<span class="fu">round</span>(mcmc_mean, digits<span class="op">=</span><span class="fl">3</span>))<span class="st">"</span>,</span>
-<span id="cb6-72"><a href="#cb6-72"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
-<span id="cb6-73"><a href="#cb6-73"></a></span>
-<span id="cb6-74"><a href="#cb6-74"></a>    <span class="co"># Calculate P(θ &lt; 0.25) - tail probability</span></span>
-<span id="cb6-75"><a href="#cb6-75"></a>    tail <span class="op">=</span> <span class="fl">0.25</span></span>
-<span id="cb6-76"><a href="#cb6-76"></a>    analytical_tail_prob <span class="op">=</span> <span class="fu">cdf</span>(data.analytical_posterior, tail)</span>
-<span id="cb6-77"><a href="#cb6-77"></a>    analytical_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, analytical_tail_prob)</span>
-<span id="cb6-78"><a href="#cb6-78"></a>    mcmc_tail_prob <span class="op">=</span> <span class="fu">mean</span>(data.mcmc_samples <span class="op">.&lt;</span> tail)</span>
-<span id="cb6-79"><a href="#cb6-79"></a>    mcmc_tail_prob <span class="op">=</span> <span class="pp">@sprintf</span>(<span class="st">"%.2E"</span>, mcmc_tail_prob)</span>
-<span id="cb6-80"><a href="#cb6-80"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.55</span>,</span>
-<span id="cb6-81"><a href="#cb6-81"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{Analytical}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(analytical_tail_prob)<span class="st">"</span>,</span>
-<span id="cb6-82"><a href="#cb6-82"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>blue)</span>
-<span id="cb6-83"><a href="#cb6-83"></a>    <span class="fu">text!</span>(ax, <span class="fl">0.05</span>, <span class="fu">maximum</span>(analytical_density) <span class="op">*</span> <span class="fl">0.45</span>,</span>
-<span id="cb6-84"><a href="#cb6-84"></a>        text<span class="op">=</span>L<span class="st">"</span><span class="sc">\t</span><span class="st">ext{MCMC}: </span><span class="sc">$</span>P<span class="st">(</span><span class="sc">\t</span><span class="st">heta &lt; %</span><span class="sc">$</span>(tail)<span class="st">)$ = %</span><span class="sc">$</span>(mcmc_tail_prob)<span class="st">"</span>,</span>
-<span id="cb6-85"><a href="#cb6-85"></a>        fontsize<span class="op">=</span><span class="fl">10</span>, color<span class="op">=:</span>red)</span>
-<span id="cb6-86"><a href="#cb6-86"></a></span>
-<span id="cb6-87"><a href="#cb6-87"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rt)</span>
-<span id="cb6-88"><a href="#cb6-88"></a><span class="cf">end</span></span>
-<span id="cb6-89"><a href="#cb6-89"></a></span>
-<span id="cb6-90"><a href="#cb6-90"></a>fig_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
-<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 1.6
-<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
-<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.8250000000000001
-</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-bayesian">
+<div id="cell-coin-flip-bayesian" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-7-output-2.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-bayesian-output-1.svg" id="coin-flip-bayesian" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1463,6 +1102,18 @@ p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) -
 <li><span class="math inline">\(\epsilon_i \sim \text{Normal}(0, \sigma^2)\)</span> is independent random noise</li>
 </ul>
 <p>This says that each observation is the “true” linear relationship plus some random variation.</p>
+<p>The following shows the synthetic dataset used throughout the examples:</p>
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-data-plot">
+<div id="cell-linear-regression-data-plot" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-data-plot-output-1.svg" id="linear-regression-data-plot" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="curve-fitting-by-minimizing-loss" class="level4" data-number="2.5.2.2">
 <h4 data-number="2.5.2.2" class="anchored" data-anchor-id="curve-fitting-by-minimizing-loss"><span class="header-section-number">2.5.2.2</span> Curve fitting by minimizing loss</h4>
@@ -1479,60 +1130,14 @@ p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) -
 <p>Substituting into the second equation and solving: <span class="math display">\[\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}\]</span></p>
 <p>where <span class="math inline">\(\bar{x} = \frac{1}{n}\sum x_i\)</span> and <span class="math inline">\(\bar{y} = \frac{1}{n}\sum y_i\)</span>.</p>
 <p>The following visualizes this curve fitting approach:</p>
-<div id="14" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">function</span> <span class="fu">demonstrate_least_squares</span>(x_data, y_data)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co"># Calculate least squares estimates</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    x_bar <span class="op">=</span> <span class="fu">mean</span>(x_data)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    y_bar <span class="op">=</span> <span class="fu">mean</span>(y_data)</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a>    b_hat <span class="op">=</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.*</span> (y_data <span class="op">.-</span> y_bar)) <span class="op">/</span> <span class="fu">sum</span>((x_data <span class="op">.-</span> x_bar) <span class="op">.^</span> <span class="fl">2</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    a_hat <span class="op">=</span> y_bar <span class="op">-</span> b_hat <span class="op">*</span> x_bar</span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="co"># Create plot</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
-<span id="cb7-12"><a href="#cb7-12"></a>        xlabel<span class="op">=</span><span class="st">"x"</span>,</span>
-<span id="cb7-13"><a href="#cb7-13"></a>        ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
-<span id="cb7-14"><a href="#cb7-14"></a>        title<span class="op">=</span><span class="st">"Curve Fitting by Minimizing MSE"</span>)</span>
-<span id="cb7-15"><a href="#cb7-15"></a></span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="co"># Plot data points</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">8</span>, label<span class="op">=</span><span class="st">"Data"</span>)</span>
-<span id="cb7-18"><a href="#cb7-18"></a></span>
-<span id="cb7-19"><a href="#cb7-19"></a>    <span class="co"># Plot fitted line</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length<span class="op">=</span><span class="fl">100</span>)</span>
-<span id="cb7-21"><a href="#cb7-21"></a>    y_line <span class="op">=</span> a_hat <span class="op">.+</span> b_hat <span class="op">.*</span> x_line</span>
-<span id="cb7-22"><a href="#cb7-22"></a>    <span class="fu">lines!</span>(ax, x_line, y_line, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
-<span id="cb7-23"><a href="#cb7-23"></a>        label<span class="op">=</span><span class="st">"Fitted line: y = </span><span class="sc">$</span>(<span class="fu">round</span>(a_hat, digits<span class="op">=</span><span class="fl">2</span>))<span class="st"> + </span><span class="sc">$</span>(<span class="fu">round</span>(b_hat, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">x"</span>)</span>
-<span id="cb7-24"><a href="#cb7-24"></a></span>
-<span id="cb7-25"><a href="#cb7-25"></a>    <span class="co"># Show residuals</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a>    y_pred <span class="op">=</span> a_hat <span class="op">.+</span> b_hat <span class="op">.*</span> x_data</span>
-<span id="cb7-27"><a href="#cb7-27"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x_data)</span>
-<span id="cb7-28"><a href="#cb7-28"></a>        <span class="fu">lines!</span>(ax, [x_data[i], x_data[i]], [y_data[i], y_pred[i]],</span>
-<span id="cb7-29"><a href="#cb7-29"></a>            color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb7-30"><a href="#cb7-30"></a>    <span class="cf">end</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a></span>
-<span id="cb7-32"><a href="#cb7-32"></a>    <span class="fu">axislegend</span>(ax, position<span class="op">=:</span>lb)</span>
-<span id="cb7-33"><a href="#cb7-33"></a>    <span class="cf">return</span> fig</span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">end</span></span>
-<span id="cb7-35"><a href="#cb7-35"></a></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co"># Example with some synthetic data</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a>slope_true <span class="op">=</span> <span class="fl">2.5</span></span>
-<span id="cb7-38"><a href="#cb7-38"></a>intercept_true <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a>ϵ_true <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a>N <span class="op">=</span> <span class="fl">25</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a>x_example <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">Uniform</span>(<span class="fl">0</span>, <span class="fl">10</span>), N)</span>
-<span id="cb7-42"><a href="#cb7-42"></a>y_example <span class="op">=</span> intercept_true <span class="op">.+</span> slope_true <span class="op">.*</span> x_example <span class="op">.+</span> <span class="fu">rand</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, ϵ_true), N)</span>
-<span id="cb7-43"><a href="#cb7-43"></a></span>
-<span id="cb7-44"><a href="#cb7-44"></a>fig_ols <span class="op">=</span> <span class="fu">demonstrate_least_squares</span>(x_example, y_example)</span>
-<span id="cb7-45"><a href="#cb7-45"></a>fig_ols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-curve-fitting">
+<div id="cell-linear-regression-curve-fitting" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-curve-fitting-output-1.svg" id="linear-regression-curve-fitting" class="img-fluid figure-img"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1552,6 +1157,38 @@ p(\theta \mid y) \propto \theta^{(y + \alpha) - 1} (1-\theta)^{(n - y + \beta) -
 <p>Maximum likelihood estimation for linear regression with Normal errors is equivalent to ordinary least squares. The probabilistic model gives the same answer as curve-fitting but also provides a framework for quantifying uncertainty.</p>
 <p>Therefore: <span class="math inline">\(\hat{a} = \bar{y} - \hat{b}\bar{x}\)</span> and <span class="math inline">\(\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}\)</span></p>
 <p>These are identical to the formulas derived from minimizing MSE.</p>
+<p>The following visualizes the maximum likelihood fit for the same data:</p>
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-mle">
+<div id="linear-regression-mle" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>MLE Estimates:
+  Intercept: 1.92
+  Slope: 1.545
+  Sigma: 0.796
+
+True Parameters:
+  Intercept: 2.0
+  Slope: 1.5
+  Sigma: 0.8
+
+Least Squares Estimates (for comparison):
+  Intercept: 1.92
+  Slope: 1.545</code></pre>
+</div>
+</div>
+</div>
+<p>A Bayesian fit with weakly informative priors yields similar point estimates with full posterior uncertainty; the following comparison summarizes results across approaches:</p>
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-comparison">
+<div id="cell-linear-regression-comparison" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-comparison-output-1.svg" id="linear-regression-comparison" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <p>This connection between statistical and machine learning approaches extends far beyond linear regression. Many machine learning methods can be understood as maximum likelihood estimation under specific distributional assumptions, while statistical methods often reduce to familiar optimization problems. This curve-fitting perspective connects to the machine learning and nonparametric methods covered in <a href="../../chapters/fundamentals/ml-nonparametric.html">Chapter on Machine Learning</a>, which address cases without specific functional form assumptions.</p>
 </section>
 </section>
