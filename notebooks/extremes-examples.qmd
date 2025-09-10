@@ -1,17 +1,10 @@
 ---
-title: "Houston precipitation extremes"
 engine: julia
 ---
 
-# Houston precipitation extremes ✏️ {.unnumbered}
+## Extreme Value Theory Examples ✏️ {.unnumbered}
 
 This notebook demonstrates extreme value analysis concepts using real Houston precipitation data, illustrating the fundamental extrapolation problem in climate risk assessment.
-
-::: {.callout-important}
-## Purpose
-
-This computational example supports the [Extreme Value Theory](/chapters/hazard/extremes.qmd) chapter by providing concrete data to illustrate key concepts with real Houston precipitation measurements.
-:::
 
 ```{julia}
 using DataFrames
@@ -28,9 +21,84 @@ using LaTeXStrings
 CairoMakie.activate!(; type="svg")
 ```
 
+## Shape parameter implications
+
+The shape parameter ξ in extreme value distributions fundamentally determines how heavy the tail is, which directly affects our extrapolation to rare events.
+Let's visualize how different shape parameter values lead to dramatically different tail behavior:
+
+```{julia}
+#| label: shape-parameter-comparison
+#| echo: false
+
+# Set up GEV parameters with same location/scale but different shape
+μ = 100.0  # location parameter (typical annual maximum rainfall, mm)
+σ = 20.0   # scale parameter (variability)
+ξ_values = [-0.2, 0.0, 0.2]  # shape parameters to compare
+colors = [:red, :blue, :green]
+labels = [L"$\xi = -0.2$ \text{(Weibull)}", L"$\xi = 0.0$ \text{(Gumbel)}", L"$\xi = 0.2$ \text{(Fréchet)}"]
+
+# Create range of values for plotting
+x_range = 60:0.5:300
+
+fig = Figure(size=(800, 600))
+
+# Plot PDFs
+ax1 = Axis(fig[1, 1],
+    title="GEV Probability Density Functions",
+    xlabel="Annual Maximum Rainfall (mm)",
+    ylabel="Density")
+
+for (i, ξ) in enumerate(ξ_values)
+    if ξ == 0.0
+        # Gumbel distribution (ξ = 0 limit)
+        dist = Gumbel(μ, σ)
+    else
+        # GeneralizedExtremeValue(μ, σ, ξ)
+        dist = GeneralizedExtremeValue(μ, σ, ξ)
+    end
+
+    y_vals = pdf.(dist, x_range)
+    lines!(ax1, x_range, y_vals, color=colors[i], linewidth=3, label=labels[i])
+end
+
+axislegend(ax1, position=:rt)
+
+# Plot survival functions (1 - CDF) on log scale to highlight tail behavior
+ax2 = Axis(fig[2, 1],
+    title="GEV Survival Functions (Tail Behavior)",
+    xlabel="Annual Maximum Rainfall (mm)",
+    ylabel=L"$P(X > x)$",
+    yscale=log10)
+
+for (i, ξ) in enumerate(ξ_values)
+    if ξ == 0.0
+        dist = Gumbel(μ, σ)
+    else
+        dist = GeneralizedExtremeValue(μ, σ, ξ)
+    end
+
+    # Only plot where survival function is positive
+    survival_vals = 1 .- cdf.(dist, x_range)
+    # Filter out zero/negative values for log scale
+    valid_indices = survival_vals .> 1e-10
+    x_valid = x_range[valid_indices]
+    y_valid = survival_vals[valid_indices]
+
+    lines!(ax2, x_valid, y_valid, color=colors[i], linewidth=3, label=labels[i])
+end
+
+axislegend(ax2, position=:lb)
+fig
+```
+
+The key insight: **the shape parameter $\xi$ controls how rapidly probabilities decrease in the tail**.
+
+## Houston precipitation data
+
+Let's look at this using a realistic example
+
 ```{julia}
 #| label: load-raw-data
-#| echo: false
 
 # Load GHCN daily precipitation data from Houston area station USC00414313
 # Data downloaded from: https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00414313.csv.gz
@@ -173,137 +241,4 @@ lines!(ax, precip_plt.date, precip_plt.rainfall_mm,
     color=:steelblue, linewidth=1)
 
 fig
-```
-
-## Shape parameter implications
-
-The shape parameter ξ in extreme value distributions fundamentally determines how heavy the tail is, which directly affects our extrapolation to rare events.
-Let's visualize how different shape parameter values lead to dramatically different tail behavior:
-
-```{julia}
-#| label: shape-parameter-comparison
-#| echo: false
-
-# Set up GEV parameters with same location/scale but different shape
-μ = 100.0  # location parameter (typical annual maximum rainfall, mm)
-σ = 20.0   # scale parameter (variability)
-ξ_values = [-0.2, 0.0, 0.2]  # shape parameters to compare
-colors = [:red, :blue, :green]
-labels = [L"\xi = -0.2" * " (Weibull)", L"\xi = 0.0" * " (Gumbel)", L"\xi = 0.2" * " (Fréchet)"]
-
-# Create range of values for plotting
-x_range = 60:0.5:300
-
-fig = Figure(size=(800, 600))
-
-# Plot PDFs
-ax1 = Axis(fig[1, 1],
-    title="GEV Probability Density Functions",
-    xlabel=L"Annual Maximum Rainfall (mm)",
-    ylabel=L"Density")
-
-for (i, ξ) in enumerate(ξ_values)
-    if ξ == 0.0
-        # Gumbel distribution (ξ = 0 limit)
-        dist = Gumbel(μ, σ)
-    else
-        # GeneralizedExtremeValue(μ, σ, ξ)
-        dist = GeneralizedExtremeValue(μ, σ, ξ)
-    end
-
-    y_vals = pdf.(dist, x_range)
-    lines!(ax1, x_range, y_vals, color=colors[i], linewidth=3, label=labels[i])
-end
-
-axislegend(ax1, position=:rt)
-
-# Plot survival functions (1 - CDF) on log scale to highlight tail behavior
-ax2 = Axis(fig[2, 1],
-    title="GEV Survival Functions (Tail Behavior)",
-    xlabel=L"Annual Maximum Rainfall (mm)",
-    ylabel=L"Pr(X > x)",
-    yscale=log10)
-
-for (i, ξ) in enumerate(ξ_values)
-    if ξ == 0.0
-        dist = Gumbel(μ, σ)
-    else
-        dist = GeneralizedExtremeValue(μ, σ, ξ)
-    end
-
-    # Only plot where survival function is positive
-    survival_vals = 1 .- cdf.(dist, x_range)
-    # Filter out zero/negative values for log scale
-    valid_indices = survival_vals .> 1e-10
-    x_valid = x_range[valid_indices]
-    y_valid = survival_vals[valid_indices]
-
-    lines!(ax2, x_valid, y_valid, color=colors[i], linewidth=3, label=labels[i])
-end
-
-axislegend(ax2, position=:rt)
-fig
-```
-
-The key insight: **the shape parameter ξ controls how rapidly probabilities decrease in the tail**.
-
-For our Houston rainfall example, this has practical implications:
-
-```{julia}
-#| label: return-level-comparison
-#| echo: false
-
-# Calculate return levels for different return periods
-return_periods = [10, 50, 100, 500, 1000]
-
-# Create a table comparing return levels
-results_df = DataFrame(
-    return_period=Int[],
-    xi_neg02=Float64[],
-    xi_zero=Float64[],
-    xi_pos02=Float64[],
-)
-
-for T in return_periods
-    p = 1.0 / T  # exceedance probability
-
-    # Calculate return levels for each shape parameter
-    levels = Float64[]
-
-    for ξ in ξ_values
-        if ξ == 0.0
-            # Gumbel case: x_T = μ - σ * ln(-ln(1-p))
-            x_T = μ - σ * log(-log(1 - p))
-        else
-            # GEV case: x_T = μ - (σ/ξ) * [1 - (-ln(1-p))^(-ξ)]
-            x_T = μ - (σ / ξ) * (1 - (-log(1 - p))^(-ξ))
-        end
-        push!(levels, x_T)
-    end
-
-    push!(results_df, (T, levels[1], levels[2], levels[3]))
-end
-
-println("Return Level Comparison (mm of daily rainfall):")
-println("=" ^ 60)
-Printf.@printf("%-15s %-12s %-12s %-12s\n", "Return Period", "ξ = -0.2", "ξ = 0.0", "ξ = 0.2")
-println("-" ^ 60)
-
-for row in eachrow(results_df)
-    Printf.@printf("%-15s %-12.1f %-12.1f %-12.1f\n",
-        "$(row.return_period)-year", row.xi_neg02, row.xi_zero, row.xi_pos02)
-end
-
-# Calculate percentage differences from Gumbel case
-println("\nPercentage difference from Gumbel (ξ = 0):")
-println("=" ^ 50)
-Printf.@printf("%-15s %-12s %-12s\n", "Return Period", "ξ = -0.2", "ξ = 0.2")
-println("-" ^ 50)
-
-for row in eachrow(results_df)
-    diff_neg = ((row.xi_neg02 - row.xi_zero) / row.xi_zero) * 100
-    diff_pos = ((row.xi_pos02 - row.xi_zero) / row.xi_zero) * 100
-    Printf.@printf("%-15s %-12.1f%% %-12.1f%%\n",
-        "$(row.return_period)-year", diff_neg, diff_pos)
-end
 ```

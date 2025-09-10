@@ -1,36 +1,922 @@
 ---
-title: "Probability, inference, and computation: examples"
 engine: julia
+format: 
+    html: 
+        code-annotations: hover
 ---
 
+# Probability, inference, and computation: examples ✏️ {.unnumbered}
+
 This notebook provides computational examples to accompany the [Probability and inference](../chapters/fundamentals/probability-stats.qmd) chapter.
+See also: [Moquito bites and beer consumption](/notebooks/mosquitos.qmd)
 
-## Examples to be added
 
-### Monte Carlo basics and asymptotic theory
-- Monte Carlo simulation of coin flips (demonstrating Law of Large Numbers)
-- Central Limit Theorem visualization with simulation
-- Monte Carlo integration examples
+```{julia}
+#| label: setup
+using CairoMakie # <1>
+using Distributions
+using LaTeXStrings
+using Turing
+using Printf
+using Random
+using StatsBase
+using HypothesisTests
+using Optim
+```
 
-### Coin flip example
-- Analytical maximum likelihood estimation
-- Bootstrap confidence intervals for coin flip parameter
-- Bayesian inference with conjugate Beta-Binomial model
-- MCMC sampling for coin flip (comparison with analytical solution)
+1. We use `using` to import necessary packages
 
-### Linear regression example  
-- Ordinary least squares implementation
-- Bootstrap confidence intervals for regression parameters
-- Bayesian linear regression with conjugate normal priors
-- MCMC sampling for Bayesian linear regression
+## Distribution examples
 
-### Logistic regression example
-- Numerical maximum likelihood optimization
-- Bootstrap confidence intervals for logistic regression
-- MCMC sampling for Bayesian logistic regression
-- MCMC diagnostics and convergence assessment
+Understanding probability distributions requires grasping three fundamental functions: the probability density function (PDF) or probability mass function (PMF), the cumulative distribution function (CDF), and the quantile function.
+These examples demonstrate how these functions work together using the normal distribution (continuous) and Poisson distribution (discrete).
 
-### Advanced topics
-- Propagating parameter uncertainty to predictions
-- Comparing frequentist and Bayesian uncertainty quantification
-- When to use analytical vs. numerical vs. simulation methods
+The visualizations show both forward operations (finding probabilities from values using the CDF) and inverse operations (finding values from probabilities using quantiles).
+This computational perspective reinforces the theoretical relationships discussed in the main chapter.
+
+We start by defining some helper functions.
+
+```{julia}
+#| label: distribution-helpers
+#| output: false
+
+function add_pdf_area!(ax, dist, a, b; color=(:orange, 0.4), label=nothing) # <1>
+    x_fill = a:0.01:b
+    pdf_fill = pdf.(dist, x_fill) # <2>
+    band!(ax, x_fill, zeros(length(x_fill)), pdf_fill, color=color, label=label)
+    prob = cdf(dist, b) - cdf(dist, a) # <3>
+    return prob
+end
+
+function add_forward_cdf!(ax, dist, x_point; color=:red, x_min=-4) # <4>
+    y_point = cdf(dist, x_point)
+    scatter!(ax, [x_point], [y_point], color=color, markersize=8)
+    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
+    return y_point
+end
+
+function add_inverse_cdf!(ax, dist, p_target; color=:green, x_min=-4) # <5>
+    x_inv = quantile(dist, p_target) # <6>
+    y_actual = cdf(dist, x_inv)
+    scatter!(ax, [x_inv], [y_actual], color=color, markersize=8)
+    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
+    return x_inv, y_actual
+end
+```
+
+1. Creates function to shade area under `PDF` curve between bounds $a$ and $b$. By convention a function that ends in `!` modifies its arguments (in this case, a plot axis).
+2. Vectorized evaluation of `PDF` using broadcasting (the `.` operator)  
+3. Calculate probability using `CDF` difference: $P(a \leq X \leq b) = F(b) - F(a)$
+4. Forward `CDF` operation: given $x$, find $F(x) = P(X \leq x)$
+5. Inverse `CDF` operation: given probability $p$, find $x$ such that $F(x) = p$  
+6. The quantile function is the inverse of the `CDF`
+
+Next, we use [`Makie.jl`](https://docs.makie.org/) to creat the plot. 
+
+```{julia}
+#| label: normal-distribution-example
+
+function plot_normal_pdf_cdf()
+    μ, σ = 0.0, 1.0
+    x_range = -4:0.01:4
+    normal_dist = Normal(μ, σ) # <1>
+
+    fig = Figure(size=(900, 400))
+
+    ax1 = Axis(fig[1, 1],
+        xlabel=L"x",
+        ylabel=L"\text{Density } $p(x)$",
+        title="Normal(0, 1) PDF")
+
+    lines!(ax1, x_range, pdf.(normal_dist, x_range), # <2>
+        color=:blue, linewidth=2, label=L"p(x)")
+
+    prob_area = add_pdf_area!(ax1, normal_dist, -1, 1,
+        label=L"P(-1 \leq X \leq 1)")
+
+    text!(ax1, -0.6, 0.125,
+        text=L"\text{Area} = %$(round(prob_area, digits=3))",
+        fontsize=14, color=:black)
+
+    axislegend(ax1, position=:rt)
+
+    ax2 = Axis(fig[1, 2],
+        xlabel=L"x",
+        ylabel=L"\text{Probability } $F(x)$",
+        title="Normal CDF: Forward and Inverse")
+
+    lines!(ax2, x_range, cdf.(normal_dist, x_range), # <3>
+        color=:blue, linewidth=2, label=L"$F(x)$")
+
+    y_point = add_forward_cdf!(ax2, normal_dist, 1.0)
+    text!(ax2, 1.2, y_point - 0.1,
+        text=L"F(1) = %$(round(y_point, digits=3))", color=:red)
+
+    x_inv, _ = add_inverse_cdf!(ax2, normal_dist, 0.25)
+    text!(ax2, x_inv - 0.8, 0.35,
+        text=L"F^{-1}(0.25) = %$(round(x_inv, digits=2))", color=:green)
+
+    axislegend(ax2, position=:rb)
+    return fig
+end
+
+fig_normal = plot_normal_pdf_cdf()
+fig_normal
+```
+
+1. Create `Normal(0,1)` distribution object from `Distributions.jl`
+2. Plot `PDF` using vectorized evaluation over x_range
+3. Plot `CDF` showing cumulative probabilities
+
+The normal distribution demonstrates these concepts for continuous variables, where probabilities correspond to areas under smooth curves.
+Next, we examine the Poisson distribution for discrete random variables, where probabilities correspond to point masses and the `CDF` becomes a step function.
+
+We define some more helper functions for discrete distributions.
+
+```{julia}
+#| label: discrete-helpers
+#| output: false
+
+function plot_pmf_stems!(ax, dist, x_range; color=:blue, linewidth=3, markersize=8) # <1>
+    pmf_vals = pdf.(dist, x_range) # <2>
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=linewidth) # <3>
+        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=markersize)
+    end
+    return pmf_vals
+end
+
+function highlight_pmf_mass!(ax, dist, x_range; color=:orange) # <4>
+    pmf_vals = pdf.(dist, x_range)
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=5)
+        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=10)
+    end
+    return sum(pmf_vals) # <5>
+end
+
+function plot_discrete_cdf!(ax, dist, x_range; color=:blue, linewidth=2, markersize=6) # <6>
+    cdf_vals = cdf.(dist, x_range)
+    for i in 1:(length(x_range)-1)
+        lines!(ax, [x_range[i], x_range[i+1]], [cdf_vals[i], cdf_vals[i]], # <7>
+            color=color, linewidth=linewidth)
+    end
+    scatter!(ax, x_range, cdf_vals, color=color, markersize=markersize)
+    return cdf_vals
+end
+
+function add_discrete_forward_cdf!(ax, dist, x_point; color=:red, x_min=0) # <8>
+    y_point = cdf(dist, x_point)
+    scatter!(ax, [x_point], [y_point], color=color, markersize=10)
+    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
+    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
+    return y_point
+end
+
+function add_discrete_inverse_cdf!(ax, dist, p_target; color=:green, x_min=0) # <9>
+    x_inv = quantile(dist, p_target)
+    y_actual = cdf(dist, x_inv)
+    scatter!(ax, [x_inv], [y_actual], color=color, markersize=10)
+    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
+    return x_inv, y_actual
+end
+```
+
+1. Plots discrete PMF as stems (vertical lines) with points at the top
+2. For discrete distributions, `pdf()` returns probability mass $P(X = x)$
+3. Draw vertical line from 0 to probability mass at each $x$ value
+4. Highlights specific probability masses in different color
+5. Sum individual masses to get cumulative probability $P(X \leq 2)$
+6. Creates step function visualization for discrete `CDF`
+7. Horizontal line segments show constant `CDF` values between integers
+8. Same forward operation logic but adapted for discrete distributions
+9. Inverse operation finds the smallest integer $x$ such that $F(x) \geq p$
+
+Now we create the plot for the Poisson distribution.
+
+```{julia}
+#| label: poisson-distribution-example
+
+function plot_poisson_pmf_cdf()
+    λ = 3.0
+    x_range = 0:10
+    poisson_dist = Poisson(λ) # <1>
+
+    fig = Figure(size=(900, 400))
+
+    ax1 = Axis(fig[1, 1],
+        xlabel=L"x",
+        ylabel=L"P(X = x)",
+        title=L"\text{Poisson}(3) \text{ PMF}",
+        xticks=1:10)
+
+    plot_pmf_stems!(ax1, poisson_dist, x_range)
+
+    prob_mass = highlight_pmf_mass!(ax1, poisson_dist, 0:2) # <2>
+
+    text!(ax1, 6, 0.15,
+        text=L"P(X \leq 2) = %$(round(prob_mass, digits=3))",
+        fontsize=14, color=:black)
+
+    ax2 = Axis(fig[1, 2],
+        xlabel=L"x",
+        ylabel=L"\text{Probability } F(x)",
+        title=L"\text{Poisson CDF: Forward and Inverse}",
+        xticks=1:10)
+
+    plot_discrete_cdf!(ax2, poisson_dist, x_range)
+
+    y_point = add_discrete_forward_cdf!(ax2, poisson_dist, 4)
+    text!(ax2, 4.2, y_point - 0.1,
+        text=L"F(4) = %$(round(y_point, digits=3))", color=:red)
+
+    x_inv, _ = add_discrete_inverse_cdf!(ax2, poisson_dist, 0.4)
+    text!(ax2, x_inv - 1.5, 0.5,
+        text=L"F^{-1}(0.4) = %$(Int(x_inv))", color=:green)
+
+    return fig
+end
+
+fig_poisson = plot_poisson_pmf_cdf()
+fig_poisson
+```
+
+1. Create Poisson distribution with rate parameter $\lambda = 3$
+2. Calculate and highlight $P(X \leq 2)$ by summing individual probability masses
+
+## Coin flip examples
+
+Having explored the foundational concepts of probability distributions, we now turn to statistical inference—the process of learning about unknown parameters from observed data.
+
+The coin flip example provides a pedagogically clean introduction to statistical inference.
+We observe a series of coin flips and want to infer the probability $\theta$ of heads.
+This simple setup allows us to demonstrate maximum likelihood estimation, Bayesian inference, and the relationship between analytical and computational approaches.
+
+### Likelihood visualization
+
+The likelihood function shows how plausible different values of $\theta$ are given our observed data.
+For the `Binomial` model, this creates a clear peak at the observed proportion of heads.
+
+```{julia}
+#| label: coin-flip-likelihood
+
+function plot_binomial_likelihood(y, n)
+    θ_grid = 0.01:0.01:0.99 # <1>
+
+    # Using Distributions.jl
+    likelihood_vals = [pdf(Binomial(n, θ), y) for θ in θ_grid] # <2>
+
+    fig = Figure(size=(800, 500))
+    ax = Axis(fig[1, 1],
+        xlabel=L"$\theta$ (probability of heads)",
+        ylabel="Likelihood",
+        title="Likelihood for $(y) heads in $(n) flips")
+
+    lines!(ax, θ_grid, likelihood_vals, label="Full likelihood", linewidth=2, color=:blue)
+
+    # Mark the MLE
+    mle = y / n # <3>
+    vlines!(ax, [mle], color=:black, linestyle=:dot, linewidth=2, label="MLE = $(round(mle, digits=2))")
+
+    axislegend(ax, position=:lt)
+    return fig
+end
+
+# Example with 7 heads in 10 flips
+fig_likelihood = plot_binomial_likelihood(7, 10)
+fig_likelihood
+```
+
+1. Create grid of $\theta$ values from 0.01 to 0.99 to evaluate likelihood
+2. Evaluate binomial likelihood $L(\theta) = P(y|\theta,n)$ for each $\theta$ value
+3. Maximum likelihood estimate is simply the observed proportion $\frac{y}{n}$
+
+The likelihood peaks at $\theta = 0.7$ when we observe 7 heads out of 10 flips.
+This demonstrates that the maximum likelihood estimate is simply the observed proportion.
+
+### Maximum likelihood estimation
+
+Maximum likelihood estimation finds the parameter value that makes the observed data most probable.
+For the coin flip problem, we can solve this analytically by taking the derivative of the log-likelihood and setting it to zero.
+The following shows how the `MLE` varies with different numbers of observed heads:
+
+```{julia}
+#| label: coin-flip-mle
+
+function demonstrate_mle_estimation(y_values, n)
+    θ_grid = 0.01:0.01:0.99
+
+    fig = Figure(size=(800, 600))
+
+    for (i, y) in enumerate(y_values) # <1>
+        ax = Axis(fig[div(i - 1, 2)+1, ((i-1)%2)+1], # <2>
+            xlabel=L"\theta",
+            ylabel="Log-likelihood",
+            title="$(y)/$(n) heads")
+
+        log_likelihood = [y * log(θ) + (n - y) * log(1 - θ) for θ in θ_grid] # <3>
+
+        lines!(ax, θ_grid, log_likelihood, linewidth=2, color=:blue)
+
+        mle = y / n
+        vlines!(ax, [mle], color=:red, linestyle=:dash, linewidth=2,
+            label="MLE")
+
+        if i == 1
+            axislegend(ax, position=:cb)
+        end
+    end
+
+    return fig
+end
+
+# Show MLE for different outcomes
+fig_mle = demonstrate_mle_estimation([3, 5, 7, 9], 10) # <4>
+fig_mle
+```
+
+1. Loop through different numbers of observed heads to show MLE behavior
+2. Create $2 \times 2$ grid of subplots using integer division and modulo
+3. Analytical log-likelihood: $\ell(\theta) = y \ln(\theta) + (n-y) \ln(1-\theta)$
+4. Demonstrate `MLE` for 3, 5, 7, and 9 heads out of 10 flips
+
+Each plot shows the log-likelihood function as a smooth curve with its maximum clearly indicated.
+Notice that the `MLE` is always at the observed proportion $\frac{y}{n}$, confirming our analytical derivation.
+
+### Bayesian analysis
+
+Bayesian inference treats the parameter $\theta$ as a random variable with its own probability distribution.
+We start with a prior belief about $\theta$, observe data, and update our beliefs to get the posterior distribution.
+
+For the coin flip problem with a `Beta` prior, we can compute the posterior analytically using conjugacy.
+The posterior parameters are simply the prior parameters plus the observed successes and failures.
+This example compares the exact analytical solution with `MCMC` sampling.
+
+First we define the `Turing.jl` model and the comparison function.
+See the official [`Turing.jl` documentation and tutorials](https://turinglang.org/).
+
+```{julia}
+# Turing model for coin flipping
+@model function coin_flip_model(y, n, prior_α, prior_β) # <1>
+    θ ~ Beta(prior_α, prior_β) # <2>
+    y ~ Binomial(n, θ) # <3>
+    return θ
+end
+```
+
+1. `Turing.jl` probabilistic programming model specification using `@model` macro
+2. Prior distribution: $\theta \sim \text{Beta}(\alpha, \beta)$
+3. Likelihood: $y \sim \text{Binomial}(n, \theta)$ connects data to parameter
+
+Next we define a function to help us create the data and fits
+
+```{julia}
+function compare_analytical_mcmc(y, n; prior_α=1, prior_β=1, n_samples=5000) # <4>
+    # Analytical posterior
+    post_α = prior_α + y # <5>
+    post_β = prior_β + n - y # <6>
+    analytical_posterior = Beta(post_α, post_β) # <7>
+
+    # MCMC sampling
+    model = coin_flip_model(y, n, prior_α, prior_β) # <8>
+    chain = sample(model, NUTS(), n_samples, verbose=false, progress=false) # <9>
+    mcmc_samples = Array(chain[:θ]) # <10>
+
+    # Return data for plotting instead of creating plots
+    return (analytical_posterior=analytical_posterior, mcmc_samples=mcmc_samples, n_samples=n_samples)
+end
+
+# Generate data by calling the same function twice  
+data_low = compare_analytical_mcmc(7, 10, n_samples=500) # <11>
+data_high = compare_analytical_mcmc(7, 10, n_samples=50_000) # <12>
+```
+
+4. Function comparing analytical vs MCMC approaches
+5. Posterior $\alpha = \text{prior } \alpha + \text{successes}$ (conjugate update)
+6. Posterior $\beta = \text{prior } \beta + \text{failures}$ (conjugate update)
+7. Exact posterior using `Beta`-Binomial conjugacy
+8. Create Turing model instance with data and priors
+9. MCMC sampling using No-U-Turn Sampler (`NUTS`)
+10. Extract $\theta$ samples from MCMC chain using `Array(chain[:θ])`
+11. Low sample count (500) to show MCMC variability
+12. High sample count (50,000) to show MCMC convergence
+
+And then we plot
+
+```{julia}
+#| label: coin-flip-bayesian
+
+# Combine plots
+fig_comparison = Figure(size=(1200, 500))
+ax1 = Axis(fig_comparison[1, 1],
+    xlabel=L"$\theta$ (probability of heads)",
+    ylabel="Density",
+    title="MCMC with 500 samples")
+ax2 = Axis(fig_comparison[1, 2],
+    xlabel=L"$\theta$ (probability of heads)",
+    title="MCMC with 50,000 samples")
+
+# Link y-axes for comparison
+linkaxes!(ax1, ax2) # <13>
+
+# Plot using the same plotting logic for both panels
+for (ax, data) in [(ax1, data_low), (ax2, data_high)] # <14>
+    # Plot analytical posterior
+    θ_grid = 0.01:0.01:0.99
+    analytical_density = pdf.(data.analytical_posterior, θ_grid) # <15>
+    lines!(ax, θ_grid, analytical_density, label="Analytical",
+        linewidth=3, color=:blue)
+
+    # Plot MCMC histogram
+    hist!(ax, vec(data.mcmc_samples), bins=40, normalization=:pdf, # <16>
+        color=(:red, 0.6), label="MCMC samples")
+
+    # Add summary statistics
+    analytical_mean = mean(data.analytical_posterior)
+    mcmc_mean = mean(data.mcmc_samples)
+
+    # Vertical lines for means
+    vlines!(ax, [analytical_mean], color=:blue, linestyle=:dash, alpha=0.8)
+    vlines!(ax, [mcmc_mean], color=:red, linestyle=:dot, alpha=0.8)
+
+    # Add vertical line at 0.3 to show tail cutoff
+    vlines!(ax, [0.3], color=:gray, linestyle=:solid, alpha=0.6)
+
+    # Add text annotations with statistics  
+    text!(ax, 0.35, maximum(analytical_density) * 0.95,
+        text=L"\text{Analytical: Mean} = %$(round(analytical_mean, digits=3))",
+        fontsize=10, color=:blue)
+    text!(ax, 0.35, maximum(analytical_density) * 0.85,
+        text=L"\text{MCMC: Mean} = %$(round(mcmc_mean, digits=3))",
+        fontsize=10, color=:red)
+
+    # Calculate P(theta < 0.25) - tail probability
+    tail = 0.25
+    analytical_tail_prob = cdf(data.analytical_posterior, tail) # <17>
+    analytical_tail_prob = @sprintf("%.2E", analytical_tail_prob) # <18>
+    mcmc_tail_prob = mean(data.mcmc_samples .< tail) # <19>
+    mcmc_tail_prob = @sprintf("%.2E", mcmc_tail_prob)
+    text!(ax, 0.05, maximum(analytical_density) * 0.55,
+        text=L"\text{Analytical}: $P(\theta < %$(tail))$ = %$(analytical_tail_prob)",
+        fontsize=10, color=:blue)
+    text!(ax, 0.05, maximum(analytical_density) * 0.45,
+        text=L"\text{MCMC}: $P(\theta < %$(tail))$ = %$(mcmc_tail_prob)",
+        fontsize=10, color=:red)
+
+    axislegend(ax, position=:rt)
+end
+
+fig_comparison
+```
+
+13. Link axes for direct comparison between panels
+14. Loop over both low and high sample datasets
+15. Exact analytical posterior density
+16. Normalized histogram of `MCMC` samples
+17. Exact tail probability using `CDF`
+18. Format tail probability in scientific notation
+19. Estimate tail probability from `MCMC` samples
+
+The results show excellent agreement between analytical and `MCMC` approaches.
+With sufficient samples, `MCMC` accurately approximates the true posterior distribution.
+The comparison also illustrates how `MCMC` precision varies across the distribution—central quantities like the mean are estimated more accurately than tail probabilities.
+
+## Linear regression example
+
+The coin flip example demonstrated inference for a single parameter using a simple likelihood function.
+Real-world problems typically involve multiple parameters and more complex relationships between variables.
+Linear regression provides our first example of multivariate statistical inference while maintaining analytical tractability.
+
+This example demonstrates the progression from curve fitting to probabilistic inference.
+We'll examine the same problem through three lenses: minimizing prediction error, maximum likelihood estimation, and Bayesian inference.
+All three approaches yield the same parameter estimates for the linear model with normal errors, but provide different ways of quantifying uncertainty.
+
+### Generating synthetic data
+
+We start by creating synthetic data from a known linear relationship with added noise.
+This allows us to verify that our inference methods recover the true parameters.
+
+```{julia}
+#| label: linear-regression-data
+#| output: false
+
+# Set parameters for data generation
+Random.seed!(42) # <1>
+n_obs = 30
+true_intercept = 2.0
+true_slope = 1.5
+true_sigma = 0.8
+
+# Generate predictor variables
+x_reg = sort(rand(Uniform(0, 5), n_obs)) # <2>
+
+# Generate response with linear relationship plus noise
+y_reg = true_intercept .+ true_slope .* x_reg .+ rand(Normal(0, true_sigma), n_obs) # <3>
+
+# Store true parameter values for comparison
+true_params = (intercept=true_intercept, slope=true_slope, sigma=true_sigma)
+```
+
+1. Set random seed for reproducible results
+2. Generate sorted predictor values from uniform distribution
+3. Generate response following $y_i = \alpha + \beta x_i + \epsilon_i$ where $\epsilon_i \sim N(0, \sigma^2)$
+
+Let's visualize our synthetic dataset:
+
+```{julia}
+#| label: linear-regression-data-plot
+
+function plot_synthetic_data(x_data, y_data, true_params)
+    fig = Figure(size=(700, 500))
+    ax = Axis(fig[1, 1],
+        xlabel="x",
+        ylabel="y",
+        title="Synthetic Linear Regression Dataset")
+
+    # Plot data points
+    scatter!(ax, x_data, y_data, color=:blue, markersize=8, label="Observed data")
+
+    # Plot true relationship
+    x_line = range(minimum(x_data), maximum(x_data), length=100)
+    y_true = true_params.intercept .+ true_params.slope .* x_line
+    lines!(ax, x_line, y_true, color=:red, linewidth=3,
+        label=L"\text{True relationship: } $y = %$(true_params.intercept) + %$(true_params.slope) x$")
+
+    # Add noise band to show true sigma
+    y_upper = y_true .+ 2 * true_params.sigma
+    y_lower = y_true .- 2 * true_params.sigma
+    band!(ax, x_line, y_lower, y_upper, color=(:red, 0.2),
+        label=L"$\pm 2 \sigma$")
+
+    axislegend(ax, position=:lt)
+    return fig
+end
+
+fig_data = plot_synthetic_data(x_reg, y_reg, true_params)
+fig_data
+```
+
+This visualization shows our synthetic dataset with the true linear relationship and noise level.
+The scattered points represent our "observations," while the red line shows the true underlying relationship we're trying to recover.
+The shaded band indicates the expected range of observations given the noise level ($\pm 2\sigma$).
+
+### Curve fitting by minimizing prediction error
+
+Without probability theory, we can view regression as finding the line that best fits the data.
+This requires choosing a loss function to measure fit quality.
+The most common choice is mean squared error (`MSE`), which penalizes large prediction errors more than small ones.
+This is more of a "machine learning" perspective on the problem, and is one to which we return in [the ML chapter](/chapters/fundamentals/ml-nonparametric.qmd).
+
+```{julia}
+#| label: linear-regression-curve-fitting
+
+function fit_least_squares(x_data, y_data) # <1>
+    n = length(x_data)
+    x_bar = mean(x_data)
+    y_bar = mean(y_data)
+
+    # Analytical least squares formulas
+    slope = sum((x_data .- x_bar) .* (y_data .- y_bar)) / sum((x_data .- x_bar) .^ 2) # <2>
+    intercept = y_bar - slope * x_bar # <3>
+
+    # Calculate residuals and MSE
+    y_pred = intercept .+ slope .* x_data
+    residuals = y_data .- y_pred
+    mse = mean(residuals .^ 2) # <4>
+
+    return (intercept=intercept, slope=slope, mse=mse, residuals=residuals, predictions=y_pred)
+end
+
+function plot_least_squares_fit(x_data, y_data, fit_results)
+    fig = Figure(size=(800, 500))
+    ax = Axis(fig[1, 1],
+        xlabel="x",
+        ylabel="y",
+        title="Least Squares Curve Fitting")
+
+    # Plot data points
+    scatter!(ax, x_data, y_data, color=:blue, markersize=8, label="Data")
+
+    # Plot fitted line
+    x_line = range(minimum(x_data), maximum(x_data), length=100)
+    y_line = fit_results.intercept .+ fit_results.slope .* x_line
+    lines!(ax, x_line, y_line, color=:red, linewidth=2,
+        label=L"\text{Fitted line:} $y = %$(round(fit_results.intercept, digits=2)) + %$(round(fit_results.slope, digits=2)) x$")
+
+    # Show residuals as vertical lines
+    for i in eachindex(x_data)
+        lines!(ax, [x_data[i], x_data[i]], [y_data[i], fit_results.predictions[i]], # <5>
+            color=:gray, linestyle=:dash, alpha=0.7, linewidth=1)
+    end
+
+    # Add true line for comparison
+    y_true_line = true_params.intercept .+ true_params.slope .* x_line
+    lines!(ax, x_line, y_true_line, color=:green, linewidth=2, linestyle=:dot,
+        label=L"\text{True line: } $y = %$(true_params.intercept) + %$(true_params.slope)x$")
+
+    axislegend(ax, position=:lt)
+    return fig
+end
+
+# Fit the model and create visualization
+ols_fit = fit_least_squares(x_reg, y_reg)
+fig_curve_fit = plot_least_squares_fit(x_reg, y_reg, ols_fit)
+fig_curve_fit
+```
+
+1. Calculate least squares estimates using analytical formulas
+2. Slope: $\hat{\beta} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$
+3. Intercept: $\hat{\alpha} = \bar{y} - \hat{\beta} \bar{x}$ (fitted line passes through centroid)
+4. Mean squared error quantifies overall fit quality
+5. Residual lines show prediction errors for each observation
+
+The least squares method finds parameter estimates close to the true values.
+The residual lines visualize the model's prediction errors, with shorter lines indicating better fit.
+
+### Maximum likelihood estimation
+
+The curve fitting approach works but provides no way to quantify uncertainty in our parameter estimates.
+By introducing a probabilistic model, we can use maximum likelihood estimation to both estimate parameters and assess their precision.
+
+For linear regression, we assume the response follows a normal distribution around the linear predictor:
+
+$$
+y_i \sim N(\alpha + \beta x_i, \sigma^2)
+$$
+
+as discussed in the theory section.
+Using the `Optim` package, we can numerically maximize the likelihood function to find the `MLE` estimates for $\alpha$, $\beta$, and $\sigma$.
+In `Optim`, all functions are minimized, so we minimize the negative log-likelihood instead.
+
+```{julia}
+#| label: linear-regression-mle
+
+function negative_log_likelihood(params, x_data, y_data) # <1>
+    α, β, σ = params
+    if σ <= 0  # <2>
+        return Inf
+    end
+
+    # Calculate predicted values
+    μ = α .+ β .* x_data
+
+    # Sum of negative log-likelihoods for each observation
+    nll = 0.0
+    for i in eachindex(y_data)
+        nll += -logpdf(Normal(μ[i], σ), y_data[i]) # <3>
+    end
+    return nll
+end
+
+function find_mle_estimates(x_data, y_data; initial_guess=[0.0, 1.0, 1.0]) # <4>
+    # Use optimization to find MLE
+    result = optimize(params -> negative_log_likelihood(params, x_data, y_data),
+        initial_guess, NelderMead()) # <5>
+
+    if !Optim.converged(result)
+        @warn "MLE optimization did not converge"
+    end
+
+    mle_params = Optim.minimizer(result)
+    return (intercept=mle_params[1], slope=mle_params[2], sigma=mle_params[3])
+end
+
+# Find MLE estimates
+mle_estimates = find_mle_estimates(x_reg, y_reg)
+
+println("MLE Estimates:")
+println("  Intercept: $(round(mle_estimates.intercept, digits=3))")
+println("  Slope: $(round(mle_estimates.slope, digits=3))")
+println("  Sigma: $(round(mle_estimates.sigma, digits=3))")
+println()
+println("True Parameters:")
+println("  Intercept: $(true_params.intercept)")
+println("  Slope: $(true_params.slope)")
+println("  Sigma: $(true_params.sigma)")
+println()
+println("Least Squares Estimates (for comparison):")
+println("  Intercept: $(round(ols_fit.intercept, digits=3))")
+println("  Slope: $(round(ols_fit.slope, digits=3))")
+```
+
+1. Negative log-likelihood function for optimization (we minimize this)
+2. Enforce constraint that $\sigma > 0$ by returning infinite cost for invalid values
+3. Sum negative log-likelihoods: $-\sum_i \log p(y_i | \alpha + \beta x_i, \sigma)$
+4. Function to find `MLE` using numerical optimization
+5. Use Nelder-Mead simplex algorithm for unconstrained optimization
+
+The `MLE` estimates for the intercept and slope match the least squares results exactly.
+This confirms the theoretical result that for linear regression with normal errors, maximum likelihood estimation is equivalent to minimizing mean squared error.
+The `MLE` approach additionally estimates $\sigma$, quantifying the noise level in the data.
+
+### Bayesian inference
+
+Bayesian inference treats all parameters as random variables with probability distributions.
+We specify prior beliefs, observe data, and compute posterior distributions that quantify parameter uncertainty.
+
+```{julia}
+#| label: linear-regression-bayesian
+
+# Define Turing.jl model for Bayesian linear regression
+@model function linear_regression_model(x, y) # <1>
+    n = length(y)
+
+    # Priors
+    α ~ Normal(0, 5)      # <2>
+    β ~ Normal(0, 5)      # <3>  
+    σ ~ Exponential(1)    # <4>
+
+    # Likelihood
+    μ = α .+ β .* x
+    for i in 1:n
+        y[i] ~ Normal(μ[i], σ) # <5>
+    end
+end
+
+function run_bayesian_regression(x_data, y_data; n_samples=5000)
+    # Create model instance
+    model = linear_regression_model(x_data, y_data)
+
+    # Sample from posterior using NUTS
+    chain = sample(model, NUTS(), n_samples, verbose=false, progress=false) # <6>
+
+    return chain
+end
+
+# Run Bayesian inference  
+bayesian_chain = run_bayesian_regression(x_reg, y_reg)
+
+# Extract posterior samples
+α_samples = vec(Array(bayesian_chain[:α])) # <7>
+β_samples = vec(Array(bayesian_chain[:β]))
+σ_samples = vec(Array(bayesian_chain[:σ]))
+
+# Calculate posterior summaries
+bayesian_estimates = (
+    intercept=(mean=mean(α_samples), std=std(α_samples)),
+    slope=(mean=mean(β_samples), std=std(β_samples)),
+    sigma=(mean=mean(σ_samples), std=std(σ_samples))
+)
+
+println("Bayesian Posterior Summaries:")
+println("  Intercept: $(round(bayesian_estimates.intercept.mean, digits=3)) ± $(round(bayesian_estimates.intercept.std, digits=3))")
+println("  Slope: $(round(bayesian_estimates.slope.mean, digits=3)) ± $(round(bayesian_estimates.slope.std, digits=3))")
+println("  Sigma: $(round(bayesian_estimates.sigma.mean, digits=3)) ± $(round(bayesian_estimates.sigma.std, digits=3))")
+```
+
+1. Turing.jl probabilistic programming model using `@model` macro
+2. Weakly informative prior for intercept: $\alpha \sim N(0, 5^2)$
+3. Weakly informative prior for slope: $\beta \sim N(0, 5^2)$
+4. Exponential prior for noise standard deviation: $\sigma \sim \text{Exp}(1)$
+5. Likelihood specification: each $y_i \sim N(\alpha + \beta x_i, \sigma)$
+6. Sample from posterior using No-U-Turn Sampler (`NUTS`)
+7. Extract parameter samples from MCMC chain and flatten to vectors
+
+### MLE with Turing
+
+We can also use `Turing.jl` to find the `MLE` by optimizing the model instead of sampling.
+This demonstrates how the same probabilistic model can be used for both optimization-based and sampling-based inference.
+
+```{julia}
+#| label: linear-regression-mle-turing
+
+# Use the same Turing model but optimize instead of sample
+function find_turing_mle(x_data, y_data)
+    model = linear_regression_model(x_data, y_data) # <1>
+
+    # Find MAP estimate using optimization
+    mle_result = optimize(model, MAP()) # <2>
+
+    # Extract parameter estimates
+    estimates = (
+        intercept=mle_result.values[:α],
+        slope=mle_result.values[:β],
+        sigma=mle_result.values[:σ]
+    )
+
+    return estimates
+end
+
+# Find MLE using Turing optimization
+turing_mle = find_turing_mle(x_reg, y_reg)
+
+println("Turing MLE Estimates:")
+println("  Intercept: $(round(turing_mle.intercept, digits=3))")
+println("  Slope: $(round(turing_mle.slope, digits=3))")
+println("  Sigma: $(round(turing_mle.sigma, digits=3))")
+println()
+println("Comparison with Manual MLE:")
+println("  Intercept difference: $(round(abs(turing_mle.intercept - mle_estimates.intercept), digits=6))")
+println("  Slope difference: $(round(abs(turing_mle.slope - mle_estimates.slope), digits=6))")
+println("  Sigma difference: $(round(abs(turing_mle.sigma - mle_estimates.sigma), digits=6))")
+```
+
+1. Use the same probabilistic model defined earlier for Bayesian inference
+2. Optimize using `MAP()` (Maximum A Posteriori) which reduces to `MLE` with flat priors
+
+This approach shows that `Turing.jl` provides a unified framework: the same model definition can be used for both `MLE` optimization and `MCMC` sampling.
+The results should match our manual `MLE` implementation, demonstrating the consistency between different computational approaches, although small numerical differences may arise due to optimization tolerances.
+
+### Comparison of approaches
+
+All three approaches provide similar point estimates, but differ in their treatment of uncertainty:
+
+```{julia}
+#| label: linear-regression-comparison
+
+function create_regression_comparison_plot()
+    fig = Figure(size=(1200, 800))
+
+    # Data and fits subplot
+    ax1 = Axis(fig[1, 1:2],
+        xlabel="x",
+        ylabel="y",
+        title="Regression Results: All Methods")
+
+    # Plot data
+    scatter!(ax1, x_reg, y_reg, color=:black, markersize=6, label="Data")
+
+    # Plot true relationship
+    x_line = range(minimum(x_reg), maximum(x_reg), length=100)
+    y_true = true_params.intercept .+ true_params.slope .* x_line
+    lines!(ax1, x_line, y_true, color=:green, linewidth=3,
+        label="True: y = $(true_params.intercept) + $(true_params.slope)x")
+
+    # Plot least squares fit
+    y_ols = ols_fit.intercept .+ ols_fit.slope .* x_line
+    lines!(ax1, x_line, y_ols, color=:blue, linewidth=2,
+        label="Least squares")
+
+    # Plot MLE fit  
+    y_mle = mle_estimates.intercept .+ mle_estimates.slope .* x_line
+    lines!(ax1, x_line, y_mle, color=:red, linewidth=2, linestyle=:dash,
+        label="MLE")
+
+    # Plot Bayesian posterior mean and credible interval
+    y_bayes = bayesian_estimates.intercept.mean .+ bayesian_estimates.slope.mean .* x_line
+    lines!(ax1, x_line, y_bayes, color=:purple, linewidth=2, linestyle=:dot,
+        label="Bayesian mean")
+
+    # Calculate 95% credible interval for predictions
+    n_pred_samples = min(1000, length(α_samples)) # <1>
+    y_pred_samples = zeros(length(x_line), n_pred_samples)
+    for i in 1:n_pred_samples
+        y_pred_samples[:, i] = α_samples[i] .+ β_samples[i] .* x_line # <2>
+    end
+
+    # Calculate percentiles for credible band
+    y_lower = [quantile(y_pred_samples[i, :], 0.025) for i in 1:length(x_line)] # <3>
+    y_upper = [quantile(y_pred_samples[i, :], 0.975) for i in 1:length(x_line)]
+
+    # Add credible interval band
+    band!(ax1, x_line, y_lower, y_upper, color=(:purple, 0.2),
+        label="95% credible interval")
+
+    axislegend(ax1, position=:lt)
+
+    # Posterior distributions subplot
+    ax2 = Axis(fig[2, 1],
+        xlabel=L"Intercept $\alpha$",
+        ylabel="Density",
+        title="Parameter Uncertainty")
+
+    hist!(ax2, vec(α_samples), bins=30, normalization=:pdf,
+        color=(:purple, 0.6), label="Posterior")
+    vlines!(ax2, [true_params.intercept], color=:green, linewidth=2,
+        label="True value")
+    vlines!(ax2, [mle_estimates.intercept], color=:red, linewidth=2,
+        label="MLE")
+    axislegend(ax2, position=:rt)
+
+    ax3 = Axis(fig[2, 2],
+        xlabel=L"Slope $\beta$",
+        ylabel="Density")
+
+    hist!(ax3, vec(β_samples), bins=30, normalization=:pdf,
+        color=(:purple, 0.6))
+    vlines!(ax3, [true_params.slope], color=:green, linewidth=2)
+    vlines!(ax3, [mle_estimates.slope], color=:red, linewidth=2)
+
+    return fig
+end
+
+fig_comparison = create_regression_comparison_plot()
+fig_comparison
+```
+
+1. Use subset of MCMC samples for computational efficiency
+2. For each x-value, calculate predicted y using different parameter samples
+3. Calculate 2.5th and 97.5th percentiles for 95% credible interval
+
+This comparison reveals several important points:
+
+- **Point estimates agree**: All methods produce nearly identical parameter estimates
+- **Uncertainty quantification differs**: Only the Bayesian approach provides full uncertainty distributions and credible intervals
+- **Prediction uncertainty**: The 95% credible interval shows the range of plausible regression lines given parameter uncertainty
+- **Computational cost varies**: Least squares is fastest, `MLE` requires optimization, `MCMC` is most expensive
+- **Interpretability**: Bayesian posteriors directly quantify "how certain should we be about these parameter values?"
+
+The Bayesian approach excels when we need to propagate parameter uncertainty through subsequent calculations or decision processes.
+The credible interval demonstrates how parameter uncertainty translates into prediction uncertainty—a crucial consideration for risk assessment and decision-making under uncertainty.

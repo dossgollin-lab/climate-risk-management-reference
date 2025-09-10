@@ -11,3 +11,9 @@ $sidebar-font-size: 0.85rem;
 .quarto-sidebar-footer {
   font-size: $sidebar-font-size;
 }
+
+// Code styling
+code,
+.sourceCode {
+  font-size: 0.75rem;
+}

@@ -4,15 +4,6 @@ title: Probability and inference ✏️
 engine: julia
 ---
 
-```{julia}
-#| code-fold: true
-#| output: false
-# Import necessary packages
-using CairoMakie
-using Distributions
-using LaTeXStrings
-using Turing
-```
 
 This chapter covers the fundamental concepts of probabilistic modeling and statistical inference.
 Data analysis proceeds by building a generative model—a formal, probabilistic hypothesis about how data are created.
@@ -140,199 +131,12 @@ Each example shows both the forward operation (finding probabilities from values
 The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves.
 The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.
 
-```{julia}
-#| code-fold: true
-
-# Helper function to add area under curve
-function add_pdf_area!(ax, dist, a, b; color=(:orange, 0.4), label=nothing)
-    x_fill = a:0.01:b
-    pdf_fill = pdf.(dist, x_fill)
-    band!(ax, x_fill, zeros(length(x_fill)), pdf_fill, color=color, label=label)
-    prob = cdf(dist, b) - cdf(dist, a)
-    return prob
-end
-
-# Helper function to show forward CDF operation
-function add_forward_cdf!(ax, dist, x_point; color=:red, x_min=-4)
-    y_point = cdf(dist, x_point)
-    scatter!(ax, [x_point], [y_point], color=color, markersize=8)
-    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
-    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
-    return y_point
-end
-
-# Helper function to show inverse CDF operation
-function add_inverse_cdf!(ax, dist, p_target; color=:green, x_min=-4)
-    x_inv = quantile(dist, p_target)
-    y_actual = cdf(dist, x_inv)
-    scatter!(ax, [x_inv], [y_actual], color=color, markersize=8)
-    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)
-    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
-    return x_inv, y_actual
-end
-
-function plot_normal_pdf_cdf()
-    μ, σ = 0.0, 1.0
-    x_range = -4:0.01:4
-    normal_dist = Normal(μ, σ)
-
-    fig = Figure(size=(900, 400))
-
-    # Left panel: PDF with area under curve
-    ax1 = Axis(fig[1, 1],
-        xlabel=L"x",
-        ylabel=L"\text{Density } p(x)",
-        title=L"\text{Normal}(0, 1) \text{ PDF}")
-
-    # Plot PDF
-    lines!(ax1, x_range, pdf.(normal_dist, x_range),
-        color=:blue, linewidth=2, label=L"p(x)")
-
-    # Add shaded area
-    prob_area = add_pdf_area!(ax1, normal_dist, -1, 1,
-        label=L"P(-1 \leq X \leq 1)")
-
-    # Add area annotation
-    text!(ax1, -0.6, 0.125,
-        text=L"\text{Area} = %$(round(prob_area, digits=3))",
-        fontsize=14, color=:black)
-
-    axislegend(ax1, position=:rt)
-
-    # Right panel: CDF with forward and inverse operations
-    ax2 = Axis(fig[1, 2],
-        xlabel=L"x",
-        ylabel=L"\text{Probability } F(x)",
-        title=L"\text{Normal CDF: Forward and Inverse}")
-
-    # Plot CDF
-    lines!(ax2, x_range, cdf.(normal_dist, x_range),
-        color=:blue, linewidth=2, label=L"F(x)")
-
-    # Forward operation: F(1)
-    y_point = add_forward_cdf!(ax2, normal_dist, 1.0)
-    text!(ax2, 1.2, y_point - 0.1,
-        text=L"F(1) = %$(round(y_point, digits=3))", color=:red)
-
-    # Inverse operation: F⁻¹(0.25)
-    x_inv, _ = add_inverse_cdf!(ax2, normal_dist, 0.25)
-    text!(ax2, x_inv - 0.8, 0.35,
-        text=L"F^{-1}(0.25) = %$(round(x_inv, digits=2))", color=:green)
-
-    axislegend(ax2, position=:rb)
-    return fig
-end
-
-fig_normal = plot_normal_pdf_cdf()
-fig_normal
-```
+{{< embed ../../notebooks/probability-stats-examples.qmd#normal-distribution-example >}}
 
 Next, a Poisson distribution example for discrete random variables.
 
-```{julia}
-#| code-fold: true
+{{< embed ../../notebooks/probability-stats-examples.qmd#poisson-distribution-example >}}
 
-# Helper function to plot discrete PMF as stem plot
-function plot_pmf_stems!(ax, dist, x_range; color=:blue, linewidth=3, markersize=8)
-    pmf_vals = pdf.(dist, x_range)
-    for (i, x) in enumerate(x_range)
-        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=linewidth)
-        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=markersize)
-    end
-    return pmf_vals
-end
-
-# Helper function to highlight discrete probability mass
-function highlight_pmf_mass!(ax, dist, x_range; color=:orange)
-    pmf_vals = pdf.(dist, x_range)
-    for (i, x) in enumerate(x_range)
-        lines!(ax, [x, x], [0, pmf_vals[i]], color=color, linewidth=5)
-        scatter!(ax, [x], [pmf_vals[i]], color=color, markersize=10)
-    end
-    return sum(pmf_vals)
-end
-
-# Helper function to plot discrete CDF as step function
-function plot_discrete_cdf!(ax, dist, x_range; color=:blue, linewidth=2, markersize=6)
-    cdf_vals = cdf.(dist, x_range)
-    # Plot horizontal segments
-    for i in 1:(length(x_range)-1)
-        lines!(ax, [x_range[i], x_range[i+1]], [cdf_vals[i], cdf_vals[i]],
-            color=color, linewidth=linewidth)
-    end
-    # Plot points
-    scatter!(ax, x_range, cdf_vals, color=color, markersize=markersize)
-    return cdf_vals
-end
-
-# Helper function for discrete forward CDF operation
-function add_discrete_forward_cdf!(ax, dist, x_point; color=:red, x_min=0)
-    y_point = cdf(dist, x_point)
-    scatter!(ax, [x_point], [y_point], color=color, markersize=10)
-    lines!(ax, [x_point, x_point], [0, y_point], color=color, linestyle=:dash)
-    lines!(ax, [x_min, x_point], [y_point, y_point], color=color, linestyle=:dash)
-    return y_point
-end
-
-# Helper function for discrete inverse CDF operation  
-function add_discrete_inverse_cdf!(ax, dist, p_target; color=:green, x_min=0)
-    x_inv = quantile(dist, p_target)
-    y_actual = cdf(dist, x_inv)
-    scatter!(ax, [x_inv], [y_actual], color=color, markersize=10)
-    lines!(ax, [x_inv, x_inv], [0, y_actual], color=color, linestyle=:dash)
-    lines!(ax, [x_min, x_inv], [p_target, p_target], color=color, linestyle=:dash)
-    return x_inv, y_actual
-end
-
-function plot_poisson_pmf_cdf()
-    λ = 3.0
-    x_range = 0:10
-    poisson_dist = Poisson(λ)
-
-    fig = Figure(size=(900, 400))
-
-    # Left panel: PMF with probability mass
-    ax1 = Axis(fig[1, 1],
-        xlabel=L"x",
-        ylabel=L"P(X = x)",
-        title=L"\text{Poisson}(3) \text{ PMF}")
-
-    # Plot full PMF
-    plot_pmf_stems!(ax1, poisson_dist, x_range)
-
-    # Highlight mass for X ≤ 2
-    prob_mass = highlight_pmf_mass!(ax1, poisson_dist, 0:2)
-
-    # Add probability annotation
-    text!(ax1, 6, 0.15,
-        text=L"P(X \leq 2) = %$(round(prob_mass, digits=3))",
-        fontsize=14, color=:black)
-
-    # Right panel: CDF with forward and inverse operations
-    ax2 = Axis(fig[1, 2],
-        xlabel=L"x",
-        ylabel=L"\text{Probability } F(x)",
-        title=L"\text{Poisson CDF: Forward and Inverse}")
-
-    # Plot CDF
-    plot_discrete_cdf!(ax2, poisson_dist, x_range)
-
-    # Forward operation: F(4)
-    y_point = add_discrete_forward_cdf!(ax2, poisson_dist, 4)
-    text!(ax2, 4.2, y_point - 0.1,
-        text=L"F(4) = %$(round(y_point, digits=3))", color=:red)
-
-    # Inverse operation: F⁻¹(0.4)
-    x_inv, _ = add_discrete_inverse_cdf!(ax2, poisson_dist, 0.4)
-    text!(ax2, x_inv - 1.5, 0.5,
-        text=L"F^{-1}(0.4) = %$(Int(x_inv))", color=:green)
-
-    return fig
-end
-
-fig_poisson = plot_poisson_pmf_cdf()
-fig_poisson
-```
 
 ### Summary statistics
 
@@ -636,6 +440,33 @@ This enables MCMC for complex models where computing the normalizing constant is
 MCMC diagnostics assess whether chains have converged to the target distribution.
 Poor convergence leads to biased estimates, making diagnostic checking essential for reliable inference.
 
+#### Uncertainty estimates: definitions
+
+##### Credible interval (Bayesian)
+
+For a parameter $\theta$ with posterior density $p(\theta \mid y)$, a $(1 - \alpha)$ credible set $C(y)$ satisfies
+$$\int_{C(y)} p(\theta \mid y)\, d\theta = 1 - \alpha.$$
+For a univariate $\theta$, a common choice is the equal-tailed credible interval
+$$[\, Q_{\theta\mid y}(\alpha/2),\; Q_{\theta\mid y}(1-\alpha/2) \,],$$
+where $Q$ denotes the posterior quantile function. Another choice is the highest posterior density (HPD) interval, the shortest interval whose posterior probability is $1 - \alpha$. Credible intervals are probability statements about $\theta$ conditional on the observed data (and prior) [e.g., @gelman_bda3:2014; @downey_thinkbayes:2021].
+
+##### Confidence interval (frequentist)
+
+A $(1 - \alpha)$ confidence set is a data-dependent rule $C(Y)$ such that, for all fixed $\theta$,
+$$\Pr_{Y\sim p(\cdot\mid \theta)}\{\, \theta \in C(Y) \,\} \ge 1 - \alpha.$$
+In words, if we were to repeat the experiment many times under the same $\theta$, the procedure would cover the true $\theta$ at least $1 - \alpha$ of the time. The probability is over hypothetical repetitions of the data, not over $\theta$. In simple models, confidence intervals arise from pivots or large-sample normal approximations [see, e.g., @gelman_regression:2021].
+
+#### Credible intervals vs. confidence intervals
+
+Practitioners often report “intervals,” but Bayesian credible intervals and frequentist confidence intervals answer different questions.
+
+- Credible interval (Bayesian): An interval C such that P(θ ∈ C | y) = 1 − α. It is a probability statement about the parameter given the observed data and prior. Common choices are equal-tailed intervals and highest posterior density (HPD) intervals. Results depend on both the likelihood and the prior.
+- Confidence interval (frequentist): A procedure that, under repeated sampling from the data-generating process, covers the true (fixed) parameter at rate 1 − α. After observing one dataset, the interval either contains the true value or it does not; the 1 − α statement refers to the long-run frequency of the procedure, not the probability for this particular dataset.
+
+The two intervals can coincide in simple regular problems (e.g., large samples with weak/flat priors), but they generally differ in finite samples or with informative priors. Be careful not to interpret a 95% confidence interval as “95% probability that θ lies in the interval” for a specific dataset—that interpretation is Bayesian and corresponds to a 95% credible interval.
+
+For clear discussions, see @gelman_bda3:2014; @gelman_regression:2021; @downey_thinkbayes:2021.
+
 ## Computational methods and asymptotic foundations
 
 ### Asymptotic theory
@@ -706,35 +537,7 @@ $$
 
 The following implementation visualizes how the likelihood varies with $\theta$:
 
-```{julia}
-#| code-fold: true
-
-function plot_binomial_likelihood(y, n)
-    θ_grid = 0.01:0.01:0.99
-
-    # Using Distributions.jl
-    likelihood_vals = [pdf(Binomial(n, θ), y) for θ in θ_grid]
-
-    fig = Figure(size=(800, 500))
-    ax = Axis(fig[1, 1],
-        xlabel=L"$\theta$ (probability of heads)",
-        ylabel="Likelihood",
-        title="Likelihood for $(y) heads in $(n) flips")
-
-    lines!(ax, θ_grid, likelihood_vals, label="Full likelihood", linewidth=2, color=:blue)
-
-    # Mark the MLE
-    mle = y / n
-    vlines!(ax, [mle], color=:black, linestyle=:dot, linewidth=2, label="MLE = $(round(mle, digits=2))")
-
-    axislegend(ax, position=:lt)
-    return fig
-end
-
-# Example with 7 heads in 10 flips
-fig_likelihood = plot_binomial_likelihood(7, 10)
-fig_likelihood
-```
+{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-likelihood >}}
 
 The likelihood peaks at the observed proportion of heads, $\hat{\theta}_{MLE} = y/n$, though many other values of $\theta$ remain plausible given limited data.
 A value of $\theta=0.1$ would make the observed data very unlikely.
@@ -769,42 +572,7 @@ This example demonstrates the general MLE procedure: write down the likelihood f
 This analytical approach works for simple models and provides the template for more complex problems that require numerical optimization.
 This pattern holds across different experimental outcomes:
 
-```{julia}
-#| code-fold: true
-
-function demonstrate_mle_estimation(y_values, n)
-    θ_grid = 0.01:0.01:0.99
-
-    fig = Figure(size=(800, 600))
-
-    for (i, y) in enumerate(y_values)
-        ax = Axis(fig[div(i - 1, 2)+1, ((i-1)%2)+1],
-            xlabel="θ",
-            ylabel="Log-likelihood",
-            title="$(y)/$(n) heads")
-
-        # Calculate log-likelihood
-        log_likelihood = [y * log(θ) + (n - y) * log(1 - θ) for θ in θ_grid]
-
-        lines!(ax, θ_grid, log_likelihood, linewidth=2, color=:blue)
-
-        # Mark MLE
-        mle = y / n
-        vlines!(ax, [mle], color=:red, linestyle=:dash, linewidth=2,
-            label="MLE")
-
-        if i == 1
-            axislegend(ax, position=:cb)
-        end
-    end
-
-    return fig
-end
-
-# Show MLE for different outcomes
-fig_mle = demonstrate_mle_estimation([3, 5, 7, 9], 10)
-fig_mle
-```
+{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-mle >}}
 
 #### Bayesian solution
 
@@ -844,99 +612,7 @@ The posterior parameters are the prior parameters plus contributions from the da
 
 The following compares the analytical solution with MCMC sampling using Turing.jl:
 
-```{julia}
-#| code-fold: true
-# Turing model for coin flipping
-
-using Printf
-
-@model function coin_flip_model(y, n, prior_α, prior_β)
-    θ ~ Beta(prior_α, prior_β)
-    y ~ Binomial(n, θ)
-    return θ
-end
-
-function compare_analytical_mcmc(y, n; prior_α=1, prior_β=1, n_samples=5000)
-    # Analytical posterior
-    post_α = prior_α + y
-    post_β = prior_β + n - y
-    analytical_posterior = Beta(post_α, post_β)
-
-    # MCMC sampling
-    model = coin_flip_model(y, n, prior_α, prior_β)
-    chain = sample(model, NUTS(), n_samples, verbose=false, progress=false)
-    mcmc_samples = Array(chain[:θ])
-
-    # Return data for plotting instead of creating plots
-    return (analytical_posterior=analytical_posterior, mcmc_samples=mcmc_samples, n_samples=n_samples)
-end
-
-# Generate data by calling the same function twice  
-data_low = compare_analytical_mcmc(7, 10, n_samples=500)
-data_high = compare_analytical_mcmc(7, 10, n_samples=50_000)
-
-# Combine plots
-fig_comparison = Figure(size=(1200, 500))
-ax1 = Axis(fig_comparison[1, 1],
-    xlabel=L"$\theta$ (probability of heads)",
-    ylabel="Density",
-    title="MCMC with 500 samples")
-ax2 = Axis(fig_comparison[1, 2],
-    xlabel=L"$\theta$ (probability of heads)",
-    title="MCMC with 50,000 samples")
-
-# Link y-axes for comparison
-linkaxes!(ax1, ax2)
-
-# Plot using the same plotting logic for both panels
-for (ax, data) in [(ax1, data_low), (ax2, data_high)]
-    # Plot analytical posterior
-    θ_grid = 0.01:0.01:0.99
-    analytical_density = pdf.(data.analytical_posterior, θ_grid)
-    lines!(ax, θ_grid, analytical_density, label="Analytical",
-        linewidth=3, color=:blue)
-
-    # Plot MCMC histogram
-    hist!(ax, vec(data.mcmc_samples), bins=40, normalization=:pdf,
-        color=(:red, 0.6), label="MCMC samples")
-
-    # Add summary statistics
-    analytical_mean = mean(data.analytical_posterior)
-    mcmc_mean = mean(data.mcmc_samples)
-
-    # Vertical lines for means
-    vlines!(ax, [analytical_mean], color=:blue, linestyle=:dash, alpha=0.8)
-    vlines!(ax, [mcmc_mean], color=:red, linestyle=:dot, alpha=0.8)
-
-    # Add vertical line at 0.3 to show tail cutoff
-    vlines!(ax, [0.3], color=:gray, linestyle=:solid, alpha=0.6)
-
-    # Add text annotations with statistics  
-    text!(ax, 0.35, maximum(analytical_density) * 0.95,
-        text=L"\text{Analytical: Mean} = %$(round(analytical_mean, digits=3))",
-        fontsize=10, color=:blue)
-    text!(ax, 0.35, maximum(analytical_density) * 0.85,
-        text=L"\text{MCMC: Mean} = %$(round(mcmc_mean, digits=3))",
-        fontsize=10, color=:red)
-
-    # Calculate P(θ < 0.25) - tail probability
-    tail = 0.25
-    analytical_tail_prob = cdf(data.analytical_posterior, tail)
-    analytical_tail_prob = @sprintf("%.2E", analytical_tail_prob)
-    mcmc_tail_prob = mean(data.mcmc_samples .< tail)
-    mcmc_tail_prob = @sprintf("%.2E", mcmc_tail_prob)
-    text!(ax, 0.05, maximum(analytical_density) * 0.55,
-        text=L"\text{Analytical}: $P(\theta < %$(tail))$ = %$(analytical_tail_prob)",
-        fontsize=10, color=:blue)
-    text!(ax, 0.05, maximum(analytical_density) * 0.45,
-        text=L"\text{MCMC}: $P(\theta < %$(tail))$ = %$(mcmc_tail_prob)",
-        fontsize=10, color=:red)
-
-    axislegend(ax, position=:rt)
-end
-
-fig_comparison
-```
+{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-bayesian >}}
 
 The analytical and MCMC results match closely, demonstrating that the Beta-Binomial conjugacy gives exact results, MCMC provides a general computational approach when analytical solutions don't exist, and both approaches quantify uncertainty through the full posterior distribution.
 
@@ -966,6 +642,10 @@ where:
 - $\epsilon_i \sim \text{Normal}(0, \sigma^2)$ is independent random noise
 
 This says that each observation is the "true" linear relationship plus some random variation.
+
+The following shows the synthetic dataset used throughout the examples:
+
+{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-data-plot >}}
 
 #### Curve fitting by minimizing loss
 
@@ -997,55 +677,7 @@ where $\bar{x} = \frac{1}{n}\sum x_i$ and $\bar{y} = \frac{1}{n}\sum y_i$.
 
 The following visualizes this curve fitting approach:
 
-```{julia}
-#| code-fold: true
-
-function demonstrate_least_squares(x_data, y_data)
-    # Calculate least squares estimates
-    x_bar = mean(x_data)
-    y_bar = mean(y_data)
-
-    b_hat = sum((x_data .- x_bar) .* (y_data .- y_bar)) / sum((x_data .- x_bar) .^ 2)
-    a_hat = y_bar - b_hat * x_bar
-
-    # Create plot
-    fig = Figure(size=(800, 500))
-    ax = Axis(fig[1, 1],
-        xlabel="x",
-        ylabel="y",
-        title="Curve Fitting by Minimizing MSE")
-
-    # Plot data points
-    scatter!(ax, x_data, y_data, color=:blue, markersize=8, label="Data")
-
-    # Plot fitted line
-    x_line = range(minimum(x_data), maximum(x_data), length=100)
-    y_line = a_hat .+ b_hat .* x_line
-    lines!(ax, x_line, y_line, color=:red, linewidth=2,
-        label="Fitted line: y = $(round(a_hat, digits=2)) + $(round(b_hat, digits=2))x")
-
-    # Show residuals
-    y_pred = a_hat .+ b_hat .* x_data
-    for i in eachindex(x_data)
-        lines!(ax, [x_data[i], x_data[i]], [y_data[i], y_pred[i]],
-            color=:gray, linestyle=:dash, alpha=0.6)
-    end
-
-    axislegend(ax, position=:lb)
-    return fig
-end
-
-# Example with some synthetic data
-slope_true = 2.5
-intercept_true = 1.0
-ϵ_true = 1.0
-N = 25
-x_example = rand(Uniform(0, 10), N)
-y_example = intercept_true .+ slope_true .* x_example .+ rand(Normal(0, ϵ_true), N)
-
-fig_ols = demonstrate_least_squares(x_example, y_example)
-fig_ols
-```
+{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-curve-fitting >}}
 
 This approach works as a pure optimization problem without probability.
 
@@ -1076,6 +708,14 @@ The probabilistic model gives the same answer as curve-fitting but also provides
 Therefore: $\hat{a} = \bar{y} - \hat{b}\bar{x}$ and $\hat{b} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}$
 
 These are identical to the formulas derived from minimizing MSE.
+
+The following visualizes the maximum likelihood fit for the same data:
+
+{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-mle >}}
+
+A Bayesian fit with weakly informative priors yields similar point estimates with full posterior uncertainty; the following comparison summarizes results across approaches:
+
+{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-comparison >}}
 
 This connection between statistical and machine learning approaches extends far beyond linear regression.
 Many machine learning methods can be understood as maximum likelihood estimation under specific distributional assumptions, while statistical methods often reduce to familiar optimization problems.
