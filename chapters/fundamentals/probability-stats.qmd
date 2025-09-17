@@ -428,69 +428,190 @@ For even modest problems (say, 10 parameters with 100 grid points each), this re
 This "curse of dimensionality" means that analytical approaches work only for the simplest models.
 Real scientific applications require computational methods.
 
-#### MCMC fundamentals
+#### Example: A Metropolis-Hastings Sampler from Scratch
 
-Markov Chain Monte Carlo methods provide a computational workaround.
-Instead of calculating the posterior distribution everywhere, `MCMC` algorithms generate samples from it.
+Modern MCMC algorithms differ in how they propose new parameter values. A classical, foundational approach is the **Metropolis-Hastings** algorithm, which gives us a powerful intuition for how MCMC works.
 
-An `MCMC` algorithm creates a Markov chain: a sequence of parameter values where each new value depends only on the current value.
-This defines the "Markov property"—the future state depends only on the present, not the entire history.
+The algorithm allows us to sample from a **target** distribution that we can't directly sample from, as long as we can evaluate its density up to a normalizing constant. We use a separate **proposal** distribution to suggest new parameter values, and then we probabilistically accept or reject these proposals based on how well they align with the target.
 
-The algorithm is carefully designed so that the chain's stationary distribution is the target posterior distribution.
-This means the algorithm spends time in different regions of parameter space in proportion to their posterior probability.
-After sufficient iterations, samples from the chain approximate samples from the posterior.
+(Shout out to [Danielle Navarro](https://blog.djnavarro.net/posts/2023-04-12_metropolis-hastings/) for a clear explanation and the working example that inspired this section).
 
-#### Why MCMC works: the mathematics
+The algorithm proceeds as follows:
 
-The theoretical foundation rests on three key concepts:
+1.  Start with an initial parameter value $\theta^{(0)}$.
+2.  For each iteration $i$:
+    - Propose a new value $\theta^*$ from a proposal distribution $q(\theta^* \mid \theta^{(i-1)})$.
+    - Compute the acceptance ratio:
+      $$
+      r = \frac{p(\theta^* \mid y) \, q(\theta^{(i-1)} \mid \theta^*)}{p(\theta^{(i-1)} \mid y) \, q(\theta^* \mid \theta^{(i-1)})}
+      $$
+    - Accept the proposal with probability $\min(1, r)$:
+      - If a random number is less than $r$, set $\theta^{(i)} = \theta^*$.
+      - Otherwise, reject the proposal and set $\theta^{(i)} = \theta^{(i-1)}$.
+3.  Repeat for many iterations to generate a chain of samples that approximates the posterior distribution $p(\theta \mid y)$.
 
-**Detailed balance**: For the chain to have the correct stationary distribution, the transition kernel must satisfy:
-$$
-p(\theta_{\text{current}}) T(\theta_{\text{current}} \to \theta_{\text{proposed}}) = p(\theta_{\text{proposed}}) T(\theta_{\text{proposed}} \to \theta_{\text{current}})
-$$
+```{julia}
+#| output: false
+using CairoMakie
+using LaTeXStrings
+using Distributions
+```
 
-This ensures that in equilibrium, the flow of probability from any state $\theta_{\text{current}}$ to $\theta_{\text{proposed}}$ exactly balances the reverse flow.
+##### Step 1: Target Distribution
 
-**Ergodicity**: The chain must be able to reach any region of parameter space with positive probability from any starting point.
-This prevents the algorithm from getting trapped in isolated regions.
+First, let's define the distribution we want to sample from. To make it interesting, we'll use a "squiggly" function that isn't a standard probability distribution. This is our unnormalized target density, which corresponds to $p(\theta^* \mid y)$ in the ratio above.
 
-**Convergence**: Given detailed balance and ergodicity, the chain converges to the target distribution regardless of starting values.
-The Law of Large Numbers then guarantees that sample averages converge to population expectations.
+```{julia}
+#| label: mh-target
+# Define the target distribution (unnormalized)
+target(x) = exp(-x^2 / 2) * (2 + sin(5 * x) + sin(2 * x))
 
-The key insight is that we only need the posterior up to a constant of proportionality: $p(\theta \mid y) \propto p(y \mid \theta) p(\theta)$.
-Since `MCMC` algorithms evaluate ratios of posterior densities, the normalizing constant cancels out.
-This allows them to handle arbitrarily complex models without computing intractable integrals.
+# Visualize what it looks like
+fig = Figure()
+ax = Axis(fig[1, 1],
+	xlabel = L"θ",
+	ylabel = L"p(θ | y) \propto \text{Target Density}")
+lines!(ax, -4:0.01:4, target, linewidth = 3)
+fig
+```
 
-#### Sampler algorithms
+Our goal is to generate samples whose histogram matches the shape of this distribution.
 
-Modern `MCMC` algorithms differ in how they propose new parameter values:
+##### Step 2: Proposal Distribution
 
-**Metropolis-Hastings**: The foundation algorithm proposes new states using a proposal distribution, then accepts or rejects based on the posterior ratio.
-Simple to implement but can be inefficient for complex posteriors.
+Next, we need a way to propose new steps.
+For this example, we'll use a **Normal distribution** centered on our current position. This is like telling our sampler to take a random "hop" left or right.
 
-**Gibbs sampling**: Updates each parameter by sampling from its conditional distribution given all other parameters.
-Efficient when conditional distributions are available but can suffer from strong correlations between parameters.
+This choice is purely for didactic purposes.
+A Normal distribution is **symmetric**, meaning the probability of hopping from $\theta_A$ to $\theta_B$ is the same as hopping from $\theta_B$ to $\theta_A$.
+This simplifies the acceptance ratio, as the proposal terms $q(\theta^{(i-1)} \mid \theta^*)$ and $q(\theta^* \mid \theta^{(i-1)})$ cancel out, leaving us with the simpler Metropolis algorithm.
 
-**Hamiltonian Monte Carlo (HMC)**: Uses gradient information to make informed proposals that follow the posterior's geometry.
-The No-U-Turn Sampler (`NUTS`) automatically tunes step sizes and trajectory lengths.
-This forms the foundation of modern probabilistic programming frameworks like `Turing.jl` and `Stan`.
+```{julia}
+#| label: mh-proposal
+#| output: false
+proposal(μ, σ) = Normal(μ, σ)
+```
 
-**Other modern approaches**: Variational inference, normalizing flows, and other advanced techniques extend beyond traditional `MCMC` but serve similar purposes.
+The standard deviation, `σ`, controls the "hop size." A larger `σ` will propose more distant jumps, while a smaller `σ` will explore the local area more finely.
 
-#### Practical implementation considerations
+##### Step 3: Sampler
 
-**Multiple chains**: Running multiple independent chains with different starting values helps assess convergence and identify multimodal posteriors.
-Modern practice uses 4 chains as a standard.
+Now we can write the core function that implements the Metropolis-Hastings logic.
+The function will take the number of samples, a starting value, and the proposal hop size as inputs.
+It will loop through the algorithm, building the chain one sample at a time.
 
-**Warm-up and adaptation**: Initial iterations allow the sampler to adapt to the posterior geometry and find the typical set.
-These "burn-in" samples should be discarded from final inference.
+```{julia}
+#| label: mh-sampler-function
+#| output: false
+function metropolis_hastings_sampler(n_samples, start_val, proposal_sd)
+	# 1. Initialize an array to store the chain
+	chain = zeros(n_samples)
+	chain[1] = start_val
+	n_accepted = 0
 
-**Chain diagnostics**: Convergence assessment requires multiple quantitative checks beyond visual inspection.
-The $\hat{R}$ statistic compares within-chain and between-chain variance.
-Effective sample size measures how many independent samples the correlated chain provides.
+	# 2. Loop from the second sample to the end
+	for i in 2:n_samples
+		current_x = chain[i-1]
 
-**Computational efficiency**: `MCMC` can be computationally expensive.
-Parallel chain execution, efficient likelihood computation, and appropriate sampler choice significantly impact performance.
+		# 3. Propose a new value
+		proposed_x = rand(proposal(current_x, proposal_sd))
+
+		# 4. Calculate acceptance ratio (r). 
+		# Since the proposal is symmetric, the q terms cancel.
+		r = target(proposed_x) / target(current_x)
+
+		# 5. Accept or reject the proposal
+		if rand() < r
+			chain[i] = proposed_x # Accept
+			n_accepted += 1
+		else
+			chain[i] = current_x # Reject (stay put)
+		end
+	end
+
+	return chain, n_accepted / n_samples
+end
+```
+
+
+##### Step 4: Implement
+
+Finally, we run the sampler and plot the results. We need to check two things:
+
+1.  **The Trace Plot**: This shows the value of the parameter at each iteration. We are looking for a "fuzzy caterpillar" pattern, which indicates the chain is exploring the distribution well and is stationary.
+2.  **The Histogram**: This shows the distribution of the collected samples. If the sampler worked, its shape should match our target density.
+
+```{julia}
+#| label: mh-run-and-plot
+#| fig-cap: "Results from our Metropolis-Hastings sampler. The trace plot (top) shows the sampler exploring the parameter space. The histogram of the MCMC samples (bottom) closely matches the shape of the unnormalized target density."
+
+# Run the sampler
+n_samples = 20000
+burn_in = 2000 # Number of initial samples to discard
+chain, acceptance_rate = metropolis_hastings_sampler(n_samples, 0.0, 1.0)
+
+println("Acceptance rate: ", round(acceptance_rate, digits = 3))
+
+# Visualize the results
+fig = Figure(size = (800, 600))
+
+# 1. Trace Plot
+ax1 = Axis(fig[1, 1],
+	title = "MCMC Trace Plot",
+	xlabel = "Iteration",
+	ylabel = L"θ")
+lines!(ax1, chain, label = "Trace")
+
+# 2. Histogram of Samples
+ax2 = Axis(fig[2, 1],
+	title = "Posterior Approximation",
+	xlabel = L"θ",
+	ylabel = "Density")
+
+# Plot the histogram, removing the initial "burn-in" period
+hist!(ax2, chain[burn_in+1:end],
+	bins = 60,
+	normalization = :pdf,
+	label = "MCMC Samples")
+
+# Overlay the true target density (scaled to be a valid PDF)
+x_grid = -4:0.01:4
+target_pdf = target.(x_grid)
+target_pdf ./= sum(target_pdf .* 0.01) # Normalize
+lines!(ax2, x_grid, target_pdf,
+	label = "Target Density",
+	linewidth = 3,
+	color = :purple)
+
+# Add a legend to the second plot
+axislegend(ax2)
+
+fig
+```
+
+The acceptance rate is a useful diagnostic. A very high rate (> 0.8) might mean the hop size is too small, and the chain isn't exploring efficiently. A very low rate (< 0.1) might mean the hop size is too large, and most proposals are being rejected. Rates between 0.2 and 0.5 are often considered good for this type of sampler.
+
+As we can see, the final histogram of samples beautifully recovers the shape of the target distribution, demonstrating that this simple algorithm successfully turned a function we can evaluate into a distribution we can sample from.
+
+#### Modern MCMC algorithms
+
+In practice, Metropolis-Hastings is rarely used due to its inefficiency and because it scales poorly to high-dimensional spaces where the acceptance rate can become very low.
+Modern MCMC algorithms, such as Hamiltonian Monte Carlo (HMC) and the No-U-Turn Sampler (NUTS), leverage gradient information to propose more informed jumps in parameter space. These methods explore the posterior distribution more efficiently, especially in high-dimensional problems common in climate modeling and other scientific applications.
+
+WHen using these advanced samplers, several best practices ensure robust and reliable inference:
+
+1. Running multiple independent chains helps assess convergence and identify multimodal posteriors. You will often see four chains as a default, but that's mainly because laptops ten years ago mainly had four cores. More is often better.
+1. Initial iterations allow the sampler to adapt to the posterior geometry and find the typical set. We typically discard these "warm-up" samples before final inference.
+1. Most samplers have hyperparameters (e.g., step size, number of leapfrog steps) that require tuning for optimal performance. Many software packages include automatic tuning during a warm-up phase.
+1. Diagnostics are essential to ensure the sampler has converged and is exploring the posterior adequately.
+    - Trace plots show the parameter values over iterations. We are looking for a "fuzzy caterpillar" pattern, which indicates the chain is exploring the distribution well and is stationary. If you see trends or drifts, the chain has not converged.
+    - Trace plots for multiple chains should overlap and mix well, indicating they are sampling from the same distribution.
+    - Autocorrelation plots help assess the degree of correlation between samples. Rapidly decreasing autocorrelation suggests good mixing, while high autocorrelation indicates the chain is stuck in local modes.
+    - Quantitative metrics, such as the $\hat{R}$ statistic and effective sample size, provide numerical assessments of convergence and sampling efficiency.
+
+In all cases, we can rule out some kinds of convergence problems, but actually proving convergence is impossible, so we must always include other checks.
+Avoid the tendency common in applied work to state without reflection or critique that because $\hat{R} < 1.1$ no further thought is needed.
+For tricky problems, work with a computational statistician (or take Bayesian stats courses beyond the scope of these lecture notes).
 
 #### From samples to inference
 
@@ -542,37 +663,13 @@ where $y^{\text{rep}}$ denotes replicated (simulated) data and $y^{\text{obs}}$ 
 
 The systematic approach follows these steps:
 
-1. **Estimate the posterior**: Use `MCMC` to obtain samples from $p(\theta | y^{\text{obs}})$
-2. **Generate replicated data**: For each posterior sample $\theta^{(i)}$, draw $y^{\text{rep}(i)} \sim p(y | \theta^{(i)})$
-3. **Compute test statistics**: Calculate relevant metrics $T(y^{\text{rep}(i)})$ and $T(y^{\text{obs}})$
-4. **Compare distributions**: Assess whether $T(y^{\text{obs}})$ falls within the distribution of $T(y^{\text{rep}})$
+1. Use MCMC to obtain samples from $p(\theta | y^{\text{obs}})$
+2. For each posterior sample $\theta^{(i)}$, draw $y^{\text{rep}(i)} \sim p(y | \theta^{(i)})$
+3. Calculate relevant "test statistics" or metrics $T(y^{\text{rep}(i)})$ and $T(y^{\text{obs}})$
+4. Assess whether $T(y^{\text{obs}})$ falls within the distribution of $T(y^{\text{rep}})$
 
-#### Choosing meaningful test statistics
+This is related to the frequentist idea of p-values explored in the [mosquitos case study](/notebooks/mosquitos.qmd).
 
-The power of posterior predictive checking lies in choosing test statistics that capture scientifically relevant model features:
-
-- **Distributional properties**: Mean, variance, skewness, or tail behavior
-- **Extreme values**: Maximum values, exceedance frequencies, or return level estimates
-- **Temporal structure**: Autocorrelation, trend detection, or persistence measures
-- **Spatial patterns**: Clustering, gradients, or dependence structures
-
-Poor model fit manifests when observed test statistics fall in the tails of the posterior predictive distribution.
-This indicates the model fails to capture important data characteristics.
-
-#### Model comparison and selection
-
-Posterior predictive checking enables principled model comparison by evaluating how well different models reproduce scientifically relevant features.
-Models that consistently generate data matching observed patterns across multiple test statistics provide better representations of the underlying process.
-
-This approach is particularly valuable in climate modeling, where we need models that capture not just central tendencies but also extreme events, temporal persistence, and spatial coherence that drive impacts and risks.
-
-### Production-ready MCMC workflow
-
-The examples above demonstrate basic MCMC concepts, but real applications require more sophisticated practices.
-The [MCMC Workflow](../../notebooks/mcmc-workflow.qmd) notebook demonstrates professional-grade MCMC practices using a hierarchical temperature model.
-
-This notebook covers modern sampling techniques, comprehensive convergence diagnostics, and robust parameter recovery assessment.
-These practices are essential when statistical analysis informs high-stakes decisions in climate policy and adaptation planning.
 
 ## Further reading {.unnumbered}
 
@@ -583,13 +680,8 @@ For deeper study of probability and statistics:
 - @gelman_regression:2021 connects regression to broader statistical modeling
 - @gelman_bda3:2014 comprehensive treatment of Bayesian computation
 
-### Computational examples
-
-This chapter's concepts are demonstrated through focused computational notebooks:
+This chapter's concepts are also demonstrated through focused computational notebooks:
 
 - [Distribution Examples](../../notebooks/distribution-examples.qmd): Understanding probability distributions and their relationships
 - [Coin Flip Inference](../../notebooks/inference-coin-flip.qmd): Introduction to statistical inference with likelihood and Bayesian methods
 - [Linear Regression Examples](../../notebooks/linear-regression-examples.qmd): Comparing curve fitting, MLE, and Bayesian approaches
-- [MCMC Workflow](../../notebooks/mcmc-workflow.qmd): Production-ready practices for complex Bayesian models
-
-Each notebook builds on the theoretical foundations presented here while demonstrating practical implementation using modern computational tools.

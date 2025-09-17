@@ -65,7 +65,6 @@ book:
         - notebooks/distribution-examples.qmd
         - notebooks/inference-coin-flip.qmd
         - notebooks/linear-regression-examples.qmd
-        - notebooks/mcmc-workflow.qmd
         - notebooks/extremes-examples.qmd
         - notebooks/mosquitos.qmd
 
