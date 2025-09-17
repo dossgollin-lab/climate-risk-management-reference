@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -136,6 +171,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Exploratory modeling for policy analysis;,citation_abstract=Exploratory modeling is using computational experiments to assist in reasoning about systems where there is significant uncertainty. While frequently confused with the use of models to consolidate knowledge into a package that is used to predict system behavior, exploratory modeling is a very different kind of use, requiring a different methodology for model development. This paper distinguishes these two broad classes of model use describes some of the approaches used in exploratory modeling, and suggests some technological innovations needed to facilitate it.;,citation_author=Steve Bankes;,citation_publication_date=1993-06-01;,citation_cover_date=1993-06-01;,citation_year=1993;,citation_fulltext_html_url=https://pubsonline.informs.org/doi/abs/10.1287/opre.41.3.435;,citation_issue=3;,citation_doi=10/c7rgcr;,citation_issn=0030-364X;,citation_volume=41;,citation_journal_title=Operations Research;,citation_journal_abbrev=Operations Research;">
 <meta name="citation_reference" content="citation_title=Generative AI without guardrails can harm learning: Evidence from high school mathematics;,citation_abstract=Generative AI is poised to revolutionize how humans work, and has already demonstrated promise in significantly improving human productivity. A key question is how generative AI affects learning—namely, how humans acquire new skills as they perform tasks. Learning is critical to long-term productivity, especially since generative AI is fallible and users must check its outputs. We study this question via a field experiment where we provide nearly a thousand high school math students with access to generative AI tutors. To understand the differential impact of tool design on learning, we deploy two generative AI tutors: one that mimics a standard ChatGPT interface (“GPT Base”) and one with prompts designed to safeguard learning (“GPT Tutor”). Consistent with prior work, our results show that having GPT-4 access while solving problems significantly improves performance (48% improvement in grades for GPT Base and 127% for GPT Tutor). However, we additionally find that when access is subsequently taken away, students actually perform worse than those who never had access (17% reduction in grades for GPT Base)—i.e., unfettered access to GPT-4 can harm educational outcomes. These negative learning effects are largely mitigated by the safeguards in GPT Tutor. Without guardrails, students attempt to use GPT-4 as a “crutch” during practice problem sessions, and subsequently perform worse on their own. Thus, decision-makers must be cautious about design choices underlying generative AI deployments to preserve skill learning and long-term productivity.;,citation_author=Hamsa Bastani;,citation_author=Osbert Bastani;,citation_author=Alp Sungu;,citation_author=Haosen Ge;,citation_author=Özge Kabakcı;,citation_author=Rei Mariman;,citation_publication_date=2025-07;,citation_cover_date=2025-07;,citation_year=2025;,citation_fulltext_html_url=https://www.pnas.org/doi/10.1073/pnas.2422633122;,citation_issue=26;,citation_doi=10.1073/pnas.2422633122;,citation_volume=122;,citation_journal_title=Proceedings of the National Academy of Sciences;,citation_publisher=Proceedings of the National Academy of Sciences;">
 <meta name="citation_reference" content="citation_title=Deep Learning: Foundations and Concepts;,citation_author=Christopher M. Bishop;,citation_author=Hugh Bishop;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://link.springer.com/10.1007/978-3-031-45468-4;,citation_doi=10.1007/978-3-031-45468-4;,citation_isbn=978-3-031-45467-7 978-3-031-45468-4;">
+<meta name="citation_reference" content="citation_title=A regional GEV scale-invariant framework for Intensity–Duration–Frequency analysis;,citation_author=J. Blanchet;,citation_author=D. Ceresetti;,citation_author=G. Molinié;,citation_author=J.-D. Creutin;,citation_publication_date=2016-09;,citation_cover_date=2016-09;,citation_year=2016;,citation_fulltext_html_url=https://linkinghub.elsevier.com/retrieve/pii/S0022169416303584;,citation_doi=10.1016/j.jhydrol.2016.06.007;,citation_issn=00221694;,citation_volume=540;,citation_journal_title=Journal of Hydrology;,citation_journal_abbrev=Journal of Hydrology;">
 <meta name="citation_reference" content="citation_title=Introduction to Probability, Second Edition;,citation_abstract=Developed from celebrated Harvard statistics lectures, Introduction to Probability provides essential language and tools for understanding statistics, randomness, and uncertainty. The book explores a wide variety of applications and examples, ranging from coincidences and paradoxes to Google PageRank and Markov chain Monte Carlo (MCMC). Additional application areas explored include genetics, medicine, computer science, and information theory. The authors present the material in an accessible style and motivate concepts using real-world examples. Throughout, they use stories to uncover connections between the fundamental distributions in statistics and conditioning to reduce complicated problems to manageable pieces.The book includes many intuitive explanations, diagrams, and practice problems. Each chapter ends with a section showing how to perform relevant simulations and calculations in R, a free statistical software environment. The second edition adds many new examples, exercises, and explanations, to deepen understanding of the ideas, clarify subtle concepts, and respond to feedback from many students and readers. New supplementary online resources have been developed, including animations and interactive visualizations, and the book has been updated to dovetail with these resources. Supplementary material is available on Joseph Blitzstein’s website www. stat110.net. The supplements include:Solutions to selected exercisesAdditional practice problemsHandouts including review material and sample exams Animations and interactive visualizations created in connection with the edX online version of Stat 110.Links to lecture videos available on ITunes U and YouTube There is also a complete instructor’s solutions manual available to instructors who require the book for a course.;,citation_author=Joseph K. Blitzstein;,citation_author=Jessica Hwang;,citation_publication_date=2019-02-08;,citation_cover_date=2019-02-08;,citation_year=2019;,citation_fulltext_html_url=http://probabilitybook.net;,citation_isbn=978-1-138-36991-7;">
 <meta name="citation_reference" content="citation_title=A water risk index for portfolio exposure to climatic extremes: Conceptualization and an application to the mining industry;,citation_abstract=Corporations, industries and non-governmental organizations have become increasingly concerned with growing water risks in many parts of the world. Most of the focus has been on water scarcity and competition for the resource between agriculture, urban users, ecology and industry. However, water risks are multi-dimensional. Water-related hazards include flooding due to extreme rainfall, persistent drought and pollution, either due to industrial operations themselves, or to the failure of infrastructure. Most companies have risk management plans at each operational location to address these risks to a certain design level. The residual risk may or may not be managed, and is typically not quantified at a portfolio scale, i.e. across many sites. Given that climate is the driver of many of these extreme events, and there is evidence of quasi-periodic climate regimes at inter-annual and decadal timescales, it is possible that a portfolio is subject to persistent, multi-year exceedances of the design level. In other words, for a multi-national corporation, it is possible that there is correlation in the climate-induced portfolio water risk across its operational sites as multiple sites may experience a hazard beyond the design level in a given year. Therefore, from an investor’s perspective, a need exists for a water risk index that allows for an exploration of the possible space and/or time clustering in exposure across many sites contained in a portfolio. This paper represents a first attempt to develop an index for financial exposure of a geographically diversified, global portfolio to the time-varying risk of climatic extremes using long daily global rainfall datasets derived from climate re-analysis models. Focusing on extreme daily rainfall amounts and using examples from major mining companies, we illustrate how the index can be developed. We discuss how companies can use it to explore their corporate exposure, and what they may need to disclose to investors and regulators to promote transparency as to risk exposure and mitigation efforts. For the examples of mining companies provided, we note that the actual exposure is substantially higher than would be expected in the absence of space and time correlation of risk as is usually tacitly assumed. We also find evidence for the increasing exposure to climate-induced risk, and for decadal variability in exposure. The relative vulnerability of different portfolios to multiple extreme events in a given year is also demonstrated.;,citation_author=Luc Bonnafous;,citation_author=Upmanu Lall;,citation_author=Jason Siegel;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://www.hydrol-earth-syst-sci.net/21/2075/2017/;,citation_issue=4;,citation_doi=10/f96k67;,citation_volume=21;,citation_journal_title=Hydrology and Earth System Sciences;">
 <meta name="citation_reference" content="citation_title=Dismantling Environmental Racism in the USA;,citation_abstract=A growing body of evidence reveals that people of colour and low‐income persons have borne greater environmental and health risks than the society at large in their neighbourhoods, workplaces and playgrounds. Over the past decade or so, grassroots activists have attempted to change the way government implements environmental, health and civil rights laws. A new movement has emerged in opposition to environmental racism and environmental injustice. Over the past two decades or so, grassroots activists have had some success in changing the way the federal government treats communities of colour and their inhabitants. Grassroots groups have also organised, educated and empowered themselves to improve the way health and environmental policies are administered. Environmentalism is now equated with social justice and civil rights.;,citation_author=Robert D. Bullard;,citation_publication_date=1999-02-01;,citation_cover_date=1999-02-01;,citation_year=1999;,citation_fulltext_html_url=https://doi.org/10.1080/13549839908725577;,citation_issue=1;,citation_doi=10.1080/13549839908725577;,citation_issn=1354-9839;,citation_volume=4;,citation_journal_title=Local Environment;,citation_publisher=Routledge;">
@@ -495,8 +531,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/probability-stats-examples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Probability, inference, and computation: examples ✏️</span></a>
+  <a href="../../notebooks/distribution-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding probability distributions ✏️</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/inference-coin-flip.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inference Example: Flipping a Coin ✏️</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/linear-regression-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear regression: three perspectives on the same problem ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -508,7 +556,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics Without the Agonizing Details ✏️</span></a>
+ <span class="menu-text">Mosquito bites and beer consumption: simulation-based inference ✏️</span></a>
   </div>
 </li>
       </ul>
@@ -589,6 +637,7 @@ window.Quarto = {
   <li><a href="#markov-chain-monte-carlo" id="toc-markov-chain-monte-carlo" class="nav-link" data-scroll-target="#markov-chain-monte-carlo"><span class="header-section-number">2.4.4</span> Markov Chain Monte Carlo</a></li>
   <li><a href="#example-coin-flip-bayesian-analysis" id="toc-example-coin-flip-bayesian-analysis" class="nav-link" data-scroll-target="#example-coin-flip-bayesian-analysis"><span class="header-section-number">2.4.5</span> Example: coin flip Bayesian analysis</a></li>
   <li><a href="#example-linear-regression-bayesian-analysis" id="toc-example-linear-regression-bayesian-analysis" class="nav-link" data-scroll-target="#example-linear-regression-bayesian-analysis"><span class="header-section-number">2.4.6</span> Example: linear regression Bayesian analysis</a></li>
+  <li><a href="#posterior-predictive-distribution-and-model-checking" id="toc-posterior-predictive-distribution-and-model-checking" class="nav-link" data-scroll-target="#posterior-predictive-distribution-and-model-checking"><span class="header-section-number">2.4.7</span> Posterior predictive distribution and model checking</a></li>
   </ul></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
@@ -674,31 +723,8 @@ window.Quarto = {
 </section>
 <section id="examples-of-key-distribution-functions" class="level4" data-number="2.1.2.5">
 <h4 data-number="2.1.2.5" class="anchored" data-anchor-id="examples-of-key-distribution-functions"><span class="header-section-number">2.1.2.5</span> Examples of key distribution functions</h4>
-<p>These examples illustrate the relationships between probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions. Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).</p>
-<p>The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-normal-distribution-example">
-<div id="cell-normal-distribution-example" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-normal-distribution-example-output-1.svg" id="normal-distribution-example" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-poisson-distribution-example">
-<div id="cell-poisson-distribution-example" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-poisson-distribution-example-output-1.svg" id="poisson-distribution-example" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
+<p>Understanding these concepts requires working through concrete examples. The <a href="../../notebooks/distribution-examples.html">Distribution Examples</a> notebook demonstrates these relationships using normal and Poisson distributions.</p>
+<p>These examples show both forward operations (finding probabilities from values) and inverse operations (finding values from probabilities), illustrating how the three fundamental functions work together to characterize uncertainty.</p>
 </section>
 </section>
 <section id="multiple-variables" class="level3" data-number="2.1.3">
@@ -712,18 +738,7 @@ window.Quarto = {
 </section>
 <section id="visualizing-joint-marginal-and-conditional-distributions" class="level4" data-number="2.1.3.2">
 <h4 data-number="2.1.3.2" class="anchored" data-anchor-id="visualizing-joint-marginal-and-conditional-distributions"><span class="header-section-number">2.1.3.2</span> Visualizing joint, marginal, and conditional distributions</h4>
-<p>Understanding the relationships between joint, marginal, and conditional distributions becomes clearer with visualization. The following example shows a bivariate normal distribution with marginal histograms and conditional distributions:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-joint-marginal-conditional-example">
-<div id="cell-joint-marginal-conditional-example" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-joint-marginal-conditional-example-output-1.svg" id="joint-marginal-conditional-example" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
+<p>Understanding the relationships between joint, marginal, and conditional distributions becomes clearer with visualization. The <a href="../../notebooks/distribution-examples.html">Distribution Examples</a> notebook includes a comprehensive multivariate example showing how joint distributions decompose into marginal and conditional components.</p>
 </section>
 <section id="independence" class="level4" data-number="2.1.3.3">
 <h4 data-number="2.1.3.3" class="anchored" data-anchor-id="independence"><span class="header-section-number">2.1.3.3</span> Independence</h4>
@@ -861,113 +876,14 @@ window.Quarto = {
 </section>
 <section id="example-coin-flip-maximum-likelihood-estimation" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="example-coin-flip-maximum-likelihood-estimation"><span class="header-section-number">2.3.3</span> Example: coin flip maximum likelihood estimation</h3>
-<p>The coin flip example demonstrates both analytical MLE derivation and the principles behind maximum likelihood estimation.</p>
-<p>A series of coin flips are independent Bernoulli trials with fixed probability <span class="math inline">\(\theta\)</span> of heads. Given <span class="math inline">\(y\)</span> heads in <span class="math inline">\(n\)</span> flips, we want to estimate <span class="math inline">\(\theta\)</span> using maximum likelihood.</p>
-<p><strong>Likelihood function</strong>: For <span class="math inline">\(n\)</span> independent coin flips, the likelihood follows the Binomial distribution: <span class="math display">\[
-p(y \mid \theta, n) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
-\]</span> where <span class="math inline">\(\binom{n}{y} = \frac{n!}{y!(n-y)!}\)</span> is the binomial coefficient.</p>
-<p>Since we condition on the observed data, the binomial coefficient is constant for inference purposes:</p>
-<p><span class="math display">\[p(y \mid \theta, n) \propto \theta^y (1-\theta)^{n-y}\]</span></p>
-<p><strong>Analytical MLE derivation</strong>: We maximize the log-likelihood:</p>
-<p><span class="math display">\[\log p(y \mid \theta) = y \log \theta + (n-y) \log(1-\theta) + \text{const.}\]</span></p>
-<p>Taking the derivative and setting to zero:</p>
-<p><span class="math display">\[\frac{d}{d\theta} \log p(y \mid \theta) = \frac{y}{\theta} - \frac{n-y}{1-\theta} = 0\]</span></p>
-<p>Solving: <span class="math inline">\(\frac{y}{\theta} = \frac{n-y}{1-\theta} \implies \hat{\theta}_{\text{MLE}} = \frac{y}{n}\)</span></p>
-<p>The maximum likelihood estimate is simply the observed proportion of heads. This intuitive result demonstrates how MLE selects parameters that make the observed data most probable.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-likelihood">
-<div id="cell-coin-flip-likelihood" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-likelihood-output-1.svg" id="coin-flip-likelihood" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-mle">
-<div id="cell-coin-flip-mle" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-mle-output-1.svg" id="coin-flip-mle" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Just as we infer <span class="math inline">\(\theta\)</span> from coin flips, climate scientists use the same principles to estimate the probability of extreme events from historical data.</p>
+<p>The coin flip example provides a pedagogically clean introduction to maximum likelihood estimation. The <a href="../../notebooks/inference-coin-flip.html">Coin Flip Inference</a> notebook demonstrates both the analytical derivation and computational implementation of MLE.</p>
+<p>This example shows how MLE connects intuitive parameter estimates (the observed proportion) with formal statistical theory. The same principles apply whether estimating coin bias or the frequency of extreme climate events from historical data.</p>
 </section>
 <section id="linear-regression-example" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="linear-regression-example"><span class="header-section-number">2.3.4</span> Linear regression example</h3>
-<p>Linear regression extends the coin flip example to multiple parameters, demonstrating both analytical solutions and the connection between probabilistic and optimization approaches.</p>
-<p>Given <span class="math inline">\(n\)</span> observations of response variable <span class="math inline">\(y_i\)</span> and predictor variable <span class="math inline">\(x_i\)</span>, the goal is to understand the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
-<p>In linear regression, we assume that the response follows a linear relationship with added noise: <span class="math display">\[
-y_i = a + b x_i + \epsilon_i
-\]</span> where:</p>
-<ul>
-<li><span class="math inline">\(a\)</span> is the intercept (value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x = 0\)</span>)</li>
-<li><span class="math inline">\(b\)</span> is the slope (change in <span class="math inline">\(y\)</span> per unit change in <span class="math inline">\(x\)</span>)</li>
-<li><span class="math inline">\(\epsilon_i \sim \text{Normal}(0, \sigma^2)\)</span> is independent random noise</li>
-</ul>
-<p>We can equivalently write this as <span class="math display">\[
-y_i \mid x_i, a, b, \sigma^2 \sim \text{Normal}(a + b x_i, \sigma^2).
-\]</span></p>
-<section id="maximum-likelihood-solution" class="level4" data-number="2.3.4.1">
-<h4 data-number="2.3.4.1" class="anchored" data-anchor-id="maximum-likelihood-solution"><span class="header-section-number">2.3.4.1</span> Maximum likelihood solution</h4>
-<p>The likelihood for a single observation is given by the Normal PDF: <span class="math display">\[
-p(y_i \mid x_i, a, b, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}
-\]</span> By independence, the likelihood for all observations is: <span class="math display">\[
-p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}
-\]</span> and the log-likelihood is: <span class="math display">\[
-\log p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = -\frac{n}{2} \log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - a - b x_i)^2.
-\]</span> If we take the derivative of the log-likelihood with respect to <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and set it equal to zero, we find that we need to minimize:</p>
-<p><span class="math display">\[\sum_{i=1}^n (y_i - a - b x_i)^2\]</span></p>
-<p>This is equivalent to minimizing the mean squared error between the observed and predicted values. This illustrates how “ordinary least squares” regression can be derived from a probabilistic model using maximum likelihood estimation or from an optimization perspective by minimizing squared errors.</p>
-<p>The following examples show both the curve fitting and MLE approaches:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-data-plot">
-<div id="cell-linear-regression-data-plot" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-data-plot-output-1.svg" id="linear-regression-data-plot" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-curve-fitting">
-<div id="cell-linear-regression-curve-fitting" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-curve-fitting-output-1.svg" id="linear-regression-curve-fitting" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-mle">
-<div id="linear-regression-mle" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-stdout">
-<pre><code>MLE Estimates:
-  Intercept: 1.851
-  Slope: 1.584
-  Sigma: 1.492
-
-True Parameters:
-  Intercept: 2.0
-  Slope: 1.5
-  Sigma: 1.5
-
-Least Squares Estimates (for comparison):
-  Intercept: 1.851
-  Slope: 1.584</code></pre>
-</div>
-</div>
-</div>
-<p>Similar approaches can model relationships between climate variables and their impacts.</p>
-</section>
+<p>Linear regression extends inference to multiple parameters, demonstrating the connections between curve fitting, maximum likelihood estimation, and Bayesian approaches.</p>
+<p>The <a href="../../notebooks/linear-regression-examples.html">Linear Regression Examples</a> notebook shows how the same statistical problem can be approached from three different philosophical perspectives, each providing different insights into parameter estimation and uncertainty quantification.</p>
+<p>This example illustrates how probabilistic models connect optimization-based and fully Bayesian approaches, with implications for modeling relationships between climate variables and their impacts.</p>
 </section>
 </section>
 <section id="bayesian-inference" class="level2" data-number="2.4">
@@ -1019,12 +935,12 @@ p(\theta \mid y) \propto \theta^{(\alpha + y) - 1}(1-\theta)^{(\beta + n - y) - 
 \]</span></p>
 <p>The posterior parameters are intuitive: prior “successes” (<span class="math inline">\(\alpha\)</span>) plus observed successes (<span class="math inline">\(y\)</span>), and prior “failures” (<span class="math inline">\(\beta\)</span>) plus observed failures (<span class="math inline">\(n-y\)</span>). This demonstrates the core Bayesian principle: new data updates our beliefs in a mathematically principled way.</p>
 <p>The following example shows this updating process in action, demonstrating how the posterior distribution evolves with each new coin flip:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-beta-binomial-updating">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/inference-coin-flip.qmd" data-notebook-title="Inference Example: Flipping a Coin ✏️" data-notebook-cellid="cell-beta-binomial-updating">
 <div id="cell-beta-binomial-updating" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-beta-binomial-updating-output-1.svg" id="beta-binomial-updating" class="img-fluid figure-img"></p>
+<p><img src="probability-stats_files/figure-html/..-..-notebooks-inference-coin-flip-beta-binomial-updating-output-1.svg" id="beta-binomial-updating" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1037,75 +953,221 @@ p(\theta \mid y) \propto \theta^{(\alpha + y) - 1}(1-\theta)^{(\beta + n - y) - 
 <h3 data-number="2.4.4" class="anchored" data-anchor-id="markov-chain-monte-carlo"><span class="header-section-number">2.4.4</span> Markov Chain Monte Carlo</h3>
 <p>For any non-trivial model, analytically computing the posterior distribution becomes mathematically intractable. A brute-force approach of evaluating the posterior on a grid fails catastrophically: with <span class="math inline">\(k\)</span> parameters and <span class="math inline">\(n\)</span> grid points per parameter, we need <span class="math inline">\(n^k\)</span> evaluations. For even modest problems (say, 10 parameters with 100 grid points each), this requires <span class="math inline">\(100^{10} = 10^{20}\)</span> calculations—computationally impossible.</p>
 <p>This “curse of dimensionality” means that analytical approaches work only for the simplest models. Real scientific applications require computational methods.</p>
-<p>Markov Chain Monte Carlo methods provide a computational workaround. Instead of calculating the posterior distribution everywhere, <code>MCMC</code> algorithms generate samples from it.</p>
-<p>An <code>MCMC</code> algorithm creates a Markov chain: a sequence of parameter values where each new value depends only on the current value. The algorithm is carefully designed so that the chain’s stationary distribution is the target posterior distribution. This means the algorithm spends time in different regions of parameter space in proportion to their posterior probability.</p>
-<p>The key insight is that we only need the posterior up to a constant of proportionality: <span class="math inline">\(p(\theta \mid y) \propto p(y \mid \theta) p(\theta)\)</span>. Since <code>MCMC</code> algorithms don’t require the normalizing constant, they can handle arbitrarily complex models.</p>
+<section id="example-a-metropolis-hastings-sampler-from-scratch" class="level4" data-number="2.4.4.1">
+<h4 data-number="2.4.4.1" class="anchored" data-anchor-id="example-a-metropolis-hastings-sampler-from-scratch"><span class="header-section-number">2.4.4.1</span> Example: A Metropolis-Hastings Sampler from Scratch</h4>
+<p>Modern MCMC algorithms differ in how they propose new parameter values. A classical, foundational approach is the <strong>Metropolis-Hastings</strong> algorithm, which gives us a powerful intuition for how MCMC works.</p>
+<p>The algorithm allows us to sample from a <strong>target</strong> distribution that we can’t directly sample from, as long as we can evaluate its density up to a normalizing constant. We use a separate <strong>proposal</strong> distribution to suggest new parameter values, and then we probabilistically accept or reject these proposals based on how well they align with the target.</p>
+<p>(Shout out to <a href="https://blog.djnavarro.net/posts/2023-04-12_metropolis-hastings/">Danielle Navarro</a> for a clear explanation and the working example that inspired this section).</p>
+<p>The algorithm proceeds as follows:</p>
+<ol type="1">
+<li>Start with an initial parameter value <span class="math inline">\(\theta^{(0)}\)</span>.</li>
+<li>For each iteration <span class="math inline">\(i\)</span>:
+<ul>
+<li>Propose a new value <span class="math inline">\(\theta^*\)</span> from a proposal distribution <span class="math inline">\(q(\theta^* \mid \theta^{(i-1)})\)</span>.</li>
+<li>Compute the acceptance ratio: <span class="math display">\[
+r = \frac{p(\theta^* \mid y) \, q(\theta^{(i-1)} \mid \theta^*)}{p(\theta^{(i-1)} \mid y) \, q(\theta^* \mid \theta^{(i-1)})}
+\]</span></li>
+<li>Accept the proposal with probability <span class="math inline">\(\min(1, r)\)</span>:
+<ul>
+<li>If a random number is less than <span class="math inline">\(r\)</span>, set <span class="math inline">\(\theta^{(i)} = \theta^*\)</span>.</li>
+<li>Otherwise, reject the proposal and set <span class="math inline">\(\theta^{(i)} = \theta^{(i-1)}\)</span>.</li>
+</ul></li>
+</ul></li>
+<li>Repeat for many iterations to generate a chain of samples that approximates the posterior distribution <span class="math inline">\(p(\theta \mid y)\)</span>.</li>
+</ol>
+<div id="2" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">LaTeXStrings</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">Distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="step-1-target-distribution" class="level5" data-number="2.4.4.1.1">
+<h5 data-number="2.4.4.1.1" class="anchored" data-anchor-id="step-1-target-distribution"><span class="header-section-number">2.4.4.1.1</span> Step 1: Target Distribution</h5>
+<p>First, let’s define the distribution we want to sample from. To make it interesting, we’ll use a “squiggly” function that isn’t a standard probability distribution. This is our unnormalized target density, which corresponds to <span class="math inline">\(p(\theta^* \mid y)\)</span> in the ratio above.</p>
+<div id="cell-mh-target" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Define the target distribution (unnormalized)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">target</span>(x) <span class="op">=</span> <span class="fu">exp</span>(<span class="op">-</span>x<span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">2</span>) <span class="op">*</span> (<span class="fl">2</span> <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">5</span> <span class="op">*</span> x) <span class="op">+</span> <span class="fu">sin</span>(<span class="fl">2</span> <span class="op">*</span> x))</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Visualize what it looks like</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb2-6"><a href="#cb2-6"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    xlabel <span class="op">=</span> L<span class="st">"θ"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    ylabel <span class="op">=</span> L<span class="st">"p(θ | y) \propto </span><span class="sc">\t</span><span class="st">ext{Target Density}"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="fu">lines!</span>(ax, <span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">4</span>, target, linewidth <span class="op">=</span> <span class="fl">3</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/mh-target-output-1.svg" id="mh-target" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Our goal is to generate samples whose histogram matches the shape of this distribution.</p>
+</section>
+<section id="step-2-proposal-distribution" class="level5" data-number="2.4.4.1.2">
+<h5 data-number="2.4.4.1.2" class="anchored" data-anchor-id="step-2-proposal-distribution"><span class="header-section-number">2.4.4.1.2</span> Step 2: Proposal Distribution</h5>
+<p>Next, we need a way to propose new steps. For this example, we’ll use a <strong>Normal distribution</strong> centered on our current position. This is like telling our sampler to take a random “hop” left or right.</p>
+<p>This choice is purely for didactic purposes. A Normal distribution is <strong>symmetric</strong>, meaning the probability of hopping from <span class="math inline">\(\theta_A\)</span> to <span class="math inline">\(\theta_B\)</span> is the same as hopping from <span class="math inline">\(\theta_B\)</span> to <span class="math inline">\(\theta_A\)</span>. This simplifies the acceptance ratio, as the proposal terms <span class="math inline">\(q(\theta^{(i-1)} \mid \theta^*)\)</span> and <span class="math inline">\(q(\theta^* \mid \theta^{(i-1)})\)</span> cancel out, leaving us with the simpler Metropolis algorithm.</p>
+<div id="mh-proposal" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">proposal</span>(μ, σ) <span class="op">=</span> <span class="fu">Normal</span>(μ, σ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The standard deviation, <code>σ</code>, controls the “hop size.” A larger <code>σ</code> will propose more distant jumps, while a smaller <code>σ</code> will explore the local area more finely.</p>
+</section>
+<section id="step-3-sampler" class="level5" data-number="2.4.4.1.3">
+<h5 data-number="2.4.4.1.3" class="anchored" data-anchor-id="step-3-sampler"><span class="header-section-number">2.4.4.1.3</span> Step 3: Sampler</h5>
+<p>Now we can write the core function that implements the Metropolis-Hastings logic. The function will take the number of samples, a starting value, and the proposal hop size as inputs. It will loop through the algorithm, building the chain one sample at a time.</p>
+<div id="mh-sampler-function" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">metropolis_hastings_sampler</span>(n_samples, start_val, proposal_sd)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="co"># 1. Initialize an array to store the chain</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    chain <span class="op">=</span> <span class="fu">zeros</span>(n_samples)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    chain[<span class="fl">1</span>] <span class="op">=</span> start_val</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    n_accepted <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="co"># 2. Loop from the second sample to the end</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span>n_samples</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        current_x <span class="op">=</span> chain[i<span class="op">-</span><span class="fl">1</span>]</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>        <span class="co"># 3. Propose a new value</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>        proposed_x <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">proposal</span>(current_x, proposal_sd))</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>        <span class="co"># 4. Calculate acceptance ratio (r). </span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>        <span class="co"># Since the proposal is symmetric, the q terms cancel.</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>        r <span class="op">=</span> <span class="fu">target</span>(proposed_x) <span class="op">/</span> <span class="fu">target</span>(current_x)</span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a>        <span class="co"># 5. Accept or reject the proposal</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>        <span class="cf">if</span> <span class="fu">rand</span>() <span class="op">&lt;</span> r</span>
+<span id="cb4-20"><a href="#cb4-20"></a>            chain[i] <span class="op">=</span> proposed_x <span class="co"># Accept</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>            n_accepted <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>        <span class="cf">else</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>            chain[i] <span class="op">=</span> current_x <span class="co"># Reject (stay put)</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>        <span class="cf">end</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>    <span class="cf">end</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a></span>
+<span id="cb4-27"><a href="#cb4-27"></a>    <span class="cf">return</span> chain, n_accepted <span class="op">/</span> n_samples</span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-implement" class="level5" data-number="2.4.4.1.4">
+<h5 data-number="2.4.4.1.4" class="anchored" data-anchor-id="step-4-implement"><span class="header-section-number">2.4.4.1.4</span> Step 4: Implement</h5>
+<p>Finally, we run the sampler and plot the results. We need to check two things:</p>
+<ol type="1">
+<li><strong>The Trace Plot</strong>: This shows the value of the parameter at each iteration. We are looking for a “fuzzy caterpillar” pattern, which indicates the chain is exploring the distribution well and is stationary.</li>
+<li><strong>The Histogram</strong>: This shows the distribution of the collected samples. If the sampler worked, its shape should match our target density.</li>
+</ol>
+<div id="cell-mh-run-and-plot" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Run the sampler</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>n_samples <span class="op">=</span> <span class="fl">20000</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>burn_in <span class="op">=</span> <span class="fl">2000</span> <span class="co"># Number of initial samples to discard</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>chain, acceptance_rate <span class="op">=</span> <span class="fu">metropolis_hastings_sampler</span>(n_samples, <span class="fl">0.0</span>, <span class="fl">1.0</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">println</span>(<span class="st">"Acceptance rate: "</span>, <span class="fu">round</span>(acceptance_rate, digits <span class="op">=</span> <span class="fl">3</span>))</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># Visualize the results</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co"># 1. Trace Plot</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    title <span class="op">=</span> <span class="st">"MCMC Trace Plot"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    xlabel <span class="op">=</span> <span class="st">"Iteration"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15"></a>    ylabel <span class="op">=</span> L<span class="st">"θ"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="fu">lines!</span>(ax1, chain, label <span class="op">=</span> <span class="st">"Trace"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># 2. Histogram of Samples</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>],</span>
+<span id="cb5-20"><a href="#cb5-20"></a>    title <span class="op">=</span> <span class="st">"Posterior Approximation"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21"></a>    xlabel <span class="op">=</span> L<span class="st">"θ"</span>,</span>
+<span id="cb5-22"><a href="#cb5-22"></a>    ylabel <span class="op">=</span> <span class="st">"Density"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co"># Plot the histogram, removing the initial "burn-in" period</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="fu">hist!</span>(ax2, chain[burn_in<span class="op">+</span><span class="fl">1</span><span class="op">:</span><span class="kw">end</span>],</span>
+<span id="cb5-26"><a href="#cb5-26"></a>    bins <span class="op">=</span> <span class="fl">60</span>,</span>
+<span id="cb5-27"><a href="#cb5-27"></a>    normalization <span class="op">=</span> <span class="op">:</span>pdf,</span>
+<span id="cb5-28"><a href="#cb5-28"></a>    label <span class="op">=</span> <span class="st">"MCMC Samples"</span>)</span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co"># Overlay the true target density (scaled to be a valid PDF)</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>x_grid <span class="op">=</span> <span class="op">-</span><span class="fl">4</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a>target_pdf <span class="op">=</span> <span class="fu">target</span>.(x_grid)</span>
+<span id="cb5-33"><a href="#cb5-33"></a>target_pdf <span class="op">./=</span> <span class="fu">sum</span>(target_pdf <span class="op">.*</span> <span class="fl">0.01</span>) <span class="co"># Normalize</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="fu">lines!</span>(ax2, x_grid, target_pdf,</span>
+<span id="cb5-35"><a href="#cb5-35"></a>    label <span class="op">=</span> <span class="st">"Target Density"</span>,</span>
+<span id="cb5-36"><a href="#cb5-36"></a>    linewidth <span class="op">=</span> <span class="fl">3</span>,</span>
+<span id="cb5-37"><a href="#cb5-37"></a>    color <span class="op">=</span> <span class="op">:</span>purple)</span>
+<span id="cb5-38"><a href="#cb5-38"></a></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="co"># Add a legend to the second plot</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="fu">axislegend</span>(ax2)</span>
+<span id="cb5-41"><a href="#cb5-41"></a></span>
+<span id="cb5-42"><a href="#cb5-42"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Acceptance rate: 0.594</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="mh-run-and-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="probability-stats_files/figure-html/mh-run-and-plot-output-2.svg" class="img-fluid figure-img"></p>
+<figcaption>Results from our Metropolis-Hastings sampler. The trace plot (top) shows the sampler exploring the parameter space. The histogram of the MCMC samples (bottom) closely matches the shape of the unnormalized target density.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The acceptance rate is a useful diagnostic. A very high rate (&gt; 0.8) might mean the hop size is too small, and the chain isn’t exploring efficiently. A very low rate (&lt; 0.1) might mean the hop size is too large, and most proposals are being rejected. Rates between 0.2 and 0.5 are often considered good for this type of sampler.</p>
+<p>As we can see, the final histogram of samples beautifully recovers the shape of the target distribution, demonstrating that this simple algorithm successfully turned a function we can evaluate into a distribution we can sample from.</p>
+</section>
+</section>
+<section id="modern-mcmc-algorithms" class="level4" data-number="2.4.4.2">
+<h4 data-number="2.4.4.2" class="anchored" data-anchor-id="modern-mcmc-algorithms"><span class="header-section-number">2.4.4.2</span> Modern MCMC algorithms</h4>
+<p>In practice, Metropolis-Hastings is rarely used due to its inefficiency and because it scales poorly to high-dimensional spaces where the acceptance rate can become very low. Modern MCMC algorithms, such as Hamiltonian Monte Carlo (HMC) and the No-U-Turn Sampler (NUTS), leverage gradient information to propose more informed jumps in parameter space. These methods explore the posterior distribution more efficiently, especially in high-dimensional problems common in climate modeling and other scientific applications.</p>
+<p>WHen using these advanced samplers, several best practices ensure robust and reliable inference:</p>
+<ol type="1">
+<li>Running multiple independent chains helps assess convergence and identify multimodal posteriors. You will often see four chains as a default, but that’s mainly because laptops ten years ago mainly had four cores. More is often better.</li>
+<li>Initial iterations allow the sampler to adapt to the posterior geometry and find the typical set. We typically discard these “warm-up” samples before final inference.</li>
+<li>Most samplers have hyperparameters (e.g., step size, number of leapfrog steps) that require tuning for optimal performance. Many software packages include automatic tuning during a warm-up phase.</li>
+<li>Diagnostics are essential to ensure the sampler has converged and is exploring the posterior adequately.
+<ul>
+<li>Trace plots show the parameter values over iterations. We are looking for a “fuzzy caterpillar” pattern, which indicates the chain is exploring the distribution well and is stationary. If you see trends or drifts, the chain has not converged.</li>
+<li>Trace plots for multiple chains should overlap and mix well, indicating they are sampling from the same distribution.</li>
+<li>Autocorrelation plots help assess the degree of correlation between samples. Rapidly decreasing autocorrelation suggests good mixing, while high autocorrelation indicates the chain is stuck in local modes.</li>
+<li>Quantitative metrics, such as the <span class="math inline">\(\hat{R}\)</span> statistic and effective sample size, provide numerical assessments of convergence and sampling efficiency.</li>
+</ul></li>
+</ol>
+<p>In all cases, we can rule out some kinds of convergence problems, but actually proving convergence is impossible, so we must always include other checks. Avoid the tendency common in applied work to state without reflection or critique that because <span class="math inline">\(\hat{R} &lt; 1.1\)</span> no further thought is needed. For tricky problems, work with a computational statistician (or take Bayesian stats courses beyond the scope of these lecture notes).</p>
+</section>
+<section id="from-samples-to-inference" class="level4" data-number="2.4.4.3">
+<h4 data-number="2.4.4.3" class="anchored" data-anchor-id="from-samples-to-inference"><span class="header-section-number">2.4.4.3</span> From samples to inference</h4>
 <p>After running the chain for thousands of iterations, the resulting samples serve as a high-fidelity numerical approximation of the true posterior distribution. We can use these samples to approximate any posterior quantity: <span class="math display">\[
 \mathbb{E}[g(\theta) \mid y] \approx \frac{1}{N} \sum_{i=1}^N g(\theta^{(i)})
-\]</span> where <span class="math inline">\(\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\)</span> are our <code>MCMC</code> samples. Modern <code>MCMC</code> algorithms include:</p>
-<ul>
-<li><strong>Metropolis-Hastings</strong>: A general-purpose algorithm using proposal distributions and acceptance criteria</li>
-<li><strong>Gibbs sampling</strong>: Efficient for multivariate problems with available conditional distributions</li>
-<li><strong>Hamiltonian Monte Carlo</strong>: Uses gradient information for efficient exploration, forming the basis of modern probabilistic programming frameworks like <code>Turing.jl</code> and <code>stan</code></li>
-</ul>
-<p>Many other modern approaches to sampling exist.</p>
+\]</span> where <span class="math inline">\(\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}\)</span> are our <code>MCMC</code> samples after discarding warm-up iterations.</p>
+<p>This Monte Carlo approximation enables: - Parameter estimates and credible intervals - Posterior predictive distributions for forecasting - Model comparison through marginal likelihood estimation - Decision analysis under parameter uncertainty</p>
+<p>The quality of these approximations depends on sample size, chain mixing, and the specific posterior quantity being estimated. Tail probabilities and extreme quantiles require more samples than central tendencies.</p>
+</section>
 </section>
 <section id="example-coin-flip-bayesian-analysis" class="level3" data-number="2.4.5">
 <h3 data-number="2.4.5" class="anchored" data-anchor-id="example-coin-flip-bayesian-analysis"><span class="header-section-number">2.4.5</span> Example: coin flip Bayesian analysis</h3>
 <p>The coin flip example demonstrates the complete Bayesian workflow, from prior specification through posterior computation and interpretation.</p>
-<p>Building on the maximum likelihood analysis from the previous section, we now treat the parameter <span class="math inline">\(\theta\)</span> as a random variable. This is a helpful example, because we can compare to the known and exact analytical solution to validate the computational approach.</p>
-<p>Starting with a <span class="math inline">\(\text{Beta}(1,1)\)</span> uniform prior (representing no initial preference for heads or tails), observing 7 heads in 10 flips yields the posterior <span class="math inline">\(\text{Beta}(8,4)\)</span>. This analytical result can be compared directly with <code>MCMC</code> sampling to demonstrate computational accuracy:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-coin-flip-bayesian">
-<div id="cell-coin-flip-bayesian" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-coin-flip-bayesian-output-1.svg" id="coin-flip-bayesian" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>The analytical and <code>MCMC</code> results match closely, demonstrating that:</p>
-<ul>
-<li>The Beta-Binomial conjugacy gives exact results</li>
-<li><code>MCMC</code> provides a general computational approach when analytical solutions don’t exist</li>
-<li>Both approaches quantify uncertainty through the full posterior distribution</li>
-<li>Increasing the number of flips improves the approximation of the posterior</li>
-</ul>
-<p><code>MCMC</code> accuracy varies across the distribution. The method provides better estimates in the center of the distribution than in the tails. For example, computing <span class="math inline">\(\mathbb{E}[\theta]\)</span> requires fewer samples than computing the probability that <span class="math inline">\(\theta \leq 0.25\)</span>, since the latter depends on accurately characterizing the probability mass in the tail. This reflects a general principle: quantities that depend on rare events or extreme values require more samples and/or more sophisticated sampling strategies for accurate estimation.</p>
+<p>The <a href="../../notebooks/inference-coin-flip.html">Coin Flip Inference</a> notebook shows how treating parameters as random variables enables full uncertainty quantification. This example compares analytical solutions (using conjugate priors) with computational approaches, validating MCMC methods against known exact results.</p>
+<p>The example illustrates key Bayesian concepts: how priors influence posterior distributions, the role of conjugacy in analytical tractability, and the use of MCMC when analytical solutions don’t exist.</p>
 </section>
 <section id="example-linear-regression-bayesian-analysis" class="level3" data-number="2.4.6">
 <h3 data-number="2.4.6" class="anchored" data-anchor-id="example-linear-regression-bayesian-analysis"><span class="header-section-number">2.4.6</span> Example: linear regression Bayesian analysis</h3>
-<p>Linear regression demonstrates Bayesian inference for multivariate problems where analytical solutions don’t exist. We specify prior distributions for all parameters (<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(\sigma\)</span>) and use <code>MCMC</code> to sample from the joint posterior distribution.</p>
-<p>The Bayesian approach provides full posterior distributions for each parameter, enabling: - Direct probabilistic statements about parameter values - Credible intervals that quantify parameter uncertainty - Prediction intervals that account for both parameter and observation uncertainty</p>
-<p>The following example shows the complete Bayesian workflow and compares results with maximum likelihood estimation:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-bayesian">
-<div id="cell-linear-regression-bayesian" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-bayesian-output-1.svg" id="linear-regression-bayesian" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-embed-nb-cell" data-notebook="/Users/jamesdoss-gollin/Documents/dossgollin-lab/climate-risk-management-reference/notebooks/probability-stats-examples.qmd" data-notebook-title="Probability, inference, and computation: examples ✏️" data-notebook-cellid="cell-linear-regression-comparison">
-<div id="cell-linear-regression-comparison" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probability-stats_files/figure-html/..-..-notebooks-probability-stats-examples-linear-regression-comparison-output-1.svg" id="linear-regression-comparison" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>All three approaches (least squares, <code>MLE</code>, Bayesian) provide similar point estimates, but differ in their treatment of uncertainty: - Least squares provides point estimates only - <code>MLE</code> provides point estimates with asymptotic standard errors - Bayesian inference provides full posterior distributions and credible intervals</p>
-<p>Notice that the key difference between <code>MLE</code> and Bayesian estimates is the influence of prior information. When priors are weak (uninformative), Bayesian and <code>MLE</code> estimates converge. When priors are informative, they pull the estimates toward the prior beliefs, demonstrating how Bayesian inference formally incorporates existing knowledge.</p>
-<p>The Bayesian approach excels when we need to propagate parameter uncertainty through subsequent calculations or decision processes. The credible interval demonstrates how parameter uncertainty translates into prediction uncertainty—a crucial consideration for risk assessment and decision-making under uncertainty.</p>
-<p>Just as we infer <span class="math inline">\(\theta\)</span> from coin flips, climate scientists estimate the probability of extreme events from historical data. The same Bayesian principles apply whether analyzing controlled experiments or complex climate observations, providing a unified framework for uncertainty quantification across scales and applications.</p>
+<p>Linear regression demonstrates Bayesian inference for multivariate problems requiring computational methods.</p>
+<p>The <a href="../../notebooks/linear-regression-examples.html">Linear Regression Examples</a> notebook provides a comprehensive comparison of least squares, maximum likelihood, and Bayesian approaches to the same problem. This comparison illuminates the philosophical differences between methods and their practical implications for uncertainty quantification.</p>
+<p>The Bayesian approach excels when parameter uncertainty must be propagated through subsequent calculations or decision processes—a crucial capability for climate risk assessment and decision-making under uncertainty.</p>
+</section>
+<section id="posterior-predictive-distribution-and-model-checking" class="level3" data-number="2.4.7">
+<h3 data-number="2.4.7" class="anchored" data-anchor-id="posterior-predictive-distribution-and-model-checking"><span class="header-section-number">2.4.7</span> Posterior predictive distribution and model checking</h3>
+<p>The Bayesian workflow extends beyond parameter estimation to include systematic model validation through posterior predictive checking. This approach uses the fitted model to generate simulated data, then compares these simulations to observed data on relevant metrics.</p>
+<p>The posterior predictive distribution represents our beliefs about new data given what we’ve observed: <span class="math display">\[p(y^{\text{rep}} | y^{\text{obs}}) = \int p(y^{\text{rep}} | \theta) p(\theta | y^{\text{obs}}) d\theta\]</span></p>
+<p>where <span class="math inline">\(y^{\text{rep}}\)</span> denotes replicated (simulated) data and <span class="math inline">\(y^{\text{obs}}\)</span> denotes observed data.</p>
+<section id="the-posterior-predictive-checking-workflow" class="level4" data-number="2.4.7.1">
+<h4 data-number="2.4.7.1" class="anchored" data-anchor-id="the-posterior-predictive-checking-workflow"><span class="header-section-number">2.4.7.1</span> The posterior predictive checking workflow</h4>
+<p>The systematic approach follows these steps:</p>
+<ol type="1">
+<li>Use MCMC to obtain samples from <span class="math inline">\(p(\theta | y^{\text{obs}})\)</span></li>
+<li>For each posterior sample <span class="math inline">\(\theta^{(i)}\)</span>, draw <span class="math inline">\(y^{\text{rep}(i)} \sim p(y | \theta^{(i)})\)</span></li>
+<li>Calculate relevant “test statistics” or metrics <span class="math inline">\(T(y^{\text{rep}(i)})\)</span> and <span class="math inline">\(T(y^{\text{obs}})\)</span></li>
+<li>Assess whether <span class="math inline">\(T(y^{\text{obs}})\)</span> falls within the distribution of <span class="math inline">\(T(y^{\text{rep}})\)</span></li>
+</ol>
+<p>This is related to the frequentist idea of p-values explored in the <a href="../../notebooks/mosquitos.html">mosquitos case study</a>.</p>
+</section>
 </section>
 </section>
 <section id="further-reading" class="level2 unnumbered">
@@ -1116,7 +1178,12 @@ p(\theta \mid y) \propto \theta^{(\alpha + y) - 1}(1-\theta)^{(\beta + n - y) - 
 <li><span class="citation" data-cites="downey_thinkbayes:2021">Downey (<a href="../references.html#ref-downey_thinkbayes:2021" role="doc-biblioref">2021</a>)</span> emphasizes Bayesian thinking with practical applications</li>
 <li><span class="citation" data-cites="gelman_regression:2021">Gelman (<a href="../references.html#ref-gelman_regression:2021" role="doc-biblioref">2021</a>)</span> connects regression to broader statistical modeling</li>
 <li><span class="citation" data-cites="gelman_bda3:2014">Gelman et al. (<a href="../references.html#ref-gelman_bda3:2014" role="doc-biblioref">2014</a>)</span> comprehensive treatment of Bayesian computation</li>
-<li><a href="../../notebooks/probability-stats-examples.html">Computational Examples</a> demonstrates all methods with working code</li>
+</ul>
+<p>This chapter’s concepts are also demonstrated through focused computational notebooks:</p>
+<ul>
+<li><a href="../../notebooks/distribution-examples.html">Distribution Examples</a>: Understanding probability distributions and their relationships</li>
+<li><a href="../../notebooks/inference-coin-flip.html">Coin Flip Inference</a>: Introduction to statistical inference with likelihood and Bayesian methods</li>
+<li><a href="../../notebooks/linear-regression-examples.html">Linear Regression Examples</a>: Comparing curve fitting, MLE, and Bayesian approaches</li>
 </ul>
 
 

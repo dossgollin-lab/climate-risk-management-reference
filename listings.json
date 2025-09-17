@@ -3,8 +3,10 @@
     "listing": "/notebooks/index.html",
     "items": [
       "/notebooks/extremes-examples.html",
-      "/notebooks/probability-stats-examples.html",
-      "/notebooks/mosquitos.html"
+      "/notebooks/inference-coin-flip.html",
+      "/notebooks/linear-regression-examples.html",
+      "/notebooks/mosquitos.html",
+      "/notebooks/distribution-examples.html"
     ]
   }
 ]

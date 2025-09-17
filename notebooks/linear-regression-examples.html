@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Downscaling and Bias Correction 🚧 – Climate Risk Assessment and Management</title>
+<title>Linear regression: three perspectives on the same problem ✏️ – Climate Risk Assessment and Management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,50 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../chapters/hazard/generators.html" rel="next">
-<link href="../../chapters/hazard/extremes.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ff4a0bb939fed34ae4231fc9111ce8ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/extremes-examples.html" rel="next">
+<link href="../notebooks/inference-coin-flip.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff4a0bb939fed34ae4231fc9111ce8ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -90,7 +105,39 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta name="citation_title" content="Climate Risk Assessment and Management">
 <meta name="citation_author" content="James Doss-Gollin">
@@ -231,7 +278,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/hazard/extremes.html"><strong>II: Hazard Assessment</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/hazard/downscaling-bias-correction.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/linear-regression-examples.html">Linear regression: three perspectives on the same problem ✏️</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -246,7 +293,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Climate Risk Assessment and Management</a> 
+      <a href="../">Climate Risk Assessment and Management</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -258,7 +305,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome 🎯</span></a>
   </div>
 </li>
@@ -273,25 +320,25 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/about/license.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/about/license.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">License</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/about/contributing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Contributing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/about/citing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Citing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/about/resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Further Reading</span></a>
   </div>
 </li>
@@ -299,7 +346,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/preface.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -314,31 +361,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/fundamentals/climate-science.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Climate science 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/fundamentals/probability-stats.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability and inference ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/fundamentals/ml-nonparametric.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Machine learning and nonparametric methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/fundamentals/correlation-dimensionality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Correlation and dimensionality 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/fundamentals/model-comparison.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Model validation and comparison 🚧</span></span></a>
   </div>
 </li>
@@ -355,37 +402,37 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/hazard/extremes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/hazard/downscaling-bias-correction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/hazard/generators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/hazard/physics-models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Physics-based models and calibration 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/hazard/sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Optimal sampling methods 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/hazard/sensitivity-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Global sensitivity analysis 🚧</span></span></a>
   </div>
 </li>
@@ -402,49 +449,49 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/exposure-vulnerability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exposure and Vulnerability 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/expectations-cost-benefit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Cost-Benefit Analysis and Net Present Value 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/policy-search.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Policy Search &amp; Optimization 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/risk-transfer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Risk Transfer 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/deep-uncertainty.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Deep Uncertainty and Model Structure 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/robustness.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Robustness 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/adaptive.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Adaptive Planning and Flexibility 🚧</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/risk/social-science.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with People: Values, Participation, and Communication 🚧</span></span></a>
   </div>
 </li>
@@ -461,37 +508,37 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/distribution-examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/distribution-examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding probability distributions ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/inference-coin-flip.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/inference-coin-flip.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Inference Example: Flipping a Coin ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/linear-regression-examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/linear-regression-examples.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Linear regression: three perspectives on the same problem ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/extremes-examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/extremes-examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Extreme Value Theory Examples ✏️</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
+  <a href="../notebooks/mosquitos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mosquito bites and beer consumption: simulation-based inference ✏️</span></a>
   </div>
 </li>
@@ -499,7 +546,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>References</strong></span></a>
   </div>
 </li>
@@ -514,19 +561,19 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/appendices/software.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Setup ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/appendices/julia.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Julia Learning Resources ✏️</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/appendices/llm.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/appendices/llm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Large Language Models (“AI”) ✏️</span></span></a>
   </div>
 </li>
@@ -544,17 +591,34 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  <li><a href="#the-regression-problem" id="toc-the-regression-problem" class="nav-link active" data-scroll-target="#the-regression-problem">The regression problem</a>
+  <ul class="collapse">
+  <li><a href="#generating-synthetic-data" id="toc-generating-synthetic-data" class="nav-link" data-scroll-target="#generating-synthetic-data">Generating synthetic data</a></li>
+  </ul></li>
+  <li><a href="#approach-1-curve-fitting-least-squares" id="toc-approach-1-curve-fitting-least-squares" class="nav-link" data-scroll-target="#approach-1-curve-fitting-least-squares">Approach 1: Curve fitting (least squares)</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-foundation" id="toc-mathematical-foundation" class="nav-link" data-scroll-target="#mathematical-foundation">Mathematical foundation</a></li>
+  <li><a href="#visualization-with-residuals" id="toc-visualization-with-residuals" class="nav-link" data-scroll-target="#visualization-with-residuals">Visualization with residuals</a></li>
+  </ul></li>
+  <li><a href="#approach-2-maximum-likelihood-estimation" id="toc-approach-2-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#approach-2-maximum-likelihood-estimation">Approach 2: Maximum likelihood estimation</a>
+  <ul class="collapse">
+  <li><a href="#statistical-model-specification" id="toc-statistical-model-specification" class="nav-link" data-scroll-target="#statistical-model-specification">Statistical model specification</a></li>
+  </ul></li>
+  <li><a href="#approach-3-bayesian-inference" id="toc-approach-3-bayesian-inference" class="nav-link" data-scroll-target="#approach-3-bayesian-inference">Approach 3: Bayesian inference</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-inference-implementation" id="toc-bayesian-inference-implementation" class="nav-link" data-scroll-target="#bayesian-inference-implementation">Bayesian inference implementation</a></li>
+  <li><a href="#trace-plot" id="toc-trace-plot" class="nav-link" data-scroll-target="#trace-plot">Trace plot</a></li>
+  <li><a href="#posterior-predictive-distribution" id="toc-posterior-predictive-distribution" class="nav-link" data-scroll-target="#posterior-predictive-distribution">Posterior predictive distribution</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/hazard/extremes.html"><strong>II: Hazard Assessment</strong></a></li><li class="breadcrumb-item"><a href="../../chapters/hazard/downscaling-bias-correction.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/index.html"><strong>Computational Case Studies</strong></a></li><li class="breadcrumb-item"><a href="../notebooks/linear-regression-examples.html">Linear regression: three perspectives on the same problem ✏️</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Downscaling and Bias Correction 🚧</span></h1>
+<h1 class="title">Linear regression: three perspectives on the same problem ✏️</h1>
 </div>
 
 
@@ -571,38 +635,494 @@ div.csl-indent {
 </header>
 
 
-<section id="learning-objectives" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>After reading this chapter, you should be able to:</p>
+<p>This notebook demonstrates how the same statistical problem can be approached from three different perspectives: curve fitting, maximum likelihood estimation, and Bayesian inference. Linear regression provides an ideal example because it bridges simple parameter estimation with multivariate modeling while maintaining analytical tractability.</p>
+<p>Understanding these different approaches illuminates the philosophical foundations underlying statistical methods and their practical implications for uncertainty quantification.</p>
+<div id="setup" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">using</span> <span class="bu">LaTeXStrings</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">using</span> <span class="bu">Turing</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="im">using</span> <span class="bu">MCMCChains</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="im">using</span> <span class="bu">Printf</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="im">using</span> <span class="bu">Optim</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="the-regression-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-regression-problem">The regression problem</h2>
+<p>Linear regression models the relationship between a predictor variable <span class="math inline">\(x\)</span> and a response variable <span class="math inline">\(y\)</span> as: <span class="math display">\[y_i = \alpha + \beta x_i + \epsilon_i\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the intercept, <span class="math inline">\(\beta\)</span> is the slope, and <span class="math inline">\(\epsilon_i\)</span> represents random noise.</p>
+<p>This framework applies broadly in climate science: relating temperature to elevation, precipitation to atmospheric pressure, or sea level rise to global temperature.</p>
+<section id="generating-synthetic-data" class="level3">
+<h3 class="anchored" data-anchor-id="generating-synthetic-data">Generating synthetic data</h3>
+<p>We create synthetic data from a known linear relationship to evaluate how well different methods recover the true parameters. First, we generate and plot our synthetic data.</p>
+<div id="cell-data-generation" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Set reproducible parameters</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">42</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>n_obs <span class="op">=</span> <span class="fl">30</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>true_intercept <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>true_slope <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>true_sigma <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Generate predictor and response data</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>x_data <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">rand</span>(<span class="fu">Uniform</span>(<span class="fl">0</span>, <span class="fl">5</span>), n_obs))</span>
+<span id="cb2-10"><a href="#cb2-10"></a>y_data <span class="op">=</span> true_intercept <span class="op">.+</span> true_slope <span class="op">.*</span> x_data <span class="op">.+</span> <span class="fu">rand</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, true_sigma), n_obs)</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="kw">function</span> <span class="fu">plot_synthetic_data</span>()</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">700</span>, <span class="fl">500</span>))</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb2-15"><a href="#cb2-15"></a>        xlabel <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>        ylabel <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>        title <span class="op">=</span> <span class="st">"Synthetic linear regression dataset"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="co"># Plot data points</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color <span class="op">=</span> <span class="op">:</span>blue, markersize <span class="op">=</span> <span class="fl">8</span>, label <span class="op">=</span> <span class="st">"Observed data"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>    <span class="co"># Plot true relationship</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length <span class="op">=</span> <span class="fl">100</span>)</span>
+<span id="cb2-24"><a href="#cb2-24"></a>    y_true <span class="op">=</span> true_intercept <span class="op">.+</span> true_slope <span class="op">.*</span> x_line</span>
+<span id="cb2-25"><a href="#cb2-25"></a>    <span class="fu">lines!</span>(ax, x_line, y_true, color <span class="op">=</span> <span class="op">:</span>red, linewidth <span class="op">=</span> <span class="fl">3</span>,</span>
+<span id="cb2-26"><a href="#cb2-26"></a>        label <span class="op">=</span> L<span class="st">"True: </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(true_intercept)<span class="st"> + %</span><span class="sc">$</span>(true_slope)<span class="st">x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="st">    # </span>Add<span class="st"> uncertainty band</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    y_upper <span class="op">=</span> y_true <span class="op">.+</span> <span class="fl">2</span> <span class="op">*</span> true_sigma</span>
+<span id="cb2-30"><a href="#cb2-30"></a>    y_lower <span class="op">=</span> y_true <span class="op">.-</span> <span class="fl">2</span> <span class="op">*</span> true_sigma</span>
+<span id="cb2-31"><a href="#cb2-31"></a>    <span class="fu">band!</span>(ax, x_line, y_lower, y_upper, color <span class="op">=</span> (<span class="op">:</span>red, <span class="fl">0.2</span>), label <span class="op">=</span> L<span class="st">"±2σ"</span>)</span>
+<span id="cb2-32"><a href="#cb2-32"></a></span>
+<span id="cb2-33"><a href="#cb2-33"></a>    <span class="fu">axislegend</span>(ax, position <span class="op">=</span> <span class="op">:</span>lt)</span>
+<span id="cb2-34"><a href="#cb2-34"></a>    <span class="cf">return</span> fig</span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="kw">end</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a></span>
+<span id="cb2-37"><a href="#cb2-37"></a>fig_data <span class="op">=</span> <span class="fu">plot_synthetic_data</span>()</span>
+<span id="cb2-38"><a href="#cb2-38"></a>fig_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="linear-regression-examples_files/figure-html/data-generation-output-1.svg" id="data-generation" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot shows our synthetic data with the true linear relationship and noise level. The scattered points represent our “observations,” while the red line and shaded band show the true underlying process we’re trying to recover.</p>
+</section>
+</section>
+<section id="approach-1-curve-fitting-least-squares" class="level2">
+<h2 class="anchored" data-anchor-id="approach-1-curve-fitting-least-squares">Approach 1: Curve fitting (least squares)</h2>
+<p>The curve fitting perspective treats regression as an optimization problem: find the line that minimizes prediction errors. This approach focuses on algorithmic solutions without probabilistic interpretation.</p>
+<section id="mathematical-foundation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-foundation">Mathematical foundation</h3>
+<p>Least squares minimizes the sum of squared residuals: <span class="math display">\[\text{minimize} \sum_{i=1}^n (y_i - \alpha - \beta x_i)^2\]</span></p>
+<p>This optimization problem has a closed-form analytical solution.</p>
+<div id="cell-least-squares-implementation" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">function</span> <span class="fu">fit_least_squares</span>(x, y)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="st">"""Analytical least squares regression"""</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    n <span class="op">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    x_bar <span class="op">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    y_bar <span class="op">=</span> <span class="fu">mean</span>(y)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="co"># Analytical formulas</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    slope <span class="op">=</span> <span class="fu">sum</span>((x <span class="op">.-</span> x_bar) <span class="op">.*</span> (y <span class="op">.-</span> y_bar)) <span class="op">/</span> <span class="fu">sum</span>((x <span class="op">.-</span> x_bar) <span class="op">.^</span> <span class="fl">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    intercept <span class="op">=</span> y_bar <span class="op">-</span> slope <span class="op">*</span> x_bar</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co"># Calculate residuals and fit statistics</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    y_pred <span class="op">=</span> intercept <span class="op">.+</span> slope <span class="op">.*</span> x</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    residuals <span class="op">=</span> y <span class="op">.-</span> y_pred</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    mse <span class="op">=</span> <span class="fu">mean</span>(residuals <span class="op">.^</span> <span class="fl">2</span>)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>    r_squared <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu">sum</span>(residuals <span class="op">.^</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fu">sum</span>((y <span class="op">.-</span> y_bar) <span class="op">.^</span> <span class="fl">2</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">return</span> (</span>
+<span id="cb3-18"><a href="#cb3-18"></a>        intercept <span class="op">=</span> intercept,</span>
+<span id="cb3-19"><a href="#cb3-19"></a>        slope <span class="op">=</span> slope,</span>
+<span id="cb3-20"><a href="#cb3-20"></a>        mse <span class="op">=</span> mse,</span>
+<span id="cb3-21"><a href="#cb3-21"></a>        r_squared <span class="op">=</span> r_squared,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>        predictions <span class="op">=</span> y_pred,</span>
+<span id="cb3-23"><a href="#cb3-23"></a>        residuals <span class="op">=</span> residuals,</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    )</span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="kw">end</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co"># Fit the model</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a>ols_results <span class="op">=</span> <span class="fu">fit_least_squares</span>(x_data, y_data)</span>
+<span id="cb3-29"><a href="#cb3-29"></a></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co"># Create results summary</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>ols_summary <span class="op">=</span> <span class="fu">DataFrame</span>(</span>
+<span id="cb3-32"><a href="#cb3-32"></a>    <span class="st">"parameter"</span> <span class="op">=&gt;</span> [<span class="st">"Intercept"</span>, <span class="st">"Slope"</span>, <span class="st">"MSE"</span>, <span class="st">"R²"</span>],</span>
+<span id="cb3-33"><a href="#cb3-33"></a>    <span class="st">"estimate"</span> <span class="op">=&gt;</span> [ols_results.intercept, ols_results.slope, ols_results.mse, ols_results.r_squared],</span>
+<span id="cb3-34"><a href="#cb3-34"></a>    <span class="st">"true_value"</span> <span class="op">=&gt;</span> [true_intercept, true_slope, <span class="cn">missing</span>, <span class="cn">missing</span>],</span>
+<span id="cb3-35"><a href="#cb3-35"></a>)</span>
+<span id="cb3-36"><a href="#cb3-36"></a>ols_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="least-squares-implementation" class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>4×3 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">true_value</th>
+</tr>
+<tr class="subheader headerLastRow even">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Union{Missing, Float64}">Float64?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">1.85082</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Slope</td>
+<td style="text-align: right;">1.58365</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">MSE</td>
+<td style="text-align: right;">2.22587</td>
+<td style="text-align: right; font-style: italic;">missing</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: left;">R²</td>
+<td style="text-align: right;">0.711843</td>
+<td style="text-align: right; font-style: italic;">missing</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The least squares estimates are close to the true values, demonstrating that the method works well for this problem. However, this approach provides no direct way to quantify uncertainty in the parameter estimates.</p>
+</section>
+<section id="visualization-with-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-with-residuals">Visualization with residuals</h3>
+<div id="cell-least-squares-visualization" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">plot_least_squares_fit</span>()</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb4-4"><a href="#cb4-4"></a>        xlabel <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>        ylabel <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>        title <span class="op">=</span> <span class="st">"Least squares curve fitting"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="co"># Plot data points</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color <span class="op">=</span> <span class="op">:</span>blue, markersize <span class="op">=</span> <span class="fl">8</span>, label <span class="op">=</span> <span class="st">"Data"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="co"># Plot fitted line</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    x_line <span class="op">=</span> <span class="fu">range</span>(<span class="fu">minimum</span>(x_data), <span class="fu">maximum</span>(x_data), length <span class="op">=</span> <span class="fl">100</span>)</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    y_fitted <span class="op">=</span> ols_results.intercept <span class="op">.+</span> ols_results.slope <span class="op">.*</span> x_line</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="fu">lines!</span>(ax, x_line, y_fitted, color <span class="op">=</span> <span class="op">:</span>red, linewidth <span class="op">=</span> <span class="fl">2</span>,</span>
+<span id="cb4-15"><a href="#cb4-15"></a>        label <span class="op">=</span> L<span class="st">"Fitted: </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(<span class="fu">round</span>(ols_results.intercept, digits<span class="op">=</span><span class="fl">2</span>))<span class="st"> + %</span><span class="sc">$</span>(<span class="fu">round</span>(ols_results.slope, digits<span class="op">=</span><span class="fl">2</span>))<span class="st">x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="st">    # </span>Show<span class="st"> residuals as vertical lines</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x_data)</span>
+<span id="cb4-19"><a href="#cb4-19"></a>        <span class="fu">lines!</span>(ax, [x_data[i], x_data[i]], [y_data[i], ols_results.predictions[i]],</span>
+<span id="cb4-20"><a href="#cb4-20"></a>            color <span class="op">=</span> <span class="op">:</span>gray, linestyle <span class="op">=</span> <span class="op">:</span>dash, alpha <span class="op">=</span> <span class="fl">0.7</span>, linewidth <span class="op">=</span> <span class="fl">1</span>)</span>
+<span id="cb4-21"><a href="#cb4-21"></a>    <span class="cf">end</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    <span class="co"># Add true line for comparison</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>    y_true_line <span class="op">=</span> true_intercept <span class="op">.+</span> true_slope <span class="op">.*</span> x_line</span>
+<span id="cb4-25"><a href="#cb4-25"></a>    <span class="fu">lines!</span>(ax, x_line, y_true_line, color <span class="op">=</span> <span class="op">:</span>green, linewidth <span class="op">=</span> <span class="fl">2</span>, linestyle <span class="op">=</span> <span class="op">:</span>dot,</span>
+<span id="cb4-26"><a href="#cb4-26"></a>        label <span class="op">=</span> L<span class="st">"True: </span><span class="sc">$</span>y<span class="st"> = %</span><span class="sc">$</span>(true_intercept)<span class="st"> + %</span><span class="sc">$</span>(true_slope)<span class="st">x</span><span class="sc">$</span><span class="st">")</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="st">    </span>axislegend<span class="st">(ax, position = :lt)</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>    <span class="cf">return</span> fig</span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="kw">end</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a></span>
+<span id="cb4-32"><a href="#cb4-32"></a>fig_ols <span class="op">=</span> <span class="fu">plot_least_squares_fit</span>()</span>
+<span id="cb4-33"><a href="#cb4-33"></a>fig_ols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="linear-regression-examples_files/figure-html/least-squares-visualization-output-1.svg" id="least-squares-visualization" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residual lines (gray dashes) show prediction errors for each data point. Least squares minimizes the sum of squared lengths of these lines, providing the “best fit” in this specific sense.</p>
+</section>
+</section>
+<section id="approach-2-maximum-likelihood-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="approach-2-maximum-likelihood-estimation">Approach 2: Maximum likelihood estimation</h2>
+<p>The probabilistic perspective treats regression as a statistical model with explicitly specified error distributions. This enables likelihood-based inference and uncertainty quantification.</p>
+<section id="statistical-model-specification" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-model-specification">Statistical model specification</h3>
+<p>We assume: <span class="math display">\[y_i \sim \text{Normal}(\alpha + \beta x_i, \sigma^2)\]</span></p>
+<p>This specifies that responses are normally distributed around the linear predictor with constant variance.</p>
+<div id="cell-mle-implementation" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Define the regression model - we'll reuse this for Bayesian inference</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">linear_regression_model</span>(x, y)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    n <span class="op">=</span> <span class="fu">length</span>(y)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="co"># Parameters to estimate</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    α <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>)      <span class="co"># Intercept</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    β <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>)      <span class="co"># Slope</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    σ <span class="op">~</span> <span class="fu">LogNormal</span>(<span class="fl">0</span>, <span class="fl">1</span>)   <span class="co"># Noise standard deviation</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="co"># Likelihood</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    μ <span class="op">=</span> α <span class="op">.+</span> β <span class="op">.*</span> x</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n</span>
+<span id="cb5-13"><a href="#cb5-13"></a>        y[i] <span class="op">~</span> <span class="fu">Normal</span>(μ[i], σ)</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="cf">end</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">end</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co"># Find MLE estimates using Turing's mode estimation</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>model <span class="op">=</span> <span class="fu">linear_regression_model</span>(x_data, y_data)</span>
+<span id="cb5-19"><a href="#cb5-19"></a>mle_result <span class="op">=</span> <span class="fu">optimize</span>(model, <span class="fu">MLE</span>())</span>
+<span id="cb5-20"><a href="#cb5-20"></a>mle_params <span class="op">=</span> mle_result.values</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co"># Extract parameter estimates</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>mle_results <span class="op">=</span> (</span>
+<span id="cb5-24"><a href="#cb5-24"></a>    intercept <span class="op">=</span> mle_params[<span class="op">:</span>α],</span>
+<span id="cb5-25"><a href="#cb5-25"></a>    slope <span class="op">=</span> mle_params[<span class="op">:</span>β],</span>
+<span id="cb5-26"><a href="#cb5-26"></a>    sigma <span class="op">=</span> mle_params[<span class="op">:</span>σ],</span>
+<span id="cb5-27"><a href="#cb5-27"></a>)</span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co"># Create comparison table</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>mle_summary <span class="op">=</span> <span class="fu">DataFrame</span>(</span>
+<span id="cb5-31"><a href="#cb5-31"></a>    Parameter <span class="op">=</span> [<span class="st">"Intercept"</span>, <span class="st">"Slope"</span>, <span class="st">"Sigma"</span>],</span>
+<span id="cb5-32"><a href="#cb5-32"></a>    MLE <span class="op">=</span> [mle_results.intercept, mle_results.slope, mle_results.sigma],</span>
+<span id="cb5-33"><a href="#cb5-33"></a>    OLS <span class="op">=</span> [ols_results.intercept, ols_results.slope, <span class="fu">sqrt</span>(ols_results.mse)],</span>
+<span id="cb5-34"><a href="#cb5-34"></a>    True_Value <span class="op">=</span> [true_intercept, true_slope, true_sigma],</span>
+<span id="cb5-35"><a href="#cb5-35"></a>)</span>
+<span id="cb5-36"><a href="#cb5-36"></a></span>
+<span id="cb5-37"><a href="#cb5-37"></a>mle_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="mle-implementation" class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>3×4 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MLE</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">OLS</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">True_Value</th>
+</tr>
+<tr class="subheader headerLastRow even">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">1.85082</td>
+<td style="text-align: right;">1.85082</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Slope</td>
+<td style="text-align: right;">1.58365</td>
+<td style="text-align: right;">1.58365</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">Sigma</td>
+<td style="text-align: right;">1.49193</td>
+<td style="text-align: right;">1.49193</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Turing’s <code>optimize</code> function with <code>MLE()</code> provides a clean, robust approach to maximum likelihood estimation without requiring custom optimization code. The MLE estimates for intercept and slope match the OLS results exactly, confirming the theoretical equivalence between these approaches for linear regression with normal errors. Additionally, MLE provides an estimate of the noise parameter <span class="math inline">\(\sigma\)</span>.</p>
+</section>
+</section>
+<section id="approach-3-bayesian-inference" class="level2">
+<h2 class="anchored" data-anchor-id="approach-3-bayesian-inference">Approach 3: Bayesian inference</h2>
+<p>Bayesian inference treats all parameters as random variables with probability distributions. It combines prior beliefs with observed data to produce posterior distributions that fully characterize parameter uncertainty.</p>
+<section id="bayesian-inference-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-inference-implementation">Bayesian inference implementation</h3>
+<div id="cell-bayesian-model" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">function</span> <span class="fu">run_bayesian_regression</span>(x, y; samples_per_chain <span class="op">=</span> <span class="fl">2000</span>, n_chains <span class="op">=</span> <span class="fl">4</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    model <span class="op">=</span> <span class="fu">linear_regression_model</span>(x, y)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    chains <span class="op">=</span> <span class="cf">begin</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>        sampler <span class="op">=</span> <span class="fu">NUTS</span>()</span>
+<span id="cb6-6"><a href="#cb6-6"></a>        discard_initial <span class="op">=</span> <span class="fl">1_000</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="fu">sample</span>(model, sampler, <span class="fu">MCMCThreads</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8"></a>            samples_per_chain, n_chains,</span>
+<span id="cb6-9"><a href="#cb6-9"></a>            discard_initial <span class="op">=</span> discard_initial,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>            verbose <span class="op">=</span> <span class="cn">false</span>, progress <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="cf">end</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="cf">return</span> chains</span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">end</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># Run Bayesian inference</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>bayesian_chains <span class="op">=</span> <span class="fu">run_bayesian_regression</span>(x_data, y_data)</span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="fu">summary</span>(bayesian_chains)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-yellow-fg ansi-bold">┌ </span><span class="ansi-yellow-fg ansi-bold">Warning: </span>Only a single thread available: MCMC chains are not sampled in parallel
+<span class="ansi-yellow-fg ansi-bold">└ </span><span class="ansi-bright-black-fg">@ AbstractMCMC ~/.julia/packages/AbstractMCMC/FSyVk/src/sample.jl:382</span>
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.05
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.2
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.2
+<span class="ansi-cyan-fg ansi-bold">┌ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>Found initial step size
+<span class="ansi-cyan-fg ansi-bold">└ </span>  ϵ = 0.025
+</pre>
+</div>
+</div>
+<div id="bayesian-model" class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>"MCMCChains.Chains{Float64, AxisArrays.AxisArray{Float64, 3, Array{Float64, 3}, Tuple{AxisArrays.Axis{:iter, StepRange{Int64, Int64}}, AxisArrays.Axis{:var, Vector{Symbol}}, AxisArrays.Axis{:chain, UnitRange{Int64}}}}, Missing, @NamedTuple{parameters::Vector{Symbol}, internals::Vector{Symbol}}, @NamedTuple{varname_to_symbol::OrderedCollections.OrderedDict{AbstractPPL.VarName, Symbol}, start_time::Vector{Float64}, stop_time::Vector{Float64}}}"</code></pre>
+</div>
+</div>
+<p>The diagnostic table is consistent with, <em>though does not guarantee</em>, MCMC convergence and accurate sampling. Fundamentally, we can check for comon signs of non-convergence and rule them out, but we cannot actually prove that we are sampling from the true posterior distribution. While there are no perfect rules, generally</p>
 <ul>
-<li>Distinguish between supervised and distributional downscaling approaches</li>
-<li>Understand the motivation for downscaling climate model outputs</li>
-<li>Apply bias correction and quantile-quantile mapping techniques</li>
-<li>Recognize the stationarity assumption and its implications</li>
-<li>Evaluate different downscaling methods for specific applications</li>
-<li>Understand modern machine learning approaches to climate downscaling</li>
+<li>Low values of <span class="math inline">\(\hat{R}\)</span> (<code>rhat</code>) close to 1 (e.g., &lt;1.1) are consistent with “good mixing”, meaning that the chains have converged to the target distribution.</li>
+<li>High effective sample sizes (<code>ess_bulk</code>, <code>ess_tail</code>) indicate that the samples are more approximately independent, which is desirable for accurate posterior estimation.</li>
 </ul>
 </section>
-<section id="further-reading" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="further-reading">Further reading</h2>
-<ul>
-<li><span class="citation" data-cites="lanzante_pitfalls:2018">Lanzante et al. (<a href="../references.html#ref-lanzante_pitfalls:2018" role="doc-biblioref">2018</a>)</span> for comprehensive review of downscaling challenges</li>
-<li><span class="citation" data-cites="lafferty_downscaling:2023">Lafferty and Sriver (<a href="../references.html#ref-lafferty_downscaling:2023" role="doc-biblioref">2023</a>)</span></li>
-<li><span class="citation" data-cites="farnham_credibly:2018">Farnham, Doss-Gollin, and Lall (<a href="../references.html#ref-farnham_credibly:2018" role="doc-biblioref">2018</a>)</span></li>
-</ul>
+<section id="trace-plot" class="level3">
+<h3 class="anchored" data-anchor-id="trace-plot">Trace plot</h3>
+<div id="cell-bayesian-analysis" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Extract samples from chains (keep chain structure for trace plots)</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>α_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chains[<span class="op">:</span>α]))  <span class="co"># flattened for summary stats</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>β_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chains[<span class="op">:</span>β]))</span>
+<span id="cb8-4"><a href="#cb8-4"></a>σ_samples <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">Array</span>(bayesian_chains[<span class="op">:</span>σ]))</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">function</span> <span class="fu">plot_mcmc_trace</span>(chains, title_prefix <span class="op">=</span> <span class="st">""</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">1200</span>, <span class="fl">800</span>))</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="co"># Extract parameter arrays (chains are organized as samples x variables x chains)</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    α_arr <span class="op">=</span> <span class="fu">Array</span>(chains[<span class="op">:</span>α])</span>
+<span id="cb8-11"><a href="#cb8-11"></a>    β_arr <span class="op">=</span> <span class="fu">Array</span>(chains[<span class="op">:</span>β])</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    σ_arr <span class="op">=</span> <span class="fu">Array</span>(chains[<span class="op">:</span>σ])</span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    nsamples, nchains <span class="op">=</span> <span class="fu">size</span>(α_arr, <span class="fl">1</span>), <span class="fu">size</span>(α_arr, <span class="fl">2</span>)</span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="co"># Set up all axes</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> <span class="st">"α"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Intercept Parameter Trace"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> <span class="st">"β"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Slope Parameter Trace"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19"></a>    ax3 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">3</span>], xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> <span class="st">"σ"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Noise Parameter Trace"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    ax4 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">1</span>], xlabel <span class="op">=</span> <span class="st">"α"</span>, ylabel <span class="op">=</span> <span class="st">"Density"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Intercept Posterior"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    ax5 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">2</span>], xlabel <span class="op">=</span> <span class="st">"β"</span>, ylabel <span class="op">=</span> <span class="st">"Density"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Slope Posterior"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22"></a>    ax6 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">2</span>, <span class="fl">3</span>], xlabel <span class="op">=</span> <span class="st">"σ"</span>, ylabel <span class="op">=</span> <span class="st">"Density"</span>, title <span class="op">=</span> <span class="st">"</span><span class="sc">$</span>(title_prefix)<span class="st">Noise Posterior"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23"></a></span>
+<span id="cb8-24"><a href="#cb8-24"></a>    <span class="co"># Define colors for chains</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>    colors <span class="op">=</span> [<span class="op">:</span>red, <span class="op">:</span>blue, <span class="op">:</span>green, <span class="op">:</span>orange]</span>
+<span id="cb8-26"><a href="#cb8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27"></a>    <span class="co"># Plot traces and histograms for each chain</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>nchains</span>
+<span id="cb8-29"><a href="#cb8-29"></a>        <span class="co"># Trace plots</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>        <span class="fu">lines!</span>(ax1, <span class="fl">1</span><span class="op">:</span>nsamples, α_arr[<span class="op">:</span>, c], label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>, color <span class="op">=</span> colors[c])</span>
+<span id="cb8-31"><a href="#cb8-31"></a>        <span class="fu">lines!</span>(ax2, <span class="fl">1</span><span class="op">:</span>nsamples, β_arr[<span class="op">:</span>, c], label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>, color <span class="op">=</span> colors[c])</span>
+<span id="cb8-32"><a href="#cb8-32"></a>        <span class="fu">lines!</span>(ax3, <span class="fl">1</span><span class="op">:</span>nsamples, σ_arr[<span class="op">:</span>, c], label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>, color <span class="op">=</span> colors[c])</span>
+<span id="cb8-33"><a href="#cb8-33"></a></span>
+<span id="cb8-34"><a href="#cb8-34"></a>        <span class="co"># Marginal densities</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a>        <span class="fu">hist!</span>(ax4, α_arr[<span class="op">:</span>, c], bins <span class="op">=</span> <span class="fl">40</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf, color <span class="op">=</span> (colors[c], <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>)</span>
+<span id="cb8-36"><a href="#cb8-36"></a>        <span class="fu">hist!</span>(ax5, β_arr[<span class="op">:</span>, c], bins <span class="op">=</span> <span class="fl">40</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf, color <span class="op">=</span> (colors[c], <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>)</span>
+<span id="cb8-37"><a href="#cb8-37"></a>        <span class="fu">hist!</span>(ax6, σ_arr[<span class="op">:</span>, c], bins <span class="op">=</span> <span class="fl">40</span>, normalization <span class="op">=</span> <span class="op">:</span>pdf, color <span class="op">=</span> (colors[c], <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">"Chain </span><span class="sc">$</span>(c)<span class="st">"</span>)</span>
+<span id="cb8-38"><a href="#cb8-38"></a>    <span class="cf">end</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a></span>
+<span id="cb8-40"><a href="#cb8-40"></a>    <span class="co"># Add true value lines</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>    <span class="fu">vlines!</span>(ax4, [true_intercept], color <span class="op">=</span> <span class="op">:</span>black, linestyle <span class="op">=</span> <span class="op">:</span>dash, linewidth <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"True value"</span>)</span>
+<span id="cb8-42"><a href="#cb8-42"></a>    <span class="fu">vlines!</span>(ax5, [true_slope], color <span class="op">=</span> <span class="op">:</span>black, linestyle <span class="op">=</span> <span class="op">:</span>dash, linewidth <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"True value"</span>)</span>
+<span id="cb8-43"><a href="#cb8-43"></a>    <span class="fu">vlines!</span>(ax6, [true_sigma], color <span class="op">=</span> <span class="op">:</span>black, linestyle <span class="op">=</span> <span class="op">:</span>dash, linewidth <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"True value"</span>)</span>
+<span id="cb8-44"><a href="#cb8-44"></a></span>
+<span id="cb8-45"><a href="#cb8-45"></a>    <span class="co"># Add legends to posterior plots</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a>    <span class="fu">axislegend</span>(ax4; position <span class="op">=</span> <span class="op">:</span>rt)</span>
+<span id="cb8-47"><a href="#cb8-47"></a>    <span class="fu">axislegend</span>(ax5; position <span class="op">=</span> <span class="op">:</span>rt)</span>
+<span id="cb8-48"><a href="#cb8-48"></a>    <span class="fu">axislegend</span>(ax6; position <span class="op">=</span> <span class="op">:</span>rt)</span>
+<span id="cb8-49"><a href="#cb8-49"></a></span>
+<span id="cb8-50"><a href="#cb8-50"></a>    <span class="cf">return</span> fig</span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="kw">end</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a></span>
+<span id="cb8-53"><a href="#cb8-53"></a>fig_trace <span class="op">=</span> <span class="fu">plot_mcmc_trace</span>(bayesian_chains, <span class="st">"Linear Regression: "</span>)</span>
+<span id="cb8-54"><a href="#cb8-54"></a>fig_trace</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="linear-regression-examples_files/figure-html/bayesian-analysis-output-1.svg" id="bayesian-analysis" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see from this plot that the chains visually appear to be <strong>well-mixed</strong> and <strong>stationary</strong>, which again is consistent with, though not definitive proof of, convergence.</p>
+</section>
+<section id="posterior-predictive-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="posterior-predictive-distribution">Posterior predictive distribution</h3>
+<p>The posterior predictive distribution represents our beliefs about new data given what we’ve observed. It’s computed as <span class="math inline">\(p(y_{\text{new}} | y_{\text{obs}}) = \int p(y_{\text{new}} | \theta) p(\theta | y_{\text{obs}}) d\theta\)</span>.</p>
+<div id="cell-posterior-predictive" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">function</span> <span class="fu">plot_posterior_predictive</span>()</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="co"># Generate posterior predictive samples at new x values</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    x_new <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">6</span>, length <span class="op">=</span> <span class="fl">50</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    n_samples <span class="op">=</span> <span class="fl">200</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    sample_indices <span class="op">=</span> <span class="fu">rand</span>(<span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(α_samples), n_samples)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="co"># For each posterior sample, generate predictions</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    y_pred_samples <span class="op">=</span> []</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="cf">for</span> i <span class="kw">in</span> sample_indices</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        α_i <span class="op">=</span> α_samples[i]</span>
+<span id="cb9-11"><a href="#cb9-11"></a>        β_i <span class="op">=</span> β_samples[i]</span>
+<span id="cb9-12"><a href="#cb9-12"></a>        σ_i <span class="op">=</span> σ_samples[i]</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>        <span class="co"># Mean prediction</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>        μ_pred <span class="op">=</span> α_i <span class="op">.+</span> β_i <span class="op">.*</span> x_new</span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="co"># Add observation noise</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>        y_pred <span class="op">=</span> <span class="fu">rand</span>.(<span class="fu">Normal</span>.(μ_pred, σ_i))</span>
+<span id="cb9-18"><a href="#cb9-18"></a>        <span class="fu">push!</span>(y_pred_samples, y_pred)</span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="cf">end</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="co"># Calculate prediction quantiles</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>    y_lower <span class="op">=</span> [<span class="fu">quantile</span>([y_pred_samples[j][i] for j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_samples], <span class="fl">0.05</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x_new)]</span>
+<span id="cb9-23"><a href="#cb9-23"></a>    y_upper <span class="op">=</span> [<span class="fu">quantile</span>([y_pred_samples[j][i] for j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_samples], <span class="fl">0.95</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x_new)]</span>
+<span id="cb9-24"><a href="#cb9-24"></a>    y_median <span class="op">=</span> [<span class="fu">quantile</span>([y_pred_samples[j][i] for j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_samples], <span class="fl">0.5</span>) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(x_new)]</span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a>    <span class="co"># Create plot</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size <span class="op">=</span> (<span class="fl">800</span>, <span class="fl">600</span>))</span>
+<span id="cb9-28"><a href="#cb9-28"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb9-29"><a href="#cb9-29"></a>        xlabel <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30"></a>        ylabel <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31"></a>        title <span class="op">=</span> <span class="st">"Posterior predictive distribution"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a>    <span class="co"># Plot observed data</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>    <span class="fu">scatter!</span>(ax, x_data, y_data, color <span class="op">=</span> <span class="op">:</span>black, markersize <span class="op">=</span> <span class="fl">8</span>, label <span class="op">=</span> <span class="st">"Observed data"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35"></a></span>
+<span id="cb9-36"><a href="#cb9-36"></a>    <span class="co"># Plot prediction interval</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>    <span class="fu">band!</span>(ax, x_new, y_lower, y_upper, color <span class="op">=</span> (<span class="op">:</span>blue, <span class="fl">0.3</span>), label <span class="op">=</span> <span class="st">"90% prediction interval"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38"></a></span>
+<span id="cb9-39"><a href="#cb9-39"></a>    <span class="co"># Plot median prediction</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a>    <span class="fu">lines!</span>(ax, x_new, y_median, color <span class="op">=</span> <span class="op">:</span>blue, linewidth <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"Posterior median"</span>)</span>
+<span id="cb9-41"><a href="#cb9-41"></a></span>
+<span id="cb9-42"><a href="#cb9-42"></a>    <span class="co"># Add true relationship for reference</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a>    y_true <span class="op">=</span> true_intercept <span class="op">.+</span> true_slope <span class="op">.*</span> x_new</span>
+<span id="cb9-44"><a href="#cb9-44"></a>    <span class="fu">lines!</span>(ax, x_new, y_true, color <span class="op">=</span> <span class="op">:</span>red, linewidth <span class="op">=</span> <span class="fl">2</span>, linestyle <span class="op">=</span> <span class="op">:</span>dash, label <span class="op">=</span> <span class="st">"True relationship"</span>)</span>
+<span id="cb9-45"><a href="#cb9-45"></a></span>
+<span id="cb9-46"><a href="#cb9-46"></a>    <span class="fu">axislegend</span>(ax, position <span class="op">=</span> <span class="op">:</span>lt)</span>
+<span id="cb9-47"><a href="#cb9-47"></a>    <span class="cf">return</span> fig</span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="kw">end</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a></span>
+<span id="cb9-50"><a href="#cb9-50"></a>fig_ppd <span class="op">=</span> <span class="fu">plot_posterior_predictive</span>()</span>
+<span id="cb9-51"><a href="#cb9-51"></a>fig_ppd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="linear-regression-examples_files/figure-html/posterior-predictive-output-1.svg" id="posterior-predictive" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The posterior predictive distribution incorporates both parameter uncertainty and observation noise. The 90% prediction interval shows where we expect new observations to fall, while the median line shows our best prediction. This is the fundamental quantity for forecasting and decision-making under uncertainty.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-farnham_credibly:2018" class="csl-entry" role="listitem">
-Farnham, David J, James Doss-Gollin, and Upmanu Lall. 2018. <span>“Regional Extreme Precipitation Events: Robust Inference from Credibly Simulated <span>GCM</span> Variables.”</span> <em>Water Resources Research</em> 54 (6). <a href="https://doi.org/10.1002/2017wr021318">https://doi.org/10.1002/2017wr021318</a>.
-</div>
-<div id="ref-lafferty_downscaling:2023" class="csl-entry" role="listitem">
-Lafferty, David C., and Ryan L. Sriver. 2023. <span>“Downscaling and Bias-Correction Contribute Considerable Uncertainty to Local Climate Projections in <span>CMIP6</span>.”</span> <em>Npj Climate and Atmospheric Science</em> 6 (1, 1): 1–13. <a href="https://doi.org/10.1038/s41612-023-00486-0">https://doi.org/10.1038/s41612-023-00486-0</a>.
-</div>
-<div id="ref-lanzante_pitfalls:2018" class="csl-entry" role="listitem">
-Lanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and Dennis Adams-Smith. 2018. <span>“Some <span>Pitfalls</span> in <span>Statistical Downscaling</span> of <span>Future Climate</span>.”</span> <em>Bulletin of the American Meteorological Society</em> 99 (4): 791–803. <a href="https://doi.org/10.1175/bams-d-17-0046.1">https://doi.org/10.1175/bams-d-17-0046.1</a>.
-</div>
-</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1046,13 +1566,13 @@ Lanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and Dennis Ad
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapters/hazard/extremes.html" class="pagination-link" aria-label="Extreme value theory ✏️">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Extreme value theory ✏️</span></span>
+      <a href="../notebooks/inference-coin-flip.html" class="pagination-link" aria-label="Inference Example: Flipping a Coin ✏️">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Inference Example: Flipping a Coin ✏️</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/hazard/generators.html" class="pagination-link" aria-label="Stochastic weather generators 🚧">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stochastic weather generators 🚧</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../notebooks/extremes-examples.html" class="pagination-link" aria-label="Extreme Value Theory Examples ✏️">
+        <span class="nav-page-text">Extreme Value Theory Examples ✏️</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1063,7 +1583,7 @@ Lanzante, John R, Keith W Dixon, Mary Jo Nath, Carolyn E Whitlock, and Dennis Ad
 <p><span class="faux-block"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2024–2025 <a href="https://orcid.org/0000-0002-3428-2224">James Doss-Gollin</a></span> <span class="faux-block"></span></p>
 </div>   
     <div class="nav-footer-center">
-<p>All content licensed under <a href="../../chapters/about/license.html"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY-NC 4.0</a></p>
+<p>All content licensed under <a href="../chapters/about/license.html"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY-NC 4.0</a></p>
 </div>
     <div class="nav-footer-right">
 <p><span class="faux-block">Made with Julia and <a href="https://quarto.org/">Quarto</a>.</span> <span class="faux-block"><a href="https://github.com/dossgollin-lab/climate-risk-management-reference">View the source on <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></span></p>
