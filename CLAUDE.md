@@ -337,3 +337,4 @@ For probability/statistics chapters, this ordering works well:
 - Provide **concrete climate examples** in later sections/chapters
 
 This approach balances pedagogical clarity with domain relevance, following the successful pattern from BDA3 and other effective technical textbooks.
+- When there are outputs from a model, never rely on print/println statements to display outputs. Create a Table/DataFrame or use other built-in display functionality.

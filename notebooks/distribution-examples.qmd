@@ -1,0 +1,374 @@
+---
+engine: julia
+format:
+    html:
+        code-annotations: hover
+---
+
+# Understanding probability distributions ✏️ {.unnumbered}
+
+This notebook demonstrates the fundamental concepts underlying probability distributions.
+Understanding these relationships forms the foundation for statistical inference and uncertainty quantification in climate risk assessment.
+
+We explore three essential functions that describe random variables: probability density functions (PDFs) or probability mass functions (PMFs), cumulative distribution functions (CDFs), and quantile functions.
+These concepts apply whether we're modeling temperature variability, extreme precipitation events, or flood frequencies.
+
+```{julia}
+#| label: setup
+using CairoMakie
+using Distributions
+using LaTeXStrings
+using DataFrames
+using Printf
+using Random
+```
+
+## Distribution functions and their relationships
+
+Every probability distribution can be characterized by three related functions.
+Understanding their relationships helps build intuition for how probability models describe uncertainty.
+
+### Helper functions for visualization
+
+We start by creating reusable functions for common visualization tasks.
+This approach keeps our main examples clean while demonstrating good programming practices.
+
+```{julia}
+#| label: distribution-helpers
+#| output: false
+
+function add_pdf_area!(ax, dist, a, b; color = (:orange, 0.4), label = nothing)
+    """Add shaded area under PDF curve between bounds a and b"""
+    x_fill = a:0.01:b
+    pdf_fill = pdf.(dist, x_fill)
+    band!(ax, x_fill, zeros(length(x_fill)), pdf_fill, color = color, label = label)
+    prob = cdf(dist, b) - cdf(dist, a)
+    return prob
+end
+
+function add_forward_cdf!(ax, dist, x_point; color = :red, x_min = -4)
+    """Demonstrate forward CDF operation: given x, find F(x)"""
+    y_point = cdf(dist, x_point)
+    scatter!(ax, [x_point], [y_point], color = color, markersize = 8)
+    lines!(ax, [x_point, x_point], [0, y_point], color = color, linestyle = :dash)
+    lines!(ax, [x_min, x_point], [y_point, y_point], color = color, linestyle = :dash)
+    return y_point
+end
+
+function add_inverse_cdf!(ax, dist, p_target; color = :green, x_min = -4)
+    """Demonstrate inverse CDF operation: given p, find x such that F(x) = p"""
+    x_inv = quantile(dist, p_target)
+    y_actual = cdf(dist, x_inv)
+    scatter!(ax, [x_inv], [y_actual], color = color, markersize = 8)
+    lines!(ax, [x_inv, x_inv], [0, y_actual], color = color, linestyle = :dash)
+    lines!(ax, [x_min, x_inv], [p_target, p_target], color = color, linestyle = :dash)
+    return x_inv, y_actual
+end
+```
+
+These helper functions encapsulate common visualization patterns.
+The `add_pdf_area!` function demonstrates how probabilities correspond to areas under density curves.
+The forward and inverse CDF functions show the relationship between values and cumulative probabilities.
+
+## Normal distribution example
+
+The normal distribution illustrates these concepts for continuous random variables.
+Its smooth curves and well-known properties make it ideal for understanding probability fundamentals.
+
+```{julia}
+#| label: normal-distribution-example
+
+function create_normal_example()
+    μ, σ = 0.0, 1.0
+    x_range = -4:0.01:4
+    normal_dist = Normal(μ, σ)
+
+    fig = Figure(size = (900, 400))
+
+    # PDF with area illustration
+    ax1 = Axis(fig[1, 1],
+        xlabel = L"x",
+        ylabel = L"\text{Density } p(x)",
+        title = "Normal(0, 1) PDF")
+
+    lines!(ax1, x_range, pdf.(normal_dist, x_range),
+        color = :blue, linewidth = 2, label = L"p(x)")
+
+    prob_area = add_pdf_area!(ax1, normal_dist, -1, 1,
+        label = L"P(-1 \leq X \leq 1)")
+
+    text!(ax1, -0.6, 0.125,
+        text = L"\text{Area} = %$(round(prob_area, digits=3))",
+        fontsize = 14, color = :black)
+
+    axislegend(ax1, position = :rt)
+
+    # CDF with forward and inverse operations
+    ax2 = Axis(fig[1, 2],
+        xlabel = L"x",
+        ylabel = L"\text{Probability } F(x)",
+        title = "Normal CDF: Forward and Inverse")
+
+    lines!(ax2, x_range, cdf.(normal_dist, x_range),
+        color = :blue, linewidth = 2, label = L"F(x)")
+
+    y_point = add_forward_cdf!(ax2, normal_dist, 1.0)
+    text!(ax2, 1.2, y_point - 0.1,
+        text = L"F(1) = %$(round(y_point, digits=3))", color = :red)
+
+    x_inv, _ = add_inverse_cdf!(ax2, normal_dist, 0.25)
+    text!(ax2, x_inv - 0.8, 0.35,
+        text = L"F^{-1}(0.25) = %$(round(x_inv, digits=2))", color = :green)
+
+    axislegend(ax2, position = :rb)
+    return fig
+end
+
+fig_normal = create_normal_example()
+fig_normal
+```
+
+The normal distribution example shows how probability density relates to cumulative probability.
+The left panel demonstrates that probabilities correspond to areas under the density curve.
+The right panel shows the CDF's S-shaped curve and illustrates both forward operations (finding probabilities from values) and inverse operations (finding values from probabilities).
+
+These operations are fundamental to risk assessment: forward operations answer "what's the probability of exceeding this threshold?" while inverse operations answer "what value corresponds to this probability?"
+
+## Discrete distributions: Poisson example
+
+Discrete distributions illustrate the same concepts but with point masses rather than continuous densities.
+The Poisson distribution commonly models count data like the number of extreme events per year.
+
+```{julia}
+#| label: discrete-helpers
+#| output: false
+
+function plot_pmf_stems!(ax, dist, x_range; color = :blue, linewidth = 3, markersize = 8)
+    """Plot discrete PMF as stems with points"""
+    pmf_vals = pdf.(dist, x_range)
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color = color, linewidth = linewidth)
+        scatter!(ax, [x], [pmf_vals[i]], color = color, markersize = markersize)
+    end
+    return pmf_vals
+end
+
+function highlight_pmf_mass!(ax, dist, x_range; color = :orange)
+    """Highlight specific probability masses"""
+    pmf_vals = pdf.(dist, x_range)
+    for (i, x) in enumerate(x_range)
+        lines!(ax, [x, x], [0, pmf_vals[i]], color = color, linewidth = 5)
+        scatter!(ax, [x], [pmf_vals[i]], color = color, markersize = 10)
+    end
+    return sum(pmf_vals)
+end
+
+function plot_discrete_cdf!(ax, dist, x_range; color = :blue, linewidth = 2, markersize = 6)
+    """Create step function visualization for discrete CDF"""
+    cdf_vals = cdf.(dist, x_range)
+    for i in 1:(length(x_range)-1)
+        lines!(ax, [x_range[i], x_range[i+1]], [cdf_vals[i], cdf_vals[i]],
+            color = color, linewidth = linewidth)
+    end
+    scatter!(ax, x_range, cdf_vals, color = color, markersize = markersize)
+    return cdf_vals
+end
+```
+
+These helper functions handle the specific visualization needs of discrete distributions.
+Unlike continuous distributions, discrete probabilities are point masses, and CDFs are step functions.
+
+```{julia}
+#| label: poisson-distribution-example
+
+function create_poisson_example()
+    λ = 3.0
+    x_range = 0:10
+    poisson_dist = Poisson(λ)
+
+    fig = Figure(size = (900, 400))
+
+    # PMF with highlighted probabilities
+    ax1 = Axis(fig[1, 1],
+        xlabel = L"x",
+        ylabel = L"P(X = x)",
+        title = L"\text{Poisson}(3) \text{ PMF}",
+        xticks = 1:10)
+
+    plot_pmf_stems!(ax1, poisson_dist, x_range)
+    prob_mass = highlight_pmf_mass!(ax1, poisson_dist, 0:2)
+
+    text!(ax1, 6, 0.15,
+        text = L"P(X \leq 2) = %$(round(prob_mass, digits=3))",
+        fontsize = 14, color = :black)
+
+    # CDF with step function
+    ax2 = Axis(fig[1, 2],
+        xlabel = L"x",
+        ylabel = L"\text{Probability } F(x)",
+        title = L"\text{Poisson CDF}",
+        xticks = 1:10)
+
+    plot_discrete_cdf!(ax2, poisson_dist, x_range)
+
+    # Add example operations
+    y_point = cdf(poisson_dist, 4)
+    scatter!(ax2, [4], [y_point], color = :red, markersize = 10)
+    text!(ax2, 4.2, y_point - 0.1,
+        text = L"F(4) = %$(round(y_point, digits=3))", color = :red)
+
+    x_inv = quantile(poisson_dist, 0.4)
+    scatter!(ax2, [x_inv], [0.4], color = :green, markersize = 10)
+    text!(ax2, x_inv - 1.5, 0.5,
+        text = L"F^{-1}(0.4) = %$(Int(x_inv))", color = :green)
+
+    return fig
+end
+
+fig_poisson = create_poisson_example()
+fig_poisson
+```
+
+The Poisson distribution demonstrates these same fundamental concepts for discrete random variables.
+Individual probabilities are represented as point masses rather than areas under curves.
+The CDF becomes a step function that jumps at each possible value.
+
+This distribution often appears in climate applications when modeling rare events like the annual number of hurricanes making landfall or the count of days exceeding extreme temperature thresholds.
+
+## Multiple variables and dependence
+
+Real systems involve multiple interconnected variables.
+Understanding joint, marginal, and conditional distributions enables modeling of complex dependencies.
+
+```{julia}
+#| label: joint-marginal-conditional-example
+
+function create_multivariate_example()
+    # Bivariate normal parameters
+    μ₁, μ₂ = 2.0, 1.0
+    σ₁, σ₂ = 1.0, 0.8
+    ρ = 0.6  # correlation coefficient
+
+    # Create bivariate normal distribution
+    Σ = [σ₁^2 ρ*σ₁*σ₂; ρ*σ₁*σ₂ σ₂^2]
+    mvn = MvNormal([μ₁, μ₂], Σ)
+
+    # Generate samples for visualization
+    Random.seed!(123)
+    n_samples = 1000
+    samples = rand(mvn, n_samples)
+    x_samples = samples[1, :]
+    y_samples = samples[2, :]
+
+    fig = Figure(size = (1000, 800))
+
+    # Main joint distribution (bottom left)
+    ax_main = Axis(fig[2, 1],
+        xlabel = L"X",
+        ylabel = L"Y",
+        title = "Joint Distribution")
+
+    scatter!(ax_main, x_samples, y_samples,
+        color = (:blue, 0.4), markersize = 4)
+
+    # Conditional distribution line
+    x_condition = 2.5
+    vlines!(ax_main, [x_condition], color = :red, linewidth = 3,
+        linestyle = :dash, label = L"X = %$(x_condition)")
+
+    # Marginal distribution of X (top)
+    ax_top = Axis(fig[1, 1],
+        ylabel = "Density",
+        title = L"\text{Marginal Distribution of }X")
+
+    hist!(ax_top, x_samples, bins = 30, normalization = :pdf,
+        color = (:green, 0.6))
+
+    # True marginal density overlay
+    x_range = range(-1, 5, length = 100)
+    marginal_x = Normal(μ₁, σ₁)
+    lines!(ax_top, x_range, pdf.(marginal_x, x_range),
+        color = :green, linewidth = 3, label = "True marginal")
+
+    vlines!(ax_top, [x_condition], color = :red, linewidth = 2, linestyle = :dash)
+
+    # Marginal distribution of Y (right)
+    ax_right = Axis(fig[2, 2],
+        xlabel = "Density",
+        title = L"Marginal Distribution of $Y$")
+
+    hist!(ax_right, y_samples, bins = 30, normalization = :pdf,
+        color = (:orange, 0.6), direction = :x)
+
+    # True marginal density
+    y_range = range(-2, 4, length = 100)
+    marginal_y = Normal(μ₂, σ₂)
+    lines!(ax_right, pdf.(marginal_y, y_range), y_range,
+        color = :orange, linewidth = 3, label = "True marginal")
+
+    # Conditional distribution (top right)
+    ax_cond = Axis(fig[1, 2],
+        xlabel = L"Y",
+        ylabel = "Conditional Density",
+        title = L"Conditional: $p(Y \mid X = %$(x_condition))$")
+
+    # Calculate conditional distribution parameters
+    μ_conditional = μ₂ + ρ * (σ₂ / σ₁) * (x_condition - μ₁)
+    σ_conditional = σ₂ * sqrt(1 - ρ^2)
+    conditional_dist = Normal(μ_conditional, σ_conditional)
+
+    lines!(ax_cond, y_range, pdf.(conditional_dist, y_range),
+        color = :red, linewidth = 3, label = L"p(y | X = %$(x_condition))")
+
+    # Show samples near conditioning value
+    tolerance = 0.2
+    near_condition = abs.(x_samples .- x_condition) .< tolerance
+    y_near = y_samples[near_condition]
+
+    hist!(ax_cond, y_near, bins = 15, normalization = :pdf,
+        color = (:red, 0.4), label = L"\text{Samples near $X = %$(x_condition)$}")
+
+    # Link axes for coordinated viewing
+    linkxaxes!(ax_main, ax_top)
+    linkyaxes!(ax_main, ax_right)
+
+    # Hide overlapping decorations
+    hidexdecorations!(ax_top, grid = false)
+    hideydecorations!(ax_right, grid = false)
+
+    # Add legends
+    axislegend(ax_main, position = :rt)
+    axislegend(ax_cond, position = :rt)
+
+    return fig
+end
+
+fig_joint = create_multivariate_example()
+fig_joint
+```
+
+This multivariate example demonstrates how joint distributions decompose into marginal and conditional components.
+The joint distribution (bottom left) shows the full relationship between variables.
+Marginal distributions (top and right panels) show each variable's behavior independently.
+The conditional distribution (top right) shows how one variable behaves given specific values of another.
+
+These concepts are essential for climate modeling where variables like temperature and precipitation are correlated.
+Understanding their joint behavior enables more accurate risk assessment than treating them independently.
+
+## Key insights and climate applications
+
+The examples in this notebook illustrate fundamental principles that apply across all probability distributions:
+
+**Distribution functions work together**: PDFs/PMFs, CDFs, and quantile functions provide complementary views of the same underlying uncertainty.
+
+**Discrete and continuous cases follow similar logic**: The mathematical relationships remain consistent whether dealing with counts or continuous measurements.
+
+**Multiple variables require joint modeling**: Real climate systems involve correlated variables that must be modeled together for accurate risk assessment.
+
+In climate applications, these concepts appear when:
+- Modeling temperature distributions to assess heat wave probabilities
+- Analyzing extreme precipitation using heavy-tailed distributions
+- Understanding joint temperature-humidity relationships for heat stress assessment
+- Characterizing the frequency of compound events like concurrent drought and heat
+
+The computational tools demonstrated here provide the foundation for more complex statistical inference methods covered in subsequent notebooks.

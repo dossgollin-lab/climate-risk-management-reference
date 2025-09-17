@@ -1,0 +1,396 @@
+---
+engine: julia
+format:
+    html:
+        code-annotations: hover
+---
+
+# Inference Example: Flipping a Coin ✏️ {.unnumbered}
+
+This notebook demonstrates the fundamental principles of statistical inference using the pedagogically clean example of coin flipping.
+While simple, this example illuminates the core concepts that underlie all statistical analysis: likelihood functions, maximum likelihood estimation, and Bayesian inference.
+
+The same principles apply whether we're estimating the probability of a fair coin or the frequency of extreme climate events.
+Understanding these methods enables principled learning from data under uncertainty.
+
+```{julia}
+#| label: setup
+using CairoMakie
+using Distributions
+using LaTeXStrings
+using Turing
+using MCMCChains
+using DataFrames
+using Printf
+using Random
+```
+
+## Problem
+
+Consider flipping a coin of unknown success rate $\theta$ (the probability of heads) multiple times.
+After observing the outcomes, we want to estimate $\theta$.
+This mirrors many climate problems where we observe limited data and seek to understand underlying probabilities.
+
+### Generating example data
+
+We start with a known scenario to validate our inference methods.
+
+```{julia}
+#| label: data-generation
+#| output: false
+
+# Set parameters for reproducible example
+Random.seed!(43)
+true_θ = 0.55  # Unknown to our "inference" methods
+n_flips = 12
+
+# Simulate the experiment (for illustration)
+coin_flips = rand(n_flips) .< true_θ
+observed_heads = sum(coin_flips)
+
+# display as H or T
+flip_results = [flip ? "H" : "T" for flip in coin_flips]
+```
+
+This setup allows us to evaluate how well different inference methods recover the true parameter value.
+In real applications, we never know the true value and must rely on the methods demonstrated here.
+
+## Likelihood-based inference
+
+The likelihood function bridges observed data and unknown parameters.
+It quantifies how probable our observed data would be under different parameter values.
+
+### Understanding the likelihood function
+
+For coin flips, the likelihood follows the binomial distribution:
+$$p(\text{data} \mid \theta) = \binom{n}{k} \theta^k (1-\theta)^{n-k}$$
+
+where $k$ is the number of observed heads and $n$ is the total number of flips.
+
+```{julia}
+#| label: likelihood-visualization
+
+function plot_likelihood(y, n)
+	θ_grid = 0.01:0.01:0.99
+
+	# Calculate likelihood for each θ value
+	likelihood_vals = [pdf(Binomial(n, θ), y) for θ in θ_grid]
+
+	fig = Figure(size = (700, 500))
+	ax = Axis(fig[1, 1],
+		xlabel = L"$\theta$ \text{ (probability of heads)}",
+		ylabel = "Likelihood",
+		title = "Likelihood function for $(y) heads in $(n) flips")
+
+	lines!(ax, θ_grid, likelihood_vals,
+		label = L"p(\vec{y} \mid \theta)", linewidth = 2, color = :blue)
+
+	# Mark the MLE
+	mle = y / n
+	vlines!(ax, [mle], color = :red, linestyle = :dash, linewidth = 2,
+		label = L"$\hat{\theta}_\text{MLE} = %$(round(mle, digits=2))$")
+
+	# Mark the true value for comparison
+	vlines!(ax, [true_θ], color = :green, linestyle = :dot, linewidth = 2,
+		label = L"$\theta_\text{true}$ = %$(true_θ)")
+
+	axislegend(ax, position = :lt)
+	return fig
+end
+
+fig_likelihood = plot_likelihood(observed_heads, n_flips)
+fig_likelihood
+```
+
+The likelihood function shows how plausible different parameter values are given our observed data.
+It peaks at the observed proportion, which becomes our maximum likelihood estimate.
+Notice how the curve's width reflects uncertainty—more data would create a sharper peak.
+
+### Maximum likelihood estimation
+
+Maximum likelihood estimation (MLE) finds the parameter value that makes the observed data most probable.
+For the binomial model, this has a simple analytical solution.
+
+```{julia}
+#| label: mle-analysis
+
+function analyze_mle_behavior()
+	n = 10
+	possible_heads = [3, 5, 7, 9]
+
+	fig = Figure(size = (800, 600))
+
+	θ_grid = 0.01:0.01:0.99
+
+	for (i, y) in enumerate(possible_heads)
+		row = div(i - 1, 2) + 1
+		col = ((i - 1) % 2) + 1
+
+		ax = Axis(fig[row, col],
+			xlabel = L"$\theta$",
+			ylabel = "likelihood",
+			title = "$(y)/$(n) heads")
+
+		likelihood = pdf.(Binomial.(n, θ_grid), y)
+
+		lines!(ax, θ_grid, likelihood, linewidth = 2, color = :blue, label = L"$p(\vec{y} \mid \theta)$")
+
+		mle = y / n
+		mle = round(mle, digits = 2)
+		vlines!(ax, [mle], color = :red, linestyle = :dash, linewidth = 2, label = L"$\hat{\theta}_{MLE}$")
+
+		if (row == 1) && (col == 1)
+			axislegend(ax, position = :rt)
+		end
+	end
+
+	return fig
+end
+
+fig_mle = analyze_mle_behavior()
+fig_mle
+```
+
+Each panel shows how the likelihood function changes with different observed outcomes.
+The maximum always occurs at the observed proportion, confirming that MLE equals the sample proportion for binomial data.
+
+This relationship holds broadly: MLE provides intuitive estimates that often match simple summary statistics for well-behaved problems.
+
+## Bayesian inference
+
+First we define our probabilistic model in Turing.
+
+```{julia}
+@model function coin_flip_model(y, n, prior_α, prior_β)
+	θ ~ Beta(prior_α, prior_β)
+	y ~ Binomial(n, θ)
+	return θ
+end
+```
+
+Then, we compare the analytical posterior (which is available due to conjugacy) to the posterior obtained via MCMC sampling.
+
+```{julia}
+#| label: posterior-comparison-plot
+#| output: false
+
+function compare_analytical_mcmc(y, n; prior_α = 3, prior_β = 3, n_samples = 5000, n_threads = 4)
+
+	# Analytical posterior
+	post_α = prior_α + y
+	post_β = prior_β + n - y
+	analytical_posterior = Beta(post_α, post_β)
+
+	# MCMC sampling
+	model = coin_flip_model(y, n, prior_α, prior_β)
+	chain = sample(
+		model, # the object with model + data
+		NUTS(), # our sampler
+		MCMCThreads(), # to use multiple threads
+		Int(ceil(n_samples / n_threads)), # number of draws total
+		n_threads, # number of chains
+		discard_initial = 1000, # burn-in samples per chain (discarded)
+		progress = false, # disable progress meter
+	)
+	mcmc_samples = vec(chain[:θ]) # convert to Vector (not always helpful)
+
+	# Return data for plotting instead of creating plots
+	return (analytical_posterior = analytical_posterior, mcmc_samples = mcmc_samples, n_samples = n_samples)
+end
+
+# Generate data by calling the same function twice  with different sample sizes
+n_low = 500
+n_high = 50_000
+data_low = compare_analytical_mcmc(7, 10, n_samples = n_low)
+data_high = compare_analytical_mcmc(7, 10, n_samples = n_high)
+```
+
+We can then compare how well we can sample the analytical distribution with different numbers of samples.
+
+```{julia}
+#| label: posterior-comparison
+
+# Combine plots
+fig_comparison = Figure(size = (1200, 500))
+ax1 = Axis(fig_comparison[1, 1],
+	xlabel = L"$\theta$ (probability of heads)",
+	ylabel = "Density",
+	title = "MCMC with $n_low samples")
+ax2 = Axis(fig_comparison[1, 2],
+	xlabel = L"$\theta$ (probability of heads)",
+	title = "MCMC with $n_high samples")
+
+# Link y-axes for comparison
+
+linkaxes!(ax1, ax2)
+
+# Plot using the same plotting logic for both panels
+
+for (ax, data) in [(ax1, data_low), (ax2, data_high)]
+	# Plot analytical posterior
+	θ_grid = 0.01:0.01:0.99
+
+	analytical_density = pdf.(data.analytical_posterior, θ_grid)
+	lines!(ax, θ_grid, analytical_density, label = "Analytical",
+		linewidth = 3, color = :blue)
+
+	# Plot MCMC histogram
+
+	hist!(ax, vec(data.mcmc_samples), bins = 40, normalization = :pdf,
+		color = (:red, 0.6), label = "MCMC samples")
+
+	# Add summary statistics
+	analytical_mean = mean(data.analytical_posterior)
+	mcmc_mean = mean(data.mcmc_samples)
+
+	# Vertical lines for means
+	vlines!(ax, [analytical_mean], color = :blue, linestyle = :dash, alpha = 0.8)
+	vlines!(ax, [mcmc_mean], color = :red, linestyle = :dot, alpha = 0.8)
+
+
+
+	# Add text annotations with statistics  
+	text!(ax, 0.35, maximum(analytical_density) * 0.95,
+		text = L"\text{Analytical: Mean} = %$(round(analytical_mean, digits=3))",
+		fontsize = 10, color = :blue)
+	text!(ax, 0.35, maximum(analytical_density) * 0.85,
+		text = L"\text{MCMC: Mean} = %$(round(mcmc_mean, digits=3))",
+		fontsize = 10, color = :red)
+
+	# Calculate P(theta < 0.25) - tail probability
+	tail = 0.25
+	vlines!(ax, [tail], color = :gray, linestyle = :solid, alpha = 0.6, label = L"$\theta = %$(tail)$")
+	analytical_tail_prob = cdf(data.analytical_posterior, tail)
+	analytical_tail_prob = @sprintf("%.2E", analytical_tail_prob)
+
+	mcmc_tail_prob = mean(data.mcmc_samples .< tail)
+	mcmc_tail_prob = @sprintf("%.2E", mcmc_tail_prob)
+	text!(ax, 0.05, maximum(analytical_density) * 0.55,
+		text = L"\text{Analytical}: $P(\theta < %$(tail))$ = %$(analytical_tail_prob)",
+		fontsize = 10, color = :blue)
+	text!(ax, 0.05, maximum(analytical_density) * 0.45,
+		text = L"\text{MCMC}: $P(\theta < %$(tail))$ = %$(mcmc_tail_prob)",
+		fontsize = 10, color = :red)
+
+	axislegend(ax, position = :rt)
+end
+
+fig_comparison
+```
+
+We can see that with a small number of samples, we do a reasonable job of approximating the mean, but the tails are poorly estimated.
+This is a general principle in Monte Carlo methods: estimating tail probabilities requires many more samples than estimating central tendencies like the mean or median.
+Sometimes, specialized techniques like importance sampling are needed to accurately capture tail behavior.
+
+### Sequential Bayesian updating
+
+The following example demonstrates how posterior distributions evolve as we observe more coin flips:
+
+```{julia}
+#| label: beta-binomial-updating
+function demonstrate_bayesian_updating()
+	# True parameter and prior
+	true_θ = 0.55
+	prior_α, prior_β = 3, 3
+
+	# Generate sequence of coin flips
+	Random.seed!(42)
+	n_total = 12
+	flips = rand(n_total) .< true_θ  # true = heads, false = tails
+
+	# Convert to H/T string for display
+	flip_chars = [f ? "H" : "T" for f in flips]
+
+	# Stages to show (number of flips observed)
+	stages = [1, 3, 5, 8, 12]
+
+	# Create figure with subplots
+	fig = Figure(size = (1000, 600))
+
+	θ_range = 0:0.01:1
+
+	for (i, stage) in enumerate(stages)
+		# Calculate posterior parameters
+		y_obs = sum(flips[1:stage])  # heads observed so far
+		n_obs = stage                # total flips observed
+
+		post_α = prior_α + y_obs
+		post_β = prior_β + n_obs - y_obs
+
+		# Create subplot
+		row = div(i - 1, 3) + 1
+		col = ((i - 1) % 3) + 1
+		ax = Axis(fig[row, col],
+			xlabel = "θ (probability of heads)",
+			ylabel = "Density",
+			title = "$(join(flip_chars[1:stage])) ($(y_obs)/$(n_obs) heads)")
+
+		# Plot prior (only for first subplot)
+		if i == 1
+			prior_density = pdf.(Beta(prior_α, prior_β), θ_range)
+			lines!(ax, θ_range, prior_density,
+				color = :gray, linewidth = 2, linestyle = :dash, label = "Prior Beta(3,3)")
+		end
+
+		# Plot posterior
+		posterior = Beta(post_α, post_β)
+		posterior_density = pdf.(posterior, θ_range)
+		lines!(ax, θ_range, posterior_density,
+			color = :blue, linewidth = 3, label = "Posterior")
+
+		# Add vertical lines
+		vlines!(ax, [true_θ], color = :green, linewidth = 2, linestyle = :dot,
+			label = i == 1 ? "True θ = $(true_θ)" : "")
+
+		# MLE estimate
+		mle_θ = stage == 0 ? 0.5 : y_obs / n_obs
+		vlines!(ax, [mle_θ], color = :red, linewidth = 2, linestyle = :dashdot,
+			label = i == 1 ? "MLE" : "")
+
+		# Posterior mean
+		post_mean = post_α / (post_α + post_β)
+		vlines!(ax, [post_mean], color = :blue, linewidth = 2, alpha = 0.7,
+			label = i == 1 ? "Posterior mean" : "")
+
+		# Add text with posterior parameters
+		text!(ax, 0.05, maximum(posterior_density) * 0.9,
+			text = "Beta($(post_α), $(post_β))",
+			fontsize = 11, color = :blue)
+
+		# Add 95% credible interval
+		ci_lower = quantile(posterior, 0.025)
+		ci_upper = quantile(posterior, 0.975)
+		text!(ax, 0.05, maximum(posterior_density) * 0.75,
+			text = "95% CI: [$(round(ci_lower, digits=2)), $(round(ci_upper, digits=2))]",
+			fontsize = 10, color = :black)
+
+		# Set consistent x-axis limits
+		xlims!(ax, 0, 1)
+	end
+
+	# Add legend in the sixth panel (bottom right)
+	ax_legend = Axis(fig[2, 3],
+		xlabel = "θ (probability of heads)",
+		ylabel = "Density")
+
+	# Create dummy plots for legend
+	lines!(ax_legend, [0, 0], [0, 0], color = :gray, linewidth = 2, linestyle = :dash, label = "Prior Beta(3,3)")
+	lines!(ax_legend, [0, 0], [0, 0], color = :blue, linewidth = 3, label = "Posterior")
+	vlines!(ax_legend, [0], color = :green, linewidth = 2, linestyle = :dot, label = "True θ = $(true_θ)")
+	vlines!(ax_legend, [0], color = :red, linewidth = 2, linestyle = :dashdot, label = "MLE")
+	vlines!(ax_legend, [0], color = :blue, linewidth = 2, alpha = 0.7, label = "Posterior mean")
+
+	axislegend(ax_legend, position = :cc, framevisible = true)
+	hidespines!(ax_legend)
+	hidedecorations!(ax_legend)
+
+	# Add overall title
+	Label(fig[0, :], "Bayesian Updating: How Posterior Evolves with New Evidence",
+		fontsize = 16, font = "TeX Gyre Heros Bold")
+
+	return fig
+end
+
+fig_updating = demonstrate_bayesian_updating()
+fig_updating
+```

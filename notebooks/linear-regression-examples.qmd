@@ -1,0 +1,408 @@
+---
+engine: julia
+format:
+    html:
+        code-annotations: hover
+---
+
+# Linear regression: three perspectives on the same problem ✏️ {.unnumbered}
+
+This notebook demonstrates how the same statistical problem can be approached from three different perspectives: curve fitting, maximum likelihood estimation, and Bayesian inference.
+Linear regression provides an ideal example because it bridges simple parameter estimation with multivariate modeling while maintaining analytical tractability.
+
+Understanding these different approaches illuminates the philosophical foundations underlying statistical methods and their practical implications for uncertainty quantification.
+
+```{julia}
+#| label: setup
+using CairoMakie
+using Distributions
+using LaTeXStrings
+using Turing
+using MCMCChains
+using DataFrames
+using Printf
+using Random
+using Optim
+```
+
+## The regression problem
+
+Linear regression models the relationship between a predictor variable $x$ and a response variable $y$ as:
+$$y_i = \alpha + \beta x_i + \epsilon_i$$
+
+where $\alpha$ is the intercept, $\beta$ is the slope, and $\epsilon_i$ represents random noise.
+
+This framework applies broadly in climate science: relating temperature to elevation, precipitation to atmospheric pressure, or sea level rise to global temperature.
+
+### Generating synthetic data
+
+We create synthetic data from a known linear relationship to evaluate how well different methods recover the true parameters.
+First, we generate and plot our synthetic data.
+
+```{julia}
+#| label: data-generation
+
+# Set reproducible parameters
+Random.seed!(42)
+n_obs = 30
+true_intercept = 2.0
+true_slope = 1.5
+true_sigma = 1.5
+
+# Generate predictor and response data
+x_data = sort(rand(Uniform(0, 5), n_obs))
+y_data = true_intercept .+ true_slope .* x_data .+ rand(Normal(0, true_sigma), n_obs)
+
+function plot_synthetic_data()
+	fig = Figure(size = (700, 500))
+	ax = Axis(fig[1, 1],
+		xlabel = "x",
+		ylabel = "y",
+		title = "Synthetic linear regression dataset")
+
+	# Plot data points
+	scatter!(ax, x_data, y_data, color = :blue, markersize = 8, label = "Observed data")
+
+	# Plot true relationship
+	x_line = range(minimum(x_data), maximum(x_data), length = 100)
+	y_true = true_intercept .+ true_slope .* x_line
+	lines!(ax, x_line, y_true, color = :red, linewidth = 3,
+		label = L"True: $y = %$(true_intercept) + %$(true_slope)x$")
+
+	# Add uncertainty band
+	y_upper = y_true .+ 2 * true_sigma
+	y_lower = y_true .- 2 * true_sigma
+	band!(ax, x_line, y_lower, y_upper, color = (:red, 0.2), label = L"±2σ")
+
+	axislegend(ax, position = :lt)
+	return fig
+end
+
+fig_data = plot_synthetic_data()
+fig_data
+```
+
+The plot shows our synthetic data with the true linear relationship and noise level.
+The scattered points represent our "observations," while the red line and shaded band show the true underlying process we're trying to recover.
+
+## Approach 1: Curve fitting (least squares)
+
+The curve fitting perspective treats regression as an optimization problem: find the line that minimizes prediction errors.
+This approach focuses on algorithmic solutions without probabilistic interpretation.
+
+### Mathematical foundation
+
+Least squares minimizes the sum of squared residuals:
+$$\text{minimize} \sum_{i=1}^n (y_i - \alpha - \beta x_i)^2$$
+
+This optimization problem has a closed-form analytical solution.
+
+```{julia}
+#| label: least-squares-implementation
+
+function fit_least_squares(x, y)
+	"""Analytical least squares regression"""
+	n = length(x)
+	x_bar = mean(x)
+	y_bar = mean(y)
+
+	# Analytical formulas
+	slope = sum((x .- x_bar) .* (y .- y_bar)) / sum((x .- x_bar) .^ 2)
+	intercept = y_bar - slope * x_bar
+
+	# Calculate residuals and fit statistics
+	y_pred = intercept .+ slope .* x
+	residuals = y .- y_pred
+	mse = mean(residuals .^ 2)
+	r_squared = 1 - sum(residuals .^ 2) / sum((y .- y_bar) .^ 2)
+
+	return (
+		intercept = intercept,
+		slope = slope,
+		mse = mse,
+		r_squared = r_squared,
+		predictions = y_pred,
+		residuals = residuals,
+	)
+end
+
+# Fit the model
+ols_results = fit_least_squares(x_data, y_data)
+
+# Create results summary
+ols_summary = DataFrame(
+	"parameter" => ["Intercept", "Slope", "MSE", "R²"],
+	"estimate" => [ols_results.intercept, ols_results.slope, ols_results.mse, ols_results.r_squared],
+	"true_value" => [true_intercept, true_slope, missing, missing],
+)
+ols_summary
+```
+
+The least squares estimates are close to the true values, demonstrating that the method works well for this problem.
+However, this approach provides no direct way to quantify uncertainty in the parameter estimates.
+
+### Visualization with residuals
+
+```{julia}
+#| label: least-squares-visualization
+
+function plot_least_squares_fit()
+	fig = Figure(size = (800, 500))
+	ax = Axis(fig[1, 1],
+		xlabel = "x",
+		ylabel = "y",
+		title = "Least squares curve fitting")
+
+	# Plot data points
+	scatter!(ax, x_data, y_data, color = :blue, markersize = 8, label = "Data")
+
+	# Plot fitted line
+	x_line = range(minimum(x_data), maximum(x_data), length = 100)
+	y_fitted = ols_results.intercept .+ ols_results.slope .* x_line
+	lines!(ax, x_line, y_fitted, color = :red, linewidth = 2,
+		label = L"Fitted: $y = %$(round(ols_results.intercept, digits=2)) + %$(round(ols_results.slope, digits=2))x$")
+
+	# Show residuals as vertical lines
+	for i in eachindex(x_data)
+		lines!(ax, [x_data[i], x_data[i]], [y_data[i], ols_results.predictions[i]],
+			color = :gray, linestyle = :dash, alpha = 0.7, linewidth = 1)
+	end
+
+	# Add true line for comparison
+	y_true_line = true_intercept .+ true_slope .* x_line
+	lines!(ax, x_line, y_true_line, color = :green, linewidth = 2, linestyle = :dot,
+		label = L"True: $y = %$(true_intercept) + %$(true_slope)x$")
+
+	axislegend(ax, position = :lt)
+	return fig
+end
+
+fig_ols = plot_least_squares_fit()
+fig_ols
+```
+
+The residual lines (gray dashes) show prediction errors for each data point.
+Least squares minimizes the sum of squared lengths of these lines, providing the "best fit" in this specific sense.
+
+## Approach 2: Maximum likelihood estimation
+
+The probabilistic perspective treats regression as a statistical model with explicitly specified error distributions.
+This enables likelihood-based inference and uncertainty quantification.
+
+### Statistical model specification
+
+We assume:
+$$y_i \sim \text{Normal}(\alpha + \beta x_i, \sigma^2)$$
+
+This specifies that responses are normally distributed around the linear predictor with constant variance.
+
+```{julia}
+#| label: mle-implementation
+
+# Define the regression model - we'll reuse this for Bayesian inference
+@model function linear_regression_model(x, y)
+	n = length(y)
+
+	# Parameters to estimate
+	α ~ Normal(0, 5)      # Intercept
+	β ~ Normal(0, 5)      # Slope
+	σ ~ LogNormal(0, 1)   # Noise standard deviation
+
+	# Likelihood
+	μ = α .+ β .* x
+	for i in 1:n
+		y[i] ~ Normal(μ[i], σ)
+	end
+end
+
+# Find MLE estimates using Turing's mode estimation
+model = linear_regression_model(x_data, y_data)
+mle_result = optimize(model, MLE())
+mle_params = mle_result.values
+
+# Extract parameter estimates
+mle_results = (
+	intercept = mle_params[:α],
+	slope = mle_params[:β],
+	sigma = mle_params[:σ],
+)
+
+# Create comparison table
+mle_summary = DataFrame(
+	Parameter = ["Intercept", "Slope", "Sigma"],
+	MLE = [mle_results.intercept, mle_results.slope, mle_results.sigma],
+	OLS = [ols_results.intercept, ols_results.slope, sqrt(ols_results.mse)],
+	True_Value = [true_intercept, true_slope, true_sigma],
+)
+
+mle_summary
+```
+
+Turing's `optimize` function with `MLE()` provides a clean, robust approach to maximum likelihood estimation without requiring custom optimization code.
+The MLE estimates for intercept and slope match the OLS results exactly, confirming the theoretical equivalence between these approaches for linear regression with normal errors.
+Additionally, MLE provides an estimate of the noise parameter $\sigma$.
+
+## Approach 3: Bayesian inference
+
+Bayesian inference treats all parameters as random variables with probability distributions.
+It combines prior beliefs with observed data to produce posterior distributions that fully characterize parameter uncertainty.
+
+### Bayesian inference implementation
+
+```{julia}
+#| label: bayesian-model
+
+function run_bayesian_regression(x, y; samples_per_chain = 2000, n_chains = 4)
+	model = linear_regression_model(x, y)
+
+	chains = begin
+		sampler = NUTS()
+		discard_initial = 1_000
+		sample(model, sampler, MCMCThreads(),
+			samples_per_chain, n_chains,
+			discard_initial = discard_initial,
+			verbose = false, progress = false)
+	end
+
+	return chains
+end
+
+# Run Bayesian inference
+bayesian_chains = run_bayesian_regression(x_data, y_data)
+summary(bayesian_chains)
+```
+
+The diagnostic table is consistent with, *though does not guarantee*, MCMC convergence and accurate sampling.
+Fundamentally, we can check for comon signs of non-convergence and rule them out, but we cannot actually prove that we are sampling from the true posterior distribution.
+While there are no perfect rules, generally
+
+- Low values of $\hat{R}$ (`rhat`) close to 1 (e.g., <1.1) are consistent with "good mixing", meaning that the chains have converged to the target distribution.
+- High effective sample sizes (`ess_bulk`, `ess_tail`) indicate that the samples are more approximately independent, which is desirable for accurate posterior estimation.
+
+### Trace plot
+
+```{julia}
+#| label: bayesian-analysis
+
+# Extract samples from chains (keep chain structure for trace plots)
+α_samples = vec(Array(bayesian_chains[:α]))  # flattened for summary stats
+β_samples = vec(Array(bayesian_chains[:β]))
+σ_samples = vec(Array(bayesian_chains[:σ]))
+
+function plot_mcmc_trace(chains, title_prefix = "")
+	fig = Figure(size = (1200, 800))
+
+	# Extract parameter arrays (chains are organized as samples x variables x chains)
+	α_arr = Array(chains[:α])
+	β_arr = Array(chains[:β])
+	σ_arr = Array(chains[:σ])
+
+	nsamples, nchains = size(α_arr, 1), size(α_arr, 2)
+
+	# Set up all axes
+	ax1 = Axis(fig[1, 1], xlabel = "Iteration", ylabel = "α", title = "$(title_prefix)Intercept Parameter Trace")
+	ax2 = Axis(fig[1, 2], xlabel = "Iteration", ylabel = "β", title = "$(title_prefix)Slope Parameter Trace")
+	ax3 = Axis(fig[1, 3], xlabel = "Iteration", ylabel = "σ", title = "$(title_prefix)Noise Parameter Trace")
+	ax4 = Axis(fig[2, 1], xlabel = "α", ylabel = "Density", title = "$(title_prefix)Intercept Posterior")
+	ax5 = Axis(fig[2, 2], xlabel = "β", ylabel = "Density", title = "$(title_prefix)Slope Posterior")
+	ax6 = Axis(fig[2, 3], xlabel = "σ", ylabel = "Density", title = "$(title_prefix)Noise Posterior")
+
+	# Define colors for chains
+	colors = [:red, :blue, :green, :orange]
+
+	# Plot traces and histograms for each chain
+	for c in 1:nchains
+		# Trace plots
+		lines!(ax1, 1:nsamples, α_arr[:, c], label = "Chain $(c)", color = colors[c])
+		lines!(ax2, 1:nsamples, β_arr[:, c], label = "Chain $(c)", color = colors[c])
+		lines!(ax3, 1:nsamples, σ_arr[:, c], label = "Chain $(c)", color = colors[c])
+
+		# Marginal densities
+		hist!(ax4, α_arr[:, c], bins = 40, normalization = :pdf, color = (colors[c], 0.3), label = "Chain $(c)")
+		hist!(ax5, β_arr[:, c], bins = 40, normalization = :pdf, color = (colors[c], 0.3), label = "Chain $(c)")
+		hist!(ax6, σ_arr[:, c], bins = 40, normalization = :pdf, color = (colors[c], 0.3), label = "Chain $(c)")
+	end
+
+	# Add true value lines
+	vlines!(ax4, [true_intercept], color = :black, linestyle = :dash, linewidth = 2, label = "True value")
+	vlines!(ax5, [true_slope], color = :black, linestyle = :dash, linewidth = 2, label = "True value")
+	vlines!(ax6, [true_sigma], color = :black, linestyle = :dash, linewidth = 2, label = "True value")
+
+	# Add legends to posterior plots
+	axislegend(ax4; position = :rt)
+	axislegend(ax5; position = :rt)
+	axislegend(ax6; position = :rt)
+
+	return fig
+end
+
+fig_trace = plot_mcmc_trace(bayesian_chains, "Linear Regression: ")
+fig_trace
+```
+
+We can see from this plot that the chains visually appear to be **well-mixed** and **stationary**, which again is consistent with, though not definitive proof of, convergence.
+
+### Posterior predictive distribution
+
+The posterior predictive distribution represents our beliefs about new data given what we've observed.
+It's computed as $p(y_{\text{new}} | y_{\text{obs}}) = \int p(y_{\text{new}} | \theta) p(\theta | y_{\text{obs}}) d\theta$.
+
+```{julia}
+#| label: posterior-predictive
+
+function plot_posterior_predictive()
+	# Generate posterior predictive samples at new x values
+	x_new = range(0, 6, length = 50)
+	n_samples = 200
+	sample_indices = rand(1:length(α_samples), n_samples)
+
+	# For each posterior sample, generate predictions
+	y_pred_samples = []
+	for i in sample_indices
+		α_i = α_samples[i]
+		β_i = β_samples[i]
+		σ_i = σ_samples[i]
+
+		# Mean prediction
+		μ_pred = α_i .+ β_i .* x_new
+		# Add observation noise
+		y_pred = rand.(Normal.(μ_pred, σ_i))
+		push!(y_pred_samples, y_pred)
+	end
+
+	# Calculate prediction quantiles
+	y_lower = [quantile([y_pred_samples[j][i] for j in 1:n_samples], 0.05) for i in 1:length(x_new)]
+	y_upper = [quantile([y_pred_samples[j][i] for j in 1:n_samples], 0.95) for i in 1:length(x_new)]
+	y_median = [quantile([y_pred_samples[j][i] for j in 1:n_samples], 0.5) for i in 1:length(x_new)]
+
+	# Create plot
+	fig = Figure(size = (800, 600))
+	ax = Axis(fig[1, 1],
+		xlabel = "x",
+		ylabel = "y",
+		title = "Posterior predictive distribution")
+
+	# Plot observed data
+	scatter!(ax, x_data, y_data, color = :black, markersize = 8, label = "Observed data")
+
+	# Plot prediction interval
+	band!(ax, x_new, y_lower, y_upper, color = (:blue, 0.3), label = "90% prediction interval")
+
+	# Plot median prediction
+	lines!(ax, x_new, y_median, color = :blue, linewidth = 2, label = "Posterior median")
+
+	# Add true relationship for reference
+	y_true = true_intercept .+ true_slope .* x_new
+	lines!(ax, x_new, y_true, color = :red, linewidth = 2, linestyle = :dash, label = "True relationship")
+
+	axislegend(ax, position = :lt)
+	return fig
+end
+
+fig_ppd = plot_posterior_predictive()
+fig_ppd
+```
+
+The posterior predictive distribution incorporates both parameter uncertainty and observation noise.
+The 90% prediction interval shows where we expect new observations to fall, while the median line shows our best prediction.
+This is the fundamental quantity for forecasting and decision-making under uncertainty.

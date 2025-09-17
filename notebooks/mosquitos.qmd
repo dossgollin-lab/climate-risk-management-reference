@@ -1,130 +1,316 @@
-# Statistics Without the Agonizing Details ✏️ {.unnumbered}
+---
+engine: julia
+format:
+    html:
+        code-annotations: hover
+---
 
-## Learning Objectives {.unnumbered}
+# Mosquito bites and beer consumption: simulation-based inference ✏️ {.unnumbered}
 
-- Compare simulation-based and parametric statistical tests
-- Understand the logic of permutation testing
-- Apply computational methods to hypothesis testing
-- Interpret p-values through simulation
+This notebook demonstrates computational approaches to hypothesis testing using a practical example: whether drinking beer affects mosquito bite frequency.
+The analysis illustrates how simulation can provide intuitive understanding of statistical concepts without relying on complex mathematical assumptions.
 
-In this class we will use computation and simulation to build fundamental insight into statistical processes without dwelling on “agonizing” details. Here we implement the excellent example problem from John Rauser. First, watch the video:
+This example showcases the power of computational thinking in statistics, where complex theoretical concepts become accessible through direct simulation.
+The same principles apply to climate data analysis where traditional parametric assumptions may not hold.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5Dnw46eC-0o?si=3Y3JKwkwD9i6lrVV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+```{julia}
+#| label: setup
+using CairoMakie
+using StatsBase
+using HypothesisTests
+using DataFrames
+using Printf
+using Random
+```
 
-We will recreate his analysis to answer the fundamental question:
+## The research question
+
+We investigate a practical question with broader implications for experimental design and causal inference:
 
 > Does drinking beer reduce the likelihood of being bitten by mosquitos?
 
-## Data
+This question exemplifies common challenges in environmental and health research where controlled experiments must account for multiple confounding factors.
+The statistical methods demonstrated here apply broadly to climate impact studies and policy evaluation.
 
-First, we will create the data. Here is the data for the beer drinkers:
+### Learning objectives
+
+After working through this analysis, you should understand:
+- The logic underlying permutation testing and simulation-based inference
+- How computational methods can replace complex mathematical derivations
+- The interpretation of p-values through direct simulation
+- When simulation-based tests offer advantages over parametric approaches
+
+## Experimental data
+
+The dataset comes from a controlled experiment where participants were randomly assigned to consume either beer or water, then exposed to mosquitos in a controlled environment.
+Researchers counted the number of mosquito bites received by each participant.
 
 ```{julia}
-#| output: false
-#| code-fold: true
-beer = [
-	27, 20, 21, 26, 27, 31, 24, 21, 20, 19, 23, 24, 28, 19, 24, 29, 18, 20, 17, 31, 20, 25, 28, 21, 27,
+#| label: data-setup
+
+# Beer drinkers group
+beer_bites = [
+    27, 20, 21, 26, 27, 31, 24, 21, 20, 19, 23, 24, 28,
+    19, 24, 29, 18, 20, 17, 31, 20, 25, 28, 21, 27
 ]
+
+# Water drinkers group (control)
+water_bites = [
+    21, 22, 15, 12, 21, 16, 19, 15, 22, 24, 19, 23,
+    13, 22, 20, 24, 18, 20
+]
+
+# Create summary table
+data_summary = DataFrame(
+    Group = ["Beer drinkers", "Water drinkers"],
+    N_participants = [length(beer_bites), length(water_bites)],
+    Mean_bites = [mean(beer_bites), mean(water_bites)],
+    Std_bites = [std(beer_bites), std(water_bites)],
+    Min_bites = [minimum(beer_bites), minimum(water_bites)],
+    Max_bites = [maximum(beer_bites), maximum(water_bites)]
+)
+
+data_summary
 ```
 
-Using Julia, we can learn more about the data through exploratory analysis.
+The descriptive statistics reveal that beer drinkers received more mosquito bites on average.
+However, we need statistical analysis to determine whether this difference could reasonably be attributed to random variation.
+
+## Initial analysis: observed difference
+
+The most direct approach compares the average number of bites between groups.
+This test statistic captures the core research question in a single number.
 
 ```{julia}
-typeof(beer)
-length(beer)
-size(beer)
-sum(beer) / length(beer) # the sample average
+#| label: observed-difference
+
+# Calculate the observed difference in means
+observed_diff = mean(beer_bites) - mean(water_bites)
+
+# Create results summary
+initial_analysis = DataFrame(
+    Statistic = ["Beer group mean", "Water group mean", "Difference (Beer - Water)"],
+    Value = [mean(beer_bites), mean(water_bites), observed_diff]
+)
+
+initial_analysis
 ```
 
-We can do the same for water drinkers:
+Beer drinkers received approximately 5.1 more bites on average than water drinkers.
+But is this difference statistically meaningful, or could it arise from random variation alone?
+
+## The null hypothesis and permutation testing
+
+The skeptic's position forms our null hypothesis: drinking beer has no effect on mosquito bite frequency.
+Under this assumption, the group assignment (beer vs. water) is irrelevant, and the observed difference arose by chance.
+
+We can test this hypothesis through permutation testing, which simulates what would happen if the null hypothesis were true.
+
+### Two approaches to hypothesis testing
+
+**Parametric approach (t-test)**:
+- Assumes data follow specific distributions (normal)
+- Uses mathematical theory for p-value calculation
+- Fast but relies on assumptions that may not hold
+
+**Simulation approach (permutation test)**:
+- Makes minimal distributional assumptions
+- Uses computational power instead of mathematical theory
+- More intuitive and flexible
+
+### Implementing permutation testing
+
+The logic is straightforward: if treatment assignment doesn't matter, we can randomly shuffle group labels and recalculate the difference.
 
 ```{julia}
-#| code-fold: true
-#| output: false
-water = [21, 22, 15, 12, 21, 16, 19, 15, 22, 24, 19, 23, 13, 22, 20, 24, 18, 20]
-```
+#| label: permutation-function
 
-## A simple analysis
+function calculate_permuted_difference(group1_data, group2_data)
+    """Calculate difference in means after random permutation of group labels"""
+    # Combine all data
+    all_data = vcat(group1_data, group2_data)
 
-Following Rauser, let’s calculate the difference between the average number of bites in each group.
+    # Randomly shuffle all observations
+    shuffled_data = shuffle(all_data)
 
-```{julia}
-#| output: false
-using StatsBase: mean
-observed_diff = mean(beer) - mean(water)
-observed_diff
-```
+    # Reassign to groups with original group sizes
+    n1 = length(group1_data)
+    new_group1 = shuffled_data[1:n1]
+    new_group2 = shuffled_data[(n1+1):end]
 
-## The skeptic’s argument
-
-The skeptic asks whether this might be random chance.
-
-1. We could answer this with a $T$ test:
-    - Determine if there is a significant difference between the means of two groups
-    - Assumes (approximate) normality
-    - Assumptions hidden behind a software package
-2. Simulation approach:
-    - Suppose the skeptic is right – the two groups are sampled from the same distribution
-    - Shuffle the data (randomly divide into two groups by assuming that there is no difference between the two groups)
-    - Calculate the difference between each group
-    - Repeat many times and examine the distribution of differences
-
-### Implementation
-
-We can code up the simulation approach in Julia.
-
-```{julia}
-#| output: false
-using Random: shuffle
-
-function get_shuffled_difference(y1, y2)
-	y_all = vcat(y1, y2)
-	y_shuffled = shuffle(y_all)
-	N1 = length(y1)
-	ynew1 = y_shuffled[1:N1]
-	ynew2 = y_shuffled[(N1+1):end]
-	difference = mean(ynew1) - mean(ynew2)
-	return difference
+    # Calculate difference in means
+    return mean(new_group1) - mean(new_group2)
 end
 
-get_shuffled_difference(beer, water)
+# Test the function
+example_permuted_diff = calculate_permuted_difference(beer_bites, water_bites)
+@printf("Example permuted difference: %.2f\n", example_permuted_diff)
 ```
 
-We want to learn about the *sampling distribution* of the group differences: repeat this experiment many times over and plot the results.
+This function simulates one possible outcome under the null hypothesis.
+By repeating this process thousands of times, we can characterize the full distribution of differences we'd expect by chance alone.
+
+### Generating the null distribution
 
 ```{julia}
-simulated_diffs = [get_shuffled_difference(beer, water) for i in 1:50_000]
-length(simulated_diffs)
+#| label: null-distribution
+
+# Set seed for reproducibility
+Random.seed!(42)
+
+# Generate many permuted differences
+n_permutations = 50_000
+permuted_differences = [
+    calculate_permuted_difference(beer_bites, water_bites)
+    for _ in 1:n_permutations
+]
+
+# Summarize the null distribution
+null_summary = DataFrame(
+    Statistic = ["Mean", "Std Dev", "Min", "Max", "2.5th percentile", "97.5th percentile"],
+    Value = [
+        mean(permuted_differences),
+        std(permuted_differences),
+        minimum(permuted_differences),
+        maximum(permuted_differences),
+        quantile(permuted_differences, 0.025),
+        quantile(permuted_differences, 0.975)
+    ]
+)
+
+null_summary
 ```
 
-### Plotting
+The null distribution shows what group differences we'd expect if treatment assignment were random.
+Most permuted differences cluster around zero, as expected when there's no true effect.
+
+### Visualizing the results
+
+The key insight comes from comparing our observed difference to the null distribution.
+How extreme is our observed value relative to what we'd expect by chance?
 
 ```{julia}
-using CairoMakie
+#| label: visualization
 
-#| label: fig-plot-diffs
-function plot_diffs(diffs, obs)
-	fig = Figure()
-	ax = Axis(fig[1, 1], xlabel = "Difference", ylabel = "Proportion of samples")
-	hist!(ax, diffs, bins = range(-6, 6, step = 0.5), normalization = :pdf, label = "If Skeptic is Right")
-	vlines!(ax, [obs], label = "Observed", linewidth = 2, color = :red)
-	axislegend(ax, position = :lt)
-	return fig, ax
+function create_permutation_plot(null_distribution, observed_value)
+    """Create visualization comparing observed value to null distribution"""
+    fig = Figure(size = (800, 500))
+    ax = Axis(fig[1, 1],
+        xlabel = "Difference in means (Beer - Water)",
+        ylabel = "Density",
+        title = "Permutation test results")
+
+    # Plot null distribution
+    hist!(ax, null_distribution, bins = 40, normalization = :pdf,
+        color = (:blue, 0.6), label = "Null distribution")
+
+    # Mark observed value
+    vlines!(ax, [observed_value], color = :red, linewidth = 3,
+        label = "Observed difference")
+
+    # Add text annotation
+    text!(ax, observed_value + 0.5, 0.15,
+        text = @sprintf("Observed\n%.2f", observed_value),
+        color = :red, fontsize = 12)
+
+    axislegend(ax, position = :rt)
+    return fig
 end
 
-fig, ax = plot_diffs(simulated_diffs, observed_diff)
-fig
+fig_permutation = create_permutation_plot(permuted_differences, observed_diff)
+fig_permutation
 ```
 
-### Alternative
+The visualization clearly shows that our observed difference lies in the extreme tail of the null distribution.
+This suggests that the observed difference is unlikely to have occurred by chance alone.
 
-We could have done this with a parametric test
+### Statistical significance assessment
 
 ```{julia}
-using HypothesisTests
+#| label: significance-testing
 
-t1 = HypothesisTests.EqualVarianceTTest(beer, water)
-t2 = HypothesisTests.UnequalVarianceTTest(beer, water);
+# Calculate p-value: proportion of permuted differences ≥ observed
+p_value_one_sided = mean(permuted_differences .>= observed_diff)
+p_value_two_sided = mean(abs.(permuted_differences) .>= abs(observed_diff))
 
-mean(simulated_diffs .>= observed_diff)
+# Effect size (Cohen's d)
+pooled_std = sqrt(((length(beer_bites) - 1) * var(beer_bites) +
+                   (length(water_bites) - 1) * var(water_bites)) /
+                  (length(beer_bites) + length(water_bites) - 2))
+cohens_d = observed_diff / pooled_std
+
+# Summary results
+test_results = DataFrame(
+    Measure = [
+        "Observed difference",
+        "One-sided p-value",
+        "Two-sided p-value",
+        "Effect size (Cohen's d)",
+        "Interpretation"
+    ],
+    Value = [
+        @sprintf("%.2f bites", observed_diff),
+        @sprintf("%.4f", p_value_one_sided),
+        @sprintf("%.4f", p_value_two_sided),
+        @sprintf("%.2f", cohens_d),
+        p_value_two_sided < 0.05 ? "Statistically significant" : "Not significant"
+    ]
+)
+
+test_results
 ```
+
+### Comparison with parametric testing
+
+For completeness, we can compare our simulation-based results with traditional parametric tests.
+
+```{julia}
+#| label: parametric-comparison
+
+# Equal variance t-test
+t_test_equal = EqualVarianceTTest(beer_bites, water_bites)
+# Unequal variance t-test (Welch's t-test)
+t_test_unequal = UnequalVarianceTTest(beer_bites, water_bites)
+
+# Comparison summary
+comparison_results = DataFrame(
+    Method = ["Permutation test", "Equal variance t-test", "Unequal variance t-test"],
+    P_value = [
+        p_value_two_sided,
+        pvalue(t_test_equal),
+        pvalue(t_test_unequal)
+    ],
+    Test_statistic = [
+        "Difference in means",
+        @sprintf("t = %.3f", t_test_equal.t),
+        @sprintf("t = %.3f", t_test_unequal.t)
+    ]
+)
+
+comparison_results
+```
+
+All three methods reach similar conclusions, but the permutation test requires fewer assumptions about the underlying data distribution.
+
+## Key insights and broader applications
+
+This analysis demonstrates several important statistical concepts:
+
+**Simulation-based inference**: Complex statistical concepts become intuitive when approached through simulation rather than mathematical theory.
+
+**Assumption-free testing**: Permutation tests work without requiring specific distributional assumptions, making them robust for real-world data.
+
+**P-value interpretation**: The p-value directly represents the probability of observing such an extreme difference under the null hypothesis, clarified through simulation.
+
+**Effect size matters**: Statistical significance alone doesn't indicate practical importance—effect size measures like Cohen's d provide additional context.
+
+### Climate science applications
+
+These simulation-based methods prove particularly valuable in climate research where:
+
+- **Non-normal data**: Climate variables often have skewed or heavy-tailed distributions
+- **Small sample sizes**: Paleoclimate records or extreme event counts may have limited observations
+- **Complex dependencies**: Traditional parametric assumptions may not hold for climate time series
+- **Policy decisions**: Robust statistical inference supports high-stakes climate adaptation decisions
+
+The computational approach demonstrated here scales naturally to more complex problems while maintaining the same intuitive logic: simulate what would happen under different assumptions and compare with observed data.

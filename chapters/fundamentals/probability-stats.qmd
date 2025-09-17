@@ -76,16 +76,10 @@ Then 99th percentile is $Q(0.99)$.
 
 #### Examples of key distribution functions
 
-These examples illustrate the relationships between probability density/mass functions, cumulative distribution functions, and quantiles using two fundamental distributions.
-Each example shows both the forward operation (finding probabilities from values) and the inverse operation (finding values from probabilities).
+Understanding these concepts requires working through concrete examples.
+The [Distribution Examples](../../notebooks/distribution-examples.qmd) notebook demonstrates these relationships using normal and Poisson distributions.
 
-The normal distribution demonstrates these concepts for continuous random variables, where probabilities correspond to areas under smooth curves.
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#normal-distribution-example >}}
-
-The Poisson distribution shows the analogous concepts for discrete random variables, where probabilities correspond to point masses and CDFs are step functions.
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#poisson-distribution-example >}}
+These examples show both forward operations (finding probabilities from values) and inverse operations (finding values from probabilities), illustrating how the three fundamental functions work together to characterize uncertainty.
 
 ### Multiple variables
 
@@ -105,9 +99,7 @@ Conditional distributions describe how variables depend on each other.
 #### Visualizing joint, marginal, and conditional distributions
 
 Understanding the relationships between joint, marginal, and conditional distributions becomes clearer with visualization.
-The following example shows a bivariate normal distribution with marginal histograms and conditional distributions:
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#joint-marginal-conditional-example >}}
+The [Distribution Examples](../../notebooks/distribution-examples.qmd) notebook includes a comprehensive multivariate example showing how joint distributions decompose into marginal and conditional components.
 
 #### Independence
 
@@ -318,91 +310,19 @@ All methods assume correct model specification -- poor model approximations yiel
 
 ### Example: coin flip maximum likelihood estimation
 
-The coin flip example demonstrates both analytical MLE derivation and the principles behind maximum likelihood estimation.
+The coin flip example provides a pedagogically clean introduction to maximum likelihood estimation.
+The [Coin Flip Inference](../../notebooks/inference-coin-flip.qmd) notebook demonstrates both the analytical derivation and computational implementation of MLE.
 
-A series of coin flips are independent Bernoulli trials with fixed probability $\theta$ of heads.
-Given $y$ heads in $n$ flips, we want to estimate $\theta$ using maximum likelihood.
-
-**Likelihood function**: For $n$ independent coin flips, the likelihood follows the Binomial distribution:
-$$
-p(y \mid \theta, n) = \binom{n}{y} \theta^y (1-\theta)^{n-y}
-$$
-where $\binom{n}{y} = \frac{n!}{y!(n-y)!}$ is the binomial coefficient.
-
-Since we condition on the observed data, the binomial coefficient is constant for inference purposes:
-
-$$p(y \mid \theta, n) \propto \theta^y (1-\theta)^{n-y}$$
-
-**Analytical MLE derivation**: We maximize the log-likelihood:
-
-$$\log p(y \mid \theta) = y \log \theta + (n-y) \log(1-\theta) + \text{const.}$$
-
-Taking the derivative and setting to zero:
-
-$$\frac{d}{d\theta} \log p(y \mid \theta) = \frac{y}{\theta} - \frac{n-y}{1-\theta} = 0$$
-
-Solving: $\frac{y}{\theta} = \frac{n-y}{1-\theta} \implies \hat{\theta}_{\text{MLE}} = \frac{y}{n}$
-
-The maximum likelihood estimate is simply the observed proportion of heads.
-This intuitive result demonstrates how MLE selects parameters that make the observed data most probable.
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-likelihood >}}
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-mle >}}
-
-Just as we infer $\theta$ from coin flips, climate scientists use the same principles to estimate the probability of extreme events from historical data.
+This example shows how MLE connects intuitive parameter estimates (the observed proportion) with formal statistical theory.
+The same principles apply whether estimating coin bias or the frequency of extreme climate events from historical data.
 
 ### Linear regression example
 
-Linear regression extends the coin flip example to multiple parameters, demonstrating both analytical solutions and the connection between probabilistic and optimization approaches.
+Linear regression extends inference to multiple parameters, demonstrating the connections between curve fitting, maximum likelihood estimation, and Bayesian approaches.
 
-Given $n$ observations of response variable $y_i$ and predictor variable $x_i$, the goal is to understand the relationship between $x$ and $y$.
+The [Linear Regression Examples](../../notebooks/linear-regression-examples.qmd) notebook shows how the same statistical problem can be approached from three different philosophical perspectives, each providing different insights into parameter estimation and uncertainty quantification.
 
-In linear regression, we assume that the response follows a linear relationship with added noise:
-$$
-y_i = a + b x_i + \epsilon_i
-$$
-where:
-
-- $a$ is the intercept (value of $y$ when $x = 0$)
-- $b$ is the slope (change in $y$ per unit change in $x$)
-- $\epsilon_i \sim \text{Normal}(0, \sigma^2)$ is independent random noise
-
-We can equivalently write this as
-$$
-y_i \mid x_i, a, b, \sigma^2 \sim \text{Normal}(a + b x_i, \sigma^2).
-$$
-
-#### Maximum likelihood solution
-
-The likelihood for a single observation is given by the Normal PDF:
-$$
-p(y_i \mid x_i, a, b, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}
-$$
-By independence, the likelihood for all observations is:
-$$
-p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left\{-\frac{(y_i - a - b x_i)^2}{2\sigma^2}\right\}
-$$
-and the log-likelihood is:
-$$
-\log p(\mathbf{y} \mid \mathbf{x}, a, b, \sigma^2) = -\frac{n}{2} \log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - a - b x_i)^2.
-$$
-If we take the derivative of the log-likelihood with respect to $a$ and $b$ and set it equal to zero, we find that we need to minimize:
-
-$$\sum_{i=1}^n (y_i - a - b x_i)^2$$
-
-This is equivalent to minimizing the mean squared error between the observed and predicted values.
-This illustrates how "ordinary least squares" regression can be derived from a probabilistic model using maximum likelihood estimation or from an optimization perspective by minimizing squared errors.
-
-The following examples show both the curve fitting and MLE approaches:
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-data-plot >}}
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-curve-fitting >}}
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-mle >}}
-
-Similar approaches can model relationships between climate variables and their impacts.
+This example illustrates how probabilistic models connect optimization-based and fully Bayesian approaches, with implications for modeling relationships between climate variables and their impacts.
 
 ## Bayesian inference
 
@@ -492,7 +412,7 @@ This demonstrates the core Bayesian principle: new data updates our beliefs in a
 
 The following example shows this updating process in action, demonstrating how the posterior distribution evolves with each new coin flip:
 
-{{< embed ../../notebooks/probability-stats-examples.qmd#beta-binomial-updating >}}
+{{< embed ../../notebooks/inference-coin-flip.qmd#beta-binomial-updating >}}
 
 As data accumulate, the influence of the prior diminishes relative to that of the likelihood.
 With sufficient data, Bayesian and maximum likelihood estimates converge regardless of the prior choice.
@@ -508,84 +428,151 @@ For even modest problems (say, 10 parameters with 100 grid points each), this re
 This "curse of dimensionality" means that analytical approaches work only for the simplest models.
 Real scientific applications require computational methods.
 
+#### MCMC fundamentals
+
 Markov Chain Monte Carlo methods provide a computational workaround.
 Instead of calculating the posterior distribution everywhere, `MCMC` algorithms generate samples from it.
 
 An `MCMC` algorithm creates a Markov chain: a sequence of parameter values where each new value depends only on the current value.
+This defines the "Markov property"—the future state depends only on the present, not the entire history.
+
 The algorithm is carefully designed so that the chain's stationary distribution is the target posterior distribution.
 This means the algorithm spends time in different regions of parameter space in proportion to their posterior probability.
+After sufficient iterations, samples from the chain approximate samples from the posterior.
+
+#### Why MCMC works: the mathematics
+
+The theoretical foundation rests on three key concepts:
+
+**Detailed balance**: For the chain to have the correct stationary distribution, the transition kernel must satisfy:
+$$
+p(\theta_{\text{current}}) T(\theta_{\text{current}} \to \theta_{\text{proposed}}) = p(\theta_{\text{proposed}}) T(\theta_{\text{proposed}} \to \theta_{\text{current}})
+$$
+
+This ensures that in equilibrium, the flow of probability from any state $\theta_{\text{current}}$ to $\theta_{\text{proposed}}$ exactly balances the reverse flow.
+
+**Ergodicity**: The chain must be able to reach any region of parameter space with positive probability from any starting point.
+This prevents the algorithm from getting trapped in isolated regions.
+
+**Convergence**: Given detailed balance and ergodicity, the chain converges to the target distribution regardless of starting values.
+The Law of Large Numbers then guarantees that sample averages converge to population expectations.
 
 The key insight is that we only need the posterior up to a constant of proportionality: $p(\theta \mid y) \propto p(y \mid \theta) p(\theta)$.
-Since `MCMC` algorithms don't require the normalizing constant, they can handle arbitrarily complex models.
+Since `MCMC` algorithms evaluate ratios of posterior densities, the normalizing constant cancels out.
+This allows them to handle arbitrarily complex models without computing intractable integrals.
+
+#### Sampler algorithms
+
+Modern `MCMC` algorithms differ in how they propose new parameter values:
+
+**Metropolis-Hastings**: The foundation algorithm proposes new states using a proposal distribution, then accepts or rejects based on the posterior ratio.
+Simple to implement but can be inefficient for complex posteriors.
+
+**Gibbs sampling**: Updates each parameter by sampling from its conditional distribution given all other parameters.
+Efficient when conditional distributions are available but can suffer from strong correlations between parameters.
+
+**Hamiltonian Monte Carlo (HMC)**: Uses gradient information to make informed proposals that follow the posterior's geometry.
+The No-U-Turn Sampler (`NUTS`) automatically tunes step sizes and trajectory lengths.
+This forms the foundation of modern probabilistic programming frameworks like `Turing.jl` and `Stan`.
+
+**Other modern approaches**: Variational inference, normalizing flows, and other advanced techniques extend beyond traditional `MCMC` but serve similar purposes.
+
+#### Practical implementation considerations
+
+**Multiple chains**: Running multiple independent chains with different starting values helps assess convergence and identify multimodal posteriors.
+Modern practice uses 4 chains as a standard.
+
+**Warm-up and adaptation**: Initial iterations allow the sampler to adapt to the posterior geometry and find the typical set.
+These "burn-in" samples should be discarded from final inference.
+
+**Chain diagnostics**: Convergence assessment requires multiple quantitative checks beyond visual inspection.
+The $\hat{R}$ statistic compares within-chain and between-chain variance.
+Effective sample size measures how many independent samples the correlated chain provides.
+
+**Computational efficiency**: `MCMC` can be computationally expensive.
+Parallel chain execution, efficient likelihood computation, and appropriate sampler choice significantly impact performance.
+
+#### From samples to inference
 
 After running the chain for thousands of iterations, the resulting samples serve as a high-fidelity numerical approximation of the true posterior distribution.
 We can use these samples to approximate any posterior quantity:
 $$
 \mathbb{E}[g(\theta) \mid y] \approx \frac{1}{N} \sum_{i=1}^N g(\theta^{(i)})
 $$
-where $\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}$ are our `MCMC` samples.
-Modern `MCMC` algorithms include:
+where $\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)}$ are our `MCMC` samples after discarding warm-up iterations.
 
-- **Metropolis-Hastings**: A general-purpose algorithm using proposal distributions and acceptance criteria
-- **Gibbs sampling**: Efficient for multivariate problems with available conditional distributions
-- **Hamiltonian Monte Carlo**: Uses gradient information for efficient exploration, forming the basis of modern probabilistic programming frameworks like `Turing.jl` and `stan`
+This Monte Carlo approximation enables:
+- Parameter estimates and credible intervals
+- Posterior predictive distributions for forecasting
+- Model comparison through marginal likelihood estimation
+- Decision analysis under parameter uncertainty
 
-Many other modern approaches to sampling exist.
+The quality of these approximations depends on sample size, chain mixing, and the specific posterior quantity being estimated.
+Tail probabilities and extreme quantiles require more samples than central tendencies.
 
 ### Example: coin flip Bayesian analysis
 
 The coin flip example demonstrates the complete Bayesian workflow, from prior specification through posterior computation and interpretation.
 
-Building on the maximum likelihood analysis from the previous section, we now treat the parameter $\theta$ as a random variable.
-This is a helpful example, because we can compare to the known and exact analytical solution to validate the computational approach.
+The [Coin Flip Inference](../../notebooks/inference-coin-flip.qmd) notebook shows how treating parameters as random variables enables full uncertainty quantification.
+This example compares analytical solutions (using conjugate priors) with computational approaches, validating MCMC methods against known exact results.
 
-Starting with a $\text{Beta}(1,1)$ uniform prior (representing no initial preference for heads or tails), observing 7 heads in 10 flips yields the posterior $\text{Beta}(8,4)$.
-This analytical result can be compared directly with `MCMC` sampling to demonstrate computational accuracy:
-
-{{< embed ../../notebooks/probability-stats-examples.qmd#coin-flip-bayesian >}}
-
-The analytical and `MCMC` results match closely, demonstrating that:
-
-- The Beta-Binomial conjugacy gives exact results
-- `MCMC` provides a general computational approach when analytical solutions don't exist
-- Both approaches quantify uncertainty through the full posterior distribution
-- Increasing the number of flips improves the approximation of the posterior
-
-`MCMC` accuracy varies across the distribution.
-The method provides better estimates in the center of the distribution than in the tails.
-For example, computing $\mathbb{E}[\theta]$ requires fewer samples than computing the probability that $\theta \leq 0.25$, since the latter depends on accurately characterizing the probability mass in the tail.
-This reflects a general principle: quantities that depend on rare events or extreme values require more samples and/or more sophisticated sampling strategies for accurate estimation.
+The example illustrates key Bayesian concepts: how priors influence posterior distributions, the role of conjugacy in analytical tractability, and the use of MCMC when analytical solutions don't exist.
 
 ### Example: linear regression Bayesian analysis
 
-Linear regression demonstrates Bayesian inference for multivariate problems where analytical solutions don't exist.
-We specify prior distributions for all parameters ($a$, $b$, $\sigma$) and use `MCMC` to sample from the joint posterior distribution.
+Linear regression demonstrates Bayesian inference for multivariate problems requiring computational methods.
 
-The Bayesian approach provides full posterior distributions for each parameter, enabling:
-- Direct probabilistic statements about parameter values
-- Credible intervals that quantify parameter uncertainty
-- Prediction intervals that account for both parameter and observation uncertainty
+The [Linear Regression Examples](../../notebooks/linear-regression-examples.qmd) notebook provides a comprehensive comparison of least squares, maximum likelihood, and Bayesian approaches to the same problem.
+This comparison illuminates the philosophical differences between methods and their practical implications for uncertainty quantification.
 
-The following example shows the complete Bayesian workflow and compares results with maximum likelihood estimation:
+The Bayesian approach excels when parameter uncertainty must be propagated through subsequent calculations or decision processes—a crucial capability for climate risk assessment and decision-making under uncertainty.
 
-{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-bayesian >}}
+### Posterior predictive distribution and model checking
 
-{{< embed ../../notebooks/probability-stats-examples.qmd#linear-regression-comparison >}}
+The Bayesian workflow extends beyond parameter estimation to include systematic model validation through posterior predictive checking.
+This approach uses the fitted model to generate simulated data, then compares these simulations to observed data on relevant metrics.
 
-All three approaches (least squares, `MLE`, Bayesian) provide similar point estimates, but differ in their treatment of uncertainty:
-- Least squares provides point estimates only
-- `MLE` provides point estimates with asymptotic standard errors
-- Bayesian inference provides full posterior distributions and credible intervals
+The posterior predictive distribution represents our beliefs about new data given what we've observed:
+$$p(y^{\text{rep}} | y^{\text{obs}}) = \int p(y^{\text{rep}} | \theta) p(\theta | y^{\text{obs}}) d\theta$$
 
-Notice that the key difference between `MLE` and Bayesian estimates is the influence of prior information.
-When priors are weak (uninformative), Bayesian and `MLE` estimates converge.
-When priors are informative, they pull the estimates toward the prior beliefs, demonstrating how Bayesian inference formally incorporates existing knowledge.
+where $y^{\text{rep}}$ denotes replicated (simulated) data and $y^{\text{obs}}$ denotes observed data.
 
-The Bayesian approach excels when we need to propagate parameter uncertainty through subsequent calculations or decision processes.
-The credible interval demonstrates how parameter uncertainty translates into prediction uncertainty—a crucial consideration for risk assessment and decision-making under uncertainty.
+#### The posterior predictive checking workflow
 
-Just as we infer $\theta$ from coin flips, climate scientists estimate the probability of extreme events from historical data.
-The same Bayesian principles apply whether analyzing controlled experiments or complex climate observations, providing a unified framework for uncertainty quantification across scales and applications.
+The systematic approach follows these steps:
+
+1. **Estimate the posterior**: Use `MCMC` to obtain samples from $p(\theta | y^{\text{obs}})$
+2. **Generate replicated data**: For each posterior sample $\theta^{(i)}$, draw $y^{\text{rep}(i)} \sim p(y | \theta^{(i)})$
+3. **Compute test statistics**: Calculate relevant metrics $T(y^{\text{rep}(i)})$ and $T(y^{\text{obs}})$
+4. **Compare distributions**: Assess whether $T(y^{\text{obs}})$ falls within the distribution of $T(y^{\text{rep}})$
+
+#### Choosing meaningful test statistics
+
+The power of posterior predictive checking lies in choosing test statistics that capture scientifically relevant model features:
+
+- **Distributional properties**: Mean, variance, skewness, or tail behavior
+- **Extreme values**: Maximum values, exceedance frequencies, or return level estimates
+- **Temporal structure**: Autocorrelation, trend detection, or persistence measures
+- **Spatial patterns**: Clustering, gradients, or dependence structures
+
+Poor model fit manifests when observed test statistics fall in the tails of the posterior predictive distribution.
+This indicates the model fails to capture important data characteristics.
+
+#### Model comparison and selection
+
+Posterior predictive checking enables principled model comparison by evaluating how well different models reproduce scientifically relevant features.
+Models that consistently generate data matching observed patterns across multiple test statistics provide better representations of the underlying process.
+
+This approach is particularly valuable in climate modeling, where we need models that capture not just central tendencies but also extreme events, temporal persistence, and spatial coherence that drive impacts and risks.
+
+### Production-ready MCMC workflow
+
+The examples above demonstrate basic MCMC concepts, but real applications require more sophisticated practices.
+The [MCMC Workflow](../../notebooks/mcmc-workflow.qmd) notebook demonstrates professional-grade MCMC practices using a hierarchical temperature model.
+
+This notebook covers modern sampling techniques, comprehensive convergence diagnostics, and robust parameter recovery assessment.
+These practices are essential when statistical analysis informs high-stakes decisions in climate policy and adaptation planning.
 
 ## Further reading {.unnumbered}
 
@@ -595,4 +582,14 @@ For deeper study of probability and statistics:
 - @downey_thinkbayes:2021 emphasizes Bayesian thinking with practical applications
 - @gelman_regression:2021 connects regression to broader statistical modeling
 - @gelman_bda3:2014 comprehensive treatment of Bayesian computation
-- [Computational Examples](../../notebooks/probability-stats-examples.qmd) demonstrates all methods with working code
+
+### Computational examples
+
+This chapter's concepts are demonstrated through focused computational notebooks:
+
+- [Distribution Examples](../../notebooks/distribution-examples.qmd): Understanding probability distributions and their relationships
+- [Coin Flip Inference](../../notebooks/inference-coin-flip.qmd): Introduction to statistical inference with likelihood and Bayesian methods
+- [Linear Regression Examples](../../notebooks/linear-regression-examples.qmd): Comparing curve fitting, MLE, and Bayesian approaches
+- [MCMC Workflow](../../notebooks/mcmc-workflow.qmd): Production-ready practices for complex Bayesian models
+
+Each notebook builds on the theoretical foundations presented here while demonstrating practical implementation using modern computational tools.

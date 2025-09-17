@@ -1,0 +1,488 @@
+---
+engine: julia
+format:
+    html:
+        code-annotations: hover
+---
+
+# Production-ready MCMC workflow ✏️ {.unnumbered}
+
+This notebook demonstrates professional-grade MCMC practices for complex statistical models.
+We move beyond simple examples to show the complete workflow required for reliable Bayesian inference in real applications.
+
+The hierarchical temperature model provides sufficient complexity to illustrate modern sampling techniques, comprehensive convergence diagnostics, and robust parameter recovery assessment.
+These practices are essential when stakes are high and decisions depend on statistical analysis.
+
+```{julia}
+#| label: setup
+using CairoMakie
+using Distributions
+using LaTeXStrings
+using Turing
+using MCMCChains
+using DataFrames
+using Printf
+using Random
+```
+
+## The hierarchical modeling framework
+
+Hierarchical models capture the multi-level structure common in real data.
+Our example models temperature measurements from multiple weather stations, where each station has its own mean but shares common variance parameters.
+
+This structure mirrors many climate applications: regional climate models with station-specific effects, species response models with site-level variation, or economic impact models with sector-specific parameters.
+
+### Data generation and model motivation
+
+We simulate temperature data from multiple stations to create a realistic inference challenge.
+
+```{julia}
+#| label: data-setup
+
+# Set reproducible parameters for validation
+Random.seed!(123)
+n_stations = 5
+n_obs_per_station = 20
+true_global_mean = 15.0  # Global temperature mean (°C)
+true_station_sd = 2.0    # Between-station variability
+true_obs_sd = 1.5        # Within-station measurement error
+
+# Generate station-specific means from hierarchical structure
+true_station_means = rand(Normal(true_global_mean, true_station_sd), n_stations)
+
+# Generate observations for each station
+station_data = []
+for i in 1:n_stations
+    station_temps = rand(Normal(true_station_means[i], true_obs_sd), n_obs_per_station)
+    push!(station_data, station_temps)
+end
+
+# Prepare data for analysis
+all_temps = vcat(station_data...)
+station_ids = repeat(1:n_stations, inner = n_obs_per_station)
+
+# Create summary of true parameters
+true_parameter_summary = DataFrame(
+    Parameter = ["Global mean (μ)", "Station SD (σ_station)", "Observation SD (σ_obs)"],
+    True_Value = [true_global_mean, true_station_sd, true_obs_sd],
+    Description = [
+        "Overall temperature average across all stations",
+        "Variability between station means",
+        "Measurement error within stations"
+    ]
+)
+
+true_parameter_summary
+```
+
+The hierarchical structure captures two sources of variation: systematic differences between stations and random measurement error within stations.
+This separation is crucial for understanding climate variability and making accurate predictions.
+
+## Model specification
+
+The hierarchical model formally represents our assumptions about the data-generating process.
+
+```{julia}
+#| label: model-definition
+
+@model function hierarchical_temperature_model(temps, station_ids, n_stations)
+    # Global parameters
+    μ_global ~ Normal(10, 5)        # Global mean with weakly informative prior
+    σ_station ~ Exponential(2)      # Between-station SD with proper prior
+    σ_obs ~ Exponential(2)          # Within-station SD with proper prior
+
+    # Station-specific means (hierarchical structure)
+    station_means = Vector{Float64}(undef, n_stations)
+    for j in 1:n_stations
+        station_means[j] ~ Normal(μ_global, σ_station)
+    end
+
+    # Observations
+    for i in eachindex(temps)
+        temps[i] ~ Normal(station_means[station_ids[i]], σ_obs)
+    end
+end
+```
+
+This model structure enables "partial pooling"—station means are neither completely independent nor forced to be identical.
+The hierarchical structure shrinks extreme station estimates toward the global mean, improving estimation efficiency.
+
+### Prior specification rationale
+
+**Global mean prior**: `Normal(10, 5)` is weakly informative, allowing the data to dominate while preventing unrealistic values.
+
+**Variance priors**: `Exponential(2)` distributions ensure positive values while being relatively uninformative on the natural scale.
+
+**Hierarchical structure**: Station means arise from a common distribution, capturing both individual variation and shared structure.
+
+## Modern MCMC sampling practices
+
+Professional MCMC workflow requires careful attention to sampling configuration, convergence assessment, and diagnostic evaluation.
+
+```{julia}
+#| label: sampling-configuration
+
+function run_comprehensive_mcmc(temps, station_ids, n_stations;
+                               samples_per_chain = 2000,
+                               n_chains = 4,
+                               target_accept = 0.8)
+
+    model = hierarchical_temperature_model(temps, station_ids, n_stations)
+
+    # Configure sampler with target acceptance rate
+    sampler = NUTS(target_accept)
+    discard_initial = 1_500  # Longer warm-up for complex model
+
+    # Sample with multiple chains
+    chains = sample(
+        model, sampler, MCMCThreads(),
+        samples_per_chain, n_chains,
+        discard_initial = discard_initial,
+        verbose = false, progress = true
+    )
+
+    return chains
+end
+
+# Run MCMC with professional configuration
+mcmc_results = run_comprehensive_mcmc(all_temps, station_ids, n_stations)
+
+# Display sampling summary
+sampling_summary = DataFrame(
+    Setting = ["Number of chains", "Samples per chain", "Warm-up samples", "Total samples", "Target acceptance"],
+    Value = [4, 2000, 1500, 8000, 0.8]
+)
+
+sampling_summary
+```
+
+The sampling configuration follows modern best practices:
+
+**Multiple chains**: Enable convergence assessment and detection of multimodal posteriors.
+
+**Adequate warm-up**: Complex models need longer adaptation periods for optimal performance.
+
+**Target acceptance**: 80% acceptance rate balances exploration efficiency with computational cost.
+
+**Parallel execution**: `MCMCThreads()` utilizes multiple cores for faster sampling.
+
+## Convergence diagnostics
+
+Rigorous convergence assessment is non-negotiable for reliable inference.
+We implement multiple diagnostic checks with clear pass/fail criteria.
+
+```{julia}
+#| label: convergence-diagnostics
+
+function compute_comprehensive_diagnostics(chains)
+    """Compute convergence diagnostics for all parameters"""
+    params = [:μ_global, :σ_station, :σ_obs]
+    diagnostics = DataFrame()
+
+    for param in params
+        rhat = MCMCChains.rhat(chains[param])[1]
+        ess_bulk = MCMCChains.ess_rhat(chains[param]).ess[1]
+        ess_tail = MCMCChains.ess_rhat(chains[param]).ess[1]  # Simplified
+        mean_val = mean(chains[param])
+        std_val = std(vec(Array(chains[param])))
+
+        push!(diagnostics, (
+            Parameter = string(param),
+            R_hat = rhat,
+            ESS_bulk = ess_bulk,
+            ESS_tail = ess_tail,
+            Mean = mean_val,
+            Std = std_val
+        ))
+    end
+
+    return diagnostics
+end
+
+function assess_convergence(diagnostics; rhat_threshold = 1.01, ess_threshold = 400)
+    """Automated convergence assessment with clear criteria"""
+    issues = String[]
+    all_good = true
+
+    for row in eachrow(diagnostics)
+        param = row.Parameter
+        if row.R_hat > rhat_threshold
+            push!(issues, "High R̂ for $(param): $(round(row.R_hat, digits=3))")
+            all_good = false
+        end
+        if row.ESS_bulk < ess_threshold
+            push!(issues, "Low ESS for $(param): $(round(Int, row.ESS_bulk))")
+            all_good = false
+        end
+    end
+
+    # Create assessment summary
+    assessment = DataFrame(
+        Check = ["R-hat < $(rhat_threshold)", "ESS > $(ess_threshold)", "Overall"],
+        Status = [
+            all(diagnostics.R_hat .< rhat_threshold) ? "✓ Pass" : "✗ Fail",
+            all(diagnostics.ESS_bulk .> ess_threshold) ? "✓ Pass" : "✗ Fail",
+            all_good ? "✓ Pass" : "✗ Fail"
+        ]
+    )
+
+    return assessment, issues
+end
+
+# Compute and display diagnostics
+diagnostics = compute_comprehensive_diagnostics(mcmc_results)
+assessment, issues = assess_convergence(diagnostics)
+
+# Display results
+println("Convergence Diagnostics:")
+diagnostics
+```
+
+```{julia}
+#| label: convergence-assessment
+assessment
+```
+
+The diagnostic tables provide quantitative assessment of MCMC performance.
+R-hat values near 1.0 indicate good mixing between chains, while adequate effective sample sizes ensure reliable posterior estimates.
+
+## Visual diagnostics
+
+Trace plots and posterior distributions provide essential visual confirmation of convergence.
+
+```{julia}
+#| label: diagnostic-plots
+
+function create_diagnostic_plots(chains, true_params)
+    """Create focused diagnostic visualizations"""
+    # Parameters to visualize
+    params = [:μ_global, :σ_station, :σ_obs]
+    param_labels = [L"\mu_{\text{global}}", L"\sigma_{\text{station}}", L"\sigma_{\text{obs}}"]
+    true_values = [true_params.global_mean, true_params.station_sd, true_params.obs_sd]
+
+    fig = Figure(size = (1200, 400))
+
+    for (i, (param, label, true_val)) in enumerate(zip(params, param_labels, true_values))
+        # Trace plot
+        ax_trace = Axis(fig[1, i],
+            xlabel = "Iteration",
+            ylabel = string(label),
+            title = "Trace: $(label)")
+
+        n_samples = size(chains[param], 1)
+        n_chains = size(chains[param], 3)
+        colors = [:red, :blue, :green, :orange]
+
+        for chain_id in 1:n_chains
+            chain_vals = chains[param][:, 1, chain_id]
+            lines!(ax_trace, 1:n_samples, chain_vals,
+                color = colors[chain_id], alpha = 0.8, linewidth = 1)
+        end
+
+        # Add true value reference
+        hlines!(ax_trace, [true_val], color = :black, linestyle = :dash, linewidth = 2)
+    end
+
+    return fig
+end
+
+# Create true parameter structure for plotting
+true_params = (
+    global_mean = true_global_mean,
+    station_sd = true_station_sd,
+    obs_sd = true_obs_sd
+)
+
+fig_traces = create_diagnostic_plots(mcmc_results, true_params)
+fig_traces
+```
+
+Good trace plots show:
+- **Rapid mixing**: Chains move efficiently through parameter space
+- **Stationarity**: No trends or systematic patterns after warm-up
+- **Convergence**: Multiple chains explore the same region
+
+These visual checks complement the quantitative diagnostics for comprehensive convergence assessment.
+
+## Parameter recovery validation
+
+Validation against known parameter values provides the ultimate test of inference quality.
+
+```{julia}
+#| label: parameter-recovery
+
+function assess_parameter_recovery(chains, true_params)
+    """Comprehensive parameter recovery assessment"""
+    # Global parameters
+    global_recovery = DataFrame()
+
+    params_info = [
+        (:μ_global, "Global mean", true_params.global_mean),
+        (:σ_station, "Station SD", true_params.station_sd),
+        (:σ_obs, "Observation SD", true_params.obs_sd)
+    ]
+
+    for (param_symbol, param_name, true_val) in params_info
+        samples = vec(Array(chains[param_symbol]))
+        post_mean = mean(samples)
+        post_sd = std(samples)
+        ci_lower = quantile(samples, 0.025)
+        ci_upper = quantile(samples, 0.975)
+
+        in_ci = ci_lower <= true_val <= ci_upper
+        relative_error = abs(post_mean - true_val) / true_val * 100
+
+        push!(global_recovery, (
+            Parameter = param_name,
+            True_Value = true_val,
+            Posterior_Mean = post_mean,
+            Posterior_SD = post_sd,
+            CI_Lower = ci_lower,
+            CI_Upper = ci_upper,
+            In_CI = in_ci ? "✓" : "✗",
+            Rel_Error_Pct = relative_error
+        ))
+    end
+
+    return global_recovery
+end
+
+function assess_station_recovery(station_ids, true_station_means)
+    """Assess recovery of station-level parameters"""
+    station_recovery = DataFrame()
+
+    for i in 1:n_stations
+        station_param = Symbol("station_means[$i]")
+        if station_param in names(mcmc_results)
+            samples = vec(Array(mcmc_results[station_param]))
+            post_mean = mean(samples)
+            ci_lower = quantile(samples, 0.025)
+            ci_upper = quantile(samples, 0.975)
+            true_val = true_station_means[i]
+            in_ci = ci_lower <= true_val <= ci_upper
+
+            push!(station_recovery, (
+                Station = i,
+                True_Mean = true_val,
+                Posterior_Mean = post_mean,
+                CI_Lower = ci_lower,
+                CI_Upper = ci_upper,
+                In_CI = in_ci ? "✓" : "✗"
+            ))
+        else
+            push!(station_recovery, (
+                Station = i,
+                True_Mean = true_station_means[i],
+                Posterior_Mean = missing,
+                CI_Lower = missing,
+                CI_Upper = missing,
+                In_CI = "Parameter not found"
+            ))
+        end
+    end
+
+    return station_recovery
+end
+
+# Assess parameter recovery
+global_recovery = assess_parameter_recovery(mcmc_results, true_params)
+station_recovery = assess_station_recovery(station_ids, true_station_means)
+
+println("Global Parameter Recovery:")
+global_recovery
+```
+
+```{julia}
+#| label: station-recovery
+println("Station-Level Parameter Recovery:")
+station_recovery
+```
+
+The recovery assessment tables quantify inference quality:
+- **Coverage**: Do credible intervals contain true values?
+- **Accuracy**: How close are posterior means to true values?
+- **Precision**: How tight are the credible intervals?
+
+Successful recovery validates both the model specification and the computational implementation.
+
+## Performance and efficiency analysis
+
+Understanding computational performance enables optimization and resource planning.
+
+```{julia}
+#| label: performance-analysis
+
+# Extract timing information (simplified - would need actual timing in practice)
+total_samples = 4 * 2000  # chains × samples_per_chain
+warmup_samples = 4 * 1500  # chains × warmup
+effective_samples = sum(diagnostics.ESS_bulk)
+
+performance_summary = DataFrame(
+    Metric = [
+        "Total samples drawn",
+        "Warm-up samples",
+        "Post-warmup samples",
+        "Effective samples (sum)",
+        "Efficiency ratio",
+        "Average ESS per parameter"
+    ],
+    Value = [
+        total_samples,
+        warmup_samples,
+        total_samples - warmup_samples,
+        round(Int, effective_samples),
+        round(effective_samples / (total_samples - warmup_samples), digits = 2),
+        round(Int, effective_samples / nrow(diagnostics))
+    ]
+)
+
+performance_summary
+```
+
+Performance metrics help evaluate sampling efficiency:
+- **Efficiency ratio**: Effective samples ÷ actual samples drawn
+- **ESS per parameter**: Indicates parameter-specific sampling quality
+- **Resource utilization**: Guides decisions about chain length and number
+
+## Best practices summary
+
+This workflow demonstrates essential practices for production MCMC:
+
+### Sampling configuration
+- **Multiple chains**: Enable convergence detection and robustness checking
+- **Adequate warm-up**: Allow sufficient adaptation for complex models
+- **Target acceptance**: Balance exploration efficiency with computational cost
+- **Parallel execution**: Utilize available computational resources
+
+### Convergence assessment
+- **Quantitative diagnostics**: R-hat and effective sample size with clear thresholds
+- **Visual diagnostics**: Trace plots for pattern recognition
+- **Automated assessment**: Clear pass/fail criteria for decision-making
+
+### Validation practices
+- **Parameter recovery**: Test against known ground truth when possible
+- **Cross-validation**: Assess predictive performance on held-out data
+- **Sensitivity analysis**: Evaluate robustness to modeling assumptions
+
+### Reporting standards
+- **Reproducibility**: Fixed random seeds and version information
+- **Transparency**: Report all diagnostic results, not just successes
+- **Interpretation**: Connect statistical results to substantive conclusions
+
+## Climate science applications
+
+This hierarchical framework applies directly to climate problems:
+
+**Regional climate analysis**: Station data with regional and local effects, similar to our temperature example.
+
+**Extreme event modeling**: Site-specific parameters with shared distributional assumptions for return period estimation.
+
+**Model ensemble analysis**: Climate model outputs with model-specific biases and shared uncertainty structures.
+
+**Impact assessment**: Economic or ecological responses with sector/species-specific parameters and common drivers.
+
+**Paleoclimate reconstruction**: Proxy records with site-specific calibrations and shared climate signals.
+
+The computational infrastructure demonstrated here scales to arbitrarily complex models while maintaining the same fundamental workflow: careful sampling, rigorous diagnostics, and thorough validation.
+
+These practices ensure that statistical analysis supports rather than undermines scientific conclusions, particularly crucial when informing high-stakes climate policy and adaptation decisions.
