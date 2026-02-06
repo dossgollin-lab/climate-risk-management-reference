@@ -177,6 +177,68 @@ The curvature of the fitted line is a direct visualization of the shape paramete
 
 [Placeholder for a Return Level Plot showing a fitted GEV or GPD curve with confidence intervals.]
 
+## Nonstationarity
+
+### The challenge of changing climates
+
+The theoretical foundations of extreme value theory assume that the underlying process is stationary—that the statistical properties remain constant over time.
+This assumption underlies the `IID` (independent and identically distributed) framework that justifies the asymptotic theorems for both the GEV and GPD.
+However, climate science provides compelling evidence that this assumption is frequently violated in environmental data.
+
+Climate systems exhibit multiple forms of nonstationarity that challenge traditional extreme value analysis:
+
+- **Long-term trends**: Anthropogenic climate change is altering the frequency and magnitude of extreme events across many regions [multiple studies]
+- **Decadal variability**: Natural oscillations like the Atlantic Multidecadal Oscillation (AMO) and Pacific Decadal Oscillation (PDO) create systematic changes in extremes over multi-decade periods
+- **Teleconnections**: Large-scale climate patterns such as El Niño Southern Oscillation (ENSO) introduce systematic dependence between extreme events in distant locations
+- **Seasonal cycles**: Even after accounting for obvious seasonal patterns, the magnitude and frequency of extremes often vary systematically within and between years
+
+Multiple studies provide comprehensive empirical evidence for widespread nonstationarity in European temperature and precipitation extremes, demonstrating that ignoring these patterns can lead to substantial errors in risk assessment.
+
+### The modeling dilemma
+
+Acknowledging nonstationarity creates a fundamental tension in extreme value analysis.
+On one hand, failing to account for systematic trends and patterns can lead to biased estimates of risk.
+On the other hand, incorporating nonstationarity requires adding parameters to models that are already highly uncertain due to limited data in the tail of the distribution.
+
+This challenge is particularly acute because:
+
+1. **Parameter uncertainty amplification**: Adding time-varying parameters increases the dimensionality of the inference problem, potentially leading to wider confidence intervals and less reliable extrapolation
+2. **Limited tail data**: Extreme events are rare by definition, providing limited information to estimate both the baseline extreme value parameters and their time evolution
+3. **Model selection complexity**: Multiple forms of nonstationarity may be present simultaneously, making it difficult to identify the most appropriate model structure
+
+Research by Serinaldi and Kilsby (2015) demonstrate that in many practical applications, the uncertainty introduced by modeling nonstationarity can outweigh the bias from ignoring it, particularly when the underlying trends are small relative to the inherent variability of extreme values.
+They show that short-term autocorrelation and clustering of extremes often have larger impacts on risk estimates than long-term trends.
+
+### Approaches to nonstationarity
+
+When evidence suggests that nonstationarity cannot be ignored, several modeling approaches are available:
+
+#### Time-varying parameters
+
+The most direct approach is to allow one or more parameters of the extreme value distribution to vary systematically with time.
+For the GEV distribution, this might involve:
+
+- **Trending location parameter**: $\mu(t) = \mu_0 + \mu_1 t$ to capture changes in typical extreme values
+- **Cyclical components**: $\mu(t) = \mu_0 + \mu_1 \cos(2\pi t / P)$ for periodic variations with period $P$
+- **Covariate-dependent parameters**: $\mu(t) = \mu_0 + \mu_1 \text{SOI}(t)$ where SOI is the Southern Oscillation Index
+
+#### Decision framework
+
+The choice of whether and how to incorporate nonstationarity should be guided by:
+
+1. **Physical understanding**: Do climate science principles suggest specific mechanisms that could drive nonstationarity in the region and variable of interest?
+2. **Statistical evidence**: Are there clear trends or patterns in the data that are unlikely to result from random variability?
+3. **Practical consequences**: How sensitive are the resulting risk estimates to different modeling choices?
+4. **Data availability**: Is there sufficient data to reliably estimate additional parameters?
+
+A common practical approach is to fit both stationary and nonstationary models, compare their performance using model selection criteria, and assess the sensitivity of risk estimates to these modeling choices.
+This provides decision-makers with a range of plausible estimates rather than false precision from a single model.
+
+### Computational approaches
+
+The [Nonstationarity Examples](../../notebooks/extremes-nonstationarity.qmd) notebook demonstrates how to implement and compare stationary and nonstationary extreme value models.
+These examples show how incorporating time trends affects parameter estimates, return level calculations, and their associated uncertainties.
+
 ## Inference
 
 ### Plotting Positions
@@ -203,13 +265,207 @@ The empirical return period for the $k$-th observation is then estimated as $1/(
 
 ### MLE
 
+Maximum likelihood estimation provides point estimates of GEV and GPD parameters by finding values that maximize the probability of observed data.
+The [Block Maxima Examples](../../notebooks/block-maxima.qmd) notebook demonstrates MLE fitting for GEV distributions using threshold exceedance methods.
+
 ### Bayesian
 
-## Sampling variability
+Bayesian inference treats parameters as random variables and provides full uncertainty quantification through posterior distributions.
+The [Sewell's Point Water Levels](../../notebooks/sewells-point.qmd) notebook demonstrates Bayesian fitting of extreme value distributions with uncertainty propagation to return level estimates.
 
-## Regionalization
+## Sampling variability and uncertainty quantification
 
-## Nonstationarity
+Extreme value analysis involves substantial uncertainty that propagates through all stages of the modeling process.
+Understanding and quantifying this uncertainty is essential for reliable risk assessment and infrastructure design.
+Unlike central statistical properties that benefit from abundant data, extreme value estimates are inherently uncertain due to the rarity of the events they describe.
+
+### Sources of uncertainty
+
+Multiple sources contribute to uncertainty in extreme value analysis:
+
+#### Parameter estimation uncertainty
+
+Even with a fixed model structure, the finite sample of extreme events leads to uncertainty in parameter estimates.
+This uncertainty is particularly pronounced for the shape parameter $\xi$, which controls tail behavior and has the greatest influence on extrapolation to rare events.
+Small changes in $\xi$ can lead to dramatically different return level estimates, especially for long return periods.
+
+The [Uncertainty Examples](../../notebooks/extremes-uncertainty.qmd) notebook demonstrates how parameter uncertainty propagates to return level estimates using both bootstrap and Bayesian approaches.
+
+#### Model selection uncertainty
+
+The choice between GEV and GPD approaches, the selection of block size or threshold, and decisions about nonstationarity all introduce model uncertainty.
+Different reasonable modeling choices can yield substantially different risk estimates, particularly in the far tails of the distribution.
+
+#### Threshold selection (for POT models)
+
+The peaks-over-threshold approach requires selecting a threshold $u$ that balances bias (threshold too low) against variance (threshold too high, yielding few exceedances).
+Diagnostic plots such as mean residual life plots and threshold stability plots help guide this choice, but uncertainty remains.
+
+### Propagation to return levels
+
+Parameter uncertainty propagates to return level estimates through the quantile function.
+The uncertainty structure depends on the return period, with longer return periods showing greater absolute uncertainty but sometimes smaller relative uncertainty.
+
+#### Delta method approximation
+
+For maximum likelihood estimates, the asymptotic distribution of return levels can be approximated using the delta method.
+If $\hat{\boldsymbol{\theta}}$ is approximately multivariate normal with covariance matrix $\boldsymbol{\Sigma}$, then:
+
+$$\text{Var}(z_N) \approx \nabla z_N(\hat{\boldsymbol{\theta}})^T \boldsymbol{\Sigma} \nabla z_N(\hat{\boldsymbol{\theta}})$$
+
+where $\nabla z_N(\boldsymbol{\theta})$ is the gradient of the return level function with respect to the parameters.
+
+#### Bootstrap approaches
+
+Non-parametric bootstrap provides a computational approach to uncertainty quantification that doesn't rely on asymptotic approximations:
+
+1. Resample the original extreme value data with replacement
+2. Fit the extreme value model to each bootstrap sample
+3. Calculate return levels for each fitted model
+4. Use the distribution of bootstrap return levels to construct confidence intervals
+
+This approach naturally accounts for the skewness and potential multimodality in the sampling distribution of return levels.
+
+#### Bayesian uncertainty quantification
+
+The Bayesian approach treats parameters as random variables and propagates uncertainty through the posterior distribution.
+Return level uncertainty is characterized by the posterior predictive distribution:
+
+$$p(z_N | y) = \int p(z_N | \boldsymbol{\theta}) p(\boldsymbol{\theta} | y) d\boldsymbol{\theta}$$
+
+where $p(\boldsymbol{\theta} | y)$ is the posterior distribution of parameters given the observed extremes $y$.
+
+`MCMC` sampling from the posterior provides a straightforward way to generate samples from this distribution.
+For each posterior sample $\boldsymbol{\theta}^{(i)}$, we compute the corresponding return level $z_N^{(i)}$.
+The collection of these return levels provides a full characterization of uncertainty, including credible intervals and tail probabilities.
+
+### Practical implications
+
+Understanding uncertainty has important practical implications:
+
+#### Design decisions under uncertainty
+
+Infrastructure design must account for return level uncertainty.
+A naive approach might use a point estimate of the 100-year return level, but this ignores the possibility that the true value could be substantially higher.
+Risk-based design approaches incorporate uncertainty by using upper confidence or credible interval bounds, or by explicitly modeling the costs of under-design versus over-design.
+
+#### Communication of results
+
+Presenting extreme value results requires careful attention to uncertainty communication.
+Confidence or credible intervals should always accompany point estimates.
+Return level plots should show uncertainty bands, not just fitted curves.
+Decision-makers need to understand that extreme value estimates become increasingly uncertain as return periods increase.
+
+#### Model checking and validation
+
+Uncertainty quantification enables proper model checking through posterior predictive checks in the Bayesian framework or bootstrap-based diagnostics in the frequentist approach.
+If observed extremes fall outside reasonable prediction intervals, this suggests model inadequacy rather than simply "bad luck."
+
+## Regionalization and spatial pooling
+
+Individual sites often have limited data for robust extreme value analysis, particularly for estimating parameters that control rare tail behavior.
+Regional analysis addresses this limitation by borrowing strength across multiple sites, leveraging the assumption that locations within a climatically homogeneous region share similar extreme value characteristics.
+This approach can substantially improve parameter estimation and reduce uncertainty in return level calculations.
+
+### The data limitation problem
+
+Consider estimating the 100-year return level at a single location with 50 years of data.
+The sample contains at most 50 annual maxima (for block maxima) or a limited number of threshold exceedances (for POT analysis).
+This sparse data makes it difficult to reliably estimate the shape parameter $\xi$, which governs extrapolation behavior.
+Small changes in $\xi$ can lead to dramatically different return level estimates for rare events.
+
+Regional analysis addresses this limitation by pooling information across multiple locations.
+If sites within a region are climatically similar, combining their data can provide equivalent information to having a much longer record at any individual site.
+
+### Traditional L-moments approach
+
+The classical approach to regional extreme value analysis uses L-moments and regional frequency analysis [Hosking and Wallis (1997)].
+This method has several steps:
+
+1. **Identify homogeneous regions** based on climate characteristics, topography, and statistical tests
+2. **Test regional homogeneity** using statistics that compare within-site and between-site variability
+3. **Select a regional distribution** from a set of candidate distributions (GEV, GLO, GPA, etc.)
+4. **Estimate regional parameters** using L-moment ratios
+5. **Calculate site-specific quantiles** by scaling regional estimates using at-site mean values
+
+This approach has been widely used in hydrology and forms the basis for many national flood frequency guidelines.
+However, it relies on the assumption of strict homogeneity within regions and doesn't naturally incorporate uncertainty in the regionalization process.
+
+### Bayesian hierarchical modeling
+
+Bayesian approaches provide a more flexible framework for regional analysis by treating parameters as random variables and naturally incorporating uncertainty at all levels of the analysis.
+The hierarchical structure reflects the belief that sites within a region are similar but not identical.
+
+#### Fully pooled models
+
+The simplest approach assumes all sites in a region have identical parameters:
+
+$$y_i \sim \text{GEV}(\mu, \sigma, \xi) \quad \text{for all sites } i$$
+
+This is equivalent to combining all data from the region into a single analysis.
+While this maximizes the use of available data, it ignores potentially important site-to-site differences.
+
+#### No pooling
+
+At the other extreme, each site is analyzed independently:
+
+$$y_i \sim \text{GEV}(\mu_i, \sigma_i, \xi_i)$$
+
+This approach respects site-specific characteristics but doesn't leverage regional information to improve estimation.
+
+#### Partial pooling
+
+The most flexible approach allows some parameters to be shared across the region while others vary by site.
+For example:
+
+$$y_i \sim \text{GEV}(\mu_i, \sigma, \xi)$$
+
+where each site has its own location parameter $\mu_i$ but shares regional values of scale ($\sigma$) and shape ($\xi$) parameters.
+
+#### Hierarchical models
+
+The full Bayesian hierarchical approach treats site-specific parameters as draws from regional distributions:
+
+$$\begin{align}
+y_i &\sim \text{GEV}(\mu_i, \sigma_i, \xi) \\
+\mu_i &\sim \text{Normal}(\mu_0, \tau_\mu) \\
+\sigma_i &\sim \text{LogNormal}(\sigma_0, \tau_\sigma) \\
+\xi &\sim \text{Normal}(\xi_0, \tau_\xi)
+\end{align}$$
+
+The hyperparameters ($\mu_0$, $\tau_\mu$, etc.) control the degree of similarity between sites.
+Large values of $\tau$ parameters allow substantial site-to-site variation, while small values enforce similarity.
+
+### Spatial hierarchical models
+
+Advanced approaches can incorporate spatial structure by modeling how similarity between sites depends on their geographic separation or climatic characteristics.
+Common approaches include:
+
+- **Gaussian process priors** that assume parameters vary smoothly in space
+- **Distance-based correlations** where nearby sites are more similar than distant ones
+- **Covariate-based models** that relate parameters to elevation, latitude, or other geographic variables
+
+These models require additional computational complexity and are beyond the scope of this introductory treatment.
+However, they represent an active area of research and provide sophisticated tools for large-scale regional analysis.
+
+### Model selection and validation
+
+Choosing between different levels of pooling requires balancing bias and variance considerations:
+
+- Full pooling minimizes variance but may introduce bias if sites are genuinely different
+- No pooling eliminates pooling bias but leads to high variance, especially for rare quantiles
+- Partial pooling provides a compromise that can be optimized using model selection criteria
+
+Cross-validation approaches can help evaluate different pooling strategies by assessing out-of-sample prediction performance.
+Information criteria such as WAIC (Widely Applicable Information Criterion) provide model comparison tools that balance goodness-of-fit against model complexity.
+
+### Computational implementation
+
+The [Regionalization Examples](../../notebooks/extremes-regionalization.qmd) notebook demonstrates how to implement Bayesian hierarchical models for regional extreme value analysis.
+These examples show how different pooling assumptions affect parameter estimates and return level calculations.
+
+The key insight is that this represents the same Bayesian principles covered in the [Probability and Statistics](../fundamentals/probability-stats.qmd) chapter, but applied to multiple locations simultaneously.
+The computational approaches (MCMC, posterior prediction, model checking) remain the same, while the model structure becomes more sophisticated to account for spatial relationships.
 
 ## Further reading {.unnumbered}
 

@@ -66,6 +66,11 @@ book:
         - notebooks/inference-coin-flip.qmd
         - notebooks/linear-regression-examples.qmd
         - notebooks/extremes-examples.qmd
+        - notebooks/block-maxima.qmd
+        - notebooks/sewells-point.qmd
+        - notebooks/extremes-nonstationarity.qmd
+        - notebooks/extremes-uncertainty.qmd
+        - notebooks/extremes-regionalization.qmd
         - notebooks/mosquitos.qmd
 
     - href: chapters/references.qmd

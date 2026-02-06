@@ -29,3 +29,4 @@ notebooks/*_files/*
 notebooks/.cache
 */.cache
 .cache
+**/*.quarto_ipynb

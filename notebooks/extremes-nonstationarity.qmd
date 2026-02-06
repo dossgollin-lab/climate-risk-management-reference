@@ -1,0 +1,366 @@
+---
+engine: julia
+---
+
+## Nonstationarity in Extreme Value Analysis ✏️ {.unnumbered}
+
+This notebook demonstrates how to model and compare stationary and nonstationary extreme value models.
+We explore the trade-offs between bias (from ignoring trends) and increased uncertainty (from adding parameters) that characterize the nonstationarity dilemma in extreme value analysis.
+
+```{julia}
+using DataFrames
+using Statistics
+using Random
+using Distributions
+using CairoMakie
+using LaTeXStrings
+using Optim
+
+CairoMakie.activate!(; type="svg")
+```
+
+## Synthetic data with known trend
+
+We start with synthetic data where we can control the degree of nonstationarity.
+This allows us to evaluate how well different models recover the true underlying process.
+
+```{julia}
+#| label: synthetic-setup
+
+# Generate synthetic annual maximum data with a linear trend
+function generate_nonstationary_data(n_years; μ₀=100, σ=20, ξ=0.05, trend=0.5)
+    Random.seed!(42)
+    years = 1:n_years
+
+    # Location parameter increases linearly with time
+    μ_t = μ₀ .+ trend .* (years .- 1)
+
+    # Generate GEV-distributed annual maxima
+    data = [rand(GeneralizedExtremeValue(μ_t[i], σ, ξ)) for i in 1:n_years]
+
+    return DataFrame(
+        year = years,
+        annual_max = data,
+        true_location = μ_t
+    ), (μ₀=μ₀, σ=σ, ξ=ξ, trend=trend)
+end
+
+# Generate 50 years of data with a moderate trend
+n_years = 50
+synthetic_data, true_params = generate_nonstationary_data(n_years; trend=0.8)
+
+println("Generated $n_years years of synthetic data")
+println("True parameters: μ₀=$(true_params.μ₀), σ=$(true_params.σ), ξ=$(true_params.ξ), trend=$(true_params.trend)")
+first(synthetic_data, 5)
+```
+
+```{julia}
+#| label: plot-synthetic-data
+#| fig-cap: "Synthetic annual maximum data with known linear trend. The true underlying location parameter (red line) increases linearly with time."
+
+fig = Figure(size=(800, 500))
+ax = Axis(fig[1, 1],
+    title="Synthetic Annual Maxima with Linear Trend",
+    xlabel="Year",
+    ylabel="Annual Maximum Value")
+
+# Plot the synthetic observations
+scatter!(ax, synthetic_data.year, synthetic_data.annual_max,
+    color=:steelblue, alpha=0.7, label="Observations")
+
+# Plot the true location parameter trend
+lines!(ax, synthetic_data.year, synthetic_data.true_location,
+    color=:red, linewidth=3, label="True location μ(t)")
+
+axislegend(ax, position=:lt)
+fig
+```
+
+## Maximum likelihood estimation
+
+We'll use maximum likelihood estimation to fit both stationary and nonstationary models, which is more numerically stable than the Bayesian approach for this demonstration.
+
+```{julia}
+#| label: mle-functions
+
+# Negative log-likelihood for stationary GEV
+function stationary_gev_nll(params, data)
+    μ, σ, ξ = params
+
+    if σ <= 0
+        return Inf
+    end
+
+    nll = 0.0
+    for x in data
+        z = (x - μ) / σ
+        if 1 + ξ * z <= 0
+            return Inf
+        end
+
+        if abs(ξ) < 1e-6  # Gumbel case
+            nll += log(σ) + z + exp(-z)
+        else  # General GEV case
+            nll += log(σ) + (1 + 1/ξ) * log(1 + ξ * z) + (1 + ξ * z)^(-1/ξ)
+        end
+    end
+
+    return nll
+end
+
+# Negative log-likelihood for nonstationary GEV with linear trend
+function nonstationary_gev_nll(params, data, years)
+    μ₀, μ₁, σ, ξ = params
+
+    if σ <= 0
+        return Inf
+    end
+
+    nll = 0.0
+    for (i, x) in enumerate(data)
+        μ_t = μ₀ + μ₁ * (years[i] - 1)
+        z = (x - μ_t) / σ
+
+        if 1 + ξ * z <= 0
+            return Inf
+        end
+
+        if abs(ξ) < 1e-6  # Gumbel case
+            nll += log(σ) + z + exp(-z)
+        else  # General GEV case
+            nll += log(σ) + (1 + 1/ξ) * log(1 + ξ * z) + (1 + ξ * z)^(-1/ξ)
+        end
+    end
+
+    return nll
+end
+
+println("Defined likelihood functions")
+```
+
+```{julia}
+#| label: fit-models
+
+# Fit stationary model
+stationary_init = [mean(synthetic_data.annual_max), std(synthetic_data.annual_max), 0.1]
+stationary_result = optimize(p -> stationary_gev_nll(p, synthetic_data.annual_max),
+                           stationary_init)
+stationary_params = Optim.minimizer(stationary_result)
+
+println("Stationary model parameters:")
+println("μ = $(round(stationary_params[1], digits=2))")
+println("σ = $(round(stationary_params[2], digits=2))")
+println("ξ = $(round(stationary_params[3], digits=3))")
+
+# Fit nonstationary model
+nonstationary_init = [mean(synthetic_data.annual_max), 0.5, std(synthetic_data.annual_max), 0.1]
+nonstationary_result = optimize(p -> nonstationary_gev_nll(p, synthetic_data.annual_max, synthetic_data.year),
+                              nonstationary_init)
+nonstationary_params = Optim.minimizer(nonstationary_result)
+
+println("\nNonstationary model parameters:")
+println("μ₀ = $(round(nonstationary_params[1], digits=2))")
+println("μ₁ = $(round(nonstationary_params[2], digits=3)) (true: $(true_params.trend))")
+println("σ = $(round(nonstationary_params[3], digits=2))")
+println("ξ = $(round(nonstationary_params[4], digits=3))")
+```
+
+```{julia}
+#| label: model-comparison
+#| fig-cap: "Comparison of stationary and nonstationary model fits. The nonstationary model correctly captures the underlying trend, while the stationary model averages over the time period."
+
+fig = Figure(size=(800, 600))
+ax = Axis(fig[1, 1],
+    title="Model Comparison: Stationary vs. Nonstationary",
+    xlabel="Year",
+    ylabel="Location Parameter μ")
+
+# Plot true trend
+lines!(ax, synthetic_data.year, synthetic_data.true_location,
+    color=:red, linewidth=3, label="True μ(t)")
+
+# Plot stationary model estimate (constant over time)
+μ_stationary = stationary_params[1]
+hlines!(ax, [μ_stationary], color=:green, linewidth=3,
+    linestyle=:dash, label="Stationary estimate")
+
+# Plot nonstationary model trend
+μ₀_est, μ₁_est = nonstationary_params[1], nonstationary_params[2]
+trend_est = μ₀_est .+ μ₁_est .* (synthetic_data.year .- 1)
+lines!(ax, synthetic_data.year, trend_est,
+    color=:blue, linewidth=3, label="Nonstationary estimate")
+
+axislegend(ax, position=:lt)
+fig
+```
+
+## Return level comparison
+
+The key practical question is how nonstationarity affects return level estimates:
+
+```{julia}
+#| label: return-level-comparison
+#| fig-cap: "Return level comparison between stationary and nonstationary models. The nonstationary model provides time-specific estimates that vary with the underlying trend."
+
+# Function to calculate return levels for GEV distribution
+function gev_return_level(μ, σ, ξ, return_period)
+    p = 1 - 1/return_period
+    if abs(ξ) < 1e-6
+        # Gumbel case (ξ ≈ 0)
+        return μ - σ * log(-log(p))
+    else
+        # General GEV case
+        return μ + (σ/ξ) * ((-log(p))^(-ξ) - 1)
+    end
+end
+
+# Calculate 100-year return levels for different time points
+return_period = 100
+future_years = [2024, 2050, 2100]  # Assuming synthetic data starts at year 1 = 2024
+
+fig = Figure(size=(800, 600))
+ax = Axis(fig[1, 1],
+    title="100-Year Return Levels: Impact of Nonstationarity",
+    xlabel="Year",
+    ylabel="100-Year Return Level")
+
+# Stationary model return level (constant over time)
+σ_stat, ξ_stat = stationary_params[2], stationary_params[3]
+rl_stationary = gev_return_level(μ_stationary, σ_stat, ξ_stat, return_period)
+hlines!(ax, [rl_stationary], color=:green, linewidth=3,
+    linestyle=:dash, label="Stationary")
+
+# Nonstationary model return levels
+σ_nonstat, ξ_nonstat = nonstationary_params[3], nonstationary_params[4]
+
+years_extended = 2024:(2024+n_years+76)  # Extend to 2100
+μ_extended = μ₀_est .+ μ₁_est .* (years_extended .- 2024)
+rl_nonstationary = [gev_return_level(μ, σ_nonstat, ξ_nonstat, return_period) for μ in μ_extended]
+
+lines!(ax, years_extended, rl_nonstationary,
+    color=:blue, linewidth=3, label="Nonstationary")
+
+# Mark specific years
+for year in future_years
+    idx = year - 2024 + 1
+    if idx <= length(rl_nonstationary)
+        scatter!(ax, [year], [rl_nonstationary[idx]],
+            color=:red, markersize=10)
+        text!(ax, year, rl_nonstationary[idx] + 5,
+            text="$(round(rl_nonstationary[idx], digits=1))")
+    end
+end
+
+axislegend(ax, position=:lt)
+fig
+```
+
+## Model selection using likelihood ratio test
+
+We can use statistical tests to evaluate whether the trend is statistically significant:
+
+```{julia}
+#| label: model-selection
+
+# Likelihood ratio test
+stationary_loglik = -Optim.minimum(stationary_result)
+nonstationary_loglik = -Optim.minimum(nonstationary_result)
+
+# Test statistic (follows chi-squared distribution with 1 df)
+lr_statistic = 2 * (nonstationary_loglik - stationary_loglik)
+p_value = 1 - cdf(Chisq(1), lr_statistic)
+
+println("Model Selection Results:")
+println("Stationary log-likelihood: $(round(stationary_loglik, digits=2))")
+println("Nonstationary log-likelihood: $(round(nonstationary_loglik, digits=2))")
+println("Likelihood ratio statistic: $(round(lr_statistic, digits=2))")
+println("P-value: $(round(p_value, digits=4))")
+
+if p_value < 0.05
+    println("→ Nonstationary model is significantly better (p < 0.05)")
+else
+    println("→ No significant evidence for nonstationarity (p ≥ 0.05)")
+end
+
+# AIC comparison
+aic_stationary = 2 * 3 - 2 * stationary_loglik  # 3 parameters
+aic_nonstationary = 2 * 4 - 2 * nonstationary_loglik  # 4 parameters
+
+println("\nAIC Comparison:")
+println("Stationary AIC: $(round(aic_stationary, digits=1))")
+println("Nonstationary AIC: $(round(aic_nonstationary, digits=1))")
+println("ΔAIC: $(round(aic_nonstationary - aic_stationary, digits=1))")
+
+if aic_nonstationary < aic_stationary
+    println("→ Nonstationary model preferred by AIC")
+else
+    println("→ Stationary model preferred by AIC")
+end
+```
+
+## Uncertainty visualization
+
+Even with point estimates, we can explore how parameter uncertainty might affect our conclusions:
+
+```{julia}
+#| label: uncertainty-sensitivity
+#| fig-cap: "Sensitivity of 100-year return levels to the trend parameter. Small uncertainties in trend estimation can lead to large differences in projected return levels."
+
+# Explore sensitivity to trend parameter
+trend_range = (μ₁_est - 0.5):0.1:(μ₁_est + 0.5)
+future_year = 2100
+year_offset = future_year - 2024
+
+fig = Figure(size=(800, 500))
+ax = Axis(fig[1, 1],
+    title="Sensitivity of 2100 Return Level to Trend Parameter",
+    xlabel="Trend μ₁ (mm/year)",
+    ylabel="100-Year Return Level in 2100 (mm)")
+
+# Calculate return levels for different trend values
+rl_sensitivity = []
+for trend in trend_range
+    μ_2100 = μ₀_est + trend * year_offset
+    rl = gev_return_level(μ_2100, σ_nonstat, ξ_nonstat, return_period)
+    push!(rl_sensitivity, rl)
+end
+
+lines!(ax, collect(trend_range), rl_sensitivity,
+    color=:navy, linewidth=3)
+
+# Mark the estimated trend
+scatter!(ax, [μ₁_est], [gev_return_level(μ₀_est + μ₁_est * year_offset, σ_nonstat, ξ_nonstat, return_period)],
+    color=:red, markersize=12, label="MLE estimate")
+
+# Mark true trend
+true_rl_2100 = gev_return_level(true_params.μ₀ + true_params.trend * year_offset, true_params.σ, true_params.ξ, return_period)
+scatter!(ax, [true_params.trend], [true_rl_2100],
+    color=:green, markersize=12, label="True value")
+
+axislegend(ax, position=:lt)
+fig
+```
+
+## Practical considerations
+
+This analysis demonstrates several key points about nonstationarity in extreme value analysis:
+
+### 1. Model selection uncertainty
+
+Even when a trend exists, the decision to include it depends on:
+- Strength of the trend relative to natural variability
+- Length of the data record
+- Purpose of the analysis (short-term vs. long-term planning)
+
+### 2. Uncertainty propagation
+
+Nonstationary models typically have larger parameter uncertainty, which propagates to return level estimates.
+The trade-off between bias (ignoring trends) and variance (estimating additional parameters) depends on the specific application.
+
+### 3. Physical plausibility
+
+Model selection should consider physical understanding of the climate system.
+Linear trends may be appropriate for temperature-related variables under climate change, but precipitation extremes may exhibit more complex patterns.
+
+This notebook demonstrates the practical challenges of incorporating nonstationarity in extreme value analysis.
+The choice between stationary and nonstationary models should be guided by physical understanding, statistical evidence, and the intended use of the results.

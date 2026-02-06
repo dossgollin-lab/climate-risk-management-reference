@@ -1,0 +1,963 @@
+---
+engine: julia
+---
+
+## Regional Extreme Value Analysis ✏️ {.unnumbered}
+
+This notebook demonstrates Bayesian hierarchical models for regional extreme value analysis.
+We compare different levels of pooling—from no pooling (independent site analysis) to full pooling (complete data combination) to partial pooling (hierarchical models)—and show how borrowing strength across sites can improve parameter estimation.
+
+```{julia}
+using DataFrames
+using Statistics
+using Random
+using Distributions
+using Turing
+using DynamicHMC
+using CairoMakie
+using LaTeXStrings
+using Printf
+using TidierData
+using Dates
+using Unitful
+using ColorSchemes
+
+CairoMakie.activate!(; type = "svg")
+```
+
+## Load real precipitation data
+
+Instead of simulating data, let's load real annual maximum daily rainfall from Texas gauges:
+
+```{julia}
+#| code-fold: true
+#| label: data-loading-functions
+function parse_station_parts(
+	station_number::Int, id, name, state, lat_str, lon_str, _elevation, years_of_data::Int = 0,
+)
+	return (
+		stnid = station_number,
+		noaa_id = String(strip(id)),
+		name = String(strip(name)),
+		state = String(strip(state)),
+		latitude = parse(Float64, strip(lat_str)),
+		longitude = parse(Float64, strip(lon_str)),
+		years_of_data = years_of_data,
+	)
+end
+function parse_station_parts(
+	station_number::Int,
+	id,
+	name,
+	city,
+	state,
+	lat_str,
+	lon_str,
+	_elevation,
+	years_of_data::Int = 0,
+)
+	# Combine name and city for the full name
+	full_name = "$(strip(name)), $(strip(city))"
+	return (
+		stnid = station_number,
+		noaa_id = String(strip(id)),
+		name = String(full_name),
+		state = String(strip(state)),
+		latitude = parse(Float64, strip(lat_str)),
+		longitude = parse(Float64, strip(lon_str)),
+		years_of_data = years_of_data,
+	)
+end
+function parse_station_header(
+	header_line::AbstractString, station_number::Int, years_of_data::Int = 0,
+)
+	# Split by commas and strip whitespace
+	parts = [strip(p) for p in split(header_line, ",")]
+
+	# Use splatting with method overloading
+	return parse_station_parts(station_number, parts..., years_of_data)
+end
+function parse_rainfall_data(
+	data_lines::Vector{<:AbstractString}, rainfall_unit, stnid::Int,
+)
+	# Pre-allocate vectors for better performance
+	dates = Date[]
+	years = Int[]
+	rainfall = Float64[]
+	stnids = Int[]
+
+	# Parse available data with error handling
+	for line in data_lines
+		line = strip(line)
+		if !isempty(line)
+			parts = split(line)
+			if length(parts) >= 2
+				try
+					date_str = parts[1]
+					rain_str = parts[2]
+
+					# Parse year directly for speed
+					year_val = parse(Int, split(date_str, "/")[3])
+					date = Date(date_str, "mm/dd/yyyy")
+					rain_val = parse(Float64, rain_str)
+
+					push!(dates, date)
+					push!(years, year_val)
+					push!(rainfall, rain_val)
+					push!(stnids, stnid)
+				catch e
+					@warn "Error parsing line for station $stnid: $line"
+					continue
+				end
+			end
+		end
+	end
+
+	# If no data, return empty DataFrame
+	if isempty(years)
+		return DataFrame(;
+			stnid = Int[], date = Date[], year = Int[], rainfall = typeof(1.0 * rainfall_unit)[],
+		)
+	end
+
+	# Create complete year sequence and fill missing years
+	min_year, max_year = extrema(years)
+	complete_years = collect(min_year:max_year)
+
+	# Create vectors for complete time series
+	complete_stnids = Int[]
+	complete_dates = Date[]
+	complete_years_vec = Int[]
+	complete_rainfall = Union{Float64, Missing}[]
+
+	for yr in complete_years
+		push!(complete_stnids, stnid)
+		push!(complete_years_vec, yr)
+
+		# Find if this year has data
+		year_idx = findfirst(==(yr), years)
+		if year_idx !== nothing
+			push!(complete_dates, dates[year_idx])
+			push!(complete_rainfall, rainfall[year_idx])
+		else
+			# Missing year - use January 1st as placeholder date
+			push!(complete_dates, Date(yr, 1, 1))
+			push!(complete_rainfall, missing)
+		end
+	end
+
+	return DataFrame(;
+		stnid = complete_stnids,
+		date = complete_dates,
+		year = complete_years_vec,
+		rainfall = complete_rainfall .* rainfall_unit,
+	)
+end
+function read_noaa_data(filename::String)
+	# Read the data file
+	txt = read(filename, String)
+	lines = split(txt, '\n')
+
+	# (1) Extract header info and set units  # <1>
+	_header = lines[1]  # <2>
+	rainfall_unit = u"inch"  # <3>
+
+	remaining_content = join(lines[2:end], '\n')
+
+	# (2) Split by blank lines which separate each gauge
+	station_blocks = filter(!isempty, split(remaining_content, r"\n\s*\n"))
+
+	stations = []
+	all_rainfall_data = DataFrame[]
+
+	# (3) For each gauge
+	for (i, block) in enumerate(station_blocks)
+		block_lines = split(strip(block), '\n')
+
+		if !isempty(block_lines)
+			# (a) Pull out the header row into station information
+			header_line = block_lines[1]
+
+			# (b) Parse the rainfall data with station ID
+			data_lines = block_lines[2:end]
+			rainfall_df = parse_rainfall_data(data_lines, rainfall_unit, i)
+
+			# Count only non-missing years
+			non_missing_years = sum(.!ismissing.(rainfall_df.rainfall))
+
+			# Create station with years_of_data (non-missing only)
+			station = parse_station_header(header_line, i, non_missing_years)
+			push!(stations, station)
+			push!(all_rainfall_data, rainfall_df)
+		end
+	end
+
+	# Convert stations vector to DataFrame
+	stations_df = DataFrame(stations)
+
+	# Combine all rainfall data into single DataFrame
+	rainfall_data_df = vcat(all_rainfall_data...)
+
+	return stations_df, rainfall_data_df
+end
+
+# Load the data
+stations_df, rainfall_df = read_noaa_data(joinpath(dirname(@__FILE__), "data", "dur01d_ams_na14v11.txt"))
+
+first(stations_df, 5)
+```
+
+```{julia}
+# Pick an Austin area station by noaa_id
+austin_noaa_id = "41-0420"
+austin_station = @filter(stations_df, noaa_id == !!austin_noaa_id)
+austin_stnid = austin_station.stnid[1]
+austin_rainfall = @filter(rainfall_df, stnid == !!austin_stnid)
+
+let
+	fig = Figure(size = (700, 400))
+	ax = Axis(fig[1, 1],
+		title = "Annual Maximum Daily Rainfall at $(austin_station.name[1])",
+		ylabel = "Rainfall (inches)")
+	lines!(ax, austin_rainfall.year, ustrip.(u"inch", austin_rainfall.rainfall),
+		color = :blue)
+	fig
+end
+```
+
+Now let's find other stations near Austin for regional analysis.
+Specifically, we'll look for the ten closest stations with at least 50 years of data.
+There are other, more formal, ways to define a region.
+
+```{julia}
+function calc_distance(lon1, lat1, lon2, lat2)
+	# Haversine formula for distance between two points on Earth
+	R = 6371.0  # Earth radius in km
+
+	# Convert degrees to radians
+	φ1, φ2 = deg2rad(lat1), deg2rad(lat2)
+	Δφ = deg2rad(lat2 - lat1)
+	Δλ = deg2rad(lon2 - lon1)
+
+	a = sin(Δφ / 2)^2 + cos(φ1) * cos(φ2) * sin(Δλ / 2)^2
+	c = 2 * atan(sqrt(a), sqrt(1 - a))
+
+	return R * c
+end
+
+# Austin coordinates
+austin_lat = austin_station.latitude[1]
+austin_lon = austin_station.longitude[1]
+
+# Find nearby stations with good data coverage
+nearby_stations = @chain stations_df begin
+	@filter(years_of_data >= 50)  # Use the years_of_data from station metadata
+	@mutate(distance_km = calc_distance(!!austin_lon, !!austin_lat, longitude, latitude))
+	@arrange(distance_km)
+	first(10)
+end
+```
+
+```{julia}
+nearby_stnids = nearby_stations.stnid
+nearby_rainfall = @chain rainfall_df begin
+	@filter(stnid in !!nearby_stnids)
+	@filter(year >= 1950)  # Focus on more recent data
+end
+
+let
+	fig = Figure(size = (700, 400))
+	ax = Axis(fig[1, 1],
+		title = "Annual Maximum Daily Rainfall at Nearby Stations",
+		xlabel = "Year",
+		ylabel = "Rainfall (inches)",
+	)
+	colors = ColorScheme(get(ColorSchemes.inferno, range(0.0, 1.0, length = length(nearby_stnids))))
+	for (color, stn_id) in zip(colors, nearby_stnids)
+		station_name = filter(row -> row.stnid == stn_id, nearby_stations).name[1]
+		station_data = filter(row -> row.stnid == stn_id, nearby_rainfall)
+		rainfall_in = ustrip.(u"inch", station_data.rainfall)
+		lines!(ax, station_data.year, rainfall_in,
+			color = color, label = "$station_name")
+	end
+	#axislegend(ax, position=:lt)
+	fig
+end
+```
+
+```{julia}
+# Create regional dataset for analysis
+selected_station_ids = nearby_stations.stnid
+regional_data = @chain rainfall_df begin
+	@filter(stnid in selected_station_ids)
+	@filter(!ismissing(rainfall))  # Remove missing values
+	@left_join(nearby_stations, stnid)
+	@mutate(site = match(stnid, selected_station_ids))
+	@mutate(annual_max = ustrip(rainfall))  # Remove units for modeling
+	@select(site, year, annual_max, stnid, name, latitude, longitude)
+end
+
+function match(x, vec)
+	return findfirst(==(x), vec)
+end
+
+# Apply the site numbering properly
+for i in 1:nrow(regional_data)
+	regional_data.site[i] = findfirst(==(regional_data.stnid[i]), selected_station_ids)
+end
+
+n_sites = length(selected_station_ids)
+println("Using data from $n_sites stations near Austin")
+println("Station details:")
+@chain regional_data begin
+	@group_by(site, stnid, name, latitude, longitude)
+	@summarize(n_years = length(year), min_year = minimum(year), max_year = maximum(year))
+	@arrange(site)
+end
+```
+
+```{julia}
+#| label: plot-real-data
+#| fig-cap: "Annual maximum daily rainfall data from five Texas gauges showing regional variation within the state."
+
+let
+	fig = Figure(size = (800, 600))
+	ax = Axis(fig[1, 1],
+		title = "Regional Annual Maximum Daily Rainfall Data (Texas)",
+		xlabel = "Year",
+		ylabel = "Annual Maximum (inches)")
+
+	colors = ColorSchemes.okabe_ito.colors
+	stnids = unique(regional_data.stnid)
+
+	for (site, color) in zip(1:n_sites, colors)
+		site_data = filter(row -> row.site == site, regional_data)
+		scatter!(ax, site_data.year, site_data.annual_max,
+			color = color, label = "Site $site", alpha = 0.7)
+	end
+
+	axislegend(ax, position = :rt)
+	fig
+end
+```
+
+## Generate regional data
+
+Alternatively, we can still simulate data for comparison or when real data isn't available:
+
+```{julia}
+#| label: generate-regional-data
+
+function generate_regional_data(n_sites, n_years; regional_params = nothing)
+	Random.seed!(42)
+
+	if regional_params === nothing
+		# Default regional characteristics
+		regional_params = (
+			μ_mean = 80.0,    # Regional average location
+			μ_sd = 15.0,      # Site-to-site variation in location
+			σ_mean = 20.0,    # Regional scale parameter
+			σ_sd = 5.0,       # Site-to-site variation in scale
+			ξ = 0.05,          # Common shape parameter
+		)
+	end
+
+	sites_data = DataFrame()
+
+	for site in 1:n_sites
+		# Site-specific parameters drawn from regional distributions
+		site_μ = rand(Normal(regional_params.μ_mean, regional_params.μ_sd))
+		site_σ = rand(LogNormal(log(regional_params.σ_mean), regional_params.σ_sd / regional_params.σ_mean))
+
+		# Generate annual maxima for this site
+		annual_max = rand(GeneralizedExtremeValue(site_μ, site_σ, regional_params.ξ), n_years)
+
+		# Create site data
+		site_df = DataFrame(
+			site = fill(site, n_years),
+			year = 1:n_years,
+			annual_max = annual_max,
+			true_μ = fill(site_μ, n_years),
+			true_σ = fill(site_σ, n_years),
+			true_ξ = fill(regional_params.ξ, n_years),
+		)
+
+		sites_data = vcat(sites_data, site_df)
+	end
+
+	return sites_data, regional_params
+end
+
+# Generate data for 5 sites with 30 years each
+n_sites = 5
+n_years = 30
+regional_data, true_regional_params = generate_regional_data(n_sites, n_years)
+
+println("Generated data for $n_sites sites with $n_years years each")
+println("True regional parameters:")
+for (key, val) in pairs(true_regional_params)
+	println("  $key: $(round(val, digits=2))")
+end
+
+first(regional_data, 10)
+```
+
+```{julia}
+#| label: plot-regional-data
+#| fig-cap: "Annual maximum precipitation data for five sites showing site-to-site variation within a climatically similar region."
+
+fig = Figure(size = (800, 600))
+ax = Axis(fig[1, 1],
+	title = "Regional Annual Maximum Precipitation Data",
+	xlabel = "Year",
+	ylabel = "Annual Maximum (mm)")
+
+colors = [:blue, :red, :green, :orange, :purple]
+
+for site in 1:n_sites
+	site_data = filter(row -> row.site == site, regional_data)
+	scatter!(ax, site_data.year, site_data.annual_max,
+		color = colors[site], label = "Site $site", alpha = 0.7)
+
+	# Add true location parameter as horizontal line
+	true_μ = site_data.true_μ[1]
+	hlines!(ax, [true_μ], color = colors[site], linestyle = :dash, alpha = 0.5)
+end
+
+axislegend(ax, position = :rt)
+fig
+```
+
+## No pooling: Independent analysis
+
+First, let's analyze each site independently (no pooling):
+
+```{julia}
+#| label: no-pooling-model
+
+@model function gev_no_pooling(y, site_ids)
+	n_sites = maximum(site_ids)
+
+	# Independent parameters for each site
+	μ = Vector{Real}(undef, n_sites)
+	σ = Vector{Real}(undef, n_sites)
+	ξ = Vector{Real}(undef, n_sites)
+
+	for i in 1:n_sites
+		μ[i] ~ Normal(80, 30)
+		σ[i] ~ truncated(Normal(20, 10), 0, Inf)
+		ξ[i] ~ Normal(0, 0.3)
+	end
+
+	# Likelihood
+	for i in eachindex(y)
+		site = site_ids[i]
+		y[i] ~ GeneralizedExtremeValue(μ[site], σ[site], ξ[site])
+	end
+
+	return μ, σ, ξ
+end
+
+# Fit no pooling model
+no_pool_chain = let
+	model = gev_no_pooling(regional_data.annual_max, regional_data.site)
+	sampler = externalsampler(DynamicHMC.NUTS())
+	sample(model, sampler, 500; drop_warmup = true)
+end
+
+println("No pooling model fitted successfully")
+println("Effective sample sizes:")
+display(summarystats(no_pool_chain))
+```
+
+## Full pooling: Combined analysis
+
+Now let's treat all data as coming from a single population (full pooling):
+
+```{julia}
+#| label: full-pooling-model
+
+@model function gev_full_pooling(y)
+	# Single set of parameters for all sites
+	μ ~ Normal(80, 30)
+	σ ~ truncated(Normal(20, 10), 0, Inf)
+	ξ ~ Normal(0, 0.3)
+
+	# Likelihood
+	for i in eachindex(y)
+		y[i] ~ GeneralizedExtremeValue(μ, σ, ξ)
+	end
+end
+
+# Fit full pooling model
+full_pool_chain = let
+	model = gev_full_pooling(regional_data.annual_max)
+	sampler = externalsampler(DynamicHMC.NUTS())
+	sample(model, sampler, 500; drop_warmup = true)
+end
+
+println("Full pooling model fitted successfully")
+display(summarystats(full_pool_chain))
+```
+
+## Partial pooling: Hierarchical model
+
+The most sophisticated approach uses a hierarchical model with partial pooling:
+
+```{julia}
+#| label: hierarchical-model
+
+@model function gev_hierarchical(y, site_ids)
+	n_sites = maximum(site_ids)
+
+	# Hyperparameters (regional population parameters)
+	μ_region ~ Normal(80, 30)
+	σ_region ~ truncated(Normal(20, 10), 0, Inf)
+	ξ_region ~ Normal(0, 0.3)
+
+	# Hyperparameters for site-to-site variation
+	τ_μ ~ truncated(Normal(15, 10), 0, Inf)  # SD of site μ values
+	τ_σ ~ truncated(Normal(5, 5), 0, Inf)    # SD of site σ values
+	τ_ξ ~ truncated(Normal(0.1, 0.1), 0, Inf) # SD of site ξ values
+
+	# Site-specific parameters drawn from regional distributions
+	μ = Vector{Real}(undef, n_sites)
+	σ = Vector{Real}(undef, n_sites)
+	ξ = Vector{Real}(undef, n_sites)
+
+	for i in 1:n_sites
+		μ[i] ~ Normal(μ_region, τ_μ)
+		σ[i] ~ truncated(Normal(σ_region, τ_σ), 0, Inf)
+		ξ[i] ~ Normal(ξ_region, τ_ξ)
+	end
+
+	# Likelihood
+	for i in eachindex(y)
+		site = site_ids[i]
+		y[i] ~ GeneralizedExtremeValue(μ[site], σ[site], ξ[site])
+	end
+
+	return μ, σ, ξ, μ_region, σ_region, ξ_region, τ_μ, τ_σ, τ_ξ
+end
+
+# Fit hierarchical model
+hierarchical_chain = let
+	model = gev_hierarchical(regional_data.annual_max, regional_data.site)
+	sampler = externalsampler(DynamicHMC.NUTS())
+	sample(model, sampler, 500; drop_warmup = true)
+end
+
+println("Hierarchical model fitted successfully")
+display(summarystats(hierarchical_chain))
+```
+
+## Simpler partial pooling: Shared shape parameter
+
+A practical compromise is to share only the shape parameter (which is hardest to estimate) while allowing site-specific location and scale parameters:
+
+```{julia}
+#| label: partial-pooling-model
+
+@model function gev_partial_pooling(y, site_ids)
+	n_sites = maximum(site_ids)
+
+	# Site-specific location and scale parameters
+	μ = Vector{Real}(undef, n_sites)
+	σ = Vector{Real}(undef, n_sites)
+
+	for i in 1:n_sites
+		μ[i] ~ Normal(80, 30)
+		σ[i] ~ truncated(Normal(20, 10), 0, Inf)
+	end
+
+	# Shared shape parameter across all sites
+	ξ ~ Normal(0, 0.3)
+
+	# Likelihood
+	for i in eachindex(y)
+		site = site_ids[i]
+		y[i] ~ GeneralizedExtremeValue(μ[site], σ[site], ξ)
+	end
+
+	return μ, σ, ξ
+end
+
+# Fit partial pooling model
+partial_pool_chain = let
+	model = gev_partial_pooling(regional_data.annual_max, regional_data.site)
+	sampler = externalsampler(DynamicHMC.NUTS())
+	sample(model, sampler, 500; drop_warmup = true)
+end
+
+println("Partial pooling model fitted successfully")
+display(summarystats(partial_pool_chain))
+```
+
+## Model comparison
+
+Let's compare the performance of different pooling approaches:
+
+```{julia}
+#| label: parameter-comparison
+#| fig-cap: "Comparison of parameter estimates across different pooling approaches. The hierarchical model provides a balance between site-specific estimates and regional information."
+
+# Extract parameter estimates
+function extract_site_params(chain, param_name, n_sites)
+	if param_name in keys(chain)
+		# Single parameter (full pooling)
+		return fill(mean(chain[param_name]), n_sites)
+	else
+		# Site-specific parameters
+		return [mean(chain[Symbol("$(param_name)[$i]")]) for i in 1:n_sites]
+	end
+end
+
+# Get true values for comparison
+true_site_params = DataFrame()
+for site in 1:n_sites
+	site_data = filter(row -> row.site == site, regional_data)
+	push!(true_site_params, (
+		site = site,
+		true_μ = site_data.true_μ[1],
+		true_σ = site_data.true_σ[1],
+		true_ξ = site_data.true_ξ[1],
+	))
+end
+
+# Extract estimates from each model
+models = ["No Pooling", "Full Pooling", "Partial Pooling", "Hierarchical"]
+chains = [no_pool_chain, full_pool_chain, partial_pool_chain, hierarchical_chain]
+
+fig = Figure(size = (1200, 800))
+
+# Location parameter comparison
+ax1 = Axis(fig[1, 1],
+	title = "Location Parameter μ",
+	xlabel = "Site",
+	ylabel = "μ (mm)")
+
+x_pos = 1:n_sites
+width = 0.2
+
+for (i, (model_name, chain)) in enumerate(zip(models, chains))
+	μ_estimates = extract_site_params(chain, :μ, n_sites)
+	barplot!(ax1, x_pos .+ (i - 2.5) * width, μ_estimates,
+		width = width, label = model_name, alpha = 0.7)
+end
+
+# Add true values
+scatter!(ax1, x_pos, true_site_params.true_μ,
+	color = :red, markersize = 10, marker = :star, label = "True")
+
+ax1.xticks = (1:n_sites, string.(1:n_sites))
+axislegend(ax1, position = :rt)
+
+# Scale parameter comparison
+ax2 = Axis(fig[1, 2],
+	title = "Scale Parameter σ",
+	xlabel = "Site",
+	ylabel = "σ (mm)")
+
+for (i, (model_name, chain)) in enumerate(zip(models, chains))
+	σ_estimates = extract_site_params(chain, :σ, n_sites)
+	barplot!(ax2, x_pos .+ (i - 2.5) * width, σ_estimates,
+		width = width, alpha = 0.7)
+end
+
+scatter!(ax2, x_pos, true_site_params.true_σ,
+	color = :red, markersize = 10, marker = :star)
+
+ax2.xticks = (1:n_sites, string.(1:n_sites))
+
+# Shape parameter comparison
+ax3 = Axis(fig[2, 1:2],
+	title = "Shape Parameter ξ",
+	xlabel = "Site",
+	ylabel = "ξ")
+
+for (i, (model_name, chain)) in enumerate(zip(models, chains))
+	ξ_estimates = extract_site_params(chain, :ξ, n_sites)
+	barplot!(ax3, x_pos .+ (i - 2.5) * width, ξ_estimates,
+		width = width, alpha = 0.7)
+end
+
+scatter!(ax3, x_pos, true_site_params.true_ξ,
+	color = :red, markersize = 10, marker = :star)
+
+ax3.xticks = (1:n_sites, string.(1:n_sites))
+
+fig
+```
+
+## Return level comparison
+
+The practical impact of different pooling approaches becomes clear when we examine return level estimates:
+
+```{julia}
+#| label: return-level-comparison
+#| fig-cap: "100-year return level estimates showing how pooling affects extrapolation. The hierarchical model provides more stable estimates while preserving site-specific information."
+
+# Function to calculate return levels with uncertainty
+function calculate_return_levels(chain, return_period, site_id = nothing)
+	if site_id === nothing
+		# Full pooling case
+		μ_samples = chain[:μ][:]
+		σ_samples = chain[:σ][:]
+		ξ_samples = chain[:ξ][:]
+	else
+		# Site-specific case
+		μ_samples = chain[Symbol("μ[$site_id]")][:]
+		if Symbol("σ[$site_id]") in keys(chain)
+			σ_samples = chain[Symbol("σ[$site_id]")][:]
+		else
+			σ_samples = chain[:σ][:]  # Shared parameter
+		end
+		if Symbol("ξ[$site_id]") in keys(chain)
+			ξ_samples = chain[Symbol("ξ[$site_id]")][:]
+		else
+			ξ_samples = chain[:ξ][:]  # Shared parameter
+		end
+	end
+
+	# Calculate return levels for each sample
+	p = 1 - 1 / return_period
+	return_levels = similar(μ_samples)
+
+	for i in eachindex(μ_samples)
+		μ, σ, ξ = μ_samples[i], σ_samples[i], ξ_samples[i]
+		if abs(ξ) < 1e-6
+			return_levels[i] = μ - σ * log(-log(p))
+		else
+			return_levels[i] = μ + (σ / ξ) * ((-log(p))^(-ξ) - 1)
+		end
+	end
+
+	return return_levels
+end
+
+# Calculate 100-year return levels for each site and model
+return_period = 100
+results = DataFrame()
+
+for site in 1:n_sites
+	for (model_name, chain) in zip(models, chains)
+		if model_name == "Full Pooling"
+			rl_samples = calculate_return_levels(chain, return_period)
+		else
+			rl_samples = calculate_return_levels(chain, return_period, site)
+		end
+
+		rl_mean = mean(rl_samples)
+		rl_ci = quantile(rl_samples, [0.025, 0.975])
+
+		push!(results, (
+			site = site,
+			model = model_name,
+			return_level = rl_mean,
+			ci_lower = rl_ci[1],
+			ci_upper = rl_ci[2],
+		))
+	end
+
+	# Add true return level
+	site_data = filter(row -> row.site == site, regional_data)
+	true_μ = site_data.true_μ[1]
+	true_σ = site_data.true_σ[1]
+	true_ξ = site_data.true_ξ[1]
+
+	p = 1 - 1 / return_period
+	if abs(true_ξ) < 1e-6
+		true_rl = true_μ - true_σ * log(-log(p))
+	else
+		true_rl = true_μ + (true_σ / true_ξ) * ((-log(p))^(-true_ξ) - 1)
+	end
+
+	push!(results, (
+		site = site,
+		model = "True",
+		return_level = true_rl,
+		ci_lower = true_rl,
+		ci_upper = true_rl,
+	))
+end
+
+# Plot return level comparison
+fig = Figure(size = (1000, 600))
+ax = Axis(fig[1, 1],
+	title = "100-Year Return Level Estimates by Site and Model",
+	xlabel = "Site",
+	ylabel = "100-Year Return Level (mm)")
+
+model_colors = Dict("No Pooling" => :blue, "Full Pooling" => :red,
+	"Partial Pooling" => :green, "Hierarchical" => :orange,
+	"True" => :black)
+
+for model in ["No Pooling", "Full Pooling", "Partial Pooling", "Hierarchical", "True"]
+	model_results = filter(row -> row.model == model, results)
+
+	if model == "True"
+		scatter!(ax, model_results.site, model_results.return_level,
+			color = model_colors[model], markersize = 10, marker = :star,
+			label = model)
+	else
+		# Plot point estimates with error bars
+		errorbars!(ax, model_results.site .+ 0.1 * (findall(x -> x == model, models)[1] - 2.5),
+			model_results.return_level,
+			model_results.return_level .- model_results.ci_lower,
+			model_results.ci_upper .- model_results.return_level,
+			color = model_colors[model], linewidth = 2)
+
+		scatter!(ax, model_results.site .+ 0.1 * (findall(x -> x == model, models)[1] - 2.5),
+			model_results.return_level,
+			color = model_colors[model], markersize = 8, label = model)
+	end
+end
+
+ax.xticks = (1:n_sites, string.(1:n_sites))
+axislegend(ax, position = :lt)
+fig
+```
+
+## Shrinkage effect
+
+A key feature of hierarchical models is shrinkage—site-specific estimates are "pulled" toward the regional mean. Let's visualize this effect:
+
+```{julia}
+#| label: shrinkage-visualization
+#| fig-cap: "Shrinkage effect in hierarchical modeling. Site estimates are pulled toward the regional mean, with stronger shrinkage for sites with limited data or extreme values."
+
+# Extract estimates
+no_pool_μ = [mean(no_pool_chain[Symbol("μ[$i]")]) for i in 1:n_sites]
+hierarchical_μ = [mean(hierarchical_chain[Symbol("μ[$i]")]) for i in 1:n_sites]
+regional_μ = mean(hierarchical_chain[:μ_region])
+
+fig = Figure(size = (800, 600))
+ax = Axis(fig[1, 1],
+	title = "Shrinkage Effect: Location Parameter μ",
+	xlabel = "No Pooling Estimate",
+	ylabel = "Hierarchical Estimate")
+
+# Diagonal line (no shrinkage)
+xlims = (minimum([no_pool_μ; hierarchical_μ]) - 5,
+	maximum([no_pool_μ; hierarchical_μ]) + 5)
+ylims = xlims
+plot_range = range(xlims[1], xlims[2], length = 100)
+lines!(ax, plot_range, plot_range, color = :gray, linestyle = :dash,
+	label = "No shrinkage")
+
+# Regional mean lines
+hlines!(ax, [regional_μ], color = :red, linestyle = :dot,
+	label = "Regional mean")
+vlines!(ax, [regional_μ], color = :red, linestyle = :dot)
+
+# Site estimates
+for i in 1:n_sites
+	scatter!(ax, [no_pool_μ[i]], [hierarchical_μ[i]],
+		color = colors[i], markersize = 12, label = "Site $i")
+
+	# Arrow showing shrinkage direction
+	if abs(no_pool_μ[i] - hierarchical_μ[i]) > 1
+		arrows!(ax, [no_pool_μ[i]], [hierarchical_μ[i]],
+			[hierarchical_μ[i] - no_pool_μ[i]], [0],
+			color = colors[i], linewidth = 2, alpha = 0.7)
+	end
+end
+
+xlims!(ax, xlims)
+ylims!(ax, ylims)
+axislegend(ax, position = :lt)
+fig
+```
+
+## Model selection
+
+Finally, let's compare models using information criteria:
+
+```{julia}
+#| label: model-selection
+
+# For model comparison, we can use WAIC or LOO
+# Here we'll compute a simple measure of fit: log predictive density
+
+function log_predictive_density(chain, y, site_ids, model_type)
+	n_samples = length(chain)
+	log_density = 0.0
+
+	for i in eachindex(y)
+		site = site_ids[i]
+		densities = Float64[]
+
+		for j in 1:min(n_samples, 1000)  # Use subset for computational efficiency
+			if model_type == "full_pooling"
+				μ = chain[:μ][j]
+				σ = chain[:σ][j]
+				ξ = chain[:ξ][j]
+			elseif model_type == "partial_pooling"
+				μ = chain[Symbol("μ[$site]")][j]
+				σ = chain[Symbol("σ[$site]")][j]
+				ξ = chain[:ξ][j]
+			else  # no_pooling or hierarchical
+				μ = chain[Symbol("μ[$site]")][j]
+				σ = chain[Symbol("σ[$site]")][j]
+				ξ = chain[Symbol("ξ[$site]")][j]
+			end
+
+			try
+				dist = GeneralizedExtremeValue(μ, σ, ξ)
+				push!(densities, pdf(dist, y[i]))
+			catch
+				# Skip invalid parameter combinations
+				continue
+			end
+		end
+
+		if !isempty(densities)
+			log_density += log(mean(densities))
+		end
+	end
+
+	return log_density
+end
+
+# Calculate log predictive densities
+model_fits = Dict(
+	"No Pooling" => log_predictive_density(no_pool_chain, regional_data.annual_max,
+		regional_data.site, "no_pooling"),
+	"Full Pooling" => log_predictive_density(full_pool_chain, regional_data.annual_max,
+		regional_data.site, "full_pooling"),
+	"Partial Pooling" => log_predictive_density(partial_pool_chain, regional_data.annual_max,
+		regional_data.site, "partial_pooling"),
+	"Hierarchical" => log_predictive_density(hierarchical_chain, regional_data.annual_max,
+		regional_data.site, "hierarchical"),
+)
+
+println("Model comparison (log predictive density, higher is better):")
+for (model, lpd) in sort(collect(model_fits), by = x -> x[2], rev = true)
+	println("  $model: $(round(lpd, digits=2))")
+end
+```
+
+## Summary
+
+This notebook demonstrates several key concepts in regional extreme value analysis:
+
+### 1. Pooling spectrum
+- **No pooling**: Maximum flexibility but high uncertainty, especially for sites with limited data
+- **Full pooling**: Minimum uncertainty but ignores site-to-site differences
+- **Partial pooling**: Compromises by sharing some parameters (often the shape parameter)
+- **Hierarchical pooling**: Most sophisticated approach that balances site-specific and regional information
+
+### 2. Shrinkage effect
+Hierarchical models naturally shrink extreme site estimates toward the regional mean, providing more stable estimates while preserving important site-to-site differences.
+
+### 3. Uncertainty reduction
+Pooling information across sites reduces uncertainty in return level estimates, particularly for rare events where individual sites have limited information.
+
+### 4. Model selection
+The choice between pooling approaches should consider:
+- Physical similarity between sites
+- Amount of data available at each site
+- Purpose of the analysis (site-specific vs. regional estimates)
+- Model selection criteria
+
+This framework extends the Bayesian principles from the probability and statistics chapter to spatial problems, showing how the same computational tools (`MCMC`, posterior prediction, model checking) apply to increasingly sophisticated model structures.
